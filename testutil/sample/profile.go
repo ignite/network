@@ -3,7 +3,7 @@ package sample
 import (
 	"math/rand"
 
-	profile "github.com/tendermint/spn/x/profile/types"
+	profile "github.com/ignite/network/x/profile/types"
 )
 
 // MsgCreateCoordinator returns a sample MsgCreateCoordinator
@@ -69,7 +69,7 @@ func ProfileGenesisState(r *rand.Rand, addresses ...string) profile.GenesisState
 	}
 	operatorAddresses := []string{OperatorAddress(r), OperatorAddress(r)}
 	return profile.GenesisState{
-		Coordinators: []profile.Coordinator{
+		CoordinatorList: []profile.Coordinator{
 			{
 				CoordinatorID: 0,
 				Address:       addresses[0],
@@ -123,8 +123,8 @@ func ProfileGenesisState(r *rand.Rand, addresses ...string) profile.GenesisState
 				CoordinatorID: 4,
 			},
 		},
-		CoordinatorCounter: 5,
-		Validators: []profile.Validator{
+		CoordinatorCount: 5,
+		ValidatorList: []profile.Validator{
 			{
 				Address:           addresses[5],
 				Description:       ValidatorDescription(String(r, 10)),

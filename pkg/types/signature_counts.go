@@ -7,8 +7,6 @@ import (
 	sdkmath "cosmossdk.io/math"
 	"github.com/cosmos/cosmos-sdk/types/bech32"
 	"github.com/pkg/errors"
-
-	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // NewSignatureCounts returns a new SignatureCounts
@@ -19,7 +17,7 @@ func NewSignatureCounts() SignatureCounts {
 // AddSignature adds a signature for the consensus address at a specific validator set size
 func (m *SignatureCounts) AddSignature(opAddress string, validatorSetSize int64) {
 	// relative signature is the signature relative to the validator set size
-	relSignature := sdk.OneDec().QuoInt(sdkmath.NewInt(validatorSetSize))
+	relSignature := sdkmath.LegacyOneDec().QuoInt(sdkmath.NewInt(validatorSetSize))
 
 	// search for the consensus address
 	for i, c := range m.Counts {
@@ -40,7 +38,7 @@ func (m *SignatureCounts) AddSignature(opAddress string, validatorSetSize int64)
 // the sum of all relative signatures should not exceed the number of block
 func (m SignatureCounts) Validate() error {
 	opAddr := make(map[string]struct{})
-	sumSig := sdk.ZeroDec()
+	sumSig := sdkmath.LegacyZeroDec()
 
 	// iterate all signature count
 	for _, sc := range m.Counts {
@@ -58,7 +56,7 @@ func (m SignatureCounts) Validate() error {
 		sumSig = sumSig.Add(sc.RelativeSignatures)
 	}
 
-	blockCountDec := sdk.NewDecFromInt(sdkmath.NewIntFromUint64(m.BlockCount))
+	blockCountDec := sdkmath.LegacyNewDecFromInt(sdkmath.NewIntFromUint64(m.BlockCount))
 	if sumSig.GT(blockCountDec) {
 		return fmt.Errorf(
 			"sum of relative signatures is higher than block number %s > %s",

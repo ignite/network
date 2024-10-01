@@ -6,18 +6,9 @@ import (
 	"time"
 
 	sdkmath "cosmossdk.io/math"
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	"gopkg.in/yaml.v2"
 )
 
-var _ paramtypes.ParamSet = (*Params)(nil)
-
 var (
-	KeyAllocationPrice       = []byte("AllocationPrice")
-	KeyParticipationTierList = []byte("ParticipationTierList")
-	KeyRegistrationPeriod    = []byte("RegistrationPeriod")
-	KeyWithdrawalDelay       = []byte("WithdrawalDelay")
-
 	DefaultAllocationPrice = AllocationPrice{
 		Bonded: sdkmath.NewInt(1000),
 	}
@@ -59,11 +50,6 @@ var (
 	DefaultWithdrawalDelay = time.Hour * 24 * 14 // Two weeks
 )
 
-// ParamKeyTable the param key table for launch module
-func ParamKeyTable() paramtypes.KeyTable {
-	return paramtypes.NewKeyTable().RegisterParamSet(&Params{})
-}
-
 // NewParams creates a new Params instance
 func NewParams(
 	allocationPrice AllocationPrice,
@@ -79,7 +65,7 @@ func NewParams(
 	}
 }
 
-// DefaultParams returns a default set of parameters
+// DefaultParams returns a default set of parameters.
 func DefaultParams() Params {
 	return NewParams(
 		DefaultAllocationPrice,
@@ -87,16 +73,6 @@ func DefaultParams() Params {
 		DefaultRegistrationPeriod,
 		DefaultWithdrawalDelay,
 	)
-}
-
-// ParamSetPairs get the params.ParamSet
-func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
-	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(KeyAllocationPrice, &p.AllocationPrice, validateAllocationPrice),
-		paramtypes.NewParamSetPair(KeyParticipationTierList, &p.ParticipationTierList, validateParticipationTierList),
-		paramtypes.NewParamSetPair(KeyRegistrationPeriod, &p.RegistrationPeriod, validateTimeDuration),
-		paramtypes.NewParamSetPair(KeyWithdrawalDelay, &p.WithdrawalDelay, validateTimeDuration),
-	}
 }
 
 // Validate validates the set of params
@@ -114,12 +90,6 @@ func (p Params) Validate() error {
 	}
 
 	return validateTimeDuration(p.WithdrawalDelay)
-}
-
-// String implements the Stringer interface.
-func (p Params) String() string {
-	out, _ := yaml.Marshal(p)
-	return string(out)
 }
 
 // validateAllocationPrice validates the AllocationPrice param
@@ -191,4 +161,24 @@ func validateTimeDuration(i interface{}) error {
 	}
 
 	return nil
+}
+
+func (a *AllocationPrice) Equal(cmp *AllocationPrice) bool {
+	return a.Bonded.Equal(cmp.Bonded)
+}
+
+func (t *Tier) Equal(cmp *Tier) bool {
+	switch {
+	case t.TierID != cmp.TierID:
+		return false
+	case !t.RequiredAllocations.Equal(cmp.RequiredAllocations):
+		return false
+	case !t.Benefits.Equal(&cmp.Benefits):
+		return false
+	}
+	return true
+}
+
+func (t *TierBenefits) Equal(cmp *TierBenefits) bool {
+	return t.MaxBidAmount.Equal(cmp.MaxBidAmount)
 }

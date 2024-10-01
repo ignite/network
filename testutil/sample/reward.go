@@ -3,7 +3,7 @@ package sample
 import (
 	"math/rand"
 
-	reward "github.com/tendermint/spn/x/reward/types"
+	reward "github.com/ignite/network/x/reward/types"
 )
 
 // RewardPool returns a sample RewardPool

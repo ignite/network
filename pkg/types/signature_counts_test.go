@@ -5,9 +5,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/pkg/types"
-	tc "github.com/tendermint/spn/testutil/constructor"
-	"github.com/tendermint/spn/testutil/sample"
+	"github.com/ignite/network/pkg/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	"github.com/ignite/network/testutil/sample"
 )
 
 func TestNewSignatureCounts(t *testing.T) {

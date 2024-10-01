@@ -4,28 +4,39 @@ import (
 	"fmt"
 	"testing"
 
+	"cosmossdk.io/collections"
 	"github.com/stretchr/testify/require"
 
-	tc "github.com/tendermint/spn/testutil/constructor"
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/project/keeper"
-	"github.com/tendermint/spn/x/project/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/project/keeper"
+	"github.com/ignite/network/x/project/types"
 )
 
 func TestAccountWithoutProjectInvariant(t *testing.T) {
 	ctx, tk, _ := testkeeper.NewTestSetup(t)
 	t.Run("should allow valid case", func(t *testing.T) {
+		var err error
 		project := sample.Project(r, 0)
-		project.ProjectID = tk.ProjectKeeper.AppendProject(ctx, project)
-		tk.ProjectKeeper.SetMainnetAccount(ctx, sample.MainnetAccount(r, project.ProjectID, sample.Address(r)))
-		msg, broken := keeper.AccountWithoutProjectInvariant(*tk.ProjectKeeper)(ctx)
+		project.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, project)
+		require.NoError(t, err)
+
+		addr := sample.AccAddress(r)
+		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(project.ProjectID, addr), sample.MainnetAccount(r, project.ProjectID, addr.String()))
+		require.NoError(t, err)
+
+		msg, broken := keeper.AccountWithoutProjectInvariant(tk.ProjectKeeper)(ctx)
 		require.False(t, broken, msg)
 	})
 
 	t.Run("should prevent invalid case", func(t *testing.T) {
-		tk.ProjectKeeper.SetMainnetAccount(ctx, sample.MainnetAccount(r, 100, sample.Address(r)))
-		msg, broken := keeper.AccountWithoutProjectInvariant(*tk.ProjectKeeper)(ctx)
+		addr := sample.AccAddress(r)
+		projectID := uint64(100)
+		err := tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(projectID, addr), sample.MainnetAccount(r, projectID, addr.String()))
+		require.NoError(t, err)
+
+		msg, broken := keeper.AccountWithoutProjectInvariant(tk.ProjectKeeper)(ctx)
 		require.True(t, broken, msg)
 	})
 }
@@ -40,14 +51,16 @@ func TestProjectSharesInvariant(t *testing.T) {
 			project.AllocatedShares,
 			tc.Shares(t, "100foo,200bar"),
 		)
-		tk.ProjectKeeper.SetProject(ctx, project)
+		err := tk.ProjectKeeper.Project.Set(ctx, projectID1, project)
+		require.NoError(t, err)
 
 		project = sample.Project(r, projectID2)
 		project.AllocatedShares = types.IncreaseShares(
 			project.AllocatedShares,
 			tc.Shares(t, "10000foo"),
 		)
-		tk.ProjectKeeper.SetProject(ctx, project)
+		err = tk.ProjectKeeper.Project.Set(ctx, projectID2, project)
+		require.NoError(t, err)
 
 		// mint vouchers
 		voucherFoo, voucherBar := types.VoucherDenom(projectID1, "foo"), types.VoucherDenom(projectID1, "bar")
@@ -58,31 +71,41 @@ func TestProjectSharesInvariant(t *testing.T) {
 		tk.Mint(ctx, sample.Address(r), tc.Coins(t, fmt.Sprintf("5000%s", voucherFoo)))
 
 		// add accounts with shares
-		tk.ProjectKeeper.SetMainnetAccount(ctx, types.MainnetAccount{
+		addr1 := sample.AccAddress(r)
+		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(projectID1, addr1), types.MainnetAccount{
 			ProjectID: projectID1,
-			Address:   sample.Address(r),
+			Address:   addr1.String(),
 			Shares:    tc.Shares(t, "20foo,40bar"),
 		})
-		tk.ProjectKeeper.SetMainnetAccount(ctx, types.MainnetAccount{
+		require.NoError(t, err)
+
+		addr2 := sample.AccAddress(r)
+		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(projectID1, addr2), types.MainnetAccount{
 			ProjectID: projectID1,
-			Address:   sample.Address(r),
+			Address:   addr2.String(),
 			Shares:    tc.Shares(t, "30foo,60bar"),
 		})
-		tk.ProjectKeeper.SetMainnetAccount(ctx, types.MainnetAccount{
+		require.NoError(t, err)
+
+		addr3 := sample.AccAddress(r)
+		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(projectID2, addr3), types.MainnetAccount{
 			ProjectID: projectID2,
-			Address:   sample.Address(r),
+			Address:   addr3.String(),
 			Shares:    tc.Shares(t, "5000foo"),
 		})
+		require.NoError(t, err)
 
-		msg, broken := keeper.ProjectSharesInvariant(*tk.ProjectKeeper)(ctx)
+		msg, broken := keeper.ProjectSharesInvariant(tk.ProjectKeeper)(ctx)
 		require.False(t, broken, msg)
 	})
 
 	t.Run("should allow project with empty allocated share is valid", func(t *testing.T) {
 		ctx, tk, _ := testkeeper.NewTestSetup(t)
-		tk.ProjectKeeper.SetProject(ctx, sample.Project(r, 3))
+		projectID := uint64(3)
+		err := tk.ProjectKeeper.Project.Set(ctx, projectID, sample.Project(r, projectID))
+		require.NoError(t, err)
 
-		msg, broken := keeper.ProjectSharesInvariant(*tk.ProjectKeeper)(ctx)
+		msg, broken := keeper.ProjectSharesInvariant(tk.ProjectKeeper)(ctx)
 		require.False(t, broken, msg)
 	})
 
@@ -99,9 +122,10 @@ func TestProjectSharesInvariant(t *testing.T) {
 			project.AllocatedShares,
 			shares,
 		)
-		tk.ProjectKeeper.SetProject(ctx, project)
+		err := tk.ProjectKeeper.Project.Set(ctx, projectID, project)
+		require.NoError(t, err)
 
-		msg, broken := keeper.ProjectSharesInvariant(*tk.ProjectKeeper)(ctx)
+		msg, broken := keeper.ProjectSharesInvariant(tk.ProjectKeeper)(ctx)
 		require.True(t, broken, msg)
 	})
 
@@ -113,13 +137,14 @@ func TestProjectSharesInvariant(t *testing.T) {
 			project.AllocatedShares,
 			tc.Shares(t, "100foo,200bar"),
 		)
-		tk.ProjectKeeper.SetProject(ctx, project)
+		err := tk.ProjectKeeper.Project.Set(ctx, projectID, project)
+		require.NoError(t, err)
 
 		// mint vouchers
 		voucherFoo, voucherBar := types.VoucherDenom(projectID, "foo"), types.VoucherDenom(projectID, "bar")
 		tk.Mint(ctx, sample.Address(r), tc.Coins(t, fmt.Sprintf("99%s,200%s", voucherFoo, voucherBar)))
 
-		msg, broken := keeper.ProjectSharesInvariant(*tk.ProjectKeeper)(ctx)
+		msg, broken := keeper.ProjectSharesInvariant(tk.ProjectKeeper)(ctx)
 		require.True(t, broken, msg)
 	})
 
@@ -130,9 +155,10 @@ func TestProjectSharesInvariant(t *testing.T) {
 			project.SpecialAllocations.GenesisDistribution,
 			sample.Shares(r),
 		)
-		tk.ProjectKeeper.SetProject(ctx, project)
+		err := tk.ProjectKeeper.Project.Set(ctx, project.ProjectID, project)
+		require.NoError(t, err)
 
-		msg, broken := keeper.ProjectSharesInvariant(*tk.ProjectKeeper)(ctx)
+		msg, broken := keeper.ProjectSharesInvariant(tk.ProjectKeeper)(ctx)
 		require.True(t, broken, msg)
 	})
 }

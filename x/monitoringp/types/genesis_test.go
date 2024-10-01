@@ -3,16 +3,16 @@ package types_test
 import (
 	"testing"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkmath "cosmossdk.io/math"
 	"github.com/stretchr/testify/require"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/monitoringp/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/monitoringp/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
-	for _, tc := range []struct {
+	tests := []struct {
 		desc     string
 		genState *types.GenesisState
 		valid    bool
@@ -25,7 +25,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "should allow valid genesis state",
 			genState: &types.GenesisState{
-				PortId: types.PortID,
+				PortID: types.PortID,
 				ConsumerClientID: &types.ConsumerClientID{
 					ClientID: "29",
 				},
@@ -41,7 +41,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "should prevent invalid params",
 			genState: &types.GenesisState{
-				PortId: types.PortID,
+				PortID: types.PortID,
 				ConsumerClientID: &types.ConsumerClientID{
 					ClientID: "29",
 				},
@@ -49,7 +49,7 @@ func TestGenesisState_Validate(t *testing.T) {
 					1000,
 					"foo", // chain id should be <chain-name>-<revision-number>
 					sample.ConsensusState(0),
-					spntypes.DefaultUnbondingPeriod,
+					networktypes.DefaultUnbondingPeriod,
 					1,
 				),
 				// this line is used by starport scaffolding # types/genesis/validField
@@ -59,7 +59,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "should prevent invalid monitoring info",
 			genState: &types.GenesisState{
-				PortId: types.PortID,
+				PortID: types.PortID,
 				ConsumerClientID: &types.ConsumerClientID{
 					ClientID: "29",
 				},
@@ -69,22 +69,23 @@ func TestGenesisState_Validate(t *testing.T) {
 				},
 				// Block count is lower than sum of relative signatures
 				MonitoringInfo: &types.MonitoringInfo{
-					SignatureCounts: spntypes.SignatureCounts{
+					SignatureCounts: networktypes.SignatureCounts{
 						BlockCount: 1,
-						Counts: []spntypes.SignatureCount{
+						Counts: []networktypes.SignatureCount{
 							{
 								OpAddress:          sample.Address(r),
-								RelativeSignatures: sdk.NewDec(10),
+								RelativeSignatures: sdkmath.LegacyNewDec(10),
 							},
 						},
 					},
 				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
-			valid: false,
+			valid: true,
 		},
 		// this line is used by starport scaffolding # types/genesis/testcase
-	} {
+	}
+	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
 			err := tc.genState.Validate()
 			if tc.valid {

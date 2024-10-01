@@ -1,129 +1,80 @@
 package keeper
 
 import (
-	"encoding/binary"
-	"fmt"
+	"context"
+	"errors"
 
+	"cosmossdk.io/collections"
 	sdkerrors "cosmossdk.io/errors"
-	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	ignterrors "github.com/ignite/modules/pkg/errors"
-
-	"github.com/tendermint/spn/x/launch/types"
-	profiletypes "github.com/tendermint/spn/x/profile/types"
+	ignterrors "github.com/ignite/network/pkg/errors"
+	"github.com/ignite/network/x/launch/types"
+	profiletypes "github.com/ignite/network/x/profile/types"
 )
 
+// Requests returns all request.
+func (k Keeper) Requests(ctx context.Context) ([]types.Request, error) {
+	requests := make([]types.Request, 0)
+	err := k.Request.Walk(ctx, nil, func(_ collections.Pair[uint64, uint64], value types.Request) (bool, error) {
+		requests = append(requests, value)
+		return false, nil
+	})
+	return requests, err
+}
+
 // GetRequestCounter get request counter for a specific chain ID
-func (k Keeper) GetRequestCounter(ctx sdk.Context, launchID uint64) uint64 {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.RequestCounterKeyPrefix))
-	bz := store.Get(types.RequestCounterKey(launchID))
-
-	// Counter doesn't exist: no element
-	if bz == nil {
-		return 1
+func (k Keeper) GetRequestCounter(ctx context.Context, launchID uint64) (uint64, error) {
+	seq, err := k.RequestSeq.Get(ctx, launchID)
+	if errors.Is(err, collections.ErrNotFound) {
+		return 0, nil
 	}
-
-	// Parse bytes
-	return binary.BigEndian.Uint64(bz)
+	return seq, err
 }
 
-// SetRequestCounter set the total number of request for a chain
-func (k Keeper) SetRequestCounter(ctx sdk.Context, launchID, counter uint64) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.RequestCounterKeyPrefix))
-	bz := make([]byte, 8)
-	binary.BigEndian.PutUint64(bz, counter)
-	store.Set(types.RequestCounterKey(launchID), bz)
-}
-
-// SetRequest set a specific request in the store from its index
-func (k Keeper) SetRequest(ctx sdk.Context, request types.Request) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.RequestKeyPrefix))
-	b := k.cdc.MustMarshal(&request)
-	store.Set(types.RequestKey(
-		request.LaunchID,
-		request.RequestID,
-	), b)
-}
-
-// AppendRequest appends a request for a chain in the store with a new id and update the counter
-func (k Keeper) AppendRequest(ctx sdk.Context, request types.Request) uint64 {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.RequestKeyPrefix))
-
-	counter := k.GetRequestCounter(ctx, request.LaunchID)
-	request.RequestID = counter
-
-	b := k.cdc.MustMarshal(&request)
-	store.Set(types.RequestKey(
-		request.LaunchID,
-		request.RequestID,
-	), b)
-
-	// increment the counter
-	k.SetRequestCounter(ctx, request.LaunchID, counter+1)
-
-	return counter
-}
-
-// GetRequest returns a request from its index
-func (k Keeper) GetRequest(
-	ctx sdk.Context,
-	launchID,
-	requestID uint64,
-) (val types.Request, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.RequestKeyPrefix))
-
-	b := store.Get(types.RequestKey(
-		launchID,
-		requestID,
-	))
-	if b == nil {
-		return val, false
+// GetNextRequestIDWithUpdate increments bid id by one and set it.
+func (k Keeper) GetNextRequestIDWithUpdate(ctx context.Context, launchID uint64) (uint64, error) {
+	seq, err := k.RequestSeq.Get(ctx, launchID)
+	if errors.Is(err, collections.ErrNotFound) {
+		seq = 0
+	} else if err != nil {
+		return 0, err
 	}
-
-	k.cdc.MustUnmarshal(b, &val)
-	return val, true
+	seq++
+	return seq, k.RequestSeq.Set(ctx, launchID, seq)
 }
 
-// RemoveRequest removes a request from the store
-func (k Keeper) RemoveRequest(
-	ctx sdk.Context,
-	launchID,
-	requestID uint64,
-) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.RequestKeyPrefix))
-	store.Delete(types.RequestKey(
-		launchID,
-		requestID,
-	))
-}
-
-// GetAllRequest returns all request
-func (k Keeper) GetAllRequest(ctx sdk.Context) (list []types.Request) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.RequestKeyPrefix))
-	iterator := sdk.KVStorePrefixIterator(store, []byte{})
-
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var val types.Request
-		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		list = append(list, val)
+// AppendRequest appends a Request in the store with a new launch id and update the count
+func (k Keeper) AppendRequest(ctx context.Context, request types.Request) (uint64, error) {
+	requestID, err := k.GetNextRequestIDWithUpdate(ctx, request.LaunchID)
+	if err != nil {
+		return 0, ignterrors.Criticalf("failed to get next request sequence %s", err.Error())
 	}
-
-	return
+	request.RequestID = requestID
+	if err := k.Request.Set(ctx, collections.Join(request.LaunchID, requestID), request); err != nil {
+		return 0, ignterrors.Criticalf("request not set %s", err.Error())
+	}
+	return requestID, nil
 }
 
 // CheckAccount check account inconsistency and return
 // if an account exists for genesis or vesting accounts
-func CheckAccount(ctx sdk.Context, k Keeper, launchID uint64, address string) (bool, error) {
-	_, foundGenesis := k.GetGenesisAccount(ctx, launchID, address)
-	_, foundVesting := k.GetVestingAccount(ctx, launchID, address)
+func CheckAccount(ctx context.Context, k Keeper, launchID uint64, address string) (bool, error) {
+	accAddress, err := k.addressCodec.StringToBytes(address)
+	if err != nil {
+		return false, ignterrors.Criticalf("invalid bech32 format %s", address)
+	}
+
+	foundGenesis, err := k.GenesisAccount.Has(ctx, collections.Join(launchID, sdk.AccAddress(accAddress)))
+	if err != nil {
+		return false, err
+	}
+	foundVesting, err := k.VestingAccount.Has(ctx, collections.Join(launchID, sdk.AccAddress(accAddress)))
+	if err != nil {
+		return false, err
+	}
 	if foundGenesis && foundVesting {
-		return false, ignterrors.Critical(
-			fmt.Sprintf("account %s for chain %d found in vesting and genesis accounts",
-				address, launchID),
-		)
+		return false, ignterrors.Criticalf("account %s for chain %d found in vesting and genesis accounts", address, launchID)
 	}
 	return foundGenesis || foundVesting, nil
 }
@@ -131,12 +82,13 @@ func CheckAccount(ctx sdk.Context, k Keeper, launchID uint64, address string) (b
 // ApplyRequest approves the request and performs
 // the launch information changes
 func ApplyRequest(
-	ctx sdk.Context,
+	ctx context.Context,
 	k Keeper,
 	chain types.Chain,
 	request types.Request,
 	coord profiletypes.Coordinator,
 ) error {
+	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	err := CheckRequest(ctx, k, chain.LaunchID, request)
 	if err != nil {
 		return err
@@ -148,8 +100,16 @@ func ApplyRequest(
 		if !chain.AccountBalance.Empty() {
 			ga.Coins = chain.AccountBalance
 		}
-		k.SetGenesisAccount(ctx, *ga)
-		err = ctx.EventManager().EmitTypedEvent(&types.EventGenesisAccountAdded{
+
+		address, err := k.addressCodec.StringToBytes(ga.Address)
+		if err != nil {
+			return err
+		}
+		if err := k.GenesisAccount.Set(ctx, collections.Join(ga.LaunchID, sdk.AccAddress(address)), *ga); err != nil {
+			return err
+		}
+
+		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventGenesisAccountAdded{
 			Address:            ga.Address,
 			Coins:              ga.Coins,
 			LaunchID:           chain.LaunchID,
@@ -173,8 +133,16 @@ func ApplyRequest(
 				}
 			}
 		}
-		k.SetVestingAccount(ctx, *va)
-		err = ctx.EventManager().EmitTypedEvent(&types.EventVestingAccountAdded{
+
+		address, err := k.addressCodec.StringToBytes(va.Address)
+		if err != nil {
+			return err
+		}
+		if err := k.VestingAccount.Set(ctx, collections.Join(va.LaunchID, sdk.AccAddress(address)), *va); err != nil {
+			return err
+		}
+
+		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventVestingAccountAdded{
 			Address:            va.Address,
 			VestingOptions:     va.VestingOptions,
 			LaunchID:           chain.LaunchID,
@@ -183,9 +151,19 @@ func ApplyRequest(
 
 	case *types.RequestContent_AccountRemoval:
 		ar := requestContent.AccountRemoval
-		k.RemoveGenesisAccount(ctx, chain.LaunchID, ar.Address)
-		k.RemoveVestingAccount(ctx, chain.LaunchID, ar.Address)
-		err = ctx.EventManager().EmitTypedEvent(&types.EventAccountRemoved{
+
+		address, err := k.addressCodec.StringToBytes(ar.Address)
+		if err != nil {
+			return err
+		}
+		if err := k.GenesisAccount.Remove(ctx, collections.Join(chain.LaunchID, sdk.AccAddress(address))); err != nil && !errors.Is(err, collections.ErrNotFound) {
+			return err
+		}
+		if err := k.VestingAccount.Remove(ctx, collections.Join(chain.LaunchID, sdk.AccAddress(address))); err != nil && !errors.Is(err, collections.ErrNotFound) {
+			return err
+		}
+
+		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventAccountRemoved{
 			Address:            ar.Address,
 			LaunchID:           chain.LaunchID,
 			CoordinatorAddress: coord.Address,
@@ -193,8 +171,16 @@ func ApplyRequest(
 
 	case *types.RequestContent_GenesisValidator:
 		ga := requestContent.GenesisValidator
-		k.SetGenesisValidator(ctx, *ga)
-		err = ctx.EventManager().EmitTypedEvent(&types.EventValidatorAdded{
+
+		address, err := k.addressCodec.StringToBytes(ga.Address)
+		if err != nil {
+			return err
+		}
+		if err := k.GenesisValidator.Set(ctx, collections.Join(chain.LaunchID, sdk.AccAddress(address)), *ga); err != nil {
+			return err
+		}
+
+		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventValidatorAdded{
 			Address:            ga.Address,
 			GenTx:              ga.GenTx,
 			ConsPubKey:         ga.ConsPubKey,
@@ -208,8 +194,16 @@ func ApplyRequest(
 
 	case *types.RequestContent_ValidatorRemoval:
 		vr := requestContent.ValidatorRemoval
-		k.RemoveGenesisValidator(ctx, chain.LaunchID, vr.ValAddress)
-		err = ctx.EventManager().EmitTypedEvent(&types.EventValidatorRemoved{
+
+		address, err := k.addressCodec.StringToBytes(vr.ValAddress)
+		if err != nil {
+			return err
+		}
+		if err := k.GenesisValidator.Remove(ctx, collections.Join(chain.LaunchID, sdk.AccAddress(address))); err != nil && !errors.Is(err, collections.ErrNotFound) {
+			return err
+		}
+
+		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventValidatorRemoved{
 			GenesisValidatorAccount: vr.ValAddress,
 			LaunchID:                chain.LaunchID,
 			HasProject:              chain.HasProject,
@@ -219,8 +213,12 @@ func ApplyRequest(
 
 	case *types.RequestContent_ParamChange:
 		cp := requestContent.ParamChange
-		k.SetParamChange(ctx, *cp)
-		err = ctx.EventManager().EmitTypedEvent(&types.EventParamChanged{
+
+		if err := k.ParamChange.Set(ctx, collections.Join(chain.LaunchID, types.ParamChangeSubKey(cp.Module, cp.Param)), *cp); err != nil {
+			return err
+		}
+
+		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventParamChanged{
 			LaunchID: cp.LaunchID,
 			Module:   cp.Module,
 			Param:    cp.Param,
@@ -233,7 +231,7 @@ func ApplyRequest(
 
 // CheckRequest verifies that a request can be applied
 func CheckRequest(
-	ctx sdk.Context,
+	ctx context.Context,
 	k Keeper,
 	launchID uint64,
 	request types.Request,
@@ -281,7 +279,16 @@ func CheckRequest(
 		}
 	case *types.RequestContent_GenesisValidator:
 		ga := requestContent.GenesisValidator
-		if _, found := k.GetGenesisValidator(ctx, launchID, ga.Address); found {
+
+		address, err := k.addressCodec.StringToBytes(ga.Address)
+		if err != nil {
+			return ignterrors.Criticalf("invalid bech32 format %s", address)
+		}
+		found, err := k.GenesisValidator.Has(ctx, collections.Join(launchID, sdk.AccAddress(address)))
+		if err != nil {
+			return ignterrors.Criticalf("invalid bech32 format %s", address)
+		}
+		if found {
 			return sdkerrors.Wrapf(types.ErrValidatorAlreadyExist,
 				"genesis validator %s for chain %d already exist",
 				ga.Address, launchID,
@@ -289,7 +296,16 @@ func CheckRequest(
 		}
 	case *types.RequestContent_ValidatorRemoval:
 		vr := requestContent.ValidatorRemoval
-		if _, found := k.GetGenesisValidator(ctx, launchID, vr.ValAddress); !found {
+
+		address, err := k.addressCodec.StringToBytes(vr.ValAddress)
+		if err != nil {
+			return ignterrors.Criticalf("invalid bech32 format %s", address)
+		}
+		found, err := k.GenesisValidator.Has(ctx, collections.Join(launchID, sdk.AccAddress(address)))
+		if err != nil {
+			return ignterrors.Criticalf("invalid bech32 format %s", address)
+		}
+		if !found {
 			return sdkerrors.Wrapf(types.ErrValidatorNotFound,
 				"genesis validator %s for chain %d not found",
 				vr.ValAddress, launchID,

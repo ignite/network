@@ -9,8 +9,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/tendermint/spn/pkg/chainid"
-	launch "github.com/tendermint/spn/x/launch/types"
+	"github.com/ignite/network/pkg/chainid"
+	launch "github.com/ignite/network/x/launch/types"
 )
 
 // Metadata returns sample metadata bytes
@@ -370,27 +370,27 @@ func LaunchGenesisState(r *rand.Rand, addresses ...string) launch.GenesisState {
 		addresses = append(addresses, Address(r))
 	}
 	return launch.GenesisState{
-		Chains: []launch.Chain{
+		ChainList: []launch.Chain{
 			Chain(r, 0, 0),
 			Chain(r, 1, 1),
 		},
-		ChainCounter: 2,
-		GenesisAccounts: []launch.GenesisAccount{
+		ChainCount: 2,
+		GenesisAccountList: []launch.GenesisAccount{
 			GenesisAccount(r, 0, addresses[0]),
 			GenesisAccount(r, 0, addresses[1]),
 			GenesisAccount(r, 1, addresses[2]),
 		},
-		VestingAccounts: []launch.VestingAccount{
+		VestingAccountList: []launch.VestingAccount{
 			VestingAccount(r, 0, addresses[3]),
 			VestingAccount(r, 0, addresses[4]),
 			VestingAccount(r, 1, addresses[5]),
 		},
-		GenesisValidators: []launch.GenesisValidator{
+		GenesisValidatorList: []launch.GenesisValidator{
 			GenesisValidator(r, 0, addresses[6]),
 			GenesisValidator(r, 0, addresses[7]),
 			GenesisValidator(r, 1, addresses[8]),
 		},
-		Requests: []launch.Request{
+		RequestList: []launch.Request{
 			Request(r, 0, addresses[9]),
 			Request(r, 1, addresses[10]),
 		},

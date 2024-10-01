@@ -1,20 +1,20 @@
 package keeper_test
 
 import (
+	"context"
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/launch/keeper"
-	"github.com/tendermint/spn/x/launch/types"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/launch/keeper"
+	"github.com/ignite/network/x/launch/types"
 )
 
 func TestKeeper_CreateNewChain(t *testing.T) {
-	sdkCtx, tk, ts := testkeeper.NewTestSetup(t)
-	ctx := sdk.WrapSDKContext(sdkCtx)
+	ctx, tk, ts := testkeeper.NewTestSetup(t)
 
 	// Create coordinators
 	coordID, coordAddress := ts.CreateCoordinator(ctx, r)
@@ -180,7 +180,7 @@ func TestKeeper_CreateNewChain(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			id, err := tk.LaunchKeeper.CreateNewChain(
-				sdkCtx,
+				ctx,
 				tc.coordinatorID,
 				tc.genesisChainID,
 				tc.sourceURL,
@@ -199,8 +199,8 @@ func TestKeeper_CreateNewChain(t *testing.T) {
 			}
 			require.EqualValues(t, tc.wantedID, id)
 
-			chain, found := tk.LaunchKeeper.GetChain(sdkCtx, id)
-			require.True(t, found)
+			chain, err := tk.LaunchKeeper.GetChain(ctx, id)
+			require.NoError(t, err)
 			require.EqualValues(t, tc.coordinatorID, chain.CoordinatorID)
 			require.EqualValues(t, tc.genesisChainID, chain.GenesisChainID)
 			require.EqualValues(t, tc.sourceURL, chain.SourceURL)
@@ -213,27 +213,19 @@ func TestKeeper_CreateNewChain(t *testing.T) {
 
 			// Check chain has been appended in the project
 			if tc.hasProject {
-				projectChains, found := tk.ProjectKeeper.GetProjectChains(sdkCtx, tc.projectID)
-				require.True(t, found)
+				projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, tc.projectID)
+				require.NoError(t, err)
 				require.Contains(t, projectChains.Chains, id)
 			}
 		})
 	}
 }
 
-func createNChain(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.Chain {
-	items := make([]types.Chain, n)
-	for i := range items {
-		items[i].LaunchID = keeper.AppendChain(ctx, items[i])
-	}
-	return items
-}
-
-func createNChainForCoordinator(keeper *keeper.Keeper, ctx sdk.Context, coordinatorID uint64, n int) []types.Chain {
+func createNChainForCoordinator(keeper keeper.Keeper, ctx context.Context, coordinatorID uint64, n int) []types.Chain {
 	items := make([]types.Chain, n)
 	for i := range items {
 		items[i].CoordinatorID = coordinatorID
-		items[i].LaunchID = keeper.AppendChain(ctx, items[i])
+		items[i].LaunchID, _ = keeper.AppendChain(ctx, items[i])
 	}
 	return items
 }
@@ -244,8 +236,8 @@ func TestGetChain(t *testing.T) {
 
 	t.Run("should get a chain", func(t *testing.T) {
 		for _, item := range items {
-			rst, found := tk.LaunchKeeper.GetChain(ctx, item.LaunchID)
-			require.True(t, found)
+			rst, err := tk.LaunchKeeper.GetChain(ctx, item.LaunchID)
+			require.NoError(t, err)
 			require.Equal(t, item, rst)
 		}
 	})
@@ -256,11 +248,12 @@ func TestEnableMonitoringConnection(t *testing.T) {
 
 	t.Run("should enable monitoring connection for a chain", func(t *testing.T) {
 		validChain := types.Chain{}
-		validChainID := tk.LaunchKeeper.AppendChain(ctx, validChain)
-		err := tk.LaunchKeeper.EnableMonitoringConnection(ctx, validChainID)
+		validChainID, err := tk.LaunchKeeper.AppendChain(ctx, validChain)
 		require.NoError(t, err)
-		rst, found := tk.LaunchKeeper.GetChain(ctx, validChainID)
-		require.True(t, found)
+		err = tk.LaunchKeeper.EnableMonitoringConnection(ctx, validChainID)
+		require.NoError(t, err)
+		rst, err := tk.LaunchKeeper.GetChain(ctx, validChainID)
+		require.NoError(t, err)
 		validChain.MonitoringConnected = true
 		require.Equal(t, validChain, rst)
 	})
@@ -273,29 +266,11 @@ func TestEnableMonitoringConnection(t *testing.T) {
 
 	t.Run("should prevent enabling monitoring connection if already enabled", func(t *testing.T) {
 		chain := types.Chain{}
-		chainID := tk.LaunchKeeper.AppendChain(ctx, chain)
-		err := tk.LaunchKeeper.EnableMonitoringConnection(ctx, chainID)
+		chainID, err := tk.LaunchKeeper.AppendChain(ctx, chain)
+		require.NoError(t, err)
+		err = tk.LaunchKeeper.EnableMonitoringConnection(ctx, chainID)
 		require.NoError(t, err)
 		err = tk.LaunchKeeper.EnableMonitoringConnection(ctx, chainID)
 		require.ErrorIs(t, err, types.ErrChainMonitoringConnected)
-	})
-}
-
-func TestGetAllChain(t *testing.T) {
-	ctx, tk, _ := testkeeper.NewTestSetup(t)
-	items := createNChain(tk.LaunchKeeper, ctx, 10)
-
-	t.Run("should get all chains", func(t *testing.T) {
-		require.ElementsMatch(t, items, tk.LaunchKeeper.GetAllChain(ctx))
-	})
-}
-
-func TestChainCounter(t *testing.T) {
-	ctx, tk, _ := testkeeper.NewTestSetup(t)
-	items := createNChain(tk.LaunchKeeper, ctx, 10)
-
-	t.Run("should get chain counter", func(t *testing.T) {
-		counter := uint64(len(items))
-		require.Equal(t, counter, tk.LaunchKeeper.GetChainCounter(ctx))
 	})
 }

@@ -1,18 +1,20 @@
 package types
 
-import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
-)
+import "context"
+
+// Event Hooks
+// These can be utilized to communicate between a fundraising keeper and other keepers.
+// The other keepers must implement this interface, which then the fundraising keeper can call.
 
 // LaunchHooks event hooks for launch module
 type LaunchHooks interface {
 	RequestCreated(
-		ctx sdk.Context,
+		ctx context.Context,
 		creator string,
 		launchID,
 		requestID uint64,
 		content RequestContent,
-	)
+	) error
 }
 
 // MultiLaunchHooks combines multiple launch hooks
@@ -23,19 +25,22 @@ func NewMultiLaunchHooks(hooks ...LaunchHooks) MultiLaunchHooks {
 }
 
 func (h MultiLaunchHooks) RequestCreated(
-	ctx sdk.Context,
+	ctx context.Context,
 	creator string,
 	launchID,
 	requestID uint64,
 	content RequestContent,
-) {
+) error {
 	for i := range h {
-		h[i].RequestCreated(
+		if err := h[i].RequestCreated(
 			ctx,
 			creator,
 			launchID,
 			requestID,
 			content,
-		)
+		); err != nil {
+			return err
+		}
 	}
+	return nil
 }

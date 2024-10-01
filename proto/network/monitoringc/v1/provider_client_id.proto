@@ -1,0 +1,9 @@
+syntax = "proto3";
+package network.monitoringc.v1;
+
+option go_package = "github.com/ignite/network/x/monitoringc/types";
+
+message ProviderClientID {
+  uint64 launchID = 1;
+  string clientID = 2;
+}

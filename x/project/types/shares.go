@@ -55,7 +55,7 @@ func CheckShares(shares Shares) error {
 
 // IsEqualShares returns true if the two sets of Shares have the same value
 func IsEqualShares(shares, newShares Shares) bool {
-	return sdk.Coins(shares).IsEqual(sdk.Coins(newShares))
+	return sdk.Coins(shares).Equal(sdk.Coins(newShares))
 }
 
 // IncreaseShares increases the number of shares

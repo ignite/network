@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/pkg/types"
+	"github.com/ignite/network/pkg/types"
 )
 
 func TestParseValidatorSetFromFile(t *testing.T) {

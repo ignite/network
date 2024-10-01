@@ -2,25 +2,24 @@ package types
 
 import "fmt"
 
-// DefaultGenesis returns the default Capability genesis state
+// DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
+		ChainList:            []Chain{},
+		GenesisAccountList:   []GenesisAccount{},
+		GenesisValidatorList: []GenesisValidator{},
+		VestingAccountList:   []VestingAccount{},
+		RequestList:          []Request{},
+		RequestCounters:      []RequestCounter{},
+		ParamChangeList:      []ParamChange{},
 		// this line is used by starport scaffolding # genesis/types/default
-		Chains:            []Chain{},
-		ChainCounter:      1,
-		GenesisAccounts:   []GenesisAccount{},
-		VestingAccounts:   []VestingAccount{},
-		GenesisValidators: []GenesisValidator{},
-		Requests:          []Request{},
-		RequestCounters:   []RequestCounter{},
-		Params:            DefaultParams(),
+		Params: DefaultParams(),
 	}
 }
 
 // Validate performs basic genesis state validation returning an error upon any
 // failure.
 func (gs GenesisState) Validate() error {
-	// this line is used by starport scaffolding # genesis/types/validate
 	launchIDMap, err := validateChains(gs)
 	if err != nil {
 		return err
@@ -34,14 +33,26 @@ func (gs GenesisState) Validate() error {
 		return err
 	}
 
+	// Check for duplicated index in paramChange
+	paramChangeIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.ParamChangeList {
+		index := fmt.Sprint(elem.LaunchID)
+		if _, ok := paramChangeIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for paramChange")
+		}
+		paramChangeIndexMap[index] = struct{}{}
+	}
+	// this line is used by starport scaffolding # genesis/types/validate
+
 	return gs.Params.Validate()
 }
 
 func validateChains(gs GenesisState) (map[uint64]struct{}, error) {
 	// Check for duplicated index in chain
-	counter := gs.GetChainCounter()
+	counter := gs.GetChainCount()
 	launchIDMap := make(map[uint64]struct{})
-	for _, elem := range gs.Chains {
+	for _, elem := range gs.ChainList {
 		if err := elem.Validate(); err != nil {
 			return nil, fmt.Errorf("invalid chain %d: %s", elem.LaunchID, err.Error())
 		}
@@ -80,8 +91,8 @@ func validateRequests(gs GenesisState, launchIDMap map[uint64]struct{}) error {
 
 	// Check for duplicated index in request
 	requestIndexMap := make(map[string]struct{})
-	for _, elem := range gs.Requests {
-		index := string(RequestKey(elem.LaunchID, elem.RequestID))
+	for _, elem := range gs.RequestList {
+		index := fmt.Sprint(elem.LaunchID, elem.RequestID)
 		if _, ok := requestIndexMap[index]; ok {
 			return fmt.Errorf("duplicated index for request")
 		}
@@ -116,8 +127,8 @@ func validateRequests(gs GenesisState, launchIDMap map[uint64]struct{}) error {
 func validateAccounts(gs GenesisState, launchIDMap map[uint64]struct{}) error {
 	// Check for duplicated index in genesisAccount
 	genesisAccountIndexMap := make(map[string]struct{})
-	for _, elem := range gs.GenesisAccounts {
-		index := string(AccountKeyPath(elem.LaunchID, elem.Address))
+	for _, elem := range gs.GenesisAccountList {
+		index := fmt.Sprint(elem.LaunchID, elem.Address)
 		if _, ok := genesisAccountIndexMap[index]; ok {
 			return fmt.Errorf("duplicated index for genesisAccount")
 		}
@@ -134,8 +145,8 @@ func validateAccounts(gs GenesisState, launchIDMap map[uint64]struct{}) error {
 
 	// Check for duplicated index in vestingAccount
 	vestingAccountIndexMap := make(map[string]struct{})
-	for _, elem := range gs.VestingAccounts {
-		index := string(AccountKeyPath(elem.LaunchID, elem.Address))
+	for _, elem := range gs.VestingAccountList {
+		index := fmt.Sprint(elem.LaunchID, elem.Address)
 		if _, ok := vestingAccountIndexMap[index]; ok {
 			return fmt.Errorf("duplicated index for vestingAccount")
 		}
@@ -150,8 +161,8 @@ func validateAccounts(gs GenesisState, launchIDMap map[uint64]struct{}) error {
 		}
 
 		// An address cannot be defined as a genesis account and a vesting account for the same chain
-		accountIndex := AccountKeyPath(elem.LaunchID, elem.Address)
-		if _, ok := genesisAccountIndexMap[string(accountIndex)]; ok {
+		accountIndex := fmt.Sprint(elem.LaunchID, elem.Address)
+		if _, ok := genesisAccountIndexMap[accountIndex]; ok {
 			return fmt.Errorf("account %s can't be a genesis account and a vesting account at the same time for the chain: %d",
 				elem.Address,
 				elem.LaunchID,
@@ -161,8 +172,8 @@ func validateAccounts(gs GenesisState, launchIDMap map[uint64]struct{}) error {
 
 	// Check for duplicated index in genesisValidator
 	genesisValidatorIndexMap := make(map[string]struct{})
-	for _, elem := range gs.GenesisValidators {
-		index := string(AccountKeyPath(elem.LaunchID, elem.Address))
+	for _, elem := range gs.GenesisValidatorList {
+		index := fmt.Sprint(elem.LaunchID, elem.Address)
 		if _, ok := genesisValidatorIndexMap[index]; ok {
 			return fmt.Errorf("duplicated index for genesisValidator")
 		}

@@ -3,37 +3,22 @@ package types
 import (
 	"fmt"
 
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/pkg/errors"
-	"gopkg.in/yaml.v2"
 
-	"github.com/tendermint/spn/pkg/chainid"
-	spntypes "github.com/tendermint/spn/pkg/types"
+	"github.com/ignite/network/pkg/chainid"
+	networktypes "github.com/ignite/network/pkg/types"
 )
 
 var (
-	KeyLastBlockHeight         = []byte("LastBlockHeight")
-	KeyConsumerConsensusState  = []byte("ConsumerConsensusState")
-	KeyConsumerChainID         = []byte("ConsumerChainID")
-	KeyConsumerUnbondingPeriod = []byte("ConsumerUnbondingPeriod")
-	KeyConsumerRevisionHeight  = []byte("RevisionHeight")
-
 	DefaultLastBlockHeight int64 = 1
 	DefaultConsumerChainID       = "spn-1"
 )
 
-var _ paramtypes.ParamSet = (*Params)(nil)
-
-// ParamKeyTable the param key table for launch module
-func ParamKeyTable() paramtypes.KeyTable {
-	return paramtypes.NewKeyTable().RegisterParamSet(&Params{})
-}
-
-// NewParams creates a new Params instance
+// NewParams creates a new Params instance.
 func NewParams(
 	lastBlockHeight int64,
 	consumerChainID string,
-	ccs spntypes.ConsensusState,
+	ccs networktypes.ConsensusState,
 	consumerUnbondingpPeriod int64,
 	consumerRevisionHeight uint64,
 ) Params {
@@ -46,46 +31,16 @@ func NewParams(
 	}
 }
 
+// DefaultParams returns a default set of parameters.
 // DefaultParams returns a default set of parameters
 func DefaultParams() Params {
 	return NewParams(
 		DefaultLastBlockHeight,
 		DefaultConsumerChainID,
-		spntypes.ConsensusState{},
-		spntypes.DefaultUnbondingPeriod,
-		spntypes.DefaultRevisionHeight,
+		networktypes.ConsensusState{},
+		networktypes.DefaultUnbondingPeriod,
+		networktypes.DefaultRevisionHeight,
 	)
-}
-
-// ParamSetPairs get the params.ParamSet
-func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
-	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(
-			KeyLastBlockHeight,
-			&p.LastBlockHeight,
-			validateLastBlockHeight,
-		),
-		paramtypes.NewParamSetPair(
-			KeyConsumerConsensusState,
-			&p.ConsumerConsensusState,
-			validateConsumerConsensusState,
-		),
-		paramtypes.NewParamSetPair(
-			KeyConsumerChainID,
-			&p.ConsumerChainID,
-			validateConsumerChainID,
-		),
-		paramtypes.NewParamSetPair(
-			KeyConsumerUnbondingPeriod,
-			&p.ConsumerUnbondingPeriod,
-			validateConsumerUnbondingPeriod,
-		),
-		paramtypes.NewParamSetPair(
-			KeyConsumerRevisionHeight,
-			&p.ConsumerRevisionHeight,
-			validateConsumerRevisionHeight,
-		),
-	}
 }
 
 // Validate validates the set of params
@@ -105,12 +60,6 @@ func (p Params) Validate() error {
 	return validateConsumerRevisionHeight(p.ConsumerRevisionHeight)
 }
 
-// String implements the Stringer interface.
-func (p Params) String() string {
-	out, _ := yaml.Marshal(p)
-	return string(out)
-}
-
 // validateLastBlockHeight validates last block height
 func validateLastBlockHeight(i interface{}) error {
 	lastBlockHeight, ok := i.(int64)
@@ -127,7 +76,7 @@ func validateLastBlockHeight(i interface{}) error {
 
 // validateConsumerConsensusState validates consumer consensus state
 func validateConsumerConsensusState(i interface{}) error {
-	ccs, ok := i.(spntypes.ConsensusState)
+	ccs, ok := i.(networktypes.ConsensusState)
 	if !ok {
 		return fmt.Errorf("invalid parameter type: %T", i)
 	}
@@ -167,8 +116,8 @@ func validateConsumerUnbondingPeriod(i interface{}) error {
 		return fmt.Errorf("invalid parameter type: %T", i)
 	}
 
-	if unbondingPeriod < spntypes.MinimalUnbondingPeriod {
-		return fmt.Errorf("minimal unbonding period is %d", spntypes.MinimalUnbondingPeriod)
+	if unbondingPeriod < networktypes.MinimalUnbondingPeriod {
+		return fmt.Errorf("minimal unbonding period is %d", networktypes.MinimalUnbondingPeriod)
 	}
 
 	return nil

@@ -7,8 +7,8 @@ import (
 	"os"
 	"time"
 
-	committypes "github.com/cosmos/ibc-go/v7/modules/core/23-commitment/types"
-	ibctm "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
+	committypes "github.com/cosmos/ibc-go/v8/modules/core/23-commitment/types"
+	ibctm "github.com/cosmos/ibc-go/v8/modules/light-clients/07-tendermint"
 	"gopkg.in/yaml.v2"
 )
 
@@ -79,4 +79,11 @@ func (cs ConsensusState) ToTendermintConsensusState() (ibctm.ConsensusState, err
 		committypes.NewMerkleRoot(rootHashBase64),
 		nextValSetHashBytes,
 	), nil
+}
+
+// Equal compares IBC Tendermint Consensus State.
+func (cs *ConsensusState) Equal(cmp *ConsensusState) bool {
+	return cs.Timestamp == cmp.Timestamp &&
+		cs.NextValidatorsHash == cmp.NextValidatorsHash &&
+		cs.Root.Hash == cmp.Root.Hash
 }

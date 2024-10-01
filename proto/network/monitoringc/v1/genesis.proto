@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package network.monitoringc.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "network/monitoringc/v1/launch_id_from_channel_id.proto";
+import "network/monitoringc/v1/launch_id_from_verified_client_id.proto";
+import "network/monitoringc/v1/monitoring_history.proto";
+import "network/monitoringc/v1/params.proto";
+import "network/monitoringc/v1/provider_client_id.proto";
+import "network/monitoringc/v1/verified_client_id.proto";
+
+option go_package = "github.com/ignite/network/x/monitoringc/types";
+
+// GenesisState defines the monitoringc module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+  string portID = 2;
+  repeated LaunchIDFromChannelID launchIDFromChannelIDList = 3 [(gogoproto.nullable) = false];
+  repeated LaunchIDFromVerifiedClientID launchIDFromVerifiedClientIDList = 4 [(gogoproto.nullable) = false];
+  repeated MonitoringHistory monitoringHistoryList = 5 [(gogoproto.nullable) = false];
+  repeated VerifiedClientID verifiedClientIDList = 6 [(gogoproto.nullable) = false];
+  repeated ProviderClientID providerClientIDList = 7 [(gogoproto.nullable) = false];
+}

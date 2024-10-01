@@ -5,25 +5,25 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/reward/types"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/reward/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
-	for _, tc := range []struct {
-		name     string
+	tests := []struct {
+		desc     string
 		genState *types.GenesisState
 		valid    bool
 	}{
 		{
-			name:     "should allow valid default genesis",
+			desc:     "default is valid",
 			genState: types.DefaultGenesis(),
 			valid:    true,
 		},
 		{
-			name: "should allow valid genesis state",
+			desc: "valid genesis state",
 			genState: &types.GenesisState{
-				RewardPools: []types.RewardPool{
+				RewardPoolList: []types.RewardPool{
 					sample.RewardPool(r, 1),
 					sample.RewardPool(r, 2),
 				},
@@ -31,11 +31,10 @@ func TestGenesisState_Validate(t *testing.T) {
 			},
 			valid: true,
 		},
-		// this line is used by starport scaffolding # types/genesis/testcase
 		{
-			name: "should prevent duplicated rewardPool",
+			desc: "duplicated rewardPool",
 			genState: &types.GenesisState{
-				RewardPools: []types.RewardPool{
+				RewardPoolList: []types.RewardPool{
 					sample.RewardPool(r, 1),
 					sample.RewardPool(r, 1),
 				},
@@ -43,17 +42,19 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid: false,
 		},
 		{
-			name: "should prevent invalid rewardPool",
+			desc: "should prevent invalid rewardPool",
 			genState: &types.GenesisState{
-				RewardPools: []types.RewardPool{
+				RewardPoolList: []types.RewardPool{
 					sample.RewardPool(r, 1),
 					{}, // invalid reward pool
 				},
 			},
 			valid: false,
 		},
-	} {
-		t.Run(tc.name, func(t *testing.T) {
+		// this line is used by starport scaffolding # types/genesis/testcase
+	}
+	for _, tc := range tests {
+		t.Run(tc.desc, func(t *testing.T) {
 			err := tc.genState.Validate()
 			if tc.valid {
 				require.NoError(t, err)

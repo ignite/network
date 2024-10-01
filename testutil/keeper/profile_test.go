@@ -3,25 +3,23 @@ package keeper_test
 import (
 	"testing"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
 )
 
 func TestTestMsgServers_CreateCoordinator(t *testing.T) {
-	sdkCtx, tk, tm := testkeeper.NewTestSetup(t)
+	ctx, tk, tm := testkeeper.NewTestSetup(t)
 	r := sample.Rand()
-	ctx := sdk.WrapSDKContext(sdkCtx)
 
 	id, addr := tm.CreateCoordinator(ctx, r)
-	coord, found := tk.ProfileKeeper.GetCoordinator(sdkCtx, id)
-	require.True(t, found)
-	require.Equal(t, id, coord.CoordinatorID)
-	require.Equal(t, addr.String(), coord.Address)
-	coordByAddr, err := tk.ProfileKeeper.GetCoordinatorByAddress(sdkCtx, addr.String())
+	coordinator, err := tk.ProfileKeeper.GetCoordinator(ctx, id)
 	require.NoError(t, err)
-	require.Equal(t, id, coordByAddr.CoordinatorID)
-	require.Equal(t, addr.String(), coordByAddr.Address)
+	require.Equal(t, id, coordinator.CoordinatorID)
+	require.Equal(t, addr.String(), coordinator.Address)
+	coordinatorByAddress, err := tk.ProfileKeeper.GetCoordinatorByAddress(ctx, addr)
+	require.NoError(t, err)
+	require.Equal(t, id, coordinatorByAddress.CoordinatorID)
+	require.Equal(t, addr.String(), coordinatorByAddress.Address)
 }

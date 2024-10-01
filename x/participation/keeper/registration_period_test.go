@@ -6,16 +6,18 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
+	testkeeper "github.com/ignite/network/testutil/keeper"
 )
 
 func TestIsRegistrationEnabled(t *testing.T) {
 	ctx, tk, _ := testkeeper.NewTestSetup(t)
 	registrationPeriod := time.Hour
 
-	params := tk.ParticipationKeeper.GetParams(ctx)
+	params, err := tk.ParticipationKeeper.Params.Get(ctx)
+	require.NoError(t, err)
 	params.RegistrationPeriod = registrationPeriod
-	tk.ParticipationKeeper.SetParams(ctx, params)
+	err = tk.ParticipationKeeper.Params.Set(ctx, params)
+	require.NoError(t, err)
 
 	for _, tc := range []struct {
 		name             string
@@ -51,7 +53,7 @@ func TestIsRegistrationEnabled(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			tmpCtx := ctx.WithBlockTime(tc.blockTime)
-			res := tk.ParticipationKeeper.IsRegistrationEnabled(tmpCtx, tc.auctionStartTime)
+			res, _ := tk.ParticipationKeeper.IsRegistrationEnabled(tmpCtx, tc.auctionStartTime)
 			require.Equal(t, tc.expected, res)
 		})
 	}

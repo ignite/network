@@ -4,24 +4,25 @@ import (
 	"fmt"
 	"testing"
 
+	sdkmath "cosmossdk.io/math"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	ignterrors "github.com/ignite/modules/pkg/errors"
-
-	spntypes "github.com/tendermint/spn/pkg/types"
-	tc "github.com/tendermint/spn/testutil/constructor"
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
-	profiletypes "github.com/tendermint/spn/x/profile/types"
-	"github.com/tendermint/spn/x/reward/keeper"
-	"github.com/tendermint/spn/x/reward/types"
+	ignterrors "github.com/ignite/network/pkg/errors"
+	spntypes "github.com/ignite/network/pkg/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	profiletypes "github.com/ignite/network/x/profile/types"
+	"github.com/ignite/network/x/reward/keeper"
+	"github.com/ignite/network/x/reward/types"
 )
 
 func TestCalculateRewards(t *testing.T) {
 	type args struct {
-		blockRatio sdk.Dec
-		sigRatio   sdk.Dec
+		blockRatio sdkmath.LegacyDec
+		sigRatio   sdkmath.LegacyDec
 		coins      sdk.Coins
 	}
 	tests := []struct {
@@ -33,8 +34,8 @@ func TestCalculateRewards(t *testing.T) {
 		{
 			name: "should give zero rewards with zero ratios and zero coins ",
 			args: args{
-				blockRatio: sdk.ZeroDec(),
-				sigRatio:   sdk.ZeroDec(),
+				blockRatio: sdkmath.LegacyZeroDec(),
+				sigRatio:   sdkmath.LegacyZeroDec(),
 				coins:      sdk.NewCoins(),
 			},
 			want: sdk.NewCoins(),
@@ -42,8 +43,8 @@ func TestCalculateRewards(t *testing.T) {
 		{
 			name: "should give zero rewards with nil coins ",
 			args: args{
-				blockRatio: sdk.OneDec(),
-				sigRatio:   sdk.OneDec(),
+				blockRatio: sdkmath.LegacyOneDec(),
+				sigRatio:   sdkmath.LegacyOneDec(),
 				coins:      nil,
 			},
 			want: sdk.NewCoins(),
@@ -51,8 +52,8 @@ func TestCalculateRewards(t *testing.T) {
 		{
 			name: "should give 0 rewards with 0 block ratio ",
 			args: args{
-				blockRatio: sdk.ZeroDec(),
-				sigRatio:   sdk.OneDec(),
+				blockRatio: sdkmath.LegacyZeroDec(),
+				sigRatio:   sdkmath.LegacyOneDec(),
 				coins:      tc.Coins(t, "10aaa,10bbb,10ccc"),
 			},
 			want: sdk.NewCoins(),
@@ -60,8 +61,8 @@ func TestCalculateRewards(t *testing.T) {
 		{
 			name: "should give 0 rewards with 0 signature ratio ",
 			args: args{
-				blockRatio: sdk.OneDec(),
-				sigRatio:   sdk.ZeroDec(),
+				blockRatio: sdkmath.LegacyOneDec(),
+				sigRatio:   sdkmath.LegacyZeroDec(),
 				coins:      tc.Coins(t, "10aaa,10bbb,10ccc"),
 			},
 			want: sdk.NewCoins(),
@@ -69,8 +70,8 @@ func TestCalculateRewards(t *testing.T) {
 		{
 			name: "should give all rewards with full block and signature ratios ",
 			args: args{
-				blockRatio: sdk.OneDec(),
-				sigRatio:   sdk.OneDec(),
+				blockRatio: sdkmath.LegacyOneDec(),
+				sigRatio:   sdkmath.LegacyOneDec(),
 				coins:      tc.Coins(t, "10aaa,10bbb,10ccc"),
 			},
 			want: tc.Coins(t, "10aaa,10bbb,10ccc"),
@@ -79,7 +80,7 @@ func TestCalculateRewards(t *testing.T) {
 			name: "should give half rewards with 0.5 block ratio ",
 			args: args{
 				blockRatio: tc.Dec(t, "0.5"),
-				sigRatio:   sdk.OneDec(),
+				sigRatio:   sdkmath.LegacyOneDec(),
 				coins:      tc.Coins(t, "10aaa,100bbb,1000ccc"),
 			},
 			want: tc.Coins(t, "5aaa,50bbb,500ccc"),
@@ -87,7 +88,7 @@ func TestCalculateRewards(t *testing.T) {
 		{
 			name: "should give half rewards with 0.5 signature ratio ",
 			args: args{
-				blockRatio: sdk.OneDec(),
+				blockRatio: sdkmath.LegacyOneDec(),
 				sigRatio:   tc.Dec(t, "0.5"),
 				coins:      tc.Coins(t, "10aaa,100bbb,1000ccc"),
 			},
@@ -106,7 +107,7 @@ func TestCalculateRewards(t *testing.T) {
 			name: "should be truncate with decimal rewards ",
 			args: args{
 				blockRatio: tc.Dec(t, "0.5"),
-				sigRatio:   sdk.OneDec(),
+				sigRatio:   sdkmath.LegacyOneDec(),
 				coins:      tc.Coins(t, "1aaa,11bbb,101ccc"),
 			},
 			want: tc.Coins(t, "5bbb,50ccc"),
@@ -124,7 +125,7 @@ func TestCalculateRewards(t *testing.T) {
 			name: "should be empty coins rewards if all rewards are fully truncated",
 			args: args{
 				blockRatio: tc.Dec(t, "0.0001"),
-				sigRatio:   sdk.OneDec(),
+				sigRatio:   sdkmath.LegacyOneDec(),
 				coins:      tc.Coins(t, "10aaa,100bbb,1000ccc"),
 			},
 			want: sdk.NewCoins(),
@@ -132,8 +133,8 @@ func TestCalculateRewards(t *testing.T) {
 		{
 			name: "should return empty coins with empty coins ",
 			args: args{
-				blockRatio: sdk.OneDec(),
-				sigRatio:   sdk.OneDec(),
+				blockRatio: sdkmath.LegacyOneDec(),
+				sigRatio:   sdkmath.LegacyOneDec(),
 				coins:      sdk.NewCoins(),
 			},
 			want: sdk.NewCoins(),
@@ -142,7 +143,7 @@ func TestCalculateRewards(t *testing.T) {
 			name: "should prevent using block ratio greater than 1",
 			args: args{
 				blockRatio: tc.Dec(t, "1.000001"),
-				sigRatio:   sdk.ZeroDec(),
+				sigRatio:   sdkmath.LegacyZeroDec(),
 				coins:      sample.Coins(r),
 			},
 			wantErr: true,
@@ -150,7 +151,7 @@ func TestCalculateRewards(t *testing.T) {
 		{
 			name: "should prevent using signature ratio greater than 1",
 			args: args{
-				blockRatio: sdk.ZeroDec(),
+				blockRatio: sdkmath.LegacyZeroDec(),
 				sigRatio:   tc.Dec(t, "1.000001"),
 				coins:      sample.Coins(r),
 			},
@@ -165,7 +166,7 @@ func TestCalculateRewards(t *testing.T) {
 				return
 			}
 			require.NoError(t, err)
-			require.True(t, got.IsEqual(tt.want),
+			require.True(t, got.Equal(tt.want),
 				fmt.Sprintf("want: %s, got: %s", tt.want.String(), got.String()),
 			)
 		})
@@ -185,26 +186,35 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 	)
 
 	// set validator profiles
-	tk.ProfileKeeper.SetValidator(ctx, profiletypes.Validator{
+	err := tk.ProfileKeeper.Validator.Set(ctx, valFoo, profiletypes.Validator{
 		Address:           valFoo,
 		OperatorAddresses: []string{valOpAddrFoo},
 	})
-	tk.ProfileKeeper.SetValidatorByOperatorAddress(ctx, profiletypes.ValidatorByOperatorAddress{
+	require.NoError(t, err)
+
+	err = tk.ProfileKeeper.ValidatorByOperatorAddress.Set(ctx, valOpAddrFoo, profiletypes.ValidatorByOperatorAddress{
 		ValidatorAddress: valFoo,
 		OperatorAddress:  valOpAddrFoo,
 	})
-	tk.ProfileKeeper.SetValidator(ctx, profiletypes.Validator{
+	require.NoError(t, err)
+
+	err = tk.ProfileKeeper.Validator.Set(ctx, valBar, profiletypes.Validator{
 		Address:           valBar,
 		OperatorAddresses: []string{valOpAddrBar},
 	})
-	tk.ProfileKeeper.SetValidatorByOperatorAddress(ctx, profiletypes.ValidatorByOperatorAddress{
+	require.NoError(t, err)
+
+	err = tk.ProfileKeeper.ValidatorByOperatorAddress.Set(ctx, valOpAddrBar, profiletypes.ValidatorByOperatorAddress{
 		ValidatorAddress: valBar,
 		OperatorAddress:  valOpAddrBar,
 	})
-	tk.ProfileKeeper.SetValidatorByOperatorAddress(ctx, profiletypes.ValidatorByOperatorAddress{
+	require.NoError(t, err)
+
+	err = tk.ProfileKeeper.ValidatorByOperatorAddress.Set(ctx, notFoundValAddr, profiletypes.ValidatorByOperatorAddress{
 		ValidatorAddress: sample.Address(r),
 		OperatorAddress:  notFoundValAddr,
 	})
+	require.NoError(t, err)
 
 	type args struct {
 		launchID        uint64
@@ -623,7 +633,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// set test reward pool if contains coins
 			if tt.rewardPool.RemainingCoins != nil {
-				tk.RewardKeeper.SetRewardPool(ctx, tt.rewardPool)
+				require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, tt.rewardPool.LaunchID, tt.rewardPool))
 				err := tk.BankKeeper.MintCoins(ctx, types.ModuleName, tt.rewardPool.RemainingCoins)
 				require.NoError(t, err)
 			}
@@ -640,8 +650,8 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 			}
 			require.NoError(t, err)
 
-			rewardPool, found := tk.RewardKeeper.GetRewardPool(ctx, tt.args.launchID)
-			require.True(t, found)
+			rewardPool, err := tk.RewardKeeper.RewardPool.Get(ctx, tt.args.launchID)
+			require.NoError(t, err)
 			require.Equal(t, tt.rewardPool.InitialCoins, rewardPool.InitialCoins)
 			require.Equal(t, tt.rewardPool.Provider, rewardPool.Provider)
 
@@ -659,7 +669,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 					require.NoError(t, err)
 
 					balance := tk.BankKeeper.GetAllBalances(ctx, wantAcc)
-					require.True(t, balance.IsEqual(wantBalance),
+					require.True(t, balance.Equal(wantBalance),
 						fmt.Sprintf("address: %s,  want: %s, got: %s",
 							wantAddr, wantBalance.String(), balance.String(),
 						),
@@ -680,13 +690,13 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 				totalDistributedBalances.String(),
 				tt.rewardPool.RemainingCoins.String(),
 			)
-			require.True(t, rewardPool.RemainingCoins.IsEqual(expectedRemainingCoins), "expected remaining coins %s, got %s",
+			require.True(t, rewardPool.RemainingCoins.Equal(expectedRemainingCoins), "expected remaining coins %s, got %s",
 				expectedRemainingCoins.String(),
 				rewardPool.RemainingCoins.String(),
 			)
 
 			// remove the reward pool used for the test
-			tk.RewardKeeper.RemoveRewardPool(ctx, tt.rewardPool.LaunchID)
+			require.NoError(t, tk.RewardKeeper.RewardPool.Remove(ctx, tt.rewardPool.LaunchID))
 		})
 	}
 }

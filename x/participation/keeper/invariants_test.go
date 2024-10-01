@@ -3,13 +3,15 @@ package keeper_test
 import (
 	"testing"
 
+	"cosmossdk.io/collections"
 	sdkmath "cosmossdk.io/math"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/participation/keeper"
-	"github.com/tendermint/spn/x/participation/types"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/participation/keeper"
+	"github.com/ignite/network/x/participation/types"
 )
 
 func TestMismatchUsedAllocationsInvariant(t *testing.T) {
@@ -45,22 +47,29 @@ func TestMismatchUsedAllocationsInvariant(t *testing.T) {
 			NumAllocations: sdkmath.NewInt(2),
 		}
 	)
+	accAddr, err := sdk.AccAddressFromBech32(addr)
+	require.NoError(t, err)
 
 	t.Run("should allow valid case", func(t *testing.T) {
-		tk.ParticipationKeeper.SetUsedAllocations(ctx, validUsedAllocs)
+		err := tk.ParticipationKeeper.UsedAllocations.Set(ctx, accAddr.String(), validUsedAllocs)
+		require.NoError(t, err)
 		for _, auction := range auctionUsedAllocs {
-			tk.ParticipationKeeper.SetAuctionUsedAllocations(ctx, auction)
+			err = tk.ParticipationKeeper.AuctionUsedAllocations.Set(ctx, collections.Join(accAddr, auction.AuctionID), auction)
+			require.NoError(t, err)
 		}
-		_, isValid := keeper.MismatchUsedAllocationsInvariant(*tk.ParticipationKeeper)(ctx)
+		_, isValid := keeper.MismatchUsedAllocationsInvariant(tk.ParticipationKeeper)(ctx)
 		require.False(t, isValid)
 	})
 
 	t.Run("should prevent invalid case", func(t *testing.T) {
-		tk.ParticipationKeeper.SetUsedAllocations(ctx, invalidUsedAllocs)
+		err := tk.ParticipationKeeper.UsedAllocations.Set(ctx, accAddr.String(), invalidUsedAllocs)
+		require.NoError(t, err)
 		for _, auction := range auctionUsedAllocs {
-			tk.ParticipationKeeper.SetAuctionUsedAllocations(ctx, auction)
+			err = tk.ParticipationKeeper.AuctionUsedAllocations.Set(ctx, collections.Join(accAddr, auction.AuctionID), auction)
+			require.NoError(t, err)
+			require.NoError(t, err)
 		}
-		_, isValid := keeper.MismatchUsedAllocationsInvariant(*tk.ParticipationKeeper)(ctx)
+		_, isValid := keeper.MismatchUsedAllocationsInvariant(tk.ParticipationKeeper)(ctx)
 		require.True(t, isValid)
 	})
 }

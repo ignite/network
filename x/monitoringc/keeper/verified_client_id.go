@@ -1,79 +1,48 @@
 package keeper
 
 import (
-	"github.com/cosmos/cosmos-sdk/store/prefix"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"context"
+	"errors"
 
-	"github.com/tendermint/spn/x/monitoringc/types"
+	"cosmossdk.io/collections"
+
+	"github.com/ignite/network/x/monitoringc/types"
 )
 
-// SetVerifiedClientID set a specific verifiedClientID in the store from its launch id
-func (k Keeper) SetVerifiedClientID(ctx sdk.Context, verifiedClientID types.VerifiedClientID) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.VerifiedClientIDKeyPrefix))
-	b := k.cdc.MustMarshal(&verifiedClientID)
-	store.Set(types.VerifiedClientIDKey(verifiedClientID.LaunchID), b)
+// AllVerifiedClientID returns all VerifiedClientID.
+func (k Keeper) AllVerifiedClientID(ctx context.Context) ([]types.VerifiedClientID, error) {
+	verifiedClientIDs := make([]types.VerifiedClientID, 0)
+	err := k.VerifiedClientID.Walk(ctx, nil, func(_ uint64, value types.VerifiedClientID) (bool, error) {
+		verifiedClientIDs = append(verifiedClientIDs, value)
+		return false, nil
+	})
+	return verifiedClientIDs, err
 }
 
-// ClearVerifiedClientIDs removes a set of verifiedClientID in the store from its launch ID
-func (k Keeper) ClearVerifiedClientIDs(ctx sdk.Context, launchID uint64) {
-	verifiedClientID, found := k.GetVerifiedClientID(ctx, launchID)
-	if !found {
-		return
-	}
-
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.VerifiedClientIDKeyPrefix))
-	store.Delete(types.VerifiedClientIDKey(launchID))
-
-	for _, id := range verifiedClientID.GetClientIDs() {
-		store = prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.LaunchIDFromVerifiedClientIDKeyPrefix))
-		store.Delete(types.LaunchIDFromChannelIDKey(id))
-	}
-}
-
-// GetVerifiedClientID returns a verifiedClientID from its launch id
-func (k Keeper) GetVerifiedClientID(
-	ctx sdk.Context,
-	launchID uint64,
-) (val types.VerifiedClientID, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.VerifiedClientIDKeyPrefix))
-
-	b := store.Get(types.VerifiedClientIDKey(launchID))
-	if b == nil {
-		return val, false
-	}
-
-	k.cdc.MustUnmarshal(b, &val)
-	return val, true
-}
-
-// GetAllVerifiedClientID returns all verifiedClientID
-func (k Keeper) GetAllVerifiedClientID(ctx sdk.Context) (list []types.VerifiedClientID) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.VerifiedClientIDKeyPrefix))
-	iterator := sdk.KVStorePrefixIterator(store, []byte{})
-
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var val types.VerifiedClientID
-		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		list = append(list, val)
-	}
-
-	return
+// AllLaunchIDFromVerifiedClientID returns all LaunchIDFromVerifiedClientID.
+func (k Keeper) AllLaunchIDFromVerifiedClientID(ctx context.Context) ([]types.LaunchIDFromVerifiedClientID, error) {
+	launchIDFromVerifiedClientIDs := make([]types.LaunchIDFromVerifiedClientID, 0)
+	err := k.LaunchIDFromVerifiedClientID.Walk(ctx, nil, func(_ string, value types.LaunchIDFromVerifiedClientID) (bool, error) {
+		launchIDFromVerifiedClientIDs = append(launchIDFromVerifiedClientIDs, value)
+		return false, nil
+	})
+	return launchIDFromVerifiedClientIDs, err
 }
 
 // AddVerifiedClientID add a specific verifiedClientID without duplication in the store from its launch id
-func (k Keeper) AddVerifiedClientID(ctx sdk.Context, launchID uint64, clientID string) {
-	verifiedClientID, found := k.GetVerifiedClientID(ctx, launchID)
-	if !found {
+func (k Keeper) AddVerifiedClientID(ctx context.Context, launchID uint64, clientID string) error {
+	verifiedClientID, err := k.VerifiedClientID.Get(ctx, launchID)
+	if errors.Is(err, collections.ErrNotFound) {
 		verifiedClientID = types.VerifiedClientID{LaunchID: launchID}
+	} else if err != nil {
+		return err
 	}
 
 	for _, cID := range verifiedClientID.ClientIDs {
 		if clientID == cID {
-			return
+			return nil
 		}
 	}
 	verifiedClientID.ClientIDs = append(verifiedClientID.ClientIDs, clientID)
-	k.SetVerifiedClientID(ctx, verifiedClientID)
+	return k.VerifiedClientID.Set(ctx, launchID, verifiedClientID)
 }

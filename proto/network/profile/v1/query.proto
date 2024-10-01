@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package network.profile.v1;
+
+import "amino/amino.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "network/profile/v1/coordinator.proto";
+import "network/profile/v1/params.proto";
+import "network/profile/v1/validator.proto";
+
+option go_package = "github.com/ignite/network/x/profile/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/ignite/network/profile/v1/params";
+  }
+
+  // Queries a list of Coordinator items.
+  rpc GetCoordinator(QueryGetCoordinatorRequest) returns (QueryGetCoordinatorResponse) {
+    option (google.api.http).get = "/ignite/network/profile/coordinator/{ID}";
+  }
+  rpc ListCoordinator(QueryAllCoordinatorRequest) returns (QueryAllCoordinatorResponse) {
+    option (google.api.http).get = "/ignite/network/profile/coordinator";
+  }
+
+  // Queries a list of Validator items.
+  rpc GetValidator(QueryGetValidatorRequest) returns (QueryGetValidatorResponse) {
+    option (google.api.http).get = "/ignite/network/profile/validator/{address}";
+  }
+  rpc ListValidator(QueryAllValidatorRequest) returns (QueryAllValidatorResponse) {
+    option (google.api.http).get = "/ignite/network/profile/validator";
+  }
+
+  // Queries a list of GetCoordinatorByAddress items.
+  rpc GetCoordinatorByAddress(QueryGetCoordinatorByAddressRequest) returns (QueryGetCoordinatorByAddressResponse) {
+    option (google.api.http).get = "/ignite/network/profile/get_coordinator_by_address/{address}";
+  }
+
+  // Queries a list of GetValidatorByOperatorAddress items.
+  rpc GetValidatorByOperatorAddress(QueryGetValidatorByOperatorAddressRequest) returns (QueryGetValidatorByOperatorAddressResponse) {
+    option (google.api.http).get = "/ignite/network/profile/get_validator_by_operator_address/{address}";
+  }
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
+
+message QueryGetCoordinatorRequest {
+  uint64 ID = 1;
+}
+
+message QueryGetCoordinatorResponse {
+  Coordinator Coordinator = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllCoordinatorRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllCoordinatorResponse {
+  repeated Coordinator Coordinator = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetValidatorRequest {
+  string address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}
+
+message QueryGetValidatorResponse {
+  Validator validator = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllValidatorRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllValidatorResponse {
+  repeated Validator validator = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetCoordinatorByAddressRequest {
+  string address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}
+
+message QueryGetCoordinatorByAddressResponse {
+  Coordinator coordinator = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetValidatorByOperatorAddressRequest {
+  string address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}
+
+message QueryGetValidatorByOperatorAddressResponse {
+  Validator validator = 1 [(gogoproto.nullable) = false];
+}

@@ -3,8 +3,6 @@ package types
 import (
 	"errors"
 	"fmt"
-
-	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // NewRewardPool returns a new RewardPool object
@@ -52,10 +50,6 @@ func (m RewardPool) Validate() error {
 			m.CurrentRewardHeight,
 			m.LastRewardHeight,
 		)
-	}
-
-	if _, err := sdk.AccAddressFromBech32(m.Provider); err != nil {
-		return fmt.Errorf("invalid provider address: %s", err)
 	}
 
 	return nil

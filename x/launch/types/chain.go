@@ -3,7 +3,7 @@ package types
 import (
 	"errors"
 
-	"github.com/tendermint/spn/pkg/chainid"
+	"github.com/ignite/network/pkg/chainid"
 )
 
 // Validate checks the chain has valid data

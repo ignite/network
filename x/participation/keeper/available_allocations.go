@@ -1,20 +1,25 @@
 package keeper
 
 import (
+	"context"
+
+	"cosmossdk.io/collections"
 	sdkmath "cosmossdk.io/math"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/pkg/errors"
 )
 
 // GetAvailableAllocations returns the number of allocations that are unused
-func (k Keeper) GetAvailableAllocations(ctx sdk.Context, address string) (sdkmath.Int, error) {
+func (k Keeper) GetAvailableAllocations(ctx context.Context, address string) (sdkmath.Int, error) {
 	numTotalAlloc, err := k.GetTotalAllocations(ctx, address)
 	if err != nil {
 		return sdkmath.ZeroInt(), err
 	}
 
-	usedAlloc, found := k.GetUsedAllocations(ctx, address)
-	if !found {
+	usedAlloc, err := k.UsedAllocations.Get(ctx, address)
+	if errors.Is(err, collections.ErrNotFound) {
 		return numTotalAlloc, nil
+	} else if err != nil {
+		return sdkmath.ZeroInt(), err
 	}
 
 	// return 0 if result would be negative

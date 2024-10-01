@@ -4,7 +4,8 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/tendermint/spn/x/monitoringc/types"
+
+	"github.com/ignite/network/x/monitoringc/types"
 )
 
 const (
@@ -28,10 +29,16 @@ func AllInvariants(k Keeper) sdk.Invariant {
 // entry in `LaunchIDFromVerifiedClientID`
 func MissingVerifiedClientIDInvariant(k Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
-		allVerifiedClientID := k.GetAllVerifiedClientID(ctx)
-		allLaunchIDFromVerifiedClientlID := k.GetAllLaunchIDFromVerifiedClientID(ctx)
+		allVerifiedClientID, err := k.AllVerifiedClientID(ctx)
+		if err != nil {
+			return "", false
+		}
+		allLaunchIDFromVerifiedClientID, err := k.AllLaunchIDFromVerifiedClientID(ctx)
+		if err != nil {
+			return "", false
+		}
 		clientIDMap := make(map[string]struct{})
-		for _, launchIDFromVerifiedClientID := range allLaunchIDFromVerifiedClientlID {
+		for _, launchIDFromVerifiedClientID := range allLaunchIDFromVerifiedClientID {
 			clientIDMap[clientIDKey(launchIDFromVerifiedClientID.LaunchID, launchIDFromVerifiedClientID.ClientID)] = struct{}{}
 		}
 		for _, verifiedClientID := range allVerifiedClientID {

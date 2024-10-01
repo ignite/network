@@ -9,9 +9,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	tc "github.com/tendermint/spn/testutil/constructor"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/launch/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/launch/types"
 )
 
 func TestRequestContent_Validate(t *testing.T) {
@@ -118,7 +118,7 @@ func TestNewGenesisAccount(t *testing.T) {
 		require.NotNil(t, genesisAccount)
 		require.EqualValues(t, launchID, genesisAccount.LaunchID)
 		require.EqualValues(t, address, genesisAccount.Address)
-		require.True(t, coins.IsEqual(genesisAccount.Coins))
+		require.True(t, coins.Equal(genesisAccount.Coins))
 
 		require.Nil(t, requestContent.GetVestingAccount())
 		require.Nil(t, requestContent.GetValidatorRemoval())
@@ -172,7 +172,7 @@ func TestNewGenesisValidator(t *testing.T) {
 		require.EqualValues(t, address, genesisValidator.Address)
 		require.EqualValues(t, gentTx, genesisValidator.GenTx)
 		require.EqualValues(t, consPubKey, genesisValidator.ConsPubKey)
-		require.True(t, selfDelegation.IsEqual(genesisValidator.SelfDelegation))
+		require.True(t, selfDelegation.Equal(genesisValidator.SelfDelegation))
 		require.EqualValues(t, peer, genesisValidator.Peer)
 
 		require.Nil(t, requestContent.GetGenesisAccount())

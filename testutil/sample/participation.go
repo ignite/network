@@ -6,7 +6,7 @@ import (
 
 	sdkmath "cosmossdk.io/math"
 
-	participation "github.com/tendermint/spn/x/participation/types"
+	participation "github.com/ignite/network/x/participation/types"
 )
 
 // ParticipationParams  returns a sample of params for the participation module
