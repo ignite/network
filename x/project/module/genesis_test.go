@@ -5,57 +5,38 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	keepertest "github.com/ignite/network/testutil/keeper"
-	"github.com/ignite/network/testutil/nullify"
+	networktypes "github.com/ignite/network/pkg/types"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
 	project "github.com/ignite/network/x/project/module"
-	"github.com/ignite/network/x/project/types"
 )
 
+/*
+// We use a genesis template from sample package, therefore this placeholder is not used
+// this line is used by starport scaffolding # genesis/test/state
+*/
+
 func TestGenesis(t *testing.T) {
-	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
+	ctx, tk, _ := testkeeper.NewTestSetup(t)
+	r := sample.Rand()
 
-		MainnetAccountList: []types.MainnetAccount{
-			{
-				ProjectID: 0,
-			},
-			{
-				ProjectID: 1,
-			},
-		},
-		ProjectList: []types.Project{
-			{
-				ProjectID: 0,
-			},
-			{
-				ProjectID: 1,
-			},
-		},
-		ProjectCount: 2,
-		ProjectChainsList: []types.ProjectChains{
-			{
-				ProjectID: 0,
-			},
-			{
-				ProjectID: 1,
-			},
-		},
-		// this line is used by starport scaffolding # genesis/test/state
-	}
+	t.Run("should allow importing and exporting genesis", func(t *testing.T) {
+		genesisState := sample.ProjectGenesisStateWithAccounts(r)
 
-	k, ctx, _ := keepertest.ProjectKeeper(t)
-	err := project.InitGenesis(ctx, k, genesisState)
-	require.NoError(t, err)
-	got, err := project.ExportGenesis(ctx, k)
-	require.NoError(t, err)
-	require.NotNil(t, got)
+		err := project.InitGenesis(ctx, tk.ProjectKeeper, genesisState)
+		require.NoError(t, err)
+		got, err := project.ExportGenesis(ctx, tk.ProjectKeeper)
+		require.NoError(t, err)
 
-	nullify.Fill(&genesisState)
-	nullify.Fill(got)
+		require.ElementsMatch(t, genesisState.ProjectChainsList, got.ProjectChainsList)
+		require.ElementsMatch(t, genesisState.ProjectList, got.ProjectList)
+		require.Equal(t, genesisState.ProjectCount, got.ProjectCount)
+		require.ElementsMatch(t, genesisState.MainnetAccountList, got.MainnetAccountList)
+		require.Equal(t, genesisState.Params, got.Params)
+		maxShares, err := tk.ProjectKeeper.TotalShares.Get(ctx)
+		require.NoError(t, err)
+		require.Equal(t, uint64(networktypes.TotalShareNumber), maxShares)
+	})
 
-	require.ElementsMatch(t, genesisState.MainnetAccountList, got.MainnetAccountList)
-	require.ElementsMatch(t, genesisState.ProjectList, got.ProjectList)
-	require.Equal(t, genesisState.ProjectCount, got.ProjectCount)
-	require.ElementsMatch(t, genesisState.ProjectChainsList, got.ProjectChainsList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

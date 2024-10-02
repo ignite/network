@@ -5,95 +5,38 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	keepertest "github.com/ignite/network/testutil/keeper"
-	"github.com/ignite/network/testutil/nullify"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
 	launch "github.com/ignite/network/x/launch/module"
-	"github.com/ignite/network/x/launch/types"
 )
 
+/*
+// We use a genesis template from sample package, therefore this placeholder is not used
+// this line is used by starport scaffolding # genesis/test/state
+*/
+
 func TestGenesis(t *testing.T) {
-	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
+	ctx, tk, _ := testkeeper.NewTestSetup(t)
+	r := sample.Rand()
 
-		ChainList: []types.Chain{
-			{
-				LaunchID: 0,
-			},
-			{
-				LaunchID: 1,
-			},
-		},
-		ChainCount: 2,
-		GenesisAccountList: []types.GenesisAccount{
-			{
-				LaunchID: 0,
-			},
-			{
-				LaunchID: 1,
-			},
-		},
-		GenesisValidatorList: []types.GenesisValidator{
-			{
-				LaunchID: 0,
-			},
-			{
-				LaunchID: 1,
-			},
-		},
-		VestingAccountList: []types.VestingAccount{
-			{
-				LaunchID: 0,
-			},
-			{
-				LaunchID: 1,
-			},
-		},
-		RequestList: []types.Request{
-			{
-				LaunchID: 0,
-			},
-			{
-				LaunchID: 1,
-			},
-		},
-		RequestCounters: []types.RequestCounter{
-			{
-				LaunchID: 0,
-				Counter:  1,
-			},
-			{
-				LaunchID: 1,
-				Counter:  2,
-			},
-		},
-		ParamChangeList: []types.ParamChange{
-			{
-				LaunchID: 0,
-			},
-			{
-				LaunchID: 1,
-			},
-		},
-		// this line is used by starport scaffolding # genesis/test/state
-	}
+	t.Run("should allow import and export the genesis state", func(t *testing.T) {
+		genesisState := sample.LaunchGenesisState(r)
+		err := launch.InitGenesis(ctx, tk.LaunchKeeper, genesisState)
+		require.NoError(t, err)
+		got, err := launch.ExportGenesis(ctx, tk.LaunchKeeper)
+		require.NoError(t, err)
 
-	k, ctx, _ := keepertest.LaunchKeeper(t)
-	err := launch.InitGenesis(ctx, k, genesisState)
-	require.NoError(t, err)
-	got, err := launch.ExportGenesis(ctx, k)
-	require.NoError(t, err)
-	require.NotNil(t, got)
+		// Compare lists
+		require.ElementsMatch(t, genesisState.ChainList, got.ChainList)
+		require.Equal(t, genesisState.ChainCount, got.ChainCount)
 
-	nullify.Fill(&genesisState)
-	nullify.Fill(got)
+		require.ElementsMatch(t, genesisState.GenesisAccountList, got.GenesisAccountList)
+		require.ElementsMatch(t, genesisState.VestingAccountList, got.VestingAccountList)
+		require.ElementsMatch(t, genesisState.GenesisValidatorList, got.GenesisValidatorList)
+		require.ElementsMatch(t, genesisState.RequestList, got.RequestList)
+		require.ElementsMatch(t, genesisState.RequestCounters, got.RequestCounters)
 
-	require.ElementsMatch(t, genesisState.ChainList, got.ChainList)
-	require.Equal(t, genesisState.ChainCount, got.ChainCount)
-	require.ElementsMatch(t, genesisState.GenesisAccountList, got.GenesisAccountList)
-	require.ElementsMatch(t, genesisState.GenesisValidatorList, got.GenesisValidatorList)
-	require.ElementsMatch(t, genesisState.VestingAccountList, got.VestingAccountList)
-	require.ElementsMatch(t, genesisState.RequestList, got.RequestList)
-	require.ElementsMatch(t, genesisState.RequestCounters, got.RequestCounters)
-	require.ElementsMatch(t, genesisState.ParamChangeList, got.ParamChangeList)
+		require.Equal(t, genesisState.Params, got.Params)
+	})
 	// this line is used by starport scaffolding # genesis/test/assert
 }

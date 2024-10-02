@@ -89,14 +89,13 @@ func DuplicatedAccountInvariant(k Keeper) sdk.Invariant {
 				return sdk.FormatInvariant(types.ModuleName, invalidBech32, err.Error()), true
 			}
 			_, err = k.VestingAccount.Get(ctx, collections.Join(account.LaunchID, sdk.AccAddress(address)))
-			if err != nil {
+			if err == nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, duplicatedAccountRoute,
 					fmt.Sprintf(
-						"account %s for chain %d found in vesting and genesis accounts: %s",
+						"account %s for chain %d found in vesting and genesis accounts",
 						account.Address,
 						account.LaunchID,
-						err.Error(),
 					),
 				), true
 			}
