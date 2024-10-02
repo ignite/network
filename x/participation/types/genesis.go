@@ -17,23 +17,20 @@ func DefaultGenesis() *GenesisState {
 func (gs GenesisState) Validate() error {
 	// Check for duplicated index in auctionUsedAllocations
 	auctionUsedAllocationsIndexMap := make(map[string]struct{})
-
 	for _, elem := range gs.AuctionUsedAllocationsList {
-		index := fmt.Sprint(elem.Address)
-		if _, ok := auctionUsedAllocationsIndexMap[index]; ok {
+		if _, ok := auctionUsedAllocationsIndexMap[elem.Address]; ok {
 			return fmt.Errorf("duplicated index for auctionUsedAllocations")
 		}
-		auctionUsedAllocationsIndexMap[index] = struct{}{}
+		auctionUsedAllocationsIndexMap[elem.Address] = struct{}{}
 	}
+
 	// Check for duplicated index in usedAllocations
 	usedAllocationsIndexMap := make(map[string]struct{})
-
 	for _, elem := range gs.UsedAllocationsList {
-		index := fmt.Sprint(elem.Address)
-		if _, ok := usedAllocationsIndexMap[index]; ok {
+		if _, ok := usedAllocationsIndexMap[elem.Address]; ok {
 			return fmt.Errorf("duplicated index for usedAllocations")
 		}
-		usedAllocationsIndexMap[index] = struct{}{}
+		usedAllocationsIndexMap[elem.Address] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

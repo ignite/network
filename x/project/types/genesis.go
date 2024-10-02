@@ -22,14 +22,12 @@ func DefaultGenesis() *GenesisState {
 // failure.
 func (gs GenesisState) Validate() error {
 	// Check for duplicated index in mainnetAccount
-	mainnetAccountIndexMap := make(map[string]struct{})
-
+	mainnetAccountIndexMap := make(map[uint64]struct{})
 	for _, elem := range gs.MainnetAccountList {
-		index := fmt.Sprint(elem.ProjectID)
-		if _, ok := mainnetAccountIndexMap[index]; ok {
+		if _, ok := mainnetAccountIndexMap[elem.ProjectID]; ok {
 			return fmt.Errorf("duplicated index for mainnetAccount")
 		}
-		mainnetAccountIndexMap[index] = struct{}{}
+		mainnetAccountIndexMap[elem.ProjectID] = struct{}{}
 	}
 	// Check for duplicated ID in project
 	projectIDMap := make(map[uint64]bool)
@@ -44,14 +42,12 @@ func (gs GenesisState) Validate() error {
 		projectIDMap[elem.ProjectID] = true
 	}
 	// Check for duplicated index in projectChains
-	projectChainsIndexMap := make(map[string]struct{})
-
+	projectChainsIndexMap := make(map[uint64]struct{})
 	for _, elem := range gs.ProjectChainsList {
-		index := fmt.Sprint(elem.ProjectID)
-		if _, ok := projectChainsIndexMap[index]; ok {
+		if _, ok := projectChainsIndexMap[elem.ProjectID]; ok {
 			return fmt.Errorf("duplicated index for projectChains")
 		}
-		projectChainsIndexMap[index] = struct{}{}
+		projectChainsIndexMap[elem.ProjectID] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

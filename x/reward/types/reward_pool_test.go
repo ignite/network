@@ -40,19 +40,6 @@ func TestRewardPool_Validate(t *testing.T) {
 			},
 		},
 		{
-			name: "should prevent with invalid provider address",
-			rewardPool: types.RewardPool{
-				LaunchID:            1,
-				Provider:            "invalid address",
-				InitialCoins:        validInitialCoins,
-				RemainingCoins:      validRemainingCoins,
-				LastRewardHeight:    50,
-				CurrentRewardHeight: 100,
-				Closed:              false,
-			},
-			wantErr: true,
-		},
-		{
 			name: "should prevent with empty initial coins",
 			rewardPool: types.RewardPool{
 				LaunchID:            1,

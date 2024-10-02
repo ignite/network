@@ -28,54 +28,47 @@ func (gs GenesisState) Validate() error {
 	}
 	// Check for duplicated index in launchIDFromChannelID
 	launchIDFromChannelIDIndexMap := make(map[string]struct{})
-
 	for _, elem := range gs.LaunchIDFromChannelIDList {
-		index := fmt.Sprint(elem.ChannelID)
-		if _, ok := launchIDFromChannelIDIndexMap[index]; ok {
+		if _, ok := launchIDFromChannelIDIndexMap[elem.ChannelID]; ok {
 			return fmt.Errorf("duplicated index for launchIDFromChannelID")
 		}
-		launchIDFromChannelIDIndexMap[index] = struct{}{}
+		launchIDFromChannelIDIndexMap[elem.ChannelID] = struct{}{}
 	}
+
 	// Check for duplicated index in launchIDFromVerifiedClientID
 	launchIDFromVerifiedClientIDIndexMap := make(map[string]struct{})
-
 	for _, elem := range gs.LaunchIDFromVerifiedClientIDList {
-		index := fmt.Sprint(elem.ClientID)
-		if _, ok := launchIDFromVerifiedClientIDIndexMap[index]; ok {
+		if _, ok := launchIDFromVerifiedClientIDIndexMap[elem.ClientID]; ok {
 			return fmt.Errorf("duplicated index for launchIDFromVerifiedClientID")
 		}
-		launchIDFromVerifiedClientIDIndexMap[index] = struct{}{}
+		launchIDFromVerifiedClientIDIndexMap[elem.ClientID] = struct{}{}
 	}
-	// Check for duplicated index in monitoringHistory
-	monitoringHistoryIndexMap := make(map[string]struct{})
 
+	// Check for duplicated index in monitoringHistory
+	monitoringHistoryIndexMap := make(map[uint64]struct{})
 	for _, elem := range gs.MonitoringHistoryList {
-		index := fmt.Sprint(elem.LaunchID)
-		if _, ok := monitoringHistoryIndexMap[index]; ok {
+		if _, ok := monitoringHistoryIndexMap[elem.LaunchID]; ok {
 			return fmt.Errorf("duplicated index for monitoringHistory")
 		}
-		monitoringHistoryIndexMap[index] = struct{}{}
+		monitoringHistoryIndexMap[elem.LaunchID] = struct{}{}
 	}
 
 	// Check for duplicated index in verifiedClientID
-	verifiedClientIDIndexMap := make(map[string]struct{})
-
+	verifiedClientIDIndexMap := make(map[uint64]struct{})
 	for _, elem := range gs.VerifiedClientIDList {
-		index := fmt.Sprint(elem.LaunchID)
-		if _, ok := verifiedClientIDIndexMap[index]; ok {
+		if _, ok := verifiedClientIDIndexMap[elem.LaunchID]; ok {
 			return fmt.Errorf("duplicated index for verifiedClientID")
 		}
-		verifiedClientIDIndexMap[index] = struct{}{}
+		verifiedClientIDIndexMap[elem.LaunchID] = struct{}{}
 	}
-	// Check for duplicated index in providerClientID
-	providerClientIDIndexMap := make(map[string]struct{})
 
+	// Check for duplicated index in providerClientID
+	providerClientIDIndexMap := make(map[uint64]struct{})
 	for _, elem := range gs.ProviderClientIDList {
-		index := fmt.Sprint(elem.LaunchID)
-		if _, ok := providerClientIDIndexMap[index]; ok {
+		if _, ok := providerClientIDIndexMap[elem.LaunchID]; ok {
 			return fmt.Errorf("duplicated index for providerClientID")
 		}
-		providerClientIDIndexMap[index] = struct{}{}
+		providerClientIDIndexMap[elem.LaunchID] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

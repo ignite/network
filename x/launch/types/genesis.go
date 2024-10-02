@@ -34,14 +34,12 @@ func (gs GenesisState) Validate() error {
 	}
 
 	// Check for duplicated index in paramChange
-	paramChangeIndexMap := make(map[string]struct{})
-
+	paramChangeIndexMap := make(map[uint64]struct{})
 	for _, elem := range gs.ParamChangeList {
-		index := fmt.Sprint(elem.LaunchID)
-		if _, ok := paramChangeIndexMap[index]; ok {
+		if _, ok := paramChangeIndexMap[elem.LaunchID]; ok {
 			return fmt.Errorf("duplicated index for paramChange")
 		}
-		paramChangeIndexMap[index] = struct{}{}
+		paramChangeIndexMap[elem.LaunchID] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

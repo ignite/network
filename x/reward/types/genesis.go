@@ -15,14 +15,15 @@ func DefaultGenesis() *GenesisState {
 // failure.
 func (gs GenesisState) Validate() error {
 	// Check for duplicated index in rewardPool
-	rewardPoolIndexMap := make(map[string]struct{})
-
+	rewardPoolIndexMap := make(map[uint64]struct{})
 	for _, elem := range gs.RewardPoolList {
-		index := fmt.Sprint(elem.LaunchID)
-		if _, ok := rewardPoolIndexMap[index]; ok {
+		if err := elem.Validate(); err != nil {
+			return err
+		}
+		if _, ok := rewardPoolIndexMap[elem.LaunchID]; ok {
 			return fmt.Errorf("duplicated index for rewardPool")
 		}
-		rewardPoolIndexMap[index] = struct{}{}
+		rewardPoolIndexMap[elem.LaunchID] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 
