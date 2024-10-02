@@ -2,9 +2,7 @@ package keeper
 
 import (
 	"context"
-	"fmt"
 
-	"cosmossdk.io/collections"
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -19,7 +17,7 @@ func (k msgServer) CreateCoordinator(ctx context.Context, msg *types.MsgCreateCo
 		return nil, errorsmod.Wrap(err, "invalid address")
 	}
 
-	if coordinator, err := k.CoordinatorByAddress.Get(ctx, address); err != nil {
+	if coordinator, err := k.CoordinatorByAddress.Get(ctx, address); err == nil {
 		return nil, errorsmod.Wrapf(types.ErrCoordinatorAlreadyExist, "coordinatorID: %d", coordinator.CoordinatorID)
 	}
 
@@ -64,16 +62,12 @@ func (k msgServer) UpdateCoordinatorDescription(ctx context.Context, msg *types.
 	}
 
 	coordByAddress, err := k.CoordinatorByAddress.Get(ctx, address)
-	if !errors.IsOf(err, collections.ErrNotFound) {
+	if err != nil {
 		return nil, errorsmod.Wrapf(types.ErrCoordinatorAddressNotFound, "coordinator address %s not found", msg.Address)
 	}
 
-	coordinator, err := k.Coordinator.Get(ctx, coordByAddress.CoordinatorID)
+	coordinator, err := k.GetCoordinator(ctx, coordByAddress.CoordinatorID)
 	if err != nil {
-		if errors.IsOf(err, collections.ErrNotFound) {
-			return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", 10)) // TODO
-		}
-
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to get coordinator")
 	}
 
@@ -109,7 +103,7 @@ func (k msgServer) UpdateCoordinatorAddress(ctx context.Context, msg *types.MsgU
 		return nil, errorsmod.Wrap(err, "invalid address")
 	}
 	coordByAddress, err := k.CoordinatorByAddress.Get(ctx, address)
-	if !errors.IsOf(err, collections.ErrNotFound) {
+	if err != nil {
 		return nil, errorsmod.Wrapf(types.ErrCoordinatorAddressNotFound, "coordinator address %s not found", msg.Address)
 	}
 
@@ -117,16 +111,12 @@ func (k msgServer) UpdateCoordinatorAddress(ctx context.Context, msg *types.MsgU
 	if err != nil {
 		return nil, errorsmod.Wrap(err, "invalid new address")
 	}
-	if newCoord, err := k.CoordinatorByAddress.Get(ctx, newAddress); err != nil {
+	if newCoord, err := k.CoordinatorByAddress.Get(ctx, newAddress); err == nil {
 		return nil, errorsmod.Wrapf(types.ErrCoordinatorAlreadyExist, "new address already have a coordinator: %d", newCoord.CoordinatorID)
 	}
 
-	coordinator, err := k.Coordinator.Get(ctx, coordByAddress.CoordinatorID)
+	coordinator, err := k.GetCoordinator(ctx, coordByAddress.CoordinatorID)
 	if err != nil {
-		if errors.IsOf(err, collections.ErrNotFound) {
-			return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", 10)) // TODO
-		}
-
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to get coordinator")
 	}
 
@@ -165,17 +155,13 @@ func (k msgServer) DisableCoordinator(ctx context.Context, msg *types.MsgDisable
 	}
 
 	coordByAddress, err := k.CoordinatorByAddress.Get(ctx, address)
-	if !errors.IsOf(err, collections.ErrNotFound) {
+	if err != nil {
 		return nil, errorsmod.Wrapf(types.ErrCoordinatorAddressNotFound, "coordinator address %s not found", msg.Address)
 	}
 
 	// Checks that the element exists
-	coordinator, err := k.Coordinator.Get(ctx, coordByAddress.CoordinatorID)
+	coordinator, err := k.GetCoordinator(ctx, coordByAddress.CoordinatorID)
 	if err != nil {
-		if errors.IsOf(err, collections.ErrNotFound) {
-			return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", coordByAddress.CoordinatorID))
-		}
-
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to get coordinator")
 	}
 
