@@ -16,6 +16,8 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	ibcclienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
 	ibcconnectiontypes "github.com/cosmos/ibc-go/v8/modules/core/03-connection/types"
+	portkeeper "github.com/cosmos/ibc-go/v8/modules/core/05-port/keeper"
+	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 	claimkeeper "github.com/ignite/modules/x/claim/keeper"
 	claimtypes "github.com/ignite/modules/x/claim/types"
@@ -112,12 +114,14 @@ func NewTestSetup(t testing.TB, options ...SetupOption) (sdk.Context, TestKeeper
 
 	paramKeeper := initializer.Param()
 	capabilityKeeper := initializer.Capability()
+	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
+	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	authKeeper := initializer.Auth(paramKeeper)
 	bankKeeper := initializer.Bank(paramKeeper, authKeeper)
 	stakingKeeper := initializer.Staking(authKeeper, bankKeeper, paramKeeper)
 	distrKeeper := initializer.Distribution(authKeeper, bankKeeper, stakingKeeper)
 	upgradeKeeper := initializer.Upgrade()
-	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, *capabilityKeeper, upgradeKeeper)
+	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, scopedKeeper, upgradeKeeper)
 	fundraisingKeeper := initializer.Fundraising(authKeeper, bankKeeper, distrKeeper)
 	profileKeeper := initializer.Profile()
 	launchKeeper := initializer.Launch(profileKeeper, distrKeeper)
@@ -128,6 +132,7 @@ func NewTestSetup(t testing.TB, options ...SetupOption) (sdk.Context, TestKeeper
 	monitoringConsumerKeeper := initializer.Monitoringc(
 		*ibcKeeper,
 		*capabilityKeeper,
+		portKeeper,
 		launchKeeper,
 		rewardKeeper,
 		[]Connection{},
@@ -220,12 +225,14 @@ func NewTestSetupWithIBCMocks(
 
 	paramKeeper := initializer.Param()
 	capabilityKeeper := initializer.Capability()
+	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
+	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	authKeeper := initializer.Auth(paramKeeper)
 	bankKeeper := initializer.Bank(paramKeeper, authKeeper)
 	stakingKeeper := initializer.Staking(authKeeper, bankKeeper, paramKeeper)
 	distrKeeper := initializer.Distribution(authKeeper, bankKeeper, stakingKeeper)
 	upgradeKeeper := initializer.Upgrade()
-	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, *capabilityKeeper, upgradeKeeper)
+	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, scopedKeeper, upgradeKeeper)
 	fundraisingKeeper := initializer.Fundraising(authKeeper, bankKeeper, distrKeeper)
 	profileKeeper := initializer.Profile()
 	launchKeeper := initializer.Launch(profileKeeper, distrKeeper)
@@ -236,6 +243,7 @@ func NewTestSetupWithIBCMocks(
 	monitoringConsumerKeeper := initializer.Monitoringc(
 		*ibcKeeper,
 		*capabilityKeeper,
+		portKeeper,
 		launchKeeper,
 		rewardKeeper,
 		connectionMock,

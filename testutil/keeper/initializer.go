@@ -211,7 +211,7 @@ func (i initializer) Staking(
 func (i initializer) IBC(
 	paramKeeper paramskeeper.Keeper,
 	stakingKeeper *stakingkeeper.Keeper,
-	capabilityKeeper capabilitykeeper.Keeper,
+	scopedKeeper capabilitykeeper.ScopedKeeper,
 	upgradeKeeper *upgradekeeper.Keeper,
 ) *ibckeeper.Keeper {
 	storeKey := storetypes.NewKVStoreKey(ibcexported.StoreKey)
@@ -223,7 +223,7 @@ func (i initializer) IBC(
 		paramKeeper.Subspace(ibcexported.ModuleName),
 		stakingKeeper,
 		upgradeKeeper,
-		capabilityKeeper.ScopeToModule(ibcexported.ModuleName),
+		scopedKeeper,
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 	)
 }
@@ -339,6 +339,7 @@ func (i initializer) Reward(
 func (i initializer) Monitoringc(
 	ibcKeeper ibckeeper.Keeper,
 	capabilityKeeper capabilitykeeper.Keeper,
+	portKeeper portkeeper.Keeper,
 	launchKeeper launchkeeper.Keeper,
 	rewardKeeper rewardkeeper.Keeper,
 	connectionMock []Connection,
@@ -362,8 +363,6 @@ func (i initializer) Monitoringc(
 		channelKeeper = NewChannelMock(channelMock)
 	}
 
-	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
-	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	scopeModule := capabilityKeeper.ScopeToModule(monitoringctypes.ModuleName)
 
 	k := monitoringckeeper.NewKeeper(
@@ -396,6 +395,7 @@ func (i initializer) Monitoringp(
 	stakingKeeper *stakingkeeper.Keeper,
 	ibcKeeper ibckeeper.Keeper,
 	capabilityKeeper capabilitykeeper.Keeper,
+	portKeeper portkeeper.Keeper,
 	connectionMock []Connection,
 	channelMock []Channel,
 ) monitoringpkeeper.Keeper {
@@ -417,8 +417,6 @@ func (i initializer) Monitoringp(
 		channelKeeper = NewChannelMock(channelMock)
 	}
 
-	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
-	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	scopeModule := capabilityKeeper.ScopeToModule(monitoringctypes.ModuleName)
 
 	k := monitoringpkeeper.NewKeeper(

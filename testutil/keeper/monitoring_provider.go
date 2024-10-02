@@ -8,6 +8,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+	portkeeper "github.com/cosmos/ibc-go/v8/modules/core/05-port/keeper"
+	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	fundraisingtypes "github.com/ignite/modules/x/fundraising/types"
 	"github.com/stretchr/testify/require"
 
@@ -39,16 +41,19 @@ func NewTestSetupWithIBCMocksMonitoringp(
 
 	paramKeeper := initializer.Param()
 	capabilityKeeper := initializer.Capability()
+	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
+	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	authKeeper := initializer.Auth(paramKeeper)
 	bankKeeper := initializer.Bank(paramKeeper, authKeeper)
 	stakingKeeper := initializer.Staking(authKeeper, bankKeeper, paramKeeper)
 	distrKeeper := initializer.Distribution(authKeeper, bankKeeper, stakingKeeper)
 	upgradeKeeper := initializer.Upgrade()
-	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, *capabilityKeeper, upgradeKeeper)
+	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, scopedKeeper, upgradeKeeper)
 	monitoringProviderKeeper := initializer.Monitoringp(
 		stakingKeeper,
 		*ibcKeeper,
 		*capabilityKeeper,
+		portKeeper,
 		connectionMock,
 		channelMock,
 	)
