@@ -14,7 +14,10 @@ func (q queryServer) TotalAllocations(ctx context.Context, req *types.QueryTotal
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	// TODO: Process the query
+	numAlloc, err := q.k.GetTotalAllocations(ctx, req.Address)
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
 
-	return &types.QueryTotalAllocationsResponse{}, nil
+	return &types.QueryTotalAllocationsResponse{TotalAllocations: numAlloc}, nil
 }

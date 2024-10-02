@@ -18,9 +18,6 @@ import (
 	"github.com/ignite/network/x/participation/types"
 )
 
-// Prevent strconv unused error
-var _ = strconv.IntSize
-
 func createNAuctionUsedAllocations(keeper keeper.Keeper, ctx context.Context, n int) []types.AuctionUsedAllocations {
 	items := make([]types.AuctionUsedAllocations, n)
 	auctionID := uint64(0)

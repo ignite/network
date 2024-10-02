@@ -14,7 +14,10 @@ func (q queryServer) TotalShares(ctx context.Context, req *types.QueryTotalShare
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	// TODO: Process the query
+	shares, err := q.k.TotalShares.Get(ctx)
+	if err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "can't get total shares %s", err.Error())
+	}
 
-	return &types.QueryTotalSharesResponse{}, nil
+	return &types.QueryTotalSharesResponse{TotalShares: shares}, nil
 }

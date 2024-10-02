@@ -21,11 +21,11 @@ parser.add_argument('--self_delegation_3',
                     )
 
 def initialize_rewards(lastBlockHeight, selfDelegationVal1, selfDelegationVal2, selfDelegationVal3):
-    cmd_devnull('spnd tx profile create-coordinator --from alice -y')
-    cmd_devnull('spnd tx launch create-chain orbit-1 orbit.com 0xaaa --from alice -y')
-    cmd_devnull('spnd tx project create-project orbit 1000000orbit --from alice -y')
-    cmd_devnull('spnd tx project mint-vouchers 1 50000orbit --from alice -y')
-    cmd_devnull('spnd tx reward set-rewards 1 50000v/1/orbit {} --from alice -y'.format(lastBlockHeight))
+    cmd_devnull('networkd tx profile create-coordinator --from alice -y')
+    cmd_devnull('networkd tx launch create-chain orbit-1 orbit.com 0xaaa --from alice -y')
+    cmd_devnull('networkd tx project create-project orbit 1000000orbit --from alice -y')
+    cmd_devnull('networkd tx project mint-vouchers 1 50000orbit --from alice -y')
+    cmd_devnull('networkd tx reward set-rewards 1 50000v/1/orbit {} --from alice -y'.format(lastBlockHeight))
 
     gentx1 = './testnet/node1/config/gentx/gentx.json'
     gentx2 = './testnet/node2/config/gentx/gentx.json'
@@ -37,14 +37,14 @@ def initialize_rewards(lastBlockHeight, selfDelegationVal1, selfDelegationVal2, 
     val2 = 'spn1pkdk6m2nh77nlaep84cylmkhjder3arey7rll5'
     val3 = 'spn1twckcceyw43da9j247pfs3yhqsv25j38grh68q'
 
-    cmd_devnull('spnd tx launch request-add-validator 1 {} {} {} aaa foo.com --validator-address {} --from alice -y'.format(gentx1, pub1, selfDelegationVal1, val1)),
-    cmd_devnull('spnd tx launch request-add-validator 1 {} {} {} aaa foo.com --validator-address {} --from alice -y'.format(gentx2, pub2, selfDelegationVal2, val2)),
-    cmd_devnull('spnd tx launch request-add-validator 1 {} {} {} aaa foo.com --validator-address {} --from alice -y'.format(gentx3, pub3, selfDelegationVal3, val3)),
+    cmd_devnull('networkd tx launch request-add-validator 1 {} {} {} aaa foo.com --validator-address {} --from alice -y'.format(gentx1, pub1, selfDelegationVal1, val1)),
+    cmd_devnull('networkd tx launch request-add-validator 1 {} {} {} aaa foo.com --validator-address {} --from alice -y'.format(gentx2, pub2, selfDelegationVal2, val2)),
+    cmd_devnull('networkd tx launch request-add-validator 1 {} {} {} aaa foo.com --validator-address {} --from alice -y'.format(gentx3, pub3, selfDelegationVal3, val3)),
 
     # Uncomment for testing incomplete validator set
-    # cmd_devnull('spnd tx launch request-add-validator 1 ./node3/config/gentx/gentx.json "FyTmyvZhwRjwqhY6eWykTfiE+0mwe+U0aSo3ti8DCW8=" 16000000stake aaa foo.com --validator-address spn1ezptsm3npn54qx9vvpah4nymre59ykr9exx2ul --from alice -y')
+    # cmd_devnull('networkd tx launch request-add-validator 1 ./node3/config/gentx/gentx.json "FyTmyvZhwRjwqhY6eWykTfiE+0mwe+U0aSo3ti8DCW8=" 16000000stake aaa foo.com --validator-address spn1ezptsm3npn54qx9vvpah4nymre59ykr9exx2ul --from alice -y')
 
-    cmd_devnull('spnd tx launch trigger-launch 1 5 --from alice -y')
+    cmd_devnull('networkd tx launch trigger-launch 1 5 --from alice -y')
 
 
 if __name__ == "__main__":

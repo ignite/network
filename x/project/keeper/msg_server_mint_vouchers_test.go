@@ -7,7 +7,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	spntypes "github.com/ignite/network/pkg/types"
+	networktypes "github.com/ignite/network/pkg/types"
 	testkeeper "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/sample"
 	profiletypes "github.com/ignite/network/x/profile/types"
@@ -23,7 +23,7 @@ func TestMsgMintVouchers(t *testing.T) {
 
 		shares, _    = types.NewShares("1000foo,500bar,300foobar")
 		sharesTooBig = types.NewSharesFromCoins(sdk.NewCoins(
-			sdk.NewCoin("foo", sdkmath.NewInt(spntypes.TotalShareNumber+1)),
+			sdk.NewCoin("foo", sdkmath.NewInt(networktypes.TotalShareNumber+1)),
 		))
 	)
 

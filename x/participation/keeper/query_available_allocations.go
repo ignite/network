@@ -14,7 +14,10 @@ func (q queryServer) AvailableAllocations(ctx context.Context, req *types.QueryA
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	// TODO: Process the query
+	availableAlloc, err := q.k.GetAvailableAllocations(ctx, req.Address)
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
 
-	return &types.QueryAvailableAllocationsResponse{}, nil
+	return &types.QueryAvailableAllocationsResponse{AvailableAllocations: availableAlloc}, nil
 }

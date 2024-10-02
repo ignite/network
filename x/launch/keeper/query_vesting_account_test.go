@@ -2,7 +2,6 @@ package keeper_test
 
 import (
 	"context"
-	"strconv"
 	"testing"
 
 	"cosmossdk.io/collections"
@@ -17,9 +16,6 @@ import (
 	"github.com/ignite/network/x/launch/keeper"
 	"github.com/ignite/network/x/launch/types"
 )
-
-// Prevent strconv unused error
-var _ = strconv.IntSize
 
 func createNVestingAccount(keeper keeper.Keeper, ctx context.Context, n int) []types.VestingAccount {
 	items := make([]types.VestingAccount, n)

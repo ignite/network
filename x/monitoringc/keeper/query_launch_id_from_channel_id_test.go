@@ -16,9 +16,6 @@ import (
 	"github.com/ignite/network/x/monitoringc/types"
 )
 
-// Prevent strconv unused error
-var _ = strconv.IntSize
-
 func createNLaunchIDFromChannelID(keeper keeper.Keeper, ctx context.Context, n int) []types.LaunchIDFromChannelID {
 	items := make([]types.LaunchIDFromChannelID, n)
 	for i := range items {

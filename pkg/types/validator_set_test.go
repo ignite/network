@@ -13,7 +13,7 @@ import (
 
 func TestParseValidatorSetFromFile(t *testing.T) {
 	fileFromContent := func(content string) string {
-		f, err := os.CreateTemp("", "spn_validator_set_test")
+		f, err := os.CreateTemp("", "network_validator_set_test")
 		require.NoError(t, err)
 		t.Cleanup(func() {
 			os.Remove(f.Name())

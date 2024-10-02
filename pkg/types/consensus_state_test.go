@@ -86,7 +86,7 @@ root:
   hash: 47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
 timestamp: "2022-01-12T07:56:35.394367Z"
 `
-		f, err := os.CreateTemp("", "spn_consensus_state_test")
+		f, err := os.CreateTemp("", "network_consensus_state_test")
 		require.NoError(t, err)
 		t.Cleanup(func() {
 			f.Close()
@@ -109,7 +109,7 @@ timestamp: "2022-01-12T07:56:35.394367Z"
 
 	t.Run("invalid file", func(t *testing.T) {
 		consensusStateYAML := `foo`
-		f, err := os.CreateTemp("", "spn_consensus_state_test")
+		f, err := os.CreateTemp("", "network_consensus_state_test")
 		require.NoError(t, err)
 		t.Cleanup(func() {
 			f.Close()

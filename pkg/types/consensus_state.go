@@ -1,4 +1,4 @@
-// Package types defines types to handle IBC handshakes in SPN modules
+// Package types defines types to handle IBC handshakes in Network modules
 package types
 
 import (

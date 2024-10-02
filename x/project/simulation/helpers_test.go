@@ -10,7 +10,7 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/stretchr/testify/require"
 
-	spntypes "github.com/ignite/network/pkg/types"
+	networktypes "github.com/ignite/network/pkg/types"
 	testkeeper "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/sample"
 	profilekeeper "github.com/ignite/network/x/profile/keeper"
@@ -199,7 +199,7 @@ func TestGetSharesFromProject(t *testing.T) {
 		)
 		shares, err := projecttypes.NewShares(fmt.Sprintf(
 			"%[1]dfoo,%[1]dbar,%[1]dtoto",
-			spntypes.TotalShareNumber,
+			networktypes.TotalShareNumber,
 		))
 		require.NoError(t, err)
 		prjt.AllocatedShares = shares

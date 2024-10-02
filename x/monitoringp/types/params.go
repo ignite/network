@@ -82,7 +82,7 @@ func validateConsumerConsensusState(i interface{}) error {
 	}
 
 	// perform the verification only if the Consumer Consensus State is defined
-	// TODO: remove this check and set an official SPN mainnet consensus state as default
+	// TODO: remove this check and set an official Network mainnet consensus state as default
 	if ccs.Timestamp != "" {
 		tmConsensusState, err := ccs.ToTendermintConsensusState()
 		if err != nil {

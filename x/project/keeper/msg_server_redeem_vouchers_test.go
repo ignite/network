@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	ignterrors "github.com/ignite/network/pkg/errors"
-	spntypes "github.com/ignite/network/pkg/types"
+	networktypes "github.com/ignite/network/pkg/types"
 	testkeeper "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/sample"
 	"github.com/ignite/network/x/project/types"
@@ -27,7 +27,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 		vouchers               sdk.Coins
 		err                    error
 		vouchersTooBig         = sdk.NewCoins(
-			sdk.NewCoin("v/0/foo", sdkmath.NewInt(spntypes.TotalShareNumber+1)),
+			sdk.NewCoin("v/0/foo", sdkmath.NewInt(networktypes.TotalShareNumber+1)),
 		)
 	)
 

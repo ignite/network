@@ -67,7 +67,7 @@ func (m SignatureCounts) Validate() error {
 	return nil
 }
 
-// GetOperatorAddress returns the operator address for the signer with the SPN prefix format
+// GetOperatorAddress returns the operator address for the signer with the Network prefix format
 func (m SignatureCount) GetOperatorAddress(accountPrefix string) (string, error) {
 	_, decoded, err := bech32.DecodeAndConvert(m.OpAddress)
 	if err != nil {

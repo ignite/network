@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	ignterrors "github.com/ignite/network/pkg/errors"
-	spntypes "github.com/ignite/network/pkg/types"
+	networktypes "github.com/ignite/network/pkg/types"
 	testkeeper "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/sample"
 	launchtypes "github.com/ignite/network/x/launch/types"
@@ -26,13 +26,13 @@ func Test_msgServer_CreateClient(t *testing.T) {
 		ctx, tk, ts = testkeeper.NewTestSetup(t)
 
 		consPubKeyStr = "jP0v8F0e2kSAS367V/QAikddQPze+V36v7lhkv1Iqgg="
-		cs            = spntypes.NewConsensusState(
+		cs            = networktypes.NewConsensusState(
 			"2022-02-08T15:12:36.161481Z",
 			"A13E761948413E405EA4F09BEC9F37632F739404108FE1635CB3529B61DA9FD7",
 			"47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
 		)
-		vs = spntypes.NewValidatorSet(
-			spntypes.NewValidator(consPubKeyStr, 0, 100),
+		vs = networktypes.NewValidatorSet(
+			networktypes.NewValidator(consPubKeyStr, 0, 100),
 		)
 	)
 
@@ -98,8 +98,8 @@ func Test_msgServer_CreateClient(t *testing.T) {
 				chainWithInvalidChainID.LaunchID,
 				cs,
 				vs,
-				spntypes.DefaultUnbondingPeriod,
-				spntypes.DefaultRevisionHeight,
+				networktypes.DefaultUnbondingPeriod,
+				networktypes.DefaultRevisionHeight,
 			),
 			err: types.ErrInvalidClientState,
 		},
@@ -111,7 +111,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 				cs,
 				vs,
 				0,
-				spntypes.DefaultRevisionHeight,
+				networktypes.DefaultRevisionHeight,
 			),
 			err: types.ErrInvalidClientState,
 		},
@@ -120,14 +120,14 @@ func Test_msgServer_CreateClient(t *testing.T) {
 			msg: *types.NewMsgCreateClient(
 				sample.Address(r),
 				resCreateChain.LaunchID,
-				spntypes.NewConsensusState(
+				networktypes.NewConsensusState(
 					"",
 					"",
 					"",
 				),
 				vs,
-				spntypes.DefaultUnbondingPeriod,
-				spntypes.DefaultRevisionHeight,
+				networktypes.DefaultUnbondingPeriod,
+				networktypes.DefaultRevisionHeight,
 			),
 			err: ignterrors.ErrCritical,
 		},
@@ -138,8 +138,8 @@ func Test_msgServer_CreateClient(t *testing.T) {
 				invalidChain,
 				cs,
 				vs,
-				spntypes.DefaultUnbondingPeriod,
-				spntypes.DefaultRevisionHeight,
+				networktypes.DefaultUnbondingPeriod,
+				networktypes.DefaultRevisionHeight,
 			),
 			err: launchtypes.ErrChainNotFound,
 		},
@@ -149,9 +149,9 @@ func Test_msgServer_CreateClient(t *testing.T) {
 				sample.Address(r),
 				resCreateChain.LaunchID,
 				sample.ConsensusState(0),
-				spntypes.ValidatorSet{},
-				spntypes.DefaultUnbondingPeriod,
-				spntypes.DefaultRevisionHeight,
+				networktypes.ValidatorSet{},
+				networktypes.DefaultUnbondingPeriod,
+				networktypes.DefaultRevisionHeight,
 			),
 			err: ignterrors.ErrCritical,
 		},
@@ -162,8 +162,8 @@ func Test_msgServer_CreateClient(t *testing.T) {
 				resCreateChain.LaunchID,
 				sample.ConsensusState(0),
 				sample.ValidatorSet(1),
-				spntypes.DefaultUnbondingPeriod,
-				spntypes.DefaultRevisionHeight,
+				networktypes.DefaultUnbondingPeriod,
+				networktypes.DefaultRevisionHeight,
 			),
 			err: types.ErrInvalidValidatorSet,
 		},
@@ -174,8 +174,8 @@ func Test_msgServer_CreateClient(t *testing.T) {
 				resCreateChain.LaunchID,
 				cs,
 				vs,
-				spntypes.DefaultUnbondingPeriod,
-				spntypes.DefaultRevisionHeight,
+				networktypes.DefaultUnbondingPeriod,
+				networktypes.DefaultRevisionHeight,
 			),
 		},
 	}

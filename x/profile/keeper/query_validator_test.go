@@ -17,9 +17,6 @@ import (
 	"github.com/ignite/network/x/profile/types"
 )
 
-// Prevent strconv unused error
-var _ = strconv.IntSize
-
 func createNValidator(keeper keeper.Keeper, ctx context.Context, n int) []types.Validator {
 	items := make([]types.Validator, n)
 	for i := range items {

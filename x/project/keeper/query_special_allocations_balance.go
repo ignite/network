@@ -14,7 +14,35 @@ func (q queryServer) SpecialAllocationsBalance(ctx context.Context, req *types.Q
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	// TODO: Process the query
+	// get the project
+	totalShareNumber, err := q.k.TotalShares.Get(ctx)
+	if err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "can't get total shares %s", err.Error())
+	}
 
-	return &types.QuerySpecialAllocationsBalanceResponse{}, nil
+	project, err := q.k.GetProject(ctx, req.ProjectID)
+	if err != nil {
+		return nil, status.Error(codes.NotFound, "project not found")
+	}
+
+	// calculate special allocations balance from total supply
+	genesisDistribution, err := project.SpecialAllocations.GenesisDistribution.CoinsFromTotalSupply(
+		project.TotalSupply,
+		totalShareNumber,
+	)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "genesis distribution can't be calculated: %s", err.Error())
+	}
+	claimableAirdrop, err := project.SpecialAllocations.ClaimableAirdrop.CoinsFromTotalSupply(
+		project.TotalSupply,
+		totalShareNumber,
+	)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "claimable airdrop can't be calculated: %s", err.Error())
+	}
+
+	return &types.QuerySpecialAllocationsBalanceResponse{
+		GenesisDistribution: genesisDistribution,
+		ClaimableAirdrop:    claimableAirdrop,
+	}, nil
 }

@@ -24,7 +24,7 @@ p2p: 26654
 
 ### Starting the Localnet
 
-Before running any scripts, `spnd` must be built for the current branch
+Before running any scripts, `networkd` must be built for the current branch
 ```
 ignite chain build
 ```
@@ -63,7 +63,7 @@ python3 start_spn.py
 
 Show the validator set
 ```
-spnd q tendermint-validator-set
+networkd q tendermint-validator-set
 block_height: "3"
 total: "3"
 validators:
@@ -94,7 +94,7 @@ python3 delegate.py 10000000 0 0
 
 Validator 1 has now more voting power
 ```
-spnd q tendermint-validator-set
+networkd q tendermint-validator-set
 block_height: "21"
 total: "3"
 validators:
@@ -125,7 +125,7 @@ python3 undelegate.py 10000000 0 0
 
 Validator 1 voting power is decreased back
 ```
-spnd q tendermint-validator-set
+networkd q tendermint-validator-set
 block_height: "67"
 total: "3"
 validators:

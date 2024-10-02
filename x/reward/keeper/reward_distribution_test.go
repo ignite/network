@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	ignterrors "github.com/ignite/network/pkg/errors"
-	spntypes "github.com/ignite/network/pkg/types"
+	networktypes "github.com/ignite/network/pkg/types"
 	tc "github.com/ignite/network/testutil/constructor"
 	testkeeper "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/sample"
@@ -218,7 +218,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 
 	type args struct {
 		launchID        uint64
-		signatureCounts spntypes.SignatureCounts
+		signatureCounts networktypes.SignatureCounts
 		lastBlockHeight int64
 		closeRewardPool bool
 	}

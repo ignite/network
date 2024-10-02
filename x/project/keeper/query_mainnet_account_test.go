@@ -2,7 +2,6 @@ package keeper_test
 
 import (
 	"context"
-	"strconv"
 	"testing"
 
 	"cosmossdk.io/collections"
@@ -11,16 +10,12 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/ignite/network/testutil/sample"
-
 	keepertest "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/nullify"
+	"github.com/ignite/network/testutil/sample"
 	"github.com/ignite/network/x/project/keeper"
 	"github.com/ignite/network/x/project/types"
 )
-
-// Prevent strconv unused error
-var _ = strconv.IntSize
 
 func createNMainnetAccount(keeper keeper.Keeper, ctx context.Context, n int) []types.MainnetAccount {
 	items := make([]types.MainnetAccount, n)

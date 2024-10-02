@@ -2,7 +2,6 @@ package keeper_test
 
 import (
 	"context"
-	"strconv"
 	"testing"
 
 	"github.com/cosmos/cosmos-sdk/types/query"
@@ -15,9 +14,6 @@ import (
 	"github.com/ignite/network/x/monitoringc/keeper"
 	"github.com/ignite/network/x/monitoringc/types"
 )
-
-// Prevent strconv unused error
-var _ = strconv.IntSize
 
 func createNProviderClientID(keeper keeper.Keeper, ctx context.Context, n int) []types.ProviderClientID {
 	items := make([]types.ProviderClientID, n)

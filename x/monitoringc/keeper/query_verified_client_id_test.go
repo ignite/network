@@ -2,7 +2,6 @@ package keeper_test
 
 import (
 	"context"
-	"strconv"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -14,9 +13,6 @@ import (
 	"github.com/ignite/network/x/monitoringc/keeper"
 	"github.com/ignite/network/x/monitoringc/types"
 )
-
-// Prevent strconv unused error
-var _ = strconv.IntSize
 
 func createNVerifiedClientID(keeper keeper.Keeper, ctx context.Context, n int) []types.VerifiedClientID {
 	items := make([]types.VerifiedClientID, n)

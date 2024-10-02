@@ -32,14 +32,14 @@ func TestMsgAddValidatorOperatorAddress_ValidateBasic(t *testing.T) {
 		err  error
 	}{
 		{
-			name: "should validate different addresses for SPN validator and operator address",
+			name: "should validate different addresses for Network validator and operator address",
 			msg: types.MsgAddValidatorOperatorAddress{
 				ValidatorAddress: sample.Address(r),
 				OperatorAddress:  sample.Address(r),
 			},
 		},
 		{
-			name: "should prevent validate same address for SPN validator and operator address",
+			name: "should prevent validate same address for Network validator and operator address",
 			msg: types.MsgAddValidatorOperatorAddress{
 				ValidatorAddress: sampleAddr,
 				OperatorAddress:  sampleAddr,
@@ -47,7 +47,7 @@ func TestMsgAddValidatorOperatorAddress_ValidateBasic(t *testing.T) {
 			err: types.ErrDupAddress,
 		},
 		{
-			name: "should prevent validate invalid SPN validator address",
+			name: "should prevent validate invalid Network validator address",
 			msg: types.MsgAddValidatorOperatorAddress{
 				ValidatorAddress: "invalid_address",
 				OperatorAddress:  sample.Address(r),
