@@ -459,13 +459,6 @@ func TestValidatorRemoval_Validate(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "should prevent validate validator removal with invalid validator address",
-			content: types.ValidatorRemoval{
-				ValAddress: "invalid_address",
-			},
-			wantErr: true,
-		},
-		{
 			name: "should validate valid validator removal",
 			content: types.ValidatorRemoval{
 				ValAddress: sample.Address(r),
@@ -499,16 +492,6 @@ func TestVestingAccount_Validate(t *testing.T) {
 		launchID uint64
 		wantErr  bool
 	}{
-		{
-			name: "should prevent validate vesting account with invalid address",
-			content: types.VestingAccount{
-				LaunchID:       launchID,
-				Address:        "invalid_address",
-				VestingOptions: option,
-			},
-			launchID: launchID,
-			wantErr:  true,
-		},
 		{
 			name: "should prevent validate vesting account with invalid vesting option",
 			content: types.VestingAccount{

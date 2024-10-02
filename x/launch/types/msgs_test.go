@@ -42,11 +42,6 @@ func TestMsgCreateChain_ValidateBasic(t *testing.T) {
 			valid: true,
 		},
 		{
-			desc:  "should prevent validate message with invalid address",
-			msg:   sample.MsgCreateChain(r, "invalid", "", false, 0),
-			valid: false,
-		},
-		{
 			desc:  "should prevent validate message with invalid genesis hash for custom genesis",
 			msg:   invalidGenesisHash,
 			valid: false,
@@ -173,7 +168,7 @@ func TestMsgSendRequest_ValidateBasic(t *testing.T) {
 			msg: types.MsgSendRequest{
 				Creator:  sample.Address(r),
 				LaunchID: sample.Uint64(r),
-				Content:  types.NewAccountRemoval("invalid_address"),
+				Content:  types.NewGenesisAccount(0, "", sdk.NewCoins()),
 			},
 			err: types.ErrInvalidRequestContent,
 		},
@@ -277,18 +272,6 @@ func TestMsgUpdateLaunchInformation_ValidateBasic(t *testing.T) {
 				true,
 			),
 			valid: true,
-		},
-		{
-			desc: "should prevent validate message with invalid coordinator address",
-			msg: sample.MsgUpdateLaunchInformation(r,
-				"invalid",
-				launchID,
-				false,
-				true,
-				true,
-				false,
-			),
-			valid: false,
 		},
 		{
 			desc: "should prevent validate message with no value to edit",

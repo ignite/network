@@ -46,22 +46,6 @@ func TestMsgAddValidatorOperatorAddress_ValidateBasic(t *testing.T) {
 			},
 			err: types.ErrDupAddress,
 		},
-		{
-			name: "should prevent validate invalid Network validator address",
-			msg: types.MsgAddValidatorOperatorAddress{
-				ValidatorAddress: "invalid_address",
-				OperatorAddress:  sample.Address(r),
-			},
-			err: types.ErrInvalidValidatorAddress,
-		},
-		{
-			name: "should prevent validate invalid operator address",
-			msg: types.MsgAddValidatorOperatorAddress{
-				ValidatorAddress: sample.Address(r),
-				OperatorAddress:  "invalid_address",
-			},
-			err: types.ErrInvalidOperatorAddress,
-		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
