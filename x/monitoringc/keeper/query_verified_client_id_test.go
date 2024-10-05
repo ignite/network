@@ -14,7 +14,7 @@ import (
 	"github.com/ignite/network/x/monitoringc/types"
 )
 
-func createNVerifiedClientID(keeper keeper.Keeper, ctx context.Context, n int) []types.VerifiedClientID {
+func createNVerifiedClientID(ctx context.Context, keeper keeper.Keeper, n int) []types.VerifiedClientID {
 	items := make([]types.VerifiedClientID, n)
 	for i := range items {
 		items[i].LaunchID = uint64(i)
@@ -27,7 +27,7 @@ func createNVerifiedClientID(keeper keeper.Keeper, ctx context.Context, n int) [
 func TestVerifiedClientIDQuerySingle(t *testing.T) {
 	k, ctx, _ := keepertest.MonitoringcKeeper(t)
 	qs := keeper.NewQueryServerImpl(k)
-	msgs := createNVerifiedClientID(k, ctx, 2)
+	msgs := createNVerifiedClientID(ctx, k, 2)
 	tests := []struct {
 		desc     string
 		request  *types.QueryGetVerifiedClientIDRequest

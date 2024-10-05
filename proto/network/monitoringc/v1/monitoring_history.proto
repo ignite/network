@@ -1,9 +1,12 @@
 syntax = "proto3";
 package network.monitoringc.v1;
 
+import "gogoproto/gogo.proto";
+import "network/types/monitoring.proto";
+
 option go_package = "github.com/ignite/network/x/monitoringc/types";
 
 message MonitoringHistory {
   uint64 launchID = 1;
-  string latestMonitoringPacket = 2;
+  network.types.MonitoringPacket latestMonitoringPacket = 2 [(gogoproto.nullable) = false];
 }
