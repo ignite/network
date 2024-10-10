@@ -51,7 +51,7 @@ func TestCheckAccount(t *testing.T) {
 		launchID,
 		genesisAcc.String(),
 	)
-	err := tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(ga.LaunchID, genesisAcc), ga)
+	err := tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(launchID, genesisAcc), ga)
 	require.NoError(t, err)
 
 	va := sample.VestingAccount(
@@ -59,15 +59,15 @@ func TestCheckAccount(t *testing.T) {
 		launchID,
 		vestingAcc.String(),
 	)
-	err = tk.LaunchKeeper.VestingAccount.Set(ctx, collections.Join(va.LaunchID, vestingAcc), va)
+	err = tk.LaunchKeeper.VestingAccount.Set(ctx, collections.Join(launchID, vestingAcc), va)
 	require.NoError(t, err)
 
 	// set duplicated entries
 	ga.Address = dupAcc.String()
 	va.Address = dupAcc.String()
-	err = tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(ga.LaunchID, genesisAcc), ga)
+	err = tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(launchID, dupAcc), ga)
 	require.NoError(t, err)
-	err = tk.LaunchKeeper.VestingAccount.Set(ctx, collections.Join(va.LaunchID, vestingAcc), va)
+	err = tk.LaunchKeeper.VestingAccount.Set(ctx, collections.Join(launchID, dupAcc), va)
 	require.NoError(t, err)
 
 	tests := []struct {

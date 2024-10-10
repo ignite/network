@@ -21,6 +21,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if err := k.ChainSeq.Set(ctx, genState.ChainCount); err != nil {
 		return err
 	}
+
 	// Set all the genesisAccount
 	for _, elem := range genState.GenesisAccountList {
 		address, err := k.AddressCodec().StringToBytes(elem.Address)
@@ -31,6 +32,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 			return err
 		}
 	}
+
 	// Set all the genesisValidator
 	for _, elem := range genState.GenesisValidatorList {
 		address, err := k.AddressCodec().StringToBytes(elem.Address)
@@ -41,6 +43,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 			return err
 		}
 	}
+
 	// Set all the vestingAccount
 	for _, elem := range genState.VestingAccountList {
 		address, err := k.AddressCodec().StringToBytes(elem.Address)
@@ -51,17 +54,19 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 			return err
 		}
 	}
+
 	// Set all the request
 	for _, elem := range genState.RequestList {
-		requestID, err := k.GetNextRequestIDWithUpdate(ctx, elem.LaunchID)
-		if err != nil {
-			return err
-		}
-		elem.RequestID = requestID
 		if err := k.Request.Set(ctx, collections.Join(elem.LaunchID, elem.RequestID), elem); err != nil {
 			return err
 		}
 	}
+	for _, elem := range genState.RequestCounters {
+		if err := k.RequestSeq.Set(ctx, elem.LaunchID, elem.Counter); err != nil {
+			return err
+		}
+	}
+
 	// Set all the paramChange
 	for _, elem := range genState.ParamChangeList {
 		if err := k.ParamChange.Set(ctx, collections.Join(elem.LaunchID, types.ParamChangeSubKey(elem.Module, elem.Param)), elem); err != nil {
