@@ -7,32 +7,18 @@ import (
 
 	keepertest "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/nullify"
+	"github.com/ignite/network/testutil/sample"
 	participation "github.com/ignite/network/x/participation/module"
-	"github.com/ignite/network/x/participation/types"
 )
 
-func TestGenesis(t *testing.T) {
-	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
+/*
+// We use a genesis template from sample package, therefore this placeholder is not used
+// this line is used by starport scaffolding # genesis/test/state
+*/
 
-		AuctionUsedAllocationsList: []types.AuctionUsedAllocations{
-			{
-				Address: "0",
-			},
-			{
-				Address: "1",
-			},
-		},
-		UsedAllocationsList: []types.UsedAllocations{
-			{
-				Address: "0",
-			},
-			{
-				Address: "1",
-			},
-		},
-		// this line is used by starport scaffolding # genesis/test/state
-	}
+func TestGenesis(t *testing.T) {
+	r := sample.Rand()
+	genesisState := sample.ParticipationGenesisStateWithAllocations(r)
 
 	k, ctx, _ := keepertest.ParticipationKeeper(t)
 	err := participation.InitGenesis(ctx, k, genesisState)
@@ -44,6 +30,7 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.Equal(t, genesisState.Params, got.Params)
 	require.ElementsMatch(t, genesisState.AuctionUsedAllocationsList, got.AuctionUsedAllocationsList)
 	require.ElementsMatch(t, genesisState.UsedAllocationsList, got.UsedAllocationsList)
 	// this line is used by starport scaffolding # genesis/test/assert

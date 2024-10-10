@@ -9,20 +9,6 @@ import (
 	"github.com/ignite/network/x/profile/types"
 )
 
-func TestMsgAddValidatorOperatorAddress_GetSigners(t *testing.T) {
-	// should contain two signers
-	valAddr := sample.AccAddress(r)
-	opAddr := sample.AccAddress(r)
-	msg := types.MsgAddValidatorOperatorAddress{
-		ValidatorAddress: valAddr.String(),
-		OperatorAddress:  opAddr.String(),
-	}
-	signers := msg.GetSigners()
-	require.Len(t, signers, 2)
-	require.Contains(t, signers, valAddr)
-	require.Contains(t, signers, opAddr)
-}
-
 func TestMsgAddValidatorOperatorAddress_ValidateBasic(t *testing.T) {
 	sampleAddr := sample.Address(r)
 

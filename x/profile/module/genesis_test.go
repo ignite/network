@@ -7,34 +7,18 @@ import (
 
 	keepertest "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/nullify"
+	"github.com/ignite/network/testutil/sample"
 	profile "github.com/ignite/network/x/profile/module"
-	"github.com/ignite/network/x/profile/types"
 )
 
+/*
+// We use a genesis template from sample package, therefore this placeholder is not used
+// this line is used by starport scaffolding # genesis/test/state
+*/
+
 func TestGenesis(t *testing.T) {
-	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
-
-		CoordinatorList: []types.Coordinator{
-			{
-				CoordinatorID: 0,
-			},
-			{
-				CoordinatorID: 1,
-			},
-		},
-		CoordinatorCount: 2,
-		ValidatorList: []types.Validator{
-			{
-				Address: "0",
-			},
-			{
-				Address: "1",
-			},
-		},
-		// this line is used by starport scaffolding # genesis/test/state
-	}
-
+	r := sample.Rand()
+	genesisState := sample.ProfileGenesisState(r)
 	k, ctx, _ := keepertest.ProfileKeeper(t)
 	err := profile.InitGenesis(ctx, k, genesisState)
 	require.NoError(t, err)
@@ -45,6 +29,7 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.ElementsMatch(t, genesisState.Params, got.Params)
 	require.ElementsMatch(t, genesisState.CoordinatorList, got.CoordinatorList)
 	require.Equal(t, genesisState.CoordinatorCount, got.CoordinatorCount)
 	require.ElementsMatch(t, genesisState.ValidatorList, got.ValidatorList)

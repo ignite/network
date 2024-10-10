@@ -10,13 +10,17 @@ import (
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/depinject"
 	"cosmossdk.io/log"
+	"cosmossdk.io/x/tx/signing"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
+	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
+	"github.com/cosmos/gogoproto/proto"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 
 	// this line is used by starport scaffolding # 1
@@ -175,7 +179,10 @@ func (am AppModule) IsAppModule() {}
 func init() {
 	appmodule.Register(
 		&modulev1.Module{},
-		appmodule.Provide(ProvideModule),
+		appmodule.Provide(
+			ProvideModule,
+			ProvideInterfaceRegistry,
+		),
 	)
 }
 
@@ -220,4 +227,37 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 	)
 
 	return ModuleOutputs{ProfileKeeper: k, Module: m}
+}
+
+type (
+	// ValidatorAddressCodec is an alias for address.Codec for validator addresses.
+	ValidatorAddressCodec address.Codec
+
+	// ConsensusAddressCodec is an alias for address.Codec for validator consensus addresses.
+	ConsensusAddressCodec address.Codec
+)
+
+// TODO custom get signers
+func ProvideInterfaceRegistry(addressCodec address.Codec, validatorAddressCodec ValidatorAddressCodec, customGetSigners []signing.CustomGetSigner) (codectypes.InterfaceRegistry, error) {
+	signingOptions := signing.Options{
+		AddressCodec:          addressCodec,
+		ValidatorAddressCodec: validatorAddressCodec,
+	}
+	for _, signer := range customGetSigners {
+		signingOptions.DefineCustomGetSigners(signer.MsgType, signer.Fn)
+	}
+
+	interfaceRegistry, err := codectypes.NewInterfaceRegistryWithOptions(codectypes.InterfaceRegistryOptions{
+		ProtoFiles:     proto.HybridResolver,
+		SigningOptions: signingOptions,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	if err := interfaceRegistry.SigningContext().Validate(); err != nil {
+		return nil, err
+	}
+
+	return interfaceRegistry, nil
 }

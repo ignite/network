@@ -20,11 +20,12 @@ import (
 
 func createNAuctionUsedAllocations(keeper keeper.Keeper, ctx context.Context, n int) []types.AuctionUsedAllocations {
 	items := make([]types.AuctionUsedAllocations, n)
-	auctionID := uint64(0)
 	for i := range items {
 		address := sample.AccAddress(r)
-		items[i].AuctionID = auctionID
+		auctionID := uint64(i)
 		items[i].Address = address.String()
+		items[i].AuctionID = auctionID
+		items[i].NumAllocations = sample.Int(r)
 
 		_ = keeper.AuctionUsedAllocations.Set(ctx, collections.Join(address, auctionID), items[i])
 	}

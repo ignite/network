@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/pkg/errors"
+
 	"cosmossdk.io/collections"
 	"cosmossdk.io/core/address"
 	"cosmossdk.io/core/store"
@@ -220,6 +222,9 @@ func (k Keeper) ScopedKeeper() exported.ScopedKeeper {
 func (k Keeper) ClearVerifiedClientIDs(ctx context.Context, launchID uint64) error {
 	verifiedClientID, err := k.VerifiedClientID.Get(ctx, launchID)
 	if err != nil {
+		if errors.Is(err, collections.ErrNotFound) {
+			return nil
+		}
 		return err
 	}
 	if err := k.VerifiedClientID.Remove(ctx, launchID); err != nil {

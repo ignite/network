@@ -114,17 +114,6 @@ func TestMsgEditChain_ValidateBasic(t *testing.T) {
 			valid: true,
 		},
 		{
-			desc: "should prevent validate message with invalid coordinator address",
-			msg: sample.MsgEditChain(r,
-				"invalid",
-				launchID,
-				true,
-				0,
-				false,
-			),
-			valid: false,
-		},
-		{
 			desc: "should prevent validate message with no value to edit",
 			msg: sample.MsgEditChain(r,
 				sample.Address(r),

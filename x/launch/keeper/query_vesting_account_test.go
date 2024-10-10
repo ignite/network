@@ -19,12 +19,13 @@ import (
 
 func createNVestingAccount(keeper keeper.Keeper, ctx context.Context, n int) []types.VestingAccount {
 	items := make([]types.VestingAccount, n)
+	launchID := uint64(0)
 	for i := range items {
 		address := sample.AccAddress(r)
-		items[i].LaunchID = uint64(i)
+		items[i].LaunchID = launchID
 		items[i].Address = address.String()
 
-		_ = keeper.VestingAccount.Set(ctx, collections.Join(items[i].LaunchID, address), items[i])
+		_ = keeper.VestingAccount.Set(ctx, collections.Join(launchID, address), items[i])
 	}
 	return items
 }
@@ -42,6 +43,7 @@ func TestVestingAccountQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryGetVestingAccountRequest{
+				Address:  msgs[0].Address,
 				LaunchID: msgs[0].LaunchID,
 			},
 			response: &types.QueryGetVestingAccountResponse{VestingAccount: msgs[0]},
@@ -49,6 +51,7 @@ func TestVestingAccountQuerySingle(t *testing.T) {
 		{
 			desc: "Second",
 			request: &types.QueryGetVestingAccountRequest{
+				Address:  msgs[1].Address,
 				LaunchID: msgs[1].LaunchID,
 			},
 			response: &types.QueryGetVestingAccountResponse{VestingAccount: msgs[1]},
@@ -56,6 +59,7 @@ func TestVestingAccountQuerySingle(t *testing.T) {
 		{
 			desc: "KeyNotFound",
 			request: &types.QueryGetVestingAccountRequest{
+				Address:  sample.Address(r),
 				LaunchID: 100000,
 			},
 			err: status.Error(codes.NotFound, "not found"),

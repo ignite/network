@@ -30,21 +30,6 @@ func (msg *MsgUpdateValidatorDescription) Type() string {
 	return sdk.MsgTypeURL(msg)
 }
 
-// TODO fixme
-func (msg *MsgAddValidatorOperatorAddress) GetSigners() []sdk.AccAddress {
-	validatorAddress, err := sdk.AccAddressFromBech32(msg.ValidatorAddress)
-	if err != nil {
-		panic(err)
-	}
-	operatorAddress, err := sdk.AccAddressFromBech32(msg.OperatorAddress)
-	if err != nil {
-		panic(err)
-	}
-
-	// validator must prove ownership of both address
-	return []sdk.AccAddress{validatorAddress, operatorAddress}
-}
-
 func (msg *MsgAddValidatorOperatorAddress) ValidateBasic() error {
 	if msg.ValidatorAddress == msg.OperatorAddress {
 		return sdkerrors.Wrapf(ErrDupAddress, "validator profile address and operator address must be different")

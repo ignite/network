@@ -45,7 +45,7 @@ func TestCoordinatorMsgServerUpdate(t *testing.T) {
 	}{
 		{
 			desc:    "invalid address",
-			request: &types.MsgUpdateCoordinatorDescription{Address: "invalid"},
+			request: &types.MsgUpdateCoordinatorDescription{Address: "invalid", Description: types.CoordinatorDescription{}},
 			err:     sdkerrors.ErrInvalidAddress,
 		},
 		{

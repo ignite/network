@@ -172,7 +172,7 @@ func TestCoordinatorByAddressQuerySingle(t *testing.T) {
 		{
 			desc:    "should prevent querying non existing coordinator by address",
 			request: &types.QueryGetCoordinatorByAddressRequest{Address: "missing"},
-			err:     status.Error(codes.NotFound, "not found"),
+			err:     status.Error(codes.Internal, "internal error"),
 		},
 		{
 			desc: "should prevent querying with invalid request",

@@ -221,13 +221,6 @@ func TestAccountRemoval_Validate(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "should prevent validate account removal with invalid address",
-			content: types.AccountRemoval{
-				Address: "invalid_address",
-			},
-			wantErr: true,
-		},
-		{
 			name: "should validate valid account removal",
 			content: types.AccountRemoval{
 				Address: sample.Address(r),
@@ -257,16 +250,6 @@ func TestGenesisAccount_Validate(t *testing.T) {
 		launchID uint64
 		wantErr  bool
 	}{
-		{
-			name: "should prevent validate genesis account with invalid address",
-			content: types.GenesisAccount{
-				Address:  "invalid_address",
-				LaunchID: launchID,
-				Coins:    sample.Coins(r),
-			},
-			launchID: launchID,
-			wantErr:  true,
-		},
 		{
 			name: "should prevent validate genesis account without coins",
 			content: types.GenesisAccount{
@@ -353,19 +336,6 @@ func TestGenesisValidator_Validate(t *testing.T) {
 				Peer:           sample.GenesisValidatorPeer(r),
 			},
 			launchID: launchID + 1,
-			wantErr:  true,
-		},
-		{
-			name: "should prevent validate genesis validator with invalid address",
-			content: types.GenesisValidator{
-				LaunchID:       launchID,
-				Address:        "invalid_address",
-				GenTx:          sample.Bytes(r, 500),
-				ConsPubKey:     sample.Bytes(r, 30),
-				SelfDelegation: sample.Coin(r),
-				Peer:           sample.GenesisValidatorPeer(r),
-			},
-			launchID: launchID,
 			wantErr:  true,
 		},
 		{

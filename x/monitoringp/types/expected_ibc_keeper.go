@@ -12,8 +12,6 @@ import (
 // ClientKeeper is imported to add the ability to create IBC Client from the module
 type ClientKeeper interface {
 	CreateClient(ctx sdk.Context, clientState exported.ClientState, consensusState exported.ConsensusState) (string, error)
-	// TODO check IBC keeper methods
-	// CreateClient(ctx context.Context, clientType string, clientState, consensusState []byte) (string, error)
 }
 
 // ConnectionKeeper is imported to check client ID during IBC handshake
