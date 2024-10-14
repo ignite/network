@@ -633,8 +633,9 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// set test reward pool if contains coins
 			if tt.rewardPool.RemainingCoins != nil {
-				require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, tt.rewardPool.LaunchID, tt.rewardPool))
-				err := tk.BankKeeper.MintCoins(ctx, types.ModuleName, tt.rewardPool.RemainingCoins)
+				err := tk.RewardKeeper.RewardPool.Set(ctx, tt.rewardPool.LaunchID, tt.rewardPool)
+				require.NoError(t, err)
+				err = tk.BankKeeper.MintCoins(ctx, types.ModuleName, tt.rewardPool.RemainingCoins)
 				require.NoError(t, err)
 			}
 
@@ -657,7 +658,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 
 			// check if reward pool should be closed
 			if tt.args.closeRewardPool || tt.args.lastBlockHeight >= rewardPool.LastRewardHeight {
-				require.Equal(t, true, rewardPool.Closed)
+				require.True(t, rewardPool.Closed)
 			} else {
 				require.Equal(t, tt.args.lastBlockHeight, rewardPool.CurrentRewardHeight)
 			}
@@ -665,7 +666,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 			totalDistributedBalances := sdk.NewCoins()
 			for wantAddr, wantBalance := range tt.wantBalances {
 				t.Run(fmt.Sprintf("check balance %s", wantAddr), func(t *testing.T) {
-					wantAcc, err := sdk.AccAddressFromBech32(wantAddr)
+					wantAcc, err := tk.RewardKeeper.AddressCodec().StringToBytes(wantAddr)
 					require.NoError(t, err)
 
 					balance := tk.BankKeeper.GetAllBalances(ctx, wantAcc)

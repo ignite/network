@@ -120,8 +120,15 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) (*types.GenesisState, error
 		return nil, err
 	}
 
+	if err := k.Request.Walk(ctx, nil, func(_ collections.Pair[uint64, uint64], val types.Request) (stop bool, err error) {
+		genesis.RequestList = append(genesis.RequestList, val)
+		return false, nil
+	}); err != nil {
+		return nil, err
+	}
+
 	// Get request counts
-	for _, elem := range genesis.ChainList {
+	for _, elem := range genesis.RequestList {
 		// Get request count
 		counter, err := k.GetRequestCounter(ctx, elem.LaunchID)
 		if err != nil {

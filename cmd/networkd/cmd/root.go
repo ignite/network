@@ -21,6 +21,7 @@ import (
 	"github.com/spf13/pflag"
 
 	"github.com/ignite/network/app"
+	networktypes "github.com/ignite/network/pkg/types"
 )
 
 // NewRootCmd creates a new root command for networkd. It is called once in the main function.
@@ -48,7 +49,7 @@ func NewRootCmd() *cobra.Command {
 	}
 
 	rootCmd := &cobra.Command{
-		Use:           app.Name + "d",
+		Use:           networktypes.Name + "d",
 		Short:         "Start network node",
 		SilenceErrors: true,
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
@@ -90,7 +91,7 @@ func NewRootCmd() *cobra.Command {
 	initRootCmd(rootCmd, clientCtx.TxConfig, moduleBasicManager)
 
 	overwriteFlagDefaults(rootCmd, map[string]string{
-		flags.FlagChainID:        strings.ReplaceAll(app.Name, "-", ""),
+		flags.FlagChainID:        strings.ReplaceAll(networktypes.Name, "-", ""),
 		flags.FlagKeyringBackend: "test",
 	})
 
@@ -130,7 +131,7 @@ func ProvideClientContext(
 		WithInput(os.Stdin).
 		WithAccountRetriever(types.AccountRetriever{}).
 		WithHomeDir(app.DefaultNodeHome).
-		WithViper(app.Name) // env variable prefix
+		WithViper(networktypes.Name) // env variable prefix
 
 	// Read the config again to overwrite the default values with the values from the config file
 	clientCtx, _ = config.ReadFromClientConfig(clientCtx)

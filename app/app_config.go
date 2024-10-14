@@ -60,6 +60,7 @@ import (
 	profilemodulev1 "github.com/ignite/network/api/network/profile/module/v1"
 	projectmodulev1 "github.com/ignite/network/api/network/project/module/v1"
 	rewardmodulev1 "github.com/ignite/network/api/network/reward/module/v1"
+	networktypes "github.com/ignite/network/pkg/types"
 	_ "github.com/ignite/network/x/launch/module"
 	launchmoduletypes "github.com/ignite/network/x/launch/types"
 	_ "github.com/ignite/network/x/monitoringc/module"
@@ -216,7 +217,7 @@ var (
 			{
 				Name: runtime.ModuleName,
 				Config: appconfig.WrapAny(&runtimev1alpha1.Module{
-					AppName:       Name,
+					AppName:       networktypes.Name,
 					PreBlockers:   preBlockers,
 					BeginBlockers: beginBlockers,
 					EndBlockers:   endBlockers,
@@ -237,7 +238,7 @@ var (
 			{
 				Name: authtypes.ModuleName,
 				Config: appconfig.WrapAny(&authmodulev1.Module{
-					Bech32Prefix:             AccountAddressPrefix,
+					Bech32Prefix:             networktypes.AccountAddressPrefix,
 					ModuleAccountPermissions: moduleAccPerms,
 					// By default modules authority is the governance module. This is configurable with the following:
 					// Authority: "group", // A custom module authority can be set using a module name
@@ -263,8 +264,8 @@ var (
 				Config: appconfig.WrapAny(&stakingmodulev1.Module{
 					// NOTE: specifying a prefix is only necessary when using bech32 addresses
 					// If not specfied, the auth Bech32Prefix appended with "valoper" and "valcons" is used by default
-					Bech32PrefixValidator: AccountAddressPrefix + "valoper",
-					Bech32PrefixConsensus: AccountAddressPrefix + "valcons",
+					Bech32PrefixValidator: networktypes.AccountAddressPrefix + "valoper",
+					Bech32PrefixConsensus: networktypes.AccountAddressPrefix + "valcons",
 				}),
 			},
 			{

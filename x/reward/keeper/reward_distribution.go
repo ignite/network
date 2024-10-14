@@ -143,7 +143,8 @@ func (k Keeper) DistributeRewards(
 			ctx,
 			types.ModuleName,
 			provider,
-			rewardPool.RemainingCoins); err != nil {
+			rewardPool.RemainingCoins,
+		); err != nil {
 			return ignterrors.Criticalf("send rewards error: %s", err.Error())
 		}
 
@@ -177,7 +178,8 @@ func (k Keeper) DistributeRewards(
 			ctx,
 			types.ModuleName,
 			provider,
-			rewardPool.RemainingCoins); err != nil {
+			rewardPool.RemainingCoins,
+		); err != nil {
 			return ignterrors.Criticalf("send rewards error: %s", err.Error())
 		}
 	}

@@ -74,6 +74,7 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
 	"github.com/ignite/network/docs"
+	networktypes "github.com/ignite/network/pkg/types"
 	launchmodulekeeper "github.com/ignite/network/x/launch/keeper"
 	monitoringcmodulekeeper "github.com/ignite/network/x/monitoringc/keeper"
 	monitoringpmodulekeeper "github.com/ignite/network/x/monitoringp/keeper"
@@ -81,11 +82,6 @@ import (
 	profilemodulekeeper "github.com/ignite/network/x/profile/keeper"
 	projectmodulekeeper "github.com/ignite/network/x/project/keeper"
 	rewardmodulekeeper "github.com/ignite/network/x/reward/keeper"
-)
-
-const (
-	AccountAddressPrefix = "cosmos"
-	Name                 = "network"
 )
 
 // DefaultNodeHome default home directories for the application daemon
@@ -156,8 +152,8 @@ type App struct {
 
 func init() {
 	var err error
-	clienthelpers.EnvPrefix = Name
-	DefaultNodeHome, err = clienthelpers.GetNodeHomeDirectory("." + Name)
+	clienthelpers.EnvPrefix = networktypes.Name
+	DefaultNodeHome, err = clienthelpers.GetNodeHomeDirectory("." + networktypes.Name)
 	if err != nil {
 		panic(err)
 	}
@@ -391,7 +387,7 @@ func (app *App) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig
 	}
 
 	// register app's OpenAPI routes.
-	docs.RegisterOpenAPIService(Name, apiSvr.Router)
+	docs.RegisterOpenAPIService(networktypes.Name, apiSvr.Router)
 }
 
 // GetMaccPerms returns a copy of the module account permissions

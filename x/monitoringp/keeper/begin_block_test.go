@@ -1,7 +1,6 @@
 package keeper_test
 
 import (
-	"errors"
 	"testing"
 
 	abci "github.com/cometbft/cometbft/abci/types"
@@ -75,28 +74,30 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 	})
 
 	tests := []struct {
-		name                   string
-		monitoringInfoExist    bool
-		inputMonitoringInfo    types.MonitoringInfo
-		lastBlockHeight        int64
-		lastCommitInfo         abci.CommitInfo
-		currentBlockHeight     int64
-		expectedMonitoringErr  error
-		expectedMonitoringInfo types.MonitoringInfo
-		wantErr                bool
+		name                        string
+		monitoringInfoExist         bool
+		inputMonitoringInfo         types.MonitoringInfo
+		lastBlockHeight             int64
+		lastCommitInfo              abci.CommitInfo
+		currentBlockHeight          int64
+		expectedMonitoringInfoFound bool
+		expectedMonitoringInfo      types.MonitoringInfo
+		wantErr                     bool
 	}{
 		{
-			name:                "should not create monitoring info with lastBlockHeight reached",
-			monitoringInfoExist: false,
-			lastBlockHeight:     10,
-			currentBlockHeight:  11,
+			name:                        "should not create monitoring info with lastBlockHeight reached",
+			monitoringInfoExist:         false,
+			lastBlockHeight:             10,
+			currentBlockHeight:          11,
+			expectedMonitoringInfoFound: false,
 		},
 		{
 			name: "should not create monitoring info created " +
 				"because counting skipped if blockHeight == 1",
-			monitoringInfoExist: false,
-			lastBlockHeight:     1,
-			currentBlockHeight:  1,
+			monitoringInfoExist:         false,
+			lastBlockHeight:             1,
+			currentBlockHeight:          1,
+			expectedMonitoringInfoFound: false,
 		},
 		{
 			name:                "should not update with lastBlockHeight reached",
@@ -118,8 +119,8 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 					BlockID: cmtproto.BlockIDFlagCommit,
 				},
 			),
-			currentBlockHeight:    11,
-			expectedMonitoringErr: errors.New(""),
+			currentBlockHeight:          11,
+			expectedMonitoringInfoFound: true,
 			expectedMonitoringInfo: tc.MonitoringInfo(10,
 				tc.SignatureCount(t,
 					valFoo.OperatorAddress,
@@ -142,8 +143,8 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 					BlockID: cmtproto.BlockIDFlagCommit,
 				},
 			),
-			currentBlockHeight:    2,
-			expectedMonitoringErr: errors.New(""),
+			currentBlockHeight:          2,
+			expectedMonitoringInfoFound: true,
 			expectedMonitoringInfo: tc.MonitoringInfo(1,
 				tc.SignatureCount(t,
 					valFoo.OperatorAddress,
@@ -191,8 +192,8 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 					BlockID: cmtproto.BlockIDFlagCommit,
 				},
 			),
-			currentBlockHeight:    2,
-			expectedMonitoringErr: errors.New(""),
+			currentBlockHeight:          2,
+			expectedMonitoringInfoFound: true,
 			expectedMonitoringInfo: tc.MonitoringInfo(51,
 				tc.SignatureCount(t,
 					valFoo.OperatorAddress,
@@ -258,7 +259,7 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 
 			// check saved values
 			monitoringInfo, err := tk.MonitoringProviderKeeper.MonitoringInfo.Get(ctx)
-			require.ErrorIs(t, tt.expectedMonitoringErr, err)
+			require.EqualValues(t, tt.expectedMonitoringInfoFound, err == nil)
 			require.EqualValues(t, tt.expectedMonitoringInfo, monitoringInfo)
 		})
 	}
@@ -298,16 +299,16 @@ func TestKeeper_TransmitSignatures(t *testing.T) {
 	})
 
 	tests := []struct {
-		name                   string
-		monitoringInfoExist    bool
-		inputMonitoringInfo    types.MonitoringInfo
-		lastBlockHeight        int64
-		currentBlockHeight     int64
-		channelIDExist         bool
-		channelID              types.ConnectionChannelID
-		expectedMonitoringErr  error
-		expectedMonitoringInfo types.MonitoringInfo
-		wantErr                bool
+		name                        string
+		monitoringInfoExist         bool
+		inputMonitoringInfo         types.MonitoringInfo
+		lastBlockHeight             int64
+		currentBlockHeight          int64
+		channelIDExist              bool
+		channelID                   types.ConnectionChannelID
+		expectedMonitoringInfoFound bool
+		expectedMonitoringInfo      types.MonitoringInfo
+		wantErr                     bool
 	}{
 		{
 			name:                "should return monitoring info with channel not found",
@@ -323,26 +324,29 @@ func TestKeeper_TransmitSignatures(t *testing.T) {
 			wantErr:            true,
 		},
 		{
-			name:                "should return nil for currentBlockHeight < lastBlockHeight",
-			monitoringInfoExist: false,
-			lastBlockHeight:     11,
-			currentBlockHeight:  10,
-			channelIDExist:      false,
+			name:                        "should return nil for currentBlockHeight < lastBlockHeight",
+			monitoringInfoExist:         false,
+			lastBlockHeight:             11,
+			currentBlockHeight:          10,
+			channelIDExist:              false,
+			expectedMonitoringInfoFound: false,
 		},
 		{
-			name:                "should return nil for lastBlockHeight no channel ID set",
-			monitoringInfoExist: false,
-			lastBlockHeight:     10,
-			currentBlockHeight:  11,
-			channelIDExist:      false,
+			name:                        "should return nil for lastBlockHeight no channel ID set",
+			monitoringInfoExist:         false,
+			lastBlockHeight:             10,
+			currentBlockHeight:          11,
+			channelIDExist:              false,
+			expectedMonitoringInfoFound: false,
 		},
 		{
-			name:                "should return nil for no monitoring info found",
-			monitoringInfoExist: false,
-			lastBlockHeight:     10,
-			currentBlockHeight:  11,
-			channelIDExist:      true,
-			channelID:           types.ConnectionChannelID{ChannelID: "channelID"},
+			name:                        "should return nil for no monitoring info found",
+			monitoringInfoExist:         false,
+			lastBlockHeight:             10,
+			currentBlockHeight:          11,
+			channelIDExist:              true,
+			channelID:                   types.ConnectionChannelID{ChannelID: "channelID"},
+			expectedMonitoringInfoFound: false,
 		},
 	}
 	for _, tt := range tests {
@@ -377,7 +381,7 @@ func TestKeeper_TransmitSignatures(t *testing.T) {
 
 			// check saved values
 			monitoringInfo, err := tk.MonitoringProviderKeeper.MonitoringInfo.Get(ctx)
-			require.ErrorIs(t, tt.expectedMonitoringErr, err)
+			require.EqualValues(t, tt.expectedMonitoringInfoFound, err == nil)
 			require.EqualValues(t, tt.expectedMonitoringInfo, monitoringInfo)
 		})
 	}

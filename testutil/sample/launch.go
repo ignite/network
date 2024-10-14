@@ -366,7 +366,7 @@ func LaunchParams(r *rand.Rand) launch.Params {
 
 // LaunchGenesisState returns a sample genesis state for the launch module
 func LaunchGenesisState(r *rand.Rand, addresses ...string) launch.GenesisState {
-	for len(addresses) < 12 {
+	for len(addresses) < 11 {
 		addresses = append(addresses, Address(r))
 	}
 	return launch.GenesisState{
@@ -393,7 +393,6 @@ func LaunchGenesisState(r *rand.Rand, addresses ...string) launch.GenesisState {
 		RequestList: []launch.Request{
 			Request(r, 0, addresses[9]),
 			Request(r, 1, addresses[10]),
-			Request(r, 1, addresses[11]),
 		},
 		RequestCounters: []launch.RequestCounter{
 			{
