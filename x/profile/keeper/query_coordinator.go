@@ -57,7 +57,7 @@ func (q queryServer) GetCoordinatorByAddress(ctx context.Context, req *types.Que
 
 	address, err := q.k.addressCodec.StringToBytes(req.Address)
 	if err != nil {
-		return nil, status.Error(codes.Internal, "internal error")
+		return nil, status.Error(codes.InvalidArgument, "invalid address")
 	}
 
 	coordinatorByAddress, err := q.k.CoordinatorByAddress.Get(ctx, address)

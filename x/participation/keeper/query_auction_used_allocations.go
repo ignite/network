@@ -43,7 +43,7 @@ func (q queryServer) GetAuctionUsedAllocations(ctx context.Context, req *types.Q
 
 	address, err := q.k.addressCodec.StringToBytes(req.Address)
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, "invalid request")
+		return nil, status.Error(codes.InvalidArgument, "invalid address")
 	}
 
 	val, err := q.k.AuctionUsedAllocations.Get(ctx, collections.Join(sdk.AccAddress(address), req.AuctionID))

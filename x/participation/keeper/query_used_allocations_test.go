@@ -12,6 +12,7 @@ import (
 
 	keepertest "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/nullify"
+	"github.com/ignite/network/testutil/sample"
 	"github.com/ignite/network/x/participation/keeper"
 	"github.com/ignite/network/x/participation/types"
 )
@@ -20,6 +21,7 @@ func createNUsedAllocations(keeper keeper.Keeper, ctx context.Context, n int) []
 	items := make([]types.UsedAllocations, n)
 	for i := range items {
 		items[i].Address = strconv.Itoa(i)
+		items[i].NumAllocations = sample.Int(r)
 
 		_ = keeper.UsedAllocations.Set(ctx, items[i].Address, items[i])
 	}

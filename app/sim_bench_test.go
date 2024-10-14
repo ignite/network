@@ -15,6 +15,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/ignite/network/app"
+	networktypes "github.com/ignite/network/pkg/types"
 )
 
 // Profile with:
@@ -45,7 +46,7 @@ func BenchmarkFullAppSimulation(b *testing.B) {
 
 	bApp, err := app.New(logger, db, nil, true, appOptions, interBlockCacheOpt())
 	require.NoError(b, err)
-	require.Equal(b, app.Name, bApp.Name())
+	require.Equal(b, networktypes.Name, bApp.Name())
 
 	// run randomized simulation
 	_, simParams, simErr := simulation.SimulateFromSeed(
@@ -102,7 +103,7 @@ func BenchmarkInvariants(b *testing.B) {
 
 	bApp, err := app.New(logger, db, nil, true, appOptions, interBlockCacheOpt())
 	require.NoError(b, err)
-	require.Equal(b, app.Name, bApp.Name())
+	require.Equal(b, networktypes.Name, bApp.Name())
 
 	// run randomized simulation
 	_, simParams, simErr := simulation.SimulateFromSeed(

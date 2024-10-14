@@ -43,7 +43,7 @@ func (q queryServer) GetVestingAccount(ctx context.Context, req *types.QueryGetV
 
 	address, err := q.k.addressCodec.StringToBytes(req.Address)
 	if err != nil {
-		return nil, status.Error(codes.Internal, "internal error")
+		return nil, status.Error(codes.InvalidArgument, "invalid address")
 	}
 
 	val, err := q.k.VestingAccount.Get(ctx, collections.Join(req.LaunchID, sdk.AccAddress(address)))

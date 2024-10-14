@@ -43,7 +43,7 @@ func (q queryServer) GetGenesisAccount(ctx context.Context, req *types.QueryGetG
 
 	address, err := q.k.addressCodec.StringToBytes(req.Address)
 	if err != nil {
-		return nil, status.Error(codes.Internal, "internal error")
+		return nil, status.Error(codes.InvalidArgument, "invalid address")
 	}
 
 	val, err := q.k.GenesisAccount.Get(ctx, collections.Join(req.LaunchID, sdk.AccAddress(address)))

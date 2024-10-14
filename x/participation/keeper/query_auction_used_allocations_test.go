@@ -20,9 +20,9 @@ import (
 
 func createNAuctionUsedAllocations(keeper keeper.Keeper, ctx context.Context, n int) []types.AuctionUsedAllocations {
 	items := make([]types.AuctionUsedAllocations, n)
+	auctionID := uint64(0)
 	for i := range items {
 		address := sample.AccAddress(r)
-		auctionID := uint64(i)
 		items[i].Address = address.String()
 		items[i].AuctionID = auctionID
 		items[i].NumAllocations = sample.Int(r)
@@ -45,23 +45,34 @@ func TestAuctionUsedAllocationsQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryGetAuctionUsedAllocationsRequest{
-				Address: msgs[0].Address,
+				AuctionID: msgs[0].AuctionID,
+				Address:   msgs[0].Address,
 			},
 			response: &types.QueryGetAuctionUsedAllocationsResponse{AuctionUsedAllocations: msgs[0]},
 		},
 		{
 			desc: "Second",
 			request: &types.QueryGetAuctionUsedAllocationsRequest{
-				Address: msgs[1].Address,
+				AuctionID: msgs[1].AuctionID,
+				Address:   msgs[1].Address,
 			},
 			response: &types.QueryGetAuctionUsedAllocationsResponse{AuctionUsedAllocations: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
 			request: &types.QueryGetAuctionUsedAllocationsRequest{
-				Address: strconv.Itoa(100000),
+				AuctionID: 100,
+				Address:   sample.Address(r),
 			},
 			err: status.Error(codes.NotFound, "not found"),
+		},
+		{
+			desc: "InvalidAddress",
+			request: &types.QueryGetAuctionUsedAllocationsRequest{
+				AuctionID: 100,
+				Address:   strconv.Itoa(100000),
+			},
+			err: status.Error(codes.InvalidArgument, "invalid address"),
 		},
 		{
 			desc: "InvalidRequest",
