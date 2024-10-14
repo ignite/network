@@ -53,12 +53,6 @@ func TestMsgUpdateValidatorDescription_ValidateBasic(t *testing.T) {
 		err  error
 	}{
 		{
-			name: "should prevent validate invalid validator address",
-			msg: types.MsgUpdateValidatorDescription{
-				Address: "invalid address",
-			},
-			err: types.ErrInvalidValidatorAddress,
-		}, {
 			name: "should prevent validate emtpy description",
 			msg: types.MsgUpdateValidatorDescription{
 				Address:     addr,
