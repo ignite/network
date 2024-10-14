@@ -165,7 +165,7 @@ func Test_msgServer_Participate(t *testing.T) {
 				AuctionID:   auctionLowerRegistrationPeriodID + 1000,
 				TierID:      1,
 			},
-			err:       types.ErrAuctionNotFound,
+			err:       fundraisingtypes.ErrAuctionNotFound,
 			blockTime: validRegistrationTime,
 		},
 		{

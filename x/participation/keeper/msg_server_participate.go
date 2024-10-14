@@ -22,7 +22,7 @@ func (k msgServer) Participate(ctx context.Context, msg *types.MsgParticipate) (
 
 	participantAddress, err := k.addressCodec.StringToBytes(msg.Participant)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid participant address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidAddress, "invalid participant address %s", msg.Participant)
 	}
 
 	availableAlloc, err := k.GetAvailableAllocations(ctx, msg.Participant)
@@ -52,10 +52,12 @@ func (k msgServer) Participate(ctx context.Context, msg *types.MsgParticipate) (
 
 	// check if the user is already added as an allowed bidder for the auction
 	_, err = k.AuctionUsedAllocations.Get(ctx, collections.Join(sdk.AccAddress(participantAddress), msg.AuctionID))
-	if err != nil {
+	if err == nil {
 		return nil, sdkerrors.Wrapf(types.ErrAlreadyParticipating,
 			"address %s is already a participant for auction %d",
 			msg.Participant, msg.AuctionID)
+	} else if !errors.Is(err, collections.ErrNotFound) {
+		return nil, ignterrors.Critical(err.Error())
 	}
 
 	tier, found := types.GetTierFromID(params.ParticipationTierList, msg.TierID)
@@ -84,9 +86,9 @@ func (k msgServer) Participate(ctx context.Context, msg *types.MsgParticipate) (
 	// set used allocations
 	numUsedAllocations := sdkmath.ZeroInt()
 	used, err := k.UsedAllocations.Get(ctx, msg.Participant)
-	if errors.Is(err, collections.ErrNotFound) {
+	if err == nil {
 		numUsedAllocations = used.NumAllocations
-	} else if err != nil {
+	} else if !errors.Is(err, collections.ErrNotFound) {
 		return nil, ignterrors.Criticalf("failed to get used allocations %s", err.Error())
 	}
 

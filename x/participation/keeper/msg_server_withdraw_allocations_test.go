@@ -106,7 +106,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 				AuctionID:   auctionID + 1000,
 			},
 			blockTime: validWithdrawalTime,
-			err:       types.ErrAuctionNotFound,
+			err:       fundraisingtypes.ErrAuctionNotFound,
 		},
 		{
 			name: "should prevent withdrawal before withdrawal delay has passed",
