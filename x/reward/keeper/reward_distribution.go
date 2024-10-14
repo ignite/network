@@ -74,7 +74,6 @@ func (k Keeper) DistributeRewards(
 
 	// calculate the total reward for all validators
 	for _, signatureCount := range signatureCounts.Counts {
-
 		// get the operator address of the signature counts with the chain prefix
 		config := sdk.GetConfig()
 		if config == nil {
@@ -89,9 +88,9 @@ func (k Keeper) DistributeRewards(
 		// otherwise rewards are distributed to the operator address account
 		valAddr := opAddr
 		validatorByOpAddr, err := k.profileKeeper.GetValidatorByOperatorAddress(ctx, opAddr)
-		if errors.Is(err, profiletypes.ErrValidatorByOperatorAddressNotFound) {
+		if err == nil {
 			valAddr = validatorByOpAddr.ValidatorAddress
-		} else if err != nil {
+		} else if !errors.Is(err, profiletypes.ErrValidatorByOperatorAddressNotFound) {
 			return ignterrors.Criticalf("can't get validator by operator address: %s", err.Error())
 		}
 
