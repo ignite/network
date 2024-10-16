@@ -16,7 +16,7 @@ import (
 	"github.com/ignite/network/x/monitoringc/types"
 )
 
-func createNLaunchIDFromChannelID(keeper keeper.Keeper, ctx context.Context, n int) []types.LaunchIDFromChannelID {
+func createNLaunchIDFromChannelID(keeper *keeper.Keeper, ctx context.Context, n int) []types.LaunchIDFromChannelID {
 	items := make([]types.LaunchIDFromChannelID, n)
 	for i := range items {
 		items[i].ChannelID = strconv.Itoa(i)

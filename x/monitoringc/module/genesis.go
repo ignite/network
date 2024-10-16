@@ -9,7 +9,7 @@ import (
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.
-func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) error {
+func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState) error {
 	// Set all the launchIDFromChannelID
 	for _, elem := range genState.LaunchIDFromChannelIDList {
 		if err := k.LaunchIDFromChannelID.Set(ctx, elem.ChannelID, elem); err != nil {
@@ -58,7 +58,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 }
 
 // ExportGenesis returns the module's exported genesis.
-func ExportGenesis(ctx sdk.Context, k keeper.Keeper) (*types.GenesisState, error) {
+func ExportGenesis(ctx sdk.Context, k *keeper.Keeper) (*types.GenesisState, error) {
 	var err error
 
 	genesis := types.DefaultGenesis()

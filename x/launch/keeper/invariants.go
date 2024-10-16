@@ -17,7 +17,7 @@ const (
 )
 
 // RegisterInvariants registers all module invariants
-func RegisterInvariants(ir sdk.InvariantRegistry, k Keeper) {
+func RegisterInvariants(ir sdk.InvariantRegistry, k *Keeper) {
 	ir.RegisterRoute(types.ModuleName, invalidChainRoute,
 		InvalidChainInvariant(k))
 	ir.RegisterRoute(types.ModuleName, duplicatedAccountRoute,
@@ -27,7 +27,7 @@ func RegisterInvariants(ir sdk.InvariantRegistry, k Keeper) {
 }
 
 // AllInvariants runs all invariants of the module.
-func AllInvariants(k Keeper) sdk.Invariant {
+func AllInvariants(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
 		res, stop := DuplicatedAccountInvariant(k)(ctx)
 		if stop {
@@ -42,7 +42,7 @@ func AllInvariants(k Keeper) sdk.Invariant {
 }
 
 // InvalidChainInvariant invariant that checks all chain in the store are valid
-func InvalidChainInvariant(k Keeper) sdk.Invariant {
+func InvalidChainInvariant(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
 		chains, err := k.Chains(ctx)
 		if err != nil {
@@ -77,7 +77,7 @@ func InvalidChainInvariant(k Keeper) sdk.Invariant {
 
 // DuplicatedAccountInvariant invariant that checks if the `GenesisAccount`
 // exists into the `VestingAccount` store
-func DuplicatedAccountInvariant(k Keeper) sdk.Invariant {
+func DuplicatedAccountInvariant(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
 		all, err := k.AllGenesisAccount(ctx)
 		if err != nil {
@@ -106,7 +106,7 @@ func DuplicatedAccountInvariant(k Keeper) sdk.Invariant {
 
 // UnknownRequestTypeInvariant invariant that checks if the Request
 // type is valid
-func UnknownRequestTypeInvariant(k Keeper) sdk.Invariant {
+func UnknownRequestTypeInvariant(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
 		all, err := k.Requests(ctx)
 		if err != nil {

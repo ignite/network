@@ -18,7 +18,7 @@ import (
 
 func initCreationFeeAndFundCoordAccounts(
 	t *testing.T,
-	keeper keeper.Keeper,
+	keeper *keeper.Keeper,
 	bk bankkeeper.Keeper,
 	ctx context.Context,
 	fee sdk.Coins,

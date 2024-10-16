@@ -17,7 +17,7 @@ import (
 	"github.com/ignite/network/x/launch/types"
 )
 
-func createNParamChange(keeper keeper.Keeper, ctx context.Context, n int) []types.ParamChange {
+func createNParamChange(keeper *keeper.Keeper, ctx context.Context, n int) []types.ParamChange {
 	items := make([]types.ParamChange, n)
 	launchID := uint64(0)
 	for i := range items {

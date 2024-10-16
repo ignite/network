@@ -14,7 +14,7 @@ import (
 	"github.com/ignite/network/x/monitoringc/types"
 )
 
-func createNMonitoringHistory(keeper keeper.Keeper, ctx context.Context, n int) []types.MonitoringHistory {
+func createNMonitoringHistory(keeper *keeper.Keeper, ctx context.Context, n int) []types.MonitoringHistory {
 	items := make([]types.MonitoringHistory, n)
 	for i := range items {
 		items[i].LaunchID = uint64(i)

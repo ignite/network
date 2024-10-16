@@ -17,7 +17,7 @@ import (
 	"github.com/ignite/network/x/launch/types"
 )
 
-func createNVestingAccount(keeper keeper.Keeper, ctx context.Context, n int) []types.VestingAccount {
+func createNVestingAccount(keeper *keeper.Keeper, ctx context.Context, n int) []types.VestingAccount {
 	items := make([]types.VestingAccount, n)
 	launchID := uint64(0)
 	for i := range items {

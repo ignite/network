@@ -26,7 +26,7 @@ import (
 	"github.com/ignite/network/x/launch/types"
 )
 
-func LaunchKeeper(t testing.TB) (keeper.Keeper, sdk.Context, address.Codec) {
+func LaunchKeeper(t testing.TB) (*keeper.Keeper, sdk.Context, address.Codec) {
 	storeKey := storetypes.NewKVStoreKey(types.StoreKey)
 
 	db := dbm.NewMemDB()

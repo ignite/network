@@ -59,7 +59,7 @@ func (k Keeper) AppendRequest(ctx context.Context, request types.Request) (uint6
 
 // CheckAccount check account inconsistency and return
 // if an account exists for genesis or vesting accounts
-func CheckAccount(ctx context.Context, k Keeper, launchID uint64, address string) (bool, error) {
+func CheckAccount(ctx context.Context, k *Keeper, launchID uint64, address string) (bool, error) {
 	accAddress, err := k.addressCodec.StringToBytes(address)
 	if err != nil {
 		return false, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
@@ -83,7 +83,7 @@ func CheckAccount(ctx context.Context, k Keeper, launchID uint64, address string
 // the launch information changes
 func ApplyRequest(
 	ctx context.Context,
-	k Keeper,
+	k *Keeper,
 	chain types.Chain,
 	request types.Request,
 	coord profiletypes.Coordinator,
@@ -232,7 +232,7 @@ func ApplyRequest(
 // CheckRequest verifies that a request can be applied
 func CheckRequest(
 	ctx context.Context,
-	k Keeper,
+	k *Keeper,
 	launchID uint64,
 	request types.Request,
 ) error {

@@ -17,7 +17,7 @@ import (
 	"github.com/ignite/network/x/launch/types"
 )
 
-func createNRequest(keeper keeper.Keeper, ctx context.Context, n int) []types.Request {
+func createNRequest(keeper *keeper.Keeper, ctx context.Context, n int) []types.Request {
 	items := make([]types.Request, n)
 	launchID := uint64(0)
 	for i := range items {

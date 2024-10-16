@@ -14,7 +14,7 @@ import (
 	"github.com/ignite/network/x/monitoringc/types"
 )
 
-func createNVerifiedClientID(ctx context.Context, keeper keeper.Keeper, n int) []types.VerifiedClientID {
+func createNVerifiedClientID(ctx context.Context, keeper *keeper.Keeper, n int) []types.VerifiedClientID {
 	items := make([]types.VerifiedClientID, n)
 	for i := range items {
 		items[i].LaunchID = uint64(i)

@@ -19,7 +19,7 @@ import (
 func SimulateMsgRequestAddGenesisAccount(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	txGen client.TxConfig,
 ) simtypes.Operation {
 	return func(
@@ -90,7 +90,7 @@ func SimulateMsgRequestAddGenesisAccount(
 func SimulateMsgRequestAddVestingAccount(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	txGen client.TxConfig,
 ) simtypes.Operation {
 	return func(
@@ -160,7 +160,7 @@ func SimulateMsgRequestAddVestingAccount(
 func SimulateMsgRequestRemoveAccount(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	txGen client.TxConfig,
 ) simtypes.Operation {
 	return func(
@@ -258,7 +258,7 @@ func SimulateMsgRequestRemoveAccount(
 func SimulateMsgRequestAddValidator(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	txGen client.TxConfig,
 ) simtypes.Operation {
 	return func(
@@ -307,7 +307,7 @@ func SimulateMsgRequestAddValidator(
 func SimulateMsgRequestRemoveValidator(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	txGen client.TxConfig,
 ) simtypes.Operation {
 	return func(
@@ -353,7 +353,7 @@ func SimulateMsgRequestRemoveValidator(
 func SimulateMsgRequestParamChange(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	txGen client.TxConfig,
 ) simtypes.Operation {
 	return func(

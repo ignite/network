@@ -22,7 +22,7 @@ type RequestSample struct {
 }
 
 func createRequestsFromSamples(
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	ctx context.Context,
 	launchID uint64,
 	samples []RequestSample,

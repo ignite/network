@@ -13,6 +13,15 @@ import (
 	"github.com/ignite/network/x/launch/types"
 )
 
+func createNChainForCoordinator(keeper *keeper.Keeper, ctx context.Context, coordinatorID uint64, n int) []types.Chain {
+	items := make([]types.Chain, n)
+	for i := range items {
+		items[i].CoordinatorID = coordinatorID
+		items[i].LaunchID, _ = keeper.AppendChain(ctx, items[i])
+	}
+	return items
+}
+
 func TestKeeper_CreateNewChain(t *testing.T) {
 	ctx, tk, ts := testkeeper.NewTestSetup(t)
 
@@ -219,15 +228,6 @@ func TestKeeper_CreateNewChain(t *testing.T) {
 			}
 		})
 	}
-}
-
-func createNChainForCoordinator(keeper keeper.Keeper, ctx context.Context, coordinatorID uint64, n int) []types.Chain {
-	items := make([]types.Chain, n)
-	for i := range items {
-		items[i].CoordinatorID = coordinatorID
-		items[i].LaunchID, _ = keeper.AppendChain(ctx, items[i])
-	}
-	return items
 }
 
 func TestGetChain(t *testing.T) {

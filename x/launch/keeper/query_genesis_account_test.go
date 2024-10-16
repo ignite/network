@@ -17,7 +17,7 @@ import (
 	"github.com/ignite/network/x/launch/types"
 )
 
-func createNGenesisAccount(keeper keeper.Keeper, ctx context.Context, n int) []types.GenesisAccount {
+func createNGenesisAccount(keeper *keeper.Keeper, ctx context.Context, n int) []types.GenesisAccount {
 	items := make([]types.GenesisAccount, n)
 	launchID := uint64(0)
 	for i := range items {

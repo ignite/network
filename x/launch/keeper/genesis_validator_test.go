@@ -15,7 +15,7 @@ import (
 	"github.com/ignite/network/x/launch/types"
 )
 
-func createNGenesisValidatorByLaunchID(keeper keeper.Keeper, ctx context.Context, launchID int) []types.GenesisValidator {
+func createNGenesisValidatorByLaunchID(keeper *keeper.Keeper, ctx context.Context, launchID int) []types.GenesisValidator {
 	items := make([]types.GenesisValidator, launchID)
 	for i := range items {
 		addr := sample.AccAddress(r)

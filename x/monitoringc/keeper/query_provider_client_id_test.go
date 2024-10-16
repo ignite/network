@@ -15,7 +15,7 @@ import (
 	"github.com/ignite/network/x/monitoringc/types"
 )
 
-func createNProviderClientID(keeper keeper.Keeper, ctx context.Context, n int) []types.ProviderClientID {
+func createNProviderClientID(keeper *keeper.Keeper, ctx context.Context, n int) []types.ProviderClientID {
 	items := make([]types.ProviderClientID, n)
 	for i := range items {
 		items[i].LaunchID = uint64(i)

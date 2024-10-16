@@ -16,7 +16,7 @@ import (
 	"github.com/ignite/network/x/launch/types"
 )
 
-func createNChain(keeper keeper.Keeper, ctx context.Context, n int) []types.Chain {
+func createNChain(keeper *keeper.Keeper, ctx context.Context, n int) []types.Chain {
 	items := make([]types.Chain, n)
 	for i := range items {
 		iu := uint64(i)

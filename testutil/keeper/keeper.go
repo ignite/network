@@ -59,10 +59,10 @@ type HookMocks struct {
 type TestKeepers struct {
 	T                        testing.TB
 	ProjectKeeper            projectkeeper.Keeper
-	LaunchKeeper             launchkeeper.Keeper
+	LaunchKeeper             *launchkeeper.Keeper
 	ProfileKeeper            profilekeeper.Keeper
 	RewardKeeper             rewardkeeper.Keeper
-	MonitoringConsumerKeeper monitoringckeeper.Keeper
+	MonitoringConsumerKeeper *monitoringckeeper.Keeper
 	MonitoringProviderKeeper monitoringpkeeper.Keeper
 	AccountKeeper            authkeeper.AccountKeeper
 	BankKeeper               bankkeeper.Keeper
@@ -171,7 +171,7 @@ func NewTestSetup(t testing.TB, options ...SetupOption) (sdk.Context, TestKeeper
 	if so.LaunchHooksMock {
 		var err error
 		launchHooksMock := mocks.NewLaunchHooks(t)
-		launchKeeper, err = launchKeeper.SetHooks(launchHooksMock)
+		err = launchKeeper.SetHooks(launchHooksMock)
 		require.NoError(t, err)
 		hooksMocks.LaunchHooksMock = launchHooksMock
 	}
@@ -225,13 +225,12 @@ func NewTestSetupWithIBCMocks(
 
 	paramKeeper := initializer.Param()
 	capabilityKeeper := initializer.Capability()
-	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
-	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	authKeeper := initializer.Auth(paramKeeper)
 	bankKeeper := initializer.Bank(paramKeeper, authKeeper)
 	stakingKeeper := initializer.Staking(authKeeper, bankKeeper, paramKeeper)
 	distrKeeper := initializer.Distribution(authKeeper, bankKeeper, stakingKeeper)
 	upgradeKeeper := initializer.Upgrade()
+	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
 	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, scopedKeeper, upgradeKeeper)
 	fundraisingKeeper := initializer.Fundraising(authKeeper, bankKeeper, distrKeeper)
 	profileKeeper := initializer.Profile()
@@ -240,6 +239,7 @@ func NewTestSetupWithIBCMocks(
 	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper)
 	participationKeeper := initializer.Participation(fundraisingKeeper, stakingKeeper)
 	launchKeeper.SetProjectKeeper(projectKeeper)
+	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	monitoringConsumerKeeper := initializer.Monitoringc(
 		ibcKeeper,
 		*capabilityKeeper,

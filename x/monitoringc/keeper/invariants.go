@@ -13,13 +13,13 @@ const (
 )
 
 // RegisterInvariants registers all module invariants
-func RegisterInvariants(ir sdk.InvariantRegistry, k Keeper) {
+func RegisterInvariants(ir sdk.InvariantRegistry, k *Keeper) {
 	ir.RegisterRoute(types.ModuleName, missingVerifiedClientIDRoute,
 		MissingVerifiedClientIDInvariant(k))
 }
 
 // AllInvariants runs all invariants of the module.
-func AllInvariants(k Keeper) sdk.Invariant {
+func AllInvariants(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
 		return MissingVerifiedClientIDInvariant(k)(ctx)
 	}
@@ -27,7 +27,7 @@ func AllInvariants(k Keeper) sdk.Invariant {
 
 // MissingVerifiedClientIDInvariant checks if any of the clientIDs in `VerifiedClientID` does not have a corresponding
 // entry in `LaunchIDFromVerifiedClientID`
-func MissingVerifiedClientIDInvariant(k Keeper) sdk.Invariant {
+func MissingVerifiedClientIDInvariant(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
 		allVerifiedClientID, err := k.AllVerifiedClientID(ctx)
 		if err != nil {

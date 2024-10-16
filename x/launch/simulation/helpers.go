@@ -13,7 +13,7 @@ import (
 )
 
 // IsLaunchTriggeredChain check if chain is launch triggered
-func IsLaunchTriggeredChain(ctx sdk.Context, k keeper.Keeper, chainID uint64) bool {
+func IsLaunchTriggeredChain(ctx sdk.Context, k *keeper.Keeper, chainID uint64) bool {
 	chain, err := k.GetChain(ctx, chainID)
 	if err != nil {
 		return false
@@ -107,7 +107,7 @@ func FindCoordinatorProject(
 // FindChainCoordinatorAccount find coordinator account by chain id
 func FindChainCoordinatorAccount(
 	ctx sdk.Context,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	accs []simtypes.Account,
 	chainID uint64,
 ) (simtypes.Account, error) {
@@ -132,7 +132,7 @@ func FindChainCoordinatorAccount(
 func FindRandomChain(
 	r *rand.Rand,
 	ctx sdk.Context,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	launchTriggered,
 	noMainnet bool,
 ) (chain types.Chain, found bool) {
@@ -166,7 +166,7 @@ func FindRandomChain(
 func FindRandomRequest(
 	r *rand.Rand,
 	ctx sdk.Context,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 ) (request types.Request, found bool) {
 	// Select a random request without launch triggered
 	requests, err := k.Requests(ctx)
@@ -223,7 +223,7 @@ func FindRandomRequest(
 func FindRandomValidator(
 	r *rand.Rand,
 	ctx sdk.Context,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	accs []simtypes.Account,
 ) (simAccount simtypes.Account, valAcc types.GenesisValidator, found bool) {
 	valAccs, err := k.AllGenesisValidator(ctx)

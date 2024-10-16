@@ -54,14 +54,14 @@ func NewKeeper(
 	authority string,
 	distributionKeeper types.DistributionKeeper,
 	profileKeeper types.ProfileKeeper,
-) Keeper {
+) *Keeper {
 	if _, err := addressCodec.StringToBytes(authority); err != nil {
 		panic(fmt.Sprintf("invalid authority address %s: %s", authority, err))
 	}
 
 	sb := collections.NewSchemaBuilder(storeService)
 
-	k := Keeper{
+	k := &Keeper{
 		cdc:                cdc,
 		addressCodec:       addressCodec,
 		storeService:       storeService,
@@ -137,12 +137,12 @@ func (k *Keeper) GetProfileKeeper() types.ProfileKeeper {
 }
 
 // SetHooks sets the fundraising hooks.
-func (k Keeper) SetHooks(hooks types.LaunchHooks) (Keeper, error) {
+func (k *Keeper) SetHooks(hooks types.LaunchHooks) error {
 	if k.hooks != nil {
-		return k, errors.New("cannot set launch hooks twice")
+		return errors.New("cannot set launch hooks twice")
 	}
 	k.hooks = hooks
-	return k, nil
+	return nil
 }
 
 // EnableMonitoringConnection sets a chain with MonitoringConnected set to true

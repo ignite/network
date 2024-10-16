@@ -51,7 +51,6 @@ type (
 		launchKeeper types.LaunchKeeper
 		rewardKeeper types.RewardKeeper
 
-		// TODO set ibc keepers
 		clientKeeper     types.ClientKeeper
 		portKeeper       types.PortKeeper
 		connectionKeeper types.ConnectionKeeper
@@ -69,27 +68,23 @@ func NewKeeper(
 	capabilityScopedFn func(string) capabilitykeeper.ScopedKeeper,
 	launchKeeper types.LaunchKeeper,
 	rewardKeeper types.RewardKeeper,
-) Keeper {
+) *Keeper {
 	if _, err := addressCodec.StringToBytes(authority); err != nil {
 		panic(fmt.Sprintf("invalid authority address %s: %s", authority, err))
 	}
 
 	sb := collections.NewSchemaBuilder(storeService)
 
-	k := Keeper{
-		cdc:                cdc,
-		addressCodec:       addressCodec,
-		storeService:       storeService,
-		authority:          authority,
-		logger:             logger,
-		ibcKeeperFn:        ibcKeeperFn,
-		capabilityScopedFn: capabilityScopedFn,
-		launchKeeper:       launchKeeper,
-		rewardKeeper:       rewardKeeper,
-		// clientKeeper:     clientKeeper, // TODO
-		// portKeeper:       portKeeper,
-		// connectionKeeper: connectionKeeper,
-		// channelKeeper:    channelKeeper,
+	k := &Keeper{
+		cdc:                          cdc,
+		addressCodec:                 addressCodec,
+		storeService:                 storeService,
+		authority:                    authority,
+		logger:                       logger,
+		ibcKeeperFn:                  ibcKeeperFn,
+		capabilityScopedFn:           capabilityScopedFn,
+		launchKeeper:                 launchKeeper,
+		rewardKeeper:                 rewardKeeper,
 		Params:                       collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
 		LaunchIDFromChannelID:        collections.NewMap(sb, types.LaunchIDFromChannelIDKey, "launchIDFromChannelID", collections.StringKey, codec.CollValue[types.LaunchIDFromChannelID](cdc)),
 		LaunchIDFromVerifiedClientID: collections.NewMap(sb, types.LaunchIDFromVerifiedClientIDKey, "launchIDFromVerifiedClientID", collections.StringKey, codec.CollValue[types.LaunchIDFromVerifiedClientID](cdc)),
@@ -128,7 +123,7 @@ func (k Keeper) AddressCodec() address.Codec {
 // ----------------------------------------------------------------------------
 
 // SetIBCKeeper sets IBC Keeper
-func (k Keeper) SetIBCKeeper(ibcKeeper *ibckeeper.Keeper) {
+func (k *Keeper) SetIBCKeeper(ibcKeeper *ibckeeper.Keeper) {
 	k.SetClientKeeper(ibcKeeper.ClientKeeper)
 	k.SetPortKeeper(ibcKeeper.PortKeeper)
 	k.SetConnectionKeeper(ibcKeeper.ConnectionKeeper)
@@ -136,22 +131,22 @@ func (k Keeper) SetIBCKeeper(ibcKeeper *ibckeeper.Keeper) {
 }
 
 // SetClientKeeper sets IBC client keeper
-func (k Keeper) SetClientKeeper(clientKeeper types.ClientKeeper) {
+func (k *Keeper) SetClientKeeper(clientKeeper types.ClientKeeper) {
 	k.clientKeeper = clientKeeper
 }
 
 // SetPortKeeper sets IBC port keeper
-func (k Keeper) SetPortKeeper(portKeeper types.PortKeeper) {
+func (k *Keeper) SetPortKeeper(portKeeper types.PortKeeper) {
 	k.portKeeper = portKeeper
 }
 
 // SetConnectionKeeper sets IBC connection keeper
-func (k Keeper) SetConnectionKeeper(connectionKeeper types.ConnectionKeeper) {
+func (k *Keeper) SetConnectionKeeper(connectionKeeper types.ConnectionKeeper) {
 	k.connectionKeeper = connectionKeeper
 }
 
 // SetChannelKeeper sets IBC channel keeper
-func (k Keeper) SetChannelKeeper(channelKeeper types.ChannelKeeper) {
+func (k *Keeper) SetChannelKeeper(channelKeeper types.ChannelKeeper) {
 	k.channelKeeper = channelKeeper
 }
 

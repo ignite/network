@@ -266,7 +266,7 @@ func (i initializer) Profile() profilekeeper.Keeper {
 func (i initializer) Launch(
 	profileKeeper profilekeeper.Keeper,
 	distrKeeper distrkeeper.Keeper,
-) launchkeeper.Keeper {
+) *launchkeeper.Keeper {
 	storeKey := storetypes.NewKVStoreKey(launchtypes.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(launchtypes.MemStoreKey)
 
@@ -285,7 +285,7 @@ func (i initializer) Launch(
 }
 
 func (i initializer) Project(
-	launchKeeper launchkeeper.Keeper,
+	launchKeeper *launchkeeper.Keeper,
 	profileKeeper profilekeeper.Keeper,
 	bankKeeper bankkeeper.Keeper,
 	distrKeeper distrkeeper.Keeper,
@@ -313,7 +313,7 @@ func (i initializer) Reward(
 	authKeeper authkeeper.AccountKeeper,
 	bankKeeper bankkeeper.Keeper,
 	profileKeeper profilekeeper.Keeper,
-	launchKeeper launchkeeper.Keeper,
+	launchKeeper *launchkeeper.Keeper,
 ) rewardkeeper.Keeper {
 	storeKey := storetypes.NewKVStoreKey(rewardtypes.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(rewardtypes.MemStoreKey)
@@ -338,11 +338,11 @@ func (i initializer) Monitoringc(
 	ibcKeeper *ibckeeper.Keeper,
 	capabilityKeeper capabilitykeeper.Keeper,
 	portKeeper portkeeper.Keeper,
-	launchKeeper launchkeeper.Keeper,
+	launchKeeper *launchkeeper.Keeper,
 	rewardKeeper rewardkeeper.Keeper,
 	connectionMock []Connection,
 	channelMock []Channel,
-) monitoringckeeper.Keeper {
+) *monitoringckeeper.Keeper {
 	storeKey := storetypes.NewKVStoreKey(monitoringctypes.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(monitoringctypes.MemStoreKey)
 

@@ -17,7 +17,7 @@ import (
 func SimulateMsgRevertLaunch(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
-	k keeper.Keeper,
+	k *keeper.Keeper,
 	txGen client.TxConfig,
 ) simtypes.Operation {
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
