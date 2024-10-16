@@ -26,6 +26,22 @@ func createNValidator(keeper keeper.Keeper, ctx context.Context, n int) []types.
 	return items
 }
 
+func createNValidatorByOperatorAddress(keeper keeper.Keeper, ctx context.Context, n int) ([]types.ValidatorByOperatorAddress, []types.Validator) {
+	valByOp := make([]types.ValidatorByOperatorAddress, n)
+	validators := make([]types.Validator, n)
+	for i := range valByOp {
+		valAddress := sample.Address(r)
+		opAddress := sample.Address(r)
+		valByOp[i].ValidatorAddress = valAddress
+		valByOp[i].OperatorAddress = opAddress
+		_ = keeper.ValidatorByOperatorAddress.Set(ctx, opAddress, valByOp[i])
+
+		validators[i].Address = valAddress
+		_ = keeper.Validator.Set(ctx, valAddress, validators[i])
+	}
+	return valByOp, validators
+}
+
 func TestValidatorQuerySingle(t *testing.T) {
 	k, ctx, _ := keepertest.ProfileKeeper(t)
 	qs := keeper.NewQueryServerImpl(k)
@@ -134,26 +150,10 @@ func TestValidatorQueryPaginated(t *testing.T) {
 	})
 }
 
-func createNValidatorByOperatorAddress(keeper keeper.Keeper, ctx context.Context, n int) []types.Validator {
-	valByOp := make([]types.ValidatorByOperatorAddress, n)
-	validators := make([]types.Validator, n)
-	for i := range valByOp {
-		valAddress := sample.Address(r)
-		opAddress := sample.Address(r)
-		valByOp[i].ValidatorAddress = valAddress
-		valByOp[i].OperatorAddress = opAddress
-		_ = keeper.ValidatorByOperatorAddress.Set(ctx, opAddress, valByOp[i])
-
-		validators[i].Address = valAddress
-		_ = keeper.Validator.Set(ctx, valAddress, validators[i])
-	}
-	return validators
-}
-
 func TestValidatorByOperatorAddressQuerySingle(t *testing.T) {
 	k, ctx, _ := keepertest.ProfileKeeper(t)
 	qs := keeper.NewQueryServerImpl(k)
-	msgs := createNValidatorByOperatorAddress(k, ctx, 2)
+	msgsOp, msgsVal := createNValidatorByOperatorAddress(k, ctx, 2)
 	for _, tc := range []struct {
 		desc     string
 		request  *types.QueryGetValidatorByOperatorAddressRequest
@@ -163,21 +163,21 @@ func TestValidatorByOperatorAddressQuerySingle(t *testing.T) {
 		{
 			desc: "should allow querying first validator by operator address",
 			request: &types.QueryGetValidatorByOperatorAddressRequest{
-				Address: msgs[0].Address,
+				OperatorAddress: msgsOp[0].OperatorAddress,
 			},
-			response: &types.QueryGetValidatorByOperatorAddressResponse{Validator: msgs[0]},
+			response: &types.QueryGetValidatorByOperatorAddressResponse{Validator: msgsVal[0]},
 		},
 		{
 			desc: "should allow querying second validator by operator address",
 			request: &types.QueryGetValidatorByOperatorAddressRequest{
-				Address: msgs[1].Address,
+				OperatorAddress: msgsOp[1].OperatorAddress,
 			},
-			response: &types.QueryGetValidatorByOperatorAddressResponse{Validator: msgs[1]},
+			response: &types.QueryGetValidatorByOperatorAddressResponse{Validator: msgsVal[1]},
 		},
 		{
 			desc: "should prevent querying non existing validator by operator address",
 			request: &types.QueryGetValidatorByOperatorAddressRequest{
-				Address: sample.Address(r),
+				OperatorAddress: sample.Address(r),
 			},
 			err: status.Error(codes.NotFound, "not found"),
 		},

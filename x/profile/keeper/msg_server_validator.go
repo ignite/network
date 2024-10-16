@@ -18,7 +18,7 @@ func (k msgServer) UpdateValidatorDescription(ctx context.Context, msg *types.Ms
 	}
 
 	if _, err := k.addressCodec.StringToBytes(msg.Address); err != nil {
-		return nil, errorsmod.Wrap(err, "invalid authority address")
+		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid address %s", err.Error())
 	}
 
 	// Check if the validator address is already in the store
@@ -69,7 +69,7 @@ func (k msgServer) AddValidatorOperatorAddress(ctx context.Context, msg *types.M
 	}
 
 	if _, err := k.addressCodec.StringToBytes(msg.ValidatorAddress); err != nil {
-		return nil, errorsmod.Wrap(err, "invalid authority address")
+		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid validator address %s", err.Error())
 	}
 
 	valAddr := msg.ValidatorAddress

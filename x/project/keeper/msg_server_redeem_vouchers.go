@@ -18,9 +18,9 @@ func (k msgServer) RedeemVouchers(ctx context.Context, msg *types.MsgRedeemVouch
 		return nil, err
 	}
 
-	creatorAddr, err := k.addressCodec.StringToBytes(msg.Sender)
+	sender, err := k.addressCodec.StringToBytes(msg.Sender)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid authority address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid sender address %s", err.Error())
 	}
 
 	project, err := k.GetProject(ctx, msg.ProjectID)
@@ -46,8 +46,8 @@ func (k msgServer) RedeemVouchers(ctx context.Context, msg *types.MsgRedeemVouch
 	}
 
 	// Send coins and burn them
-	if err := k.bankKeeper.SendCoinsFromAccountToModule(ctx, creatorAddr, types.ModuleName, msg.Vouchers); err != nil {
-		return nil, sdkerrors.Wrapf(types.ErrInsufficientVouchers, "%s", creatorAddr)
+	if err := k.bankKeeper.SendCoinsFromAccountToModule(ctx, sender, types.ModuleName, msg.Vouchers); err != nil {
+		return nil, sdkerrors.Wrapf(types.ErrInsufficientVouchers, "%s", sender)
 	}
 	if err := k.bankKeeper.BurnCoins(ctx, types.ModuleName, msg.Vouchers); err != nil {
 		return nil, ignterrors.Criticalf("can't burn coins %s", err.Error())
@@ -57,7 +57,7 @@ func (k msgServer) RedeemVouchers(ctx context.Context, msg *types.MsgRedeemVouch
 
 	accountAddress, err := k.addressCodec.StringToBytes(msg.Account)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid authority address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid account address %s", err.Error())
 	}
 
 	found := true

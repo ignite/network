@@ -3,127 +3,270 @@ package keeper_test
 import (
 	"testing"
 
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
 
 	keepertest "github.com/ignite/network/testutil/keeper"
-	"github.com/ignite/network/x/profile/keeper"
+	"github.com/ignite/network/testutil/sample"
 	"github.com/ignite/network/x/profile/types"
 )
 
-func TestCoordinatorMsgServerCreate(t *testing.T) {
-	k, ctx, addressCodec := keepertest.ProfileKeeper(t)
-	srv := keeper.NewMsgServerImpl(k)
-
-	address, err := addressCodec.BytesToString([]byte("signerAddr__________________"))
-	require.NoError(t, err)
-
-	for i := 0; i < 5; i++ {
-		resp, err := srv.CreateCoordinator(ctx, &types.MsgCreateCoordinator{Address: address})
-		require.NoError(t, err)
-		require.Equal(t, i, int(resp.CoordinatorID))
-	}
-}
-
-func TestCoordinatorMsgServerUpdate(t *testing.T) {
-	k, ctx, addressCodec := keepertest.ProfileKeeper(t)
-	srv := keeper.NewMsgServerImpl(k)
-
-	address, err := addressCodec.BytesToString([]byte("signerAddr__________________"))
-	require.NoError(t, err)
-
-	unauthorizedAddr, err := addressCodec.BytesToString([]byte("unauthorizedAddr___________"))
-	require.NoError(t, err)
-
-	_, err = srv.CreateCoordinator(ctx, &types.MsgCreateCoordinator{Address: address})
-	require.NoError(t, err)
-
+func TestMsgCreateCoordinator(t *testing.T) {
+	var (
+		msg1        = sample.MsgCreateCoordinator(sample.Address(r))
+		msg2        = sample.MsgCreateCoordinator(sample.Address(r))
+		ctx, tk, ts = keepertest.NewTestSetup(t)
+	)
 	tests := []struct {
-		desc    string
-		request *types.MsgUpdateCoordinatorDescription
-		err     error
+		name   string
+		msg    types.MsgCreateCoordinator
+		wantId uint64
+		err    error
 	}{
 		{
-			desc:    "invalid address",
-			request: &types.MsgUpdateCoordinatorDescription{Address: "invalid", Description: types.CoordinatorDescription{}},
-			err:     sdkerrors.ErrInvalidAddress,
+			name:   "should allow creating a coordinator",
+			msg:    msg1,
+			wantId: 0,
 		},
 		{
-			desc:    "unauthorized",
-			request: &types.MsgUpdateCoordinatorDescription{Address: unauthorizedAddr},
-			err:     sdkerrors.ErrUnauthorized,
+			name:   "should allow creating a second coordinator",
+			msg:    msg2,
+			wantId: 1,
 		},
 		{
-			desc: "key not found",
-			request: &types.MsgUpdateCoordinatorDescription{Address: address, Description: types.CoordinatorDescription{
-				Identity: "id",
-				Website:  "wb",
-				Details:  "dt",
-			}},
-			err: sdkerrors.ErrKeyNotFound,
-		},
-		{
-			desc:    "completed",
-			request: &types.MsgUpdateCoordinatorDescription{Address: address},
+			name: "should prevent creating with an existing coordinator address",
+			msg:  msg2,
+			err:  types.ErrCoordinatorAlreadyExist,
 		},
 	}
-	for _, tc := range tests {
-		t.Run(tc.desc, func(t *testing.T) {
-			_, err = srv.UpdateCoordinatorDescription(ctx, tc.request)
-			if tc.err != nil {
-				require.ErrorIs(t, err, tc.err)
-			} else {
-				require.NoError(t, err)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := ts.ProfileSrv.CreateCoordinator(ctx, &tt.msg)
+			if tt.err != nil {
+				require.ErrorIs(t, err, tt.err)
+				return
 			}
+			require.NoError(t, err)
+
+			address, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.msg.Address)
+			require.NoError(t, err)
+			coordByAddr, err := tk.ProfileKeeper.GetCoordinatorByAddress(ctx, address)
+			require.NoError(t, err)
+			require.EqualValues(t, tt.wantId, coordByAddr.CoordinatorID)
+			require.EqualValues(t, tt.wantId, got.CoordinatorID)
+
+			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorID)
+			require.NoError(t, err, "coordinator id not found")
+			require.EqualValues(t, tt.msg.Address, coord.Address)
+			require.EqualValues(t, tt.msg.Description, coord.Description)
+			require.EqualValues(t, coordByAddr.CoordinatorID, coord.CoordinatorID)
+			require.EqualValues(t, true, coord.Active)
 		})
 	}
 }
 
-func TestCoordinatorMsgServerDelete(t *testing.T) {
-	k, ctx, addressCodec := keepertest.ProfileKeeper(t)
-	srv := keeper.NewMsgServerImpl(k)
-
-	address, err := addressCodec.BytesToString([]byte("signerAddr__________________"))
-	require.NoError(t, err)
-
-	unauthorizedAddr, err := addressCodec.BytesToString([]byte("unauthorizedAddr___________"))
-	require.NoError(t, err)
-
-	_, err = srv.CreateCoordinator(ctx, &types.MsgCreateCoordinator{Address: address})
+func TestMsgDisableCoordinator(t *testing.T) {
+	var (
+		addr        = sample.Address(r)
+		msgCoord    = sample.MsgCreateCoordinator(sample.Address(r))
+		ctx, tk, ts = keepertest.NewTestSetup(t)
+	)
+	_, err := ts.ProfileSrv.CreateCoordinator(ctx, &msgCoord)
 	require.NoError(t, err)
 
 	tests := []struct {
-		desc    string
-		request *types.MsgDisableCoordinator
-		err     error
+		name string
+		msg  types.MsgDisableCoordinator
+		err  error
 	}{
 		{
-			desc:    "invalid address",
-			request: &types.MsgDisableCoordinator{Address: "invalid"},
-			err:     sdkerrors.ErrInvalidAddress,
+			name: "should prevent disabling a non existing coordinator",
+			msg:  types.MsgDisableCoordinator{Address: addr},
+			err:  types.ErrCoordinatorAddressNotFound,
 		},
 		{
-			desc:    "unauthorized",
-			request: &types.MsgDisableCoordinator{Address: unauthorizedAddr},
-			err:     sdkerrors.ErrUnauthorized,
-		},
-		{
-			desc:    "key not found",
-			request: &types.MsgDisableCoordinator{Address: address},
-			err:     sdkerrors.ErrKeyNotFound,
-		},
-		{
-			desc:    "completed",
-			request: &types.MsgDisableCoordinator{Address: address},
+			name: "should allow disabling an active coordinator",
+			msg:  types.MsgDisableCoordinator{Address: msgCoord.Address},
 		},
 	}
-	for _, tc := range tests {
-		t.Run(tc.desc, func(t *testing.T) {
-			_, err = srv.DisableCoordinator(ctx, tc.request)
-			if tc.err != nil {
-				require.ErrorIs(t, err, tc.err)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := ts.ProfileSrv.DisableCoordinator(ctx, &tt.msg)
+			if tt.err != nil {
+				require.ErrorIs(t, err, tt.err)
+				return
+			}
+			require.NoError(t, err)
+
+			address, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.msg.Address)
+			require.NoError(t, err)
+			_, err = tk.ProfileKeeper.GetCoordinatorByAddress(ctx, address)
+			require.ErrorIs(t, err, types.ErrCoordinatorAddressNotFound)
+
+			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, got.CoordinatorID)
+			require.NoError(t, err)
+			require.EqualValues(t, false, coord.Active)
+		})
+	}
+}
+
+func TestMsgUpdateCoordinatorAddress(t *testing.T) {
+	var (
+		addr         = sample.Address(r)
+		nonExistAddr = sample.Address(r)
+		coord1       = sample.MsgCreateCoordinator(sample.Address(r))
+		coord2       = sample.MsgCreateCoordinator(sample.Address(r))
+		ctx, tk, ts  = keepertest.NewTestSetup(t)
+	)
+	_, err := ts.ProfileSrv.CreateCoordinator(ctx, &coord1)
+	require.NoError(t, err)
+	_, err = ts.ProfileSrv.CreateCoordinator(ctx, &coord2)
+	require.NoError(t, err)
+
+	tests := []struct {
+		name string
+		msg  types.MsgUpdateCoordinatorAddress
+		err  error
+	}{
+		{
+			name: "should prevent updating a non existing coordinator",
+			msg: types.MsgUpdateCoordinatorAddress{
+				Address:    addr,
+				NewAddress: nonExistAddr,
+			},
+			err: types.ErrCoordinatorAddressNotFound,
+		}, {
+			name: "should prevent updating with an address already associated to a coordinator",
+			msg: types.MsgUpdateCoordinatorAddress{
+				Address:    coord1.Address,
+				NewAddress: coord2.Address,
+			},
+			err: types.ErrCoordinatorAlreadyExist,
+		}, {
+			name: "should allow updating coordinator address",
+			msg: types.MsgUpdateCoordinatorAddress{
+				Address:    coord1.Address,
+				NewAddress: addr,
+			},
+		}, {
+			name: "should allow updating coordinator address a second time",
+			msg: types.MsgUpdateCoordinatorAddress{
+				Address:    coord2.Address,
+				NewAddress: coord1.Address,
+			},
+		}, {
+			name: "should prevent updating from previous coordinator address",
+			msg: types.MsgUpdateCoordinatorAddress{
+				Address:    addr,
+				NewAddress: coord1.Address,
+			},
+			err: types.ErrCoordinatorAlreadyExist,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			_, err := ts.ProfileSrv.UpdateCoordinatorAddress(ctx, &tt.msg)
+			if tt.err != nil {
+				require.ErrorIs(t, err, tt.err)
+				return
+			}
+			require.NoError(t, err)
+
+			address, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.msg.Address)
+			require.NoError(t, err)
+			_, err = tk.ProfileKeeper.GetCoordinatorByAddress(ctx, address)
+			require.ErrorIs(t, err, types.ErrCoordinatorAddressNotFound, "old coordinator address was not removed")
+
+			newAddress, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.msg.NewAddress)
+			require.NoError(t, err)
+			coordByAddr, err := tk.ProfileKeeper.GetCoordinatorByAddress(ctx, newAddress)
+			require.NoError(t, err, "coordinator by address not found")
+			require.EqualValues(t, tt.msg.NewAddress, coordByAddr.Address)
+
+			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorID)
+			require.NoError(t, err, "coordinator id not found")
+			require.EqualValues(t, tt.msg.NewAddress, coord.Address)
+			require.EqualValues(t, coordByAddr.CoordinatorID, coord.CoordinatorID)
+		})
+	}
+}
+
+func TestMsgUpdateCoordinatorDescription(t *testing.T) {
+	var (
+		addr        = sample.Address(r)
+		msgCoord    = sample.MsgCreateCoordinator(sample.Address(r))
+		ctx, tk, ts = keepertest.NewTestSetup(t)
+	)
+	_, err := ts.ProfileSrv.CreateCoordinator(ctx, &msgCoord)
+	require.NoError(t, err)
+
+	tests := []struct {
+		name string
+		msg  types.MsgUpdateCoordinatorDescription
+		err  error
+	}{
+		{
+			name: "should prevent updating description of non existing coordinator",
+			msg:  sample.MsgUpdateCoordinatorDescription(addr),
+			err:  types.ErrCoordinatorAddressNotFound,
+		},
+		{
+			name: "should allow updating one value of coordinator description",
+			msg: types.MsgUpdateCoordinatorDescription{
+				Address: msgCoord.Address,
+				Description: types.CoordinatorDescription{
+					Identity: "update",
+				},
+			},
+		},
+		{
+			name: "should allow updating all values of coordinator description",
+			msg:  sample.MsgUpdateCoordinatorDescription(msgCoord.Address),
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			address, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.msg.Address)
+			require.NoError(t, err)
+
+			var oldCoord types.Coordinator
+			if tt.err == nil {
+				coordByAddr, err := tk.ProfileKeeper.GetCoordinatorByAddress(ctx, address)
+				require.NoError(t, err, "coordinator by address not found")
+				oldCoord, err = tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorID)
+				require.NoError(t, err, "coordinator not found")
+			}
+
+			_, err = ts.ProfileSrv.UpdateCoordinatorDescription(ctx, &tt.msg)
+			if tt.err != nil {
+				require.ErrorIs(t, err, tt.err)
+				return
+			}
+			require.NoError(t, err)
+
+			coordByAddr, err := tk.ProfileKeeper.GetCoordinatorByAddress(ctx, address)
+			require.NoError(t, err, "coordinator by address not found")
+			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorID)
+			require.NoError(t, err, "coordinator not found")
+			require.EqualValues(t, tt.msg.Address, coord.Address)
+			require.EqualValues(t, coordByAddr.CoordinatorID, coord.CoordinatorID)
+
+			if len(tt.msg.Description.Identity) > 0 {
+				require.EqualValues(t, tt.msg.Description.Identity, coord.Description.Identity)
 			} else {
-				require.NoError(t, err)
+				require.EqualValues(t, oldCoord.Description.Identity, coord.Description.Identity)
+			}
+
+			if len(tt.msg.Description.Website) > 0 {
+				require.EqualValues(t, tt.msg.Description.Website, coord.Description.Website)
+			} else {
+				require.EqualValues(t, oldCoord.Description.Website, coord.Description.Website)
+			}
+
+			if len(tt.msg.Description.Details) > 0 {
+				require.EqualValues(t, tt.msg.Description.Details, coord.Description.Details)
+			} else {
+				require.EqualValues(t, oldCoord.Description.Details, coord.Description.Details)
 			}
 		})
 	}

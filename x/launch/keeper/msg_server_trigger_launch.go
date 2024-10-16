@@ -20,7 +20,7 @@ func (k msgServer) TriggerLaunch(ctx context.Context, msg *types.MsgTriggerLaunc
 
 	coordinatorAddress, err := k.addressCodec.StringToBytes(msg.Coordinator)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid coordinator address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
 	}
 
 	chain, err := k.GetChain(ctx, msg.LaunchID)

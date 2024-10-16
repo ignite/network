@@ -7,7 +7,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	ignterrors "github.com/ignite/network/pkg/errors"
 	networktypes "github.com/ignite/network/pkg/types"
 	testkeeper "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/sample"
@@ -16,22 +15,16 @@ import (
 
 func TestMsgBurnVouchers(t *testing.T) {
 	var (
-		ctx, tk, ts = testkeeper.NewTestSetup(t)
-
+		ctx, tk, ts    = testkeeper.NewTestSetup(t)
 		project        = sample.Project(r, 0)
 		addr           = sample.AccAddress(r)
-		shares         types.Shares
-		vouchers       sdk.Coins
-		err            error
 		vouchersTooBig = sdk.NewCoins(
 			sdk.NewCoin("v/0/foo", sdkmath.NewInt(networktypes.TotalShareNumber+1)),
 		)
 	)
-
-	t.Run("should allow create valid shares", func(t *testing.T) {
-		shares, err = types.NewShares("1000foo,500bar,300foobar")
-		require.NoError(t, err)
-	})
+	// Create shares
+	shares, err := types.NewShares("1000foo,500bar,300foobar")
+	require.NoError(t, err)
 
 	// Set project
 	project.AllocatedShares = shares
@@ -39,10 +32,12 @@ func TestMsgBurnVouchers(t *testing.T) {
 	require.NoError(t, err)
 
 	// Create vouchers
-	t.Run("should allow create valid vouchers", func(t *testing.T) {
-		vouchers, err = types.SharesToVouchers(shares, project.ProjectID)
-		require.NoError(t, err)
-	})
+	vouchers, err := types.SharesToVouchers(shares, project.ProjectID)
+	require.NoError(t, err)
+
+	invalidProjectID := uint64(1000)
+	vouchersErr, err := types.SharesToVouchers(shares, invalidProjectID)
+	require.NoError(t, err)
 
 	t.Run("should allow setting initial balances", func(t *testing.T) {
 		err = tk.BankKeeper.MintCoins(ctx, types.ModuleName, vouchers)
@@ -84,8 +79,8 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should fail for non existing project",
 			msg: types.MsgBurnVouchers{
 				Sender:    addr.String(),
-				ProjectID: 1000,
-				Vouchers:  sample.Coins(r),
+				ProjectID: invalidProjectID,
+				Vouchers:  sdk.NewCoins(vouchersErr[0]),
 			},
 			err: types.ErrProjectNotFound,
 		},
@@ -94,9 +89,9 @@ func TestMsgBurnVouchers(t *testing.T) {
 			msg: types.MsgBurnVouchers{
 				Sender:    "invalid_address",
 				ProjectID: project.ProjectID,
-				Vouchers:  sample.Coins(r),
+				Vouchers:  sdk.NewCoins(vouchers[1]),
 			},
-			err: ignterrors.ErrCritical,
+			err: types.ErrInvalidSigner,
 		},
 		{
 			name: "should not burn more than allocated shares",

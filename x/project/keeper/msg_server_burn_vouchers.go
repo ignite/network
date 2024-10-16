@@ -17,7 +17,7 @@ func (k msgServer) BurnVouchers(ctx context.Context, msg *types.MsgBurnVouchers)
 
 	sender, err := k.addressCodec.StringToBytes(msg.Sender)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid authority address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid sender address %s", err.Error())
 	}
 
 	project, err := k.GetProject(ctx, msg.ProjectID)

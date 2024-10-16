@@ -62,7 +62,7 @@ func (k Keeper) AppendRequest(ctx context.Context, request types.Request) (uint6
 func CheckAccount(ctx context.Context, k Keeper, launchID uint64, address string) (bool, error) {
 	accAddress, err := k.addressCodec.StringToBytes(address)
 	if err != nil {
-		return false, ignterrors.Criticalf("invalid bech32 format %s", address)
+		return false, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
 	}
 
 	foundGenesis, err := k.GenesisAccount.Has(ctx, collections.Join(launchID, sdk.AccAddress(accAddress)))

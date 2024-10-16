@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	sdkmath "cosmossdk.io/math"
+
 	"github.com/stretchr/testify/require"
 
 	networktypes "github.com/ignite/network/pkg/types"

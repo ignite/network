@@ -15,7 +15,7 @@ import (
 func (k msgServer) RevertLaunch(ctx context.Context, msg *types.MsgRevertLaunch) (*types.MsgRevertLaunchResponse, error) {
 	coordinatorAddress, err := k.addressCodec.StringToBytes(msg.Coordinator)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid coordinator address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
 	}
 
 	params, err := k.Params.Get(ctx)

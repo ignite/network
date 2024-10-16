@@ -20,11 +20,24 @@ import (
 
 func createNAuctionUsedAllocations(keeper keeper.Keeper, ctx context.Context, n int) []types.AuctionUsedAllocations {
 	items := make([]types.AuctionUsedAllocations, n)
-	auctionID := uint64(0)
 	for i := range items {
+		auctionID := uint64(i)
 		address := sample.AccAddress(r)
 		items[i].Address = address.String()
 		items[i].AuctionID = auctionID
+		items[i].NumAllocations = sample.Int(r)
+
+		_ = keeper.AuctionUsedAllocations.Set(ctx, collections.Join(address, auctionID), items[i])
+	}
+	return items
+}
+
+func createNAuctionUsedAllocationsWithSameAddress(keeper keeper.Keeper, ctx context.Context, n int) []types.AuctionUsedAllocations {
+	items := make([]types.AuctionUsedAllocations, n)
+	address := sample.AccAddress(r)
+	for i := range items {
+		auctionID := uint64(i)
+		items[i].Address = address.String()
 		items[i].NumAllocations = sample.Int(r)
 
 		_ = keeper.AuctionUsedAllocations.Set(ctx, collections.Join(address, auctionID), items[i])
@@ -98,10 +111,12 @@ func TestAuctionUsedAllocationsQuerySingle(t *testing.T) {
 func TestAuctionUsedAllocationsQueryPaginated(t *testing.T) {
 	k, ctx, _ := keepertest.ParticipationKeeper(t)
 	qs := keeper.NewQueryServerImpl(k)
-	msgs := createNAuctionUsedAllocations(k, ctx, 5)
+	msgs := createNAuctionUsedAllocationsWithSameAddress(k, ctx, 5)
+	address := msgs[0].Address
 
-	request := func(next []byte, offset, limit uint64, total bool) *types.QueryAllAuctionUsedAllocationsRequest {
+	request := func(addr string, next []byte, offset, limit uint64, total bool) *types.QueryAllAuctionUsedAllocationsRequest {
 		return &types.QueryAllAuctionUsedAllocationsRequest{
+			Address: addr,
 			Pagination: &query.PageRequest{
 				Key:        next,
 				Offset:     offset,
@@ -110,10 +125,16 @@ func TestAuctionUsedAllocationsQueryPaginated(t *testing.T) {
 			},
 		}
 	}
+	t.Run("should return empty set", func(t *testing.T) {
+		resp, err := qs.ListAuctionUsedAllocations(ctx, request("invalid", nil, 0, 0, true))
+		require.NoError(t, err)
+		require.Equal(t, 0, int(resp.Pagination.Total))
+		require.Nil(t, resp.AuctionUsedAllocations)
+	})
 	t.Run("ByOffset", func(t *testing.T) {
 		step := 2
 		for i := 0; i < len(msgs); i += step {
-			resp, err := qs.ListAuctionUsedAllocations(ctx, request(nil, uint64(i), uint64(step), false))
+			resp, err := qs.ListAuctionUsedAllocations(ctx, request(address, nil, uint64(i), uint64(step), false))
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.AuctionUsedAllocations), step)
 			require.Subset(t,
@@ -126,7 +147,7 @@ func TestAuctionUsedAllocationsQueryPaginated(t *testing.T) {
 		step := 2
 		var next []byte
 		for i := 0; i < len(msgs); i += step {
-			resp, err := qs.ListAuctionUsedAllocations(ctx, request(next, 0, uint64(step), false))
+			resp, err := qs.ListAuctionUsedAllocations(ctx, request(address, next, 0, uint64(step), false))
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.AuctionUsedAllocations), step)
 			require.Subset(t,
@@ -137,7 +158,7 @@ func TestAuctionUsedAllocationsQueryPaginated(t *testing.T) {
 		}
 	})
 	t.Run("Total", func(t *testing.T) {
-		resp, err := qs.ListAuctionUsedAllocations(ctx, request(nil, 0, 0, true))
+		resp, err := qs.ListAuctionUsedAllocations(ctx, request(address, nil, 0, 0, true))
 		require.NoError(t, err)
 		require.Equal(t, len(msgs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,

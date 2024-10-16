@@ -17,9 +17,9 @@ func (k msgServer) UnredeemVouchers(ctx context.Context, msg *types.MsgUnredeemV
 		return nil, err
 	}
 
-	senderAddress, err := k.addressCodec.StringToBytes(msg.Sender)
+	sender, err := k.addressCodec.StringToBytes(msg.Sender)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid authority address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid sender address %s", err.Error())
 	}
 
 	project, err := k.GetProject(ctx, msg.ProjectID)
@@ -39,7 +39,7 @@ func (k msgServer) UnredeemVouchers(ctx context.Context, msg *types.MsgUnredeemV
 	}
 
 	// Check if the account already exists
-	account, err := k.MainnetAccount.Get(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(senderAddress)))
+	account, err := k.MainnetAccount.Get(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(sender)))
 	if err != nil {
 		return nil, ignterrors.Criticalf("can't get mainnet account %s", err.Error())
 	}
@@ -53,7 +53,7 @@ func (k msgServer) UnredeemVouchers(ctx context.Context, msg *types.MsgUnredeemV
 	// If the account no longer has shares, it can be removed from the store
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	if types.IsEqualShares(account.Shares, types.EmptyShares()) {
-		if err := k.MainnetAccount.Remove(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(senderAddress))); err != nil {
+		if err := k.MainnetAccount.Remove(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(sender))); err != nil {
 			return nil, ignterrors.Criticalf("can't remove mainnet account %s", err.Error())
 		}
 		if err := sdkCtx.EventManager().EmitTypedEvent(&types.EventMainnetAccountRemoved{
@@ -63,7 +63,7 @@ func (k msgServer) UnredeemVouchers(ctx context.Context, msg *types.MsgUnredeemV
 			return nil, err
 		}
 	} else {
-		if err := k.MainnetAccount.Set(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(senderAddress)), account); err != nil {
+		if err := k.MainnetAccount.Set(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(sender)), account); err != nil {
 			return nil, ignterrors.Criticalf("can't set mainnet account %s", err.Error())
 		}
 		if err := sdkCtx.EventManager().EmitTypedEvent(&types.EventMainnetAccountUpdated{
@@ -84,7 +84,7 @@ func (k msgServer) UnredeemVouchers(ctx context.Context, msg *types.MsgUnredeemV
 		return nil, sdkerrors.Wrap(types.ErrVouchersMinting, err.Error())
 	}
 
-	if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, senderAddress, vouchers); err != nil {
+	if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, sender, vouchers); err != nil {
 		return nil, ignterrors.Criticalf("can't send minted coins %s", err.Error())
 	}
 

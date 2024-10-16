@@ -22,7 +22,7 @@ func (k msgServer) Participate(ctx context.Context, msg *types.MsgParticipate) (
 
 	participantAddress, err := k.addressCodec.StringToBytes(msg.Participant)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(types.ErrInvalidAddress, "invalid participant address %s", msg.Participant)
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid participant address %s", err.Error())
 	}
 
 	availableAlloc, err := k.GetAvailableAllocations(ctx, msg.Participant)

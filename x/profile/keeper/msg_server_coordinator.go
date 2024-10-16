@@ -14,7 +14,7 @@ import (
 func (k msgServer) CreateCoordinator(ctx context.Context, msg *types.MsgCreateCoordinator) (*types.MsgCreateCoordinatorResponse, error) {
 	address, err := k.addressCodec.StringToBytes(msg.Address)
 	if err != nil {
-		return nil, errorsmod.Wrap(err, "invalid address")
+		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid address %s", err.Error())
 	}
 
 	if coordinator, err := k.CoordinatorByAddress.Get(ctx, address); err == nil {
@@ -58,7 +58,7 @@ func (k msgServer) UpdateCoordinatorDescription(ctx context.Context, msg *types.
 
 	address, err := k.addressCodec.StringToBytes(msg.Address)
 	if err != nil {
-		return nil, errorsmod.Wrap(err, "invalid address")
+		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid address %s", err.Error())
 	}
 
 	coordByAddress, err := k.CoordinatorByAddress.Get(ctx, address)
@@ -100,7 +100,7 @@ func (k msgServer) UpdateCoordinatorAddress(ctx context.Context, msg *types.MsgU
 
 	address, err := k.addressCodec.StringToBytes(msg.Address)
 	if err != nil {
-		return nil, errorsmod.Wrap(err, "invalid address")
+		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid address %s", err.Error())
 	}
 	coordByAddress, err := k.CoordinatorByAddress.Get(ctx, address)
 	if err != nil {
@@ -109,7 +109,7 @@ func (k msgServer) UpdateCoordinatorAddress(ctx context.Context, msg *types.MsgU
 
 	newAddress, err := k.addressCodec.StringToBytes(msg.NewAddress)
 	if err != nil {
-		return nil, errorsmod.Wrap(err, "invalid new address")
+		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid new address %s", err.Error())
 	}
 	if newCoord, err := k.CoordinatorByAddress.Get(ctx, newAddress); err == nil {
 		return nil, errorsmod.Wrapf(types.ErrCoordinatorAlreadyExist, "new address already have a coordinator: %d", newCoord.CoordinatorID)
@@ -151,7 +151,7 @@ func (k msgServer) UpdateCoordinatorAddress(ctx context.Context, msg *types.MsgU
 func (k msgServer) DisableCoordinator(ctx context.Context, msg *types.MsgDisableCoordinator) (*types.MsgDisableCoordinatorResponse, error) {
 	address, err := k.addressCodec.StringToBytes(msg.Address)
 	if err != nil {
-		return nil, errorsmod.Wrap(err, "invalid address")
+		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid address %s", err.Error())
 	}
 
 	coordByAddress, err := k.CoordinatorByAddress.Get(ctx, address)
@@ -187,9 +187,11 @@ func (k msgServer) DisableCoordinator(ctx context.Context, msg *types.MsgDisable
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to delete coordinator")
 	}
 
-	return &types.MsgDisableCoordinatorResponse{}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(
-		&types.EventCoordinatorDisabled{
-			CoordinatorID: coordByAddress.CoordinatorID,
-			Address:       msg.Address,
-		})
+	return &types.MsgDisableCoordinatorResponse{
+			CoordinatorID: coordinator.CoordinatorID,
+		}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(
+			&types.EventCoordinatorDisabled{
+				CoordinatorID: coordByAddress.CoordinatorID,
+				Address:       msg.Address,
+			})
 }

@@ -54,7 +54,7 @@ func (q queryServer) GetValidatorByOperatorAddress(ctx context.Context, req *typ
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	operator, err := q.k.ValidatorByOperatorAddress.Get(ctx, req.Address)
+	operator, err := q.k.ValidatorByOperatorAddress.Get(ctx, req.OperatorAddress)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, status.Error(codes.NotFound, "not found")

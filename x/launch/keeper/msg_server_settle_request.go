@@ -13,7 +13,7 @@ import (
 
 func (k msgServer) SettleRequest(ctx context.Context, msg *types.MsgSettleRequest) (*types.MsgSettleRequestResponse, error) {
 	if _, err := k.addressCodec.StringToBytes(msg.Signer); err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid authority address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid signer address %s", err.Error())
 	}
 
 	chain, err := k.GetChain(ctx, msg.LaunchID)

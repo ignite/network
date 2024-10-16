@@ -16,9 +16,9 @@ func (k msgServer) SendRequest(ctx context.Context, msg *types.MsgSendRequest) (
 		return nil, err
 	}
 
-	sender, err := k.addressCodec.StringToBytes(msg.Creator)
+	creator, err := k.addressCodec.StringToBytes(msg.Creator)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid authority address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid creator address %s", err.Error())
 	}
 
 	params, err := k.Params.Get(ctx)
@@ -77,7 +77,7 @@ func (k msgServer) SendRequest(ctx context.Context, msg *types.MsgSendRequest) (
 	// deduct request fee if set
 
 	if !params.RequestFee.Empty() {
-		if err = k.distributionKeeper.FundCommunityPool(ctx, params.RequestFee, sender); err != nil {
+		if err = k.distributionKeeper.FundCommunityPool(ctx, params.RequestFee, creator); err != nil {
 			return nil, sdkerrors.Wrap(types.ErrFundCommunityPool, err.Error())
 		}
 	}

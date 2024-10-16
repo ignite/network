@@ -23,7 +23,7 @@ func (k msgServer) WithdrawAllocations(ctx context.Context, msg *types.MsgWithdr
 
 	participantAddress, err := k.addressCodec.StringToBytes(msg.Participant)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid participant address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid participant address %s", err.Error())
 	}
 
 	auction, err := k.fundraisingKeeper.GetAuction(ctx, msg.AuctionID)

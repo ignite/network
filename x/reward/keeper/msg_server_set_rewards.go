@@ -20,7 +20,7 @@ func (k msgServer) SetRewards(ctx context.Context, msg *types.MsgSetRewards) (*t
 
 	provider, err := k.addressCodec.StringToBytes(msg.Provider)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid authority address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid provider address %s", err.Error())
 	}
 
 	// determine if the chain exists

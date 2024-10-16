@@ -43,7 +43,7 @@ service Query {
 
   // Queries a list of GetValidatorByOperatorAddress items.
   rpc GetValidatorByOperatorAddress(QueryGetValidatorByOperatorAddressRequest) returns (QueryGetValidatorByOperatorAddressResponse) {
-    option (google.api.http).get = "/ignite/network/profile/get_validator_by_operator_address/{address}";
+    option (google.api.http).get = "/ignite/network/profile/get_validator_by_operator_address/{operatorAddress}";
   }
 }
 
@@ -102,7 +102,7 @@ message QueryGetCoordinatorByAddressResponse {
 }
 
 message QueryGetValidatorByOperatorAddressRequest {
-  string address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string operatorAddress = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }
 
 message QueryGetValidatorByOperatorAddressResponse {

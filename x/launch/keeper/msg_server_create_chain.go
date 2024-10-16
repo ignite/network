@@ -16,7 +16,7 @@ func (k msgServer) CreateChain(ctx context.Context, msg *types.MsgCreateChain) (
 
 	coordinatorAddress, err := k.addressCodec.StringToBytes(msg.Coordinator)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid coordinator address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
 	}
 
 	params, err := k.Params.Get(ctx)
@@ -59,11 +59,7 @@ func (k msgServer) CreateChain(ctx context.Context, msg *types.MsgCreateChain) (
 	// Deduct chain creation fee if set
 	creationFee := params.ChainCreationFee
 	if !params.ChainCreationFee.Empty() {
-		coordAddr, err := k.addressCodec.StringToBytes(msg.Coordinator)
-		if err != nil {
-			return nil, ignterrors.Criticalf("invalid coordinator bech32 address %s", err.Error())
-		}
-		if err = k.distributionKeeper.FundCommunityPool(ctx, creationFee, coordAddr); err != nil {
+		if err = k.distributionKeeper.FundCommunityPool(ctx, creationFee, coordinatorAddress); err != nil {
 			return nil, sdkerrors.Wrap(types.ErrFundCommunityPool, err.Error())
 		}
 	}

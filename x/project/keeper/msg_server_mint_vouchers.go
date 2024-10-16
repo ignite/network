@@ -20,7 +20,7 @@ func (k msgServer) MintVouchers(ctx context.Context, msg *types.MsgMintVouchers)
 
 	coordinatorAddress, err := k.addressCodec.StringToBytes(msg.Coordinator)
 	if err != nil {
-		return nil, sdkerrors.Wrap(err, "invalid authority address")
+		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
 	}
 
 	project, err := k.GetProject(ctx, msg.ProjectID)
