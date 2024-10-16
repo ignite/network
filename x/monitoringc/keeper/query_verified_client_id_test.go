@@ -2,6 +2,7 @@ package keeper_test
 
 import (
 	"context"
+	"strconv"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -18,6 +19,7 @@ func createNVerifiedClientID(ctx context.Context, keeper *keeper.Keeper, n int) 
 	items := make([]types.VerifiedClientID, n)
 	for i := range items {
 		items[i].LaunchID = uint64(i)
+		items[i].ClientIDs = []string{strconv.Itoa(i)}
 
 		_ = keeper.VerifiedClientID.Set(ctx, items[i].LaunchID, items[i])
 	}
