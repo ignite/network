@@ -35,7 +35,9 @@ func TestMsgUpdateParams(t *testing.T) {
 			name: "send enabled param",
 			input: &types.MsgUpdateParams{
 				Authority: k.GetAuthority(),
-				Params:    types.Params{},
+				Params: types.Params{
+					TotalSupplyRange: types.DefaultTotalSupplyRange(),
+				},
 			},
 		},
 		{

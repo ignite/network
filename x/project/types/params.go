@@ -20,6 +20,14 @@ func NewTotalSupplyRange(minTotalSupply, maxTotalSupply sdkmath.Int) TotalSupply
 	}
 }
 
+// DefaultTotalSupplyRange returns default total supply range.
+func DefaultTotalSupplyRange() TotalSupplyRange {
+	return NewTotalSupplyRange(
+		DefaultMinTotalSupply,
+		DefaultMaxTotalSupply,
+	)
+}
+
 // NewParams creates a new Params instance
 func NewParams(
 	minTotalSupply,

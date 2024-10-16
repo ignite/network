@@ -95,7 +95,7 @@ func (k msgServer) SendRequest(ctx context.Context, msg *types.MsgSendRequest) (
 	}
 
 	// call request created hook
-	err = k.hooks.RequestCreated(ctx, msg.Creator, msg.LaunchID, request.RequestID, msg.Content)
+	err = k.RequestCreated(ctx, msg.Creator, msg.LaunchID, request.RequestID, msg.Content)
 	return &types.MsgSendRequestResponse{
 		RequestID:    request.RequestID,
 		AutoApproved: approved,

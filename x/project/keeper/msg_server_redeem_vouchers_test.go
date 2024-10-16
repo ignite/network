@@ -23,18 +23,13 @@ func TestMsgRedeemVouchers(t *testing.T) {
 		existAddr              = sample.AccAddress(r)
 		project                = sample.Project(r, 0)
 		projectMainnetLaunched = sample.Project(r, 1)
-		shares                 types.Shares
-		vouchers               sdk.Coins
-		err                    error
 		vouchersTooBig         = sdk.NewCoins(
 			sdk.NewCoin("v/0/foo", sdkmath.NewInt(networktypes.TotalShareNumber+1)),
 		)
 	)
 
-	t.Run("should allow creation of valid shares", func(t *testing.T) {
-		shares, err = types.NewShares("1000foo,500bar,300foobar")
-		require.NoError(t, err)
-	})
+	shares, err := types.NewShares("1000foo,500bar,300foobar")
+	require.NoError(t, err)
 
 	// Set projects
 	project.AllocatedShares = shares
@@ -51,10 +46,12 @@ func TestMsgRedeemVouchers(t *testing.T) {
 	projectMainnetLaunched.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetLaunched)
 	require.NoError(t, err)
 
-	t.Run("should allow creation of valid vouchers", func(t *testing.T) {
-		vouchers, err = types.SharesToVouchers(shares, project.ProjectID)
-		require.NoError(t, err)
-	})
+	vouchers, err := types.SharesToVouchers(shares, project.ProjectID)
+	require.NoError(t, err)
+
+	invalidProjectID := uint64(10000)
+	vouchersErr, err := types.SharesToVouchers(shares, invalidProjectID)
+	require.NoError(t, err)
 
 	t.Run("should allow setting test balances", func(t *testing.T) {
 		err = tk.BankKeeper.MintCoins(ctx, types.ModuleName, vouchers)
@@ -120,8 +117,8 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    addr.String(),
 				Account:   addr.String(),
-				ProjectID: 10000,
-				Vouchers:  sample.Coins(r),
+				ProjectID: invalidProjectID,
+				Vouchers:  vouchersErr,
 			},
 			err: types.ErrProjectNotFound,
 		},
@@ -131,7 +128,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 				Sender:    addr.String(),
 				Account:   addr.String(),
 				ProjectID: project.ProjectID,
-				Vouchers:  sample.Coins(r),
+				Vouchers:  vouchersErr,
 			},
 			err: ignterrors.ErrCritical,
 		},
@@ -143,7 +140,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 				ProjectID: project.ProjectID,
 				Vouchers:  vouchers,
 			},
-			err: ignterrors.ErrCritical,
+			err: types.ErrInvalidSigner,
 		},
 		{
 			name: "should fail with insufficient funds",
@@ -182,7 +179,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 				Sender:    addr.String(),
 				Account:   addr.String(),
 				ProjectID: projectMainnetLaunched.ProjectID,
-				Vouchers:  sample.Coins(r),
+				Vouchers:  vouchers,
 			},
 			err: types.ErrMainnetLaunchTriggered,
 		},
