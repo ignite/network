@@ -18,10 +18,10 @@ func TestKeeper_AddChainToProject(t *testing.T) {
 	})
 
 	// Chains can be added
+	projectID := uint64(0)
 	t.Run("should allow adding chains to project", func(t *testing.T) {
-		projectID := uint64(0)
 		err := tk.ProjectKeeper.Project.Set(ctx, projectID, sample.Project(r, 0))
-		require.Error(t, err)
+		require.NoError(t, err)
 		err = tk.ProjectKeeper.AddChainToProject(ctx, projectID, 0)
 		require.NoError(t, err)
 		err = tk.ProjectKeeper.AddChainToProject(ctx, projectID, 1)
@@ -38,7 +38,7 @@ func TestKeeper_AddChainToProject(t *testing.T) {
 
 	// Can't add an existing chain
 	t.Run("should prevent adding existing chain to project", func(t *testing.T) {
-		err := tk.ProjectKeeper.AddChainToProject(ctx, 0, 0)
+		err := tk.ProjectKeeper.AddChainToProject(ctx, projectID, 0)
 		require.Error(t, err)
 	})
 }

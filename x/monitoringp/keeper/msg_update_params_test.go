@@ -5,6 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
+	networktypes "github.com/ignite/network/pkg/types"
 	keepertest "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/x/monitoringp/keeper"
 	"github.com/ignite/network/x/monitoringp/types"
@@ -35,7 +36,12 @@ func TestMsgUpdateParams(t *testing.T) {
 			name: "send enabled param",
 			input: &types.MsgUpdateParams{
 				Authority: k.GetAuthority(),
-				Params:    types.Params{},
+				Params: types.Params{
+					LastBlockHeight:         types.DefaultLastBlockHeight,
+					ConsumerChainID:         types.DefaultConsumerChainID,
+					ConsumerUnbondingPeriod: networktypes.DefaultUnbondingPeriod,
+					ConsumerRevisionHeight:  networktypes.DefaultRevisionHeight,
+				},
 			},
 		},
 		{

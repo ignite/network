@@ -200,7 +200,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 
 				previousAccount, err = tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectID, accountAddr)
 				if err != nil {
-					require.ErrorIs(t, err, types.ErrAccountNotFound)
+					require.ErrorIs(t, err, types.ErrMainnetAccountNotFound)
 					foundAccount = false
 				} else {
 					foundAccount = true

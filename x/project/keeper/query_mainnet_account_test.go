@@ -42,6 +42,7 @@ func TestMainnetAccountQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryGetMainnetAccountRequest{
+				Address:   msgs[0].Address,
 				ProjectID: msgs[0].ProjectID,
 			},
 			response: &types.QueryGetMainnetAccountResponse{MainnetAccount: msgs[0]},
@@ -49,6 +50,7 @@ func TestMainnetAccountQuerySingle(t *testing.T) {
 		{
 			desc: "Second",
 			request: &types.QueryGetMainnetAccountRequest{
+				Address:   msgs[1].Address,
 				ProjectID: msgs[1].ProjectID,
 			},
 			response: &types.QueryGetMainnetAccountResponse{MainnetAccount: msgs[1]},
@@ -56,6 +58,7 @@ func TestMainnetAccountQuerySingle(t *testing.T) {
 		{
 			desc: "KeyNotFound",
 			request: &types.QueryGetMainnetAccountRequest{
+				Address:   sample.Address(r),
 				ProjectID: 100000,
 			},
 			err: status.Error(codes.NotFound, "not found"),
