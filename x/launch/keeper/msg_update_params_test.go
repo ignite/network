@@ -35,7 +35,9 @@ func TestMsgUpdateParams(t *testing.T) {
 			name: "send enabled param",
 			input: &types.MsgUpdateParams{
 				Authority: k.GetAuthority(),
-				Params:    types.Params{},
+				Params: types.Params{
+					RevertDelay: types.DefaultRevertDelay,
+				},
 			},
 		},
 		{
@@ -49,7 +51,6 @@ func TestMsgUpdateParams(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			_, err := ms.UpdateParams(ctx, tc.input)
-
 			if tc.err != nil {
 				require.Error(t, err)
 				require.ErrorIs(t, err, tc.err)

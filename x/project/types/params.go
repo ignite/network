@@ -1,8 +1,6 @@
 package types
 
 import (
-	"fmt"
-
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -54,18 +52,10 @@ func (p Params) Validate() error {
 	if err := validateProjectCreationFee(p.ProjectCreationFee); err != nil {
 		return err
 	}
-	if err := validateMaxMetadataLength(p.MaxMetadataLength); err != nil {
-		return err
-	}
-
 	return p.ProjectCreationFee.Validate()
 }
 
-func validateTotalSupplyRange(i interface{}) error {
-	v, ok := i.(TotalSupplyRange)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
+func validateTotalSupplyRange(v TotalSupplyRange) error {
 	if err := v.ValidateBasic(); err != nil {
 		return err
 	}
@@ -73,17 +63,6 @@ func validateTotalSupplyRange(i interface{}) error {
 	return nil
 }
 
-func validateProjectCreationFee(i interface{}) error {
-	v, ok := i.(sdk.Coins)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
+func validateProjectCreationFee(v sdk.Coins) error {
 	return v.Validate()
-}
-
-func validateMaxMetadataLength(i interface{}) error {
-	if _, ok := i.(uint64); !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-	return nil
 }

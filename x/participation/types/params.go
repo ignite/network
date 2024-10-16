@@ -93,12 +93,7 @@ func (p Params) Validate() error {
 }
 
 // validateAllocationPrice validates the AllocationPrice param
-func validateAllocationPrice(v interface{}) error {
-	allocationPrice, ok := v.(AllocationPrice)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", v)
-	}
-
+func validateAllocationPrice(allocationPrice AllocationPrice) error {
 	if allocationPrice.Bonded.IsNil() {
 		return errors.New("value for 'bonded' should be set")
 	}
@@ -111,16 +106,11 @@ func validateAllocationPrice(v interface{}) error {
 }
 
 // validateParticipationTierList validates the ParticipationTierList param
-func validateParticipationTierList(v interface{}) error {
-	participationTierList, ok := v.([]Tier)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", v)
-	}
-
+func validateParticipationTierList(participationTierList []Tier) error {
 	tiersIndexMap := make(map[uint64]struct{})
 	for _, tier := range participationTierList {
 		// check IDs are unique
-		if _, ok = tiersIndexMap[tier.TierID]; ok {
+		if _, ok := tiersIndexMap[tier.TierID]; ok {
 			return fmt.Errorf("duplicated tier ID: %v", tier.TierID)
 		}
 		tiersIndexMap[tier.TierID] = struct{}{}
@@ -150,12 +140,7 @@ func validateTierBenefits(b TierBenefits) error {
 }
 
 // validateTimeDuration validates a time.Duration parameter
-func validateTimeDuration(i interface{}) error {
-	v, ok := i.(time.Duration)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateTimeDuration(v time.Duration) error {
 	if v <= 0 {
 		return fmt.Errorf("time frame must be positive")
 	}

@@ -61,12 +61,7 @@ func (p Params) Validate() error {
 }
 
 // validateLastBlockHeight validates last block height
-func validateLastBlockHeight(i interface{}) error {
-	lastBlockHeight, ok := i.(int64)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateLastBlockHeight(lastBlockHeight int64) error {
 	if lastBlockHeight <= 0 {
 		return errors.New("last block height can't be 0 or negative")
 	}
@@ -75,12 +70,7 @@ func validateLastBlockHeight(i interface{}) error {
 }
 
 // validateConsumerConsensusState validates consumer consensus state
-func validateConsumerConsensusState(i interface{}) error {
-	ccs, ok := i.(networktypes.ConsensusState)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateConsumerConsensusState(ccs networktypes.ConsensusState) error {
 	// perform the verification only if the Consumer Consensus State is defined
 	// TODO: remove this check and set an official Network mainnet consensus state as default
 	if ccs.Timestamp != "" {
@@ -96,12 +86,7 @@ func validateConsumerConsensusState(i interface{}) error {
 }
 
 // validateConsumerChainID validates consumer chain ID
-func validateConsumerChainID(i interface{}) error {
-	chainID, ok := i.(string)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateConsumerChainID(chainID string) error {
 	_, _, err := chainid.ParseGenesisChainID(chainID)
 	if err != nil {
 		return errors.Wrap(err, "invalid chain ID param")
@@ -110,12 +95,7 @@ func validateConsumerChainID(i interface{}) error {
 }
 
 // validateConsumerUnbondingPeriod validates consumer unbonding period
-func validateConsumerUnbondingPeriod(i interface{}) error {
-	unbondingPeriod, ok := i.(int64)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateConsumerUnbondingPeriod(unbondingPeriod int64) error {
 	if unbondingPeriod < networktypes.MinimalUnbondingPeriod {
 		return fmt.Errorf("minimal unbonding period is %d", networktypes.MinimalUnbondingPeriod)
 	}
@@ -124,12 +104,7 @@ func validateConsumerUnbondingPeriod(i interface{}) error {
 }
 
 // validateConsumerRevisionHeight validates consumer revision height
-func validateConsumerRevisionHeight(i interface{}) error {
-	revisionHeight, ok := i.(uint64)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateConsumerRevisionHeight(revisionHeight uint64) error {
 	if revisionHeight == 0 {
 		return fmt.Errorf("minimal revision height is %d", 1)
 	}

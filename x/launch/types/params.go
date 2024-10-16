@@ -2,7 +2,6 @@ package types
 
 import (
 	"errors"
-	"fmt"
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -75,21 +74,13 @@ func (p Params) Validate() error {
 	if err := validateRevertDelay(p.RevertDelay); err != nil {
 		return err
 	}
-	if err := validateMaxMetadataLength(p.MaxMetadataLength); err != nil {
-		return err
-	}
 	if err := p.ChainCreationFee.Validate(); err != nil {
 		return err
 	}
 	return p.RequestFee.Validate()
 }
 
-func validateLaunchTimeRange(i interface{}) error {
-	v, ok := i.(LaunchTimeRange)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateLaunchTimeRange(v LaunchTimeRange) error {
 	// it is enough to check that minLaunchTime is positive since it must be that minLaunchTime < maxLaunchTime
 	if v.MinLaunchTime < 0 {
 		return errors.New("MinLaunchTime can't be negative")
@@ -106,12 +97,7 @@ func validateLaunchTimeRange(i interface{}) error {
 	return nil
 }
 
-func validateRevertDelay(i interface{}) error {
-	v, ok := i.(time.Duration)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateRevertDelay(v time.Duration) error {
 	if v > MaxParametrableRevertDelay {
 		return errors.New("max parametrable revert delay reached")
 	}
@@ -120,21 +106,6 @@ func validateRevertDelay(i interface{}) error {
 		return errors.New("revert delay parameter must be positive")
 	}
 
-	return nil
-}
-
-func validateRequestFee(i interface{}) error {
-	v, ok := i.(sdk.Coins)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-	return v.Validate()
-}
-
-func validateMaxMetadataLength(i interface{}) error {
-	if _, ok := i.(uint64); !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
 	return nil
 }
 
