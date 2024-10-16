@@ -45,5 +45,4 @@ var (
 	ErrInvalidModuleName           = sdkerrors.Register(ModuleName, 1136, "invalid module name")
 	ErrInvalidParamName            = sdkerrors.Register(ModuleName, 1137, "invalid param name")
 	ErrChainNotFound               = sdkerrors.Register(ModuleName, 1138, "chain not found for launch id")
-	ErrHookNotImplemented          = sdkerrors.Register(ModuleName, 1139, "launch hooks not implemented")
 )

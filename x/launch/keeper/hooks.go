@@ -18,7 +18,7 @@ func (k Keeper) RequestCreated(
 	content types.RequestContent,
 ) error {
 	if k.hooks == nil {
-		return types.ErrHookNotImplemented
+		return nil
 	}
 	return k.hooks.RequestCreated(
 		ctx,

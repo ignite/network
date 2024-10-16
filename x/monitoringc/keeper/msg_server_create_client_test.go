@@ -183,7 +183,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			res, err := ts.MonitoringcSrv.CreateClient(ctx, &tt.msg)
 			if tt.err != nil {
-				require.ErrorIs(t, tt.err, err)
+				require.ErrorIs(t, err, tt.err)
 				return
 			}
 			require.NoError(t, err)
