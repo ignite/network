@@ -41,17 +41,17 @@ func NewTestSetupWithIBCMocksMonitoringp(
 
 	paramKeeper := initializer.Param()
 	capabilityKeeper := initializer.Capability()
-	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
-	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	authKeeper := initializer.Auth(paramKeeper)
 	bankKeeper := initializer.Bank(paramKeeper, authKeeper)
 	stakingKeeper := initializer.Staking(authKeeper, bankKeeper, paramKeeper)
 	distrKeeper := initializer.Distribution(authKeeper, bankKeeper, stakingKeeper)
 	upgradeKeeper := initializer.Upgrade()
+	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
 	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, scopedKeeper, upgradeKeeper)
+	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	monitoringProviderKeeper := initializer.Monitoringp(
 		stakingKeeper,
-		*ibcKeeper,
+		ibcKeeper,
 		*capabilityKeeper,
 		portKeeper,
 		connectionMock,

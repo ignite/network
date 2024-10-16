@@ -388,7 +388,7 @@ func (i initializer) Monitoringc(
 
 func (i initializer) Monitoringp(
 	stakingKeeper *stakingkeeper.Keeper,
-	ibcKeeper ibckeeper.Keeper,
+	ibcKeeper *ibckeeper.Keeper,
 	capabilityKeeper capabilitykeeper.Keeper,
 	portKeeper portkeeper.Keeper,
 	connectionMock []Connection,
@@ -430,12 +430,9 @@ func (i initializer) Monitoringp(
 		},
 		stakingKeeper,
 	)
-	k.SetIBCKeepers(
-		ibcKeeper.ClientKeeper,
-		connKeeper,
-		channelKeeper,
-		ibcKeeper.PortKeeper,
-	)
+	k.SetIBCKeeper(ibcKeeper)
+	k.SetConnectionKeeper(connKeeper)
+	k.SetChannelKeeper(channelKeeper)
 	return k
 }
 

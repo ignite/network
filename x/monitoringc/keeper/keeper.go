@@ -122,7 +122,7 @@ func (k Keeper) AddressCodec() address.Codec {
 // IBC Keeper Logic
 // ----------------------------------------------------------------------------
 
-// SetIBCKeeper sets IBC Keeper
+// SetIBCKeeper sets the IBC Keeper
 func (k *Keeper) SetIBCKeeper(ibcKeeper *ibckeeper.Keeper) {
 	k.SetClientKeeper(ibcKeeper.ClientKeeper)
 	k.SetPortKeeper(ibcKeeper.PortKeeper)

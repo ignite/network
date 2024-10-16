@@ -112,37 +112,31 @@ func (k Keeper) AddressCodec() address.Codec {
 // IBC Keeper Logic
 // ----------------------------------------------------------------------------
 
-// SetIBCKeepers sets all IBC Keepers
-// TODO set
-func (k Keeper) SetIBCKeepers(
-	clientKeeper types.ClientKeeper,
-	connectionKeeper types.ConnectionKeeper,
-	channelKeeper types.ChannelKeeper,
-	portKeeper types.PortKeeper,
-) {
-	k.SetClientKeeper(clientKeeper)
-	k.SetPortKeeper(portKeeper)
-	k.SetConnectionKeeper(connectionKeeper)
-	k.SetChannelKeeper(channelKeeper)
+// SetIBCKeeper sets the IBC Keeper
+func (k *Keeper) SetIBCKeeper(ibcKeeper *ibckeeper.Keeper) {
+	k.SetClientKeeper(ibcKeeper.ClientKeeper)
+	k.SetPortKeeper(ibcKeeper.PortKeeper)
+	k.SetConnectionKeeper(ibcKeeper.ConnectionKeeper)
+	k.SetChannelKeeper(ibcKeeper.ChannelKeeper)
 }
 
 // SetClientKeeper sets IBC client keeper
-func (k Keeper) SetClientKeeper(clientKeeper types.ClientKeeper) {
+func (k *Keeper) SetClientKeeper(clientKeeper types.ClientKeeper) {
 	k.clientKeeper = clientKeeper
 }
 
 // SetPortKeeper sets IBC port keeper
-func (k Keeper) SetPortKeeper(portKeeper types.PortKeeper) {
+func (k *Keeper) SetPortKeeper(portKeeper types.PortKeeper) {
 	k.portKeeper = portKeeper
 }
 
 // SetConnectionKeeper sets IBC connection keeper
-func (k Keeper) SetConnectionKeeper(connectionKeeper types.ConnectionKeeper) {
+func (k *Keeper) SetConnectionKeeper(connectionKeeper types.ConnectionKeeper) {
 	k.connectionKeeper = connectionKeeper
 }
 
 // SetChannelKeeper sets IBC channel keeper
-func (k Keeper) SetChannelKeeper(channelKeeper types.ChannelKeeper) {
+func (k *Keeper) SetChannelKeeper(channelKeeper types.ChannelKeeper) {
 	k.channelKeeper = channelKeeper
 }
 
