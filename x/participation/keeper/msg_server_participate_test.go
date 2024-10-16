@@ -240,9 +240,9 @@ func Test_msgServer_Participate(t *testing.T) {
 			require.EqualValues(t, tt.desiredUsedAlloc, usedAllocations.NumAllocations)
 
 			// check valid auction used allocations entry for bidder exists
-			participantAddress, err := sdk.AccAddressFromBech32(tt.msg.Participant)
+			participantAddress, err := tk.ParticipationKeeper.AddressCodec().StringToBytes(tt.msg.Participant)
 			require.NoError(t, err)
-			auctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(tmpCtx, collections.Join(participantAddress, tt.msg.AuctionID))
+			auctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(tmpCtx, collections.Join(sdk.AccAddress(participantAddress), tt.msg.AuctionID))
 			require.NoError(t, err)
 			require.Equal(t, tier.RequiredAllocations, auctionUsedAllocations.NumAllocations)
 			require.False(t, auctionUsedAllocations.Withdrawn)

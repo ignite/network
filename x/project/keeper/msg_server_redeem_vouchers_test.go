@@ -8,7 +8,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	ignterrors "github.com/ignite/network/pkg/errors"
 	networktypes "github.com/ignite/network/pkg/types"
 	testkeeper "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/sample"
@@ -51,6 +50,9 @@ func TestMsgRedeemVouchers(t *testing.T) {
 
 	invalidProjectID := uint64(10000)
 	vouchersErr, err := types.SharesToVouchers(shares, invalidProjectID)
+	require.NoError(t, err)
+
+	vouchersMainnet, err := types.SharesToVouchers(shares, projectMainnetLaunched.ProjectID)
 	require.NoError(t, err)
 
 	t.Run("should allow setting test balances", func(t *testing.T) {
@@ -130,7 +132,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 				ProjectID: project.ProjectID,
 				Vouchers:  vouchersErr,
 			},
-			err: ignterrors.ErrCritical,
+			err: types.ErrNoMatchVouchers,
 		},
 		{
 			name: "should fail with invalid sender address",
@@ -179,7 +181,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 				Sender:    addr.String(),
 				Account:   addr.String(),
 				ProjectID: projectMainnetLaunched.ProjectID,
-				Vouchers:  vouchers,
+				Vouchers:  vouchersMainnet,
 			},
 			err: types.ErrMainnetLaunchTriggered,
 		},
@@ -192,7 +194,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 
 			// Get values before message execution
 			if tc.err == nil {
-				accountAddr, err = sdk.AccAddressFromBech32(tc.msg.Account)
+				accountAddr, err = tk.ProjectKeeper.AddressCodec().StringToBytes(tc.msg.Account)
 				require.NoError(t, err)
 
 				previousAccount, err = tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectID, accountAddr)

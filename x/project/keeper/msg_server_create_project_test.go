@@ -38,7 +38,7 @@ func initCreationFeeAndFundCoordAccounts(
 
 	t.Run("should add coins to balance of each coordinator address", func(t *testing.T) {
 		for _, addr := range addrs {
-			accAddr, err := sdk.AccAddressFromBech32(addr)
+			accAddr, err := keeper.AddressCodec().StringToBytes(addr)
 			require.NoError(t, err)
 			err = bk.MintCoins(ctx, types.ModuleName, coins)
 			require.NoError(t, err)
@@ -141,7 +141,7 @@ func TestMsgCreateProject(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			// get account initial balance
-			accAddr, err := sdk.AccAddressFromBech32(tc.msg.Coordinator)
+			accAddr, err := tk.ProjectKeeper.AddressCodec().StringToBytes(tc.msg.Coordinator)
 			require.NoError(t, err)
 			preBalance := tk.BankKeeper.SpendableCoins(ctx, accAddr)
 

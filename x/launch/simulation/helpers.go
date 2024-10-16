@@ -22,12 +22,12 @@ func IsLaunchTriggeredChain(ctx sdk.Context, k *keeper.Keeper, chainID uint64) b
 }
 
 // FindAccount find account by string hex address
-func FindAccount(accs []simtypes.Account, address string) (simtypes.Account, error) {
-	coordAddr, err := sdk.AccAddressFromBech32(address)
+func FindAccount(k *keeper.Keeper, accs []simtypes.Account, address string) (simtypes.Account, error) {
+	coordinatorAddress, err := k.AddressCodec().StringToBytes(address)
 	if err != nil {
 		return simtypes.Account{}, err
 	}
-	simAccount, found := simtypes.FindAccount(accs, coordAddr)
+	simAccount, found := simtypes.FindAccount(accs, sdk.AccAddress(coordinatorAddress))
 	if !found {
 		return simAccount, fmt.Errorf("address %s not found in the sim accounts", address)
 	}
@@ -125,7 +125,7 @@ func FindChainCoordinatorAccount(
 		return simtypes.Account{}, fmt.Errorf("coordinator %d inactive", chain.CoordinatorID)
 	}
 
-	return FindAccount(accs, coord.Address)
+	return FindAccount(k, accs, coord.Address)
 }
 
 // FindRandomChain find a random chain from store

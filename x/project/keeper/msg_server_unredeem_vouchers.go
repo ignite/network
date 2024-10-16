@@ -41,7 +41,7 @@ func (k msgServer) UnredeemVouchers(ctx context.Context, msg *types.MsgUnredeemV
 	// Check if the account already exists
 	account, err := k.MainnetAccount.Get(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(sender)))
 	if err != nil {
-		return nil, ignterrors.Criticalf("can't get mainnet account %s", err.Error())
+		return nil, sdkerrors.Wrapf(types.ErrAccountNotFound, "%s: %s", err.Error(), msg.Sender)
 	}
 
 	// Update the shares of the account

@@ -4,7 +4,6 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
 	testkeeper "github.com/ignite/network/testutil/keeper"
@@ -229,7 +228,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 			if !tt.inputState.noCoordinator {
 				err = tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorID, tt.inputState.coordinator)
 				require.NoError(t, err)
-				addr, err := sdk.AccAddressFromBech32(tt.inputState.coordinator.Address)
+				addr, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.inputState.coordinator.Address)
 				require.NoError(t, err)
 				err = tk.ProfileKeeper.CoordinatorByAddress.Set(ctx, addr, profiletypes.CoordinatorByAddress{
 					Address:       tt.inputState.coordinator.Address,

@@ -143,7 +143,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 				previousProject, err = tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
 				require.NoError(t, err)
 
-				creatorAddr, err = sdk.AccAddressFromBech32(tc.msg.Sender)
+				creatorAddr, err = tk.ProjectKeeper.AddressCodec().StringToBytes(tc.msg.Sender)
 				require.NoError(t, err)
 				previousBalance = tk.BankKeeper.GetAllBalances(ctx, creatorAddr)
 			}

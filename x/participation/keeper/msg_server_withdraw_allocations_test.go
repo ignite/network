@@ -161,9 +161,9 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 			require.NoError(t, err)
 
 			// check auctionUsedAllocations is set to `withdrawn`
-			participantAddress, err := sdk.AccAddressFromBech32(tt.msg.Participant)
+			participantAddress, err := tk.ParticipationKeeper.AddressCodec().StringToBytes(tt.msg.Participant)
 			require.NoError(t, err)
-			postAuctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(tmpCtx, collections.Join(participantAddress, tt.msg.AuctionID))
+			postAuctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(tmpCtx, collections.Join(sdk.AccAddress(participantAddress), tt.msg.AuctionID))
 			require.NoError(t, err)
 			require.True(t, postAuctionUsedAllocations.Withdrawn)
 			require.Equal(t, preAuctionUsedAllocations.NumAllocations, postAuctionUsedAllocations.NumAllocations)

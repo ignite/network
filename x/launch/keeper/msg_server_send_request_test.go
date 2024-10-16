@@ -271,7 +271,7 @@ func TestMsgRequestAddAccount(t *testing.T) {
 			if !tt.inputState.noCoordinator {
 				err := tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorID, tt.inputState.coordinator)
 				require.NoError(t, err)
-				addr, err := sdk.AccAddressFromBech32(tt.inputState.coordinator.Address)
+				addr, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.inputState.coordinator.Address)
 				require.NoError(t, err)
 				err = tk.ProfileKeeper.CoordinatorByAddress.Set(ctx, addr, profiletypes.CoordinatorByAddress{
 					CoordinatorID: tt.inputState.coordinator.CoordinatorID,
@@ -284,9 +284,9 @@ func TestMsgRequestAddAccount(t *testing.T) {
 				require.NoError(t, err)
 			}
 			if !tt.inputState.noAccount {
-				addr, err := sdk.AccAddressFromBech32(tt.inputState.account.Address)
+				addr, err := tk.LaunchKeeper.AddressCodec().StringToBytes(tt.inputState.account.Address)
 				require.NoError(t, err)
-				err = tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(tt.inputState.account.LaunchID, addr), tt.inputState.account)
+				err = tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(tt.inputState.account.LaunchID, sdk.AccAddress(addr)), tt.inputState.account)
 				require.NoError(t, err)
 			}
 			if !tt.inputState.fee.Empty() {

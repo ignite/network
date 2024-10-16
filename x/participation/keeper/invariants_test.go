@@ -47,8 +47,9 @@ func TestMismatchUsedAllocationsInvariant(t *testing.T) {
 			NumAllocations: sdkmath.NewInt(2),
 		}
 	)
-	accAddr, err := sdk.AccAddressFromBech32(addr)
+	byteAddr, err := tk.ParticipationKeeper.AddressCodec().StringToBytes(addr)
 	require.NoError(t, err)
+	accAddr := sdk.AccAddress(byteAddr)
 
 	t.Run("should allow valid case", func(t *testing.T) {
 		err := tk.ParticipationKeeper.UsedAllocations.Set(ctx, accAddr.String(), validUsedAllocs)

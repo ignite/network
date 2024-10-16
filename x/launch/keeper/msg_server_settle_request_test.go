@@ -231,8 +231,8 @@ func TestMsgSettleRequest(t *testing.T) {
 			require.NoError(t, err, "request not found")
 			require.Equal(t, tt.wantStatus, request.Status)
 
-			checkAddr, err := sdk.AccAddressFromBech32(tt.checkAddr)
-			_, err = tk.LaunchKeeper.GenesisAccount.Get(ctx, collections.Join(tt.msg.LaunchID, checkAddr))
+			checkAddr, err := tk.LaunchKeeper.AddressCodec().StringToBytes(tt.checkAddr)
+			_, err = tk.LaunchKeeper.GenesisAccount.Get(ctx, collections.Join(tt.msg.LaunchID, sdk.AccAddress(checkAddr)))
 			if tt.msg.Approve {
 				require.NoError(t, err, "request apply performed")
 			} else {

@@ -118,7 +118,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			var previousProject types.Project
 			var previousBalance sdk.Coins
 
-			coordAddr, err := sdk.AccAddressFromBech32(tc.msg.Coordinator)
+			coordAddr, err := tk.ProjectKeeper.AddressCodec().StringToBytes(tc.msg.Coordinator)
 			require.NoError(t, err)
 
 			// Get values before message execution

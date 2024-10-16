@@ -213,35 +213,35 @@ func TestApplyRequest(t *testing.T) {
 			switch requestContent := tt.request.Content.Content.(type) {
 			case *types.RequestContent_GenesisAccount:
 				ga := requestContent.GenesisAccount
-				address, err := sdk.AccAddressFromBech32(ga.Address)
+				address, err := tk.LaunchKeeper.AddressCodec().StringToBytes(ga.Address)
 				require.NoError(t, err)
-				_, err = tk.LaunchKeeper.GenesisAccount.Get(ctx, collections.Join(launchID, address))
+				_, err = tk.LaunchKeeper.GenesisAccount.Get(ctx, collections.Join(launchID, sdk.AccAddress(address)))
 				require.NoError(t, err, "genesis account not found")
 			case *types.RequestContent_VestingAccount:
 				va := requestContent.VestingAccount
-				address, err := sdk.AccAddressFromBech32(va.Address)
+				address, err := tk.LaunchKeeper.AddressCodec().StringToBytes(va.Address)
 				require.NoError(t, err)
-				_, err = tk.LaunchKeeper.VestingAccount.Get(ctx, collections.Join(launchID, address))
+				_, err = tk.LaunchKeeper.VestingAccount.Get(ctx, collections.Join(launchID, sdk.AccAddress(address)))
 				require.NoError(t, err, "vesting account not found")
 			case *types.RequestContent_AccountRemoval:
 				ar := requestContent.AccountRemoval
-				address, err := sdk.AccAddressFromBech32(ar.Address)
+				address, err := tk.LaunchKeeper.AddressCodec().StringToBytes(ar.Address)
 				require.NoError(t, err)
-				_, err = tk.LaunchKeeper.GenesisAccount.Get(ctx, collections.Join(launchID, address))
+				_, err = tk.LaunchKeeper.GenesisAccount.Get(ctx, collections.Join(launchID, sdk.AccAddress(address)))
 				require.Error(t, err, "genesis account not removed")
-				_, err = tk.LaunchKeeper.VestingAccount.Get(ctx, collections.Join(launchID, address))
+				_, err = tk.LaunchKeeper.VestingAccount.Get(ctx, collections.Join(launchID, sdk.AccAddress(address)))
 				require.Error(t, err, "vesting account not removed")
 			case *types.RequestContent_GenesisValidator:
 				ga := requestContent.GenesisValidator
-				address, err := sdk.AccAddressFromBech32(ga.Address)
+				address, err := tk.LaunchKeeper.AddressCodec().StringToBytes(ga.Address)
 				require.NoError(t, err)
-				_, err = tk.LaunchKeeper.GenesisValidator.Get(ctx, collections.Join(launchID, address))
+				_, err = tk.LaunchKeeper.GenesisValidator.Get(ctx, collections.Join(launchID, sdk.AccAddress(address)))
 				require.NoError(t, err, "genesis validator not found")
 			case *types.RequestContent_ValidatorRemoval:
 				vr := requestContent.ValidatorRemoval
-				address, err := sdk.AccAddressFromBech32(vr.ValAddress)
+				address, err := tk.LaunchKeeper.AddressCodec().StringToBytes(vr.ValAddress)
 				require.NoError(t, err)
-				_, err = tk.LaunchKeeper.GenesisValidator.Get(ctx, collections.Join(launchID, address))
+				_, err = tk.LaunchKeeper.GenesisValidator.Get(ctx, collections.Join(launchID, sdk.AccAddress(address)))
 				require.Error(t, err, "genesis validator not removed")
 			}
 		})

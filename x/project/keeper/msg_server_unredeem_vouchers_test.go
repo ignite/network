@@ -44,14 +44,14 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 	require.NoError(t, err)
 
 	// Create accounts
-	accountAddress, err := sdk.AccAddressFromBech32(account.Address)
+	accountAddress, err := tk.ProjectKeeper.AddressCodec().StringToBytes(account.Address)
 	require.NoError(t, err)
-	err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(projectID, accountAddress), account)
+	err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(projectID, sdk.AccAddress(accountAddress)), account)
 	require.NoError(t, err)
 
-	accountFewSharesAddress, err := sdk.AccAddressFromBech32(accountFewShares.Address)
+	accountFewSharesAddress, err := tk.ProjectKeeper.AddressCodec().StringToBytes(accountFewShares.Address)
 	require.NoError(t, err)
-	err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(projectID, accountFewSharesAddress), accountFewShares)
+	err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(projectID, sdk.AccAddress(accountFewSharesAddress)), accountFewShares)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -132,7 +132,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 			var previousAccount types.MainnetAccount
 			var previousBalance sdk.Coins
 
-			accountAddr, err := sdk.AccAddressFromBech32(tc.msg.Sender)
+			accountAddr, err := tk.ProjectKeeper.AddressCodec().StringToBytes(tc.msg.Sender)
 			require.NoError(t, err)
 
 			// Get values before message execution
