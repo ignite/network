@@ -54,8 +54,6 @@ func NewKeeper(
 	authority string,
 	distributionKeeper types.DistributionKeeper,
 	profileKeeper types.ProfileKeeper,
-	projectKeeper types.ProjectKeeper, // TODO check injection
-	monitoringcKeeper types.MonitoringConsumerKeeper, // TODO check injection
 ) Keeper {
 	if _, err := addressCodec.StringToBytes(authority); err != nil {
 		panic(fmt.Sprintf("invalid authority address %s: %s", authority, err))
@@ -71,8 +69,6 @@ func NewKeeper(
 		logger:             logger,
 		distributionKeeper: distributionKeeper,
 		profileKeeper:      profileKeeper,
-		projectKeeper:      projectKeeper,
-		monitoringcKeeper:  monitoringcKeeper,
 		Params:             collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
 		ChainSeq:           collections.NewSequence(sb, types.ChainCountKey, "chain_seq"),
 		Chain:              collections.NewMap(sb, types.ChainKey, "chain", collections.Uint64Key, codec.CollValue[types.Chain](cdc)),

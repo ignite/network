@@ -72,6 +72,7 @@ import (
 	ibcfeekeeper "github.com/cosmos/ibc-go/v8/modules/apps/29-fee/keeper"
 	ibctransferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
+	fundraisingmodulekeeper "github.com/ignite/modules/x/fundraising/keeper"
 
 	"github.com/ignite/network/docs"
 	networktypes "github.com/ignite/network/pkg/types"
@@ -137,6 +138,7 @@ type App struct {
 	ScopedICAHostKeeper       capabilitykeeper.ScopedKeeper
 	ScopedKeepers             map[string]capabilitykeeper.ScopedKeeper
 
+	FundraisingKeeper   fundraisingmodulekeeper.Keeper
 	ProfileKeeper       profilemodulekeeper.Keeper
 	ProjectKeeper       projectmodulekeeper.Keeper
 	RewardKeeper        rewardmodulekeeper.Keeper
@@ -247,11 +249,12 @@ func New(
 		&app.NFTKeeper,
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
+		&app.FundraisingKeeper,
 		&app.ProfileKeeper,
-		&app.ProjectKeeper,
-		&app.RewardKeeper,
-		&app.ParticipationKeeper,
 		&app.LaunchKeeper,
+		&app.RewardKeeper,
+		&app.ProjectKeeper,
+		&app.ParticipationKeeper,
 		&app.MonitoringcKeeper,
 		&app.MonitoringpKeeper,
 	); err != nil {
@@ -269,6 +272,11 @@ func New(
 	if err := app.registerIBCModules(appOpts); err != nil {
 		return nil, err
 	}
+
+	// register redundancy modules
+	app.LaunchKeeper.SetProjectKeeper(app.ProjectKeeper)
+	app.LaunchKeeper.SetMonitoringcKeeper(app.MonitoringcKeeper)
+	app.MonitoringcKeeper.SetIBCKeeper(app.IBCKeeper)
 
 	// register streaming services
 	if err := app.RegisterStreamingServices(appOpts, app.kvStoreKeys()); err != nil {

@@ -15,6 +15,8 @@ import (
 	"cosmossdk.io/store"
 	storetypes "cosmossdk.io/store/types"
 	"cosmossdk.io/x/feegrant"
+	upgradetypes "cosmossdk.io/x/upgrade/types"
+
 	abci "github.com/cometbft/cometbft/abci/types"
 	cmtproto "github.com/cometbft/cometbft/proto/tendermint/types"
 	dbm "github.com/cosmos/cosmos-db"
@@ -200,6 +202,9 @@ func TestAppImportExport(t *testing.T) {
 
 	// skip certain prefixes
 	skipPrefixes := map[string][][]byte{
+		upgradetypes.StoreKey: {
+			[]byte{upgradetypes.VersionMapByte},
+		},
 		stakingtypes.StoreKey: {
 			stakingtypes.UnbondingQueueKey, stakingtypes.RedelegationQueueKey, stakingtypes.ValidatorQueueKey,
 			stakingtypes.HistoricalInfoKey, stakingtypes.UnbondingIDKey, stakingtypes.UnbondingIndexKey,

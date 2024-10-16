@@ -281,8 +281,6 @@ func (i initializer) Launch(
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 		distrKeeper,
 		profileKeeper,
-		nil,
-		nil,
 	)
 }
 
@@ -337,7 +335,7 @@ func (i initializer) Reward(
 }
 
 func (i initializer) Monitoringc(
-	ibcKeeper ibckeeper.Keeper,
+	ibcKeeper *ibckeeper.Keeper,
 	capabilityKeeper capabilitykeeper.Keeper,
 	portKeeper portkeeper.Keeper,
 	launchKeeper launchkeeper.Keeper,
@@ -382,12 +380,9 @@ func (i initializer) Monitoringc(
 		launchKeeper,
 		rewardKeeper,
 	)
-	k.SetIBCKeepers(
-		ibcKeeper.ClientKeeper,
-		connKeeper,
-		channelKeeper,
-		ibcKeeper.PortKeeper,
-	)
+	k.SetIBCKeeper(ibcKeeper)
+	k.SetConnectionKeeper(connKeeper)
+	k.SetChannelKeeper(channelKeeper)
 	return k
 }
 

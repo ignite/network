@@ -51,6 +51,9 @@ import (
 	ibcfeetypes "github.com/cosmos/ibc-go/v8/modules/apps/29-fee/types"
 	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
+	fundraisingmodulev1 "github.com/ignite/modules/api/modules/fundraising/module/v1"
+	_ "github.com/ignite/modules/x/fundraising/module"
+	fundraisingmoduletypes "github.com/ignite/modules/x/fundraising/types"
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	launchmodulev1 "github.com/ignite/network/api/network/launch/module/v1"
@@ -111,11 +114,12 @@ var (
 		consensustypes.ModuleName,
 		circuittypes.ModuleName,
 		// chain modules
+		fundraisingmoduletypes.ModuleName,
 		profilemoduletypes.ModuleName,
-		projectmoduletypes.ModuleName,
-		rewardmoduletypes.ModuleName,
-		participationmoduletypes.ModuleName,
 		launchmoduletypes.ModuleName,
+		rewardmoduletypes.ModuleName,
+		projectmoduletypes.ModuleName,
+		participationmoduletypes.ModuleName,
 		monitoringcmoduletypes.ModuleName,
 		monitoringpmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
@@ -142,11 +146,12 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
+		fundraisingmoduletypes.ModuleName,
 		profilemoduletypes.ModuleName,
-		projectmoduletypes.ModuleName,
-		rewardmoduletypes.ModuleName,
-		participationmoduletypes.ModuleName,
 		launchmoduletypes.ModuleName,
+		rewardmoduletypes.ModuleName,
+		projectmoduletypes.ModuleName,
+		participationmoduletypes.ModuleName,
 		monitoringcmoduletypes.ModuleName,
 		monitoringpmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
@@ -167,11 +172,12 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
+		fundraisingmoduletypes.ModuleName,
 		profilemoduletypes.ModuleName,
-		projectmoduletypes.ModuleName,
-		rewardmoduletypes.ModuleName,
-		participationmoduletypes.ModuleName,
 		launchmoduletypes.ModuleName,
+		rewardmoduletypes.ModuleName,
+		projectmoduletypes.ModuleName,
+		participationmoduletypes.ModuleName,
 		monitoringcmoduletypes.ModuleName,
 		monitoringpmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
@@ -332,24 +338,28 @@ var (
 				Config: appconfig.WrapAny(&circuitmodulev1.Module{}),
 			},
 			{
+				Name:   fundraisingmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&fundraisingmodulev1.Module{}),
+			},
+			{
 				Name:   profilemoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&profilemodulev1.Module{}),
 			},
 			{
-				Name:   projectmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&projectmodulev1.Module{}),
+				Name:   launchmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&launchmodulev1.Module{}),
 			},
 			{
 				Name:   rewardmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&rewardmodulev1.Module{}),
 			},
 			{
-				Name:   participationmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&participationmodulev1.Module{}),
+				Name:   projectmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&projectmodulev1.Module{}),
 			},
 			{
-				Name:   launchmoduletypes.ModuleName,
-				Config: appconfig.WrapAny(&launchmodulev1.Module{}),
+				Name:   participationmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&participationmodulev1.Module{}),
 			},
 			{
 				Name:   monitoringcmoduletypes.ModuleName,

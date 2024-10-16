@@ -47,8 +47,6 @@ func LaunchKeeper(t testing.TB) (keeper.Keeper, sdk.Context, address.Codec) {
 		authority.String(),
 		nil,
 		nil,
-		nil,
-		nil,
 	)
 
 	ctx := sdk.NewContext(stateStore, cmtproto.Header{}, false, log.NewNopLogger())

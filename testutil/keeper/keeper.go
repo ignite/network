@@ -114,13 +114,12 @@ func NewTestSetup(t testing.TB, options ...SetupOption) (sdk.Context, TestKeeper
 
 	paramKeeper := initializer.Param()
 	capabilityKeeper := initializer.Capability()
-	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
-	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	authKeeper := initializer.Auth(paramKeeper)
 	bankKeeper := initializer.Bank(paramKeeper, authKeeper)
 	stakingKeeper := initializer.Staking(authKeeper, bankKeeper, paramKeeper)
 	distrKeeper := initializer.Distribution(authKeeper, bankKeeper, stakingKeeper)
 	upgradeKeeper := initializer.Upgrade()
+	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
 	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, scopedKeeper, upgradeKeeper)
 	fundraisingKeeper := initializer.Fundraising(authKeeper, bankKeeper, distrKeeper)
 	profileKeeper := initializer.Profile()
@@ -129,8 +128,9 @@ func NewTestSetup(t testing.TB, options ...SetupOption) (sdk.Context, TestKeeper
 	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper)
 	participationKeeper := initializer.Participation(fundraisingKeeper, stakingKeeper)
 	launchKeeper.SetProjectKeeper(projectKeeper)
+	portKeeper := portkeeper.NewKeeper(scopedKeeper)
 	monitoringConsumerKeeper := initializer.Monitoringc(
-		*ibcKeeper,
+		ibcKeeper,
 		*capabilityKeeper,
 		portKeeper,
 		launchKeeper,
@@ -241,7 +241,7 @@ func NewTestSetupWithIBCMocks(
 	participationKeeper := initializer.Participation(fundraisingKeeper, stakingKeeper)
 	launchKeeper.SetProjectKeeper(projectKeeper)
 	monitoringConsumerKeeper := initializer.Monitoringc(
-		*ibcKeeper,
+		ibcKeeper,
 		*capabilityKeeper,
 		portKeeper,
 		launchKeeper,
