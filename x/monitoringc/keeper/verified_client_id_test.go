@@ -3,6 +3,7 @@ package keeper_test
 import (
 	"testing"
 
+	"cosmossdk.io/collections"
 	"github.com/stretchr/testify/require"
 
 	testkeeper "github.com/ignite/network/testutil/keeper"
@@ -47,9 +48,9 @@ func TestVerifiedClientIDClear(t *testing.T) {
 		err = tk.MonitoringConsumerKeeper.ClearVerifiedClientIDs(ctx, launchID)
 		require.NoError(t, err)
 		_, err = tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, launchID)
-		require.NoError(t, err)
+		require.ErrorIs(t, err, collections.ErrNotFound)
 		_, err = tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Get(ctx, clientID)
-		require.NoError(t, err)
+		require.ErrorIs(t, err, collections.ErrNotFound)
 	})
 }
 

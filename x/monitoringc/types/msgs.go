@@ -33,35 +33,35 @@ func (msg *MsgCreateClient) ValidateBasic() error {
 	// validate consensus state
 	tmConsensusState, err := msg.ConsensusState.ToTendermintConsensusState()
 	if err != nil {
-		return sdkerrors.Wrapf(ErrInvalidConsensusState, err.Error())
+		return sdkerrors.Wrap(ErrInvalidConsensusState, err.Error())
 	}
 	if err := tmConsensusState.ValidateBasic(); err != nil {
-		return sdkerrors.Wrapf(ErrInvalidConsensusState, err.Error())
+		return sdkerrors.Wrap(ErrInvalidConsensusState, err.Error())
 	}
 
 	// validate validator set
 	tmValidatorSet, err := msg.ValidatorSet.ToTendermintValidatorSet()
 	if err != nil {
-		return sdkerrors.Wrapf(ErrInvalidValidatorSet, err.Error())
+		return sdkerrors.Wrap(ErrInvalidValidatorSet, err.Error())
 	}
 	if err := tmValidatorSet.ValidateBasic(); err != nil {
-		return sdkerrors.Wrapf(ErrInvalidValidatorSet, err.Error())
+		return sdkerrors.Wrap(ErrInvalidValidatorSet, err.Error())
 	}
 
 	// check validator set hash matches consensus state
 	if !networktypes.CheckValidatorSetHash(tmValidatorSet, tmConsensusState) {
-		return sdkerrors.Wrapf(ErrInvalidValidatorSetHash, "validator set hash doesn't match the consensus state")
+		return sdkerrors.Wrap(ErrInvalidValidatorSetHash, "validator set hash doesn't match the consensus state")
 	}
 
 	// unbonding period must greater than 1 because trusting period for the IBC client is unbonding period - 1
 	// and trusting period can't be 0
 	if msg.UnbondingPeriod < networktypes.MinimalUnbondingPeriod {
-		return sdkerrors.Wrapf(ErrInvalidUnbondingPeriod, "unbonding period must be greater than 1")
+		return sdkerrors.Wrap(ErrInvalidUnbondingPeriod, "unbonding period must be greater than 1")
 	}
 
 	// check revision height is non-null
 	if msg.RevisionHeight == 0 {
-		return sdkerrors.Wrapf(ErrInvalidRevisionHeight, "revision height must be non-null")
+		return sdkerrors.Wrap(ErrInvalidRevisionHeight, "revision height must be non-null")
 	}
 
 	return nil

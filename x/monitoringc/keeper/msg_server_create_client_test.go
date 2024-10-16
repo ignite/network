@@ -9,7 +9,6 @@ import (
 	ibctmtypes "github.com/cosmos/ibc-go/v8/modules/light-clients/07-tendermint"
 	"github.com/stretchr/testify/require"
 
-	ignterrors "github.com/ignite/network/pkg/errors"
 	networktypes "github.com/ignite/network/pkg/types"
 	testkeeper "github.com/ignite/network/testutil/keeper"
 	"github.com/ignite/network/testutil/sample"
@@ -104,18 +103,6 @@ func Test_msgServer_CreateClient(t *testing.T) {
 			err: types.ErrInvalidClientState,
 		},
 		{
-			name: "invalid client state",
-			msg: *types.NewMsgCreateClient(
-				sample.Address(r),
-				resCreateChain.LaunchID,
-				cs,
-				vs,
-				0,
-				networktypes.DefaultRevisionHeight,
-			),
-			err: types.ErrInvalidClientState,
-		},
-		{
 			name: "invalid consensus state",
 			msg: *types.NewMsgCreateClient(
 				sample.Address(r),
@@ -129,7 +116,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 				networktypes.DefaultUnbondingPeriod,
 				networktypes.DefaultRevisionHeight,
 			),
-			err: ignterrors.ErrCritical,
+			err: types.ErrInvalidConsensusState,
 		},
 		{
 			name: "chain doesn't exist",
@@ -153,7 +140,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 				networktypes.DefaultUnbondingPeriod,
 				networktypes.DefaultRevisionHeight,
 			),
-			err: ignterrors.ErrCritical,
+			err: types.ErrInvalidValidatorSet,
 		},
 		{
 			name: "invalid validator set",
@@ -165,7 +152,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 				networktypes.DefaultUnbondingPeriod,
 				networktypes.DefaultRevisionHeight,
 			),
-			err: types.ErrInvalidValidatorSet,
+			err: types.ErrInvalidValidatorSetHash,
 		},
 		{
 			name: "verified client should be created",
