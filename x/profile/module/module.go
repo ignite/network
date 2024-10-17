@@ -181,7 +181,7 @@ func init() {
 		&modulev1.Module{},
 		appmodule.Provide(
 			ProvideModule,
-			ProvideInterfaceRegistry,
+			//ProvideInterfaceRegistry,
 		),
 	)
 }
