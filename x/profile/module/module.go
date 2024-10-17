@@ -25,6 +25,7 @@ import (
 	// this line is used by starport scaffolding # 1
 
 	modulev1 "github.com/ignite/network/api/network/profile/module/v1"
+	profile1 "github.com/ignite/network/api/network/profile/v1"
 	"github.com/ignite/network/x/profile/keeper"
 	"github.com/ignite/network/x/profile/types"
 )
@@ -230,14 +231,14 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 
 func ProvideCustomGetSigners() signing.CustomGetSigner {
 	return signing.CustomGetSigner{
-		MsgType: proto.MessageName(&types.MsgAddValidatorOperatorAddress{}),
+		MsgType: proto.MessageName(&profile1.MsgAddValidatorOperatorAddress{}),
 		Fn: func(msg proto.Message) ([][]byte, error) {
-			testMsg, ok := msg.(*types.MsgAddValidatorOperatorAddress)
+			testMsg, ok := msg.(*profile1.MsgAddValidatorOperatorAddress)
 			if !ok {
 				return nil, fmt.Errorf("invalid message type: %T", msg)
 			}
-			validatorSigner := testMsg.validatorAddress
-			operatorSigner := testMsg.operatorAddress
+			validatorSigner := testMsg.ValidatorAddress
+			operatorSigner := testMsg.OperatorAddress
 			return [][]byte{[]byte(validatorSigner), []byte(operatorSigner)}, nil
 		},
 	}
