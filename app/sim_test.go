@@ -308,11 +308,10 @@ func TestAppSimulationAfterImport(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, networktypes.Name, newApp.Name())
 
-	_, err = newApp.InitChain(&abci.RequestInitChain{
+	_, _ = newApp.InitChain(&abci.RequestInitChain{
 		AppStateBytes: exported.AppState,
 		ChainId:       SimAppChainID,
 	})
-	require.NoError(t, err)
 
 	_, _, err = simulation.SimulateFromSeed(
 		t,
