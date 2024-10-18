@@ -229,7 +229,7 @@ func ProvideModule(in ModuleInputs) ModuleOutputs {
 	return ModuleOutputs{ProfileKeeper: k, Module: m}
 }
 
-func ProvideCustomGetSigners() signing.CustomGetSigner {
+func ProvideCustomGetSigners(cdc address.Codec) signing.CustomGetSigner {
 	return signing.CustomGetSigner{
 		MsgType: proto.MessageName(&profile1.MsgAddValidatorOperatorAddress{}),
 		Fn: func(msg proto.Message) ([][]byte, error) {
@@ -237,9 +237,15 @@ func ProvideCustomGetSigners() signing.CustomGetSigner {
 			if !ok {
 				return nil, fmt.Errorf("invalid message type: %T", msg)
 			}
-			validatorSigner := testMsg.ValidatorAddress
-			operatorSigner := testMsg.OperatorAddress
-			return [][]byte{[]byte(validatorSigner), []byte(operatorSigner)}, nil
+			validatorSigner, err := cdc.StringToBytes(testMsg.ValidatorAddress)
+			if err != nil {
+				return nil, err
+			}
+			operatorSigner, err := cdc.StringToBytes(testMsg.OperatorAddress)
+			if err != nil {
+				return nil, err
+			}
+			return [][]byte{validatorSigner, operatorSigner}, nil
 		},
 	}
 }
