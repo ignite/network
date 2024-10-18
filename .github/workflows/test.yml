@@ -40,7 +40,6 @@ jobs:
           excludelist+=" $(find ./docs -type d)"
           excludelist+=" $(find ./localnet -type d)"
           excludelist+=" $(find ./proto -type d)"
-          excludelist+=" $(find ./scripts -type d)"
           excludelist+=" $(find ./testutil -type d)"
           excludelist+=" $(find ./tools -type d)"
           for filename in ${excludelist}; do
