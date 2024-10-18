@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package network.launch.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "network/launch/v1/chain.proto";
+import "network/launch/v1/genesis_account.proto";
+import "network/launch/v1/genesis_validator.proto";
+import "network/launch/v1/param_change.proto";
+import "network/launch/v1/params.proto";
+import "network/launch/v1/request.proto";
+import "network/launch/v1/vesting_account.proto";
+
+option go_package = "github.com/ignite/network/x/launch/types";
+
+// GenesisState defines the launch module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+  repeated Chain chainList = 2 [(gogoproto.nullable) = false];
+  uint64 chainCount = 3;
+  repeated GenesisAccount genesisAccountList = 4 [(gogoproto.nullable) = false];
+  repeated VestingAccount vestingAccountList = 5 [(gogoproto.nullable) = false];
+  repeated GenesisValidator genesisValidatorList = 6 [(gogoproto.nullable) = false];
+  repeated Request requestList = 7 [(gogoproto.nullable) = false];
+  repeated RequestCounter requestCounters = 8 [(gogoproto.nullable) = false];
+  repeated ParamChange paramChangeList = 9 [(gogoproto.nullable) = false];
+}
+
+message RequestCounter {
+  uint64 launchID = 1;
+  uint64 counter = 2;
+}

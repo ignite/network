@@ -3,15 +3,16 @@ package keeper_test
 import (
 	"testing"
 
-	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
+	channeltypes "github.com/cosmos/ibc-go/v8/modules/core/04-channel/types"
 	"github.com/stretchr/testify/require"
-	spntypes "github.com/tendermint/spn/pkg/types"
-	tc "github.com/tendermint/spn/testutil/constructor"
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/monitoringc/types"
-	profiletypes "github.com/tendermint/spn/x/profile/types"
-	rewardtypes "github.com/tendermint/spn/x/reward/types"
+
+	networktypes "github.com/ignite/network/pkg/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/monitoringc/types"
+	profiletypes "github.com/ignite/network/x/profile/types"
+	rewardtypes "github.com/ignite/network/x/reward/types"
 )
 
 func Test_OnRecvMonitoringPacket(t *testing.T) {
@@ -27,18 +28,21 @@ func Test_OnRecvMonitoringPacket(t *testing.T) {
 		coins          = sample.Coins(r)
 	)
 
-	tk.MonitoringConsumerKeeper.SetLaunchIDFromChannelID(ctx, types.LaunchIDFromChannelID{
+	err := tk.MonitoringConsumerKeeper.LaunchIDFromChannelID.Set(ctx, invalidChannel, types.LaunchIDFromChannelID{
 		ChannelID: invalidChannel,
 		LaunchID:  10000,
 	})
-	chain.LaunchID = tk.LaunchKeeper.AppendChain(ctx, chain)
-	tk.MonitoringConsumerKeeper.SetLaunchIDFromChannelID(ctx, types.LaunchIDFromChannelID{
+	require.NoError(t, err)
+	chain.LaunchID, err = tk.LaunchKeeper.AppendChain(ctx, chain)
+	require.NoError(t, err)
+	err = tk.MonitoringConsumerKeeper.LaunchIDFromChannelID.Set(ctx, validChannel, types.LaunchIDFromChannelID{
 		ChannelID: validChannel,
 		LaunchID:  chain.LaunchID,
 	})
+	require.NoError(t, err)
 
 	t.Run("should allow set reward pool", func(t *testing.T) {
-		tk.RewardKeeper.SetRewardPool(ctx, rewardtypes.RewardPool{
+		err := tk.RewardKeeper.RewardPool.Set(ctx, chain.LaunchID, rewardtypes.RewardPool{
 			LaunchID:         chain.LaunchID,
 			Provider:         sample.Address(r),
 			InitialCoins:     coins,
@@ -46,32 +50,37 @@ func Test_OnRecvMonitoringPacket(t *testing.T) {
 			LastRewardHeight: 1,
 			Closed:           false,
 		})
-		err := tk.BankKeeper.MintCoins(ctx, rewardtypes.ModuleName, coins)
+		require.NoError(t, err)
+		err = tk.BankKeeper.MintCoins(ctx, rewardtypes.ModuleName, coins)
 		require.NoError(t, err)
 	})
 
 	// set validator profiles
-	tk.ProfileKeeper.SetValidator(ctx, profiletypes.Validator{
+	err = tk.ProfileKeeper.Validator.Set(ctx, valFoo, profiletypes.Validator{
 		Address:           valFoo,
 		OperatorAddresses: []string{valOpAddrFoo},
 	})
-	tk.ProfileKeeper.SetValidatorByOperatorAddress(ctx, profiletypes.ValidatorByOperatorAddress{
+	require.NoError(t, err)
+	err = tk.ProfileKeeper.ValidatorByOperatorAddress.Set(ctx, valOpAddrFoo, profiletypes.ValidatorByOperatorAddress{
 		ValidatorAddress: valFoo,
 		OperatorAddress:  valOpAddrFoo,
 	})
-	tk.ProfileKeeper.SetValidator(ctx, profiletypes.Validator{
+	require.NoError(t, err)
+	err = tk.ProfileKeeper.Validator.Set(ctx, valBar, profiletypes.Validator{
 		Address:           valBar,
 		OperatorAddresses: []string{valOpAddrBar},
 	})
-	tk.ProfileKeeper.SetValidatorByOperatorAddress(ctx, profiletypes.ValidatorByOperatorAddress{
+	require.NoError(t, err)
+	err = tk.ProfileKeeper.ValidatorByOperatorAddress.Set(ctx, valOpAddrBar, profiletypes.ValidatorByOperatorAddress{
 		ValidatorAddress: valBar,
 		OperatorAddress:  valOpAddrBar,
 	})
+	require.NoError(t, err)
 
 	tests := []struct {
 		name   string
 		packet channeltypes.Packet
-		data   spntypes.MonitoringPacket
+		data   networktypes.MonitoringPacket
 		valid  bool
 	}{
 		{
@@ -79,7 +88,7 @@ func Test_OnRecvMonitoringPacket(t *testing.T) {
 			packet: channeltypes.Packet{
 				DestinationChannel: validChannel,
 			},
-			data: spntypes.MonitoringPacket{
+			data: networktypes.MonitoringPacket{
 				BlockHeight: 10,
 				SignatureCounts: tc.SignatureCounts(10,
 					tc.SignatureCount(t, valOpAddrFoo, "0.5"),
@@ -91,9 +100,9 @@ func Test_OnRecvMonitoringPacket(t *testing.T) {
 		{
 			name:   "should prevent invalid data",
 			packet: channeltypes.Packet{},
-			data: spntypes.MonitoringPacket{
+			data: networktypes.MonitoringPacket{
 				BlockHeight: 0,
-				SignatureCounts: spntypes.SignatureCounts{
+				SignatureCounts: networktypes.SignatureCounts{
 					BlockCount: 1,
 				},
 			},
@@ -104,9 +113,9 @@ func Test_OnRecvMonitoringPacket(t *testing.T) {
 			packet: channeltypes.Packet{
 				DestinationChannel: "invalid",
 			},
-			data: spntypes.MonitoringPacket{
+			data: networktypes.MonitoringPacket{
 				BlockHeight: 1,
-				SignatureCounts: spntypes.SignatureCounts{
+				SignatureCounts: networktypes.SignatureCounts{
 					BlockCount: 1,
 				},
 			},
@@ -117,9 +126,9 @@ func Test_OnRecvMonitoringPacket(t *testing.T) {
 			packet: channeltypes.Packet{
 				DestinationChannel: invalidChannel,
 			},
-			data: spntypes.MonitoringPacket{
+			data: networktypes.MonitoringPacket{
 				BlockHeight: 1,
-				SignatureCounts: spntypes.SignatureCounts{
+				SignatureCounts: networktypes.SignatureCounts{
 					BlockCount: 1,
 				},
 			},
@@ -145,7 +154,7 @@ func Test_OnAcknowledgementMonitoringPacket(t *testing.T) {
 		err := tk.MonitoringConsumerKeeper.OnAcknowledgementMonitoringPacket(
 			ctx,
 			channeltypes.Packet{},
-			spntypes.MonitoringPacket{},
+			networktypes.MonitoringPacket{},
 			channeltypes.Acknowledgement{},
 		)
 		require.EqualError(t, err, "not implemented")
@@ -159,7 +168,7 @@ func Test_OnTimeoutMonitoringPacket(t *testing.T) {
 		err := tk.MonitoringConsumerKeeper.OnTimeoutMonitoringPacket(
 			ctx,
 			channeltypes.Packet{},
-			spntypes.MonitoringPacket{},
+			networktypes.MonitoringPacket{},
 		)
 		require.EqualError(t, err, "not implemented")
 	})

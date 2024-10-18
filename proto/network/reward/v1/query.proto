@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package network.reward.v1;
+
+import "amino/amino.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "network/reward/v1/params.proto";
+import "network/reward/v1/reward_pool.proto";
+
+option go_package = "github.com/ignite/network/x/reward/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/ignite/network/reward/v1/params";
+  }
+
+  // Queries a list of RewardPool items.
+  rpc GetRewardPool(QueryGetRewardPoolRequest) returns (QueryGetRewardPoolResponse) {
+    option (google.api.http).get = "/ignite/network/reward/reward_pool/{launchID}";
+  }
+  rpc ListRewardPool(QueryAllRewardPoolRequest) returns (QueryAllRewardPoolResponse) {
+    option (google.api.http).get = "/ignite/network/reward/reward_pool";
+  }
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
+
+message QueryGetRewardPoolRequest {
+  uint64 launchID = 1;
+}
+
+message QueryGetRewardPoolResponse {
+  RewardPool rewardPool = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllRewardPoolRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllRewardPoolResponse {
+  repeated RewardPool rewardPool = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}

@@ -7,9 +7,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/testutil/sample"
-	project "github.com/tendermint/spn/x/project/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	"github.com/ignite/network/testutil/sample"
+	project "github.com/ignite/network/x/project/types"
 )
 
 var (
@@ -39,7 +39,7 @@ func TestNewProject(t *testing.T) {
 		require.EqualValues(t, coordinator, c.CoordinatorID)
 		require.EqualValues(t, createdAt, c.CreatedAt)
 		require.False(t, c.MainnetInitialized)
-		require.True(t, totalSupply.IsEqual(c.TotalSupply))
+		require.True(t, totalSupply.Equal(c.TotalSupply))
 		require.EqualValues(t, project.EmptyShares(), c.AllocatedShares)
 	})
 }
@@ -60,9 +60,9 @@ func TestProject_Validate(t *testing.T) {
 		invalidAllocatedShares.AllocatedShares = project.NewSharesFromCoins(invalidProjectCoins)
 		totalSharesReached = sample.Project(r, 0)
 		totalSharesReached.AllocatedShares = project.NewSharesFromCoins(sdk.NewCoins(
-			sdk.NewCoin("foo", sdkmath.NewInt(spntypes.TotalShareNumber+1)),
+			sdk.NewCoin("foo", sdkmath.NewInt(networktypes.TotalShareNumber+1)),
 		))
-		reached, err := project.IsTotalSharesReached(totalSharesReached.AllocatedShares, spntypes.TotalShareNumber)
+		reached, err := project.IsTotalSharesReached(totalSharesReached.AllocatedShares, networktypes.TotalShareNumber)
 		require.NoError(t, err)
 		require.True(t, reached)
 	})
@@ -131,7 +131,7 @@ func TestProject_Validate(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			require.EqualValues(t, tc.valid, tc.project.Validate(spntypes.TotalShareNumber) == nil)
+			require.EqualValues(t, tc.valid, tc.project.Validate(networktypes.TotalShareNumber) == nil)
 		})
 	}
 }

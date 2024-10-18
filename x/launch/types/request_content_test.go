@@ -9,9 +9,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	tc "github.com/tendermint/spn/testutil/constructor"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/launch/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/launch/types"
 )
 
 func TestRequestContent_Validate(t *testing.T) {
@@ -118,7 +118,7 @@ func TestNewGenesisAccount(t *testing.T) {
 		require.NotNil(t, genesisAccount)
 		require.EqualValues(t, launchID, genesisAccount.LaunchID)
 		require.EqualValues(t, address, genesisAccount.Address)
-		require.True(t, coins.IsEqual(genesisAccount.Coins))
+		require.True(t, coins.Equal(genesisAccount.Coins))
 
 		require.Nil(t, requestContent.GetVestingAccount())
 		require.Nil(t, requestContent.GetValidatorRemoval())
@@ -172,7 +172,7 @@ func TestNewGenesisValidator(t *testing.T) {
 		require.EqualValues(t, address, genesisValidator.Address)
 		require.EqualValues(t, gentTx, genesisValidator.GenTx)
 		require.EqualValues(t, consPubKey, genesisValidator.ConsPubKey)
-		require.True(t, selfDelegation.IsEqual(genesisValidator.SelfDelegation))
+		require.True(t, selfDelegation.Equal(genesisValidator.SelfDelegation))
 		require.EqualValues(t, peer, genesisValidator.Peer)
 
 		require.Nil(t, requestContent.GetGenesisAccount())
@@ -221,13 +221,6 @@ func TestAccountRemoval_Validate(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "should prevent validate account removal with invalid address",
-			content: types.AccountRemoval{
-				Address: "invalid_address",
-			},
-			wantErr: true,
-		},
-		{
 			name: "should validate valid account removal",
 			content: types.AccountRemoval{
 				Address: sample.Address(r),
@@ -257,16 +250,6 @@ func TestGenesisAccount_Validate(t *testing.T) {
 		launchID uint64
 		wantErr  bool
 	}{
-		{
-			name: "should prevent validate genesis account with invalid address",
-			content: types.GenesisAccount{
-				Address:  "invalid_address",
-				LaunchID: launchID,
-				Coins:    sample.Coins(r),
-			},
-			launchID: launchID,
-			wantErr:  true,
-		},
 		{
 			name: "should prevent validate genesis account without coins",
 			content: types.GenesisAccount{
@@ -353,19 +336,6 @@ func TestGenesisValidator_Validate(t *testing.T) {
 				Peer:           sample.GenesisValidatorPeer(r),
 			},
 			launchID: launchID + 1,
-			wantErr:  true,
-		},
-		{
-			name: "should prevent validate genesis validator with invalid address",
-			content: types.GenesisValidator{
-				LaunchID:       launchID,
-				Address:        "invalid_address",
-				GenTx:          sample.Bytes(r, 500),
-				ConsPubKey:     sample.Bytes(r, 30),
-				SelfDelegation: sample.Coin(r),
-				Peer:           sample.GenesisValidatorPeer(r),
-			},
-			launchID: launchID,
 			wantErr:  true,
 		},
 		{
@@ -459,13 +429,6 @@ func TestValidatorRemoval_Validate(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "should prevent validate validator removal with invalid validator address",
-			content: types.ValidatorRemoval{
-				ValAddress: "invalid_address",
-			},
-			wantErr: true,
-		},
-		{
 			name: "should validate valid validator removal",
 			content: types.ValidatorRemoval{
 				ValAddress: sample.Address(r),
@@ -499,16 +462,6 @@ func TestVestingAccount_Validate(t *testing.T) {
 		launchID uint64
 		wantErr  bool
 	}{
-		{
-			name: "should prevent validate vesting account with invalid address",
-			content: types.VestingAccount{
-				LaunchID:       launchID,
-				Address:        "invalid_address",
-				VestingOptions: option,
-			},
-			launchID: launchID,
-			wantErr:  true,
-		},
 		{
 			name: "should prevent validate vesting account with invalid vesting option",
 			content: types.VestingAccount{

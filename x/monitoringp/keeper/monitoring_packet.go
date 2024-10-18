@@ -3,31 +3,31 @@ package keeper
 import (
 	sdkerrors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
-	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
-	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"
+	clienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
+	channeltypes "github.com/cosmos/ibc-go/v8/modules/core/04-channel/types"
+	host "github.com/cosmos/ibc-go/v8/modules/core/24-host"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/x/monitoringp/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	"github.com/ignite/network/x/monitoringp/types"
 )
 
 // TransmitMonitoringPacket transmits the packet over IBC with the specified source port and source channel
 func (k Keeper) TransmitMonitoringPacket(
 	ctx sdk.Context,
-	packetData spntypes.MonitoringPacket,
+	packetData networktypes.MonitoringPacket,
 	sourcePort,
 	sourceChannel string,
 	timeoutHeight clienttypes.Height,
 	timeoutTimestamp uint64,
 ) (sequence uint64, err error) {
-	channelCap, ok := k.scopedKeeper.GetCapability(ctx, host.ChannelCapabilityPath(sourcePort, sourceChannel))
+	channelCap, ok := k.ScopedKeeper().GetCapability(ctx, host.ChannelCapabilityPath(sourcePort, sourceChannel))
 	if !ok {
 		return 0, sdkerrors.Wrap(channeltypes.ErrChannelCapabilityNotFound, "module does not own channel capability")
 	}
 
 	// encode the packet
-	var modulePacket spntypes.MonitoringPacketData
-	modulePacket.Packet = &spntypes.MonitoringPacketData_MonitoringPacket{
+	var modulePacket networktypes.MonitoringPacketData
+	modulePacket.Packet = &networktypes.MonitoringPacketData_MonitoringPacket{
 		MonitoringPacket: &packetData,
 	}
 
@@ -43,8 +43,8 @@ func (k Keeper) TransmitMonitoringPacket(
 func (k Keeper) OnRecvMonitoringPacket(
 	_ sdk.Context,
 	_ channeltypes.Packet,
-	_ spntypes.MonitoringPacket,
-) (packetAck spntypes.MonitoringPacketAck, err error) {
+	_ networktypes.MonitoringPacket,
+) (packetAck networktypes.MonitoringPacketAck, err error) {
 	return packetAck, types.ErrNotImplemented
 }
 
@@ -53,7 +53,7 @@ func (k Keeper) OnRecvMonitoringPacket(
 func (k Keeper) OnAcknowledgementMonitoringPacket(
 	ctx sdk.Context,
 	packet channeltypes.Packet,
-	data spntypes.MonitoringPacket,
+	data networktypes.MonitoringPacket,
 	ack channeltypes.Acknowledgement,
 ) error {
 	switch dispatchedAck := ack.Response.(type) {
@@ -61,7 +61,7 @@ func (k Keeper) OnAcknowledgementMonitoringPacket(
 		return nil
 	case *channeltypes.Acknowledgement_Result:
 		// Decode the packet acknowledgment
-		var packetAck spntypes.MonitoringPacketAck
+		var packetAck networktypes.MonitoringPacketAck
 
 		if err := types.ModuleCdc.UnmarshalJSON(dispatchedAck.Result, &packetAck); err != nil {
 			// The counter-party module doesn't implement the correct acknowledgment format
@@ -80,7 +80,7 @@ func (k Keeper) OnAcknowledgementMonitoringPacket(
 func (k Keeper) OnTimeoutMonitoringPacket(
 	_ sdk.Context,
 	_ channeltypes.Packet,
-	_ spntypes.MonitoringPacket,
+	_ networktypes.MonitoringPacket,
 ) error {
 	return types.ErrNotImplemented
 }

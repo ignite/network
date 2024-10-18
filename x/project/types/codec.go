@@ -1,43 +1,44 @@
 package types
 
 import (
-	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/msgservice"
+	// this line is used by starport scaffolding # 1
 )
-
-func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgCreateProject{}, "project/CreateProject", nil)
-	cdc.RegisterConcrete(&MsgEditProject{}, "project/EditProject", nil)
-	cdc.RegisterConcrete(&MsgUpdateTotalSupply{}, "project/UpdateTotalSupply", nil)
-	cdc.RegisterConcrete(&MsgUpdateSpecialAllocations{}, "project/UpdateSpecialAllocations", nil)
-	cdc.RegisterConcrete(&MsgInitializeMainnet{}, "project/InitializeMainnet", nil)
-	cdc.RegisterConcrete(&MsgMintVouchers{}, "project/MintVouchers", nil)
-	cdc.RegisterConcrete(&MsgBurnVouchers{}, "project/BurnVouchers", nil)
-	cdc.RegisterConcrete(&MsgRedeemVouchers{}, "project/RedeemVouchers", nil)
-	cdc.RegisterConcrete(&MsgUnredeemVouchers{}, "project/UnredeemVouchers", nil)
-	// this line is used by starport scaffolding # 2
-}
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
-	// this line is used by starport scaffolding # 3
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateProject{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgEditProject{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgUpdateTotalSupply{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgUpdateSpecialAllocations{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgInitializeMainnet{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgMintVouchers{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgBurnVouchers{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgRedeemVouchers{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgUnredeemVouchers{},
 	)
+	// this line is used by starport scaffolding # 3
 
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgUpdateParams{},
+	)
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 }
-
-var (
-	Amino     = codec.NewLegacyAmino()
-	ModuleCdc = codec.NewProtoCodec(cdctypes.NewInterfaceRegistry())
-)

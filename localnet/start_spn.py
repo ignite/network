@@ -44,7 +44,7 @@ def start_spn():
 
     # Create the gentxs
     for i in range(3):
-        gentxCmd = 'spnd gentx {valName} {selfDelegation} --chain-id {chainID} --moniker="{valName}" --home ./spn/node{i} --output-document ./gentx.json'.format(
+        gentxCmd = 'networkd gentx {valName} {selfDelegation} --chain-id {chainID} --moniker="{valName}" --home ./spn/node{i} --output-document ./gentx.json'.format(
             valName=conf['validator_names'][i],
             selfDelegation=str(conf['validator_self_delegations'][i])+conf['staking_denom'],
             chainID=conf['chain_id'],
@@ -60,9 +60,9 @@ def start_spn():
     save_genesis(genesis)
 
     print('Starting the network')
-    subprocess.Popen(["spnd", "start", "--home", "./spn/node2"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    subprocess.Popen(["spnd", "start", "--home", "./spn/node3"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    subprocess.run(["spnd start --home ./spn/node1"], shell=True, check=True)
+    subprocess.Popen(["networkd", "start", "--home", "./spn/node2"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(["networkd", "start", "--home", "./spn/node3"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(["networkd start --home ./spn/node1"], shell=True, check=True)
 
 if __name__ == "__main__":
     start_spn()

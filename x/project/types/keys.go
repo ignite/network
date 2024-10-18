@@ -1,6 +1,6 @@
 package types
 
-import spntypes "github.com/tendermint/spn/pkg/types"
+import "cosmossdk.io/collections"
 
 const (
 	// ModuleName defines the module name
@@ -9,60 +9,25 @@ const (
 	// StoreKey defines the primary module store key
 	StoreKey = ModuleName
 
-	// RouterKey is the message route for slashing
-	RouterKey = ModuleName
-
-	// QuerierRoute defines the module's query routing key
-	QuerierRoute = ModuleName
-
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_project"
-
-	// ProjectKey is the prefix to retrieve all Project
-	ProjectKey = "Project/value/"
-
-	// ProjectCounterKey is the prefix to store project count
-	ProjectCounterKey = "Project/count/"
-
-	// TotalSharesKey is the prefix to retrieve TotalShares
-	TotalSharesKey = "TotalShares/value/"
-
-	// ProjectChainsKeyPrefix is the prefix to retrieve all ProjectChains
-	ProjectChainsKeyPrefix = "ProjectChains/value/"
-
-	// MainnetAccountKeyPrefix is the prefix to retrieve all MainnetAccount
-	MainnetAccountKeyPrefix = "MainnetAccount/value/"
-
-	// MainnetVestingAccountKeyPrefix is the prefix to retrieve all MainnetVestingAccount
-	MainnetVestingAccountKeyPrefix = "MainnetVestingAccount/value/"
 )
 
-func KeyPrefix(p string) []byte {
-	return []byte(p)
-}
+var (
+	// ParamsKey is the prefix to retrieve all Params
+	ParamsKey = collections.NewPrefix("p_project")
 
-// ProjectChainsKey returns the store key to retrieve a ProjectChains from the index fields
-func ProjectChainsKey(projectID uint64) []byte {
-	return append(spntypes.UintBytes(projectID), byte('/'))
-}
+	// ProjectKey is the prefix to retrieve all Project
+	ProjectKey = collections.NewPrefix("project/value/")
+	// ProjectCountKey is the prefix to retrieve all ProjectCount
+	ProjectCountKey = collections.NewPrefix("project/count/")
 
-// AccountKeyPath returns the store key path without prefix for an account defined by a project ID and an address
-func AccountKeyPath(projectID uint64, address string) []byte {
-	projectIDBytes := append(spntypes.UintBytes(projectID), byte('/'))
-	addressBytes := append([]byte(address), byte('/'))
-	return append(projectIDBytes, addressBytes...)
-}
+	// ProjectChainsKey is the prefix to retrieve all ProjectChains
+	ProjectChainsKey = collections.NewPrefix("ProjectChains/value/")
 
-// MainnetAccountAllKey returns the store key to retrieve all MainnetAccount by project id
-func MainnetAccountAllKey(projectID uint64) []byte {
-	prefixBytes := []byte(MainnetAccountKeyPrefix)
-	projectIDBytes := append(spntypes.UintBytes(projectID), byte('/'))
-	return append(prefixBytes, projectIDBytes...)
-}
+	// MainnetAccountKey is the prefix to retrieve all MainnetAccount
+	MainnetAccountKey = collections.NewPrefix("MainnetAccount/value/")
 
-// MainnetVestingAccountAllKey returns the store key to retrieve all MainnetVestingAccount by project id
-func MainnetVestingAccountAllKey(projectID uint64) []byte {
-	prefixBytes := []byte(MainnetVestingAccountKeyPrefix)
-	projectIDBytes := append(spntypes.UintBytes(projectID), byte('/'))
-	return append(prefixBytes, projectIDBytes...)
-}
+	// TotalSharesKey is the prefix to retrieve all TotalShares
+	TotalSharesKey = collections.NewPrefix("TotalShares/value/")
+)

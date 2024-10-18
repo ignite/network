@@ -7,25 +7,27 @@ import (
 	sdkmath "cosmossdk.io/math"
 	"github.com/stretchr/testify/require"
 
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/participation/types"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/participation/types"
 )
 
 func TestTotalAllocationsGet(t *testing.T) {
-	sdkCtx, tk, _ := testkeeper.NewTestSetup(t)
+	ctx, tk, _ := testkeeper.NewTestSetup(t)
 
 	invalidAddress := strconv.Itoa(1)
 	params := types.DefaultParams()
 	params.AllocationPrice = types.AllocationPrice{Bonded: sdkmath.NewInt(100)}
 
-	tk.ParticipationKeeper.SetParams(sdkCtx, params)
-
+	err := tk.ParticipationKeeper.Params.Set(ctx, params)
+	require.NoError(t, err)
 	validAddress := sample.Address(r)
 	addressNegativeDelegations := sample.Address(r)
 
-	tk.DelegateN(sdkCtx, r, validAddress, 100, 10)
-	tk.DelegateN(sdkCtx, r, addressNegativeDelegations, -100, 10)
+	_, _, err = tk.DelegateN(ctx, r, validAddress, 100, 10)
+	require.NoError(t, err)
+	_, _, err = tk.DelegateN(ctx, r, addressNegativeDelegations, -100, 10)
+	require.NoError(t, err)
 
 	for _, tc := range []struct {
 		name       string
@@ -50,7 +52,7 @@ func TestTotalAllocationsGet(t *testing.T) {
 		},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
-			alloc, err := tk.ParticipationKeeper.GetTotalAllocations(sdkCtx, tc.address)
+			alloc, err := tk.ParticipationKeeper.GetTotalAllocations(ctx, tc.address)
 			if tc.wantError {
 				require.Error(t, err)
 				return

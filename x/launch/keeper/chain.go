@@ -1,19 +1,22 @@
 package keeper
 
 import (
-	"encoding/binary"
+	"context"
 	"fmt"
 	"time"
 
-	"github.com/cosmos/cosmos-sdk/store/prefix"
+	"cosmossdk.io/collections"
+	sdkerrors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/pkg/errors"
 
-	"github.com/tendermint/spn/x/launch/types"
+	ignterrors "github.com/ignite/network/pkg/errors"
+	"github.com/ignite/network/x/launch/types"
 )
 
 // CreateNewChain creates a new chain in the store from the provided information
 func (k Keeper) CreateNewChain(
-	ctx sdk.Context,
+	ctx context.Context,
 	coordinatorID uint64,
 	genesisChainID,
 	sourceURL,
@@ -25,15 +28,16 @@ func (k Keeper) CreateNewChain(
 	accountBalance sdk.Coins,
 	metadata []byte,
 ) (uint64, error) {
-	coord, found := k.profileKeeper.GetCoordinator(ctx, coordinatorID)
-	if !found {
-		return 0, fmt.Errorf("the coordinator %d doesn't exist", coordinatorID)
+	sdkCtx := sdk.UnwrapSDKContext(ctx)
+	coordinator, err := k.profileKeeper.GetCoordinator(ctx, coordinatorID)
+	if err != nil {
+		return 0, sdkerrors.Wrapf(err, "%d", coordinatorID)
 	}
 
 	chain := types.Chain{
 		CoordinatorID:   coordinatorID,
 		GenesisChainID:  genesisChainID,
-		CreatedAt:       ctx.BlockTime().Unix(),
+		CreatedAt:       sdkCtx.BlockTime().Unix(),
 		SourceURL:       sourceURL,
 		SourceHash:      sourceHash,
 		InitialGenesis:  initialGenesis,
@@ -52,9 +56,9 @@ func (k Keeper) CreateNewChain(
 
 	// If the chain is associated to a project, project existence and coordinator is checked
 	if hasProject {
-		project, found := k.projectKeeper.GetProject(ctx, projectID)
-		if !found {
-			return 0, fmt.Errorf("project %d doesn't exist", projectID)
+		project, err := k.projectKeeper.GetProject(ctx, projectID)
+		if err != nil {
+			return 0, sdkerrors.Wrapf(err, "%d", projectID)
 		}
 		if project.CoordinatorID != coordinatorID {
 			return 0, fmt.Errorf(
@@ -66,7 +70,7 @@ func (k Keeper) CreateNewChain(
 	}
 
 	// Append the chain to the store
-	launchID := k.AppendChain(ctx, chain)
+	launchID, err := k.AppendChain(ctx, chain)
 
 	// Register the chain to the project
 	if hasProject {
@@ -75,102 +79,40 @@ func (k Keeper) CreateNewChain(
 		}
 	}
 
-	return launchID, ctx.EventManager().EmitTypedEvent(&types.EventChainCreated{
+	return launchID, sdkCtx.EventManager().EmitTypedEvent(&types.EventChainCreated{
 		LaunchID:           launchID,
-		CoordinatorAddress: coord.Address,
+		CoordinatorAddress: coordinator.Address,
 		CoordinatorID:      coordinatorID,
 	})
 }
 
-// GetChainCounter get the counter for chains
-func (k Keeper) GetChainCounter(ctx sdk.Context) uint64 {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.ChainCounterKey)
-	bz := store.Get(byteKey)
-
-	// Counter doesn't exist: no element
-	if bz == nil {
-		return 0
+// AppendChain appends a chain in the store with a new launch id and update the count
+func (k Keeper) AppendChain(ctx context.Context, chain types.Chain) (uint64, error) {
+	launchID, err := k.ChainSeq.Next(ctx)
+	if err != nil {
+		return 0, ignterrors.Criticalf("failed to get next chain sequence %s", err.Error())
 	}
-
-	// Parse bytes
-	return binary.BigEndian.Uint64(bz)
-}
-
-// SetChainCounter set the counter for chains
-func (k Keeper) SetChainCounter(ctx sdk.Context, counter uint64) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.ChainCounterKey)
-	bz := make([]byte, 8)
-	binary.BigEndian.PutUint64(bz, counter)
-	store.Set(byteKey, bz)
-}
-
-// AppendChain appends a chain in the store with a new id and update the counter
-func (k Keeper) AppendChain(ctx sdk.Context, chain types.Chain) uint64 {
-	counter := k.GetChainCounter(ctx)
-
-	// Set the ID of the appended value
-	chain.LaunchID = counter
-
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ChainKeyPrefix))
-	appendedValue := k.cdc.MustMarshal(&chain)
-	store.Set(types.ChainKey(chain.LaunchID), appendedValue)
-
-	// Update chain counter
-	k.SetChainCounter(ctx, counter+1)
-
-	return counter
-}
-
-// SetChain set a specific chain in the store from its index
-func (k Keeper) SetChain(ctx sdk.Context, chain types.Chain) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ChainKeyPrefix))
-	b := k.cdc.MustMarshal(&chain)
-	store.Set(types.ChainKey(chain.LaunchID), b)
-}
-
-// EnableMonitoringConnection sets a chain with MonitoringConnected set to true
-func (k Keeper) EnableMonitoringConnection(ctx sdk.Context, launchID uint64) error {
-	chain, found := k.GetChain(ctx, launchID)
-	if !found {
-		return types.ErrChainNotFound
+	chain.LaunchID = launchID
+	if err := k.Chain.Set(ctx, launchID, chain); err != nil {
+		return 0, ignterrors.Criticalf("chain not set %s", err.Error())
 	}
-
-	if chain.MonitoringConnected {
-		return types.ErrChainMonitoringConnected
-	}
-
-	chain.MonitoringConnected = true
-	k.SetChain(ctx, chain)
-	return nil
+	return launchID, nil
 }
 
-// GetChain returns a chain from its index
-func (k Keeper) GetChain(ctx sdk.Context, launchID uint64) (val types.Chain, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ChainKeyPrefix))
-
-	b := store.Get(types.ChainKey(launchID))
-	if b == nil {
-		return val, false
+func (k Keeper) GetChain(ctx context.Context, launchID uint64) (types.Chain, error) {
+	chain, err := k.Chain.Get(ctx, launchID)
+	if errors.Is(err, collections.ErrNotFound) {
+		return types.Chain{}, types.ErrChainNotFound
 	}
-
-	k.cdc.MustUnmarshal(b, &val)
-	return val, true
+	return chain, err
 }
 
-// GetAllChain returns all chain
-func (k Keeper) GetAllChain(ctx sdk.Context) (list []types.Chain) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ChainKeyPrefix))
-	iterator := sdk.KVStorePrefixIterator(store, []byte{})
-
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var val types.Chain
-		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		list = append(list, val)
-	}
-
-	return
+// Chains returns all Chain.
+func (k Keeper) Chains(ctx context.Context) ([]types.Chain, error) {
+	chains := make([]types.Chain, 0)
+	err := k.Chain.Walk(ctx, nil, func(_ uint64, chain types.Chain) (bool, error) {
+		chains = append(chains, chain)
+		return false, nil
+	})
+	return chains, err
 }

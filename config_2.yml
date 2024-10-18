@@ -3,24 +3,21 @@ build:
   binary: spn2d
   proto:
     path: proto
-    third_party_paths:
-    - third_party/proto
-    - proto_vendor
 accounts:
-- name: alice
-  coins:
-  - 200000000uspn
-  mnemonic: slide moment original seven milk crawl help text kick fluid boring awkward
-    doll wonder sure fragile plate grid hard next casual expire okay body
-- name: bob
-  coins:
-  - 200000000uspn
-  mnemonic: trap possible liquid elite embody host segment fantasy swim cable digital
-    eager tiny broom burden diary earn hen grow engine pigeon fringe claim program
+  - name: alice
+    coins:
+      - 200000000uspn
+    mnemonic: slide moment original seven milk crawl help text kick fluid boring awkward
+      doll wonder sure fragile plate grid hard next casual expire okay body
+  - name: bob
+    coins:
+      - 200000000uspn
+    mnemonic: trap possible liquid elite embody host segment fantasy swim cable digital
+      eager tiny broom burden diary earn hen grow engine pigeon fringe claim program
 faucet:
   name: bob
   coins:
-  - 100000uspn
+    - 100000uspn
   host: 0.0.0.0:4500
   port: 4502
 genesis:
@@ -31,8 +28,8 @@ genesis:
     gov:
       deposit_params:
         min_deposit:
-        - amount: "1"
-          denom: uspn
+          - amount: "1"
+            denom: uspn
     launch:
       params:
         launchTimeRange:
@@ -52,18 +49,18 @@ genesis:
         bond_denom: uspn
   chain_id: spn-1
 validators:
-- name: alice
-  bonded: 100000000uspn
-  app:
-    api:
-      address: :1319
-    grpc:
-      address: :9094
-    grpc-web:
-      address: :9095
-  config:
-    p2p:
-      laddr: :26660
-    rpc:
-      laddr: :26661
-      pprof_laddr: :6062
+  - name: alice
+    bonded: 100000000uspn
+    app:
+      api:
+        address: :1319
+      grpc:
+        address: :9094
+      grpc-web:
+        address: :9095
+    config:
+      p2p:
+        laddr: :26660
+      rpc:
+        laddr: :26661
+        pprof_laddr: :6062

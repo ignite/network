@@ -4,11 +4,10 @@ import (
 	"testing"
 
 	"github.com/pkg/errors"
-
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/profile/types"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/profile/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
@@ -33,7 +32,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "should validate valid genesis",
 			genState: &types.GenesisState{
-				Validators: []types.Validator{
+				ValidatorList: []types.Validator{
 					{Address: addr1, OperatorAddresses: []string{opAddr1}},
 					{Address: addr2, OperatorAddresses: []string{opAddr2}},
 					{Address: addr3, OperatorAddresses: []string{opAddr3}},
@@ -48,12 +47,12 @@ func TestGenesisState_Validate(t *testing.T) {
 					{CoordinatorID: 1, Address: addr2},
 					{CoordinatorID: 2, Address: addr3},
 				},
-				Coordinators: []types.Coordinator{
+				CoordinatorList: []types.Coordinator{
 					{CoordinatorID: 0, Address: addr1, Active: true},
 					{CoordinatorID: 1, Address: addr2, Active: true},
 					{CoordinatorID: 2, Address: addr3, Active: true},
 				},
-				CoordinatorCounter: 4,
+				CoordinatorCount: 4,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -61,7 +60,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "should prevent validate an invalid genesis",
 			genState: &types.GenesisState{
-				Validators: []types.Validator{
+				ValidatorList: []types.Validator{
 					{Address: addr1, OperatorAddresses: []string{opAddr1}},
 				},
 				ValidatorsByOperatorAddress: []types.ValidatorByOperatorAddress{
@@ -105,7 +104,7 @@ func TestGenesisStateValidateValidator(t *testing.T) {
 		{
 			name: "should validate genesis with valid validators",
 			genState: &types.GenesisState{
-				Validators: []types.Validator{
+				ValidatorList: []types.Validator{
 					{Address: addr1, OperatorAddresses: []string{opAddr1}},
 					{Address: addr2, OperatorAddresses: []string{opAddr2}},
 					{Address: addr3, OperatorAddresses: []string{opAddr3}},
@@ -120,7 +119,7 @@ func TestGenesisStateValidateValidator(t *testing.T) {
 		{
 			name: "should prevent validate duplicated validators",
 			genState: &types.GenesisState{
-				Validators: []types.Validator{
+				ValidatorList: []types.Validator{
 					{Address: addr1, OperatorAddresses: []string{opAddr1}},
 					{Address: addr1, OperatorAddresses: []string{opAddr1}},
 				},
@@ -134,7 +133,7 @@ func TestGenesisStateValidateValidator(t *testing.T) {
 		{
 			name: "should prevent validate duplicated validator by operator address",
 			genState: &types.GenesisState{
-				Validators: []types.Validator{
+				ValidatorList: []types.Validator{
 					{Address: addr1, OperatorAddresses: []string{opAddr1}},
 				},
 				ValidatorsByOperatorAddress: []types.ValidatorByOperatorAddress{
@@ -147,7 +146,7 @@ func TestGenesisStateValidateValidator(t *testing.T) {
 		{
 			name: "should prevent validate missing validator address",
 			genState: &types.GenesisState{
-				Validators: []types.Validator{
+				ValidatorList: []types.Validator{
 					{Address: addr1, OperatorAddresses: []string{opAddr1}},
 				},
 				ValidatorsByOperatorAddress: []types.ValidatorByOperatorAddress{
@@ -160,7 +159,7 @@ func TestGenesisStateValidateValidator(t *testing.T) {
 		{
 			name: "should prevent validator missing validator operator address",
 			genState: &types.GenesisState{
-				Validators: []types.Validator{
+				ValidatorList: []types.Validator{
 					{Address: addr1, OperatorAddresses: []string{}},
 					{Address: addr2, OperatorAddresses: []string{opAddr2}},
 				},
@@ -212,13 +211,13 @@ func TestGenesisStateValidateCoordinator(t *testing.T) {
 					{CoordinatorID: 2, Address: addr3},
 					{CoordinatorID: 3, Address: addr4},
 				},
-				Coordinators: []types.Coordinator{
+				CoordinatorList: []types.Coordinator{
 					{CoordinatorID: 0, Address: addr1, Active: true},
 					{CoordinatorID: 1, Address: addr2, Active: true},
 					{CoordinatorID: 2, Address: addr3, Active: true},
 					{CoordinatorID: 3, Address: addr4, Active: true},
 				},
-				CoordinatorCounter: 4,
+				CoordinatorCount: 4,
 			},
 		},
 		{
@@ -227,11 +226,11 @@ func TestGenesisStateValidateCoordinator(t *testing.T) {
 				CoordinatorsByAddress: []types.CoordinatorByAddress{
 					{CoordinatorID: 0, Address: addr1},
 				},
-				Coordinators: []types.Coordinator{
+				CoordinatorList: []types.Coordinator{
 					{CoordinatorID: 0, Address: addr1, Active: true},
 					{CoordinatorID: 1, Address: addr2, Active: false},
 				},
-				CoordinatorCounter: 2,
+				CoordinatorCount: 2,
 			},
 		},
 		{
@@ -241,7 +240,7 @@ func TestGenesisStateValidateCoordinator(t *testing.T) {
 					{CoordinatorID: 0, Address: addr1},
 					{CoordinatorID: 1, Address: addr1},
 				},
-				CoordinatorCounter: 2,
+				CoordinatorCount: 2,
 			},
 			err: errors.New("duplicated index for coordinatorByAddress"),
 		},
@@ -252,11 +251,11 @@ func TestGenesisStateValidateCoordinator(t *testing.T) {
 					{CoordinatorID: 0, Address: addr1},
 					{CoordinatorID: 0, Address: addr2},
 				},
-				Coordinators: []types.Coordinator{
+				CoordinatorList: []types.Coordinator{
 					{CoordinatorID: 0, Address: addr1, Active: true},
 					{CoordinatorID: 0, Address: addr2, Active: true},
 				},
-				CoordinatorCounter: 2,
+				CoordinatorCount: 2,
 			},
 			err: errors.New("duplicated id for coordinator"),
 		},
@@ -266,11 +265,11 @@ func TestGenesisStateValidateCoordinator(t *testing.T) {
 				CoordinatorsByAddress: []types.CoordinatorByAddress{
 					{CoordinatorID: 0, Address: addr1},
 				},
-				Coordinators: []types.Coordinator{
+				CoordinatorList: []types.Coordinator{
 					{CoordinatorID: 0, Address: addr1, Active: true},
 					{CoordinatorID: 1, Address: addr2, Active: true},
 				},
-				CoordinatorCounter: 2,
+				CoordinatorCount: 2,
 			},
 			err: errors.New("coordinator address not found for CoordinatorByAddress"),
 		},
@@ -281,10 +280,10 @@ func TestGenesisStateValidateCoordinator(t *testing.T) {
 					{CoordinatorID: 0, Address: addr1},
 					{CoordinatorID: 1, Address: addr2},
 				},
-				Coordinators: []types.Coordinator{
+				CoordinatorList: []types.Coordinator{
 					{CoordinatorID: 0, Address: addr1, Active: true},
 				},
-				CoordinatorCounter: 2,
+				CoordinatorCount: 2,
 			},
 			err: errors.New("coordinator address not found for coordinatorID"),
 		},
@@ -295,11 +294,11 @@ func TestGenesisStateValidateCoordinator(t *testing.T) {
 					{CoordinatorID: 0, Address: addr1},
 					{CoordinatorID: 133, Address: addr2},
 				},
-				Coordinators: []types.Coordinator{
+				CoordinatorList: []types.Coordinator{
 					{CoordinatorID: 0, Address: addr1, Active: true},
 					{CoordinatorID: 133, Address: addr2, Active: true},
 				},
-				CoordinatorCounter: 2,
+				CoordinatorCount: 2,
 			},
 			err: errors.New("coordinator id should be lower or equal than the last id"),
 		},
@@ -310,11 +309,11 @@ func TestGenesisStateValidateCoordinator(t *testing.T) {
 					{CoordinatorID: 0, Address: addr1},
 					{CoordinatorID: 1, Address: addr2},
 				},
-				Coordinators: []types.Coordinator{
+				CoordinatorList: []types.Coordinator{
 					{CoordinatorID: 0, Address: addr1, Active: true},
 					{CoordinatorID: 1, Address: addr2, Active: false},
 				},
-				CoordinatorCounter: 2,
+				CoordinatorCount: 2,
 			},
 			err: errors.New("coordinator found by CoordinatorByAddress should not be inactive"),
 		},

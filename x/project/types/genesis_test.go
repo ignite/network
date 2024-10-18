@@ -5,12 +5,13 @@ import (
 	"testing"
 
 	sdkmath "cosmossdk.io/math"
+
 	"github.com/stretchr/testify/require"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	tc2 "github.com/tendermint/spn/testutil/constructor"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/project/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	tc2 "github.com/ignite/network/testutil/constructor"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/project/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
@@ -43,7 +44,7 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should allow validation of valid genesis",
 			genState: &types.GenesisState{
 				// this line is used by starport scaffolding # types/genesis/validField
-				ProjectChains: []types.ProjectChains{
+				ProjectChainsList: []types.ProjectChains{
 					{
 						ProjectID: project1.ProjectID,
 					},
@@ -51,12 +52,12 @@ func TestGenesisState_Validate(t *testing.T) {
 						ProjectID: project2.ProjectID,
 					},
 				},
-				Projects: []types.Project{
+				ProjectList: []types.Project{
 					project1,
 					project2,
 				},
-				ProjectCounter: 2,
-				MainnetAccounts: []types.MainnetAccount{
+				ProjectCount: 2,
+				MainnetAccountList: []types.MainnetAccount{
 					{
 						ProjectID: project1.ProjectID,
 						Address:   sample.Address(r),
@@ -68,14 +69,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Shares:    shares3,
 					},
 				},
-				TotalShares: spntypes.TotalShareNumber,
+				TotalShares: networktypes.TotalShareNumber,
 				Params:      types.DefaultParams(),
 			},
 		},
 		{
 			name: "should prevent validation of genesis with non existing project for mainnet account",
 			genState: &types.GenesisState{
-				ProjectChains: []types.ProjectChains{
+				ProjectChainsList: []types.ProjectChains{
 					{
 						ProjectID: 0,
 					},
@@ -83,22 +84,22 @@ func TestGenesisState_Validate(t *testing.T) {
 						ProjectID: 1,
 					},
 				},
-				Projects: []types.Project{
+				ProjectList: []types.Project{
 					sample.Project(r, 0),
 					sample.Project(r, 1),
 				},
-				ProjectCounter: 2,
-				MainnetAccounts: []types.MainnetAccount{
+				ProjectCount: 2,
+				MainnetAccountList: []types.MainnetAccount{
 					sample.MainnetAccount(r, 330, "330"),
 				},
-				TotalShares: spntypes.TotalShareNumber,
+				TotalShares: networktypes.TotalShareNumber,
 			},
 			errorMessage: "project id 330 doesn't exist for mainnet account 330",
 		},
 		{
 			name: "should prevent validation of genesis with non existing project for chains",
 			genState: &types.GenesisState{
-				ProjectChains: []types.ProjectChains{
+				ProjectChainsList: []types.ProjectChains{
 					{
 						ProjectID: 2,
 					},
@@ -106,23 +107,23 @@ func TestGenesisState_Validate(t *testing.T) {
 						ProjectID: 4,
 					},
 				},
-				Projects: []types.Project{
+				ProjectList: []types.Project{
 					sample.Project(r, 99),
 					sample.Project(r, 88),
 				},
-				ProjectCounter: 100,
-				TotalShares:    spntypes.TotalShareNumber,
+				ProjectCount: 100,
+				TotalShares:  networktypes.TotalShareNumber,
 			},
 			errorMessage: "project id 2 doesn't exist for chains",
 		},
 		{
 			name: "should prevent validation of genesis with duplicated projectChains",
 			genState: &types.GenesisState{
-				Projects: []types.Project{
+				ProjectList: []types.Project{
 					sample.Project(r, 0),
 				},
-				ProjectCounter: 1,
-				ProjectChains: []types.ProjectChains{
+				ProjectCount: 1,
+				ProjectChainsList: []types.ProjectChains{
 					{
 						ProjectID: 0,
 					},
@@ -130,37 +131,37 @@ func TestGenesisState_Validate(t *testing.T) {
 						ProjectID: 0,
 					},
 				},
-				TotalShares: spntypes.TotalShareNumber,
+				TotalShares: networktypes.TotalShareNumber,
 			},
 			errorMessage: "duplicated index for projectChains",
 		},
 		{
 			name: "should prevent validation of genesis with duplicated project",
 			genState: &types.GenesisState{
-				Projects: []types.Project{
+				ProjectList: []types.Project{
 					sample.Project(r, 0),
 					sample.Project(r, 0),
 				},
-				ProjectCounter: 2,
-				TotalShares:    spntypes.TotalShareNumber,
+				ProjectCount: 2,
+				TotalShares:  networktypes.TotalShareNumber,
 			},
 			errorMessage: "duplicated id for project",
 		},
 		{
 			name: "should prevent validation of genesis with invalid project count",
 			genState: &types.GenesisState{
-				Projects: []types.Project{
+				ProjectList: []types.Project{
 					sample.Project(r, 1),
 				},
-				ProjectCounter: 0,
-				TotalShares:    spntypes.TotalShareNumber,
+				ProjectCount: 0,
+				TotalShares:  networktypes.TotalShareNumber,
 			},
 			errorMessage: "project id should be lower or equal than the last id",
 		},
 		{
 			name: "should prevent validation of genesis with invalid project",
 			genState: &types.GenesisState{
-				Projects: []types.Project{
+				ProjectList: []types.Project{
 					types.NewProject(
 						0,
 						invalidProjectName,
@@ -170,19 +171,19 @@ func TestGenesisState_Validate(t *testing.T) {
 						sample.Duration(r).Milliseconds(),
 					),
 				},
-				ProjectCounter: 1,
-				TotalShares:    spntypes.TotalShareNumber,
+				ProjectCount: 1,
+				TotalShares:  networktypes.TotalShareNumber,
 			},
 			errorMessage: "invalid project 0: project name can only contain alphanumerical characters or hyphen",
 		},
 		{
 			name: "should prevent validation of genesis with duplicated mainnetAccount",
 			genState: &types.GenesisState{
-				Projects: []types.Project{
+				ProjectList: []types.Project{
 					sample.Project(r, 0),
 				},
-				ProjectCounter: 1,
-				MainnetAccounts: []types.MainnetAccount{
+				ProjectCount: 1,
+				MainnetAccountList: []types.MainnetAccount{
 					{
 						ProjectID: 0,
 						Address:   "0",
@@ -192,14 +193,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Address:   "0",
 					},
 				},
-				TotalShares: spntypes.TotalShareNumber,
+				TotalShares: networktypes.TotalShareNumber,
 			},
 			errorMessage: "duplicated index for mainnetAccount",
 		},
 		{
 			name: "should prevent validation of genesis with invalid allocations",
 			genState: &types.GenesisState{
-				Projects: []types.Project{
+				ProjectList: []types.Project{
 					{
 						ProjectID:          0,
 						ProjectName:        "test",
@@ -207,18 +208,18 @@ func TestGenesisState_Validate(t *testing.T) {
 						MainnetID:          0,
 						MainnetInitialized: false,
 						TotalSupply:        nil,
-						AllocatedShares:    types.NewSharesFromCoins(tc2.Coins(t, fmt.Sprintf("%dstake", spntypes.TotalShareNumber+1))),
+						AllocatedShares:    types.NewSharesFromCoins(tc2.Coins(t, fmt.Sprintf("%dstake", networktypes.TotalShareNumber+1))),
 						Metadata:           nil,
 					},
 				},
-				ProjectCounter: 1,
-				MainnetAccounts: []types.MainnetAccount{
+				ProjectCount: 1,
+				MainnetAccountList: []types.MainnetAccount{
 					{
 						ProjectID: 0,
 						Address:   "0",
 					},
 				},
-				TotalShares: spntypes.TotalShareNumber,
+				TotalShares: networktypes.TotalShareNumber,
 			},
 			errorMessage: "invalid project 0: more allocated shares than total shares",
 		},
@@ -234,12 +235,12 @@ func TestGenesisState_Validate(t *testing.T) {
 			require.NoError(t, err)
 
 			projectIDMap := make(map[uint64]types.Shares)
-			for _, elem := range tc.genState.Projects {
+			for _, elem := range tc.genState.ProjectList {
 				projectIDMap[elem.ProjectID] = elem.AllocatedShares
 			}
 			shares := make(map[uint64]types.Shares)
 
-			for _, acc := range tc.genState.MainnetAccounts {
+			for _, acc := range tc.genState.MainnetAccountList {
 				// check if the project exists for mainnet accounts
 				_, ok := projectIDMap[acc.ProjectID]
 				require.True(t, ok)

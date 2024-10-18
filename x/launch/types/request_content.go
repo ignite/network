@@ -56,11 +56,6 @@ func NewGenesisAccount(launchID uint64, address string, coins sdk.Coins) Request
 
 // Validate implements GenesisAccount validation
 func (m GenesisAccount) Validate(launchID uint64) error {
-	_, err := sdk.AccAddressFromBech32(m.Address)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidGenesisAddress, err.Error())
-	}
-
 	if !m.Coins.IsValid() || m.Coins.Empty() {
 		return sdkerrors.Wrap(ErrInvalidCoins, m.Address)
 	}
@@ -87,11 +82,6 @@ func NewVestingAccount(launchID uint64, address string, vestingOptions VestingOp
 
 // Validate implements VestingAccount validation
 func (m VestingAccount) Validate(launchID uint64) error {
-	_, err := sdk.AccAddressFromBech32(m.Address)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidVestingAddress, err.Error())
-	}
-
 	if err := m.VestingOptions.Validate(); err != nil {
 		return sdkerrors.Wrapf(ErrInvalidVestingOption, err.Error())
 	}
@@ -128,11 +118,6 @@ func NewGenesisValidator(
 
 // Validate implements GenesisValidator validation
 func (m GenesisValidator) Validate(launchID uint64) error {
-	_, err := sdk.AccAddressFromBech32(m.Address)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidValidatorAddress, err.Error())
-	}
-
 	if len(m.GenTx) == 0 {
 		return sdkerrors.Wrap(ErrInvalidGenTx, "empty gentx")
 	}
@@ -173,10 +158,6 @@ func NewAccountRemoval(address string) RequestContent {
 
 // Validate implements AccountRemoval validation
 func (m AccountRemoval) Validate() error {
-	_, err := sdk.AccAddressFromBech32(m.Address)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidGenesisAddress, err.Error())
-	}
 	return nil
 }
 
@@ -193,10 +174,6 @@ func NewValidatorRemoval(address string) RequestContent {
 
 // Validate implements ValidatorRemoval validation
 func (m ValidatorRemoval) Validate() error {
-	_, err := sdk.AccAddressFromBech32(m.ValAddress)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidValidatorAddress, err.Error())
-	}
 	return nil
 }
 

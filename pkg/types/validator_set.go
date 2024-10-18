@@ -1,4 +1,4 @@
-// Package types defines types to handle IBC handshakes in SPN modules
+// Package types defines types to handle IBC handshakes in Network modules
 package types
 
 import (
@@ -7,12 +7,11 @@ import (
 	"os"
 	"strconv"
 
-	"gopkg.in/yaml.v2"
-
 	"github.com/cometbft/cometbft/crypto/ed25519"
 	tmtypes "github.com/cometbft/cometbft/types"
-	ibctmtypes "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
+	ibctmtypes "github.com/cosmos/ibc-go/v8/modules/light-clients/07-tendermint"
 	"github.com/pkg/errors"
+	"gopkg.in/yaml.v2"
 )
 
 const TypeEd25519 = "tendermint/PubKeyEd25519"

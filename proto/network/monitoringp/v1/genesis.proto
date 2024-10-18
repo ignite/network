@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package network.monitoringp.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "network/monitoringp/v1/connection_channel_id.proto";
+import "network/monitoringp/v1/consumer_client_id.proto";
+import "network/monitoringp/v1/monitoring_info.proto";
+import "network/monitoringp/v1/params.proto";
+
+option go_package = "github.com/ignite/network/x/monitoringp/types";
+
+// GenesisState defines the monitoringp module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+  string portID = 2;
+  MonitoringInfo monitoringInfo = 3;
+  ConnectionChannelID connectionChannelID = 4;
+  ConsumerClientID consumerClientID = 5;
+}

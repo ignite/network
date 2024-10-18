@@ -1,0 +1,11 @@
+syntax = "proto3";
+package network.launch.v1;
+
+option go_package = "github.com/ignite/network/x/launch/types";
+
+message ParamChange {
+  uint64 launchID = 1;
+  string module = 2;
+  string param = 3;
+  bytes value = 4;
+}

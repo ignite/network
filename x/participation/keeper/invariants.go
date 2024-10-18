@@ -4,7 +4,7 @@ import (
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/tendermint/spn/x/participation/types"
+	"github.com/ignite/network/x/participation/types"
 )
 
 const (
@@ -28,9 +28,15 @@ func AllInvariants(k Keeper) sdk.Invariant {
 // is different from the sum of per-auction used allocations in `AuctionUsedAllocations`
 func MismatchUsedAllocationsInvariant(k Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
-		all := k.GetAllUsedAllocations(ctx)
+		all, err := k.AllUsedAllocations(ctx)
+		if err != nil {
+			return "", false
+		}
 		for _, usedAllocs := range all {
-			auctionUsedAllocs := k.GetAllAuctionUsedAllocationsByAddress(ctx, usedAllocs.Address)
+			auctionUsedAllocs, err := k.AllAuctionUsedAllocations(ctx, usedAllocs.Address)
+			if err != nil {
+				return "", false
+			}
 			sum := sdkmath.ZeroInt()
 			for _, auction := range auctionUsedAllocs {
 				if !auction.Withdrawn {

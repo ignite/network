@@ -108,15 +108,15 @@ def start_testnet(
     genesis['app_state']['staking']['params']['unbonding_time'] = str(unbondingTime)+"s"
 
     # Create the gentxs
-    cmd_devnull('spnd gentx joe {} --chain-id {} --moniker="joe" --home ./testnet/node1 --output-document ./gentx1.json'.format(selfDelegationVal1, chainID))
+    cmd_devnull('networkd gentx joe {} --chain-id {} --moniker="joe" --home ./testnet/node1 --output-document ./gentx1.json'.format(selfDelegationVal1, chainID))
     gentx1File = open('./gentx1.json')
     gentx1 = json.load(gentx1File)
 
-    cmd_devnull('spnd gentx steve {} --chain-id {} --moniker="steve" --home ./testnet/node2 --output-document ./gentx2.json'.format(selfDelegationVal2, chainID))
+    cmd_devnull('networkd gentx steve {} --chain-id {} --moniker="steve" --home ./testnet/node2 --output-document ./gentx2.json'.format(selfDelegationVal2, chainID))
     gentx2File = open('./gentx2.json')
     gentx2 = json.load(gentx2File)
 
-    cmd_devnull('spnd gentx olivia {} --chain-id {} --moniker="olivia" --home ./testnet/node3 --output-document ./gentx3.json'.format(selfDelegationVal3, chainID))
+    cmd_devnull('networkd gentx olivia {} --chain-id {} --moniker="olivia" --home ./testnet/node3 --output-document ./gentx3.json'.format(selfDelegationVal3, chainID))
     gentx3File = open('./gentx3.json')
     gentx3 = json.load(gentx3File)
 
@@ -133,12 +133,12 @@ def start_testnet(
     save_genesis(genesis)
 
     print('Starting the network')
-    subprocess.Popen(["spnd", "start", "--home", "./testnet/node2"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    subprocess.Popen(["spnd", "start", "--home", "./testnet/node3"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(["networkd", "start", "--home", "./testnet/node2"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(["networkd", "start", "--home", "./testnet/node3"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     if background:
-        subprocess.Popen(["spnd", "start", "--home", "./testnet/node1"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.Popen(["networkd", "start", "--home", "./testnet/node1"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     else:
-        subprocess.run(["spnd start --home ./testnet/node1"], shell=True, check=True)
+        subprocess.run(["networkd start --home ./testnet/node1"], shell=True, check=True)
 
 
 if __name__ == "__main__":

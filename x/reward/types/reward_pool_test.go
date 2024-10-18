@@ -7,8 +7,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/reward/types"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/reward/types"
 )
 
 func TestRewardPool_Validate(t *testing.T) {
@@ -38,19 +38,6 @@ func TestRewardPool_Validate(t *testing.T) {
 				CurrentRewardHeight: 100,
 				Closed:              false,
 			},
-		},
-		{
-			name: "should prevent with invalid provider address",
-			rewardPool: types.RewardPool{
-				LaunchID:            1,
-				Provider:            "invalid address",
-				InitialCoins:        validInitialCoins,
-				RemainingCoins:      validRemainingCoins,
-				LastRewardHeight:    50,
-				CurrentRewardHeight: 100,
-				Closed:              false,
-			},
-			wantErr: true,
 		},
 		{
 			name: "should prevent with empty initial coins",

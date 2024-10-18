@@ -1,101 +1,106 @@
 package keeper
 
 import (
-	"encoding/binary"
+	"context"
 
-	"github.com/cosmos/cosmos-sdk/store/prefix"
+	"cosmossdk.io/collections"
+	sdkerrors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/pkg/errors"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/x/profile/types"
+	ignterrors "github.com/ignite/network/pkg/errors"
+	"github.com/ignite/network/x/profile/types"
 )
 
-// GetCoordinatorCounter get the total number of Coordinators
-func (k Keeper) GetCoordinatorCounter(ctx sdk.Context) uint64 {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.CoordinatorCounterKey)
-	bz := store.Get(byteKey)
+// AppendCoordinator appends a coordinator in the store with a new coordinator id and update the count
+func (k Keeper) AppendCoordinator(ctx context.Context, coordinator types.Coordinator) (uint64, error) {
+	cordinatorID, err := k.CoordinatorSeq.Next(ctx)
+	if err != nil {
+		return 0, ignterrors.Criticalf("failed to get next coordinator sequence %s", err.Error())
+	}
+	coordinator.CoordinatorID = cordinatorID
+	if err := k.Coordinator.Set(ctx, cordinatorID, coordinator); err != nil {
+		return 0, ignterrors.Criticalf("coordinator not set %s", err.Error())
+	}
+	return cordinatorID, nil
+}
 
-	// Counter doesn't exist: no element
-	if bz == nil {
-		return 0
+func (k Keeper) CoordinatorIDFromAddress(ctx context.Context, address sdk.AccAddress) (uint64, error) {
+	coordinatorByAddress, err := k.CoordinatorByAddress.Get(ctx, address)
+	if errors.Is(err, collections.ErrNotFound) {
+		return 0, types.ErrCoordinatorAddressNotFound
+	}
+	return coordinatorByAddress.CoordinatorID, err
+}
+
+func (k Keeper) GetCoordinator(ctx context.Context, coordinatorID uint64) (types.Coordinator, error) {
+	acc, err := k.Coordinator.Get(ctx, coordinatorID)
+	if errors.Is(err, collections.ErrNotFound) {
+		return types.Coordinator{}, types.ErrCoordinatorNotFound
+	}
+	return acc, err
+}
+
+// Coordinators returns all Coordinator.
+func (k Keeper) Coordinators(ctx context.Context) ([]types.Coordinator, error) {
+	coordinators := make([]types.Coordinator, 0)
+	err := k.Coordinator.Walk(ctx, nil, func(_ uint64, coordinator types.Coordinator) (bool, error) {
+		coordinators = append(coordinators, coordinator)
+		return false, nil
+	})
+	return coordinators, err
+}
+
+// GetCoordinatorByAddress returns the CoordinatorByAddress associated to an address
+// returns ErrCoordAddressNotFound if not found in the store
+// if the corresponding Coordinator is not found or is inactive, returns ErrCritical
+func (k Keeper) GetCoordinatorByAddress(ctx context.Context, address sdk.AccAddress) (types.CoordinatorByAddress, error) {
+	coordinatorByAddress, err := k.CoordinatorByAddress.Get(ctx, address)
+	if errors.Is(err, collections.ErrNotFound) {
+		return types.CoordinatorByAddress{}, sdkerrors.Wrapf(types.ErrCoordinatorAddressNotFound, "address: %s", address)
+	} else if err != nil {
+		return types.CoordinatorByAddress{}, err
 	}
 
-	// Parse bytes
-	return binary.BigEndian.Uint64(bz)
-}
-
-// SetCoordinatorCounter set the total number of coordinator
-func (k Keeper) SetCoordinatorCounter(ctx sdk.Context, counter uint64) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.CoordinatorCounterKey)
-	bz := make([]byte, 8)
-	binary.BigEndian.PutUint64(bz, counter)
-	store.Set(byteKey, bz)
-}
-
-// AppendCoordinator appends a coordinator in the store with a new id and update the counter
-func (k Keeper) AppendCoordinator(
-	ctx sdk.Context,
-	coordinator types.Coordinator,
-) uint64 {
-	// Create the coordinator
-	counter := k.GetCoordinatorCounter(ctx)
-
-	// Set the ID of the appended value
-	coordinator.CoordinatorID = counter
-
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CoordinatorKey))
-	appendedValue := k.cdc.MustMarshal(&coordinator)
-	store.Set(GetCoordinatorIDBytes(coordinator.CoordinatorID), appendedValue)
-
-	// Update coordinator counter
-	k.SetCoordinatorCounter(ctx, counter+1)
-
-	return counter
-}
-
-// SetCoordinator set a specific coordinator in the store
-func (k Keeper) SetCoordinator(ctx sdk.Context, coordinator types.Coordinator) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CoordinatorKey))
-	b := k.cdc.MustMarshal(&coordinator)
-	store.Set(GetCoordinatorIDBytes(coordinator.CoordinatorID), b)
-}
-
-// GetCoordinator returns a coordinator from its id
-func (k Keeper) GetCoordinator(ctx sdk.Context, id uint64) (val types.Coordinator, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CoordinatorKey))
-	b := store.Get(GetCoordinatorIDBytes(id))
-	if b == nil {
-		return val, false
-	}
-	k.cdc.MustUnmarshal(b, &val)
-	return val, true
-}
-
-// RemoveCoordinator removes a coordinator from the store
-func (k Keeper) RemoveCoordinator(ctx sdk.Context, id uint64) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CoordinatorKey))
-	store.Delete(GetCoordinatorIDBytes(id))
-}
-
-// GetAllCoordinator returns all coordinator
-func (k Keeper) GetAllCoordinator(ctx sdk.Context) (list []types.Coordinator) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.CoordinatorKey))
-	iterator := sdk.KVStorePrefixIterator(store, []byte{})
-
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var val types.Coordinator
-		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		list = append(list, val)
+	coordinator, err := k.GetCoordinator(ctx, coordinatorByAddress.CoordinatorID)
+	if errors.Is(err, types.ErrCoordinatorNotFound) {
+		// return critical error
+		return types.CoordinatorByAddress{}, ignterrors.Criticalf("a coordinator address is associated to a non-existent coordinator ID: %d",
+			coordinatorByAddress.CoordinatorID)
+	} else if err != nil {
+		return types.CoordinatorByAddress{}, err
 	}
 
-	return
+	if !coordinator.Active {
+		// return critical error
+		return types.CoordinatorByAddress{}, ignterrors.Criticalf("a coordinator address is inactive and should not exist in the store: ID: %d",
+			coordinatorByAddress.CoordinatorID)
+	}
+
+	return coordinatorByAddress, nil
 }
 
-// GetCoordinatorIDBytes returns the byte representation of the ID
-func GetCoordinatorIDBytes(id uint64) []byte {
-	return spntypes.UintBytes(id)
+// CoordinatorByAddresses returns all CoordinatorByAddress.
+func (k Keeper) CoordinatorByAddresses(ctx context.Context) ([]types.CoordinatorByAddress, error) {
+	coordinatorByAddresses := make([]types.CoordinatorByAddress, 0)
+	err := k.CoordinatorByAddress.Walk(ctx, nil, func(_ sdk.AccAddress, coordinatorByAddress types.CoordinatorByAddress) (bool, error) {
+		coordinator, err := k.GetCoordinator(ctx, coordinatorByAddress.CoordinatorID)
+		if errors.Is(err, types.ErrCoordinatorNotFound) {
+			// return critical error
+			return true, ignterrors.Criticalf("a coordinator address is associated to a non-existent coordinator ID: %d",
+				coordinatorByAddress.CoordinatorID)
+		} else if err != nil {
+			return true, err
+		}
+
+		if !coordinator.Active {
+			// return critical error
+			return true, ignterrors.Criticalf("a coordinator address is inactive and should not exist in the store: ID: %d",
+				coordinatorByAddress.CoordinatorID)
+		}
+
+		coordinatorByAddresses = append(coordinatorByAddresses, coordinatorByAddress)
+		return false, nil
+	})
+	return coordinatorByAddresses, err
 }

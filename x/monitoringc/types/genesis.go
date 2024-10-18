@@ -3,18 +3,18 @@ package types
 import (
 	"fmt"
 
-	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"
+	host "github.com/cosmos/ibc-go/v8/modules/core/24-host"
 )
 
-// DefaultGenesis returns the default Capability genesis state
+// DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		PortId:                        PortID,
-		VerifiedClientIDs:             []VerifiedClientID{},
-		ProviderClientIDs:             []ProviderClientID{},
-		LaunchIDsFromVerifiedClientID: []LaunchIDFromVerifiedClientID{},
-		LaunchIDsFromChannelID:        []LaunchIDFromChannelID{},
-		MonitoringHistories:           []MonitoringHistory{},
+		PortID:                           PortID,
+		LaunchIDFromChannelIDList:        []LaunchIDFromChannelID{},
+		LaunchIDFromVerifiedClientIDList: []LaunchIDFromVerifiedClientID{},
+		MonitoringHistoryList:            []MonitoringHistory{},
+		VerifiedClientIDList:             []VerifiedClientID{},
+		ProviderClientIDList:             []ProviderClientID{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -23,85 +23,54 @@ func DefaultGenesis() *GenesisState {
 // Validate performs basic genesis state validation returning an error upon any
 // failure.
 func (gs GenesisState) Validate() error {
-	if err := host.PortIdentifierValidator(gs.PortId); err != nil {
+	if err := host.PortIdentifierValidator(gs.PortID); err != nil {
 		return err
 	}
-
-	// Check for duplicated index in verifiedClientID
-	verifiedClientIDIndexMap := make(map[string]struct{})
-	clientIDMap := make(map[string]struct{})
-	for _, elem := range gs.VerifiedClientIDs {
-		index := string(VerifiedClientIDKey(elem.LaunchID))
-		if _, ok := verifiedClientIDIndexMap[index]; ok {
-			return fmt.Errorf("duplicated index for verifiedClientID")
+	// Check for duplicated index in launchIDFromChannelID
+	launchIDFromChannelIDIndexMap := make(map[string]struct{})
+	for _, elem := range gs.LaunchIDFromChannelIDList {
+		if _, ok := launchIDFromChannelIDIndexMap[elem.ChannelID]; ok {
+			return fmt.Errorf("duplicated index for launchIDFromChannelID")
 		}
-		verifiedClientIDIndexMap[index] = struct{}{}
-
-		// Check for duplicated client id
-		for _, clientID := range elem.ClientIDs {
-			key := clientIDKey(elem.LaunchID, clientID)
-			if _, ok := clientIDMap[key]; ok {
-				return fmt.Errorf("duplicated client id")
-			}
-			clientIDMap[key] = struct{}{}
-		}
-	}
-
-	// Check for duplicated index in providerClientID
-	providerClientIDIndexMap := make(map[string]struct{})
-	for _, elem := range gs.ProviderClientIDs {
-		index := string(ProviderClientIDKey(elem.LaunchID))
-		if _, ok := providerClientIDIndexMap[index]; ok {
-			return fmt.Errorf("duplicated index for providerClientID")
-		}
-		// Check if the client id exist
-		key := clientIDKey(elem.LaunchID, elem.ClientID)
-		if _, ok := clientIDMap[key]; !ok {
-			return fmt.Errorf("client id from providerClientID list not found")
-		}
-		providerClientIDIndexMap[index] = struct{}{}
+		launchIDFromChannelIDIndexMap[elem.ChannelID] = struct{}{}
 	}
 
 	// Check for duplicated index in launchIDFromVerifiedClientID
 	launchIDFromVerifiedClientIDIndexMap := make(map[string]struct{})
-	for _, elem := range gs.LaunchIDsFromVerifiedClientID {
-		index := string(LaunchIDFromVerifiedClientIDKey(elem.ClientID))
-		if _, ok := launchIDFromVerifiedClientIDIndexMap[index]; ok {
+	for _, elem := range gs.LaunchIDFromVerifiedClientIDList {
+		if _, ok := launchIDFromVerifiedClientIDIndexMap[elem.ClientID]; ok {
 			return fmt.Errorf("duplicated index for launchIDFromVerifiedClientID")
 		}
-		// Check if the client id exist
-		key := clientIDKey(elem.LaunchID, elem.ClientID)
-		if _, ok := clientIDMap[key]; !ok {
-			return fmt.Errorf("client id from launchIDFromVerifiedClientID list not found")
-		}
-		launchIDFromVerifiedClientIDIndexMap[index] = struct{}{}
-	}
-
-	// Check for duplicated index in launchIDFromChannelID
-	launchIDFromChannelIDIndexMap := make(map[string]struct{})
-	for _, elem := range gs.LaunchIDsFromChannelID {
-		index := string(LaunchIDFromChannelIDKey(elem.ChannelID))
-		if _, ok := launchIDFromChannelIDIndexMap[index]; ok {
-			return fmt.Errorf("duplicated index for launchIDFromChannelID")
-		}
-		launchIDFromChannelIDIndexMap[index] = struct{}{}
+		launchIDFromVerifiedClientIDIndexMap[elem.ClientID] = struct{}{}
 	}
 
 	// Check for duplicated index in monitoringHistory
-	monitoringHistoryIndexMap := make(map[string]struct{})
-	for _, elem := range gs.MonitoringHistories {
-		index := string(MonitoringHistoryKey(elem.LaunchID))
-		if _, ok := monitoringHistoryIndexMap[index]; ok {
+	monitoringHistoryIndexMap := make(map[uint64]struct{})
+	for _, elem := range gs.MonitoringHistoryList {
+		if _, ok := monitoringHistoryIndexMap[elem.LaunchID]; ok {
 			return fmt.Errorf("duplicated index for monitoringHistory")
 		}
-		monitoringHistoryIndexMap[index] = struct{}{}
+		monitoringHistoryIndexMap[elem.LaunchID] = struct{}{}
+	}
+
+	// Check for duplicated index in verifiedClientID
+	verifiedClientIDIndexMap := make(map[uint64]struct{})
+	for _, elem := range gs.VerifiedClientIDList {
+		if _, ok := verifiedClientIDIndexMap[elem.LaunchID]; ok {
+			return fmt.Errorf("duplicated index for verifiedClientID")
+		}
+		verifiedClientIDIndexMap[elem.LaunchID] = struct{}{}
+	}
+
+	// Check for duplicated index in providerClientID
+	providerClientIDIndexMap := make(map[uint64]struct{})
+	for _, elem := range gs.ProviderClientIDList {
+		if _, ok := providerClientIDIndexMap[elem.LaunchID]; ok {
+			return fmt.Errorf("duplicated index for providerClientID")
+		}
+		providerClientIDIndexMap[elem.LaunchID] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 
 	return gs.Params.Validate()
-}
-
-// clientIDKey creates a string key for launch id and client id
-func clientIDKey(launchID uint64, clientID string) string {
-	return fmt.Sprintf("%d-%s", launchID, clientID)
 }

@@ -3,12 +3,12 @@ package types_test
 import (
 	"testing"
 
+	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/launch/types"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/launch/types"
 )
 
 func TestChain_Validate(t *testing.T) {
@@ -20,7 +20,7 @@ func TestChain_Validate(t *testing.T) {
 
 	invalidCoins := sample.Chain(r, 0, 0)
 	// add invalid coin amount
-	invalidCoins.AccountBalance = sdk.Coins{sdk.Coin{Denom: "invalid", Amount: sdk.NewInt(-1)}}
+	invalidCoins.AccountBalance = sdk.Coins{sdk.Coin{Denom: "invalid", Amount: sdkmath.NewInt(-1)}}
 
 	for _, tc := range []struct {
 		desc  string

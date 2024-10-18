@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/profile/types"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/profile/types"
 )
 
 func TestValidator_AddValidatorOperatorAddress(t *testing.T) {

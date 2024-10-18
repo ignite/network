@@ -73,7 +73,7 @@ if __name__ == "__main__":
     )
     print('rewards initialized')
 
-    cmd('spnd q ibc client self-consensus-state --height {} > spncs.yaml'.format(revisionHeight))
+    cmd('networkd q ibc client self-consensus-state --height {} > spncs.yaml'.format(revisionHeight))
 
     # Start the testnet
     print('start network')
@@ -96,9 +96,9 @@ if __name__ == "__main__":
 
     # Create verified IBC client on SPN
     print('create verified client')
-    cmd('spnd q tendermint-validator-set 2 --node "tcp://localhost:26659" > vs.yaml')
-    cmd('spnd q ibc client self-consensus-state --height 2 --node "tcp://localhost:26659" > cs.yaml')
-    cmd('spnd tx monitoring-consumer create-client 1 cs.yaml vs.yaml --unbonding-period {} --revision-height 2 --from alice -y'.format(unbondingTime))
+    cmd('networkd q tendermint-validator-set 2 --node "tcp://localhost:26659" > vs.yaml')
+    cmd('networkd q ibc client self-consensus-state --height 2 --node "tcp://localhost:26659" > cs.yaml')
+    cmd('networkd tx monitoring-consumer create-client 1 cs.yaml vs.yaml --unbonding-period {} --revision-height 2 --from alice -y'.format(unbondingTime))
 
     # Perform IBC connection
     cmd('hermes -c ./hermes/config.toml create connection spn-1 --client-a 07-tendermint-0 --client-b 07-tendermint-0')

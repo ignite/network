@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package network.monitoringp.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "network/types/ibc.proto";
+
+option go_package = "github.com/ignite/network/x/monitoringp/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "network/x/monitoringp/Params";
+  option (gogoproto.equal) = true;
+  int64 lastBlockHeight = 1;
+  string consumerChainID = 2;
+  network.types.ConsensusState consumerConsensusState = 3 [(gogoproto.nullable) = false];
+  int64 consumerUnbondingPeriod = 4;
+  uint64 consumerRevisionHeight = 5;
+}

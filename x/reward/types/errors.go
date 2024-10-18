@@ -6,14 +6,15 @@ import (
 	sdkerrors "cosmossdk.io/errors"
 )
 
+// x/reward module sentinel errors
 var (
-	ErrInvalidRewardPoolCoins = sdkerrors.Register(ModuleName, 2, "invalid coins for reward pool")
-	ErrInvalidCoordinatorID   = sdkerrors.Register(ModuleName, 3, "invalid coordinator id for reward pool")
-	ErrRewardPoolNotFound     = sdkerrors.Register(ModuleName, 4, "reward pool not found")
-	ErrRewardPoolClosed       = sdkerrors.Register(ModuleName, 5, "reward pool is closed")
-	ErrInvalidSignatureCounts = sdkerrors.Register(ModuleName, 6, "invalid signature counts")
-	ErrInvalidLastBlockHeight = sdkerrors.Register(ModuleName, 7, "invalid last block height")
-	ErrInvalidRewardHeight    = sdkerrors.Register(ModuleName, 8, "invalid reward height")
-	ErrInvalidProviderAddress = sdkerrors.Register(ModuleName, 9, "invalid provider address")
-	ErrInsufficientFunds      = sdkerrors.Register(ModuleName, 10, "insufficient funds")
+	ErrInvalidSigner          = sdkerrors.Register(ModuleName, 1101, "expected gov account as only signer for proposal message")
+	ErrInvalidRewardPoolCoins = sdkerrors.Register(ModuleName, 1102, "invalid coins for reward pool")
+	ErrInvalidCoordinatorID   = sdkerrors.Register(ModuleName, 1103, "invalid coordinator id for reward pool")
+	ErrRewardPoolNotFound     = sdkerrors.Register(ModuleName, 1104, "reward pool not found")
+	ErrRewardPoolClosed       = sdkerrors.Register(ModuleName, 1105, "reward pool is closed")
+	ErrInvalidSignatureCounts = sdkerrors.Register(ModuleName, 1106, "invalid signature counts")
+	ErrInvalidLastBlockHeight = sdkerrors.Register(ModuleName, 1107, "invalid last block height")
+	ErrInvalidRewardHeight    = sdkerrors.Register(ModuleName, 1108, "invalid reward height")
+	ErrInsufficientFunds      = sdkerrors.Register(ModuleName, 1109, "insufficient funds")
 )

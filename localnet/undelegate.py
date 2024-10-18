@@ -11,7 +11,7 @@ confFile = open('./conf.yml')
 conf = yaml.safe_load(confFile)
 
 def undelegate_cmd(valNumber, amount):
-    cmd = ["spnd", "tx", "staking", "unbond"]
+    cmd = ["networkd", "tx", "staking", "unbond"]
     cmd.append(conf['validator_addresses'][valNumber])
 
     stake = amount + conf['staking_denom']
@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     print()
     print('unbonding performed, to show validator set:')
-    print('spnd q tendermint-validator-set')
+    print('networkd q tendermint-validator-set')
     print()
     print('to show consensus state')
-    print('spnd q ibc client self-consensus-state')
+    print('networkd q ibc client self-consensus-state')

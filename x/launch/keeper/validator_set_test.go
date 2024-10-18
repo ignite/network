@@ -3,15 +3,16 @@ package keeper_test
 import (
 	"testing"
 
+	"cosmossdk.io/collections"
 	sdkmath "cosmossdk.io/math"
 	"github.com/cometbft/cometbft/crypto"
 	tmtypes "github.com/cometbft/cometbft/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/launch/types"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/launch/types"
 )
 
 func TestKeeper_CheckValidatorSet(t *testing.T) {
@@ -22,36 +23,41 @@ func TestKeeper_CheckValidatorSet(t *testing.T) {
 		validatorNotFoundSet = tmtypes.ValidatorSet{}
 		invalidValidatorSet  = tmtypes.ValidatorSet{}
 	)
-	notTriggeredLaunchID := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
+	notTriggeredLaunchID, err := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
 		CoordinatorID:   0,
 		LaunchTriggered: false,
 		GenesisChainID:  "spn-1",
 	})
-	invalidChainIDLaunchID := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
+	require.NoError(t, err)
+	invalidChainIDLaunchID, err := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
 		CoordinatorID:   0,
 		LaunchTriggered: true,
 		GenesisChainID:  "spn-10",
 	})
-	monitoringConnectedLaunchID := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
+	require.NoError(t, err)
+	monitoringConnectedLaunchID, err := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
 		CoordinatorID:       0,
 		LaunchTriggered:     true,
 		GenesisChainID:      "spn-1",
 		MonitoringConnected: true,
 	})
-	launchID := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
+	require.NoError(t, err)
+	launchID, err := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
 		CoordinatorID:   0,
 		LaunchTriggered: true,
 		GenesisChainID:  "spn-1",
 	})
+	require.NoError(t, err)
 
 	for _, validator := range validators {
 		addr := sdk.AccAddress(validator.Address().Bytes())
-		tk.LaunchKeeper.SetGenesisValidator(ctx, types.GenesisValidator{
+		err = tk.LaunchKeeper.GenesisValidator.Set(ctx, collections.Join(launchID, addr), types.GenesisValidator{
 			LaunchID:       launchID,
 			Address:        addr.String(),
 			ConsPubKey:     validator.Bytes(),
 			SelfDelegation: sdk.NewCoin("spn", sdkmath.NewInt(1000)),
 		})
+		require.NoError(t, err)
 		validatorSet.Validators = append(validatorSet.Validators,
 			tmtypes.NewValidator(validator, 0),
 		)

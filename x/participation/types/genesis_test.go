@@ -6,8 +6,8 @@ import (
 	sdkmath "cosmossdk.io/math"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/participation/types"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/participation/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
