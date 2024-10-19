@@ -47,14 +47,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Query TotalAllocations",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "address"}},
 				},
-
 				{
 					RpcMethod:      "AvailableAllocations",
 					Use:            "available-allocations [address]",
 					Short:          "Query AvailableAllocations",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "address"}},
 				},
-
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

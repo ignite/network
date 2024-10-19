@@ -47,14 +47,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Query GetCoordinatorByAddress",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "address"}},
 				},
-
 				{
 					RpcMethod:      "GetValidatorByOperatorAddress",
 					Use:            "get-validator-by-operator-address [address]",
 					Short:          "Query GetValidatorByOperatorAddress",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "address"}},
 				},
-
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},

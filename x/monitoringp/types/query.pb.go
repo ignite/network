@@ -582,6 +582,7 @@ func _Query_GetConsumerClientID_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+var Query_serviceDesc = _Query_serviceDesc
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "network.monitoringp.v1.Query",
 	HandlerType: (*QueryServer)(nil),

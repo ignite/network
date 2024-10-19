@@ -55,28 +55,24 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Query SpecialAllocationsBalance",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectID"}},
 				},
-
 				{
 					RpcMethod:      "MainnetAccountBalance",
 					Use:            "mainnet-account-balance [project-id] [address]",
 					Short:          "Query MainnetAccountBalance",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectID"}, {ProtoField: "address"}},
 				},
-
 				{
 					RpcMethod:      "ListMainnetAccountBalance",
 					Use:            "list-mainnet-account-balance [project-id]",
 					Short:          "Query ListMainnetAccountBalance",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectID"}},
 				},
-
 				{
 					RpcMethod:      "TotalShares",
 					Use:            "total-shares",
 					Short:          "Query TotalShares",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
-
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
