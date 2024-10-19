@@ -96,7 +96,7 @@ genesis:
         denom: uspn
     fundraising:
       params:
-        auction_creation_fee:
+        auctionCreationFee:
           - amount: "100"
             denom: uspn
     gov:
