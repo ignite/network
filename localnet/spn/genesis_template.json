@@ -1,102 +1,77 @@
 {
-  "genesis_time": "2022-02-16T10:55:41.670751Z",
-  "chain_id": "spn-1",
-  "initial_height": "1",
-  "consensus_params": {
-    "block": {
-      "max_bytes": "22020096",
-      "max_gas": "-1",
-      "time_iota_ms": "1000"
-    },
-    "evidence": {
-      "max_age_num_blocks": "100000",
-      "max_age_duration": "172800000000000",
-      "max_bytes": "1048576"
-    },
-    "validator": {
-      "pub_key_types": [
-        "ed25519"
-      ]
-    },
-    "version": {}
-  },
   "app_hash": "",
   "app_state": {
     "auth": {
-      "params": {
-        "max_memo_characters": "256",
-        "tx_sig_limit": "7",
-        "tx_size_cost_per_byte": "10",
-        "sig_verify_cost_ed25519": "590",
-        "sig_verify_cost_secp256k1": "1000"
-      },
       "accounts": [
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "0",
           "address": "spn1ezptsm3npn54qx9vvpah4nymre59ykr9exx2ul",
           "pub_key": null,
-          "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "0",
           "address": "spn1aqn8ynvr3jmq67879qulzrwhchq5dtrvtx0nhe",
           "pub_key": null,
-          "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "0",
           "address": "spn1pkdk6m2nh77nlaep84cylmkhjder3arey7rll5",
           "pub_key": null,
-          "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "0",
           "address": "spn1twckcceyw43da9j247pfs3yhqsv25j38grh68q",
           "pub_key": null,
-          "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "0",
           "address": "spn15rz2rwnlgr7nf6eauz52usezffwrxc0m7fezqe",
           "pub_key": null,
-          "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "0",
           "address": "spn1mhyps2hlkm0nz6k2puumn69928cnvgg43zlrg7",
           "pub_key": null,
-          "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "0",
           "address": "spn1hmx8eakt2948szjgmksvpv9ha0q9s6w08ppedf",
           "pub_key": null,
-          "account_number": "0",
           "sequence": "0"
         }
-      ]
+      ],
+      "params": {
+        "max_memo_characters": "256",
+        "sig_verify_cost_ed25519": "590",
+        "sig_verify_cost_secp256k1": "1000",
+        "tx_sig_limit": "7",
+        "tx_size_cost_per_byte": "10"
+      }
     },
     "authz": {
       "authorization": []
     },
     "bank": {
-      "params": {
-        "send_enabled": [],
-        "default_send_enabled": true
-      },
       "balances": [
         {
           "address": "spn1pkdk6m2nh77nlaep84cylmkhjder3arey7rll5",
           "coins": [
             {
-              "denom": "uspn",
-              "amount": "200000000"
+              "amount": "200000000",
+              "denom": "uspn"
             }
           ]
         },
@@ -104,8 +79,8 @@
           "address": "spn1twckcceyw43da9j247pfs3yhqsv25j38grh68q",
           "coins": [
             {
-              "denom": "uspn",
-              "amount": "200000000"
+              "amount": "200000000",
+              "denom": "uspn"
             }
           ]
         },
@@ -113,8 +88,8 @@
           "address": "spn15rz2rwnlgr7nf6eauz52usezffwrxc0m7fezqe",
           "coins": [
             {
-              "denom": "uspn",
-              "amount": "200000000"
+              "amount": "200000000",
+              "denom": "uspn"
             }
           ]
         },
@@ -122,8 +97,8 @@
           "address": "spn1hmx8eakt2948szjgmksvpv9ha0q9s6w08ppedf",
           "coins": [
             {
-              "denom": "uspn",
-              "amount": "200000000"
+              "amount": "200000000",
+              "denom": "uspn"
             }
           ]
         },
@@ -131,8 +106,8 @@
           "address": "spn1ezptsm3npn54qx9vvpah4nymre59ykr9exx2ul",
           "coins": [
             {
-              "denom": "uspn",
-              "amount": "200000000"
+              "amount": "200000000",
+              "denom": "uspn"
             }
           ]
         },
@@ -140,8 +115,8 @@
           "address": "spn1mhyps2hlkm0nz6k2puumn69928cnvgg43zlrg7",
           "coins": [
             {
-              "denom": "uspn",
-              "amount": "200000000"
+              "amount": "200000000",
+              "denom": "uspn"
             }
           ]
         },
@@ -149,28 +124,18 @@
           "address": "spn1aqn8ynvr3jmq67879qulzrwhchq5dtrvtx0nhe",
           "coins": [
             {
-              "denom": "uspn",
-              "amount": "200000000"
+              "amount": "200000000",
+              "denom": "uspn"
             }
           ]
         }
       ],
-      "supply": [],
-      "denom_metadata": []
-    },
-    "project": {
-      "projectChainsList": [],
-      "projectCounter": "1",
-      "projectList": [],
-      "mainnetAccountList": [],
+      "denom_metadata": [],
       "params": {
-        "totalSupplyRange": {
-          "maxTotalSupply": "1000000000000000",
-          "minTotalSupply": "100"
-        },
-        "projectCreationFee": []
+        "default_send_enabled": true,
+        "send_enabled": []
       },
-      "totalShares": "100000"
+      "supply": []
     },
     "capability": {
       "index": "1",
@@ -295,12 +260,12 @@
       "genesisAccountList": [],
       "genesisValidatorList": [],
       "params": {
-        "revertDelay": "5",
+        "chainCreationFee": [],
         "launchTimeRange": {
           "maxLaunchTime": "604800",
           "minLaunchTime": "5"
         },
-        "chainCreationFee": []
+        "revertDelay": "5"
       },
       "requestCounterList": [],
       "requestList": [],
@@ -331,18 +296,17 @@
       "launchIDFromChannelIDList": [],
       "launchIDFromVerifiedClientIDList": [],
       "monitoringHistoryList": [],
-      "params": {
-      },
+      "params": {},
       "port_id": "monitoringc",
       "providerClientIDList": [],
       "verifiedClientIDList": []
     },
     "monitoringp": {
       "params": {
-        "lastBlockHeight": 1,
         "consumerChainID": "orbit-1",
+        "consumerRevisionHeight": 1,
         "consumerUnbondingPeriod": "2",
-        "consumerRevisionHeight": 1
+        "lastBlockHeight": 1
       },
       "port_id": "monitoringp"
     },
@@ -354,32 +318,32 @@
         },
         "participationTierList": [
           {
-            "tierID": 1,
-            "requiredAllocations": "1",
             "benefits": {
               "maxBidAmount": "1000"
-            }
+            },
+            "requiredAllocations": "1",
+            "tierID": 1
           },
           {
-            "tierID": 2,
-            "requiredAllocations": "2",
             "benefits": {
               "maxBidAmount": "2000"
-            }
+            },
+            "requiredAllocations": "2",
+            "tierID": 2
           },
           {
-            "tierID": 3,
-            "requiredAllocations": "5",
             "benefits": {
               "maxBidAmount": "10000"
-            }
+            },
+            "requiredAllocations": "5",
+            "tierID": 3
           },
           {
-            "tierID": 4,
-            "requiredAllocations": "10",
             "benefits": {
               "maxBidAmount": "30000"
-            }
+            },
+            "requiredAllocations": "10",
+            "tierID": 4
           }
         ],
         "registrationPeriod": "604800s",
@@ -435,5 +399,26 @@
     },
     "upgrade": {},
     "vesting": {}
-  }
+  },
+  "chain_id": "spn-1",
+  "consensus_params": {
+    "block": {
+      "max_bytes": "22020096",
+      "max_gas": "-1",
+      "time_iota_ms": "1000"
+    },
+    "evidence": {
+      "max_age_duration": "172800000000000",
+      "max_age_num_blocks": "100000",
+      "max_bytes": "1048576"
+    },
+    "validator": {
+      "pub_key_types": [
+        "ed25519"
+      ]
+    },
+    "version": {}
+  },
+  "genesis_time": "2022-02-16T10:55:41.670751Z",
+  "initial_height": "1"
 }
