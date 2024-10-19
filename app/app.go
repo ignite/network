@@ -53,9 +53,7 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	groupkeeper "github.com/cosmos/cosmos-sdk/x/group/keeper"
 	_ "github.com/cosmos/cosmos-sdk/x/group/module" // import for side-effects
-	_ "github.com/cosmos/cosmos-sdk/x/mint"         // import for side-effects
-	mintkeeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
-	_ "github.com/cosmos/cosmos-sdk/x/params" // import for side-effects
+	_ "github.com/cosmos/cosmos-sdk/x/params"       // import for side-effects
 	paramsclient "github.com/cosmos/cosmos-sdk/x/params/client"
 	paramskeeper "github.com/cosmos/cosmos-sdk/x/params/keeper"
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
@@ -73,6 +71,9 @@ import (
 	ibctransferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 	fundraisingmodulekeeper "github.com/ignite/modules/x/fundraising/keeper"
+	_ "github.com/ignite/modules/x/fundraising/module" // import for side-effects
+	mintkeeper "github.com/ignite/modules/x/mint/keeper"
+	_ "github.com/ignite/modules/x/mint/module" // import for side-effects
 
 	"github.com/ignite/network/docs"
 	networktypes "github.com/ignite/network/pkg/types"

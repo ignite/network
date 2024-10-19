@@ -17,7 +17,6 @@ import (
 	genutilmodulev1 "cosmossdk.io/api/cosmos/genutil/module/v1"
 	govmodulev1 "cosmossdk.io/api/cosmos/gov/module/v1"
 	groupmodulev1 "cosmossdk.io/api/cosmos/group/module/v1"
-	mintmodulev1 "cosmossdk.io/api/cosmos/mint/module/v1"
 	nftmodulev1 "cosmossdk.io/api/cosmos/nft/module/v1"
 	paramsmodulev1 "cosmossdk.io/api/cosmos/params/module/v1"
 	slashingmodulev1 "cosmossdk.io/api/cosmos/slashing/module/v1"
@@ -42,7 +41,6 @@ import (
 	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/cosmos/cosmos-sdk/x/group"
-	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
@@ -52,9 +50,10 @@ import (
 	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	fundraisingmodulev1 "github.com/ignite/modules/api/modules/fundraising/module/v1"
+	mintmodulev1 "github.com/ignite/modules/api/modules/mint/module/v1"
 	claimtypes "github.com/ignite/modules/x/claim/types"
-	_ "github.com/ignite/modules/x/fundraising/module"
 	fundraisingmoduletypes "github.com/ignite/modules/x/fundraising/types"
+	minttypes "github.com/ignite/modules/x/mint/types"
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	launchmodulev1 "github.com/ignite/network/api/network/launch/module/v1"
@@ -166,6 +165,7 @@ var (
 		feegrant.ModuleName,
 		group.ModuleName,
 		genutiltypes.ModuleName,
+		minttypes.ModuleName,
 		// ibc modules
 		ibcexported.ModuleName,
 		ibctransfertypes.ModuleName,

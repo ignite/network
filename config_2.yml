@@ -37,7 +37,7 @@ genesis:
         revertDelay: 5s
     mint:
       params:
-        mint_denom: uspn
+        mintDenom: uspn
     monitoringp:
       params:
         consumerChainID: orbit-1
