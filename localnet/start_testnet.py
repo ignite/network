@@ -108,15 +108,15 @@ def start_testnet(
     genesis['app_state']['staking']['params']['unbonding_time'] = str(unbondingTime)+"s"
 
     # Create the gentxs
-    cmd_devnull('networkd gentx joe {} --chain-id {} --moniker="joe" --home ./testnet/node1 --output-document ./gentx1.json'.format(selfDelegationVal1, chainID))
+    cmd_devnull('networkd genesis gentx joe {} --chain-id {} --moniker="joe" --home ./testnet/node1 --output-document ./gentx1.json'.format(selfDelegationVal1, chainID))
     gentx1File = open('./gentx1.json')
     gentx1 = json.load(gentx1File)
 
-    cmd_devnull('networkd gentx steve {} --chain-id {} --moniker="steve" --home ./testnet/node2 --output-document ./gentx2.json'.format(selfDelegationVal2, chainID))
+    cmd_devnull('networkd genesis gentx steve {} --chain-id {} --moniker="steve" --home ./testnet/node2 --output-document ./gentx2.json'.format(selfDelegationVal2, chainID))
     gentx2File = open('./gentx2.json')
     gentx2 = json.load(gentx2File)
 
-    cmd_devnull('networkd gentx olivia {} --chain-id {} --moniker="olivia" --home ./testnet/node3 --output-document ./gentx3.json'.format(selfDelegationVal3, chainID))
+    cmd_devnull('networkd genesis gentx olivia {} --chain-id {} --moniker="olivia" --home ./testnet/node3 --output-document ./gentx3.json'.format(selfDelegationVal3, chainID))
     gentx3File = open('./gentx3.json')
     gentx3 = json.load(gentx3File)
 

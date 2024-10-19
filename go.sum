@@ -925,8 +925,8 @@ github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:
 github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/ianlancetaylor/demangle v0.0.0-20210905161508-09a460cdf81d/go.mod h1:aYm2/VgdVmcIU8iMfdMvDMsRAQjcfZSKFby6HOFvi/w=
 github.com/ianlancetaylor/demangle v0.0.0-20230524184225-eabc099b10ab/go.mod h1:gx7rwoVhcfuVKG5uya9Hs3Sxj7EIvldVofAWIUtGouw=
-github.com/ignite/modules v0.0.3-0.20241003123636-eefc8f505b3f h1:mWSPXvrrr9//WC5aQN9X7p2mK/eSTl3AplH4qnqu938=
-github.com/ignite/modules v0.0.3-0.20241003123636-eefc8f505b3f/go.mod h1:dUUmof5pdx14d7YGRByjzErnaTSHYCFd1Doz+sPIjhs=
+github.com/ignite/modules v0.0.3-0.20241019070348-56cac3115dc5 h1:iSQeljt8Ii7AtrENzjdnbsnQUwDLwMm2ZCyYVy+AEdM=
+github.com/ignite/modules v0.0.3-0.20241019070348-56cac3115dc5/go.mod h1:Rmv2KTn5jfXL/qkKdaHD4ExJ1eaH1iVQDs+YD4eTV+o=
 github.com/improbable-eng/grpc-web v0.15.0 h1:BN+7z6uNXZ1tQGcNAuaU1YjsLTApzkjt2tzCixLaUPQ=
 github.com/improbable-eng/grpc-web v0.15.0/go.mod h1:1sy9HKV4Jt9aEs9JSnkWlRJPuPtwNr0l57L4f878wP8=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=

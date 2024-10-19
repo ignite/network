@@ -44,7 +44,7 @@ def start_spn():
 
     # Create the gentxs
     for i in range(3):
-        gentxCmd = 'networkd gentx {valName} {selfDelegation} --chain-id {chainID} --moniker="{valName}" --home ./spn/node{i} --output-document ./gentx.json'.format(
+        gentxCmd = 'networkd genesis gentx {valName} {selfDelegation} --chain-id {chainID} --moniker="{valName}" --home ./spn/node{i} --output-document ./gentx.json'.format(
             valName=conf['validator_names'][i],
             selfDelegation=str(conf['validator_self_delegations'][i])+conf['staking_denom'],
             chainID=conf['chain_id'],

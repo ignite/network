@@ -68,10 +68,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectID"}},
 				},
 				{
-					RpcMethod:      "TotalShares",
-					Use:            "total-shares",
-					Short:          "Query TotalShares",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
+					RpcMethod: "TotalShares",
+					Use:       "total-shares",
+					Short:     "Query TotalShares",
 				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
@@ -94,19 +93,19 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "EditProject",
 					Use:            "edit-project [project-id] [name] [metadata]",
 					Short:          "Send a EditProject tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectId"}, {ProtoField: "name"}, {ProtoField: "metadata"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectID"}, {ProtoField: "name"}, {ProtoField: "metadata"}},
 				},
 				{
 					RpcMethod:      "UpdateTotalSupply",
 					Use:            "update-total-supply [project-id] [total-supply-update]",
 					Short:          "Send a UpdateTotalSupply tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectId"}, {ProtoField: "totalSupplyUpdate"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectID"}, {ProtoField: "totalSupplyUpdate"}},
 				},
 				{
 					RpcMethod:      "UpdateSpecialAllocations",
 					Use:            "update-special-allocations [project-id] [special-allocations]",
 					Short:          "Send a UpdateSpecialAllocations tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectId"}, {ProtoField: "specialAllocations"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "projectID"}, {ProtoField: "specialAllocations"}},
 				},
 				{
 					RpcMethod:      "InitializeMainnet",

@@ -30,11 +30,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "channelID"}},
 				},
 				{
-					RpcMethod: "ListLaunchIDFromVerifiedClientID",
-					Use:       "list-launch-id-from-verified-client-id",
-					Short:     "List all LaunchIDFromVerifiedClientID",
-				},
-				{
 					RpcMethod:      "GetMonitoringHistory",
 					Use:            "get-monitoring-history [launch-id]",
 					Short:          "Gets a MonitoringHistory",

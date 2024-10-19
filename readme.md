@@ -26,7 +26,7 @@
     <img alt="Lint Status" src="https://github.com/ignite/network/workflows/Lint/badge.svg" />
 </div>
 
-**spn** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite](https://github.com/ignite/cli).
+**network** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite](https://github.com/ignite/cli).
 
 ## Get started
 
@@ -36,7 +36,7 @@ ignite chain serve
 
 ## Launching chains with Ignite CLI
 
-Please read our [guides](https://docs.ignite.com/network/introduction) for using `spn` with Ignite CLI.
+Please read our [guides](https://docs.ignite.com/network/introduction) for using `network` with Ignite CLI.
 
 ## Learn more
 

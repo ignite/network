@@ -49,9 +49,9 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "GetValidatorByOperatorAddress",
-					Use:            "get-validator-by-operator-address [address]",
+					Use:            "get-validator-by-operator-address [operatorAddress]",
 					Short:          "Query GetValidatorByOperatorAddress",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "address"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "operatorAddress"}},
 				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
@@ -66,21 +66,20 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "CreateCoordinator",
-					Use:            "create-coordinator [description] [active]",
+					Use:            "create-coordinator [description]",
 					Short:          "Create Coordinator",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "description"}, {ProtoField: "active"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "description"}},
 				},
 				{
 					RpcMethod:      "UpdateCoordinatorDescription",
-					Use:            "update-coordinator [id] [description] [active]",
-					Short:          "Update Coordinator",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "ID"}, {ProtoField: "description"}, {ProtoField: "active"}},
+					Use:            "update-coordinator-description [description]",
+					Short:          "Update Coordinator Description",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "description"}},
 				},
 				{
-					RpcMethod:      "DisableCoordinator",
-					Use:            "delete-coordinator [id]",
-					Short:          "Delete Coordinator",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "ID"}},
+					RpcMethod: "DisableCoordinator",
+					Use:       "disable-coordinator",
+					Short:     "Disable Coordinator",
 				},
 				{
 					RpcMethod:      "UpdateCoordinatorAddress",

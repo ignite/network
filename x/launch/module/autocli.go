@@ -24,10 +24,10 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "GetChain",
-					Use:            "get-chain [id]",
+					Use:            "get-chain [launch-id]",
 					Short:          "Gets a Chain by id",
 					Alias:          []string{"show-chain"},
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launchID"}},
 				},
 				{
 					RpcMethod:      "ListGenesisAccount",
@@ -40,7 +40,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "get-genesis-account [id]",
 					Short:          "Gets a GenesisAccount",
 					Alias:          []string{"show-genesis-account"},
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launchID"}, {ProtoField: "Address"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launchID"}, {ProtoField: "address"}},
 				},
 				{
 					RpcMethod:      "ListGenesisValidator",
@@ -53,7 +53,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "get-genesis-validator [id]",
 					Short:          "Gets a GenesisValidator",
 					Alias:          []string{"show-genesis-validator"},
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launchID"}, {ProtoField: "Address"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launchID"}, {ProtoField: "address"}},
 				},
 				{
 					RpcMethod:      "ListVestingAccount",
@@ -66,7 +66,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "get-vesting-account [id]",
 					Short:          "Gets a VestingAccount",
 					Alias:          []string{"show-vesting-account"},
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launchID"}, {ProtoField: "Address"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launchID"}, {ProtoField: "address"}},
 				},
 				{
 					RpcMethod:      "ListRequest",
