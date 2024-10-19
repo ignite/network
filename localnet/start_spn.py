@@ -4,7 +4,7 @@ import subprocess
 import pathlib
 import yaml
 from clear import clear_home
-from utils import cmd_devnull
+from utils import cmd_devnull, cmd
 
 def save_genesis(genesis):
     with open('./spn/node1/config/genesis.json', 'w', encoding='utf-8') as f:
@@ -50,7 +50,7 @@ def start_spn():
             chainID=conf['chain_id'],
             i=str(i+1),
         )
-        cmd_devnull(gentxCmd)
+        cmd(gentxCmd)
         gentxFile = open('./gentx.json')
         gentx = json.load(gentxFile)
         genesis['app_state']['genutil']['gen_txs'].append(gentx)
