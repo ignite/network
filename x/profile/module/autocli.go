@@ -69,12 +69,22 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "create-coordinator [description]",
 					Short:          "Create Coordinator",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "description"}},
+					FlagOptions: map[string]*autocliv1.FlagOptions{
+						"identity": {Name: "identity", Usage: "Coordinator identity"},
+						"website":  {Name: "website", Usage: "Coordinator website URL"},
+						"details":  {Name: "details", Usage: "Coordinator details"},
+					},
 				},
 				{
 					RpcMethod:      "UpdateCoordinatorDescription",
 					Use:            "update-coordinator-description [description]",
 					Short:          "Update Coordinator Description",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "description"}},
+					FlagOptions: map[string]*autocliv1.FlagOptions{
+						"identity": {Name: "identity", Usage: "Coordinator identity"},
+						"website":  {Name: "website", Usage: "Coordinator website URL"},
+						"details":  {Name: "details", Usage: "Coordinator details"},
+					},
 				},
 				{
 					RpcMethod: "DisableCoordinator",

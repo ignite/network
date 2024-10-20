@@ -29,8 +29,12 @@ func (k msgServer) CreateCoordinator(ctx context.Context, msg *types.MsgCreateCo
 	coordinator := types.Coordinator{
 		CoordinatorId: nextID,
 		Address:       msg.Address,
-		Description:   msg.Description,
-		Active:        true,
+		Description: types.CoordinatorDescription{
+			Identity: msg.Identity,
+			Website:  msg.Website,
+			Details:  msg.Details,
+		},
+		Active: true,
 	}
 
 	if err = k.Coordinator.Set(ctx, nextID, coordinator); err != nil {
@@ -76,14 +80,14 @@ func (k msgServer) UpdateCoordinatorDescription(ctx context.Context, msg *types.
 		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	if len(msg.Description.Identity) > 0 {
-		coordinator.Description.Identity = msg.Description.Identity
+	if len(msg.Identity) > 0 {
+		coordinator.Description.Identity = msg.Identity
 	}
-	if len(msg.Description.Website) > 0 {
-		coordinator.Description.Website = msg.Description.Website
+	if len(msg.Website) > 0 {
+		coordinator.Description.Website = msg.Website
 	}
-	if len(msg.Description.Details) > 0 {
-		coordinator.Description.Details = msg.Description.Details
+	if len(msg.Details) > 0 {
+		coordinator.Description.Details = msg.Details
 	}
 
 	if err := k.Coordinator.Set(ctx, coordByAddress.CoordinatorId, coordinator); err != nil {

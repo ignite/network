@@ -27,15 +27,21 @@ func Test_msgServer_UpdateSpecialAllocations(t *testing.T) {
 	require.NoError(t, err)
 
 	t.Run("should allow creation of coordinators", func(t *testing.T) {
+		desc1 := sample.CoordinatorDescription(r)
 		res, err := ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
-			Address:     coordAddr,
-			Description: sample.CoordinatorDescription(r),
+			Address:  coordAddr,
+			Identity: desc1.Identity,
+			Details:  desc1.Details,
+			Website:  desc1.Website,
 		})
 		require.NoError(t, err)
 		coordID = res.CoordinatorId
+		desc2 := sample.CoordinatorDescription(r)
 		res, err = ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
-			Address:     coordAddrNoProject,
-			Description: sample.CoordinatorDescription(r),
+			Address:  coordAddrNoProject,
+			Identity: desc2.Identity,
+			Details:  desc2.Details,
+			Website:  desc2.Website,
 		})
 		require.NoError(t, err)
 	})

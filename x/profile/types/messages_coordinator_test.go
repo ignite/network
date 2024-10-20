@@ -19,20 +19,17 @@ func TestMsgUpdateCoordinatorDescription_ValidateBasic(t *testing.T) {
 		{
 			name: "should prevent validate empty description",
 			msg: types.MsgUpdateCoordinatorDescription{
-				Address:     addr,
-				Description: types.CoordinatorDescription{},
+				Address: addr,
 			},
 			err: types.ErrEmptyDescription,
 		},
 		{
 			name: "should validate valid message",
 			msg: types.MsgUpdateCoordinatorDescription{
-				Address: sample.Address(r),
-				Description: types.CoordinatorDescription{
-					Identity: "identity",
-					Website:  "website",
-					Details:  "details",
-				},
+				Address:  sample.Address(r),
+				Identity: "identity",
+				Website:  "website",
+				Details:  "details",
 			},
 		},
 	}

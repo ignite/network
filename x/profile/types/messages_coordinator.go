@@ -7,12 +7,10 @@ import (
 
 func NewMsgCreateCoordinator(address, identity, website, details string) *MsgCreateCoordinator {
 	return &MsgCreateCoordinator{
-		Address: address,
-		Description: CoordinatorDescription{
-			Identity: identity,
-			Website:  website,
-			Details:  details,
-		},
+		Address:  address,
+		Identity: identity,
+		Website:  website,
+		Details:  details,
 	}
 }
 
@@ -23,12 +21,10 @@ func (msg *MsgCreateCoordinator) Type() string {
 
 func NewMsgUpdateCoordinatorDescription(address, identity, website, details string) *MsgUpdateCoordinatorDescription {
 	return &MsgUpdateCoordinatorDescription{
-		Address: address,
-		Description: CoordinatorDescription{
-			Identity: identity,
-			Website:  website,
-			Details:  details,
-		},
+		Address:  address,
+		Identity: identity,
+		Website:  website,
+		Details:  details,
 	}
 }
 
@@ -38,9 +34,9 @@ func (msg *MsgUpdateCoordinatorDescription) Type() string {
 }
 
 func (msg *MsgUpdateCoordinatorDescription) ValidateBasic() error {
-	if msg.Description.Details == "" &&
-		msg.Description.Identity == "" &&
-		msg.Description.Website == "" {
+	if msg.Details == "" &&
+		msg.Identity == "" &&
+		msg.Website == "" {
 		return sdkerrors.Wrap(ErrEmptyDescription, msg.Address)
 	}
 	return nil

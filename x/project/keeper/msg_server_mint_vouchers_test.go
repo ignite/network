@@ -28,15 +28,21 @@ func TestMsgMintVouchers(t *testing.T) {
 	)
 
 	t.Run("should allow creation of coordinators", func(t *testing.T) {
+		desc1 := sample.CoordinatorDescription(r)
 		res, err := ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
-			Address:     coord,
-			Description: sample.CoordinatorDescription(r),
+			Address:  coord,
+			Identity: desc1.Identity,
+			Details:  desc1.Details,
+			Website:  desc1.Website,
 		})
 		require.NoError(t, err)
 		coordID = res.CoordinatorId
+		desc2 := sample.CoordinatorDescription(r)
 		res, err = ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
-			Address:     coordNoProject,
-			Description: sample.CoordinatorDescription(r),
+			Address:  coordNoProject,
+			Identity: desc2.Identity,
+			Details:  desc2.Details,
+			Website:  desc2.Website,
 		})
 		require.NoError(t, err)
 	})

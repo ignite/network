@@ -21,15 +21,21 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 	)
 
 	t.Run("should allow creating coordinators", func(t *testing.T) {
+		desc1 := sample.CoordinatorDescription(r)
 		res, err := ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
-			Address:     coordAddr1,
-			Description: sample.CoordinatorDescription(r),
+			Address:  coordAddr1,
+			Identity: desc1.Identity,
+			Details:  desc1.Details,
+			Website:  desc1.Website,
 		})
 		require.NoError(t, err)
 		coordID = res.CoordinatorId
+		desc2 := sample.CoordinatorDescription(r)
 		res, err = ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
-			Address:     coordAddr2,
-			Description: sample.CoordinatorDescription(r),
+			Address:  coordAddr2,
+			Identity: desc2.Identity,
+			Details:  desc2.Details,
+			Website:  desc2.Website,
 		})
 		require.NoError(t, err)
 	})

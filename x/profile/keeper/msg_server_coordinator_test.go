@@ -57,7 +57,9 @@ func TestMsgCreateCoordinator(t *testing.T) {
 			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorId)
 			require.NoError(t, err, "coordinator id not found")
 			require.EqualValues(t, tt.msg.Address, coord.Address)
-			require.EqualValues(t, tt.msg.Description, coord.Description)
+			require.EqualValues(t, tt.msg.Identity, coord.Description.Identity)
+			require.EqualValues(t, tt.msg.Website, coord.Description.Website)
+			require.EqualValues(t, tt.msg.Details, coord.Description.Details)
 			require.EqualValues(t, coordByAddr.CoordinatorId, coord.CoordinatorId)
 			require.EqualValues(t, true, coord.Active)
 		})
@@ -212,10 +214,8 @@ func TestMsgUpdateCoordinatorDescription(t *testing.T) {
 		{
 			name: "should allow updating one value of coordinator description",
 			msg: types.MsgUpdateCoordinatorDescription{
-				Address: msgCoord.Address,
-				Description: types.CoordinatorDescription{
-					Identity: "update",
-				},
+				Address:  msgCoord.Address,
+				Identity: "update",
 			},
 		},
 		{
@@ -251,20 +251,20 @@ func TestMsgUpdateCoordinatorDescription(t *testing.T) {
 			require.EqualValues(t, tt.msg.Address, coord.Address)
 			require.EqualValues(t, coordByAddr.CoordinatorId, coord.CoordinatorId)
 
-			if len(tt.msg.Description.Identity) > 0 {
-				require.EqualValues(t, tt.msg.Description.Identity, coord.Description.Identity)
+			if len(tt.msg.Identity) > 0 {
+				require.EqualValues(t, tt.msg.Identity, coord.Description.Identity)
 			} else {
 				require.EqualValues(t, oldCoord.Description.Identity, coord.Description.Identity)
 			}
 
-			if len(tt.msg.Description.Website) > 0 {
-				require.EqualValues(t, tt.msg.Description.Website, coord.Description.Website)
+			if len(tt.msg.Website) > 0 {
+				require.EqualValues(t, tt.msg.Website, coord.Description.Website)
 			} else {
 				require.EqualValues(t, oldCoord.Description.Website, coord.Description.Website)
 			}
 
-			if len(tt.msg.Description.Details) > 0 {
-				require.EqualValues(t, tt.msg.Description.Details, coord.Description.Details)
+			if len(tt.msg.Details) > 0 {
+				require.EqualValues(t, tt.msg.Details, coord.Description.Details)
 			} else {
 				require.EqualValues(t, oldCoord.Description.Details, coord.Description.Details)
 			}
