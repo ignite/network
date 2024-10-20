@@ -15,15 +15,15 @@ import (
 )
 
 var (
-	md_EventCoordinatorCreated               protoreflect.MessageDescriptor
-	fd_EventCoordinatorCreated_coordinatorID protoreflect.FieldDescriptor
-	fd_EventCoordinatorCreated_address       protoreflect.FieldDescriptor
+	md_EventCoordinatorCreated                protoreflect.MessageDescriptor
+	fd_EventCoordinatorCreated_coordinator_id protoreflect.FieldDescriptor
+	fd_EventCoordinatorCreated_address        protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_profile_v1_events_proto_init()
 	md_EventCoordinatorCreated = File_network_profile_v1_events_proto.Messages().ByName("EventCoordinatorCreated")
-	fd_EventCoordinatorCreated_coordinatorID = md_EventCoordinatorCreated.Fields().ByName("coordinatorID")
+	fd_EventCoordinatorCreated_coordinator_id = md_EventCoordinatorCreated.Fields().ByName("coordinator_id")
 	fd_EventCoordinatorCreated_address = md_EventCoordinatorCreated.Fields().ByName("address")
 }
 
@@ -92,9 +92,9 @@ func (x *fastReflection_EventCoordinatorCreated) Interface() protoreflect.ProtoM
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventCoordinatorCreated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.CoordinatorID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.CoordinatorID)
-		if !f(fd_EventCoordinatorCreated_coordinatorID, value) {
+	if x.CoordinatorId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.CoordinatorId)
+		if !f(fd_EventCoordinatorCreated_coordinator_id, value) {
 			return
 		}
 	}
@@ -119,8 +119,8 @@ func (x *fastReflection_EventCoordinatorCreated) Range(f func(protoreflect.Field
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventCoordinatorCreated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorCreated.coordinatorID":
-		return x.CoordinatorID != uint64(0)
+	case "network.profile.v1.EventCoordinatorCreated.coordinator_id":
+		return x.CoordinatorId != uint64(0)
 	case "network.profile.v1.EventCoordinatorCreated.address":
 		return x.Address != ""
 	default:
@@ -139,8 +139,8 @@ func (x *fastReflection_EventCoordinatorCreated) Has(fd protoreflect.FieldDescri
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventCoordinatorCreated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorCreated.coordinatorID":
-		x.CoordinatorID = uint64(0)
+	case "network.profile.v1.EventCoordinatorCreated.coordinator_id":
+		x.CoordinatorId = uint64(0)
 	case "network.profile.v1.EventCoordinatorCreated.address":
 		x.Address = ""
 	default:
@@ -159,8 +159,8 @@ func (x *fastReflection_EventCoordinatorCreated) Clear(fd protoreflect.FieldDesc
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventCoordinatorCreated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.profile.v1.EventCoordinatorCreated.coordinatorID":
-		value := x.CoordinatorID
+	case "network.profile.v1.EventCoordinatorCreated.coordinator_id":
+		value := x.CoordinatorId
 		return protoreflect.ValueOfUint64(value)
 	case "network.profile.v1.EventCoordinatorCreated.address":
 		value := x.Address
@@ -185,8 +185,8 @@ func (x *fastReflection_EventCoordinatorCreated) Get(descriptor protoreflect.Fie
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventCoordinatorCreated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorCreated.coordinatorID":
-		x.CoordinatorID = value.Uint()
+	case "network.profile.v1.EventCoordinatorCreated.coordinator_id":
+		x.CoordinatorId = value.Uint()
 	case "network.profile.v1.EventCoordinatorCreated.address":
 		x.Address = value.Interface().(string)
 	default:
@@ -209,8 +209,8 @@ func (x *fastReflection_EventCoordinatorCreated) Set(fd protoreflect.FieldDescri
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventCoordinatorCreated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorCreated.coordinatorID":
-		panic(fmt.Errorf("field coordinatorID of message network.profile.v1.EventCoordinatorCreated is not mutable"))
+	case "network.profile.v1.EventCoordinatorCreated.coordinator_id":
+		panic(fmt.Errorf("field coordinator_id of message network.profile.v1.EventCoordinatorCreated is not mutable"))
 	case "network.profile.v1.EventCoordinatorCreated.address":
 		panic(fmt.Errorf("field address of message network.profile.v1.EventCoordinatorCreated is not mutable"))
 	default:
@@ -226,7 +226,7 @@ func (x *fastReflection_EventCoordinatorCreated) Mutable(fd protoreflect.FieldDe
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventCoordinatorCreated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorCreated.coordinatorID":
+	case "network.profile.v1.EventCoordinatorCreated.coordinator_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.profile.v1.EventCoordinatorCreated.address":
 		return protoreflect.ValueOfString("")
@@ -299,8 +299,8 @@ func (x *fastReflection_EventCoordinatorCreated) ProtoMethods() *protoiface.Meth
 		var n int
 		var l int
 		_ = l
-		if x.CoordinatorID != 0 {
-			n += 1 + runtime.Sov(uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			n += 1 + runtime.Sov(uint64(x.CoordinatorId))
 		}
 		l = len(x.Address)
 		if l > 0 {
@@ -342,8 +342,8 @@ func (x *fastReflection_EventCoordinatorCreated) ProtoMethods() *protoiface.Meth
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.CoordinatorID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -398,9 +398,9 @@ func (x *fastReflection_EventCoordinatorCreated) ProtoMethods() *protoiface.Meth
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorId", wireType)
 				}
-				x.CoordinatorID = 0
+				x.CoordinatorId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -410,7 +410,7 @@ func (x *fastReflection_EventCoordinatorCreated) ProtoMethods() *protoiface.Meth
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.CoordinatorID |= uint64(b&0x7F) << shift
+					x.CoordinatorId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -483,16 +483,16 @@ func (x *fastReflection_EventCoordinatorCreated) ProtoMethods() *protoiface.Meth
 }
 
 var (
-	md_EventCoordinatorAddressUpdated               protoreflect.MessageDescriptor
-	fd_EventCoordinatorAddressUpdated_coordinatorID protoreflect.FieldDescriptor
-	fd_EventCoordinatorAddressUpdated_newAddress    protoreflect.FieldDescriptor
+	md_EventCoordinatorAddressUpdated                protoreflect.MessageDescriptor
+	fd_EventCoordinatorAddressUpdated_coordinator_id protoreflect.FieldDescriptor
+	fd_EventCoordinatorAddressUpdated_new_address    protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_profile_v1_events_proto_init()
 	md_EventCoordinatorAddressUpdated = File_network_profile_v1_events_proto.Messages().ByName("EventCoordinatorAddressUpdated")
-	fd_EventCoordinatorAddressUpdated_coordinatorID = md_EventCoordinatorAddressUpdated.Fields().ByName("coordinatorID")
-	fd_EventCoordinatorAddressUpdated_newAddress = md_EventCoordinatorAddressUpdated.Fields().ByName("newAddress")
+	fd_EventCoordinatorAddressUpdated_coordinator_id = md_EventCoordinatorAddressUpdated.Fields().ByName("coordinator_id")
+	fd_EventCoordinatorAddressUpdated_new_address = md_EventCoordinatorAddressUpdated.Fields().ByName("new_address")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventCoordinatorAddressUpdated)(nil)
@@ -560,15 +560,15 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) Interface() protoreflect
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventCoordinatorAddressUpdated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.CoordinatorID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.CoordinatorID)
-		if !f(fd_EventCoordinatorAddressUpdated_coordinatorID, value) {
+	if x.CoordinatorId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.CoordinatorId)
+		if !f(fd_EventCoordinatorAddressUpdated_coordinator_id, value) {
 			return
 		}
 	}
 	if x.NewAddress != "" {
 		value := protoreflect.ValueOfString(x.NewAddress)
-		if !f(fd_EventCoordinatorAddressUpdated_newAddress, value) {
+		if !f(fd_EventCoordinatorAddressUpdated_new_address, value) {
 			return
 		}
 	}
@@ -587,9 +587,9 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) Range(f func(protoreflec
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventCoordinatorAddressUpdated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinatorID":
-		return x.CoordinatorID != uint64(0)
-	case "network.profile.v1.EventCoordinatorAddressUpdated.newAddress":
+	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinator_id":
+		return x.CoordinatorId != uint64(0)
+	case "network.profile.v1.EventCoordinatorAddressUpdated.new_address":
 		return x.NewAddress != ""
 	default:
 		if fd.IsExtension() {
@@ -607,9 +607,9 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) Has(fd protoreflect.Fiel
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventCoordinatorAddressUpdated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinatorID":
-		x.CoordinatorID = uint64(0)
-	case "network.profile.v1.EventCoordinatorAddressUpdated.newAddress":
+	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinator_id":
+		x.CoordinatorId = uint64(0)
+	case "network.profile.v1.EventCoordinatorAddressUpdated.new_address":
 		x.NewAddress = ""
 	default:
 		if fd.IsExtension() {
@@ -627,10 +627,10 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) Clear(fd protoreflect.Fi
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventCoordinatorAddressUpdated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinatorID":
-		value := x.CoordinatorID
+	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinator_id":
+		value := x.CoordinatorId
 		return protoreflect.ValueOfUint64(value)
-	case "network.profile.v1.EventCoordinatorAddressUpdated.newAddress":
+	case "network.profile.v1.EventCoordinatorAddressUpdated.new_address":
 		value := x.NewAddress
 		return protoreflect.ValueOfString(value)
 	default:
@@ -653,9 +653,9 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) Get(descriptor protorefl
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventCoordinatorAddressUpdated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinatorID":
-		x.CoordinatorID = value.Uint()
-	case "network.profile.v1.EventCoordinatorAddressUpdated.newAddress":
+	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinator_id":
+		x.CoordinatorId = value.Uint()
+	case "network.profile.v1.EventCoordinatorAddressUpdated.new_address":
 		x.NewAddress = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
@@ -677,10 +677,10 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) Set(fd protoreflect.Fiel
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventCoordinatorAddressUpdated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinatorID":
-		panic(fmt.Errorf("field coordinatorID of message network.profile.v1.EventCoordinatorAddressUpdated is not mutable"))
-	case "network.profile.v1.EventCoordinatorAddressUpdated.newAddress":
-		panic(fmt.Errorf("field newAddress of message network.profile.v1.EventCoordinatorAddressUpdated is not mutable"))
+	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinator_id":
+		panic(fmt.Errorf("field coordinator_id of message network.profile.v1.EventCoordinatorAddressUpdated is not mutable"))
+	case "network.profile.v1.EventCoordinatorAddressUpdated.new_address":
+		panic(fmt.Errorf("field new_address of message network.profile.v1.EventCoordinatorAddressUpdated is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.profile.v1.EventCoordinatorAddressUpdated"))
@@ -694,9 +694,9 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) Mutable(fd protoreflect.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventCoordinatorAddressUpdated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinatorID":
+	case "network.profile.v1.EventCoordinatorAddressUpdated.coordinator_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.profile.v1.EventCoordinatorAddressUpdated.newAddress":
+	case "network.profile.v1.EventCoordinatorAddressUpdated.new_address":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
@@ -767,8 +767,8 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) ProtoMethods() *protoifa
 		var n int
 		var l int
 		_ = l
-		if x.CoordinatorID != 0 {
-			n += 1 + runtime.Sov(uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			n += 1 + runtime.Sov(uint64(x.CoordinatorId))
 		}
 		l = len(x.NewAddress)
 		if l > 0 {
@@ -810,8 +810,8 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) ProtoMethods() *protoifa
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.CoordinatorID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -866,9 +866,9 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) ProtoMethods() *protoifa
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorId", wireType)
 				}
-				x.CoordinatorID = 0
+				x.CoordinatorId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -878,7 +878,7 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) ProtoMethods() *protoifa
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.CoordinatorID |= uint64(b&0x7F) << shift
+					x.CoordinatorId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -951,15 +951,15 @@ func (x *fastReflection_EventCoordinatorAddressUpdated) ProtoMethods() *protoifa
 }
 
 var (
-	md_EventCoordinatorDisabled               protoreflect.MessageDescriptor
-	fd_EventCoordinatorDisabled_coordinatorID protoreflect.FieldDescriptor
-	fd_EventCoordinatorDisabled_address       protoreflect.FieldDescriptor
+	md_EventCoordinatorDisabled                protoreflect.MessageDescriptor
+	fd_EventCoordinatorDisabled_coordinator_id protoreflect.FieldDescriptor
+	fd_EventCoordinatorDisabled_address        protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_profile_v1_events_proto_init()
 	md_EventCoordinatorDisabled = File_network_profile_v1_events_proto.Messages().ByName("EventCoordinatorDisabled")
-	fd_EventCoordinatorDisabled_coordinatorID = md_EventCoordinatorDisabled.Fields().ByName("coordinatorID")
+	fd_EventCoordinatorDisabled_coordinator_id = md_EventCoordinatorDisabled.Fields().ByName("coordinator_id")
 	fd_EventCoordinatorDisabled_address = md_EventCoordinatorDisabled.Fields().ByName("address")
 }
 
@@ -1028,9 +1028,9 @@ func (x *fastReflection_EventCoordinatorDisabled) Interface() protoreflect.Proto
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventCoordinatorDisabled) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.CoordinatorID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.CoordinatorID)
-		if !f(fd_EventCoordinatorDisabled_coordinatorID, value) {
+	if x.CoordinatorId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.CoordinatorId)
+		if !f(fd_EventCoordinatorDisabled_coordinator_id, value) {
 			return
 		}
 	}
@@ -1055,8 +1055,8 @@ func (x *fastReflection_EventCoordinatorDisabled) Range(f func(protoreflect.Fiel
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventCoordinatorDisabled) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorDisabled.coordinatorID":
-		return x.CoordinatorID != uint64(0)
+	case "network.profile.v1.EventCoordinatorDisabled.coordinator_id":
+		return x.CoordinatorId != uint64(0)
 	case "network.profile.v1.EventCoordinatorDisabled.address":
 		return x.Address != ""
 	default:
@@ -1075,8 +1075,8 @@ func (x *fastReflection_EventCoordinatorDisabled) Has(fd protoreflect.FieldDescr
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventCoordinatorDisabled) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorDisabled.coordinatorID":
-		x.CoordinatorID = uint64(0)
+	case "network.profile.v1.EventCoordinatorDisabled.coordinator_id":
+		x.CoordinatorId = uint64(0)
 	case "network.profile.v1.EventCoordinatorDisabled.address":
 		x.Address = ""
 	default:
@@ -1095,8 +1095,8 @@ func (x *fastReflection_EventCoordinatorDisabled) Clear(fd protoreflect.FieldDes
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventCoordinatorDisabled) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.profile.v1.EventCoordinatorDisabled.coordinatorID":
-		value := x.CoordinatorID
+	case "network.profile.v1.EventCoordinatorDisabled.coordinator_id":
+		value := x.CoordinatorId
 		return protoreflect.ValueOfUint64(value)
 	case "network.profile.v1.EventCoordinatorDisabled.address":
 		value := x.Address
@@ -1121,8 +1121,8 @@ func (x *fastReflection_EventCoordinatorDisabled) Get(descriptor protoreflect.Fi
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventCoordinatorDisabled) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorDisabled.coordinatorID":
-		x.CoordinatorID = value.Uint()
+	case "network.profile.v1.EventCoordinatorDisabled.coordinator_id":
+		x.CoordinatorId = value.Uint()
 	case "network.profile.v1.EventCoordinatorDisabled.address":
 		x.Address = value.Interface().(string)
 	default:
@@ -1145,8 +1145,8 @@ func (x *fastReflection_EventCoordinatorDisabled) Set(fd protoreflect.FieldDescr
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventCoordinatorDisabled) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorDisabled.coordinatorID":
-		panic(fmt.Errorf("field coordinatorID of message network.profile.v1.EventCoordinatorDisabled is not mutable"))
+	case "network.profile.v1.EventCoordinatorDisabled.coordinator_id":
+		panic(fmt.Errorf("field coordinator_id of message network.profile.v1.EventCoordinatorDisabled is not mutable"))
 	case "network.profile.v1.EventCoordinatorDisabled.address":
 		panic(fmt.Errorf("field address of message network.profile.v1.EventCoordinatorDisabled is not mutable"))
 	default:
@@ -1162,7 +1162,7 @@ func (x *fastReflection_EventCoordinatorDisabled) Mutable(fd protoreflect.FieldD
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventCoordinatorDisabled) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.profile.v1.EventCoordinatorDisabled.coordinatorID":
+	case "network.profile.v1.EventCoordinatorDisabled.coordinator_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.profile.v1.EventCoordinatorDisabled.address":
 		return protoreflect.ValueOfString("")
@@ -1235,8 +1235,8 @@ func (x *fastReflection_EventCoordinatorDisabled) ProtoMethods() *protoiface.Met
 		var n int
 		var l int
 		_ = l
-		if x.CoordinatorID != 0 {
-			n += 1 + runtime.Sov(uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			n += 1 + runtime.Sov(uint64(x.CoordinatorId))
 		}
 		l = len(x.Address)
 		if l > 0 {
@@ -1278,8 +1278,8 @@ func (x *fastReflection_EventCoordinatorDisabled) ProtoMethods() *protoiface.Met
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.CoordinatorID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -1334,9 +1334,9 @@ func (x *fastReflection_EventCoordinatorDisabled) ProtoMethods() *protoiface.Met
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorId", wireType)
 				}
-				x.CoordinatorID = 0
+				x.CoordinatorId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1346,7 +1346,7 @@ func (x *fastReflection_EventCoordinatorDisabled) ProtoMethods() *protoiface.Met
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.CoordinatorID |= uint64(b&0x7F) << shift
+					x.CoordinatorId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1465,16 +1465,16 @@ func (x *_EventValidatorCreated_2_list) IsValid() bool {
 }
 
 var (
-	md_EventValidatorCreated                   protoreflect.MessageDescriptor
-	fd_EventValidatorCreated_address           protoreflect.FieldDescriptor
-	fd_EventValidatorCreated_operatorAddresses protoreflect.FieldDescriptor
+	md_EventValidatorCreated                    protoreflect.MessageDescriptor
+	fd_EventValidatorCreated_address            protoreflect.FieldDescriptor
+	fd_EventValidatorCreated_operator_addresses protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_profile_v1_events_proto_init()
 	md_EventValidatorCreated = File_network_profile_v1_events_proto.Messages().ByName("EventValidatorCreated")
 	fd_EventValidatorCreated_address = md_EventValidatorCreated.Fields().ByName("address")
-	fd_EventValidatorCreated_operatorAddresses = md_EventValidatorCreated.Fields().ByName("operatorAddresses")
+	fd_EventValidatorCreated_operator_addresses = md_EventValidatorCreated.Fields().ByName("operator_addresses")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventValidatorCreated)(nil)
@@ -1550,7 +1550,7 @@ func (x *fastReflection_EventValidatorCreated) Range(f func(protoreflect.FieldDe
 	}
 	if len(x.OperatorAddresses) != 0 {
 		value := protoreflect.ValueOfList(&_EventValidatorCreated_2_list{list: &x.OperatorAddresses})
-		if !f(fd_EventValidatorCreated_operatorAddresses, value) {
+		if !f(fd_EventValidatorCreated_operator_addresses, value) {
 			return
 		}
 	}
@@ -1571,7 +1571,7 @@ func (x *fastReflection_EventValidatorCreated) Has(fd protoreflect.FieldDescript
 	switch fd.FullName() {
 	case "network.profile.v1.EventValidatorCreated.address":
 		return x.Address != ""
-	case "network.profile.v1.EventValidatorCreated.operatorAddresses":
+	case "network.profile.v1.EventValidatorCreated.operator_addresses":
 		return len(x.OperatorAddresses) != 0
 	default:
 		if fd.IsExtension() {
@@ -1591,7 +1591,7 @@ func (x *fastReflection_EventValidatorCreated) Clear(fd protoreflect.FieldDescri
 	switch fd.FullName() {
 	case "network.profile.v1.EventValidatorCreated.address":
 		x.Address = ""
-	case "network.profile.v1.EventValidatorCreated.operatorAddresses":
+	case "network.profile.v1.EventValidatorCreated.operator_addresses":
 		x.OperatorAddresses = nil
 	default:
 		if fd.IsExtension() {
@@ -1612,7 +1612,7 @@ func (x *fastReflection_EventValidatorCreated) Get(descriptor protoreflect.Field
 	case "network.profile.v1.EventValidatorCreated.address":
 		value := x.Address
 		return protoreflect.ValueOfString(value)
-	case "network.profile.v1.EventValidatorCreated.operatorAddresses":
+	case "network.profile.v1.EventValidatorCreated.operator_addresses":
 		if len(x.OperatorAddresses) == 0 {
 			return protoreflect.ValueOfList(&_EventValidatorCreated_2_list{})
 		}
@@ -1640,7 +1640,7 @@ func (x *fastReflection_EventValidatorCreated) Set(fd protoreflect.FieldDescript
 	switch fd.FullName() {
 	case "network.profile.v1.EventValidatorCreated.address":
 		x.Address = value.Interface().(string)
-	case "network.profile.v1.EventValidatorCreated.operatorAddresses":
+	case "network.profile.v1.EventValidatorCreated.operator_addresses":
 		lv := value.List()
 		clv := lv.(*_EventValidatorCreated_2_list)
 		x.OperatorAddresses = *clv.list
@@ -1664,7 +1664,7 @@ func (x *fastReflection_EventValidatorCreated) Set(fd protoreflect.FieldDescript
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventValidatorCreated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.profile.v1.EventValidatorCreated.operatorAddresses":
+	case "network.profile.v1.EventValidatorCreated.operator_addresses":
 		if x.OperatorAddresses == nil {
 			x.OperatorAddresses = []string{}
 		}
@@ -1687,7 +1687,7 @@ func (x *fastReflection_EventValidatorCreated) NewField(fd protoreflect.FieldDes
 	switch fd.FullName() {
 	case "network.profile.v1.EventValidatorCreated.address":
 		return protoreflect.ValueOfString("")
-	case "network.profile.v1.EventValidatorCreated.operatorAddresses":
+	case "network.profile.v1.EventValidatorCreated.operator_addresses":
 		list := []string{}
 		return protoreflect.ValueOfList(&_EventValidatorCreated_2_list{list: &list})
 	default:
@@ -2009,16 +2009,16 @@ func (x *_EventValidatorOperatorAddressesUpdated_2_list) IsValid() bool {
 }
 
 var (
-	md_EventValidatorOperatorAddressesUpdated                   protoreflect.MessageDescriptor
-	fd_EventValidatorOperatorAddressesUpdated_address           protoreflect.FieldDescriptor
-	fd_EventValidatorOperatorAddressesUpdated_operatorAddresses protoreflect.FieldDescriptor
+	md_EventValidatorOperatorAddressesUpdated                    protoreflect.MessageDescriptor
+	fd_EventValidatorOperatorAddressesUpdated_address            protoreflect.FieldDescriptor
+	fd_EventValidatorOperatorAddressesUpdated_operator_addresses protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_profile_v1_events_proto_init()
 	md_EventValidatorOperatorAddressesUpdated = File_network_profile_v1_events_proto.Messages().ByName("EventValidatorOperatorAddressesUpdated")
 	fd_EventValidatorOperatorAddressesUpdated_address = md_EventValidatorOperatorAddressesUpdated.Fields().ByName("address")
-	fd_EventValidatorOperatorAddressesUpdated_operatorAddresses = md_EventValidatorOperatorAddressesUpdated.Fields().ByName("operatorAddresses")
+	fd_EventValidatorOperatorAddressesUpdated_operator_addresses = md_EventValidatorOperatorAddressesUpdated.Fields().ByName("operator_addresses")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventValidatorOperatorAddressesUpdated)(nil)
@@ -2094,7 +2094,7 @@ func (x *fastReflection_EventValidatorOperatorAddressesUpdated) Range(f func(pro
 	}
 	if len(x.OperatorAddresses) != 0 {
 		value := protoreflect.ValueOfList(&_EventValidatorOperatorAddressesUpdated_2_list{list: &x.OperatorAddresses})
-		if !f(fd_EventValidatorOperatorAddressesUpdated_operatorAddresses, value) {
+		if !f(fd_EventValidatorOperatorAddressesUpdated_operator_addresses, value) {
 			return
 		}
 	}
@@ -2115,7 +2115,7 @@ func (x *fastReflection_EventValidatorOperatorAddressesUpdated) Has(fd protorefl
 	switch fd.FullName() {
 	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.address":
 		return x.Address != ""
-	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operatorAddresses":
+	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operator_addresses":
 		return len(x.OperatorAddresses) != 0
 	default:
 		if fd.IsExtension() {
@@ -2135,7 +2135,7 @@ func (x *fastReflection_EventValidatorOperatorAddressesUpdated) Clear(fd protore
 	switch fd.FullName() {
 	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.address":
 		x.Address = ""
-	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operatorAddresses":
+	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operator_addresses":
 		x.OperatorAddresses = nil
 	default:
 		if fd.IsExtension() {
@@ -2156,7 +2156,7 @@ func (x *fastReflection_EventValidatorOperatorAddressesUpdated) Get(descriptor p
 	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.address":
 		value := x.Address
 		return protoreflect.ValueOfString(value)
-	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operatorAddresses":
+	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operator_addresses":
 		if len(x.OperatorAddresses) == 0 {
 			return protoreflect.ValueOfList(&_EventValidatorOperatorAddressesUpdated_2_list{})
 		}
@@ -2184,7 +2184,7 @@ func (x *fastReflection_EventValidatorOperatorAddressesUpdated) Set(fd protorefl
 	switch fd.FullName() {
 	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.address":
 		x.Address = value.Interface().(string)
-	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operatorAddresses":
+	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operator_addresses":
 		lv := value.List()
 		clv := lv.(*_EventValidatorOperatorAddressesUpdated_2_list)
 		x.OperatorAddresses = *clv.list
@@ -2208,7 +2208,7 @@ func (x *fastReflection_EventValidatorOperatorAddressesUpdated) Set(fd protorefl
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventValidatorOperatorAddressesUpdated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operatorAddresses":
+	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operator_addresses":
 		if x.OperatorAddresses == nil {
 			x.OperatorAddresses = []string{}
 		}
@@ -2231,7 +2231,7 @@ func (x *fastReflection_EventValidatorOperatorAddressesUpdated) NewField(fd prot
 	switch fd.FullName() {
 	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.address":
 		return protoreflect.ValueOfString("")
-	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operatorAddresses":
+	case "network.profile.v1.EventValidatorOperatorAddressesUpdated.operator_addresses":
 		list := []string{}
 		return protoreflect.ValueOfList(&_EventValidatorOperatorAddressesUpdated_2_list{list: &list})
 	default:
@@ -2524,7 +2524,7 @@ type EventCoordinatorCreated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CoordinatorID uint64 `protobuf:"varint,1,opt,name=coordinatorID,proto3" json:"coordinatorID,omitempty"`
+	CoordinatorId uint64 `protobuf:"varint,1,opt,name=coordinator_id,json=coordinatorId,proto3" json:"coordinator_id,omitempty"`
 	Address       string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 }
 
@@ -2548,9 +2548,9 @@ func (*EventCoordinatorCreated) Descriptor() ([]byte, []int) {
 	return file_network_profile_v1_events_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *EventCoordinatorCreated) GetCoordinatorID() uint64 {
+func (x *EventCoordinatorCreated) GetCoordinatorId() uint64 {
 	if x != nil {
-		return x.CoordinatorID
+		return x.CoordinatorId
 	}
 	return 0
 }
@@ -2567,8 +2567,8 @@ type EventCoordinatorAddressUpdated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CoordinatorID uint64 `protobuf:"varint,1,opt,name=coordinatorID,proto3" json:"coordinatorID,omitempty"`
-	NewAddress    string `protobuf:"bytes,2,opt,name=newAddress,proto3" json:"newAddress,omitempty"`
+	CoordinatorId uint64 `protobuf:"varint,1,opt,name=coordinator_id,json=coordinatorId,proto3" json:"coordinator_id,omitempty"`
+	NewAddress    string `protobuf:"bytes,2,opt,name=new_address,json=newAddress,proto3" json:"new_address,omitempty"`
 }
 
 func (x *EventCoordinatorAddressUpdated) Reset() {
@@ -2591,9 +2591,9 @@ func (*EventCoordinatorAddressUpdated) Descriptor() ([]byte, []int) {
 	return file_network_profile_v1_events_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *EventCoordinatorAddressUpdated) GetCoordinatorID() uint64 {
+func (x *EventCoordinatorAddressUpdated) GetCoordinatorId() uint64 {
 	if x != nil {
-		return x.CoordinatorID
+		return x.CoordinatorId
 	}
 	return 0
 }
@@ -2610,7 +2610,7 @@ type EventCoordinatorDisabled struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CoordinatorID uint64 `protobuf:"varint,1,opt,name=coordinatorID,proto3" json:"coordinatorID,omitempty"`
+	CoordinatorId uint64 `protobuf:"varint,1,opt,name=coordinator_id,json=coordinatorId,proto3" json:"coordinator_id,omitempty"`
 	Address       string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 }
 
@@ -2634,9 +2634,9 @@ func (*EventCoordinatorDisabled) Descriptor() ([]byte, []int) {
 	return file_network_profile_v1_events_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *EventCoordinatorDisabled) GetCoordinatorID() uint64 {
+func (x *EventCoordinatorDisabled) GetCoordinatorId() uint64 {
 	if x != nil {
-		return x.CoordinatorID
+		return x.CoordinatorId
 	}
 	return 0
 }
@@ -2654,7 +2654,7 @@ type EventValidatorCreated struct {
 	unknownFields protoimpl.UnknownFields
 
 	Address           string   `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
-	OperatorAddresses []string `protobuf:"bytes,2,rep,name=operatorAddresses,proto3" json:"operatorAddresses,omitempty"`
+	OperatorAddresses []string `protobuf:"bytes,2,rep,name=operator_addresses,json=operatorAddresses,proto3" json:"operator_addresses,omitempty"`
 }
 
 func (x *EventValidatorCreated) Reset() {
@@ -2697,7 +2697,7 @@ type EventValidatorOperatorAddressesUpdated struct {
 	unknownFields protoimpl.UnknownFields
 
 	Address           string   `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
-	OperatorAddresses []string `protobuf:"bytes,2,rep,name=operatorAddresses,proto3" json:"operatorAddresses,omitempty"`
+	OperatorAddresses []string `protobuf:"bytes,2,rep,name=operator_addresses,json=operatorAddresses,proto3" json:"operator_addresses,omitempty"`
 }
 
 func (x *EventValidatorOperatorAddressesUpdated) Reset() {
@@ -2748,59 +2748,60 @@ var file_network_profile_v1_events_proto_rawDesc = []byte{
 	0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x22, 0x6e, 0x65,
 	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x2f, 0x76, 0x31,
 	0x2f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x22, 0x73, 0x0a, 0x17, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x43, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
-	0x61, 0x74, 0x6f, 0x72, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x24, 0x0a, 0x0d, 0x63,
-	0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49,
-	0x44, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x80, 0x01, 0x0a, 0x1e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x43,
-	0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x24, 0x0a, 0x0d, 0x63, 0x6f, 0x6f, 0x72,
-	0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52,
-	0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x44, 0x12, 0x38,
-	0x0a, 0x0a, 0x6e, 0x65, 0x77, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x0a, 0x6e, 0x65,
-	0x77, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x74, 0x0a, 0x18, 0x45, 0x76, 0x65, 0x6e,
-	0x74, 0x43, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x44, 0x69, 0x73, 0x61,
-	0x62, 0x6c, 0x65, 0x64, 0x12, 0x24, 0x0a, 0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61,
-	0x74, 0x6f, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x63, 0x6f, 0x6f,
-	0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x44, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d,
-	0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53,
-	0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x79,
-	0x0a, 0x15, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65,
-	0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69,
-	0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x2c, 0x0a, 0x11, 0x6f,
-	0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73,
-	0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x11, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72,
-	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x22, 0x8a, 0x01, 0x0a, 0x26, 0x45, 0x76,
-	0x65, 0x6e, 0x74, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x4f, 0x70, 0x65, 0x72,
-	0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x55, 0x70, 0x64,
-	0x61, 0x74, 0x65, 0x64, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
+	0x22, 0x74, 0x0a, 0x17, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x43, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
+	0x61, 0x74, 0x6f, 0x72, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x25, 0x0a, 0x0e, 0x63,
+	0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72,
+	0x49, 0x64, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e,
+	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x82, 0x01, 0x0a, 0x1e, 0x45, 0x76, 0x65, 0x6e, 0x74,
+	0x43, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x6f, 0x6f,
+	0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x64,
+	0x12, 0x39, 0x0a, 0x0b, 0x6e, 0x65, 0x77, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
 	0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52,
-	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x2c, 0x0a, 0x11, 0x6f, 0x70, 0x65, 0x72,
-	0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x18, 0x02, 0x20,
-	0x03, 0x28, 0x09, 0x52, 0x11, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x42, 0xcb, 0x01, 0x0a, 0x16, 0x63, 0x6f, 0x6d, 0x2e, 0x6e,
-	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x2e, 0x76,
-	0x31, 0x42, 0x0b, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01,
-	0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e,
-	0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x2f,
-	0x76, 0x31, 0x3b, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e,
-	0x50, 0x58, 0xaa, 0x02, 0x12, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x50, 0x72, 0x6f,
-	0x66, 0x69, 0x6c, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x12, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72,
-	0x6b, 0x5c, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1e, 0x4e,
-	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x5c, 0x56,
-	0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x14,
-	0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
-	0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x0a, 0x6e, 0x65, 0x77, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x75, 0x0a, 0x18, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x43, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x44,
+	0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x6f, 0x6f, 0x72, 0x64,
+	0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x64, 0x12, 0x32,
+	0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42,
+	0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x22, 0x7a, 0x0a, 0x15, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x56, 0x61, 0x6c, 0x69, 0x64,
+	0x61, 0x74, 0x6f, 0x72, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x32, 0x0a, 0x07, 0x61,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4,
+	0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12,
+	0x2d, 0x0a, 0x12, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x61, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x11, 0x6f, 0x70, 0x65,
+	0x72, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x22, 0x8b,
+	0x01, 0x0a, 0x26, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f,
+	0x72, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x65, 0x73, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14,
+	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74,
+	0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x2d, 0x0a,
+	0x12, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x11, 0x6f, 0x70, 0x65, 0x72, 0x61,
+	0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x42, 0xcb, 0x01, 0x0a,
+	0x16, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70, 0x72, 0x6f,
+	0x66, 0x69, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x0b, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x50,
+	0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72,
+	0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x70, 0x72,
+	0x6f, 0x66, 0x69, 0x6c, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
+	0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x50, 0x58, 0xaa, 0x02, 0x12, 0x4e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x6b, 0x2e, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x12,
+	0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x5c,
+	0x56, 0x31, 0xe2, 0x02, 0x1e, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x50, 0x72, 0x6f,
+	0x66, 0x69, 0x6c, 0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64,
+	0x61, 0x74, 0x61, 0xea, 0x02, 0x14, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x50,
+	0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (

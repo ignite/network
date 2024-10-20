@@ -21,11 +21,11 @@ func createNParamChange(keeper *keeper.Keeper, ctx context.Context, n int) []typ
 	items := make([]types.ParamChange, n)
 	launchID := uint64(0)
 	for i := range items {
-		items[i].LaunchID = launchID
+		items[i].LaunchId = launchID
 		items[i].Module = fmt.Sprintf("module_%d", i)
 		items[i].Param = fmt.Sprintf("param_%d", i)
 
-		_ = keeper.ParamChange.Set(ctx, collections.Join(items[i].LaunchID, types.ParamChangeSubKey(items[i].Module, items[i].Param)), items[i])
+		_ = keeper.ParamChange.Set(ctx, collections.Join(items[i].LaunchId, types.ParamChangeSubKey(items[i].Module, items[i].Param)), items[i])
 	}
 	return items
 }

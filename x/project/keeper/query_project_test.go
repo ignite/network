@@ -20,7 +20,7 @@ func createNProject(keeper keeper.Keeper, ctx context.Context, n int) []types.Pr
 	items := make([]types.Project, n)
 	for i := range items {
 		iu := uint64(i)
-		items[i].ProjectID = iu
+		items[i].ProjectId = iu
 		_ = keeper.Project.Set(ctx, iu, items[i])
 		_ = keeper.ProjectSeq.Set(ctx, iu)
 	}
@@ -39,17 +39,17 @@ func TestProjectQuerySingle(t *testing.T) {
 	}{
 		{
 			desc:     "First",
-			request:  &types.QueryGetProjectRequest{ProjectID: msgs[0].ProjectID},
+			request:  &types.QueryGetProjectRequest{ProjectId: msgs[0].ProjectId},
 			response: &types.QueryGetProjectResponse{Project: msgs[0]},
 		},
 		{
 			desc:     "Second",
-			request:  &types.QueryGetProjectRequest{ProjectID: msgs[1].ProjectID},
+			request:  &types.QueryGetProjectRequest{ProjectId: msgs[1].ProjectId},
 			response: &types.QueryGetProjectResponse{Project: msgs[1]},
 		},
 		{
 			desc:    "KeyNotFound",
-			request: &types.QueryGetProjectRequest{ProjectID: uint64(len(msgs))},
+			request: &types.QueryGetProjectRequest{ProjectId: uint64(len(msgs))},
 			err:     sdkerrors.ErrKeyNotFound,
 		},
 		{

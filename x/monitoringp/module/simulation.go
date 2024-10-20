@@ -34,7 +34,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	monitoringpGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		PortID: types.PortID,
+		PortId: types.PortID,
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&monitoringpGenesis)

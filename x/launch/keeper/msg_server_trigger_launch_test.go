@@ -37,7 +37,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			inputState: inputState{
 				chain: sample.Chain(r, 0, 0),
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 0,
+					CoordinatorId: 0,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -45,7 +45,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 				blockHeight: 100,
 			},
 			msg: types.MsgTriggerLaunch{
-				LaunchID:    0,
+				LaunchId:    0,
 				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
 				Coordinator: sampleAddr,
 			},
@@ -55,7 +55,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			inputState: inputState{
 				chain: sample.Chain(r, 10, 10),
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 10,
+					CoordinatorId: 10,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -63,7 +63,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 				blockHeight: 5000,
 			},
 			msg: types.MsgTriggerLaunch{
-				LaunchID:    10,
+				LaunchId:    10,
 				LaunchTime:  sampleTime.Add(types.DefaultMaxLaunchTime),
 				Coordinator: sampleAddr,
 			},
@@ -73,7 +73,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			inputState: inputState{
 				noChain: true,
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 1,
+					CoordinatorId: 1,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -81,7 +81,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 				blockHeight: 100,
 			},
 			msg: types.MsgTriggerLaunch{
-				LaunchID:    1000,
+				LaunchId:    1000,
 				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
 				Coordinator: sampleAddr,
 			},
@@ -96,7 +96,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 				blockHeight:   100,
 			},
 			msg: types.MsgTriggerLaunch{
-				LaunchID:    2,
+				LaunchId:    2,
 				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
 				Coordinator: sample.Address(r),
 			},
@@ -107,7 +107,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			inputState: inputState{
 				chain: sample.Chain(r, 3, 1000),
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 3,
+					CoordinatorId: 3,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -115,7 +115,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 				blockHeight: 100,
 			},
 			msg: types.MsgTriggerLaunch{
-				LaunchID:    3,
+				LaunchId:    3,
 				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
 				Coordinator: sampleAddr,
 			},
@@ -125,12 +125,12 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			name: "should prevent triggering a chain launch with chain launch already triggered",
 			inputState: inputState{
 				chain: types.Chain{
-					LaunchID:        5,
-					CoordinatorID:   5,
+					LaunchId:        5,
+					CoordinatorId:   5,
 					LaunchTriggered: true,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 5,
+					CoordinatorId: 5,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -138,7 +138,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 				blockHeight: 100,
 			},
 			msg: types.MsgTriggerLaunch{
-				LaunchID:    5,
+				LaunchId:    5,
 				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
 				Coordinator: sampleAddr,
 			},
@@ -149,7 +149,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			inputState: inputState{
 				chain: sample.Chain(r, 6, 6),
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 6,
+					CoordinatorId: 6,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -157,7 +157,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 				blockHeight: 100,
 			},
 			msg: types.MsgTriggerLaunch{
-				LaunchID:    6,
+				LaunchId:    6,
 				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime - time.Second),
 				Coordinator: sampleAddr,
 			},
@@ -168,7 +168,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			inputState: inputState{
 				chain: sample.Chain(r, 7, 7),
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 7,
+					CoordinatorId: 7,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -176,7 +176,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 				blockHeight: 100,
 			},
 			msg: types.MsgTriggerLaunch{
-				LaunchID:    7,
+				LaunchId:    7,
 				LaunchTime:  sampleTime.Add(types.DefaultMaxLaunchTime + time.Second),
 				Coordinator: sampleAddr,
 			},
@@ -186,17 +186,17 @@ func TestMsgTriggerLaunch(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// initialize input state
 			if !tt.inputState.noChain {
-				err := tk.LaunchKeeper.Chain.Set(ctx, tt.inputState.chain.LaunchID, tt.inputState.chain)
+				err := tk.LaunchKeeper.Chain.Set(ctx, tt.inputState.chain.LaunchId, tt.inputState.chain)
 				require.NoError(t, err)
 			}
 			if !tt.inputState.noCoordinator {
-				err := tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorID, tt.inputState.coordinator)
+				err := tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorId, tt.inputState.coordinator)
 				require.NoError(t, err)
 				addr, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.inputState.coordinator.Address)
 				require.NoError(t, err)
 				err = tk.ProfileKeeper.CoordinatorByAddress.Set(ctx, addr, profiletypes.CoordinatorByAddress{
 					Address:       tt.inputState.coordinator.Address,
-					CoordinatorID: tt.inputState.coordinator.CoordinatorID,
+					CoordinatorId: tt.inputState.coordinator.CoordinatorId,
 				})
 				require.NoError(t, err)
 			}
@@ -216,7 +216,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			require.NoError(t, err)
 
 			// Check values
-			chain, err := tk.LaunchKeeper.GetChain(ctx, tt.msg.LaunchID)
+			chain, err := tk.LaunchKeeper.GetChain(ctx, tt.msg.LaunchId)
 			require.NoError(t, err)
 			require.True(t, chain.LaunchTriggered)
 			require.EqualValues(t, tt.msg.LaunchTime, chain.LaunchTime)

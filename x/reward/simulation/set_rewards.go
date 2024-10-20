@@ -51,7 +51,7 @@ func SimulateMsgSetRewards(
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "no viable chain to be found"), nil, nil
 		}
 
-		coordinator, err := k.GetProfileKeeper().GetCoordinator(ctx, chain.CoordinatorID)
+		coordinator, err := k.GetProfileKeeper().GetCoordinator(ctx, chain.CoordinatorId)
 		if err != nil {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "chain does not have a coordinator"), nil, nil
 		}
@@ -69,7 +69,7 @@ func SimulateMsgSetRewards(
 		// initialize basic message
 		msg = &types.MsgSetRewards{
 			Provider: simAccount.Address.String(),
-			LaunchID: chain.LaunchID,
+			LaunchId: chain.LaunchId,
 		}
 
 		// set message based on action to be taken
@@ -78,7 +78,7 @@ func SimulateMsgSetRewards(
 			msg.LastRewardHeight = ctx.BlockHeight() + r.Int63n(1000)
 			msg.Coins = wantCoin
 		case ActionEdit:
-			pool, err := k.RewardPool.Get(ctx, chain.LaunchID)
+			pool, err := k.RewardPool.Get(ctx, chain.LaunchId)
 			if err != nil {
 				return simtypes.NoOpMsg(types.ModuleName, msg.Type(), err.Error()), nil, err
 			}

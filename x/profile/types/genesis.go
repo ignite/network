@@ -11,7 +11,7 @@ func DefaultGenesis() *GenesisState {
 		ValidatorList:               []Validator{},
 		ValidatorsByOperatorAddress: []ValidatorByOperatorAddress{},
 		CoordinatorList:             []Coordinator{},
-		CoordinatorsByAddress:       []CoordinatorByAddress{},
+		CoordinatorByAddress:        []CoordinatorByAddress{},
 		// this line is used by starport scaffolding # genesis/types/default
 	}
 }
@@ -67,22 +67,22 @@ func (gs GenesisState) ValidateValidators() error {
 func (gs GenesisState) ValidateCoordinators() error {
 	// Check for duplicated index in coordinatorByAddress
 	coordinatorByAddressIndexMap := make(map[string]uint64)
-	for _, elem := range gs.CoordinatorsByAddress {
+	for _, elem := range gs.CoordinatorByAddress {
 		index := elem.Address
 		if _, ok := coordinatorByAddressIndexMap[index]; ok {
 			return errors.New("duplicated index for coordinatorByAddress")
 		}
-		coordinatorByAddressIndexMap[index] = elem.CoordinatorID
+		coordinatorByAddressIndexMap[index] = elem.CoordinatorId
 	}
 
 	// Check for duplicated ID in coordinator or if coordinator is inactive
 	coordinatorIDMap := make(map[uint64]bool)
 	counter := gs.CoordinatorCount
 	for _, elem := range gs.CoordinatorList {
-		if _, ok := coordinatorIDMap[elem.CoordinatorID]; ok {
+		if _, ok := coordinatorIDMap[elem.CoordinatorId]; ok {
 			return errors.New("duplicated id for coordinator")
 		}
-		if elem.CoordinatorID >= counter {
+		if elem.CoordinatorId >= counter {
 			return errors.New("coordinator id should be lower or equal than the last id")
 		}
 		index := elem.Address
@@ -95,7 +95,7 @@ func (gs GenesisState) ValidateCoordinators() error {
 			return errors.New("coordinator found by CoordinatorByAddress should not be inactive")
 		}
 
-		coordinatorIDMap[elem.CoordinatorID] = true
+		coordinatorIDMap[elem.CoordinatorId] = true
 
 		// Remove to check if all coordinator by address exist
 		delete(coordinatorByAddressIndexMap, index)

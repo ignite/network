@@ -18,9 +18,9 @@ import (
 func createNProviderClientID(keeper *keeper.Keeper, ctx context.Context, n int) []types.ProviderClientID {
 	items := make([]types.ProviderClientID, n)
 	for i := range items {
-		items[i].LaunchID = uint64(i)
+		items[i].LaunchId = uint64(i)
 
-		_ = keeper.ProviderClientID.Set(ctx, items[i].LaunchID, items[i])
+		_ = keeper.ProviderClientID.Set(ctx, items[i].LaunchId, items[i])
 	}
 	return items
 }
@@ -38,21 +38,21 @@ func TestProviderClientIDQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryGetProviderClientIDRequest{
-				LaunchID: msgs[0].LaunchID,
+				LaunchId: msgs[0].LaunchId,
 			},
-			response: &types.QueryGetProviderClientIDResponse{ProviderClientID: msgs[0]},
+			response: &types.QueryGetProviderClientIDResponse{ProviderClientId: msgs[0]},
 		},
 		{
 			desc: "Second",
 			request: &types.QueryGetProviderClientIDRequest{
-				LaunchID: msgs[1].LaunchID,
+				LaunchId: msgs[1].LaunchId,
 			},
-			response: &types.QueryGetProviderClientIDResponse{ProviderClientID: msgs[1]},
+			response: &types.QueryGetProviderClientIDResponse{ProviderClientId: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
 			request: &types.QueryGetProviderClientIDRequest{
-				LaunchID: 100000,
+				LaunchId: 100000,
 			},
 			err: status.Error(codes.NotFound, "not found"),
 		},
@@ -97,10 +97,10 @@ func TestProviderClientIDQueryPaginated(t *testing.T) {
 		for i := 0; i < len(msgs); i += step {
 			resp, err := qs.ListProviderClientID(ctx, request(nil, uint64(i), uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.ProviderClientID), step)
+			require.LessOrEqual(t, len(resp.ProviderClientId), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.ProviderClientID),
+				nullify.Fill(resp.ProviderClientId),
 			)
 		}
 	})
@@ -110,10 +110,10 @@ func TestProviderClientIDQueryPaginated(t *testing.T) {
 		for i := 0; i < len(msgs); i += step {
 			resp, err := qs.ListProviderClientID(ctx, request(next, 0, uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.ProviderClientID), step)
+			require.LessOrEqual(t, len(resp.ProviderClientId), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.ProviderClientID),
+				nullify.Fill(resp.ProviderClientId),
 			)
 			next = resp.Pagination.NextKey
 		}
@@ -124,7 +124,7 @@ func TestProviderClientIDQueryPaginated(t *testing.T) {
 		require.Equal(t, len(msgs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,
 			nullify.Fill(msgs),
-			nullify.Fill(resp.ProviderClientID),
+			nullify.Fill(resp.ProviderClientId),
 		)
 	})
 	t.Run("InvalidRequest", func(t *testing.T) {

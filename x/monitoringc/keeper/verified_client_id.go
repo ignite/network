@@ -11,38 +11,38 @@ import (
 
 // AllVerifiedClientID returns all VerifiedClientID.
 func (k Keeper) AllVerifiedClientID(ctx context.Context) ([]types.VerifiedClientID, error) {
-	verifiedClientIDs := make([]types.VerifiedClientID, 0)
+	verifiedClientIdList := make([]types.VerifiedClientID, 0)
 	err := k.VerifiedClientID.Walk(ctx, nil, func(_ uint64, value types.VerifiedClientID) (bool, error) {
-		verifiedClientIDs = append(verifiedClientIDs, value)
+		verifiedClientIdList = append(verifiedClientIdList, value)
 		return false, nil
 	})
-	return verifiedClientIDs, err
+	return verifiedClientIdList, err
 }
 
 // AllLaunchIDFromVerifiedClientID returns all LaunchIDFromVerifiedClientID.
 func (k Keeper) AllLaunchIDFromVerifiedClientID(ctx context.Context) ([]types.LaunchIDFromVerifiedClientID, error) {
-	launchIDFromVerifiedClientIDs := make([]types.LaunchIDFromVerifiedClientID, 0)
+	launchIDFromVerifiedClientIdList := make([]types.LaunchIDFromVerifiedClientID, 0)
 	err := k.LaunchIDFromVerifiedClientID.Walk(ctx, nil, func(_ string, value types.LaunchIDFromVerifiedClientID) (bool, error) {
-		launchIDFromVerifiedClientIDs = append(launchIDFromVerifiedClientIDs, value)
+		launchIDFromVerifiedClientIdList = append(launchIDFromVerifiedClientIdList, value)
 		return false, nil
 	})
-	return launchIDFromVerifiedClientIDs, err
+	return launchIDFromVerifiedClientIdList, err
 }
 
 // AddVerifiedClientID add a specific verifiedClientID without duplication in the store from its launch id
 func (k Keeper) AddVerifiedClientID(ctx context.Context, launchID uint64, clientID string) error {
 	verifiedClientID, err := k.VerifiedClientID.Get(ctx, launchID)
 	if errors.Is(err, collections.ErrNotFound) {
-		verifiedClientID = types.VerifiedClientID{LaunchID: launchID}
+		verifiedClientID = types.VerifiedClientID{LaunchId: launchID}
 	} else if err != nil {
 		return err
 	}
 
-	for _, cID := range verifiedClientID.ClientIDs {
+	for _, cID := range verifiedClientID.ClientIdList {
 		if clientID == cID {
 			return nil
 		}
 	}
-	verifiedClientID.ClientIDs = append(verifiedClientID.ClientIDs, clientID)
+	verifiedClientID.ClientIdList = append(verifiedClientID.ClientIdList, clientID)
 	return k.VerifiedClientID.Set(ctx, launchID, verifiedClientID)
 }

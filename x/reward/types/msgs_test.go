@@ -20,7 +20,7 @@ func TestMsgSetRewards_ValidateBasic(t *testing.T) {
 		{
 			name: "should allow valid reward pool msg",
 			msg: types.MsgSetRewards{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         sample.Address(r),
 				Coins:            sample.Coins(r),
 				LastRewardHeight: 50,
@@ -29,7 +29,7 @@ func TestMsgSetRewards_ValidateBasic(t *testing.T) {
 		{
 			name: "should allow valid reward pool msg with empty coins",
 			msg: types.MsgSetRewards{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         sample.Address(r),
 				Coins:            sdk.NewCoins(),
 				LastRewardHeight: 50,
@@ -38,7 +38,7 @@ func TestMsgSetRewards_ValidateBasic(t *testing.T) {
 		{
 			name: "should prevent msg with invalid coins",
 			msg: types.MsgSetRewards{
-				LaunchID: 1,
+				LaunchId: 1,
 				Provider: sample.Address(r),
 				Coins: sdk.Coins{sdk.Coin{
 					Denom:  "invalid denom",
@@ -51,7 +51,7 @@ func TestMsgSetRewards_ValidateBasic(t *testing.T) {
 		{
 			name: "should prevent msg with negative last reward height",
 			msg: types.MsgSetRewards{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         sample.Address(r),
 				Coins:            sample.Coins(r),
 				LastRewardHeight: -1,

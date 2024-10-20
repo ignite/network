@@ -20,7 +20,7 @@ var (
 	ErrConnectionAlreadyEstablished = sdkerrors.Register(ModuleName, 1110, "ibc connection already established")
 	ErrInvalidUnbondingPeriod       = sdkerrors.Register(ModuleName, 1111, "invalid unbonding period")
 	ErrInvalidRevisionHeight        = sdkerrors.Register(ModuleName, 1112, "invalid revision height")
-	ErrVerifiedClientIDsNotFound    = sdkerrors.Register(ModuleName, 1113, "verified client IDs not found")
+	ErrVerifiedClientIdListNotFound = sdkerrors.Register(ModuleName, 1113, "verified client IDs not found")
 	ErrInvalidClientCreatorAddress  = sdkerrors.Register(ModuleName, 1114, "invalid client creator address")
 	ErrCannotCloseChannel           = sdkerrors.Register(ModuleName, 1115, "user cannot close channel")
 	ErrJSONUnmarshal                = sdkerrors.Register(ModuleName, 1116, "failed to unmarshal JSON")

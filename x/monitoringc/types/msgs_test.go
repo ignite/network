@@ -20,7 +20,7 @@ func TestMsgCreateClient_ValidateBasic(t *testing.T) {
 			name: "should validate valid message",
 			msg: types.MsgCreateClient{
 				Creator:         sample.Address(r),
-				LaunchID:        0,
+				LaunchId:        0,
 				ConsensusState:  sample.ConsensusState(0),
 				ValidatorSet:    sample.ValidatorSet(0),
 				UnbondingPeriod: networktypes.DefaultUnbondingPeriod,
@@ -31,7 +31,7 @@ func TestMsgCreateClient_ValidateBasic(t *testing.T) {
 			name: "should prevent invalid consensus state",
 			msg: types.MsgCreateClient{
 				Creator:  sample.Address(r),
-				LaunchID: 0,
+				LaunchId: 0,
 				ConsensusState: networktypes.NewConsensusState(
 					"2022-01-12T07:56:35.394367Z",
 					"foo",
@@ -47,7 +47,7 @@ func TestMsgCreateClient_ValidateBasic(t *testing.T) {
 			name: "should prevent invalid validator set",
 			msg: types.MsgCreateClient{
 				Creator:        sample.Address(r),
-				LaunchID:       0,
+				LaunchId:       0,
 				ConsensusState: sample.ConsensusState(0),
 				ValidatorSet: networktypes.NewValidatorSet(
 					networktypes.NewValidator(
@@ -65,7 +65,7 @@ func TestMsgCreateClient_ValidateBasic(t *testing.T) {
 			name: "should prevent validator set not matching consensus state",
 			msg: types.MsgCreateClient{
 				Creator:         sample.Address(r),
-				LaunchID:        0,
+				LaunchId:        0,
 				ConsensusState:  sample.ConsensusState(0),
 				ValidatorSet:    sample.ValidatorSet(1),
 				UnbondingPeriod: networktypes.DefaultUnbondingPeriod,
@@ -77,7 +77,7 @@ func TestMsgCreateClient_ValidateBasic(t *testing.T) {
 			name: "should prevent unbonding period lower than minimal",
 			msg: types.MsgCreateClient{
 				Creator:         sample.Address(r),
-				LaunchID:        0,
+				LaunchId:        0,
 				ConsensusState:  sample.ConsensusState(0),
 				ValidatorSet:    sample.ValidatorSet(0),
 				UnbondingPeriod: networktypes.MinimalUnbondingPeriod - 1,
@@ -89,7 +89,7 @@ func TestMsgCreateClient_ValidateBasic(t *testing.T) {
 			name: "should prevent zero revision height",
 			msg: types.MsgCreateClient{
 				Creator:         sample.Address(r),
-				LaunchID:        0,
+				LaunchId:        0,
 				ConsensusState:  sample.ConsensusState(0),
 				ValidatorSet:    sample.ValidatorSet(0),
 				UnbondingPeriod: networktypes.MinimalUnbondingPeriod,

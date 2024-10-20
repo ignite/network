@@ -61,11 +61,11 @@ message QueryParamsResponse {
 
 message QueryGetAuctionUsedAllocationsRequest {
   string address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 auctionID = 2;
+  uint64 auction_id = 2;
 }
 
 message QueryGetAuctionUsedAllocationsResponse {
-  AuctionUsedAllocations auctionUsedAllocations = 1 [(gogoproto.nullable) = false];
+  AuctionUsedAllocations auction_used_allocations = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllAuctionUsedAllocationsRequest {
@@ -74,7 +74,7 @@ message QueryAllAuctionUsedAllocationsRequest {
 }
 
 message QueryAllAuctionUsedAllocationsResponse {
-  repeated AuctionUsedAllocations auctionUsedAllocations = 1 [(gogoproto.nullable) = false];
+  repeated AuctionUsedAllocations auction_used_allocations = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
@@ -83,7 +83,7 @@ message QueryGetUsedAllocationsRequest {
 }
 
 message QueryGetUsedAllocationsResponse {
-  UsedAllocations usedAllocations = 1 [(gogoproto.nullable) = false];
+  UsedAllocations used_allocations = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllUsedAllocationsRequest {
@@ -91,7 +91,7 @@ message QueryAllUsedAllocationsRequest {
 }
 
 message QueryAllUsedAllocationsResponse {
-  repeated UsedAllocations usedAllocations = 1 [(gogoproto.nullable) = false];
+  repeated UsedAllocations used_allocations = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
@@ -100,7 +100,7 @@ message QueryTotalAllocationsRequest {
 }
 
 message QueryTotalAllocationsResponse {
-  string totalAllocations = 1 [
+  string total_allocations = 1 [
     (gogoproto.nullable) = false,
     (gogoproto.customtype) = "cosmossdk.io/math.Int",
     (cosmos_proto.scalar) = "cosmos.Int"
@@ -112,7 +112,7 @@ message QueryAvailableAllocationsRequest {
 }
 
 message QueryAvailableAllocationsResponse {
-  string availableAllocations = 1 [
+  string available_allocations = 1 [
     (gogoproto.nullable) = false,
     (gogoproto.customtype) = "cosmossdk.io/math.Int",
     (cosmos_proto.scalar) = "cosmos.Int"

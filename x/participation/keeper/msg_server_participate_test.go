@@ -89,8 +89,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should allow valid message tier 1",
 			msg: &types.MsgParticipate{
 				Participant: addrsWithDelsTier[0],
-				AuctionID:   auctionRegistrationPeriodID,
-				TierID:      1,
+				AuctionId:   auctionRegistrationPeriodID,
+				TierId:      1,
 			},
 			desiredUsedAlloc:      sdkmath.OneInt(),
 			currentAvailableAlloc: availableAllocsTier[0],
@@ -100,8 +100,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should allow valid message tier 2",
 			msg: &types.MsgParticipate{
 				Participant: addrsWithDelsTier[1],
-				AuctionID:   auctionRegistrationPeriodID,
-				TierID:      2,
+				AuctionId:   auctionRegistrationPeriodID,
+				TierId:      2,
 			},
 			desiredUsedAlloc:      sdkmath.NewInt(2),
 			currentAvailableAlloc: availableAllocsTier[1],
@@ -111,8 +111,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should allow participation when registration period is longer than range between Unix time 0 and auction's start time",
 			msg: &types.MsgParticipate{
 				Participant: addrsWithDelsTier[2],
-				AuctionID:   auctionLowerRegistrationPeriodID,
-				TierID:      1,
+				AuctionId:   auctionLowerRegistrationPeriodID,
+				TierId:      1,
 			},
 			desiredUsedAlloc:      sdkmath.OneInt(),
 			currentAvailableAlloc: availableAllocsTier[2],
@@ -122,8 +122,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should prevent invalid address",
 			msg: &types.MsgParticipate{
 				Participant: "",
-				AuctionID:   auctionRegistrationPeriodID,
-				TierID:      1,
+				AuctionId:   auctionRegistrationPeriodID,
+				TierId:      1,
 			},
 			err:       types.ErrInvalidSigner,
 			blockTime: validRegistrationTime,
@@ -132,8 +132,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should prevent participating twice in the same auction",
 			msg: &types.MsgParticipate{
 				Participant: addrsWithDelsTier[0],
-				AuctionID:   auctionRegistrationPeriodID,
-				TierID:      1,
+				AuctionId:   auctionRegistrationPeriodID,
+				TierId:      1,
 			},
 			err:       types.ErrAlreadyParticipating,
 			blockTime: validRegistrationTime,
@@ -142,8 +142,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should prevent if user has insufficient available allocations",
 			msg: &types.MsgParticipate{
 				Participant: sample.Address(r),
-				AuctionID:   auctionRegistrationPeriodID,
-				TierID:      1,
+				AuctionId:   auctionRegistrationPeriodID,
+				TierId:      1,
 			},
 			err:       types.ErrInsufficientAllocations,
 			blockTime: validRegistrationTime,
@@ -152,8 +152,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should prevent participating using a non existent tier",
 			msg: &types.MsgParticipate{
 				Participant: sample.Address(r),
-				AuctionID:   auctionRegistrationPeriodID,
-				TierID:      111,
+				AuctionId:   auctionRegistrationPeriodID,
+				TierId:      111,
 			},
 			err:       types.ErrTierNotFound,
 			blockTime: validRegistrationTime,
@@ -162,8 +162,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should prevent participating in a non existent auction",
 			msg: &types.MsgParticipate{
 				Participant: sample.Address(r),
-				AuctionID:   auctionLowerRegistrationPeriodID + 1000,
-				TierID:      1,
+				AuctionId:   auctionLowerRegistrationPeriodID + 1000,
+				TierId:      1,
 			},
 			err:       fundraisingtypes.ErrAuctionNotFound,
 			blockTime: validRegistrationTime,
@@ -172,8 +172,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should prevent participating if auction cancelled",
 			msg: &types.MsgParticipate{
 				Participant: addrsWithDelsTier[1],
-				AuctionID:   auctionCancelledID,
-				TierID:      1,
+				AuctionId:   auctionCancelledID,
+				TierId:      1,
 			},
 			err:       types.ErrParticipationNotAllowed,
 			blockTime: validRegistrationTime,
@@ -182,8 +182,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should prevent participating if auction started",
 			msg: &types.MsgParticipate{
 				Participant: addrsWithDelsTier[1],
-				AuctionID:   auctionStartedID,
-				TierID:      1,
+				AuctionId:   auctionStartedID,
+				TierId:      1,
 			},
 			err:       types.ErrParticipationNotAllowed,
 			blockTime: startTime.Add(time.Hour),
@@ -192,8 +192,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should prevent participating before registration period",
 			msg: &types.MsgParticipate{
 				Participant: addrsWithDelsTier[1],
-				AuctionID:   auctionRegistrationPeriodID,
-				TierID:      2,
+				AuctionId:   auctionRegistrationPeriodID,
+				TierId:      2,
 			},
 			err:       types.ErrParticipationNotAllowed,
 			blockTime: ctx.BlockTime(),
@@ -202,8 +202,8 @@ func Test_msgServer_Participate(t *testing.T) {
 			name: "should prevent participating if tier amount greater than auction max bid amount",
 			msg: &types.MsgParticipate{
 				Participant: addrsWithDelsTier[3],
-				AuctionID:   auctionRegistrationPeriodID,
-				TierID:      4,
+				AuctionId:   auctionRegistrationPeriodID,
+				TierId:      4,
 			},
 			err:       types.ErrInvalidBidder,
 			blockTime: validRegistrationTime,
@@ -223,11 +223,11 @@ func Test_msgServer_Participate(t *testing.T) {
 			}
 			require.NoError(t, err)
 
-			tier, found := types.GetTierFromID(types.DefaultParticipationTierList, tt.msg.TierID)
+			tier, found := types.GetTierFromID(types.DefaultParticipationTierList, tt.msg.TierId)
 			require.True(t, found)
 
 			// check auction contains allowed bidder
-			allowedBidders, err := tk.FundraisingKeeper.GetAllowedBiddersByAuction(tmpCtx, tt.msg.AuctionID)
+			allowedBidders, err := tk.FundraisingKeeper.GetAllowedBiddersByAuction(tmpCtx, tt.msg.AuctionId)
 			require.NoError(t, err)
 			require.Contains(t, allowedBidders, fundraisingtypes.AllowedBidder{
 				Bidder:       tt.msg.Participant,
@@ -242,7 +242,7 @@ func Test_msgServer_Participate(t *testing.T) {
 			// check valid auction used allocations entry for bidder exists
 			participantAddress, err := tk.ParticipationKeeper.AddressCodec().StringToBytes(tt.msg.Participant)
 			require.NoError(t, err)
-			auctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(tmpCtx, collections.Join(sdk.AccAddress(participantAddress), tt.msg.AuctionID))
+			auctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(tmpCtx, collections.Join(sdk.AccAddress(participantAddress), tt.msg.AuctionId))
 			require.NoError(t, err)
 			require.Equal(t, tier.RequiredAllocations, auctionUsedAllocations.NumAllocations)
 			require.False(t, auctionUsedAllocations.Withdrawn)

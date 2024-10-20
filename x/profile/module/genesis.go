@@ -25,7 +25,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 
 	// Set all the coordinator
 	for _, elem := range genState.CoordinatorList {
-		if err := k.Coordinator.Set(ctx, elem.CoordinatorID, elem); err != nil {
+		if err := k.Coordinator.Set(ctx, elem.CoordinatorId, elem); err != nil {
 			return err
 		}
 	}
@@ -36,7 +36,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	}
 
 	// Set all the coordinatorByAddress
-	for _, elem := range genState.CoordinatorsByAddress {
+	for _, elem := range genState.CoordinatorByAddress {
 		address, err := k.AddressCodec().StringToBytes(elem.Address)
 		if err != nil {
 			return err
@@ -76,7 +76,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) (*types.GenesisState, error
 	}
 
 	err = k.CoordinatorByAddress.Walk(ctx, nil, func(key sdk.AccAddress, elem types.CoordinatorByAddress) (bool, error) {
-		genesis.CoordinatorsByAddress = append(genesis.CoordinatorsByAddress, elem)
+		genesis.CoordinatorByAddress = append(genesis.CoordinatorByAddress, elem)
 		return false, nil
 	})
 	if err != nil {

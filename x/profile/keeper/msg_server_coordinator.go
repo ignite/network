@@ -18,7 +18,7 @@ func (k msgServer) CreateCoordinator(ctx context.Context, msg *types.MsgCreateCo
 	}
 
 	if coordinator, err := k.CoordinatorByAddress.Get(ctx, address); err == nil {
-		return nil, errorsmod.Wrapf(types.ErrCoordinatorAlreadyExist, "coordinatorID: %d", coordinator.CoordinatorID)
+		return nil, errorsmod.Wrapf(types.ErrCoordinatorAlreadyExist, "coordinatorID: %d", coordinator.CoordinatorId)
 	}
 
 	nextID, err := k.CoordinatorSeq.Next(ctx)
@@ -27,7 +27,7 @@ func (k msgServer) CreateCoordinator(ctx context.Context, msg *types.MsgCreateCo
 	}
 
 	coordinator := types.Coordinator{
-		CoordinatorID: nextID,
+		CoordinatorId: nextID,
 		Address:       msg.Address,
 		Description:   msg.Description,
 		Active:        true,
@@ -39,14 +39,14 @@ func (k msgServer) CreateCoordinator(ctx context.Context, msg *types.MsgCreateCo
 
 	if err = k.CoordinatorByAddress.Set(ctx, address, types.CoordinatorByAddress{
 		Address:       msg.Address,
-		CoordinatorID: nextID,
+		CoordinatorId: nextID,
 	}); err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to set coordinator by address")
 	}
 
-	return &types.MsgCreateCoordinatorResponse{CoordinatorID: nextID}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(
+	return &types.MsgCreateCoordinatorResponse{CoordinatorId: nextID}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(
 		&types.EventCoordinatorCreated{
-			CoordinatorID: nextID,
+			CoordinatorId: nextID,
 			Address:       msg.Address,
 		})
 }
@@ -66,7 +66,7 @@ func (k msgServer) UpdateCoordinatorDescription(ctx context.Context, msg *types.
 		return nil, errorsmod.Wrapf(types.ErrCoordinatorAddressNotFound, "coordinator address %s not found", msg.Address)
 	}
 
-	coordinator, err := k.GetCoordinator(ctx, coordByAddress.CoordinatorID)
+	coordinator, err := k.GetCoordinator(ctx, coordByAddress.CoordinatorId)
 	if err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to get coordinator")
 	}
@@ -86,7 +86,7 @@ func (k msgServer) UpdateCoordinatorDescription(ctx context.Context, msg *types.
 		coordinator.Description.Details = msg.Description.Details
 	}
 
-	if err := k.Coordinator.Set(ctx, coordByAddress.CoordinatorID, coordinator); err != nil {
+	if err := k.Coordinator.Set(ctx, coordByAddress.CoordinatorId, coordinator); err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to update coordinator")
 	}
 
@@ -112,17 +112,17 @@ func (k msgServer) UpdateCoordinatorAddress(ctx context.Context, msg *types.MsgU
 		return nil, errorsmod.Wrapf(types.ErrInvalidSigner, "invalid new address %s", err.Error())
 	}
 	if newCoord, err := k.CoordinatorByAddress.Get(ctx, newAddress); err == nil {
-		return nil, errorsmod.Wrapf(types.ErrCoordinatorAlreadyExist, "new address already have a coordinator: %d", newCoord.CoordinatorID)
+		return nil, errorsmod.Wrapf(types.ErrCoordinatorAlreadyExist, "new address already have a coordinator: %d", newCoord.CoordinatorId)
 	}
 
-	coordinator, err := k.GetCoordinator(ctx, coordByAddress.CoordinatorID)
+	coordinator, err := k.GetCoordinator(ctx, coordByAddress.CoordinatorId)
 	if err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to get coordinator")
 	}
 
 	// Check if the coordinator is inactive
 	if !coordinator.Active {
-		return nil, errors.Criticalf("inactive coordinator address should not exist in store, ID: %d", coordByAddress.CoordinatorID)
+		return nil, errors.Criticalf("inactive coordinator address should not exist in store, ID: %d", coordByAddress.CoordinatorId)
 	}
 
 	coordinator.Address = msg.NewAddress
@@ -133,17 +133,17 @@ func (k msgServer) UpdateCoordinatorAddress(ctx context.Context, msg *types.MsgU
 	}
 	if err = k.CoordinatorByAddress.Set(ctx, newAddress, types.CoordinatorByAddress{
 		Address:       msg.NewAddress,
-		CoordinatorID: coordByAddress.CoordinatorID,
+		CoordinatorId: coordByAddress.CoordinatorId,
 	}); err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to set coordinator by address")
 	}
-	if err := k.Coordinator.Set(ctx, coordByAddress.CoordinatorID, coordinator); err != nil {
+	if err := k.Coordinator.Set(ctx, coordByAddress.CoordinatorId, coordinator); err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to update coordinator address")
 	}
 
 	return &types.MsgUpdateCoordinatorAddressResponse{}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(
 		&types.EventCoordinatorAddressUpdated{
-			CoordinatorID: coordByAddress.CoordinatorID,
+			CoordinatorId: coordByAddress.CoordinatorId,
 			NewAddress:    msg.NewAddress,
 		})
 }
@@ -160,7 +160,7 @@ func (k msgServer) DisableCoordinator(ctx context.Context, msg *types.MsgDisable
 	}
 
 	// Checks that the element exists
-	coordinator, err := k.GetCoordinator(ctx, coordByAddress.CoordinatorID)
+	coordinator, err := k.GetCoordinator(ctx, coordByAddress.CoordinatorId)
 	if err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to get coordinator")
 	}
@@ -174,12 +174,12 @@ func (k msgServer) DisableCoordinator(ctx context.Context, msg *types.MsgDisable
 	if !coordinator.Active {
 		return nil,
 			errors.Criticalf("inactive coordinator address should not exist in store, ID: %d",
-				coordByAddress.CoordinatorID)
+				coordByAddress.CoordinatorId)
 	}
 
 	// disable by setting to inactive and remove CoordByAddress
 	coordinator.Active = false
-	if err := k.Coordinator.Set(ctx, coordinator.CoordinatorID, coordinator); err != nil {
+	if err := k.Coordinator.Set(ctx, coordinator.CoordinatorId, coordinator); err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrLogic, "failed to set coordinator")
 	}
 
@@ -188,10 +188,10 @@ func (k msgServer) DisableCoordinator(ctx context.Context, msg *types.MsgDisable
 	}
 
 	return &types.MsgDisableCoordinatorResponse{
-			CoordinatorID: coordinator.CoordinatorID,
+			CoordinatorId: coordinator.CoordinatorId,
 		}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(
 			&types.EventCoordinatorDisabled{
-				CoordinatorID: coordByAddress.CoordinatorID,
+				CoordinatorId: coordByAddress.CoordinatorId,
 				Address:       msg.Address,
 			})
 }

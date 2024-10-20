@@ -20,7 +20,7 @@ func createNChain(keeper *keeper.Keeper, ctx context.Context, n int) []types.Cha
 	items := make([]types.Chain, n)
 	for i := range items {
 		iu := uint64(i)
-		items[i].LaunchID = iu
+		items[i].LaunchId = iu
 		_ = keeper.Chain.Set(ctx, iu, items[i])
 		_ = keeper.ChainSeq.Set(ctx, iu)
 	}
@@ -39,17 +39,17 @@ func TestChainQuerySingle(t *testing.T) {
 	}{
 		{
 			desc:     "First",
-			request:  &types.QueryGetChainRequest{LaunchID: msgs[0].LaunchID},
+			request:  &types.QueryGetChainRequest{LaunchId: msgs[0].LaunchId},
 			response: &types.QueryGetChainResponse{Chain: msgs[0]},
 		},
 		{
 			desc:     "Second",
-			request:  &types.QueryGetChainRequest{LaunchID: msgs[1].LaunchID},
+			request:  &types.QueryGetChainRequest{LaunchId: msgs[1].LaunchId},
 			response: &types.QueryGetChainResponse{Chain: msgs[1]},
 		},
 		{
 			desc:    "KeyNotFound",
-			request: &types.QueryGetChainRequest{LaunchID: uint64(len(msgs))},
+			request: &types.QueryGetChainRequest{LaunchId: uint64(len(msgs))},
 			err:     sdkerrors.ErrKeyNotFound,
 		},
 		{

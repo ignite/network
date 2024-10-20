@@ -32,7 +32,7 @@ func TestKeeper_InitializeConsumerClient(t *testing.T) {
 
 		consumerClientID, err := tk.MonitoringProviderKeeper.ConsumerClientID.Get(ctx)
 		require.NoError(t, err, "consumer client ID should be registered in the store")
-		require.EqualValues(t, clientID, consumerClientID.ClientID)
+		require.EqualValues(t, clientID, consumerClientID.ClientId)
 
 		// IBC client should be created
 		clientState, found := tk.IBCKeeper.ClientKeeper.GetClientState(ctx, clientID)

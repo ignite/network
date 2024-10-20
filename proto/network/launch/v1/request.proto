@@ -11,10 +11,10 @@ import "network/launch/v1/vesting_account.proto";
 option go_package = "github.com/ignite/network/x/launch/types";
 
 message Request {
-  uint64 launchID = 1;
-  uint64 requestID = 2;
+  uint64 launch_id = 1;
+  uint64 request_id = 2;
   string creator = 3 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  int64 createdAt = 4;
+  int64 created_at = 4;
   RequestContent content = 5 [(gogoproto.nullable) = false];
   enum Status {
     PENDING = 0;
@@ -26,12 +26,12 @@ message Request {
 
 message RequestContent {
   oneof content {
-    GenesisAccount genesisAccount = 1;
-    VestingAccount vestingAccount = 2;
-    GenesisValidator genesisValidator = 3;
-    AccountRemoval accountRemoval = 4;
-    ValidatorRemoval validatorRemoval = 5;
-    ParamChange paramChange = 6;
+    GenesisAccount genesis_account = 1;
+    VestingAccount vesting_account = 2;
+    GenesisValidator genesis_validator = 3;
+    AccountRemoval account_removal = 4;
+    ValidatorRemoval validator_removal = 5;
+    ParamChange param_change = 6;
   }
 }
 

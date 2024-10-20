@@ -28,11 +28,11 @@ func TestMsgBurnVouchers(t *testing.T) {
 
 	// Set project
 	project.AllocatedShares = shares
-	project.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, project)
+	project.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, project)
 	require.NoError(t, err)
 
 	// Create vouchers
-	vouchers, err := types.SharesToVouchers(shares, project.ProjectID)
+	vouchers, err := types.SharesToVouchers(shares, project.ProjectId)
 	require.NoError(t, err)
 
 	invalidProjectID := uint64(1000)
@@ -55,7 +55,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should allow burn voucher",
 			msg: types.MsgBurnVouchers{
 				Sender:    addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[0]),
 			},
 		},
@@ -63,7 +63,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should allow burn voucher two",
 			msg: types.MsgBurnVouchers{
 				Sender:    addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[1]),
 			},
 		},
@@ -71,7 +71,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should allow burn voucher three",
 			msg: types.MsgBurnVouchers{
 				Sender:    addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[2]),
 			},
 		},
@@ -79,7 +79,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should fail for non existing project",
 			msg: types.MsgBurnVouchers{
 				Sender:    addr.String(),
-				ProjectID: invalidProjectID,
+				ProjectId: invalidProjectID,
 				Vouchers:  sdk.NewCoins(vouchersErr[0]),
 			},
 			err: types.ErrProjectNotFound,
@@ -88,7 +88,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should fail for invalid sender address",
 			msg: types.MsgBurnVouchers{
 				Sender:    "invalid_address",
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[1]),
 			},
 			err: types.ErrInvalidSigner,
@@ -97,7 +97,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should not burn more than allocated shares",
 			msg: types.MsgBurnVouchers{
 				Sender:    addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  vouchersTooBig,
 			},
 			err: types.ErrInsufficientVouchers,
@@ -107,7 +107,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should fail for insufficient funds for voucher one",
 			msg: types.MsgBurnVouchers{
 				Sender:    addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[0]),
 			},
 			err: types.ErrInsufficientVouchers,
@@ -117,7 +117,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should fail for insufficient funds for voucher two",
 			msg: types.MsgBurnVouchers{
 				Sender:    addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[1]),
 			},
 			err: types.ErrInsufficientVouchers,
@@ -127,7 +127,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 			name: "should fail for insufficient funds for voucher three",
 			msg: types.MsgBurnVouchers{
 				Sender:    addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[2]),
 			},
 			err: types.ErrInsufficientVouchers,
@@ -140,7 +140,7 @@ func TestMsgBurnVouchers(t *testing.T) {
 
 			// Get values before message execution
 			if tc.err == nil {
-				previousProject, err = tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
+				previousProject, err = tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectId)
 				require.NoError(t, err)
 
 				creatorAddr, err = tk.ProjectKeeper.AddressCodec().StringToBytes(tc.msg.Sender)
@@ -156,11 +156,11 @@ func TestMsgBurnVouchers(t *testing.T) {
 			}
 			require.NoError(t, err)
 
-			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
+			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectId)
 			require.NoError(t, err)
 
 			// Allocated shares of the project must be decreased
-			burned, err := types.VouchersToShares(tc.msg.Vouchers, tc.msg.ProjectID)
+			burned, err := types.VouchersToShares(tc.msg.Vouchers, tc.msg.ProjectId)
 			require.NoError(t, err)
 
 			expectedShares, err := types.DecreaseShares(previousProject.AllocatedShares, burned)

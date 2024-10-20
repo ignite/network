@@ -23,9 +23,9 @@ func (k msgServer) TriggerLaunch(ctx context.Context, msg *types.MsgTriggerLaunc
 		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
 	}
 
-	chain, err := k.GetChain(ctx, msg.LaunchID)
+	chain, err := k.GetChain(ctx, msg.LaunchId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchId)
 	}
 
 	// Get the coordinator ID associated to the sender address
@@ -34,15 +34,15 @@ func (k msgServer) TriggerLaunch(ctx context.Context, msg *types.MsgTriggerLaunc
 		return nil, err
 	}
 
-	if chain.CoordinatorID != coordinatorID {
+	if chain.CoordinatorId != coordinatorID {
 		return nil, sdkerrors.Wrap(profiletypes.ErrCoordinatorInvalid, fmt.Sprintf(
 			"coordinator of the chain is %d",
-			chain.CoordinatorID,
+			chain.CoordinatorId,
 		))
 	}
 
 	if chain.LaunchTriggered {
-		return nil, sdkerrors.Wrapf(types.ErrTriggeredLaunch, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(types.ErrTriggeredLaunch, "%d", msg.LaunchId)
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
@@ -60,13 +60,13 @@ func (k msgServer) TriggerLaunch(ctx context.Context, msg *types.MsgTriggerLaunc
 	// set revision height for monitoring IBC client
 	chain.ConsumerRevisionHeight = sdkCtx.BlockHeight()
 
-	if err := k.Chain.Set(ctx, chain.LaunchID, chain); err != nil {
+	if err := k.Chain.Set(ctx, chain.LaunchId, chain); err != nil {
 		return nil, ignterrors.Criticalf("chain not set %s", err.Error())
 	}
 
 	err = sdkCtx.EventManager().EmitTypedEvent(&types.EventLaunchTriggered{
-		LaunchID:        msg.LaunchID,
-		LaunchTimeStamp: chain.LaunchTime,
+		LaunchId:        msg.LaunchId,
+		LaunchTimestamp: chain.LaunchTime,
 	})
 
 	return &types.MsgTriggerLaunchResponse{}, err

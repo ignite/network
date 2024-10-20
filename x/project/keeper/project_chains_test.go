@@ -31,7 +31,7 @@ func TestKeeper_AddChainToProject(t *testing.T) {
 
 		projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, projectID)
 		require.NoError(t, err)
-		require.EqualValues(t, projectChains.ProjectID, uint64(0))
+		require.EqualValues(t, projectChains.ProjectId, uint64(0))
 		require.Len(t, projectChains.Chains, 3)
 		require.EqualValues(t, []uint64{0, 1, 2}, projectChains.Chains)
 	})

@@ -27,8 +27,8 @@ func (k Keeper) OnRecvMonitoringPacket(
 	}
 
 	// save the latest received monitoring packet for documentation purpose
-	err = k.MonitoringHistory.Set(ctx, lidFromCid.LaunchID, types.MonitoringHistory{
-		LaunchID:               lidFromCid.LaunchID,
+	err = k.MonitoringHistory.Set(ctx, lidFromCid.LaunchId, types.MonitoringHistory{
+		LaunchId:               lidFromCid.LaunchId,
 		LatestMonitoringPacket: data,
 	})
 	if err != nil {
@@ -37,7 +37,7 @@ func (k Keeper) OnRecvMonitoringPacket(
 	// distribute reward from the signature count
 	err = k.rewardKeeper.DistributeRewards(
 		ctx,
-		lidFromCid.LaunchID,
+		lidFromCid.LaunchId,
 		data.SignatureCounts,
 		data.BlockHeight,
 		true,

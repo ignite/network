@@ -22,7 +22,7 @@ func TestMsgBurnVouchers_ValidateBasic(t *testing.T) {
 			name: "should allow validation of valid msg",
 			msg: types.MsgBurnVouchers{
 				Sender:    sample.Address(r),
-				ProjectID: 0,
+				ProjectId: 0,
 				Vouchers:  sample.Vouchers(r, 0),
 			},
 		},
@@ -30,7 +30,7 @@ func TestMsgBurnVouchers_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with invalid vouchers",
 			msg: types.MsgBurnVouchers{
 				Sender:    sample.Address(r),
-				ProjectID: 0,
+				ProjectId: 0,
 				Vouchers:  invalidCoins,
 			},
 			err: types.ErrInvalidVouchers,
@@ -39,7 +39,7 @@ func TestMsgBurnVouchers_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with empty vouchers",
 			msg: types.MsgBurnVouchers{
 				Sender:    sample.Address(r),
-				ProjectID: 0,
+				ProjectId: 0,
 				Vouchers:  sdk.Coins{},
 			},
 			err: types.ErrInvalidVouchers,
@@ -48,7 +48,7 @@ func TestMsgBurnVouchers_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with vouchers not matching project",
 			msg: types.MsgBurnVouchers{
 				Sender:    sample.Address(r),
-				ProjectID: 0,
+				ProjectId: 0,
 				Vouchers: sdk.NewCoins(
 					sdk.NewCoin("invalid/foo", sdkmath.NewInt(100)),
 				),
@@ -127,7 +127,7 @@ func TestMsgEditProject_ValidateBasic(t *testing.T) {
 		{
 			name: "should allow validation of msg with both name and metadata modified",
 			msg: types.MsgEditProject{
-				ProjectID:   0,
+				ProjectId:   0,
 				Coordinator: sample.Address(r),
 				Name:        sample.ProjectName(r),
 				Metadata:    sample.Metadata(r, 20),
@@ -136,7 +136,7 @@ func TestMsgEditProject_ValidateBasic(t *testing.T) {
 		{
 			name: "should allow validation of msg with name modified",
 			msg: types.MsgEditProject{
-				ProjectID:   0,
+				ProjectId:   0,
 				Coordinator: sample.Address(r),
 				Name:        sample.ProjectName(r),
 				Metadata:    []byte{},
@@ -145,7 +145,7 @@ func TestMsgEditProject_ValidateBasic(t *testing.T) {
 		{
 			name: "should allow validation of msg with metadata modified",
 			msg: types.MsgEditProject{
-				ProjectID:   0,
+				ProjectId:   0,
 				Coordinator: sample.Address(r),
 				Name:        "",
 				Metadata:    sample.Metadata(r, 20),
@@ -154,7 +154,7 @@ func TestMsgEditProject_ValidateBasic(t *testing.T) {
 		{
 			name: "should prevent validation of msg with invalid project name",
 			msg: types.MsgEditProject{
-				ProjectID:   0,
+				ProjectId:   0,
 				Coordinator: sample.Address(r),
 				Name:        invalidProjectName,
 				Metadata:    sample.Metadata(r, 20),
@@ -164,7 +164,7 @@ func TestMsgEditProject_ValidateBasic(t *testing.T) {
 		{
 			name: "should prevent validation of msg with no fields modified",
 			msg: types.MsgEditProject{
-				ProjectID:   0,
+				ProjectId:   0,
 				Coordinator: sample.Address(r),
 				Name:        "",
 				Metadata:    []byte{},
@@ -194,20 +194,20 @@ func TestMsgInitializeMainnet_ValidateBasic(t *testing.T) {
 			name: "should allow validation of valid msg",
 			msg: types.MsgInitializeMainnet{
 				Coordinator:    sample.Address(r),
-				ProjectID:      sample.Uint64(r),
-				SourceURL:      sample.String(r, 30),
+				ProjectId:      sample.Uint64(r),
+				SourceUrl:      sample.String(r, 30),
 				SourceHash:     sample.String(r, 20),
-				MainnetChainID: sample.GenesisChainID(r),
+				MainnetChainId: sample.GenesisChainID(r),
 			},
 		},
 		{
 			name: "should prevent validation of msg with empty source URL",
 			msg: types.MsgInitializeMainnet{
 				Coordinator:    sample.Address(r),
-				ProjectID:      sample.Uint64(r),
-				SourceURL:      "",
+				ProjectId:      sample.Uint64(r),
+				SourceUrl:      "",
 				SourceHash:     sample.String(r, 20),
-				MainnetChainID: sample.GenesisChainID(r),
+				MainnetChainId: sample.GenesisChainID(r),
 			},
 			err: types.ErrInvalidMainnetInfo,
 		},
@@ -215,10 +215,10 @@ func TestMsgInitializeMainnet_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with empty source hash",
 			msg: types.MsgInitializeMainnet{
 				Coordinator:    sample.Address(r),
-				ProjectID:      sample.Uint64(r),
-				SourceURL:      sample.String(r, 30),
+				ProjectId:      sample.Uint64(r),
+				SourceUrl:      sample.String(r, 30),
 				SourceHash:     "",
-				MainnetChainID: sample.GenesisChainID(r),
+				MainnetChainId: sample.GenesisChainID(r),
 			},
 			err: types.ErrInvalidMainnetInfo,
 		},
@@ -226,10 +226,10 @@ func TestMsgInitializeMainnet_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with invalid chain id",
 			msg: types.MsgInitializeMainnet{
 				Coordinator:    sample.Address(r),
-				ProjectID:      sample.Uint64(r),
-				SourceURL:      sample.String(r, 30),
+				ProjectId:      sample.Uint64(r),
+				SourceUrl:      sample.String(r, 30),
 				SourceHash:     sample.String(r, 20),
-				MainnetChainID: "invalid_chain_id",
+				MainnetChainId: "invalid_chain_id",
 			},
 			err: types.ErrInvalidMainnetInfo,
 		},
@@ -258,7 +258,7 @@ func TestMsgMintVouchers_ValidateBasic(t *testing.T) {
 			name: "should allow validation of valid msg",
 			msg: types.MsgMintVouchers{
 				Coordinator: sample.Address(r),
-				ProjectID:   0,
+				ProjectId:   0,
 				Shares:      sample.Shares(r),
 			},
 		},
@@ -266,7 +266,7 @@ func TestMsgMintVouchers_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with invalid shares",
 			msg: types.MsgMintVouchers{
 				Coordinator: sample.Address(r),
-				ProjectID:   0,
+				ProjectId:   0,
 				Shares:      invalidShares,
 			},
 			err: types.ErrInvalidShares,
@@ -275,7 +275,7 @@ func TestMsgMintVouchers_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with empty shares",
 			msg: types.MsgMintVouchers{
 				Coordinator: sample.Address(r),
-				ProjectID:   0,
+				ProjectId:   0,
 				Shares:      types.EmptyShares(),
 			},
 			err: types.ErrInvalidShares,
@@ -308,7 +308,7 @@ func TestMsgRedeemVouchers_ValidateBasic(t *testing.T) {
 				Sender:    sample.Address(r),
 				Account:   sample.Address(r),
 				Vouchers:  sample.Vouchers(r, 0),
-				ProjectID: 0,
+				ProjectId: 0,
 			},
 		},
 		{
@@ -317,7 +317,7 @@ func TestMsgRedeemVouchers_ValidateBasic(t *testing.T) {
 				Sender:    addr,
 				Account:   addr,
 				Vouchers:  sample.Vouchers(r, 0),
-				ProjectID: 0,
+				ProjectId: 0,
 			},
 		},
 		{
@@ -326,7 +326,7 @@ func TestMsgRedeemVouchers_ValidateBasic(t *testing.T) {
 				Sender:    sample.Address(r),
 				Account:   sample.Address(r),
 				Vouchers:  invalidCoins,
-				ProjectID: 0,
+				ProjectId: 0,
 			},
 			err: types.ErrInvalidVouchers,
 		},
@@ -336,7 +336,7 @@ func TestMsgRedeemVouchers_ValidateBasic(t *testing.T) {
 				Sender:    sample.Address(r),
 				Account:   sample.Address(r),
 				Vouchers:  sample.Vouchers(r, 10),
-				ProjectID: 0,
+				ProjectId: 0,
 			},
 			err: types.ErrNoMatchVouchers,
 		},
@@ -348,7 +348,7 @@ func TestMsgRedeemVouchers_ValidateBasic(t *testing.T) {
 				Vouchers: sdk.NewCoins(
 					sdk.NewCoin("invalid/foo", sdkmath.NewInt(100)),
 				),
-				ProjectID: 0,
+				ProjectId: 0,
 			},
 			err: types.ErrNoMatchVouchers,
 		},
@@ -358,7 +358,7 @@ func TestMsgRedeemVouchers_ValidateBasic(t *testing.T) {
 				Sender:    sample.Address(r),
 				Account:   sample.Address(r),
 				Vouchers:  sdk.Coins{},
-				ProjectID: 0,
+				ProjectId: 0,
 			},
 			err: types.ErrInvalidVouchers,
 		},
@@ -387,7 +387,7 @@ func TestMsgUnredeemVouchers_ValidateBasic(t *testing.T) {
 			name: "should allow validation of valid msg",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    sample.Address(r),
-				ProjectID: 0,
+				ProjectId: 0,
 				Shares:    sample.Shares(r),
 			},
 		},
@@ -395,7 +395,7 @@ func TestMsgUnredeemVouchers_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with invalid shares",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    sample.Address(r),
-				ProjectID: 0,
+				ProjectId: 0,
 				Shares:    invalidShares,
 			},
 			err: types.ErrInvalidShares,
@@ -404,7 +404,7 @@ func TestMsgUnredeemVouchers_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with empty shares",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    sample.Address(r),
-				ProjectID: 0,
+				ProjectId: 0,
 				Shares:    types.EmptyShares(),
 			},
 			err: types.ErrInvalidShares,
@@ -434,7 +434,7 @@ func TestMsgUpdateSpecialAllocations_ValidateBasic(t *testing.T) {
 			name: "should allow validation of valid msg",
 			msg: types.MsgUpdateSpecialAllocations{
 				Coordinator:        sample.Address(r),
-				ProjectID:          1,
+				ProjectId:          1,
 				SpecialAllocations: sample.SpecialAllocations(r),
 			},
 		},
@@ -442,7 +442,7 @@ func TestMsgUpdateSpecialAllocations_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with invalid special allocations",
 			msg: types.MsgUpdateSpecialAllocations{
 				Coordinator:        sample.Address(r),
-				ProjectID:          1,
+				ProjectId:          1,
 				SpecialAllocations: types.NewSpecialAllocations(invalidShares, sample.Shares(r)),
 			},
 			err: types.ErrInvalidSpecialAllocations,
@@ -472,7 +472,7 @@ func TestMsgUpdateTotalSupply_ValidateBasic(t *testing.T) {
 			name: "should allow validation of valid msg",
 			msg: types.MsgUpdateTotalSupply{
 				Coordinator:       sample.Address(r),
-				ProjectID:         0,
+				ProjectId:         0,
 				TotalSupplyUpdate: sample.TotalSupply(r),
 			},
 		},
@@ -480,7 +480,7 @@ func TestMsgUpdateTotalSupply_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with invalid total supply",
 			msg: types.MsgUpdateTotalSupply{
 				Coordinator:       sample.Address(r),
-				ProjectID:         0,
+				ProjectId:         0,
 				TotalSupplyUpdate: invalidCoins,
 			},
 			err: types.ErrInvalidTotalSupply,
@@ -489,7 +489,7 @@ func TestMsgUpdateTotalSupply_ValidateBasic(t *testing.T) {
 			name: "should prevent validation of msg with empty total supply",
 			msg: types.MsgUpdateTotalSupply{
 				Coordinator:       sample.Address(r),
-				ProjectID:         0,
+				ProjectId:         0,
 				TotalSupplyUpdate: sdk.NewCoins(),
 			},
 			err: types.ErrInvalidTotalSupply,

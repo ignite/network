@@ -20,13 +20,13 @@ func (k msgServer) BurnVouchers(ctx context.Context, msg *types.MsgBurnVouchers)
 		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid sender address %s", err.Error())
 	}
 
-	project, err := k.GetProject(ctx, msg.ProjectID)
+	project, err := k.GetProject(ctx, msg.ProjectId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectId)
 	}
 
 	// Convert and validate vouchers first
-	shares, err := types.VouchersToShares(msg.Vouchers, msg.ProjectID)
+	shares, err := types.VouchersToShares(msg.Vouchers, msg.ProjectId)
 	if err != nil {
 		return nil, ignterrors.Criticalf("verified voucher are invalid %s", err.Error())
 	}
@@ -44,12 +44,12 @@ func (k msgServer) BurnVouchers(ctx context.Context, msg *types.MsgBurnVouchers)
 	if err != nil {
 		return nil, ignterrors.Criticalf("invalid allocated share amount %s", err.Error())
 	}
-	if err := k.Project.Set(ctx, project.ProjectID, project); err != nil {
+	if err := k.Project.Set(ctx, project.ProjectId, project); err != nil {
 		return nil, ignterrors.Criticalf("can't set project %s", err.Error())
 	}
 
 	return &types.MsgBurnVouchersResponse{}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(&types.EventProjectSharesUpdated{
-		ProjectID:       project.ProjectID,
+		ProjectId:       project.ProjectId,
 		AllocatedShares: project.AllocatedShares,
 	})
 }

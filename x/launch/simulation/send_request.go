@@ -47,11 +47,11 @@ func SimulateMsgRequestAddGenesisAccount(
 		var simAccount simtypes.Account
 		var availableAccount bool
 		for _, acc := range accs {
-			_, err := k.GenesisAccount.Get(ctx, collections.Join(chain.LaunchID, acc.Address))
+			_, err := k.GenesisAccount.Get(ctx, collections.Join(chain.LaunchId, acc.Address))
 			if err != nil {
 				continue
 			}
-			_, err = k.VestingAccount.Get(ctx, collections.Join(chain.LaunchID, acc.Address))
+			_, err = k.VestingAccount.Get(ctx, collections.Join(chain.LaunchId, acc.Address))
 			if err != nil {
 				continue
 			}
@@ -66,7 +66,7 @@ func SimulateMsgRequestAddGenesisAccount(
 		msg = sample.MsgSendRequestWithAddAccount(r,
 			simAccount.Address.String(),
 			simAccount.Address.String(),
-			chain.LaunchID,
+			chain.LaunchId,
 		)
 
 		txCtx := simulation.OperationInput{
@@ -117,11 +117,11 @@ func SimulateMsgRequestAddVestingAccount(
 		var simAccount simtypes.Account
 		var availableAccount bool
 		for _, acc := range accs {
-			_, err := k.GenesisAccount.Get(ctx, collections.Join(chain.LaunchID, acc.Address))
+			_, err := k.GenesisAccount.Get(ctx, collections.Join(chain.LaunchId, acc.Address))
 			if err != nil {
 				continue
 			}
-			_, err = k.VestingAccount.Get(ctx, collections.Join(chain.LaunchID, acc.Address))
+			_, err = k.VestingAccount.Get(ctx, collections.Join(chain.LaunchId, acc.Address))
 			if err != nil {
 				continue
 			}
@@ -136,7 +136,7 @@ func SimulateMsgRequestAddVestingAccount(
 		msg = sample.MsgSendRequestWithAddVestingAccount(r,
 			simAccount.Address.String(),
 			simAccount.Address.String(),
-			chain.LaunchID,
+			chain.LaunchId,
 		)
 
 		txCtx := simulation.OperationInput{
@@ -187,7 +187,7 @@ func SimulateMsgRequestRemoveAccount(
 		for _, acc := range genAccs {
 			accChains = append(accChains, accChain{
 				address:  acc.Address,
-				launchID: acc.LaunchID,
+				launchID: acc.LaunchId,
 			})
 		}
 		vestAccs, err := k.AllVestingAccount(ctx)
@@ -197,7 +197,7 @@ func SimulateMsgRequestRemoveAccount(
 		for _, acc := range vestAccs {
 			accChains = append(accChains, accChain{
 				address:  acc.Address,
-				launchID: acc.LaunchID,
+				launchID: acc.LaunchId,
 			})
 		}
 
@@ -283,7 +283,7 @@ func SimulateMsgRequestAddValidator(
 		msg = sample.MsgSendRequestWithAddValidator(r,
 			simAccount.Address.String(),
 			simAccount.Address.String(),
-			chain.LaunchID,
+			chain.LaunchId,
 		)
 
 		txCtx := simulation.OperationInput{
@@ -329,7 +329,7 @@ func SimulateMsgRequestRemoveValidator(
 		msg = sample.MsgSendRequestWithRemoveValidator(
 			simAccount.Address.String(),
 			valAcc.Address,
-			valAcc.LaunchID,
+			valAcc.LaunchId,
 		)
 
 		txCtx := simulation.OperationInput{
@@ -377,7 +377,7 @@ func SimulateMsgRequestParamChange(
 		msg = sample.MsgSendRequestWithParamChange(
 			r,
 			simAccount.Address.String(),
-			chain.LaunchID,
+			chain.LaunchId,
 		)
 
 		txCtx := simulation.OperationInput{

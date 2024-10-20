@@ -925,29 +925,29 @@ func (x *_MsgCreateChain_8_list) IsValid() bool {
 }
 
 var (
-	md_MsgCreateChain                protoreflect.MessageDescriptor
-	fd_MsgCreateChain_coordinator    protoreflect.FieldDescriptor
-	fd_MsgCreateChain_genesisChainID protoreflect.FieldDescriptor
-	fd_MsgCreateChain_sourceURL      protoreflect.FieldDescriptor
-	fd_MsgCreateChain_sourceHash     protoreflect.FieldDescriptor
-	fd_MsgCreateChain_initialGenesis protoreflect.FieldDescriptor
-	fd_MsgCreateChain_hasProject     protoreflect.FieldDescriptor
-	fd_MsgCreateChain_projectID      protoreflect.FieldDescriptor
-	fd_MsgCreateChain_accountBalance protoreflect.FieldDescriptor
-	fd_MsgCreateChain_metadata       protoreflect.FieldDescriptor
+	md_MsgCreateChain                  protoreflect.MessageDescriptor
+	fd_MsgCreateChain_coordinator      protoreflect.FieldDescriptor
+	fd_MsgCreateChain_genesis_chain_id protoreflect.FieldDescriptor
+	fd_MsgCreateChain_source_url       protoreflect.FieldDescriptor
+	fd_MsgCreateChain_source_hash      protoreflect.FieldDescriptor
+	fd_MsgCreateChain_initial_genesis  protoreflect.FieldDescriptor
+	fd_MsgCreateChain_has_project      protoreflect.FieldDescriptor
+	fd_MsgCreateChain_project_id       protoreflect.FieldDescriptor
+	fd_MsgCreateChain_account_balance  protoreflect.FieldDescriptor
+	fd_MsgCreateChain_metadata         protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_tx_proto_init()
 	md_MsgCreateChain = File_network_launch_v1_tx_proto.Messages().ByName("MsgCreateChain")
 	fd_MsgCreateChain_coordinator = md_MsgCreateChain.Fields().ByName("coordinator")
-	fd_MsgCreateChain_genesisChainID = md_MsgCreateChain.Fields().ByName("genesisChainID")
-	fd_MsgCreateChain_sourceURL = md_MsgCreateChain.Fields().ByName("sourceURL")
-	fd_MsgCreateChain_sourceHash = md_MsgCreateChain.Fields().ByName("sourceHash")
-	fd_MsgCreateChain_initialGenesis = md_MsgCreateChain.Fields().ByName("initialGenesis")
-	fd_MsgCreateChain_hasProject = md_MsgCreateChain.Fields().ByName("hasProject")
-	fd_MsgCreateChain_projectID = md_MsgCreateChain.Fields().ByName("projectID")
-	fd_MsgCreateChain_accountBalance = md_MsgCreateChain.Fields().ByName("accountBalance")
+	fd_MsgCreateChain_genesis_chain_id = md_MsgCreateChain.Fields().ByName("genesis_chain_id")
+	fd_MsgCreateChain_source_url = md_MsgCreateChain.Fields().ByName("source_url")
+	fd_MsgCreateChain_source_hash = md_MsgCreateChain.Fields().ByName("source_hash")
+	fd_MsgCreateChain_initial_genesis = md_MsgCreateChain.Fields().ByName("initial_genesis")
+	fd_MsgCreateChain_has_project = md_MsgCreateChain.Fields().ByName("has_project")
+	fd_MsgCreateChain_project_id = md_MsgCreateChain.Fields().ByName("project_id")
+	fd_MsgCreateChain_account_balance = md_MsgCreateChain.Fields().ByName("account_balance")
 	fd_MsgCreateChain_metadata = md_MsgCreateChain.Fields().ByName("metadata")
 }
 
@@ -1022,45 +1022,45 @@ func (x *fastReflection_MsgCreateChain) Range(f func(protoreflect.FieldDescripto
 			return
 		}
 	}
-	if x.GenesisChainID != "" {
-		value := protoreflect.ValueOfString(x.GenesisChainID)
-		if !f(fd_MsgCreateChain_genesisChainID, value) {
+	if x.GenesisChainId != "" {
+		value := protoreflect.ValueOfString(x.GenesisChainId)
+		if !f(fd_MsgCreateChain_genesis_chain_id, value) {
 			return
 		}
 	}
-	if x.SourceURL != "" {
-		value := protoreflect.ValueOfString(x.SourceURL)
-		if !f(fd_MsgCreateChain_sourceURL, value) {
+	if x.SourceUrl != "" {
+		value := protoreflect.ValueOfString(x.SourceUrl)
+		if !f(fd_MsgCreateChain_source_url, value) {
 			return
 		}
 	}
 	if x.SourceHash != "" {
 		value := protoreflect.ValueOfString(x.SourceHash)
-		if !f(fd_MsgCreateChain_sourceHash, value) {
+		if !f(fd_MsgCreateChain_source_hash, value) {
 			return
 		}
 	}
 	if x.InitialGenesis != nil {
 		value := protoreflect.ValueOfMessage(x.InitialGenesis.ProtoReflect())
-		if !f(fd_MsgCreateChain_initialGenesis, value) {
+		if !f(fd_MsgCreateChain_initial_genesis, value) {
 			return
 		}
 	}
 	if x.HasProject != false {
 		value := protoreflect.ValueOfBool(x.HasProject)
-		if !f(fd_MsgCreateChain_hasProject, value) {
+		if !f(fd_MsgCreateChain_has_project, value) {
 			return
 		}
 	}
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_MsgCreateChain_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_MsgCreateChain_project_id, value) {
 			return
 		}
 	}
 	if len(x.AccountBalance) != 0 {
 		value := protoreflect.ValueOfList(&_MsgCreateChain_8_list{list: &x.AccountBalance})
-		if !f(fd_MsgCreateChain_accountBalance, value) {
+		if !f(fd_MsgCreateChain_account_balance, value) {
 			return
 		}
 	}
@@ -1087,19 +1087,19 @@ func (x *fastReflection_MsgCreateChain) Has(fd protoreflect.FieldDescriptor) boo
 	switch fd.FullName() {
 	case "network.launch.v1.MsgCreateChain.coordinator":
 		return x.Coordinator != ""
-	case "network.launch.v1.MsgCreateChain.genesisChainID":
-		return x.GenesisChainID != ""
-	case "network.launch.v1.MsgCreateChain.sourceURL":
-		return x.SourceURL != ""
-	case "network.launch.v1.MsgCreateChain.sourceHash":
+	case "network.launch.v1.MsgCreateChain.genesis_chain_id":
+		return x.GenesisChainId != ""
+	case "network.launch.v1.MsgCreateChain.source_url":
+		return x.SourceUrl != ""
+	case "network.launch.v1.MsgCreateChain.source_hash":
 		return x.SourceHash != ""
-	case "network.launch.v1.MsgCreateChain.initialGenesis":
+	case "network.launch.v1.MsgCreateChain.initial_genesis":
 		return x.InitialGenesis != nil
-	case "network.launch.v1.MsgCreateChain.hasProject":
+	case "network.launch.v1.MsgCreateChain.has_project":
 		return x.HasProject != false
-	case "network.launch.v1.MsgCreateChain.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.launch.v1.MsgCreateChain.accountBalance":
+	case "network.launch.v1.MsgCreateChain.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.launch.v1.MsgCreateChain.account_balance":
 		return len(x.AccountBalance) != 0
 	case "network.launch.v1.MsgCreateChain.metadata":
 		return len(x.Metadata) != 0
@@ -1121,19 +1121,19 @@ func (x *fastReflection_MsgCreateChain) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "network.launch.v1.MsgCreateChain.coordinator":
 		x.Coordinator = ""
-	case "network.launch.v1.MsgCreateChain.genesisChainID":
-		x.GenesisChainID = ""
-	case "network.launch.v1.MsgCreateChain.sourceURL":
-		x.SourceURL = ""
-	case "network.launch.v1.MsgCreateChain.sourceHash":
+	case "network.launch.v1.MsgCreateChain.genesis_chain_id":
+		x.GenesisChainId = ""
+	case "network.launch.v1.MsgCreateChain.source_url":
+		x.SourceUrl = ""
+	case "network.launch.v1.MsgCreateChain.source_hash":
 		x.SourceHash = ""
-	case "network.launch.v1.MsgCreateChain.initialGenesis":
+	case "network.launch.v1.MsgCreateChain.initial_genesis":
 		x.InitialGenesis = nil
-	case "network.launch.v1.MsgCreateChain.hasProject":
+	case "network.launch.v1.MsgCreateChain.has_project":
 		x.HasProject = false
-	case "network.launch.v1.MsgCreateChain.projectID":
-		x.ProjectID = uint64(0)
-	case "network.launch.v1.MsgCreateChain.accountBalance":
+	case "network.launch.v1.MsgCreateChain.project_id":
+		x.ProjectId = uint64(0)
+	case "network.launch.v1.MsgCreateChain.account_balance":
 		x.AccountBalance = nil
 	case "network.launch.v1.MsgCreateChain.metadata":
 		x.Metadata = nil
@@ -1156,25 +1156,25 @@ func (x *fastReflection_MsgCreateChain) Get(descriptor protoreflect.FieldDescrip
 	case "network.launch.v1.MsgCreateChain.coordinator":
 		value := x.Coordinator
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgCreateChain.genesisChainID":
-		value := x.GenesisChainID
+	case "network.launch.v1.MsgCreateChain.genesis_chain_id":
+		value := x.GenesisChainId
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgCreateChain.sourceURL":
-		value := x.SourceURL
+	case "network.launch.v1.MsgCreateChain.source_url":
+		value := x.SourceUrl
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgCreateChain.sourceHash":
+	case "network.launch.v1.MsgCreateChain.source_hash":
 		value := x.SourceHash
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgCreateChain.initialGenesis":
+	case "network.launch.v1.MsgCreateChain.initial_genesis":
 		value := x.InitialGenesis
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.MsgCreateChain.hasProject":
+	case "network.launch.v1.MsgCreateChain.has_project":
 		value := x.HasProject
 		return protoreflect.ValueOfBool(value)
-	case "network.launch.v1.MsgCreateChain.projectID":
-		value := x.ProjectID
+	case "network.launch.v1.MsgCreateChain.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.MsgCreateChain.accountBalance":
+	case "network.launch.v1.MsgCreateChain.account_balance":
 		if len(x.AccountBalance) == 0 {
 			return protoreflect.ValueOfList(&_MsgCreateChain_8_list{})
 		}
@@ -1205,19 +1205,19 @@ func (x *fastReflection_MsgCreateChain) Set(fd protoreflect.FieldDescriptor, val
 	switch fd.FullName() {
 	case "network.launch.v1.MsgCreateChain.coordinator":
 		x.Coordinator = value.Interface().(string)
-	case "network.launch.v1.MsgCreateChain.genesisChainID":
-		x.GenesisChainID = value.Interface().(string)
-	case "network.launch.v1.MsgCreateChain.sourceURL":
-		x.SourceURL = value.Interface().(string)
-	case "network.launch.v1.MsgCreateChain.sourceHash":
+	case "network.launch.v1.MsgCreateChain.genesis_chain_id":
+		x.GenesisChainId = value.Interface().(string)
+	case "network.launch.v1.MsgCreateChain.source_url":
+		x.SourceUrl = value.Interface().(string)
+	case "network.launch.v1.MsgCreateChain.source_hash":
 		x.SourceHash = value.Interface().(string)
-	case "network.launch.v1.MsgCreateChain.initialGenesis":
+	case "network.launch.v1.MsgCreateChain.initial_genesis":
 		x.InitialGenesis = value.Message().Interface().(*InitialGenesis)
-	case "network.launch.v1.MsgCreateChain.hasProject":
+	case "network.launch.v1.MsgCreateChain.has_project":
 		x.HasProject = value.Bool()
-	case "network.launch.v1.MsgCreateChain.projectID":
-		x.ProjectID = value.Uint()
-	case "network.launch.v1.MsgCreateChain.accountBalance":
+	case "network.launch.v1.MsgCreateChain.project_id":
+		x.ProjectId = value.Uint()
+	case "network.launch.v1.MsgCreateChain.account_balance":
 		lv := value.List()
 		clv := lv.(*_MsgCreateChain_8_list)
 		x.AccountBalance = *clv.list
@@ -1243,12 +1243,12 @@ func (x *fastReflection_MsgCreateChain) Set(fd protoreflect.FieldDescriptor, val
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateChain) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgCreateChain.initialGenesis":
+	case "network.launch.v1.MsgCreateChain.initial_genesis":
 		if x.InitialGenesis == nil {
 			x.InitialGenesis = new(InitialGenesis)
 		}
 		return protoreflect.ValueOfMessage(x.InitialGenesis.ProtoReflect())
-	case "network.launch.v1.MsgCreateChain.accountBalance":
+	case "network.launch.v1.MsgCreateChain.account_balance":
 		if x.AccountBalance == nil {
 			x.AccountBalance = []*v1beta1.Coin{}
 		}
@@ -1256,16 +1256,16 @@ func (x *fastReflection_MsgCreateChain) Mutable(fd protoreflect.FieldDescriptor)
 		return protoreflect.ValueOfList(value)
 	case "network.launch.v1.MsgCreateChain.coordinator":
 		panic(fmt.Errorf("field coordinator of message network.launch.v1.MsgCreateChain is not mutable"))
-	case "network.launch.v1.MsgCreateChain.genesisChainID":
-		panic(fmt.Errorf("field genesisChainID of message network.launch.v1.MsgCreateChain is not mutable"))
-	case "network.launch.v1.MsgCreateChain.sourceURL":
-		panic(fmt.Errorf("field sourceURL of message network.launch.v1.MsgCreateChain is not mutable"))
-	case "network.launch.v1.MsgCreateChain.sourceHash":
-		panic(fmt.Errorf("field sourceHash of message network.launch.v1.MsgCreateChain is not mutable"))
-	case "network.launch.v1.MsgCreateChain.hasProject":
-		panic(fmt.Errorf("field hasProject of message network.launch.v1.MsgCreateChain is not mutable"))
-	case "network.launch.v1.MsgCreateChain.projectID":
-		panic(fmt.Errorf("field projectID of message network.launch.v1.MsgCreateChain is not mutable"))
+	case "network.launch.v1.MsgCreateChain.genesis_chain_id":
+		panic(fmt.Errorf("field genesis_chain_id of message network.launch.v1.MsgCreateChain is not mutable"))
+	case "network.launch.v1.MsgCreateChain.source_url":
+		panic(fmt.Errorf("field source_url of message network.launch.v1.MsgCreateChain is not mutable"))
+	case "network.launch.v1.MsgCreateChain.source_hash":
+		panic(fmt.Errorf("field source_hash of message network.launch.v1.MsgCreateChain is not mutable"))
+	case "network.launch.v1.MsgCreateChain.has_project":
+		panic(fmt.Errorf("field has_project of message network.launch.v1.MsgCreateChain is not mutable"))
+	case "network.launch.v1.MsgCreateChain.project_id":
+		panic(fmt.Errorf("field project_id of message network.launch.v1.MsgCreateChain is not mutable"))
 	case "network.launch.v1.MsgCreateChain.metadata":
 		panic(fmt.Errorf("field metadata of message network.launch.v1.MsgCreateChain is not mutable"))
 	default:
@@ -1283,20 +1283,20 @@ func (x *fastReflection_MsgCreateChain) NewField(fd protoreflect.FieldDescriptor
 	switch fd.FullName() {
 	case "network.launch.v1.MsgCreateChain.coordinator":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgCreateChain.genesisChainID":
+	case "network.launch.v1.MsgCreateChain.genesis_chain_id":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgCreateChain.sourceURL":
+	case "network.launch.v1.MsgCreateChain.source_url":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgCreateChain.sourceHash":
+	case "network.launch.v1.MsgCreateChain.source_hash":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgCreateChain.initialGenesis":
+	case "network.launch.v1.MsgCreateChain.initial_genesis":
 		m := new(InitialGenesis)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.launch.v1.MsgCreateChain.hasProject":
+	case "network.launch.v1.MsgCreateChain.has_project":
 		return protoreflect.ValueOfBool(false)
-	case "network.launch.v1.MsgCreateChain.projectID":
+	case "network.launch.v1.MsgCreateChain.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.MsgCreateChain.accountBalance":
+	case "network.launch.v1.MsgCreateChain.account_balance":
 		list := []*v1beta1.Coin{}
 		return protoreflect.ValueOfList(&_MsgCreateChain_8_list{list: &list})
 	case "network.launch.v1.MsgCreateChain.metadata":
@@ -1374,11 +1374,11 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.GenesisChainID)
+		l = len(x.GenesisChainId)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.SourceURL)
+		l = len(x.SourceUrl)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -1393,8 +1393,8 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 		if x.HasProject {
 			n += 2
 		}
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		if len(x.AccountBalance) > 0 {
 			for _, e := range x.AccountBalance {
@@ -1458,8 +1458,8 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 				dAtA[i] = 0x42
 			}
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x38
 		}
@@ -1494,17 +1494,17 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x22
 		}
-		if len(x.SourceURL) > 0 {
-			i -= len(x.SourceURL)
-			copy(dAtA[i:], x.SourceURL)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.SourceURL)))
+		if len(x.SourceUrl) > 0 {
+			i -= len(x.SourceUrl)
+			copy(dAtA[i:], x.SourceUrl)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.SourceUrl)))
 			i--
 			dAtA[i] = 0x1a
 		}
-		if len(x.GenesisChainID) > 0 {
-			i -= len(x.GenesisChainID)
-			copy(dAtA[i:], x.GenesisChainID)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.GenesisChainID)))
+		if len(x.GenesisChainId) > 0 {
+			i -= len(x.GenesisChainId)
+			copy(dAtA[i:], x.GenesisChainId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.GenesisChainId)))
 			i--
 			dAtA[i] = 0x12
 		}
@@ -1598,7 +1598,7 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GenesisChainID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GenesisChainId", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -1626,11 +1626,11 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.GenesisChainID = string(dAtA[iNdEx:postIndex])
+				x.GenesisChainId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 3:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field SourceURL", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field SourceUrl", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -1658,7 +1658,7 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.SourceURL = string(dAtA[iNdEx:postIndex])
+				x.SourceUrl = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 4:
 				if wireType != 2 {
@@ -1750,9 +1750,9 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 				x.HasProject = bool(v != 0)
 			case 7:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1762,7 +1762,7 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1871,14 +1871,14 @@ func (x *fastReflection_MsgCreateChain) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_MsgCreateChainResponse          protoreflect.MessageDescriptor
-	fd_MsgCreateChainResponse_launchID protoreflect.FieldDescriptor
+	md_MsgCreateChainResponse           protoreflect.MessageDescriptor
+	fd_MsgCreateChainResponse_launch_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_tx_proto_init()
 	md_MsgCreateChainResponse = File_network_launch_v1_tx_proto.Messages().ByName("MsgCreateChainResponse")
-	fd_MsgCreateChainResponse_launchID = md_MsgCreateChainResponse.Fields().ByName("launchID")
+	fd_MsgCreateChainResponse_launch_id = md_MsgCreateChainResponse.Fields().ByName("launch_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgCreateChainResponse)(nil)
@@ -1946,9 +1946,9 @@ func (x *fastReflection_MsgCreateChainResponse) Interface() protoreflect.ProtoMe
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_MsgCreateChainResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_MsgCreateChainResponse_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_MsgCreateChainResponse_launch_id, value) {
 			return
 		}
 	}
@@ -1967,8 +1967,8 @@ func (x *fastReflection_MsgCreateChainResponse) Range(f func(protoreflect.FieldD
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_MsgCreateChainResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgCreateChainResponse.launchID":
-		return x.LaunchID != uint64(0)
+	case "network.launch.v1.MsgCreateChainResponse.launch_id":
+		return x.LaunchId != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgCreateChainResponse"))
@@ -1985,8 +1985,8 @@ func (x *fastReflection_MsgCreateChainResponse) Has(fd protoreflect.FieldDescrip
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateChainResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgCreateChainResponse.launchID":
-		x.LaunchID = uint64(0)
+	case "network.launch.v1.MsgCreateChainResponse.launch_id":
+		x.LaunchId = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgCreateChainResponse"))
@@ -2003,8 +2003,8 @@ func (x *fastReflection_MsgCreateChainResponse) Clear(fd protoreflect.FieldDescr
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_MsgCreateChainResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.launch.v1.MsgCreateChainResponse.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.MsgCreateChainResponse.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
@@ -2026,8 +2026,8 @@ func (x *fastReflection_MsgCreateChainResponse) Get(descriptor protoreflect.Fiel
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateChainResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgCreateChainResponse.launchID":
-		x.LaunchID = value.Uint()
+	case "network.launch.v1.MsgCreateChainResponse.launch_id":
+		x.LaunchId = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgCreateChainResponse"))
@@ -2048,8 +2048,8 @@ func (x *fastReflection_MsgCreateChainResponse) Set(fd protoreflect.FieldDescrip
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateChainResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgCreateChainResponse.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.MsgCreateChainResponse is not mutable"))
+	case "network.launch.v1.MsgCreateChainResponse.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.MsgCreateChainResponse is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgCreateChainResponse"))
@@ -2063,7 +2063,7 @@ func (x *fastReflection_MsgCreateChainResponse) Mutable(fd protoreflect.FieldDes
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_MsgCreateChainResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgCreateChainResponse.launchID":
+	case "network.launch.v1.MsgCreateChainResponse.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -2134,8 +2134,8 @@ func (x *fastReflection_MsgCreateChainResponse) ProtoMethods() *protoiface.Metho
 		var n int
 		var l int
 		_ = l
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -2166,8 +2166,8 @@ func (x *fastReflection_MsgCreateChainResponse) ProtoMethods() *protoiface.Metho
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -2222,9 +2222,9 @@ func (x *fastReflection_MsgCreateChainResponse) ProtoMethods() *protoiface.Metho
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -2234,7 +2234,7 @@ func (x *fastReflection_MsgCreateChainResponse) ProtoMethods() *protoiface.Metho
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -2275,21 +2275,21 @@ func (x *fastReflection_MsgCreateChainResponse) ProtoMethods() *protoiface.Metho
 }
 
 var (
-	md_MsgEditChain              protoreflect.MessageDescriptor
-	fd_MsgEditChain_coordinator  protoreflect.FieldDescriptor
-	fd_MsgEditChain_launchID     protoreflect.FieldDescriptor
-	fd_MsgEditChain_setProjectID protoreflect.FieldDescriptor
-	fd_MsgEditChain_projectID    protoreflect.FieldDescriptor
-	fd_MsgEditChain_metadata     protoreflect.FieldDescriptor
+	md_MsgEditChain                protoreflect.MessageDescriptor
+	fd_MsgEditChain_coordinator    protoreflect.FieldDescriptor
+	fd_MsgEditChain_launch_id      protoreflect.FieldDescriptor
+	fd_MsgEditChain_set_project_id protoreflect.FieldDescriptor
+	fd_MsgEditChain_project_id     protoreflect.FieldDescriptor
+	fd_MsgEditChain_metadata       protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_tx_proto_init()
 	md_MsgEditChain = File_network_launch_v1_tx_proto.Messages().ByName("MsgEditChain")
 	fd_MsgEditChain_coordinator = md_MsgEditChain.Fields().ByName("coordinator")
-	fd_MsgEditChain_launchID = md_MsgEditChain.Fields().ByName("launchID")
-	fd_MsgEditChain_setProjectID = md_MsgEditChain.Fields().ByName("setProjectID")
-	fd_MsgEditChain_projectID = md_MsgEditChain.Fields().ByName("projectID")
+	fd_MsgEditChain_launch_id = md_MsgEditChain.Fields().ByName("launch_id")
+	fd_MsgEditChain_set_project_id = md_MsgEditChain.Fields().ByName("set_project_id")
+	fd_MsgEditChain_project_id = md_MsgEditChain.Fields().ByName("project_id")
 	fd_MsgEditChain_metadata = md_MsgEditChain.Fields().ByName("metadata")
 }
 
@@ -2364,21 +2364,21 @@ func (x *fastReflection_MsgEditChain) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_MsgEditChain_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_MsgEditChain_launch_id, value) {
 			return
 		}
 	}
-	if x.SetProjectID != false {
-		value := protoreflect.ValueOfBool(x.SetProjectID)
-		if !f(fd_MsgEditChain_setProjectID, value) {
+	if x.SetProjectId != false {
+		value := protoreflect.ValueOfBool(x.SetProjectId)
+		if !f(fd_MsgEditChain_set_project_id, value) {
 			return
 		}
 	}
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_MsgEditChain_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_MsgEditChain_project_id, value) {
 			return
 		}
 	}
@@ -2405,12 +2405,12 @@ func (x *fastReflection_MsgEditChain) Has(fd protoreflect.FieldDescriptor) bool 
 	switch fd.FullName() {
 	case "network.launch.v1.MsgEditChain.coordinator":
 		return x.Coordinator != ""
-	case "network.launch.v1.MsgEditChain.launchID":
-		return x.LaunchID != uint64(0)
-	case "network.launch.v1.MsgEditChain.setProjectID":
-		return x.SetProjectID != false
-	case "network.launch.v1.MsgEditChain.projectID":
-		return x.ProjectID != uint64(0)
+	case "network.launch.v1.MsgEditChain.launch_id":
+		return x.LaunchId != uint64(0)
+	case "network.launch.v1.MsgEditChain.set_project_id":
+		return x.SetProjectId != false
+	case "network.launch.v1.MsgEditChain.project_id":
+		return x.ProjectId != uint64(0)
 	case "network.launch.v1.MsgEditChain.metadata":
 		return len(x.Metadata) != 0
 	default:
@@ -2431,12 +2431,12 @@ func (x *fastReflection_MsgEditChain) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "network.launch.v1.MsgEditChain.coordinator":
 		x.Coordinator = ""
-	case "network.launch.v1.MsgEditChain.launchID":
-		x.LaunchID = uint64(0)
-	case "network.launch.v1.MsgEditChain.setProjectID":
-		x.SetProjectID = false
-	case "network.launch.v1.MsgEditChain.projectID":
-		x.ProjectID = uint64(0)
+	case "network.launch.v1.MsgEditChain.launch_id":
+		x.LaunchId = uint64(0)
+	case "network.launch.v1.MsgEditChain.set_project_id":
+		x.SetProjectId = false
+	case "network.launch.v1.MsgEditChain.project_id":
+		x.ProjectId = uint64(0)
 	case "network.launch.v1.MsgEditChain.metadata":
 		x.Metadata = nil
 	default:
@@ -2458,14 +2458,14 @@ func (x *fastReflection_MsgEditChain) Get(descriptor protoreflect.FieldDescripto
 	case "network.launch.v1.MsgEditChain.coordinator":
 		value := x.Coordinator
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgEditChain.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.MsgEditChain.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.MsgEditChain.setProjectID":
-		value := x.SetProjectID
+	case "network.launch.v1.MsgEditChain.set_project_id":
+		value := x.SetProjectId
 		return protoreflect.ValueOfBool(value)
-	case "network.launch.v1.MsgEditChain.projectID":
-		value := x.ProjectID
+	case "network.launch.v1.MsgEditChain.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
 	case "network.launch.v1.MsgEditChain.metadata":
 		value := x.Metadata
@@ -2492,12 +2492,12 @@ func (x *fastReflection_MsgEditChain) Set(fd protoreflect.FieldDescriptor, value
 	switch fd.FullName() {
 	case "network.launch.v1.MsgEditChain.coordinator":
 		x.Coordinator = value.Interface().(string)
-	case "network.launch.v1.MsgEditChain.launchID":
-		x.LaunchID = value.Uint()
-	case "network.launch.v1.MsgEditChain.setProjectID":
-		x.SetProjectID = value.Bool()
-	case "network.launch.v1.MsgEditChain.projectID":
-		x.ProjectID = value.Uint()
+	case "network.launch.v1.MsgEditChain.launch_id":
+		x.LaunchId = value.Uint()
+	case "network.launch.v1.MsgEditChain.set_project_id":
+		x.SetProjectId = value.Bool()
+	case "network.launch.v1.MsgEditChain.project_id":
+		x.ProjectId = value.Uint()
 	case "network.launch.v1.MsgEditChain.metadata":
 		x.Metadata = value.Bytes()
 	default:
@@ -2522,12 +2522,12 @@ func (x *fastReflection_MsgEditChain) Mutable(fd protoreflect.FieldDescriptor) p
 	switch fd.FullName() {
 	case "network.launch.v1.MsgEditChain.coordinator":
 		panic(fmt.Errorf("field coordinator of message network.launch.v1.MsgEditChain is not mutable"))
-	case "network.launch.v1.MsgEditChain.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.MsgEditChain is not mutable"))
-	case "network.launch.v1.MsgEditChain.setProjectID":
-		panic(fmt.Errorf("field setProjectID of message network.launch.v1.MsgEditChain is not mutable"))
-	case "network.launch.v1.MsgEditChain.projectID":
-		panic(fmt.Errorf("field projectID of message network.launch.v1.MsgEditChain is not mutable"))
+	case "network.launch.v1.MsgEditChain.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.MsgEditChain is not mutable"))
+	case "network.launch.v1.MsgEditChain.set_project_id":
+		panic(fmt.Errorf("field set_project_id of message network.launch.v1.MsgEditChain is not mutable"))
+	case "network.launch.v1.MsgEditChain.project_id":
+		panic(fmt.Errorf("field project_id of message network.launch.v1.MsgEditChain is not mutable"))
 	case "network.launch.v1.MsgEditChain.metadata":
 		panic(fmt.Errorf("field metadata of message network.launch.v1.MsgEditChain is not mutable"))
 	default:
@@ -2545,11 +2545,11 @@ func (x *fastReflection_MsgEditChain) NewField(fd protoreflect.FieldDescriptor) 
 	switch fd.FullName() {
 	case "network.launch.v1.MsgEditChain.coordinator":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgEditChain.launchID":
+	case "network.launch.v1.MsgEditChain.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.MsgEditChain.setProjectID":
+	case "network.launch.v1.MsgEditChain.set_project_id":
 		return protoreflect.ValueOfBool(false)
-	case "network.launch.v1.MsgEditChain.projectID":
+	case "network.launch.v1.MsgEditChain.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.launch.v1.MsgEditChain.metadata":
 		return protoreflect.ValueOfBytes(nil)
@@ -2626,14 +2626,14 @@ func (x *fastReflection_MsgEditChain) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
-		if x.SetProjectID {
+		if x.SetProjectId {
 			n += 2
 		}
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.Metadata)
 		if l > 0 {
@@ -2675,14 +2675,14 @@ func (x *fastReflection_MsgEditChain) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x2a
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x20
 		}
-		if x.SetProjectID {
+		if x.SetProjectId {
 			i--
-			if x.SetProjectID {
+			if x.SetProjectId {
 				dAtA[i] = 1
 			} else {
 				dAtA[i] = 0
@@ -2690,8 +2690,8 @@ func (x *fastReflection_MsgEditChain) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x18
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x10
 		}
@@ -2785,9 +2785,9 @@ func (x *fastReflection_MsgEditChain) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -2797,14 +2797,14 @@ func (x *fastReflection_MsgEditChain) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 3:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field SetProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field SetProjectId", wireType)
 				}
 				var v int
 				for shift := uint(0); ; shift += 7 {
@@ -2821,12 +2821,12 @@ func (x *fastReflection_MsgEditChain) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
-				x.SetProjectID = bool(v != 0)
+				x.SetProjectId = bool(v != 0)
 			case 4:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -2836,7 +2836,7 @@ func (x *fastReflection_MsgEditChain) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -3267,24 +3267,24 @@ func (x *fastReflection_MsgEditChainResponse) ProtoMethods() *protoiface.Methods
 }
 
 var (
-	md_MsgUpdateLaunchInformation                protoreflect.MessageDescriptor
-	fd_MsgUpdateLaunchInformation_coordinator    protoreflect.FieldDescriptor
-	fd_MsgUpdateLaunchInformation_launchID       protoreflect.FieldDescriptor
-	fd_MsgUpdateLaunchInformation_genesisChainID protoreflect.FieldDescriptor
-	fd_MsgUpdateLaunchInformation_sourceURL      protoreflect.FieldDescriptor
-	fd_MsgUpdateLaunchInformation_sourceHash     protoreflect.FieldDescriptor
-	fd_MsgUpdateLaunchInformation_initialGenesis protoreflect.FieldDescriptor
+	md_MsgUpdateLaunchInformation                  protoreflect.MessageDescriptor
+	fd_MsgUpdateLaunchInformation_coordinator      protoreflect.FieldDescriptor
+	fd_MsgUpdateLaunchInformation_launch_id        protoreflect.FieldDescriptor
+	fd_MsgUpdateLaunchInformation_genesis_chain_id protoreflect.FieldDescriptor
+	fd_MsgUpdateLaunchInformation_source_url       protoreflect.FieldDescriptor
+	fd_MsgUpdateLaunchInformation_source_hash      protoreflect.FieldDescriptor
+	fd_MsgUpdateLaunchInformation_initial_genesis  protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_tx_proto_init()
 	md_MsgUpdateLaunchInformation = File_network_launch_v1_tx_proto.Messages().ByName("MsgUpdateLaunchInformation")
 	fd_MsgUpdateLaunchInformation_coordinator = md_MsgUpdateLaunchInformation.Fields().ByName("coordinator")
-	fd_MsgUpdateLaunchInformation_launchID = md_MsgUpdateLaunchInformation.Fields().ByName("launchID")
-	fd_MsgUpdateLaunchInformation_genesisChainID = md_MsgUpdateLaunchInformation.Fields().ByName("genesisChainID")
-	fd_MsgUpdateLaunchInformation_sourceURL = md_MsgUpdateLaunchInformation.Fields().ByName("sourceURL")
-	fd_MsgUpdateLaunchInformation_sourceHash = md_MsgUpdateLaunchInformation.Fields().ByName("sourceHash")
-	fd_MsgUpdateLaunchInformation_initialGenesis = md_MsgUpdateLaunchInformation.Fields().ByName("initialGenesis")
+	fd_MsgUpdateLaunchInformation_launch_id = md_MsgUpdateLaunchInformation.Fields().ByName("launch_id")
+	fd_MsgUpdateLaunchInformation_genesis_chain_id = md_MsgUpdateLaunchInformation.Fields().ByName("genesis_chain_id")
+	fd_MsgUpdateLaunchInformation_source_url = md_MsgUpdateLaunchInformation.Fields().ByName("source_url")
+	fd_MsgUpdateLaunchInformation_source_hash = md_MsgUpdateLaunchInformation.Fields().ByName("source_hash")
+	fd_MsgUpdateLaunchInformation_initial_genesis = md_MsgUpdateLaunchInformation.Fields().ByName("initial_genesis")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgUpdateLaunchInformation)(nil)
@@ -3358,33 +3358,33 @@ func (x *fastReflection_MsgUpdateLaunchInformation) Range(f func(protoreflect.Fi
 			return
 		}
 	}
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_MsgUpdateLaunchInformation_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_MsgUpdateLaunchInformation_launch_id, value) {
 			return
 		}
 	}
-	if x.GenesisChainID != "" {
-		value := protoreflect.ValueOfString(x.GenesisChainID)
-		if !f(fd_MsgUpdateLaunchInformation_genesisChainID, value) {
+	if x.GenesisChainId != "" {
+		value := protoreflect.ValueOfString(x.GenesisChainId)
+		if !f(fd_MsgUpdateLaunchInformation_genesis_chain_id, value) {
 			return
 		}
 	}
-	if x.SourceURL != "" {
-		value := protoreflect.ValueOfString(x.SourceURL)
-		if !f(fd_MsgUpdateLaunchInformation_sourceURL, value) {
+	if x.SourceUrl != "" {
+		value := protoreflect.ValueOfString(x.SourceUrl)
+		if !f(fd_MsgUpdateLaunchInformation_source_url, value) {
 			return
 		}
 	}
 	if x.SourceHash != "" {
 		value := protoreflect.ValueOfString(x.SourceHash)
-		if !f(fd_MsgUpdateLaunchInformation_sourceHash, value) {
+		if !f(fd_MsgUpdateLaunchInformation_source_hash, value) {
 			return
 		}
 	}
 	if x.InitialGenesis != nil {
 		value := protoreflect.ValueOfMessage(x.InitialGenesis.ProtoReflect())
-		if !f(fd_MsgUpdateLaunchInformation_initialGenesis, value) {
+		if !f(fd_MsgUpdateLaunchInformation_initial_genesis, value) {
 			return
 		}
 	}
@@ -3405,15 +3405,15 @@ func (x *fastReflection_MsgUpdateLaunchInformation) Has(fd protoreflect.FieldDes
 	switch fd.FullName() {
 	case "network.launch.v1.MsgUpdateLaunchInformation.coordinator":
 		return x.Coordinator != ""
-	case "network.launch.v1.MsgUpdateLaunchInformation.launchID":
-		return x.LaunchID != uint64(0)
-	case "network.launch.v1.MsgUpdateLaunchInformation.genesisChainID":
-		return x.GenesisChainID != ""
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceURL":
-		return x.SourceURL != ""
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceHash":
+	case "network.launch.v1.MsgUpdateLaunchInformation.launch_id":
+		return x.LaunchId != uint64(0)
+	case "network.launch.v1.MsgUpdateLaunchInformation.genesis_chain_id":
+		return x.GenesisChainId != ""
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_url":
+		return x.SourceUrl != ""
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_hash":
 		return x.SourceHash != ""
-	case "network.launch.v1.MsgUpdateLaunchInformation.initialGenesis":
+	case "network.launch.v1.MsgUpdateLaunchInformation.initial_genesis":
 		return x.InitialGenesis != nil
 	default:
 		if fd.IsExtension() {
@@ -3433,15 +3433,15 @@ func (x *fastReflection_MsgUpdateLaunchInformation) Clear(fd protoreflect.FieldD
 	switch fd.FullName() {
 	case "network.launch.v1.MsgUpdateLaunchInformation.coordinator":
 		x.Coordinator = ""
-	case "network.launch.v1.MsgUpdateLaunchInformation.launchID":
-		x.LaunchID = uint64(0)
-	case "network.launch.v1.MsgUpdateLaunchInformation.genesisChainID":
-		x.GenesisChainID = ""
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceURL":
-		x.SourceURL = ""
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceHash":
+	case "network.launch.v1.MsgUpdateLaunchInformation.launch_id":
+		x.LaunchId = uint64(0)
+	case "network.launch.v1.MsgUpdateLaunchInformation.genesis_chain_id":
+		x.GenesisChainId = ""
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_url":
+		x.SourceUrl = ""
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_hash":
 		x.SourceHash = ""
-	case "network.launch.v1.MsgUpdateLaunchInformation.initialGenesis":
+	case "network.launch.v1.MsgUpdateLaunchInformation.initial_genesis":
 		x.InitialGenesis = nil
 	default:
 		if fd.IsExtension() {
@@ -3462,19 +3462,19 @@ func (x *fastReflection_MsgUpdateLaunchInformation) Get(descriptor protoreflect.
 	case "network.launch.v1.MsgUpdateLaunchInformation.coordinator":
 		value := x.Coordinator
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgUpdateLaunchInformation.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.MsgUpdateLaunchInformation.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.MsgUpdateLaunchInformation.genesisChainID":
-		value := x.GenesisChainID
+	case "network.launch.v1.MsgUpdateLaunchInformation.genesis_chain_id":
+		value := x.GenesisChainId
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceURL":
-		value := x.SourceURL
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_url":
+		value := x.SourceUrl
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceHash":
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_hash":
 		value := x.SourceHash
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgUpdateLaunchInformation.initialGenesis":
+	case "network.launch.v1.MsgUpdateLaunchInformation.initial_genesis":
 		value := x.InitialGenesis
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
@@ -3499,15 +3499,15 @@ func (x *fastReflection_MsgUpdateLaunchInformation) Set(fd protoreflect.FieldDes
 	switch fd.FullName() {
 	case "network.launch.v1.MsgUpdateLaunchInformation.coordinator":
 		x.Coordinator = value.Interface().(string)
-	case "network.launch.v1.MsgUpdateLaunchInformation.launchID":
-		x.LaunchID = value.Uint()
-	case "network.launch.v1.MsgUpdateLaunchInformation.genesisChainID":
-		x.GenesisChainID = value.Interface().(string)
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceURL":
-		x.SourceURL = value.Interface().(string)
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceHash":
+	case "network.launch.v1.MsgUpdateLaunchInformation.launch_id":
+		x.LaunchId = value.Uint()
+	case "network.launch.v1.MsgUpdateLaunchInformation.genesis_chain_id":
+		x.GenesisChainId = value.Interface().(string)
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_url":
+		x.SourceUrl = value.Interface().(string)
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_hash":
 		x.SourceHash = value.Interface().(string)
-	case "network.launch.v1.MsgUpdateLaunchInformation.initialGenesis":
+	case "network.launch.v1.MsgUpdateLaunchInformation.initial_genesis":
 		x.InitialGenesis = value.Message().Interface().(*InitialGenesis)
 	default:
 		if fd.IsExtension() {
@@ -3529,21 +3529,21 @@ func (x *fastReflection_MsgUpdateLaunchInformation) Set(fd protoreflect.FieldDes
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgUpdateLaunchInformation) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgUpdateLaunchInformation.initialGenesis":
+	case "network.launch.v1.MsgUpdateLaunchInformation.initial_genesis":
 		if x.InitialGenesis == nil {
 			x.InitialGenesis = new(InitialGenesis)
 		}
 		return protoreflect.ValueOfMessage(x.InitialGenesis.ProtoReflect())
 	case "network.launch.v1.MsgUpdateLaunchInformation.coordinator":
 		panic(fmt.Errorf("field coordinator of message network.launch.v1.MsgUpdateLaunchInformation is not mutable"))
-	case "network.launch.v1.MsgUpdateLaunchInformation.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.MsgUpdateLaunchInformation is not mutable"))
-	case "network.launch.v1.MsgUpdateLaunchInformation.genesisChainID":
-		panic(fmt.Errorf("field genesisChainID of message network.launch.v1.MsgUpdateLaunchInformation is not mutable"))
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceURL":
-		panic(fmt.Errorf("field sourceURL of message network.launch.v1.MsgUpdateLaunchInformation is not mutable"))
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceHash":
-		panic(fmt.Errorf("field sourceHash of message network.launch.v1.MsgUpdateLaunchInformation is not mutable"))
+	case "network.launch.v1.MsgUpdateLaunchInformation.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.MsgUpdateLaunchInformation is not mutable"))
+	case "network.launch.v1.MsgUpdateLaunchInformation.genesis_chain_id":
+		panic(fmt.Errorf("field genesis_chain_id of message network.launch.v1.MsgUpdateLaunchInformation is not mutable"))
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_url":
+		panic(fmt.Errorf("field source_url of message network.launch.v1.MsgUpdateLaunchInformation is not mutable"))
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_hash":
+		panic(fmt.Errorf("field source_hash of message network.launch.v1.MsgUpdateLaunchInformation is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgUpdateLaunchInformation"))
@@ -3559,15 +3559,15 @@ func (x *fastReflection_MsgUpdateLaunchInformation) NewField(fd protoreflect.Fie
 	switch fd.FullName() {
 	case "network.launch.v1.MsgUpdateLaunchInformation.coordinator":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgUpdateLaunchInformation.launchID":
+	case "network.launch.v1.MsgUpdateLaunchInformation.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.MsgUpdateLaunchInformation.genesisChainID":
+	case "network.launch.v1.MsgUpdateLaunchInformation.genesis_chain_id":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceURL":
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_url":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgUpdateLaunchInformation.sourceHash":
+	case "network.launch.v1.MsgUpdateLaunchInformation.source_hash":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgUpdateLaunchInformation.initialGenesis":
+	case "network.launch.v1.MsgUpdateLaunchInformation.initial_genesis":
 		m := new(InitialGenesis)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
@@ -3643,14 +3643,14 @@ func (x *fastReflection_MsgUpdateLaunchInformation) ProtoMethods() *protoiface.M
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
-		l = len(x.GenesisChainID)
+		l = len(x.GenesisChainId)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.SourceURL)
+		l = len(x.SourceUrl)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -3712,22 +3712,22 @@ func (x *fastReflection_MsgUpdateLaunchInformation) ProtoMethods() *protoiface.M
 			i--
 			dAtA[i] = 0x2a
 		}
-		if len(x.SourceURL) > 0 {
-			i -= len(x.SourceURL)
-			copy(dAtA[i:], x.SourceURL)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.SourceURL)))
+		if len(x.SourceUrl) > 0 {
+			i -= len(x.SourceUrl)
+			copy(dAtA[i:], x.SourceUrl)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.SourceUrl)))
 			i--
 			dAtA[i] = 0x22
 		}
-		if len(x.GenesisChainID) > 0 {
-			i -= len(x.GenesisChainID)
-			copy(dAtA[i:], x.GenesisChainID)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.GenesisChainID)))
+		if len(x.GenesisChainId) > 0 {
+			i -= len(x.GenesisChainId)
+			copy(dAtA[i:], x.GenesisChainId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.GenesisChainId)))
 			i--
 			dAtA[i] = 0x1a
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x10
 		}
@@ -3821,9 +3821,9 @@ func (x *fastReflection_MsgUpdateLaunchInformation) ProtoMethods() *protoiface.M
 				iNdEx = postIndex
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -3833,14 +3833,14 @@ func (x *fastReflection_MsgUpdateLaunchInformation) ProtoMethods() *protoiface.M
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 3:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GenesisChainID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GenesisChainId", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -3868,11 +3868,11 @@ func (x *fastReflection_MsgUpdateLaunchInformation) ProtoMethods() *protoiface.M
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.GenesisChainID = string(dAtA[iNdEx:postIndex])
+				x.GenesisChainId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 4:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field SourceURL", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field SourceUrl", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -3900,7 +3900,7 @@ func (x *fastReflection_MsgUpdateLaunchInformation) ProtoMethods() *protoiface.M
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.SourceURL = string(dAtA[iNdEx:postIndex])
+				x.SourceUrl = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 5:
 				if wireType != 2 {
@@ -4362,17 +4362,17 @@ func (x *fastReflection_MsgUpdateLaunchInformationResponse) ProtoMethods() *prot
 }
 
 var (
-	md_MsgSendRequest          protoreflect.MessageDescriptor
-	fd_MsgSendRequest_creator  protoreflect.FieldDescriptor
-	fd_MsgSendRequest_launchID protoreflect.FieldDescriptor
-	fd_MsgSendRequest_content  protoreflect.FieldDescriptor
+	md_MsgSendRequest           protoreflect.MessageDescriptor
+	fd_MsgSendRequest_creator   protoreflect.FieldDescriptor
+	fd_MsgSendRequest_launch_id protoreflect.FieldDescriptor
+	fd_MsgSendRequest_content   protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_tx_proto_init()
 	md_MsgSendRequest = File_network_launch_v1_tx_proto.Messages().ByName("MsgSendRequest")
 	fd_MsgSendRequest_creator = md_MsgSendRequest.Fields().ByName("creator")
-	fd_MsgSendRequest_launchID = md_MsgSendRequest.Fields().ByName("launchID")
+	fd_MsgSendRequest_launch_id = md_MsgSendRequest.Fields().ByName("launch_id")
 	fd_MsgSendRequest_content = md_MsgSendRequest.Fields().ByName("content")
 }
 
@@ -4447,9 +4447,9 @@ func (x *fastReflection_MsgSendRequest) Range(f func(protoreflect.FieldDescripto
 			return
 		}
 	}
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_MsgSendRequest_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_MsgSendRequest_launch_id, value) {
 			return
 		}
 	}
@@ -4476,8 +4476,8 @@ func (x *fastReflection_MsgSendRequest) Has(fd protoreflect.FieldDescriptor) boo
 	switch fd.FullName() {
 	case "network.launch.v1.MsgSendRequest.creator":
 		return x.Creator != ""
-	case "network.launch.v1.MsgSendRequest.launchID":
-		return x.LaunchID != uint64(0)
+	case "network.launch.v1.MsgSendRequest.launch_id":
+		return x.LaunchId != uint64(0)
 	case "network.launch.v1.MsgSendRequest.content":
 		return x.Content != nil
 	default:
@@ -4498,8 +4498,8 @@ func (x *fastReflection_MsgSendRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "network.launch.v1.MsgSendRequest.creator":
 		x.Creator = ""
-	case "network.launch.v1.MsgSendRequest.launchID":
-		x.LaunchID = uint64(0)
+	case "network.launch.v1.MsgSendRequest.launch_id":
+		x.LaunchId = uint64(0)
 	case "network.launch.v1.MsgSendRequest.content":
 		x.Content = nil
 	default:
@@ -4521,8 +4521,8 @@ func (x *fastReflection_MsgSendRequest) Get(descriptor protoreflect.FieldDescrip
 	case "network.launch.v1.MsgSendRequest.creator":
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgSendRequest.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.MsgSendRequest.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
 	case "network.launch.v1.MsgSendRequest.content":
 		value := x.Content
@@ -4549,8 +4549,8 @@ func (x *fastReflection_MsgSendRequest) Set(fd protoreflect.FieldDescriptor, val
 	switch fd.FullName() {
 	case "network.launch.v1.MsgSendRequest.creator":
 		x.Creator = value.Interface().(string)
-	case "network.launch.v1.MsgSendRequest.launchID":
-		x.LaunchID = value.Uint()
+	case "network.launch.v1.MsgSendRequest.launch_id":
+		x.LaunchId = value.Uint()
 	case "network.launch.v1.MsgSendRequest.content":
 		x.Content = value.Message().Interface().(*RequestContent)
 	default:
@@ -4580,8 +4580,8 @@ func (x *fastReflection_MsgSendRequest) Mutable(fd protoreflect.FieldDescriptor)
 		return protoreflect.ValueOfMessage(x.Content.ProtoReflect())
 	case "network.launch.v1.MsgSendRequest.creator":
 		panic(fmt.Errorf("field creator of message network.launch.v1.MsgSendRequest is not mutable"))
-	case "network.launch.v1.MsgSendRequest.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.MsgSendRequest is not mutable"))
+	case "network.launch.v1.MsgSendRequest.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.MsgSendRequest is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgSendRequest"))
@@ -4597,7 +4597,7 @@ func (x *fastReflection_MsgSendRequest) NewField(fd protoreflect.FieldDescriptor
 	switch fd.FullName() {
 	case "network.launch.v1.MsgSendRequest.creator":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgSendRequest.launchID":
+	case "network.launch.v1.MsgSendRequest.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.launch.v1.MsgSendRequest.content":
 		m := new(RequestContent)
@@ -4675,8 +4675,8 @@ func (x *fastReflection_MsgSendRequest) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		if x.Content != nil {
 			l = options.Size(x.Content)
@@ -4725,8 +4725,8 @@ func (x *fastReflection_MsgSendRequest) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x1a
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x10
 		}
@@ -4820,9 +4820,9 @@ func (x *fastReflection_MsgSendRequest) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -4832,7 +4832,7 @@ func (x *fastReflection_MsgSendRequest) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -4909,16 +4909,16 @@ func (x *fastReflection_MsgSendRequest) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_MsgSendRequestResponse              protoreflect.MessageDescriptor
-	fd_MsgSendRequestResponse_requestID    protoreflect.FieldDescriptor
-	fd_MsgSendRequestResponse_autoApproved protoreflect.FieldDescriptor
+	md_MsgSendRequestResponse               protoreflect.MessageDescriptor
+	fd_MsgSendRequestResponse_request_id    protoreflect.FieldDescriptor
+	fd_MsgSendRequestResponse_auto_approved protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_tx_proto_init()
 	md_MsgSendRequestResponse = File_network_launch_v1_tx_proto.Messages().ByName("MsgSendRequestResponse")
-	fd_MsgSendRequestResponse_requestID = md_MsgSendRequestResponse.Fields().ByName("requestID")
-	fd_MsgSendRequestResponse_autoApproved = md_MsgSendRequestResponse.Fields().ByName("autoApproved")
+	fd_MsgSendRequestResponse_request_id = md_MsgSendRequestResponse.Fields().ByName("request_id")
+	fd_MsgSendRequestResponse_auto_approved = md_MsgSendRequestResponse.Fields().ByName("auto_approved")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgSendRequestResponse)(nil)
@@ -4986,15 +4986,15 @@ func (x *fastReflection_MsgSendRequestResponse) Interface() protoreflect.ProtoMe
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_MsgSendRequestResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.RequestID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.RequestID)
-		if !f(fd_MsgSendRequestResponse_requestID, value) {
+	if x.RequestId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.RequestId)
+		if !f(fd_MsgSendRequestResponse_request_id, value) {
 			return
 		}
 	}
 	if x.AutoApproved != false {
 		value := protoreflect.ValueOfBool(x.AutoApproved)
-		if !f(fd_MsgSendRequestResponse_autoApproved, value) {
+		if !f(fd_MsgSendRequestResponse_auto_approved, value) {
 			return
 		}
 	}
@@ -5013,9 +5013,9 @@ func (x *fastReflection_MsgSendRequestResponse) Range(f func(protoreflect.FieldD
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_MsgSendRequestResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgSendRequestResponse.requestID":
-		return x.RequestID != uint64(0)
-	case "network.launch.v1.MsgSendRequestResponse.autoApproved":
+	case "network.launch.v1.MsgSendRequestResponse.request_id":
+		return x.RequestId != uint64(0)
+	case "network.launch.v1.MsgSendRequestResponse.auto_approved":
 		return x.AutoApproved != false
 	default:
 		if fd.IsExtension() {
@@ -5033,9 +5033,9 @@ func (x *fastReflection_MsgSendRequestResponse) Has(fd protoreflect.FieldDescrip
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgSendRequestResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgSendRequestResponse.requestID":
-		x.RequestID = uint64(0)
-	case "network.launch.v1.MsgSendRequestResponse.autoApproved":
+	case "network.launch.v1.MsgSendRequestResponse.request_id":
+		x.RequestId = uint64(0)
+	case "network.launch.v1.MsgSendRequestResponse.auto_approved":
 		x.AutoApproved = false
 	default:
 		if fd.IsExtension() {
@@ -5053,10 +5053,10 @@ func (x *fastReflection_MsgSendRequestResponse) Clear(fd protoreflect.FieldDescr
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_MsgSendRequestResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.launch.v1.MsgSendRequestResponse.requestID":
-		value := x.RequestID
+	case "network.launch.v1.MsgSendRequestResponse.request_id":
+		value := x.RequestId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.MsgSendRequestResponse.autoApproved":
+	case "network.launch.v1.MsgSendRequestResponse.auto_approved":
 		value := x.AutoApproved
 		return protoreflect.ValueOfBool(value)
 	default:
@@ -5079,9 +5079,9 @@ func (x *fastReflection_MsgSendRequestResponse) Get(descriptor protoreflect.Fiel
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgSendRequestResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgSendRequestResponse.requestID":
-		x.RequestID = value.Uint()
-	case "network.launch.v1.MsgSendRequestResponse.autoApproved":
+	case "network.launch.v1.MsgSendRequestResponse.request_id":
+		x.RequestId = value.Uint()
+	case "network.launch.v1.MsgSendRequestResponse.auto_approved":
 		x.AutoApproved = value.Bool()
 	default:
 		if fd.IsExtension() {
@@ -5103,10 +5103,10 @@ func (x *fastReflection_MsgSendRequestResponse) Set(fd protoreflect.FieldDescrip
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgSendRequestResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgSendRequestResponse.requestID":
-		panic(fmt.Errorf("field requestID of message network.launch.v1.MsgSendRequestResponse is not mutable"))
-	case "network.launch.v1.MsgSendRequestResponse.autoApproved":
-		panic(fmt.Errorf("field autoApproved of message network.launch.v1.MsgSendRequestResponse is not mutable"))
+	case "network.launch.v1.MsgSendRequestResponse.request_id":
+		panic(fmt.Errorf("field request_id of message network.launch.v1.MsgSendRequestResponse is not mutable"))
+	case "network.launch.v1.MsgSendRequestResponse.auto_approved":
+		panic(fmt.Errorf("field auto_approved of message network.launch.v1.MsgSendRequestResponse is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgSendRequestResponse"))
@@ -5120,9 +5120,9 @@ func (x *fastReflection_MsgSendRequestResponse) Mutable(fd protoreflect.FieldDes
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_MsgSendRequestResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgSendRequestResponse.requestID":
+	case "network.launch.v1.MsgSendRequestResponse.request_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.MsgSendRequestResponse.autoApproved":
+	case "network.launch.v1.MsgSendRequestResponse.auto_approved":
 		return protoreflect.ValueOfBool(false)
 	default:
 		if fd.IsExtension() {
@@ -5193,8 +5193,8 @@ func (x *fastReflection_MsgSendRequestResponse) ProtoMethods() *protoiface.Metho
 		var n int
 		var l int
 		_ = l
-		if x.RequestID != 0 {
-			n += 1 + runtime.Sov(uint64(x.RequestID))
+		if x.RequestId != 0 {
+			n += 1 + runtime.Sov(uint64(x.RequestId))
 		}
 		if x.AutoApproved {
 			n += 2
@@ -5238,8 +5238,8 @@ func (x *fastReflection_MsgSendRequestResponse) ProtoMethods() *protoiface.Metho
 			i--
 			dAtA[i] = 0x10
 		}
-		if x.RequestID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.RequestID))
+		if x.RequestId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.RequestId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -5294,9 +5294,9 @@ func (x *fastReflection_MsgSendRequestResponse) ProtoMethods() *protoiface.Metho
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RequestID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RequestId", wireType)
 				}
-				x.RequestID = 0
+				x.RequestId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -5306,7 +5306,7 @@ func (x *fastReflection_MsgSendRequestResponse) ProtoMethods() *protoiface.Metho
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.RequestID |= uint64(b&0x7F) << shift
+					x.RequestId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -5367,19 +5367,19 @@ func (x *fastReflection_MsgSendRequestResponse) ProtoMethods() *protoiface.Metho
 }
 
 var (
-	md_MsgSettleRequest           protoreflect.MessageDescriptor
-	fd_MsgSettleRequest_signer    protoreflect.FieldDescriptor
-	fd_MsgSettleRequest_launchID  protoreflect.FieldDescriptor
-	fd_MsgSettleRequest_requestID protoreflect.FieldDescriptor
-	fd_MsgSettleRequest_approve   protoreflect.FieldDescriptor
+	md_MsgSettleRequest            protoreflect.MessageDescriptor
+	fd_MsgSettleRequest_signer     protoreflect.FieldDescriptor
+	fd_MsgSettleRequest_launch_id  protoreflect.FieldDescriptor
+	fd_MsgSettleRequest_request_id protoreflect.FieldDescriptor
+	fd_MsgSettleRequest_approve    protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_tx_proto_init()
 	md_MsgSettleRequest = File_network_launch_v1_tx_proto.Messages().ByName("MsgSettleRequest")
 	fd_MsgSettleRequest_signer = md_MsgSettleRequest.Fields().ByName("signer")
-	fd_MsgSettleRequest_launchID = md_MsgSettleRequest.Fields().ByName("launchID")
-	fd_MsgSettleRequest_requestID = md_MsgSettleRequest.Fields().ByName("requestID")
+	fd_MsgSettleRequest_launch_id = md_MsgSettleRequest.Fields().ByName("launch_id")
+	fd_MsgSettleRequest_request_id = md_MsgSettleRequest.Fields().ByName("request_id")
 	fd_MsgSettleRequest_approve = md_MsgSettleRequest.Fields().ByName("approve")
 }
 
@@ -5454,15 +5454,15 @@ func (x *fastReflection_MsgSettleRequest) Range(f func(protoreflect.FieldDescrip
 			return
 		}
 	}
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_MsgSettleRequest_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_MsgSettleRequest_launch_id, value) {
 			return
 		}
 	}
-	if x.RequestID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.RequestID)
-		if !f(fd_MsgSettleRequest_requestID, value) {
+	if x.RequestId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.RequestId)
+		if !f(fd_MsgSettleRequest_request_id, value) {
 			return
 		}
 	}
@@ -5489,10 +5489,10 @@ func (x *fastReflection_MsgSettleRequest) Has(fd protoreflect.FieldDescriptor) b
 	switch fd.FullName() {
 	case "network.launch.v1.MsgSettleRequest.signer":
 		return x.Signer != ""
-	case "network.launch.v1.MsgSettleRequest.launchID":
-		return x.LaunchID != uint64(0)
-	case "network.launch.v1.MsgSettleRequest.requestID":
-		return x.RequestID != uint64(0)
+	case "network.launch.v1.MsgSettleRequest.launch_id":
+		return x.LaunchId != uint64(0)
+	case "network.launch.v1.MsgSettleRequest.request_id":
+		return x.RequestId != uint64(0)
 	case "network.launch.v1.MsgSettleRequest.approve":
 		return x.Approve != false
 	default:
@@ -5513,10 +5513,10 @@ func (x *fastReflection_MsgSettleRequest) Clear(fd protoreflect.FieldDescriptor)
 	switch fd.FullName() {
 	case "network.launch.v1.MsgSettleRequest.signer":
 		x.Signer = ""
-	case "network.launch.v1.MsgSettleRequest.launchID":
-		x.LaunchID = uint64(0)
-	case "network.launch.v1.MsgSettleRequest.requestID":
-		x.RequestID = uint64(0)
+	case "network.launch.v1.MsgSettleRequest.launch_id":
+		x.LaunchId = uint64(0)
+	case "network.launch.v1.MsgSettleRequest.request_id":
+		x.RequestId = uint64(0)
 	case "network.launch.v1.MsgSettleRequest.approve":
 		x.Approve = false
 	default:
@@ -5538,11 +5538,11 @@ func (x *fastReflection_MsgSettleRequest) Get(descriptor protoreflect.FieldDescr
 	case "network.launch.v1.MsgSettleRequest.signer":
 		value := x.Signer
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgSettleRequest.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.MsgSettleRequest.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.MsgSettleRequest.requestID":
-		value := x.RequestID
+	case "network.launch.v1.MsgSettleRequest.request_id":
+		value := x.RequestId
 		return protoreflect.ValueOfUint64(value)
 	case "network.launch.v1.MsgSettleRequest.approve":
 		value := x.Approve
@@ -5569,10 +5569,10 @@ func (x *fastReflection_MsgSettleRequest) Set(fd protoreflect.FieldDescriptor, v
 	switch fd.FullName() {
 	case "network.launch.v1.MsgSettleRequest.signer":
 		x.Signer = value.Interface().(string)
-	case "network.launch.v1.MsgSettleRequest.launchID":
-		x.LaunchID = value.Uint()
-	case "network.launch.v1.MsgSettleRequest.requestID":
-		x.RequestID = value.Uint()
+	case "network.launch.v1.MsgSettleRequest.launch_id":
+		x.LaunchId = value.Uint()
+	case "network.launch.v1.MsgSettleRequest.request_id":
+		x.RequestId = value.Uint()
 	case "network.launch.v1.MsgSettleRequest.approve":
 		x.Approve = value.Bool()
 	default:
@@ -5597,10 +5597,10 @@ func (x *fastReflection_MsgSettleRequest) Mutable(fd protoreflect.FieldDescripto
 	switch fd.FullName() {
 	case "network.launch.v1.MsgSettleRequest.signer":
 		panic(fmt.Errorf("field signer of message network.launch.v1.MsgSettleRequest is not mutable"))
-	case "network.launch.v1.MsgSettleRequest.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.MsgSettleRequest is not mutable"))
-	case "network.launch.v1.MsgSettleRequest.requestID":
-		panic(fmt.Errorf("field requestID of message network.launch.v1.MsgSettleRequest is not mutable"))
+	case "network.launch.v1.MsgSettleRequest.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.MsgSettleRequest is not mutable"))
+	case "network.launch.v1.MsgSettleRequest.request_id":
+		panic(fmt.Errorf("field request_id of message network.launch.v1.MsgSettleRequest is not mutable"))
 	case "network.launch.v1.MsgSettleRequest.approve":
 		panic(fmt.Errorf("field approve of message network.launch.v1.MsgSettleRequest is not mutable"))
 	default:
@@ -5618,9 +5618,9 @@ func (x *fastReflection_MsgSettleRequest) NewField(fd protoreflect.FieldDescript
 	switch fd.FullName() {
 	case "network.launch.v1.MsgSettleRequest.signer":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgSettleRequest.launchID":
+	case "network.launch.v1.MsgSettleRequest.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.MsgSettleRequest.requestID":
+	case "network.launch.v1.MsgSettleRequest.request_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.launch.v1.MsgSettleRequest.approve":
 		return protoreflect.ValueOfBool(false)
@@ -5697,11 +5697,11 @@ func (x *fastReflection_MsgSettleRequest) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
-		if x.RequestID != 0 {
-			n += 1 + runtime.Sov(uint64(x.RequestID))
+		if x.RequestId != 0 {
+			n += 1 + runtime.Sov(uint64(x.RequestId))
 		}
 		if x.Approve {
 			n += 2
@@ -5745,13 +5745,13 @@ func (x *fastReflection_MsgSettleRequest) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x20
 		}
-		if x.RequestID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.RequestID))
+		if x.RequestId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.RequestId))
 			i--
 			dAtA[i] = 0x18
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x10
 		}
@@ -5845,9 +5845,9 @@ func (x *fastReflection_MsgSettleRequest) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -5857,16 +5857,16 @@ func (x *fastReflection_MsgSettleRequest) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 3:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RequestID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RequestId", wireType)
 				}
-				x.RequestID = 0
+				x.RequestId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -5876,7 +5876,7 @@ func (x *fastReflection_MsgSettleRequest) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.RequestID |= uint64(b&0x7F) << shift
+					x.RequestId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -6295,16 +6295,16 @@ func (x *fastReflection_MsgSettleRequestResponse) ProtoMethods() *protoiface.Met
 var (
 	md_MsgTriggerLaunch             protoreflect.MessageDescriptor
 	fd_MsgTriggerLaunch_coordinator protoreflect.FieldDescriptor
-	fd_MsgTriggerLaunch_launchID    protoreflect.FieldDescriptor
-	fd_MsgTriggerLaunch_launchTime  protoreflect.FieldDescriptor
+	fd_MsgTriggerLaunch_launch_id   protoreflect.FieldDescriptor
+	fd_MsgTriggerLaunch_launch_time protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_tx_proto_init()
 	md_MsgTriggerLaunch = File_network_launch_v1_tx_proto.Messages().ByName("MsgTriggerLaunch")
 	fd_MsgTriggerLaunch_coordinator = md_MsgTriggerLaunch.Fields().ByName("coordinator")
-	fd_MsgTriggerLaunch_launchID = md_MsgTriggerLaunch.Fields().ByName("launchID")
-	fd_MsgTriggerLaunch_launchTime = md_MsgTriggerLaunch.Fields().ByName("launchTime")
+	fd_MsgTriggerLaunch_launch_id = md_MsgTriggerLaunch.Fields().ByName("launch_id")
+	fd_MsgTriggerLaunch_launch_time = md_MsgTriggerLaunch.Fields().ByName("launch_time")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgTriggerLaunch)(nil)
@@ -6378,15 +6378,15 @@ func (x *fastReflection_MsgTriggerLaunch) Range(f func(protoreflect.FieldDescrip
 			return
 		}
 	}
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_MsgTriggerLaunch_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_MsgTriggerLaunch_launch_id, value) {
 			return
 		}
 	}
 	if x.LaunchTime != nil {
 		value := protoreflect.ValueOfMessage(x.LaunchTime.ProtoReflect())
-		if !f(fd_MsgTriggerLaunch_launchTime, value) {
+		if !f(fd_MsgTriggerLaunch_launch_time, value) {
 			return
 		}
 	}
@@ -6407,9 +6407,9 @@ func (x *fastReflection_MsgTriggerLaunch) Has(fd protoreflect.FieldDescriptor) b
 	switch fd.FullName() {
 	case "network.launch.v1.MsgTriggerLaunch.coordinator":
 		return x.Coordinator != ""
-	case "network.launch.v1.MsgTriggerLaunch.launchID":
-		return x.LaunchID != uint64(0)
-	case "network.launch.v1.MsgTriggerLaunch.launchTime":
+	case "network.launch.v1.MsgTriggerLaunch.launch_id":
+		return x.LaunchId != uint64(0)
+	case "network.launch.v1.MsgTriggerLaunch.launch_time":
 		return x.LaunchTime != nil
 	default:
 		if fd.IsExtension() {
@@ -6429,9 +6429,9 @@ func (x *fastReflection_MsgTriggerLaunch) Clear(fd protoreflect.FieldDescriptor)
 	switch fd.FullName() {
 	case "network.launch.v1.MsgTriggerLaunch.coordinator":
 		x.Coordinator = ""
-	case "network.launch.v1.MsgTriggerLaunch.launchID":
-		x.LaunchID = uint64(0)
-	case "network.launch.v1.MsgTriggerLaunch.launchTime":
+	case "network.launch.v1.MsgTriggerLaunch.launch_id":
+		x.LaunchId = uint64(0)
+	case "network.launch.v1.MsgTriggerLaunch.launch_time":
 		x.LaunchTime = nil
 	default:
 		if fd.IsExtension() {
@@ -6452,10 +6452,10 @@ func (x *fastReflection_MsgTriggerLaunch) Get(descriptor protoreflect.FieldDescr
 	case "network.launch.v1.MsgTriggerLaunch.coordinator":
 		value := x.Coordinator
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgTriggerLaunch.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.MsgTriggerLaunch.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.MsgTriggerLaunch.launchTime":
+	case "network.launch.v1.MsgTriggerLaunch.launch_time":
 		value := x.LaunchTime
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
@@ -6480,9 +6480,9 @@ func (x *fastReflection_MsgTriggerLaunch) Set(fd protoreflect.FieldDescriptor, v
 	switch fd.FullName() {
 	case "network.launch.v1.MsgTriggerLaunch.coordinator":
 		x.Coordinator = value.Interface().(string)
-	case "network.launch.v1.MsgTriggerLaunch.launchID":
-		x.LaunchID = value.Uint()
-	case "network.launch.v1.MsgTriggerLaunch.launchTime":
+	case "network.launch.v1.MsgTriggerLaunch.launch_id":
+		x.LaunchId = value.Uint()
+	case "network.launch.v1.MsgTriggerLaunch.launch_time":
 		x.LaunchTime = value.Message().Interface().(*timestamppb.Timestamp)
 	default:
 		if fd.IsExtension() {
@@ -6504,15 +6504,15 @@ func (x *fastReflection_MsgTriggerLaunch) Set(fd protoreflect.FieldDescriptor, v
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgTriggerLaunch) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.MsgTriggerLaunch.launchTime":
+	case "network.launch.v1.MsgTriggerLaunch.launch_time":
 		if x.LaunchTime == nil {
 			x.LaunchTime = new(timestamppb.Timestamp)
 		}
 		return protoreflect.ValueOfMessage(x.LaunchTime.ProtoReflect())
 	case "network.launch.v1.MsgTriggerLaunch.coordinator":
 		panic(fmt.Errorf("field coordinator of message network.launch.v1.MsgTriggerLaunch is not mutable"))
-	case "network.launch.v1.MsgTriggerLaunch.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.MsgTriggerLaunch is not mutable"))
+	case "network.launch.v1.MsgTriggerLaunch.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.MsgTriggerLaunch is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgTriggerLaunch"))
@@ -6528,9 +6528,9 @@ func (x *fastReflection_MsgTriggerLaunch) NewField(fd protoreflect.FieldDescript
 	switch fd.FullName() {
 	case "network.launch.v1.MsgTriggerLaunch.coordinator":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgTriggerLaunch.launchID":
+	case "network.launch.v1.MsgTriggerLaunch.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.MsgTriggerLaunch.launchTime":
+	case "network.launch.v1.MsgTriggerLaunch.launch_time":
 		m := new(timestamppb.Timestamp)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
@@ -6606,8 +6606,8 @@ func (x *fastReflection_MsgTriggerLaunch) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		if x.LaunchTime != nil {
 			l = options.Size(x.LaunchTime)
@@ -6656,8 +6656,8 @@ func (x *fastReflection_MsgTriggerLaunch) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x1a
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x10
 		}
@@ -6751,9 +6751,9 @@ func (x *fastReflection_MsgTriggerLaunch) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -6763,7 +6763,7 @@ func (x *fastReflection_MsgTriggerLaunch) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -7198,14 +7198,14 @@ func (x *fastReflection_MsgTriggerLaunchResponse) ProtoMethods() *protoiface.Met
 var (
 	md_MsgRevertLaunch             protoreflect.MessageDescriptor
 	fd_MsgRevertLaunch_coordinator protoreflect.FieldDescriptor
-	fd_MsgRevertLaunch_launchID    protoreflect.FieldDescriptor
+	fd_MsgRevertLaunch_launch_id   protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_tx_proto_init()
 	md_MsgRevertLaunch = File_network_launch_v1_tx_proto.Messages().ByName("MsgRevertLaunch")
 	fd_MsgRevertLaunch_coordinator = md_MsgRevertLaunch.Fields().ByName("coordinator")
-	fd_MsgRevertLaunch_launchID = md_MsgRevertLaunch.Fields().ByName("launchID")
+	fd_MsgRevertLaunch_launch_id = md_MsgRevertLaunch.Fields().ByName("launch_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgRevertLaunch)(nil)
@@ -7279,9 +7279,9 @@ func (x *fastReflection_MsgRevertLaunch) Range(f func(protoreflect.FieldDescript
 			return
 		}
 	}
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_MsgRevertLaunch_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_MsgRevertLaunch_launch_id, value) {
 			return
 		}
 	}
@@ -7302,8 +7302,8 @@ func (x *fastReflection_MsgRevertLaunch) Has(fd protoreflect.FieldDescriptor) bo
 	switch fd.FullName() {
 	case "network.launch.v1.MsgRevertLaunch.coordinator":
 		return x.Coordinator != ""
-	case "network.launch.v1.MsgRevertLaunch.launchID":
-		return x.LaunchID != uint64(0)
+	case "network.launch.v1.MsgRevertLaunch.launch_id":
+		return x.LaunchId != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgRevertLaunch"))
@@ -7322,8 +7322,8 @@ func (x *fastReflection_MsgRevertLaunch) Clear(fd protoreflect.FieldDescriptor) 
 	switch fd.FullName() {
 	case "network.launch.v1.MsgRevertLaunch.coordinator":
 		x.Coordinator = ""
-	case "network.launch.v1.MsgRevertLaunch.launchID":
-		x.LaunchID = uint64(0)
+	case "network.launch.v1.MsgRevertLaunch.launch_id":
+		x.LaunchId = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgRevertLaunch"))
@@ -7343,8 +7343,8 @@ func (x *fastReflection_MsgRevertLaunch) Get(descriptor protoreflect.FieldDescri
 	case "network.launch.v1.MsgRevertLaunch.coordinator":
 		value := x.Coordinator
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.MsgRevertLaunch.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.MsgRevertLaunch.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
@@ -7368,8 +7368,8 @@ func (x *fastReflection_MsgRevertLaunch) Set(fd protoreflect.FieldDescriptor, va
 	switch fd.FullName() {
 	case "network.launch.v1.MsgRevertLaunch.coordinator":
 		x.Coordinator = value.Interface().(string)
-	case "network.launch.v1.MsgRevertLaunch.launchID":
-		x.LaunchID = value.Uint()
+	case "network.launch.v1.MsgRevertLaunch.launch_id":
+		x.LaunchId = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgRevertLaunch"))
@@ -7392,8 +7392,8 @@ func (x *fastReflection_MsgRevertLaunch) Mutable(fd protoreflect.FieldDescriptor
 	switch fd.FullName() {
 	case "network.launch.v1.MsgRevertLaunch.coordinator":
 		panic(fmt.Errorf("field coordinator of message network.launch.v1.MsgRevertLaunch is not mutable"))
-	case "network.launch.v1.MsgRevertLaunch.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.MsgRevertLaunch is not mutable"))
+	case "network.launch.v1.MsgRevertLaunch.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.MsgRevertLaunch is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.MsgRevertLaunch"))
@@ -7409,7 +7409,7 @@ func (x *fastReflection_MsgRevertLaunch) NewField(fd protoreflect.FieldDescripto
 	switch fd.FullName() {
 	case "network.launch.v1.MsgRevertLaunch.coordinator":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.MsgRevertLaunch.launchID":
+	case "network.launch.v1.MsgRevertLaunch.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -7484,8 +7484,8 @@ func (x *fastReflection_MsgRevertLaunch) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -7516,8 +7516,8 @@ func (x *fastReflection_MsgRevertLaunch) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x10
 		}
@@ -7611,9 +7611,9 @@ func (x *fastReflection_MsgRevertLaunch) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -7623,7 +7623,7 @@ func (x *fastReflection_MsgRevertLaunch) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -8112,13 +8112,13 @@ type MsgCreateChain struct {
 	unknownFields protoimpl.UnknownFields
 
 	Coordinator    string          `protobuf:"bytes,1,opt,name=coordinator,proto3" json:"coordinator,omitempty"`
-	GenesisChainID string          `protobuf:"bytes,2,opt,name=genesisChainID,proto3" json:"genesisChainID,omitempty"`
-	SourceURL      string          `protobuf:"bytes,3,opt,name=sourceURL,proto3" json:"sourceURL,omitempty"`
-	SourceHash     string          `protobuf:"bytes,4,opt,name=sourceHash,proto3" json:"sourceHash,omitempty"`
-	InitialGenesis *InitialGenesis `protobuf:"bytes,5,opt,name=initialGenesis,proto3" json:"initialGenesis,omitempty"`
-	HasProject     bool            `protobuf:"varint,6,opt,name=hasProject,proto3" json:"hasProject,omitempty"`
-	ProjectID      uint64          `protobuf:"varint,7,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	AccountBalance []*v1beta1.Coin `protobuf:"bytes,8,rep,name=accountBalance,proto3" json:"accountBalance,omitempty"`
+	GenesisChainId string          `protobuf:"bytes,2,opt,name=genesis_chain_id,json=genesisChainId,proto3" json:"genesis_chain_id,omitempty"`
+	SourceUrl      string          `protobuf:"bytes,3,opt,name=source_url,json=sourceUrl,proto3" json:"source_url,omitempty"`
+	SourceHash     string          `protobuf:"bytes,4,opt,name=source_hash,json=sourceHash,proto3" json:"source_hash,omitempty"`
+	InitialGenesis *InitialGenesis `protobuf:"bytes,5,opt,name=initial_genesis,json=initialGenesis,proto3" json:"initial_genesis,omitempty"`
+	HasProject     bool            `protobuf:"varint,6,opt,name=has_project,json=hasProject,proto3" json:"has_project,omitempty"`
+	ProjectId      uint64          `protobuf:"varint,7,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	AccountBalance []*v1beta1.Coin `protobuf:"bytes,8,rep,name=account_balance,json=accountBalance,proto3" json:"account_balance,omitempty"`
 	Metadata       []byte          `protobuf:"bytes,9,opt,name=metadata,proto3" json:"metadata,omitempty"`
 }
 
@@ -8149,16 +8149,16 @@ func (x *MsgCreateChain) GetCoordinator() string {
 	return ""
 }
 
-func (x *MsgCreateChain) GetGenesisChainID() string {
+func (x *MsgCreateChain) GetGenesisChainId() string {
 	if x != nil {
-		return x.GenesisChainID
+		return x.GenesisChainId
 	}
 	return ""
 }
 
-func (x *MsgCreateChain) GetSourceURL() string {
+func (x *MsgCreateChain) GetSourceUrl() string {
 	if x != nil {
-		return x.SourceURL
+		return x.SourceUrl
 	}
 	return ""
 }
@@ -8184,9 +8184,9 @@ func (x *MsgCreateChain) GetHasProject() bool {
 	return false
 }
 
-func (x *MsgCreateChain) GetProjectID() uint64 {
+func (x *MsgCreateChain) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -8210,7 +8210,7 @@ type MsgCreateChainResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LaunchID uint64 `protobuf:"varint,1,opt,name=launchID,proto3" json:"launchID,omitempty"`
+	LaunchId uint64 `protobuf:"varint,1,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
 }
 
 func (x *MsgCreateChainResponse) Reset() {
@@ -8233,9 +8233,9 @@ func (*MsgCreateChainResponse) Descriptor() ([]byte, []int) {
 	return file_network_launch_v1_tx_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *MsgCreateChainResponse) GetLaunchID() uint64 {
+func (x *MsgCreateChainResponse) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -8246,9 +8246,9 @@ type MsgEditChain struct {
 	unknownFields protoimpl.UnknownFields
 
 	Coordinator  string `protobuf:"bytes,1,opt,name=coordinator,proto3" json:"coordinator,omitempty"`
-	LaunchID     uint64 `protobuf:"varint,2,opt,name=launchID,proto3" json:"launchID,omitempty"`
-	SetProjectID bool   `protobuf:"varint,3,opt,name=setProjectID,proto3" json:"setProjectID,omitempty"`
-	ProjectID    uint64 `protobuf:"varint,4,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	LaunchId     uint64 `protobuf:"varint,2,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
+	SetProjectId bool   `protobuf:"varint,3,opt,name=set_project_id,json=setProjectId,proto3" json:"set_project_id,omitempty"`
+	ProjectId    uint64 `protobuf:"varint,4,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Metadata     []byte `protobuf:"bytes,5,opt,name=metadata,proto3" json:"metadata,omitempty"`
 }
 
@@ -8279,23 +8279,23 @@ func (x *MsgEditChain) GetCoordinator() string {
 	return ""
 }
 
-func (x *MsgEditChain) GetLaunchID() uint64 {
+func (x *MsgEditChain) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
 
-func (x *MsgEditChain) GetSetProjectID() bool {
+func (x *MsgEditChain) GetSetProjectId() bool {
 	if x != nil {
-		return x.SetProjectID
+		return x.SetProjectId
 	}
 	return false
 }
 
-func (x *MsgEditChain) GetProjectID() uint64 {
+func (x *MsgEditChain) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -8339,11 +8339,11 @@ type MsgUpdateLaunchInformation struct {
 	unknownFields protoimpl.UnknownFields
 
 	Coordinator    string          `protobuf:"bytes,1,opt,name=coordinator,proto3" json:"coordinator,omitempty"`
-	LaunchID       uint64          `protobuf:"varint,2,opt,name=launchID,proto3" json:"launchID,omitempty"`
-	GenesisChainID string          `protobuf:"bytes,3,opt,name=genesisChainID,proto3" json:"genesisChainID,omitempty"`
-	SourceURL      string          `protobuf:"bytes,4,opt,name=sourceURL,proto3" json:"sourceURL,omitempty"`
-	SourceHash     string          `protobuf:"bytes,5,opt,name=sourceHash,proto3" json:"sourceHash,omitempty"`
-	InitialGenesis *InitialGenesis `protobuf:"bytes,6,opt,name=initialGenesis,proto3" json:"initialGenesis,omitempty"`
+	LaunchId       uint64          `protobuf:"varint,2,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
+	GenesisChainId string          `protobuf:"bytes,3,opt,name=genesis_chain_id,json=genesisChainId,proto3" json:"genesis_chain_id,omitempty"`
+	SourceUrl      string          `protobuf:"bytes,4,opt,name=source_url,json=sourceUrl,proto3" json:"source_url,omitempty"`
+	SourceHash     string          `protobuf:"bytes,5,opt,name=source_hash,json=sourceHash,proto3" json:"source_hash,omitempty"`
+	InitialGenesis *InitialGenesis `protobuf:"bytes,6,opt,name=initial_genesis,json=initialGenesis,proto3" json:"initial_genesis,omitempty"`
 }
 
 func (x *MsgUpdateLaunchInformation) Reset() {
@@ -8373,23 +8373,23 @@ func (x *MsgUpdateLaunchInformation) GetCoordinator() string {
 	return ""
 }
 
-func (x *MsgUpdateLaunchInformation) GetLaunchID() uint64 {
+func (x *MsgUpdateLaunchInformation) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
 
-func (x *MsgUpdateLaunchInformation) GetGenesisChainID() string {
+func (x *MsgUpdateLaunchInformation) GetGenesisChainId() string {
 	if x != nil {
-		return x.GenesisChainID
+		return x.GenesisChainId
 	}
 	return ""
 }
 
-func (x *MsgUpdateLaunchInformation) GetSourceURL() string {
+func (x *MsgUpdateLaunchInformation) GetSourceUrl() string {
 	if x != nil {
-		return x.SourceURL
+		return x.SourceUrl
 	}
 	return ""
 }
@@ -8440,7 +8440,7 @@ type MsgSendRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	Creator  string          `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	LaunchID uint64          `protobuf:"varint,2,opt,name=launchID,proto3" json:"launchID,omitempty"`
+	LaunchId uint64          `protobuf:"varint,2,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
 	Content  *RequestContent `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
 }
 
@@ -8471,9 +8471,9 @@ func (x *MsgSendRequest) GetCreator() string {
 	return ""
 }
 
-func (x *MsgSendRequest) GetLaunchID() uint64 {
+func (x *MsgSendRequest) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -8490,8 +8490,8 @@ type MsgSendRequestResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RequestID    uint64 `protobuf:"varint,1,opt,name=requestID,proto3" json:"requestID,omitempty"`
-	AutoApproved bool   `protobuf:"varint,2,opt,name=autoApproved,proto3" json:"autoApproved,omitempty"`
+	RequestId    uint64 `protobuf:"varint,1,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
+	AutoApproved bool   `protobuf:"varint,2,opt,name=auto_approved,json=autoApproved,proto3" json:"auto_approved,omitempty"`
 }
 
 func (x *MsgSendRequestResponse) Reset() {
@@ -8514,9 +8514,9 @@ func (*MsgSendRequestResponse) Descriptor() ([]byte, []int) {
 	return file_network_launch_v1_tx_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *MsgSendRequestResponse) GetRequestID() uint64 {
+func (x *MsgSendRequestResponse) GetRequestId() uint64 {
 	if x != nil {
-		return x.RequestID
+		return x.RequestId
 	}
 	return 0
 }
@@ -8534,8 +8534,8 @@ type MsgSettleRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	Signer    string `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
-	LaunchID  uint64 `protobuf:"varint,2,opt,name=launchID,proto3" json:"launchID,omitempty"`
-	RequestID uint64 `protobuf:"varint,3,opt,name=requestID,proto3" json:"requestID,omitempty"`
+	LaunchId  uint64 `protobuf:"varint,2,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
+	RequestId uint64 `protobuf:"varint,3,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
 	Approve   bool   `protobuf:"varint,4,opt,name=approve,proto3" json:"approve,omitempty"`
 }
 
@@ -8566,16 +8566,16 @@ func (x *MsgSettleRequest) GetSigner() string {
 	return ""
 }
 
-func (x *MsgSettleRequest) GetLaunchID() uint64 {
+func (x *MsgSettleRequest) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
 
-func (x *MsgSettleRequest) GetRequestID() uint64 {
+func (x *MsgSettleRequest) GetRequestId() uint64 {
 	if x != nil {
-		return x.RequestID
+		return x.RequestId
 	}
 	return 0
 }
@@ -8619,8 +8619,8 @@ type MsgTriggerLaunch struct {
 	unknownFields protoimpl.UnknownFields
 
 	Coordinator string                 `protobuf:"bytes,1,opt,name=coordinator,proto3" json:"coordinator,omitempty"`
-	LaunchID    uint64                 `protobuf:"varint,2,opt,name=launchID,proto3" json:"launchID,omitempty"`
-	LaunchTime  *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=launchTime,proto3" json:"launchTime,omitempty"`
+	LaunchId    uint64                 `protobuf:"varint,2,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
+	LaunchTime  *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=launch_time,json=launchTime,proto3" json:"launch_time,omitempty"`
 }
 
 func (x *MsgTriggerLaunch) Reset() {
@@ -8650,9 +8650,9 @@ func (x *MsgTriggerLaunch) GetCoordinator() string {
 	return ""
 }
 
-func (x *MsgTriggerLaunch) GetLaunchID() uint64 {
+func (x *MsgTriggerLaunch) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -8696,7 +8696,7 @@ type MsgRevertLaunch struct {
 	unknownFields protoimpl.UnknownFields
 
 	Coordinator string `protobuf:"bytes,1,opt,name=coordinator,proto3" json:"coordinator,omitempty"`
-	LaunchID    uint64 `protobuf:"varint,2,opt,name=launchID,proto3" json:"launchID,omitempty"`
+	LaunchId    uint64 `protobuf:"varint,2,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
 }
 
 func (x *MsgRevertLaunch) Reset() {
@@ -8726,9 +8726,9 @@ func (x *MsgRevertLaunch) GetCoordinator() string {
 	return ""
 }
 
-func (x *MsgRevertLaunch) GetLaunchID() uint64 {
+func (x *MsgRevertLaunch) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -8794,198 +8794,200 @@ var file_network_launch_v1_tx_proto_rawDesc = []byte{
 	0x6f, 0x72, 0x6b, 0x2f, 0x78, 0x2f, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f, 0x4d, 0x73, 0x67,
 	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x19, 0x0a, 0x17,
 	0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xa6, 0x04, 0x0a, 0x0e, 0x4d, 0x73, 0x67, 0x43,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xae, 0x04, 0x0a, 0x0e, 0x4d, 0x73, 0x67, 0x43,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x12, 0x3a, 0x0a, 0x0b, 0x63, 0x6f,
 	0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42,
 	0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72,
 	0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64,
-	0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x26, 0x0a, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69,
-	0x73, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e,
-	0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44, 0x12, 0x1c,
-	0x0a, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x55, 0x52, 0x4c, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x55, 0x52, 0x4c, 0x12, 0x1e, 0x0a, 0x0a,
-	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x48, 0x61, 0x73, 0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x48, 0x61, 0x73, 0x68, 0x12, 0x4f, 0x0a, 0x0e,
-	0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x18, 0x05,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c,
-	0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0e, 0x69,
-	0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x12, 0x1e, 0x0a,
-	0x0a, 0x68, 0x61, 0x73, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28,
-	0x08, 0x52, 0x0a, 0x68, 0x61, 0x73, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x1c, 0x0a,
-	0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0xb4, 0x01, 0x0a, 0x0e,
-	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x18, 0x08,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61,
-	0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42,
-	0x71, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
-	0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e,
-	0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63,
-	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b,
-	0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0, 0x2a,
-	0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0,
-	0x2a, 0x01, 0x52, 0x0e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x61, 0x6c, 0x61, 0x6e,
-	0x63, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x09,
-	0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x10,
-	0x82, 0xe7, 0xb0, 0x2a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72,
-	0x22, 0x34, 0x0a, 0x16, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61,
-	0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x22, 0xd6, 0x01, 0x0a, 0x0c, 0x4d, 0x73, 0x67, 0x45, 0x64,
-	0x69, 0x74, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x12, 0x3a, 0x0a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64,
-	0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4,
-	0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61,
-	0x74, 0x6f, 0x72, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x12,
-	0x22, 0x0a, 0x0c, 0x73, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0c, 0x73, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63,
-	0x74, 0x49, 0x44, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44,
-	0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49,
-	0x44, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x05, 0x20,
-	0x01, 0x28, 0x0c, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x10, 0x82,
-	0xe7, 0xb0, 0x2a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x22,
-	0x16, 0x0a, 0x14, 0x4d, 0x73, 0x67, 0x45, 0x64, 0x69, 0x74, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xb7, 0x02, 0x0a, 0x1a, 0x4d, 0x73, 0x67, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x6e, 0x66, 0x6f, 0x72,
-	0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x3a, 0x0a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69,
-	0x6e, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d,
-	0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53,
-	0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74,
-	0x6f, 0x72, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x12, 0x26,
-	0x0a, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43,
-	0x68, 0x61, 0x69, 0x6e, 0x49, 0x44, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
-	0x55, 0x52, 0x4c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63,
-	0x65, 0x55, 0x52, 0x4c, 0x12, 0x1e, 0x0a, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x48, 0x61,
-	0x73, 0x68, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
-	0x48, 0x61, 0x73, 0x68, 0x12, 0x49, 0x0a, 0x0e, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47,
-	0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e,
-	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31,
-	0x2e, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x52,
-	0x0e, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x3a,
-	0x10, 0x82, 0xe7, 0xb0, 0x2a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f,
-	0x72, 0x22, 0x24, 0x0a, 0x22, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x49, 0x6e, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xb1, 0x01, 0x0a, 0x0e, 0x4d, 0x73, 0x67, 0x53,
-	0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x32, 0x0a, 0x07, 0x63, 0x72,
-	0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d,
-	0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53,
-	0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x1a,
-	0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x12, 0x41, 0x0a, 0x07, 0x63, 0x6f,
-	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x42, 0x04,
-	0xc8, 0xde, 0x1f, 0x00, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x3a, 0x0c, 0x82,
-	0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x5a, 0x0a, 0x16, 0x4d,
-	0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x49, 0x44, 0x12, 0x22, 0x0a, 0x0c, 0x61, 0x75, 0x74, 0x6f, 0x41, 0x70, 0x70, 0x72, 0x6f,
-	0x76, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0c, 0x61, 0x75, 0x74, 0x6f, 0x41,
-	0x70, 0x70, 0x72, 0x6f, 0x76, 0x65, 0x64, 0x22, 0xa5, 0x01, 0x0a, 0x10, 0x4d, 0x73, 0x67, 0x53,
-	0x65, 0x74, 0x74, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x06,
-	0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4,
-	0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x12, 0x1a,
-	0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x44, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x72,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x70, 0x70, 0x72,
-	0x6f, 0x76, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x61, 0x70, 0x70, 0x72, 0x6f,
-	0x76, 0x65, 0x3a, 0x0b, 0x82, 0xe7, 0xb0, 0x2a, 0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x22,
-	0x1a, 0x0a, 0x18, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x74, 0x74, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xc2, 0x01, 0x0a, 0x10,
-	0x4d, 0x73, 0x67, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x28, 0x0a, 0x10, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69,
+	0x73, 0x5f, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x64,
+	0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x55, 0x72, 0x6c, 0x12,
+	0x1f, 0x0a, 0x0b, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x48, 0x61, 0x73, 0x68,
+	0x12, 0x50, 0x0a, 0x0f, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x5f, 0x67, 0x65, 0x6e, 0x65,
+	0x73, 0x69, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77,
+	0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e,
+	0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x42, 0x04, 0xc8, 0xde,
+	0x1f, 0x00, 0x52, 0x0e, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73,
+	0x69, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x68, 0x61, 0x73, 0x5f, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63,
+	0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x68, 0x61, 0x73, 0x50, 0x72, 0x6f, 0x6a,
+	0x65, 0x63, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69,
+	0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
+	0x49, 0x64, 0x12, 0xb5, 0x01, 0x0a, 0x0f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x62,
+	0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x18, 0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63,
+	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74,
+	0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x71, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f,
+	0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79,
+	0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f,
+	0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43,
+	0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f,
+	0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x0e, 0x61, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x42, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x65,
+	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x6d, 0x65,
+	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x10, 0x82, 0xe7, 0xb0, 0x2a, 0x0b, 0x63, 0x6f, 0x6f,
+	0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x35, 0x0a, 0x16, 0x4d, 0x73, 0x67, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64, 0x22,
+	0xda, 0x01, 0x0a, 0x0c, 0x4d, 0x73, 0x67, 0x45, 0x64, 0x69, 0x74, 0x43, 0x68, 0x61, 0x69, 0x6e,
 	0x12, 0x3a, 0x0a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
 	0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52,
-	0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x1a, 0x0a, 0x08,
-	0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08,
-	0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x12, 0x44, 0x0a, 0x0a, 0x6c, 0x61, 0x75, 0x6e,
-	0x63, 0x68, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67,
-	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54,
-	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x08, 0xc8, 0xde, 0x1f, 0x00, 0x90, 0xdf,
-	0x1f, 0x01, 0x52, 0x0a, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x54, 0x69, 0x6d, 0x65, 0x3a, 0x10,
-	0x82, 0xe7, 0xb0, 0x2a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72,
-	0x22, 0x1a, 0x0a, 0x18, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x4c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x7b, 0x0a, 0x0f,
-	0x4d, 0x73, 0x67, 0x52, 0x65, 0x76, 0x65, 0x72, 0x74, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x12,
-	0x3a, 0x0a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
-	0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x0b,
-	0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x1a, 0x0a, 0x08, 0x6c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x3a, 0x10, 0x82, 0xe7, 0xb0, 0x2a, 0x0b, 0x63, 0x6f,
-	0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x73, 0x67,
-	0x52, 0x65, 0x76, 0x65, 0x72, 0x74, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x32, 0xa4, 0x06, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x5e, 0x0a, 0x0c,
-	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x22, 0x2e, 0x6e,
-	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31,
-	0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x1a, 0x2a, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63,
-	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5b, 0x0a, 0x0b,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x12, 0x21, 0x2e, 0x6e, 0x65,
+	0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x1b, 0x0a, 0x09,
+	0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x0e, 0x73, 0x65, 0x74,
+	0x5f, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x0c, 0x73, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12,
+	0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x1a,
+	0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0c,
+	0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x3a, 0x10, 0x82, 0xe7, 0xb0, 0x2a,
+	0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x16, 0x0a, 0x14,
+	0x4d, 0x73, 0x67, 0x45, 0x64, 0x69, 0x74, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0xbd, 0x02, 0x0a, 0x1a, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x6e, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x12, 0x3a, 0x0a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74,
+	0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f,
+	0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69,
+	0x6e, 0x67, 0x52, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x12,
+	0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64, 0x12, 0x28, 0x0a, 0x10,
+	0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x5f, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5f, 0x69, 0x64,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43,
+	0x68, 0x61, 0x69, 0x6e, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
+	0x5f, 0x75, 0x72, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x6f, 0x75, 0x72,
+	0x63, 0x65, 0x55, 0x72, 0x6c, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f,
+	0x68, 0x61, 0x73, 0x68, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x6f, 0x75, 0x72,
+	0x63, 0x65, 0x48, 0x61, 0x73, 0x68, 0x12, 0x4a, 0x0a, 0x0f, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61,
+	0x6c, 0x5f, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73,
+	0x69, 0x73, 0x52, 0x0e, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73,
+	0x69, 0x73, 0x3a, 0x10, 0x82, 0xe7, 0xb0, 0x2a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
+	0x61, 0x74, 0x6f, 0x72, 0x22, 0x24, 0x0a, 0x22, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x6e, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xb2, 0x01, 0x0a, 0x0e, 0x4d,
+	0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x32, 0x0a,
+	0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18,
+	0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f,
+	0x72, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64, 0x12, 0x41,
+	0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x65,
+	0x6e, 0x74, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22,
+	0x5c, 0x0a, 0x16, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x72, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x72,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x12, 0x23, 0x0a, 0x0d, 0x61, 0x75, 0x74, 0x6f,
+	0x5f, 0x61, 0x70, 0x70, 0x72, 0x6f, 0x76, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x0c, 0x61, 0x75, 0x74, 0x6f, 0x41, 0x70, 0x70, 0x72, 0x6f, 0x76, 0x65, 0x64, 0x22, 0xa7, 0x01,
+	0x0a, 0x10, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x74, 0x74, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x30, 0x0a, 0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x06, 0x73, 0x69,
+	0x67, 0x6e, 0x65, 0x72, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49,
+	0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64,
+	0x12, 0x18, 0x0a, 0x07, 0x61, 0x70, 0x70, 0x72, 0x6f, 0x76, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x07, 0x61, 0x70, 0x70, 0x72, 0x6f, 0x76, 0x65, 0x3a, 0x0b, 0x82, 0xe7, 0xb0, 0x2a,
+	0x06, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x72, 0x22, 0x1a, 0x0a, 0x18, 0x4d, 0x73, 0x67, 0x53, 0x65,
+	0x74, 0x74, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0xc4, 0x01, 0x0a, 0x10, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x69, 0x67, 0x67,
+	0x65, 0x72, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x12, 0x3a, 0x0a, 0x0b, 0x63, 0x6f, 0x6f, 0x72,
+	0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2,
+	0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
+	0x61, 0x74, 0x6f, 0x72, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49,
+	0x64, 0x12, 0x45, 0x0a, 0x0b, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x74, 0x69, 0x6d, 0x65,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
+	0x6d, 0x70, 0x42, 0x08, 0xc8, 0xde, 0x1f, 0x00, 0x90, 0xdf, 0x1f, 0x01, 0x52, 0x0a, 0x6c, 0x61,
+	0x75, 0x6e, 0x63, 0x68, 0x54, 0x69, 0x6d, 0x65, 0x3a, 0x10, 0x82, 0xe7, 0xb0, 0x2a, 0x0b, 0x63,
+	0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x1a, 0x0a, 0x18, 0x4d, 0x73,
+	0x67, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x7c, 0x0a, 0x0f, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x76,
+	0x65, 0x72, 0x74, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x12, 0x3a, 0x0a, 0x0b, 0x63, 0x6f, 0x6f,
+	0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18,
+	0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69,
+	0x6e, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f,
+	0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x49, 0x64, 0x3a, 0x10, 0x82, 0xe7, 0xb0, 0x2a, 0x0b, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
+	0x61, 0x74, 0x6f, 0x72, 0x22, 0x19, 0x0a, 0x17, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x76, 0x65, 0x72,
+	0x74, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32,
+	0xa4, 0x06, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x5e, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x22, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72,
+	0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x2a, 0x2e, 0x6e, 0x65,
 	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e,
-	0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x1a, 0x29,
+	0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5b, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x12, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x1a, 0x29, 0x2e, 0x6e, 0x65, 0x74, 0x77,
+	0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73,
+	0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x55, 0x0a, 0x09, 0x45, 0x64, 0x69, 0x74, 0x43, 0x68, 0x61, 0x69,
+	0x6e, 0x12, 0x1f, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e,
+	0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x45, 0x64, 0x69, 0x74, 0x43, 0x68, 0x61,
+	0x69, 0x6e, 0x1a, 0x27, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75,
+	0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x45, 0x64, 0x69, 0x74, 0x43, 0x68,
+	0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x7f, 0x0a, 0x17, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x6e, 0x66, 0x6f, 0x72,
+	0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x2d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x6e, 0x66, 0x6f, 0x72, 0x6d,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x35, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
+	0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x6e, 0x66, 0x6f, 0x72, 0x6d, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5b, 0x0a, 0x0b,
+	0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x2e, 0x6e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e,
+	0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29,
 	0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e,
-	0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x69,
-	0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x55, 0x0a, 0x09, 0x45, 0x64, 0x69,
-	0x74, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x12, 0x1f, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
-	0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x45, 0x64,
-	0x69, 0x74, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x1a, 0x27, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72,
-	0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x45,
-	0x64, 0x69, 0x74, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x7f, 0x0a, 0x17, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68,
-	0x49, 0x6e, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x2d, 0x2e, 0x6e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e,
-	0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49,
-	0x6e, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x35, 0x2e, 0x6e, 0x65, 0x74,
+	0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x61, 0x0a, 0x0d, 0x53, 0x65, 0x74,
+	0x74, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x23, 0x2e, 0x6e, 0x65, 0x74,
 	0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d,
-	0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x6e,
-	0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x5b, 0x0a, 0x0b, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x12, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63,
-	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x6e, 0x64, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x61,
-	0x0a, 0x0d, 0x53, 0x65, 0x74, 0x74, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x23, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x73, 0x67, 0x53, 0x65, 0x74, 0x74, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x2b, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
 	0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x74, 0x74, 0x6c, 0x65, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x53, 0x65, 0x74, 0x74,
-	0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x61, 0x0a, 0x0d, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x4c, 0x61, 0x75, 0x6e,
-	0x63, 0x68, 0x12, 0x23, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75,
+	0x75, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x61, 0x0a, 0x0d,
+	0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x12, 0x23, 0x2e,
+	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76,
+	0x31, 0x2e, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x4c, 0x61, 0x75, 0x6e,
+	0x63, 0x68, 0x1a, 0x2b, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75,
 	0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65,
-	0x72, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x1a, 0x2b, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72,
-	0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x54,
-	0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x5e, 0x0a, 0x0c, 0x52, 0x65, 0x76, 0x65, 0x72, 0x74, 0x4c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x12, 0x22, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x76, 0x65,
-	0x72, 0x74, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x1a, 0x2a, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67,
-	0x52, 0x65, 0x76, 0x65, 0x72, 0x74, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0xc0, 0x01, 0x0a, 0x15,
-	0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e,
-	0x63, 0x68, 0x2e, 0x76, 0x31, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01,
-	0x5a, 0x38, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e,
-	0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f, 0x76,
-	0x31, 0x3b, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4c, 0x58,
-	0xaa, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63,
-	0x68, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1d, 0x4e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42,
-	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x13, 0x4e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x3a, 0x3a, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x5e, 0x0a, 0x0c, 0x52, 0x65, 0x76, 0x65, 0x72, 0x74, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x12,
+	0x22, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x76, 0x65, 0x72, 0x74, 0x4c, 0x61, 0x75,
+	0x6e, 0x63, 0x68, 0x1a, 0x2a, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61,
+	0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x76, 0x65, 0x72,
+	0x74, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a,
+	0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0xc0, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31,
+	0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x38, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x6b, 0x2f, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f, 0x76, 0x31, 0x3b, 0x6c, 0x61, 0x75,
+	0x6e, 0x63, 0x68, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4c, 0x58, 0xaa, 0x02, 0x11, 0x4e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x56, 0x31, 0xca,
+	0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61,
+	0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64,
+	0x61, 0x74, 0x61, 0xea, 0x02, 0x13, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4c,
+	0x61, 0x75, 0x6e, 0x63, 0x68, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -9026,11 +9028,11 @@ var file_network_launch_v1_tx_proto_goTypes = []interface{}{
 }
 var file_network_launch_v1_tx_proto_depIdxs = []int32{
 	16, // 0: network.launch.v1.MsgUpdateParams.params:type_name -> network.launch.v1.Params
-	17, // 1: network.launch.v1.MsgCreateChain.initialGenesis:type_name -> network.launch.v1.InitialGenesis
-	18, // 2: network.launch.v1.MsgCreateChain.accountBalance:type_name -> cosmos.base.v1beta1.Coin
-	17, // 3: network.launch.v1.MsgUpdateLaunchInformation.initialGenesis:type_name -> network.launch.v1.InitialGenesis
+	17, // 1: network.launch.v1.MsgCreateChain.initial_genesis:type_name -> network.launch.v1.InitialGenesis
+	18, // 2: network.launch.v1.MsgCreateChain.account_balance:type_name -> cosmos.base.v1beta1.Coin
+	17, // 3: network.launch.v1.MsgUpdateLaunchInformation.initial_genesis:type_name -> network.launch.v1.InitialGenesis
 	19, // 4: network.launch.v1.MsgSendRequest.content:type_name -> network.launch.v1.RequestContent
-	20, // 5: network.launch.v1.MsgTriggerLaunch.launchTime:type_name -> google.protobuf.Timestamp
+	20, // 5: network.launch.v1.MsgTriggerLaunch.launch_time:type_name -> google.protobuf.Timestamp
 	0,  // 6: network.launch.v1.Msg.UpdateParams:input_type -> network.launch.v1.MsgUpdateParams
 	2,  // 7: network.launch.v1.Msg.CreateChain:input_type -> network.launch.v1.MsgCreateChain
 	4,  // 8: network.launch.v1.Msg.EditChain:input_type -> network.launch.v1.MsgEditChain

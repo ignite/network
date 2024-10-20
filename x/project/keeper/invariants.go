@@ -41,10 +41,10 @@ func AccountWithoutProjectInvariant(k Keeper) sdk.Invariant {
 			return "", false
 		}
 		for _, acc := range all {
-			if _, err := k.GetProject(ctx, acc.ProjectID); err != nil {
+			if _, err := k.GetProject(ctx, acc.ProjectId); err != nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, accountWithoutProjectRoute,
-					fmt.Sprintf("%s: %d", err, acc.ProjectID),
+					fmt.Sprintf("%s: %d", err, acc.ProjectId),
 				), true
 			}
 		}
@@ -66,11 +66,11 @@ func ProjectSharesInvariant(k Keeper) sdk.Invariant {
 			return "", false
 		}
 		for _, acc := range accounts {
-			if _, ok := accountSharesByProject[acc.ProjectID]; !ok {
-				accountSharesByProject[acc.ProjectID] = types.EmptyShares()
+			if _, ok := accountSharesByProject[acc.ProjectId]; !ok {
+				accountSharesByProject[acc.ProjectId] = types.EmptyShares()
 			}
-			accountSharesByProject[acc.ProjectID] = types.IncreaseShares(
-				accountSharesByProject[acc.ProjectID],
+			accountSharesByProject[acc.ProjectId] = types.IncreaseShares(
+				accountSharesByProject[acc.ProjectId],
 				acc.Shares,
 			)
 		}
@@ -80,7 +80,7 @@ func ProjectSharesInvariant(k Keeper) sdk.Invariant {
 			return "", false
 		}
 		for _, project := range projects {
-			projectID := project.ProjectID
+			projectID := project.ProjectId
 			expectedAllocatedSharesShares := accountSharesByProject[projectID]
 
 			// read existing denoms from allocated shares of the project to check possible minted vouchers

@@ -30,7 +30,7 @@ func (k Keeper) CheckValidatorSet(
 	if chain.MonitoringConnected {
 		return sdkerrors.Wrapf(types.ErrChainMonitoringConnected, "%d", launchID)
 	}
-	if chain.GenesisChainID != chainID {
+	if chain.GenesisChainId != chainID {
 		return sdkerrors.Wrap(types.ErrInvalidGenesisChainID, chainID)
 	}
 

@@ -39,11 +39,11 @@ func MissingVerifiedClientIDInvariant(k *Keeper) sdk.Invariant {
 		}
 		clientIDMap := make(map[string]struct{})
 		for _, launchIDFromVerifiedClientID := range allLaunchIDFromVerifiedClientID {
-			clientIDMap[clientIDKey(launchIDFromVerifiedClientID.LaunchID, launchIDFromVerifiedClientID.ClientID)] = struct{}{}
+			clientIDMap[clientIDKey(launchIDFromVerifiedClientID.LaunchId, launchIDFromVerifiedClientID.ClientId)] = struct{}{}
 		}
 		for _, verifiedClientID := range allVerifiedClientID {
-			for _, clientID := range verifiedClientID.ClientIDs {
-				if _, ok := clientIDMap[clientIDKey(verifiedClientID.LaunchID, clientID)]; !ok {
+			for _, clientID := range verifiedClientID.ClientIdList {
+				if _, ok := clientIDMap[clientIDKey(verifiedClientID.LaunchId, clientID)]; !ok {
 					return sdk.FormatInvariant(
 						types.ModuleName, missingVerifiedClientIDRoute,
 						"client id from verifiedClient list not found in launchIDFromVerifiedClientID list",

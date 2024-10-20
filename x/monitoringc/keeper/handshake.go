@@ -26,12 +26,12 @@ func (k Keeper) VerifyClientIDFromConnID(ctx sdk.Context, connID string) error {
 	}
 
 	// check if the connection with the provider for this launch ID is already established
-	pCid, err := k.ProviderClientID.Get(ctx, lidFromCid.LaunchID)
+	pCid, err := k.ProviderClientID.Get(ctx, lidFromCid.LaunchId)
 	if err == nil {
 		return sdkerrors.Wrapf(
 			types.ErrConnectionAlreadyEstablished,
 			"provider client ID for launch ID %d is: %s",
-			pCid.LaunchID, pCid.ClientID,
+			pCid.LaunchId, pCid.ClientId,
 		)
 	}
 	return nil
@@ -59,15 +59,15 @@ func (k Keeper) RegisterProviderClientIDFromChannelID(ctx sdk.Context, channelID
 
 	// another connection could have been established between OnChanOpenInit and OnChanOpenAck
 	// so we check if provider client ID exists
-	pCid, err := k.ProviderClientID.Get(ctx, lidFromCid.LaunchID)
+	pCid, err := k.ProviderClientID.Get(ctx, lidFromCid.LaunchId)
 	if err == nil {
 		return sdkerrors.Wrapf(
 			types.ErrConnectionAlreadyEstablished,
 			"provider connection for launch ID %d has been established: %s",
-			pCid.LaunchID, pCid.ClientID,
+			pCid.LaunchId, pCid.ClientId,
 		)
 	}
-	launchID := lidFromCid.LaunchID
+	launchID := lidFromCid.LaunchId
 
 	// update the chain since it is not MonitoringConnected
 	if err = k.launchKeeper.EnableMonitoringConnection(ctx, launchID); err != nil {
@@ -76,16 +76,16 @@ func (k Keeper) RegisterProviderClientIDFromChannelID(ctx sdk.Context, channelID
 
 	// register the client for the provider
 	err = k.ProviderClientID.Set(ctx, launchID, types.ProviderClientID{
-		ClientID: clientID,
-		LaunchID: launchID,
+		ClientId: clientID,
+		LaunchId: launchID,
 	})
 	if err != nil {
 		return err
 	}
 	// associate the channel ID for the provider connection with the correct launch ID
 	return k.LaunchIDFromChannelID.Set(ctx, channelID, types.LaunchIDFromChannelID{
-		LaunchID:  launchID,
-		ChannelID: channelID,
+		LaunchId:  launchID,
+		ChannelId: channelID,
 	})
 }
 

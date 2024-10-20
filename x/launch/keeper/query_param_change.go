@@ -21,7 +21,7 @@ func (q queryServer) ListParamChange(ctx context.Context, req *types.QueryAllPar
 		q.k.ParamChange,
 		req.Pagination,
 		func(_ collections.Pair[uint64, string], value types.ParamChange) (bool, error) {
-			return value.LaunchID == req.LaunchID, nil
+			return value.LaunchId == req.LaunchId, nil
 		},
 		func(_ collections.Pair[uint64, string], value types.ParamChange) (types.ParamChange, error) {
 			return value, nil

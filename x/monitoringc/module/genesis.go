@@ -11,44 +11,44 @@ import (
 // InitGenesis initializes the module's state from a provided genesis state.
 func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState) error {
 	// Set all the launchIDFromChannelID
-	for _, elem := range genState.LaunchIDFromChannelIDList {
-		if err := k.LaunchIDFromChannelID.Set(ctx, elem.ChannelID, elem); err != nil {
+	for _, elem := range genState.LaunchIdFromChannelIdList {
+		if err := k.LaunchIDFromChannelID.Set(ctx, elem.ChannelId, elem); err != nil {
 			return err
 		}
 	}
 	// Set all the launchIDFromVerifiedClientID
-	for _, elem := range genState.LaunchIDFromVerifiedClientIDList {
-		if err := k.LaunchIDFromVerifiedClientID.Set(ctx, elem.ClientID, elem); err != nil {
+	for _, elem := range genState.LaunchIdFromVerifiedClientIdList {
+		if err := k.LaunchIDFromVerifiedClientID.Set(ctx, elem.ClientId, elem); err != nil {
 			return err
 		}
 	}
 	// Set all the monitoringHistory
 	for _, elem := range genState.MonitoringHistoryList {
-		if err := k.MonitoringHistory.Set(ctx, elem.LaunchID, elem); err != nil {
+		if err := k.MonitoringHistory.Set(ctx, elem.LaunchId, elem); err != nil {
 			return err
 		}
 	}
 
 	// Set all the verifiedClientID
-	for _, elem := range genState.VerifiedClientIDList {
-		if err := k.VerifiedClientID.Set(ctx, elem.LaunchID, elem); err != nil {
+	for _, elem := range genState.VerifiedClientIdList {
+		if err := k.VerifiedClientID.Set(ctx, elem.LaunchId, elem); err != nil {
 			return err
 		}
 	}
 	// Set all the providerClientID
-	for _, elem := range genState.ProviderClientIDList {
-		if err := k.ProviderClientID.Set(ctx, elem.LaunchID, elem); err != nil {
+	for _, elem := range genState.ProviderClientIdList {
+		if err := k.ProviderClientID.Set(ctx, elem.LaunchId, elem); err != nil {
 			return err
 		}
 	}
 	// this line is used by starport scaffolding # genesis/module/init
-	k.SetPort(ctx, genState.PortID)
+	k.SetPort(ctx, genState.PortId)
 	// Only try to bind to port if it is not already bound, since we may already own
 	// port capability from capability InitGenesis
-	if k.ShouldBound(ctx, genState.PortID) {
+	if k.ShouldBound(ctx, genState.PortId) {
 		// module binds to the port on InitChain
 		// and claims the returned capability
-		err := k.BindPort(ctx, genState.PortID)
+		err := k.BindPort(ctx, genState.PortId)
 		if err != nil {
 			return errors.Wrap(err, "could not claim port capability")
 		}
@@ -67,15 +67,15 @@ func ExportGenesis(ctx sdk.Context, k *keeper.Keeper) (*types.GenesisState, erro
 		return nil, err
 	}
 
-	genesis.PortID = k.GetPort(ctx)
+	genesis.PortId = k.GetPort(ctx)
 	if err := k.LaunchIDFromChannelID.Walk(ctx, nil, func(_ string, val types.LaunchIDFromChannelID) (stop bool, err error) {
-		genesis.LaunchIDFromChannelIDList = append(genesis.LaunchIDFromChannelIDList, val)
+		genesis.LaunchIdFromChannelIdList = append(genesis.LaunchIdFromChannelIdList, val)
 		return false, nil
 	}); err != nil {
 		return nil, err
 	}
 	if err := k.LaunchIDFromVerifiedClientID.Walk(ctx, nil, func(_ string, val types.LaunchIDFromVerifiedClientID) (stop bool, err error) {
-		genesis.LaunchIDFromVerifiedClientIDList = append(genesis.LaunchIDFromVerifiedClientIDList, val)
+		genesis.LaunchIdFromVerifiedClientIdList = append(genesis.LaunchIdFromVerifiedClientIdList, val)
 		return false, nil
 	}); err != nil {
 		return nil, err
@@ -88,14 +88,14 @@ func ExportGenesis(ctx sdk.Context, k *keeper.Keeper) (*types.GenesisState, erro
 	}
 
 	if err := k.VerifiedClientID.Walk(ctx, nil, func(_ uint64, val types.VerifiedClientID) (stop bool, err error) {
-		genesis.VerifiedClientIDList = append(genesis.VerifiedClientIDList, val)
+		genesis.VerifiedClientIdList = append(genesis.VerifiedClientIdList, val)
 		return false, nil
 	}); err != nil {
 		return nil, err
 	}
 
 	if err := k.ProviderClientID.Walk(ctx, nil, func(_ uint64, val types.ProviderClientID) (stop bool, err error) {
-		genesis.ProviderClientIDList = append(genesis.ProviderClientIDList, val)
+		genesis.ProviderClientIdList = append(genesis.ProviderClientIdList, val)
 		return false, nil
 	}); err != nil {
 		return nil, err

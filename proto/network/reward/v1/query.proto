@@ -21,7 +21,7 @@ service Query {
 
   // Queries a list of RewardPool items.
   rpc GetRewardPool(QueryGetRewardPoolRequest) returns (QueryGetRewardPoolResponse) {
-    option (google.api.http).get = "/ignite/network/reward/reward_pool/{launchID}";
+    option (google.api.http).get = "/ignite/network/reward/reward_pool/{launch_id}";
   }
   rpc ListRewardPool(QueryAllRewardPoolRequest) returns (QueryAllRewardPoolResponse) {
     option (google.api.http).get = "/ignite/network/reward/reward_pool";
@@ -41,11 +41,11 @@ message QueryParamsResponse {
 }
 
 message QueryGetRewardPoolRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
 }
 
 message QueryGetRewardPoolResponse {
-  RewardPool rewardPool = 1 [(gogoproto.nullable) = false];
+  RewardPool reward_pool = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllRewardPoolRequest {
@@ -53,6 +53,6 @@ message QueryAllRewardPoolRequest {
 }
 
 message QueryAllRewardPoolResponse {
-  repeated RewardPool rewardPool = 1 [(gogoproto.nullable) = false];
+  repeated RewardPool reward_pool = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

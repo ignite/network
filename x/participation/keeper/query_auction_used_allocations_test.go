@@ -24,7 +24,7 @@ func createNAuctionUsedAllocations(keeper keeper.Keeper, ctx context.Context, n 
 		auctionID := uint64(i)
 		address := sample.AccAddress(r)
 		items[i].Address = address.String()
-		items[i].AuctionID = auctionID
+		items[i].AuctionId = auctionID
 		items[i].NumAllocations = sample.Int(r)
 
 		_ = keeper.AuctionUsedAllocations.Set(ctx, collections.Join(address, auctionID), items[i])
@@ -58,7 +58,7 @@ func TestAuctionUsedAllocationsQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryGetAuctionUsedAllocationsRequest{
-				AuctionID: msgs[0].AuctionID,
+				AuctionId: msgs[0].AuctionId,
 				Address:   msgs[0].Address,
 			},
 			response: &types.QueryGetAuctionUsedAllocationsResponse{AuctionUsedAllocations: msgs[0]},
@@ -66,7 +66,7 @@ func TestAuctionUsedAllocationsQuerySingle(t *testing.T) {
 		{
 			desc: "Second",
 			request: &types.QueryGetAuctionUsedAllocationsRequest{
-				AuctionID: msgs[1].AuctionID,
+				AuctionId: msgs[1].AuctionId,
 				Address:   msgs[1].Address,
 			},
 			response: &types.QueryGetAuctionUsedAllocationsResponse{AuctionUsedAllocations: msgs[1]},
@@ -74,7 +74,7 @@ func TestAuctionUsedAllocationsQuerySingle(t *testing.T) {
 		{
 			desc: "KeyNotFound",
 			request: &types.QueryGetAuctionUsedAllocationsRequest{
-				AuctionID: 100,
+				AuctionId: 100,
 				Address:   sample.Address(r),
 			},
 			err: status.Error(codes.NotFound, "not found"),
@@ -82,7 +82,7 @@ func TestAuctionUsedAllocationsQuerySingle(t *testing.T) {
 		{
 			desc: "InvalidAddress",
 			request: &types.QueryGetAuctionUsedAllocationsRequest{
-				AuctionID: 100,
+				AuctionId: 100,
 				Address:   strconv.Itoa(100000),
 			},
 			err: status.Error(codes.InvalidArgument, "invalid address"),

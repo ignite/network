@@ -74,7 +74,7 @@ func Project(r *rand.Rand, id uint64) project.Project {
 // MainnetAccount returns a sample MainnetAccount
 func MainnetAccount(r *rand.Rand, projectID uint64, address string) project.MainnetAccount {
 	return project.MainnetAccount{
-		ProjectID: projectID,
+		ProjectId: projectID,
 		Address:   address,
 		Shares:    Shares(r),
 	}
@@ -114,7 +114,7 @@ func ProjectGenesisState(r *rand.Rand) project.GenesisState {
 		ProjectCount: 2,
 		ProjectChainsList: []project.ProjectChains{
 			{
-				ProjectID: 0,
+				ProjectId: 0,
 				Chains:    []uint64{0, 1},
 			},
 		},
@@ -130,7 +130,7 @@ func ProjectGenesisStateWithAccounts(r *rand.Rand) project.GenesisState {
 
 	for i, c := range genState.ProjectList {
 		for j := 0; j < 5; j++ {
-			mainnetAccount := MainnetAccount(r, c.ProjectID, Address(r))
+			mainnetAccount := MainnetAccount(r, c.ProjectId, Address(r))
 			genState.MainnetAccountList = append(genState.MainnetAccountList, mainnetAccount)
 
 			// increase project allocated shares accordingly

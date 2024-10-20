@@ -18,10 +18,10 @@ import (
 func createNVerifiedClientID(ctx context.Context, keeper *keeper.Keeper, n int) []types.VerifiedClientID {
 	items := make([]types.VerifiedClientID, n)
 	for i := range items {
-		items[i].LaunchID = uint64(i)
-		items[i].ClientIDs = []string{strconv.Itoa(i)}
+		items[i].LaunchId = uint64(i)
+		items[i].ClientIdList = []string{strconv.Itoa(i)}
 
-		_ = keeper.VerifiedClientID.Set(ctx, items[i].LaunchID, items[i])
+		_ = keeper.VerifiedClientID.Set(ctx, items[i].LaunchId, items[i])
 	}
 	return items
 }
@@ -39,21 +39,21 @@ func TestVerifiedClientIDQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryGetVerifiedClientIDRequest{
-				LaunchID: msgs[0].LaunchID,
+				LaunchId: msgs[0].LaunchId,
 			},
-			response: &types.QueryGetVerifiedClientIDResponse{VerifiedClientID: msgs[0]},
+			response: &types.QueryGetVerifiedClientIDResponse{VerifiedClientId: msgs[0]},
 		},
 		{
 			desc: "Second",
 			request: &types.QueryGetVerifiedClientIDRequest{
-				LaunchID: msgs[1].LaunchID,
+				LaunchId: msgs[1].LaunchId,
 			},
-			response: &types.QueryGetVerifiedClientIDResponse{VerifiedClientID: msgs[1]},
+			response: &types.QueryGetVerifiedClientIDResponse{VerifiedClientId: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
 			request: &types.QueryGetVerifiedClientIDRequest{
-				LaunchID: 100000,
+				LaunchId: 100000,
 			},
 			err: status.Error(codes.NotFound, "not found"),
 		},

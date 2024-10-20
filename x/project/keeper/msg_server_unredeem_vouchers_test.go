@@ -38,9 +38,9 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 	chainLaunched := sample.Chain(r, 0, 0)
 	chainLaunched.LaunchTriggered = true
 	chainLaunched.IsMainnet = true
-	projectMainnetLaunched.MainnetID, err = tk.LaunchKeeper.AppendChain(ctx, chainLaunched)
+	projectMainnetLaunched.MainnetId, err = tk.LaunchKeeper.AppendChain(ctx, chainLaunched)
 	require.NoError(t, err)
-	projectMainnetLaunched.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetLaunched)
+	projectMainnetLaunched.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetLaunched)
 	require.NoError(t, err)
 
 	// Create accounts
@@ -63,7 +63,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 			name: "should allow unredeem vouchers",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    accountAddr,
-				ProjectID: 0,
+				ProjectId: 0,
 				Shares:    shares,
 			},
 		},
@@ -71,7 +71,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 			name: "should allow unredeem vouchers a second time",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    accountAddr,
-				ProjectID: 0,
+				ProjectId: 0,
 				Shares:    shares,
 			},
 		},
@@ -81,7 +81,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 		//	name: "should allow unredeem vouchers to zero",
 		//	msg: types.MsgUnredeemVouchers{
 		//		Sender:    accountAddr,
-		//		ProjectID: 0,
+		//		ProjectId: 0,
 		//		Shares:    shares,
 		//	},
 		//},
@@ -89,7 +89,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 			name: "should allow unredeem vouchers from another account",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    accountFewSharesAddr,
-				ProjectID: 0,
+				ProjectId: 0,
 				Shares:    shares,
 			},
 		},
@@ -97,7 +97,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 			name: "should prevent if not enough shares in balance",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    accountFewSharesAddr,
-				ProjectID: 0,
+				ProjectId: 0,
 				Shares:    shares,
 			},
 			err: types.ErrSharesDecrease,
@@ -106,7 +106,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 			name: "should prevent for non existent project",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    accountAddr,
-				ProjectID: 1000,
+				ProjectId: 1000,
 				Shares:    shares,
 			},
 			err: types.ErrProjectNotFound,
@@ -115,7 +115,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 			name: "should prevent for non existent account",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    sample.Address(r),
-				ProjectID: 0,
+				ProjectId: 0,
 				Shares:    shares,
 			},
 			err: types.ErrAccountNotFound,
@@ -124,7 +124,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 			name: "should prevent for project with launched mainnet",
 			msg: types.MsgUnredeemVouchers{
 				Sender:    accountAddr,
-				ProjectID: projectMainnetLaunched.ProjectID,
+				ProjectId: projectMainnetLaunched.ProjectId,
 				Shares:    sample.Shares(r),
 			},
 			err: types.ErrMainnetLaunchTriggered,
@@ -139,7 +139,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 
 			// Get values before message execution
 			if tc.err == nil {
-				previousAccount, err = tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectID, accountAddr)
+				previousAccount, err = tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectId, accountAddr)
 				require.NoError(t, err)
 
 				previousBalance = tk.BankKeeper.GetAllBalances(ctx, accountAddr)
@@ -155,11 +155,11 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 
 			if types.IsEqualShares(tc.msg.Shares, previousAccount.Shares) {
 				// All unredeemed
-				_, err := tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectID, accountAddr)
+				_, err := tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectId, accountAddr)
 				require.NoError(t, err)
 
 			} else {
-				account, err := tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectID, accountAddr)
+				account, err := tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectId, accountAddr)
 				require.NoError(t, err)
 
 				expectedShares, err := types.DecreaseShares(previousAccount.Shares, tc.msg.Shares)
@@ -168,7 +168,7 @@ func TestMsgUnredeemVouchers(t *testing.T) {
 			}
 
 			// Compare balance
-			unredeemed, err := types.SharesToVouchers(tc.msg.Shares, tc.msg.ProjectID)
+			unredeemed, err := types.SharesToVouchers(tc.msg.Shares, tc.msg.ProjectId)
 			require.NoError(t, err)
 			balance := tk.BankKeeper.GetAllBalances(ctx, accountAddr)
 			require.True(t, balance.Equal(previousBalance.Add(unredeemed...)))

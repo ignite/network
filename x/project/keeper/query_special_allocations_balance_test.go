@@ -60,7 +60,7 @@ func TestSpecialAllocationsBalance(t *testing.T) {
 	}{
 		{
 			desc:    "should fetch the balance of special allocations",
-			request: &types.QuerySpecialAllocationsBalanceRequest{ProjectID: projectID},
+			request: &types.QuerySpecialAllocationsBalanceRequest{ProjectId: projectID},
 			response: &types.QuerySpecialAllocationsBalanceResponse{
 				GenesisDistribution: tc.Coins(t, "500foo,200bar"),
 				ClaimableAirdrop:    tc.Coins(t, "500foo,1000baz"),
@@ -68,17 +68,17 @@ func TestSpecialAllocationsBalance(t *testing.T) {
 		},
 		{
 			desc:          "should fail if project not found",
-			request:       &types.QuerySpecialAllocationsBalanceRequest{ProjectID: 10000},
+			request:       &types.QuerySpecialAllocationsBalanceRequest{ProjectId: 10000},
 			errStatusCode: codes.NotFound,
 		},
 		{
 			desc:          "should fail if genesis distribution is invalid",
-			request:       &types.QuerySpecialAllocationsBalanceRequest{ProjectID: projectIDInvalidGenesisDistribution},
+			request:       &types.QuerySpecialAllocationsBalanceRequest{ProjectId: projectIDInvalidGenesisDistribution},
 			errStatusCode: codes.Internal,
 		},
 		{
 			desc:          "should fail if claimable airdrop is invalid",
-			request:       &types.QuerySpecialAllocationsBalanceRequest{ProjectID: projectIDInvalidClaimableAirdrop},
+			request:       &types.QuerySpecialAllocationsBalanceRequest{ProjectId: projectIDInvalidClaimableAirdrop},
 			errStatusCode: codes.Internal,
 		},
 	} {

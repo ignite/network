@@ -44,8 +44,8 @@ func TestKeeper_VerifyClientIDFromChannelID(t *testing.T) {
 		sdkCtx := sdk.UnwrapSDKContext(ctx)
 		clientID := "foo"
 		err := tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Set(sdkCtx, clientID, types.LaunchIDFromVerifiedClientID{
-			LaunchID: 1,
-			ClientID: clientID,
+			LaunchId: 1,
+			ClientId: clientID,
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringConsumerKeeper.VerifyClientIDFromConnID(sdkCtx, "foo")
@@ -71,13 +71,13 @@ func TestKeeper_VerifyClientIDFromChannelID(t *testing.T) {
 		sdkCtx := sdk.UnwrapSDKContext(ctx)
 		launchID := uint64(1)
 		err := tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Set(sdkCtx, "foo", types.LaunchIDFromVerifiedClientID{
-			LaunchID: launchID,
-			ClientID: "foo",
+			LaunchId: launchID,
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringConsumerKeeper.ProviderClientID.Set(sdkCtx, launchID, types.ProviderClientID{
-			LaunchID: launchID,
-			ClientID: "bar",
+			LaunchId: launchID,
+			ClientId: "bar",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringConsumerKeeper.VerifyClientIDFromConnID(sdkCtx, "foo")
@@ -92,13 +92,13 @@ func TestKeeper_RegisterProviderClientIDFromChannelID(t *testing.T) {
 		clientID := "foo"
 		launchID := uint64(1)
 		err := tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Set(sdkCtx, clientID, types.LaunchIDFromVerifiedClientID{
-			LaunchID: launchID,
-			ClientID: clientID,
+			LaunchId: launchID,
+			ClientId: clientID,
 		})
 		require.NoError(t, err)
 
 		chain := launchtypes.Chain{
-			LaunchID: launchID,
+			LaunchId: launchID,
 		}
 		err = tk.LaunchKeeper.Chain.Set(sdkCtx, launchID, chain)
 		require.NoError(t, err)
@@ -114,14 +114,14 @@ func TestKeeper_RegisterProviderClientIDFromChannelID(t *testing.T) {
 		// the provider client ID should be created
 		pCid, err := tk.MonitoringConsumerKeeper.ProviderClientID.Get(sdkCtx, 1)
 		require.NoError(t, err)
-		require.EqualValues(t, launchID, pCid.LaunchID)
-		require.EqualValues(t, "foo", pCid.ClientID)
+		require.EqualValues(t, launchID, pCid.LaunchId)
+		require.EqualValues(t, "foo", pCid.ClientId)
 
 		// the channel ID is associated with the correct launch ID
 		launchIDFromChanID, err := tk.MonitoringConsumerKeeper.LaunchIDFromChannelID.Get(sdkCtx, "foo")
 		require.NoError(t, err)
-		require.EqualValues(t, launchID, launchIDFromChanID.LaunchID)
-		require.EqualValues(t, "foo", launchIDFromChanID.ChannelID)
+		require.EqualValues(t, launchID, launchIDFromChanID.LaunchId)
+		require.EqualValues(t, "foo", launchIDFromChanID.ChannelId)
 	})
 
 	t.Run("should fail if the channel doesn't exist", func(t *testing.T) {
@@ -143,13 +143,13 @@ func TestKeeper_RegisterProviderClientIDFromChannelID(t *testing.T) {
 		sdkCtx := sdk.UnwrapSDKContext(ctx)
 		launchID := uint64(1)
 		err := tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Set(sdkCtx, "foo", types.LaunchIDFromVerifiedClientID{
-			LaunchID: launchID,
-			ClientID: "foo",
+			LaunchId: launchID,
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringConsumerKeeper.ProviderClientID.Set(sdkCtx, launchID, types.ProviderClientID{
-			LaunchID: launchID,
-			ClientID: "bar",
+			LaunchId: launchID,
+			ClientId: "bar",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringConsumerKeeper.RegisterProviderClientIDFromChannelID(sdkCtx, "foo")
@@ -161,12 +161,12 @@ func TestKeeper_RegisterProviderClientIDFromChannelID(t *testing.T) {
 		sdkCtx := sdk.UnwrapSDKContext(ctx)
 		launchID := uint64(1)
 		err := tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Set(sdkCtx, "foo", types.LaunchIDFromVerifiedClientID{
-			LaunchID: launchID,
-			ClientID: "foo",
+			LaunchId: launchID,
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		chain := launchtypes.Chain{
-			LaunchID:            launchID,
+			LaunchId:            launchID,
 			MonitoringConnected: true,
 		}
 		err = tk.LaunchKeeper.Chain.Set(sdkCtx, launchID, chain)

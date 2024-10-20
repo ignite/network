@@ -46,7 +46,7 @@ func (q queryServer) GetAuctionUsedAllocations(ctx context.Context, req *types.Q
 		return nil, status.Error(codes.InvalidArgument, "invalid address")
 	}
 
-	val, err := q.k.AuctionUsedAllocations.Get(ctx, collections.Join(sdk.AccAddress(address), req.AuctionID))
+	val, err := q.k.AuctionUsedAllocations.Get(ctx, collections.Join(sdk.AccAddress(address), req.AuctionId))
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, status.Error(codes.NotFound, "not found")

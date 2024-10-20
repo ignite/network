@@ -62,15 +62,15 @@ func request_Query_GetRewardPool_0(ctx context.Context, marshaler runtime.Marsha
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	msg, err := client.GetRewardPool(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -89,15 +89,15 @@ func local_request_Query_GetRewardPool_0(ctx context.Context, marshaler runtime.
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	msg, err := server.GetRewardPool(ctx, &protoReq)
@@ -323,7 +323,7 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 var (
 	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"ignite", "network", "reward", "v1", "params"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_GetRewardPool_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "reward", "reward_pool", "launchID"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetRewardPool_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "reward", "reward_pool", "launch_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
 	pattern_Query_ListRewardPool_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"ignite", "network", "reward", "reward_pool"}, "", runtime.AssumeColonVerbOpt(false)))
 )

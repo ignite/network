@@ -30,12 +30,12 @@ func (k Keeper) VerifyClientIDFromConnID(ctx sdk.Context, connID string) error {
 		return types.ErrNoConsumerClient
 	}
 
-	if consumerClient.ClientID != clientID {
+	if consumerClient.ClientId != clientID {
 		return sdkerrors.Wrapf(
 			types.ErrInvalidClient,
 			"the client is not the consumer client, got %s, expected %s",
 			clientID,
-			consumerClient.ClientID,
+			consumerClient.ClientId,
 		)
 	}
 
@@ -58,7 +58,7 @@ func (k Keeper) RegisterConnectionChannelID(ctx sdk.Context, channelID string) e
 
 	// register the connection channel ID
 	return k.ConnectionChannelID.Set(ctx, types.ConnectionChannelID{
-		ChannelID: channelID,
+		ChannelId: channelID,
 	})
 }
 

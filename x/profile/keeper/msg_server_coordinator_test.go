@@ -51,14 +51,14 @@ func TestMsgCreateCoordinator(t *testing.T) {
 			require.NoError(t, err)
 			coordByAddr, err := tk.ProfileKeeper.GetCoordinatorByAddress(ctx, address)
 			require.NoError(t, err)
-			require.EqualValues(t, tt.wantId, coordByAddr.CoordinatorID)
-			require.EqualValues(t, tt.wantId, got.CoordinatorID)
+			require.EqualValues(t, tt.wantId, coordByAddr.CoordinatorId)
+			require.EqualValues(t, tt.wantId, got.CoordinatorId)
 
-			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorID)
+			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorId)
 			require.NoError(t, err, "coordinator id not found")
 			require.EqualValues(t, tt.msg.Address, coord.Address)
 			require.EqualValues(t, tt.msg.Description, coord.Description)
-			require.EqualValues(t, coordByAddr.CoordinatorID, coord.CoordinatorID)
+			require.EqualValues(t, coordByAddr.CoordinatorId, coord.CoordinatorId)
 			require.EqualValues(t, true, coord.Active)
 		})
 	}
@@ -102,7 +102,7 @@ func TestMsgDisableCoordinator(t *testing.T) {
 			_, err = tk.ProfileKeeper.GetCoordinatorByAddress(ctx, address)
 			require.ErrorIs(t, err, types.ErrCoordinatorAddressNotFound)
 
-			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, got.CoordinatorID)
+			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, got.CoordinatorId)
 			require.NoError(t, err)
 			require.EqualValues(t, false, coord.Active)
 		})
@@ -182,10 +182,10 @@ func TestMsgUpdateCoordinatorAddress(t *testing.T) {
 			require.NoError(t, err, "coordinator by address not found")
 			require.EqualValues(t, tt.msg.NewAddress, coordByAddr.Address)
 
-			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorID)
+			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorId)
 			require.NoError(t, err, "coordinator id not found")
 			require.EqualValues(t, tt.msg.NewAddress, coord.Address)
-			require.EqualValues(t, coordByAddr.CoordinatorID, coord.CoordinatorID)
+			require.EqualValues(t, coordByAddr.CoordinatorId, coord.CoordinatorId)
 		})
 	}
 }
@@ -233,7 +233,7 @@ func TestMsgUpdateCoordinatorDescription(t *testing.T) {
 			if tt.err == nil {
 				coordByAddr, err := tk.ProfileKeeper.GetCoordinatorByAddress(ctx, address)
 				require.NoError(t, err, "coordinator by address not found")
-				oldCoord, err = tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorID)
+				oldCoord, err = tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorId)
 				require.NoError(t, err, "coordinator not found")
 			}
 
@@ -246,10 +246,10 @@ func TestMsgUpdateCoordinatorDescription(t *testing.T) {
 
 			coordByAddr, err := tk.ProfileKeeper.GetCoordinatorByAddress(ctx, address)
 			require.NoError(t, err, "coordinator by address not found")
-			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorID)
+			coord, err := tk.ProfileKeeper.GetCoordinator(ctx, coordByAddr.CoordinatorId)
 			require.NoError(t, err, "coordinator not found")
 			require.EqualValues(t, tt.msg.Address, coord.Address)
-			require.EqualValues(t, coordByAddr.CoordinatorID, coord.CoordinatorID)
+			require.EqualValues(t, coordByAddr.CoordinatorId, coord.CoordinatorId)
 
 			if len(tt.msg.Description.Identity) > 0 {
 				require.EqualValues(t, tt.msg.Description.Identity, coord.Description.Identity)

@@ -31,7 +31,7 @@ func SimulateMsgSettleRequest(
 		}
 
 		// Find coordinator account
-		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, request.LaunchID)
+		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, request.LaunchId)
 		if err != nil {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), err.Error()), nil, nil
 		}
@@ -39,13 +39,13 @@ func SimulateMsgSettleRequest(
 		approve := r.Intn(100) < 50
 		msg = sample.MsgSettleRequest(
 			simAccount.Address.String(),
-			request.LaunchID,
-			request.RequestID,
+			request.LaunchId,
+			request.RequestId,
 			approve,
 		)
 
 		// if we cannot check the request, reject
-		if err := keeper.CheckRequest(ctx, k, request.LaunchID, request); err != nil {
+		if err := keeper.CheckRequest(ctx, k, request.LaunchId, request); err != nil {
 			msg.Approve = false
 		}
 

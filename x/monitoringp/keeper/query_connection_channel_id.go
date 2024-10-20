@@ -25,5 +25,5 @@ func (q queryServer) GetConnectionChannelID(ctx context.Context, req *types.Quer
 		return nil, status.Error(codes.Internal, "internal error")
 	}
 
-	return &types.QueryGetConnectionChannelIDResponse{ConnectionChannelID: val}, nil
+	return &types.QueryGetConnectionChannelIDResponse{ConnectionChannelId: val}, nil
 }

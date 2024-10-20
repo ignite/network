@@ -132,7 +132,7 @@ func populateLaunch(r *rand.Rand, launchState launch.GenesisState) launch.Genesi
 	// add request
 	for i := 0; i < 5; i++ {
 		request := sample.Request(r, 0, sample.Address(r))
-		request.RequestID = uint64(i)
+		request.RequestId = uint64(i)
 		launchState.RequestList = append(
 			launchState.RequestList,
 			request,
@@ -146,7 +146,7 @@ func populateProject(r *rand.Rand, projectState project.GenesisState) project.Ge
 	// add projects
 	for i := 0; i < 5; i++ {
 		prjt := project.Project{
-			ProjectID: uint64(i),
+			ProjectId: uint64(i),
 		}
 		nullify.Fill(&prjt)
 		projectState.ProjectList = append(projectState.ProjectList, prjt)
@@ -155,7 +155,7 @@ func populateProject(r *rand.Rand, projectState project.GenesisState) project.Ge
 	// add project chains
 	for i := 0; i < 5; i++ {
 		projectState.ProjectChainsList = append(projectState.ProjectChainsList, project.ProjectChains{
-			ProjectID: uint64(i),
+			ProjectId: uint64(i),
 			Chains:    []uint64{uint64(i)},
 		})
 	}
@@ -191,7 +191,7 @@ func populateClaim(r *rand.Rand, claimState claim.GenesisState) claim.GenesisSta
 	// add missions
 	for i := 0; i < 5; i++ {
 		mission := claim.Mission{
-			MissionID: uint64(i),
+			MissionId: uint64(i),
 			Weight:    sdkmath.LegacyNewDec(r.Int63()),
 		}
 		nullify.Fill(&mission)
@@ -205,11 +205,11 @@ func populateMonitoringc(monitoringcState monitoringc.GenesisState) monitoringc.
 	// add launch ID from channel ID
 	for i := 0; i < 5; i++ {
 		launchIDFromChannelID := monitoringc.LaunchIDFromChannelID{
-			ChannelID: strconv.Itoa(i),
+			ChannelId: strconv.Itoa(i),
 		}
 		nullify.Fill(&launchIDFromChannelID)
-		monitoringcState.LaunchIDFromChannelIDList = append(
-			monitoringcState.LaunchIDFromChannelIDList,
+		monitoringcState.LaunchIdFromChannelIdList = append(
+			monitoringcState.LaunchIdFromChannelIdList,
 			launchIDFromChannelID,
 		)
 	}
@@ -217,7 +217,7 @@ func populateMonitoringc(monitoringcState monitoringc.GenesisState) monitoringc.
 	// add monitoring history
 	for i := 0; i < 5; i++ {
 		monitoringHistory := monitoringc.MonitoringHistory{
-			LaunchID: uint64(i),
+			LaunchId: uint64(i),
 		}
 		nullify.Fill(&monitoringHistory)
 		monitoringcState.MonitoringHistoryList = append(monitoringcState.MonitoringHistoryList, monitoringHistory)
@@ -226,19 +226,19 @@ func populateMonitoringc(monitoringcState monitoringc.GenesisState) monitoringc.
 	// add provider client ID
 	for i := 0; i < 5; i++ {
 		providerClientID := monitoringc.ProviderClientID{
-			LaunchID: uint64(i),
+			LaunchId: uint64(i),
 		}
 		nullify.Fill(&providerClientID)
-		monitoringcState.ProviderClientIDList = append(monitoringcState.ProviderClientIDList, providerClientID)
+		monitoringcState.ProviderClientIdList = append(monitoringcState.ProviderClientIdList, providerClientID)
 	}
 
 	// add verified client IDs
 	for i := 0; i < 5; i++ {
 		verifiedClientID := monitoringc.VerifiedClientID{
-			LaunchID: uint64(i),
+			LaunchId: uint64(i),
 		}
 		nullify.Fill(&verifiedClientID)
-		monitoringcState.VerifiedClientIDList = append(monitoringcState.VerifiedClientIDList, verifiedClientID)
+		monitoringcState.VerifiedClientIdList = append(monitoringcState.VerifiedClientIdList, verifiedClientID)
 	}
 
 	return monitoringcState
@@ -260,7 +260,7 @@ func populateParticipation(r *rand.Rand, participationState participation.Genesi
 	for i := 0; i < 5; i++ {
 		auctionUsedAllocations := participation.AuctionUsedAllocations{
 			Address:        address,
-			AuctionID:      uint64(i),
+			AuctionId:      uint64(i),
 			NumAllocations: sample.Int(r),
 		}
 		nullify.Fill(&auctionUsedAllocations)
@@ -275,14 +275,14 @@ func populateProfile(r *rand.Rand, profileState profile.GenesisState) profile.Ge
 	for i := 0; i < 5; i++ {
 		profileState.CoordinatorList = append(
 			profileState.CoordinatorList,
-			profile.Coordinator{CoordinatorID: uint64(i)},
+			profile.Coordinator{CoordinatorId: uint64(i)},
 		)
 	}
 
 	// add coordinator by address
 	for i := 0; i < 5; i++ {
-		profileState.CoordinatorsByAddress = append(
-			profileState.CoordinatorsByAddress,
+		profileState.CoordinatorByAddress = append(
+			profileState.CoordinatorByAddress,
 			profile.CoordinatorByAddress{Address: sample.Address(r)},
 		)
 	}
@@ -301,7 +301,7 @@ func populateReward(rewardState reward.GenesisState) reward.GenesisState {
 	// add reward pool
 	for i := 0; i < 5; i++ {
 		rewardPool := reward.RewardPool{
-			LaunchID: uint64(i),
+			LaunchId: uint64(i),
 		}
 		nullify.Fill(&rewardPool)
 		rewardState.RewardPoolList = append(rewardState.RewardPoolList, rewardPool)

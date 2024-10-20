@@ -14,47 +14,47 @@ import (
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
-		PortID: types.PortID,
-		VerifiedClientIDList: []types.VerifiedClientID{
+		PortId: types.PortID,
+		VerifiedClientIdList: []types.VerifiedClientID{
 			{
-				LaunchID:  0,
-				ClientIDs: []string{"0"},
+				LaunchId:     0,
+				ClientIdList: []string{"0"},
 			},
 			{
-				LaunchID:  1,
-				ClientIDs: []string{"0"},
-			},
-		},
-		ProviderClientIDList: []types.ProviderClientID{
-			{
-				LaunchID: 0,
-			},
-			{
-				LaunchID: 1,
+				LaunchId:     1,
+				ClientIdList: []string{"0"},
 			},
 		},
-		LaunchIDFromVerifiedClientIDList: []types.LaunchIDFromVerifiedClientID{
+		ProviderClientIdList: []types.ProviderClientID{
 			{
-				ClientID: "0",
+				LaunchId: 0,
 			},
 			{
-				ClientID: "1",
+				LaunchId: 1,
 			},
 		},
-		LaunchIDFromChannelIDList: []types.LaunchIDFromChannelID{
+		LaunchIdFromVerifiedClientIdList: []types.LaunchIDFromVerifiedClientID{
 			{
-				ChannelID: "0",
+				ClientId: "0",
 			},
 			{
-				ChannelID: "1",
+				ClientId: "1",
+			},
+		},
+		LaunchIdFromChannelIdList: []types.LaunchIDFromChannelID{
+			{
+				ChannelId: "0",
+			},
+			{
+				ChannelId: "1",
 			},
 		},
 		MonitoringHistoryList: []types.MonitoringHistory{
 			{
-				LaunchID: 0,
+				LaunchId: 0,
 			},
 			{
-				LaunchID: 1,
+				LaunchId: 1,
 			},
 		},
 		// this line is used by starport scaffolding # genesis/test/state
@@ -71,12 +71,12 @@ func TestGenesis(t *testing.T) {
 		nullify.Fill(&genesisState)
 		nullify.Fill(got)
 
-		require.Equal(t, genesisState.PortID, got.PortID)
+		require.Equal(t, genesisState.PortId, got.PortId)
 
-		require.ElementsMatch(t, genesisState.VerifiedClientIDList, got.VerifiedClientIDList)
-		require.ElementsMatch(t, genesisState.ProviderClientIDList, got.ProviderClientIDList)
-		require.ElementsMatch(t, genesisState.LaunchIDFromVerifiedClientIDList, got.LaunchIDFromVerifiedClientIDList)
-		require.ElementsMatch(t, genesisState.LaunchIDFromChannelIDList, got.LaunchIDFromChannelIDList)
+		require.ElementsMatch(t, genesisState.VerifiedClientIdList, got.VerifiedClientIdList)
+		require.ElementsMatch(t, genesisState.ProviderClientIdList, got.ProviderClientIdList)
+		require.ElementsMatch(t, genesisState.LaunchIdFromVerifiedClientIdList, got.LaunchIdFromVerifiedClientIdList)
+		require.ElementsMatch(t, genesisState.LaunchIdFromChannelIdList, got.LaunchIdFromChannelIdList)
 		require.ElementsMatch(t, genesisState.MonitoringHistoryList, got.MonitoringHistoryList)
 		// this line is used by starport scaffolding # genesis/test/assert
 	})

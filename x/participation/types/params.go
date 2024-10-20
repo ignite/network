@@ -14,28 +14,28 @@ var (
 	}
 	DefaultParticipationTierList = []Tier{
 		{
-			TierID:              1,
+			TierId:              1,
 			RequiredAllocations: sdkmath.OneInt(),
 			Benefits: TierBenefits{
 				MaxBidAmount: sdkmath.NewInt(1000),
 			},
 		},
 		{
-			TierID:              2,
+			TierId:              2,
 			RequiredAllocations: sdkmath.NewInt(2),
 			Benefits: TierBenefits{
 				MaxBidAmount: sdkmath.NewInt(2000),
 			},
 		},
 		{
-			TierID:              3,
+			TierId:              3,
 			RequiredAllocations: sdkmath.NewInt(5),
 			Benefits: TierBenefits{
 				MaxBidAmount: sdkmath.NewInt(10000),
 			},
 		},
 		{
-			TierID:              4,
+			TierId:              4,
 			RequiredAllocations: sdkmath.NewInt(10),
 			Benefits: TierBenefits{
 				MaxBidAmount: sdkmath.NewInt(30000),
@@ -110,10 +110,10 @@ func validateParticipationTierList(participationTierList []Tier) error {
 	tiersIndexMap := make(map[uint64]struct{})
 	for _, tier := range participationTierList {
 		// check IDs are unique
-		if _, ok := tiersIndexMap[tier.TierID]; ok {
-			return fmt.Errorf("duplicated tier ID: %v", tier.TierID)
+		if _, ok := tiersIndexMap[tier.TierId]; ok {
+			return fmt.Errorf("duplicated tier ID: %v", tier.TierId)
 		}
-		tiersIndexMap[tier.TierID] = struct{}{}
+		tiersIndexMap[tier.TierId] = struct{}{}
 
 		if tier.RequiredAllocations.LTE(sdkmath.ZeroInt()) {
 			return errors.New("required allocations must be greater than zero")
@@ -154,7 +154,7 @@ func (a *AllocationPrice) Equal(cmp *AllocationPrice) bool {
 
 func (t *Tier) Equal(cmp *Tier) bool {
 	switch {
-	case t.TierID != cmp.TierID:
+	case t.TierId != cmp.TierId:
 		return false
 	case !t.RequiredAllocations.Equal(cmp.RequiredAllocations):
 		return false

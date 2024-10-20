@@ -46,7 +46,7 @@ func NewGenesisAccount(launchID uint64, address string, coins sdk.Coins) Request
 	return RequestContent{
 		Content: &RequestContent_GenesisAccount{
 			GenesisAccount: &GenesisAccount{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Address:  address,
 				Coins:    coins,
 			},
@@ -60,7 +60,7 @@ func (m GenesisAccount) Validate(launchID uint64) error {
 		return sdkerrors.Wrap(ErrInvalidCoins, m.Address)
 	}
 
-	if m.LaunchID != launchID {
+	if m.LaunchId != launchID {
 		return ErrInvalidLaunchID
 	}
 
@@ -72,7 +72,7 @@ func NewVestingAccount(launchID uint64, address string, vestingOptions VestingOp
 	return RequestContent{
 		Content: &RequestContent_VestingAccount{
 			VestingAccount: &VestingAccount{
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				Address:        address,
 				VestingOptions: vestingOptions,
 			},
@@ -86,7 +86,7 @@ func (m VestingAccount) Validate(launchID uint64) error {
 		return sdkerrors.Wrapf(ErrInvalidVestingOption, err.Error())
 	}
 
-	if m.LaunchID != launchID {
+	if m.LaunchId != launchID {
 		return ErrInvalidLaunchID
 	}
 
@@ -105,7 +105,7 @@ func NewGenesisValidator(
 	return RequestContent{
 		Content: &RequestContent_GenesisValidator{
 			GenesisValidator: &GenesisValidator{
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				Address:        address,
 				GenTx:          genTx,
 				ConsPubKey:     consPubKey,
@@ -138,7 +138,7 @@ func (m GenesisValidator) Validate(launchID uint64) error {
 		return sdkerrors.Wrap(ErrInvalidPeer, err.Error())
 	}
 
-	if m.LaunchID != launchID {
+	if m.LaunchId != launchID {
 		return ErrInvalidLaunchID
 	}
 
@@ -182,7 +182,7 @@ func NewParamChange(launchID uint64, module, param string, value []byte) Request
 	return RequestContent{
 		Content: &RequestContent_ParamChange{
 			ParamChange: &ParamChange{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Module:   module,
 				Param:    param,
 				Value:    value,
@@ -201,7 +201,7 @@ func (m ParamChange) Validate(launchID uint64) error {
 		return ErrInvalidParamName
 	}
 
-	if m.LaunchID != launchID {
+	if m.LaunchId != launchID {
 		return ErrInvalidLaunchID
 	}
 

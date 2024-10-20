@@ -12,9 +12,9 @@ option go_package = "github.com/ignite/network/x/monitoringp/types";
 message Params {
   option (amino.name) = "network/x/monitoringp/Params";
   option (gogoproto.equal) = true;
-  int64 lastBlockHeight = 1;
-  string consumerChainID = 2;
-  network.types.ConsensusState consumerConsensusState = 3 [(gogoproto.nullable) = false];
-  int64 consumerUnbondingPeriod = 4;
-  uint64 consumerRevisionHeight = 5;
+  int64 last_block_height = 1;
+  string consumer_chain_id = 2;
+  network.types.ConsensusState consumer_consensus_state = 3 [(gogoproto.nullable) = false];
+  int64 consumer_unbonding_period = 4;
+  uint64 consumer_revision_height = 5;
 }

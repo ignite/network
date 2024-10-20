@@ -34,9 +34,9 @@ func TestNewProject(t *testing.T) {
 			metadata,
 			createdAt,
 		)
-		require.EqualValues(t, projectID, c.ProjectID)
+		require.EqualValues(t, projectID, c.ProjectId)
 		require.EqualValues(t, projectName, c.ProjectName)
-		require.EqualValues(t, coordinator, c.CoordinatorID)
+		require.EqualValues(t, coordinator, c.CoordinatorId)
 		require.EqualValues(t, createdAt, c.CreatedAt)
 		require.False(t, c.MainnetInitialized)
 		require.True(t, totalSupply.Equal(c.TotalSupply))

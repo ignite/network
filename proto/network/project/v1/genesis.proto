@@ -17,9 +17,9 @@ message GenesisState {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
-  repeated Project projectList = 2 [(gogoproto.nullable) = false];
-  uint64 projectCount = 3;
-  repeated ProjectChains projectChainsList = 4 [(gogoproto.nullable) = false];
-  repeated MainnetAccount mainnetAccountList = 5 [(gogoproto.nullable) = false];
-  uint64 totalShares = 6;
+  repeated Project project_list = 2 [(gogoproto.nullable) = false];
+  uint64 project_count = 3;
+  repeated ProjectChains project_chains_list = 4 [(gogoproto.nullable) = false];
+  repeated MainnetAccount mainnet_account_list = 5 [(gogoproto.nullable) = false];
+  uint64 total_shares = 6;
 }

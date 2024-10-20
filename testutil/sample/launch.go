@@ -28,11 +28,11 @@ func GenesisChainID(r *rand.Rand) string {
 // Chain returns a sample Chain
 func Chain(r *rand.Rand, id, coordinatorID uint64) launch.Chain {
 	return launch.Chain{
-		LaunchID:        id,
-		CoordinatorID:   coordinatorID,
-		GenesisChainID:  GenesisChainID(r),
+		LaunchId:        id,
+		CoordinatorId:   coordinatorID,
+		GenesisChainId:  GenesisChainID(r),
 		CreatedAt:       Duration(r).Milliseconds(),
-		SourceURL:       String(r, 10),
+		SourceUrl:       String(r, 10),
 		SourceHash:      String(r, 10),
 		LaunchTime:      ZeroTime(),
 		LaunchTriggered: false,
@@ -45,7 +45,7 @@ func Chain(r *rand.Rand, id, coordinatorID uint64) launch.Chain {
 // GenesisAccount returns a sample GenesisAccount
 func GenesisAccount(r *rand.Rand, launchID uint64, address string) launch.GenesisAccount {
 	return launch.GenesisAccount{
-		LaunchID: launchID,
+		LaunchId: launchID,
 		Address:  address,
 		Coins:    Coins(r),
 	}
@@ -60,7 +60,7 @@ func VestingOptions(r *rand.Rand) launch.VestingOptions {
 // VestingAccount returns a sample VestingAccount
 func VestingAccount(r *rand.Rand, launchID uint64, address string) launch.VestingAccount {
 	return launch.VestingAccount{
-		LaunchID:       launchID,
+		LaunchId:       launchID,
 		Address:        address,
 		VestingOptions: VestingOptions(r),
 	}
@@ -76,7 +76,7 @@ func AccountRemoval(address string) *launch.AccountRemoval {
 // ParamChange returns a sample ParamChange
 func ParamChange(r *rand.Rand, launchID uint64) launch.ParamChange {
 	return launch.ParamChange{
-		LaunchID: launchID,
+		LaunchId: launchID,
 		Module:   AlphaString(r, 5),
 		Param:    AlphaString(r, 5),
 		Value:    Bytes(r, 5),
@@ -86,7 +86,7 @@ func ParamChange(r *rand.Rand, launchID uint64) launch.ParamChange {
 // GenesisValidator returns a sample GenesisValidator
 func GenesisValidator(r *rand.Rand, launchID uint64, address string) launch.GenesisValidator {
 	return launch.GenesisValidator{
-		LaunchID:       launchID,
+		LaunchId:       launchID,
 		Address:        address,
 		GenTx:          Bytes(r, 200),
 		ConsPubKey:     PubKey(r).Bytes(),
@@ -107,8 +107,8 @@ func GenesisValidatorPeer(r *rand.Rand) launch.Peer {
 // RequestWithContent creates a launch request object with launch id and content
 func RequestWithContent(r *rand.Rand, launchID uint64, content launch.RequestContent) launch.Request {
 	return launch.Request{
-		RequestID: 1,
-		LaunchID:  launchID,
+		RequestId: 1,
+		LaunchId:  launchID,
 		Creator:   Address(r),
 		CreatedAt: Duration(r).Milliseconds(),
 		Content:   content,
@@ -118,8 +118,8 @@ func RequestWithContent(r *rand.Rand, launchID uint64, content launch.RequestCon
 // RequestWithContentAndCreator creates a launch request object with launch id and content and creator
 func RequestWithContentAndCreator(r *rand.Rand, launchID uint64, content launch.RequestContent, creator string) launch.Request {
 	return launch.Request{
-		RequestID: 1,
-		LaunchID:  launchID,
+		RequestId: 1,
+		LaunchId:  launchID,
 		Creator:   creator,
 		CreatedAt: Duration(r).Milliseconds(),
 		Content:   content,
@@ -287,7 +287,7 @@ func MsgSendRequestWithParamChange(r *rand.Rand, creator string, launchID uint64
 	return *launch.NewMsgSendRequest(
 		creator,
 		launchID,
-		launch.NewParamChange(pc.LaunchID, pc.Module, pc.Param, pc.Value),
+		launch.NewParamChange(pc.LaunchId, pc.Module, pc.Param, pc.Value),
 	)
 }
 
@@ -396,11 +396,11 @@ func LaunchGenesisState(r *rand.Rand, addresses ...string) launch.GenesisState {
 		},
 		RequestCounters: []launch.RequestCounter{
 			{
-				LaunchID: 0,
+				LaunchId: 0,
 				Counter:  1,
 			},
 			{
-				LaunchID: 1,
+				LaunchId: 1,
 				Counter:  2,
 			},
 		},

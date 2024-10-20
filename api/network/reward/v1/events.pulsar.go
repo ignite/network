@@ -17,15 +17,15 @@ import (
 )
 
 var (
-	md_EventRewardPoolCreated          protoreflect.MessageDescriptor
-	fd_EventRewardPoolCreated_launchID protoreflect.FieldDescriptor
-	fd_EventRewardPoolCreated_provider protoreflect.FieldDescriptor
+	md_EventRewardPoolCreated           protoreflect.MessageDescriptor
+	fd_EventRewardPoolCreated_launch_id protoreflect.FieldDescriptor
+	fd_EventRewardPoolCreated_provider  protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_reward_v1_events_proto_init()
 	md_EventRewardPoolCreated = File_network_reward_v1_events_proto.Messages().ByName("EventRewardPoolCreated")
-	fd_EventRewardPoolCreated_launchID = md_EventRewardPoolCreated.Fields().ByName("launchID")
+	fd_EventRewardPoolCreated_launch_id = md_EventRewardPoolCreated.Fields().ByName("launch_id")
 	fd_EventRewardPoolCreated_provider = md_EventRewardPoolCreated.Fields().ByName("provider")
 }
 
@@ -94,9 +94,9 @@ func (x *fastReflection_EventRewardPoolCreated) Interface() protoreflect.ProtoMe
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventRewardPoolCreated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_EventRewardPoolCreated_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_EventRewardPoolCreated_launch_id, value) {
 			return
 		}
 	}
@@ -121,8 +121,8 @@ func (x *fastReflection_EventRewardPoolCreated) Range(f func(protoreflect.FieldD
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventRewardPoolCreated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolCreated.launchID":
-		return x.LaunchID != uint64(0)
+	case "network.reward.v1.EventRewardPoolCreated.launch_id":
+		return x.LaunchId != uint64(0)
 	case "network.reward.v1.EventRewardPoolCreated.provider":
 		return x.Provider != ""
 	default:
@@ -141,8 +141,8 @@ func (x *fastReflection_EventRewardPoolCreated) Has(fd protoreflect.FieldDescrip
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventRewardPoolCreated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolCreated.launchID":
-		x.LaunchID = uint64(0)
+	case "network.reward.v1.EventRewardPoolCreated.launch_id":
+		x.LaunchId = uint64(0)
 	case "network.reward.v1.EventRewardPoolCreated.provider":
 		x.Provider = ""
 	default:
@@ -161,8 +161,8 @@ func (x *fastReflection_EventRewardPoolCreated) Clear(fd protoreflect.FieldDescr
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventRewardPoolCreated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.reward.v1.EventRewardPoolCreated.launchID":
-		value := x.LaunchID
+	case "network.reward.v1.EventRewardPoolCreated.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
 	case "network.reward.v1.EventRewardPoolCreated.provider":
 		value := x.Provider
@@ -187,8 +187,8 @@ func (x *fastReflection_EventRewardPoolCreated) Get(descriptor protoreflect.Fiel
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventRewardPoolCreated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolCreated.launchID":
-		x.LaunchID = value.Uint()
+	case "network.reward.v1.EventRewardPoolCreated.launch_id":
+		x.LaunchId = value.Uint()
 	case "network.reward.v1.EventRewardPoolCreated.provider":
 		x.Provider = value.Interface().(string)
 	default:
@@ -211,8 +211,8 @@ func (x *fastReflection_EventRewardPoolCreated) Set(fd protoreflect.FieldDescrip
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventRewardPoolCreated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolCreated.launchID":
-		panic(fmt.Errorf("field launchID of message network.reward.v1.EventRewardPoolCreated is not mutable"))
+	case "network.reward.v1.EventRewardPoolCreated.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.reward.v1.EventRewardPoolCreated is not mutable"))
 	case "network.reward.v1.EventRewardPoolCreated.provider":
 		panic(fmt.Errorf("field provider of message network.reward.v1.EventRewardPoolCreated is not mutable"))
 	default:
@@ -228,7 +228,7 @@ func (x *fastReflection_EventRewardPoolCreated) Mutable(fd protoreflect.FieldDes
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventRewardPoolCreated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolCreated.launchID":
+	case "network.reward.v1.EventRewardPoolCreated.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.reward.v1.EventRewardPoolCreated.provider":
 		return protoreflect.ValueOfString("")
@@ -301,8 +301,8 @@ func (x *fastReflection_EventRewardPoolCreated) ProtoMethods() *protoiface.Metho
 		var n int
 		var l int
 		_ = l
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		l = len(x.Provider)
 		if l > 0 {
@@ -344,8 +344,8 @@ func (x *fastReflection_EventRewardPoolCreated) ProtoMethods() *protoiface.Metho
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -400,9 +400,9 @@ func (x *fastReflection_EventRewardPoolCreated) ProtoMethods() *protoiface.Metho
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -412,7 +412,7 @@ func (x *fastReflection_EventRewardPoolCreated) ProtoMethods() *protoiface.Metho
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -485,14 +485,14 @@ func (x *fastReflection_EventRewardPoolCreated) ProtoMethods() *protoiface.Metho
 }
 
 var (
-	md_EventRewardPoolRemoved          protoreflect.MessageDescriptor
-	fd_EventRewardPoolRemoved_launchID protoreflect.FieldDescriptor
+	md_EventRewardPoolRemoved           protoreflect.MessageDescriptor
+	fd_EventRewardPoolRemoved_launch_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_reward_v1_events_proto_init()
 	md_EventRewardPoolRemoved = File_network_reward_v1_events_proto.Messages().ByName("EventRewardPoolRemoved")
-	fd_EventRewardPoolRemoved_launchID = md_EventRewardPoolRemoved.Fields().ByName("launchID")
+	fd_EventRewardPoolRemoved_launch_id = md_EventRewardPoolRemoved.Fields().ByName("launch_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventRewardPoolRemoved)(nil)
@@ -560,9 +560,9 @@ func (x *fastReflection_EventRewardPoolRemoved) Interface() protoreflect.ProtoMe
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventRewardPoolRemoved) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_EventRewardPoolRemoved_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_EventRewardPoolRemoved_launch_id, value) {
 			return
 		}
 	}
@@ -581,8 +581,8 @@ func (x *fastReflection_EventRewardPoolRemoved) Range(f func(protoreflect.FieldD
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventRewardPoolRemoved) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolRemoved.launchID":
-		return x.LaunchID != uint64(0)
+	case "network.reward.v1.EventRewardPoolRemoved.launch_id":
+		return x.LaunchId != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.reward.v1.EventRewardPoolRemoved"))
@@ -599,8 +599,8 @@ func (x *fastReflection_EventRewardPoolRemoved) Has(fd protoreflect.FieldDescrip
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventRewardPoolRemoved) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolRemoved.launchID":
-		x.LaunchID = uint64(0)
+	case "network.reward.v1.EventRewardPoolRemoved.launch_id":
+		x.LaunchId = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.reward.v1.EventRewardPoolRemoved"))
@@ -617,8 +617,8 @@ func (x *fastReflection_EventRewardPoolRemoved) Clear(fd protoreflect.FieldDescr
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventRewardPoolRemoved) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.reward.v1.EventRewardPoolRemoved.launchID":
-		value := x.LaunchID
+	case "network.reward.v1.EventRewardPoolRemoved.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
@@ -640,8 +640,8 @@ func (x *fastReflection_EventRewardPoolRemoved) Get(descriptor protoreflect.Fiel
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventRewardPoolRemoved) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolRemoved.launchID":
-		x.LaunchID = value.Uint()
+	case "network.reward.v1.EventRewardPoolRemoved.launch_id":
+		x.LaunchId = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.reward.v1.EventRewardPoolRemoved"))
@@ -662,8 +662,8 @@ func (x *fastReflection_EventRewardPoolRemoved) Set(fd protoreflect.FieldDescrip
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventRewardPoolRemoved) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolRemoved.launchID":
-		panic(fmt.Errorf("field launchID of message network.reward.v1.EventRewardPoolRemoved is not mutable"))
+	case "network.reward.v1.EventRewardPoolRemoved.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.reward.v1.EventRewardPoolRemoved is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.reward.v1.EventRewardPoolRemoved"))
@@ -677,7 +677,7 @@ func (x *fastReflection_EventRewardPoolRemoved) Mutable(fd protoreflect.FieldDes
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventRewardPoolRemoved) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardPoolRemoved.launchID":
+	case "network.reward.v1.EventRewardPoolRemoved.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -748,8 +748,8 @@ func (x *fastReflection_EventRewardPoolRemoved) ProtoMethods() *protoiface.Metho
 		var n int
 		var l int
 		_ = l
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -780,8 +780,8 @@ func (x *fastReflection_EventRewardPoolRemoved) ProtoMethods() *protoiface.Metho
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -836,9 +836,9 @@ func (x *fastReflection_EventRewardPoolRemoved) ProtoMethods() *protoiface.Metho
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -848,7 +848,7 @@ func (x *fastReflection_EventRewardPoolRemoved) ProtoMethods() *protoiface.Metho
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -940,16 +940,16 @@ func (x *_EventRewardsDistributed_3_list) IsValid() bool {
 }
 
 var (
-	md_EventRewardsDistributed          protoreflect.MessageDescriptor
-	fd_EventRewardsDistributed_launchID protoreflect.FieldDescriptor
-	fd_EventRewardsDistributed_receiver protoreflect.FieldDescriptor
-	fd_EventRewardsDistributed_rewards  protoreflect.FieldDescriptor
+	md_EventRewardsDistributed           protoreflect.MessageDescriptor
+	fd_EventRewardsDistributed_launch_id protoreflect.FieldDescriptor
+	fd_EventRewardsDistributed_receiver  protoreflect.FieldDescriptor
+	fd_EventRewardsDistributed_rewards   protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_reward_v1_events_proto_init()
 	md_EventRewardsDistributed = File_network_reward_v1_events_proto.Messages().ByName("EventRewardsDistributed")
-	fd_EventRewardsDistributed_launchID = md_EventRewardsDistributed.Fields().ByName("launchID")
+	fd_EventRewardsDistributed_launch_id = md_EventRewardsDistributed.Fields().ByName("launch_id")
 	fd_EventRewardsDistributed_receiver = md_EventRewardsDistributed.Fields().ByName("receiver")
 	fd_EventRewardsDistributed_rewards = md_EventRewardsDistributed.Fields().ByName("rewards")
 }
@@ -1019,9 +1019,9 @@ func (x *fastReflection_EventRewardsDistributed) Interface() protoreflect.ProtoM
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventRewardsDistributed) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_EventRewardsDistributed_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_EventRewardsDistributed_launch_id, value) {
 			return
 		}
 	}
@@ -1052,8 +1052,8 @@ func (x *fastReflection_EventRewardsDistributed) Range(f func(protoreflect.Field
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventRewardsDistributed) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardsDistributed.launchID":
-		return x.LaunchID != uint64(0)
+	case "network.reward.v1.EventRewardsDistributed.launch_id":
+		return x.LaunchId != uint64(0)
 	case "network.reward.v1.EventRewardsDistributed.receiver":
 		return x.Receiver != ""
 	case "network.reward.v1.EventRewardsDistributed.rewards":
@@ -1074,8 +1074,8 @@ func (x *fastReflection_EventRewardsDistributed) Has(fd protoreflect.FieldDescri
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventRewardsDistributed) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardsDistributed.launchID":
-		x.LaunchID = uint64(0)
+	case "network.reward.v1.EventRewardsDistributed.launch_id":
+		x.LaunchId = uint64(0)
 	case "network.reward.v1.EventRewardsDistributed.receiver":
 		x.Receiver = ""
 	case "network.reward.v1.EventRewardsDistributed.rewards":
@@ -1096,8 +1096,8 @@ func (x *fastReflection_EventRewardsDistributed) Clear(fd protoreflect.FieldDesc
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventRewardsDistributed) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.reward.v1.EventRewardsDistributed.launchID":
-		value := x.LaunchID
+	case "network.reward.v1.EventRewardsDistributed.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
 	case "network.reward.v1.EventRewardsDistributed.receiver":
 		value := x.Receiver
@@ -1128,8 +1128,8 @@ func (x *fastReflection_EventRewardsDistributed) Get(descriptor protoreflect.Fie
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventRewardsDistributed) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardsDistributed.launchID":
-		x.LaunchID = value.Uint()
+	case "network.reward.v1.EventRewardsDistributed.launch_id":
+		x.LaunchId = value.Uint()
 	case "network.reward.v1.EventRewardsDistributed.receiver":
 		x.Receiver = value.Interface().(string)
 	case "network.reward.v1.EventRewardsDistributed.rewards":
@@ -1162,8 +1162,8 @@ func (x *fastReflection_EventRewardsDistributed) Mutable(fd protoreflect.FieldDe
 		}
 		value := &_EventRewardsDistributed_3_list{list: &x.Rewards}
 		return protoreflect.ValueOfList(value)
-	case "network.reward.v1.EventRewardsDistributed.launchID":
-		panic(fmt.Errorf("field launchID of message network.reward.v1.EventRewardsDistributed is not mutable"))
+	case "network.reward.v1.EventRewardsDistributed.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.reward.v1.EventRewardsDistributed is not mutable"))
 	case "network.reward.v1.EventRewardsDistributed.receiver":
 		panic(fmt.Errorf("field receiver of message network.reward.v1.EventRewardsDistributed is not mutable"))
 	default:
@@ -1179,7 +1179,7 @@ func (x *fastReflection_EventRewardsDistributed) Mutable(fd protoreflect.FieldDe
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventRewardsDistributed) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.reward.v1.EventRewardsDistributed.launchID":
+	case "network.reward.v1.EventRewardsDistributed.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.reward.v1.EventRewardsDistributed.receiver":
 		return protoreflect.ValueOfString("")
@@ -1255,8 +1255,8 @@ func (x *fastReflection_EventRewardsDistributed) ProtoMethods() *protoiface.Meth
 		var n int
 		var l int
 		_ = l
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		l = len(x.Receiver)
 		if l > 0 {
@@ -1320,8 +1320,8 @@ func (x *fastReflection_EventRewardsDistributed) ProtoMethods() *protoiface.Meth
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -1376,9 +1376,9 @@ func (x *fastReflection_EventRewardsDistributed) ProtoMethods() *protoiface.Meth
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1388,7 +1388,7 @@ func (x *fastReflection_EventRewardsDistributed) ProtoMethods() *protoiface.Meth
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1512,7 +1512,7 @@ type EventRewardPoolCreated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LaunchID uint64 `protobuf:"varint,1,opt,name=launchID,proto3" json:"launchID,omitempty"`
+	LaunchId uint64 `protobuf:"varint,1,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
 	Provider string `protobuf:"bytes,2,opt,name=provider,proto3" json:"provider,omitempty"`
 }
 
@@ -1536,9 +1536,9 @@ func (*EventRewardPoolCreated) Descriptor() ([]byte, []int) {
 	return file_network_reward_v1_events_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *EventRewardPoolCreated) GetLaunchID() uint64 {
+func (x *EventRewardPoolCreated) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -1555,7 +1555,7 @@ type EventRewardPoolRemoved struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LaunchID uint64 `protobuf:"varint,1,opt,name=launchID,proto3" json:"launchID,omitempty"`
+	LaunchId uint64 `protobuf:"varint,1,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
 }
 
 func (x *EventRewardPoolRemoved) Reset() {
@@ -1578,9 +1578,9 @@ func (*EventRewardPoolRemoved) Descriptor() ([]byte, []int) {
 	return file_network_reward_v1_events_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *EventRewardPoolRemoved) GetLaunchID() uint64 {
+func (x *EventRewardPoolRemoved) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -1590,7 +1590,7 @@ type EventRewardsDistributed struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LaunchID uint64          `protobuf:"varint,1,opt,name=launchID,proto3" json:"launchID,omitempty"`
+	LaunchId uint64          `protobuf:"varint,1,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
 	Receiver string          `protobuf:"bytes,2,opt,name=receiver,proto3" json:"receiver,omitempty"`
 	Rewards  []*v1beta1.Coin `protobuf:"bytes,3,rep,name=rewards,proto3" json:"rewards,omitempty"`
 }
@@ -1615,9 +1615,9 @@ func (*EventRewardsDistributed) Descriptor() ([]byte, []int) {
 	return file_network_reward_v1_events_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *EventRewardsDistributed) GetLaunchID() uint64 {
+func (x *EventRewardsDistributed) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -1650,48 +1650,48 @@ var file_network_reward_v1_events_proto_rawDesc = []byte{
 	0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67,
 	0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x23, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
 	0x2f, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x2f, 0x76, 0x31, 0x2f, 0x72, 0x65, 0x77, 0x61, 0x72,
-	0x64, 0x5f, 0x70, 0x6f, 0x6f, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x6a, 0x0a, 0x16,
+	0x64, 0x5f, 0x70, 0x6f, 0x6f, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x6b, 0x0a, 0x16,
 	0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x50, 0x6f, 0x6f, 0x6c, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
-	0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
-	0x49, 0x44, 0x12, 0x34, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
-	0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x08,
-	0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x22, 0x34, 0x0a, 0x16, 0x45, 0x76, 0x65, 0x6e,
-	0x74, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x50, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x6d, 0x6f, 0x76,
-	0x65, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x22, 0x94,
-	0x02, 0x0a, 0x17, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x44,
-	0x69, 0x73, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x12, 0x34, 0x0a, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76,
-	0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69,
-	0x6e, 0x67, 0x52, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x72, 0x12, 0xa6, 0x01, 0x0a,
-	0x07, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19,
-	0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62,
-	0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x71, 0xc8, 0xde, 0x1f, 0x00, 0xfa,
-	0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f,
-	0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73,
-	0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63,
-	0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x07, 0x72, 0x65,
-	0x77, 0x61, 0x72, 0x64, 0x73, 0x42, 0xc4, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x2e, 0x76, 0x31, 0x42,
-	0x0b, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x38,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74,
-	0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x2f, 0x76, 0x31, 0x3b,
-	0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x52, 0x58, 0xaa, 0x02,
-	0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x2e,
-	0x56, 0x31, 0xca, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x52, 0x65, 0x77,
-	0x61, 0x72, 0x64, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
-	0x5c, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x13, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
-	0x3a, 0x3a, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63,
+	0x68, 0x49, 0x64, 0x12, 0x34, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
+	0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52,
+	0x08, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x22, 0x35, 0x0a, 0x16, 0x45, 0x76, 0x65,
+	0x6e, 0x74, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x50, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x6d, 0x6f,
+	0x76, 0x65, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64,
+	0x22, 0x95, 0x02, 0x0a, 0x17, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64,
+	0x73, 0x44, 0x69, 0x73, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x64, 0x12, 0x1b, 0x0a, 0x09,
+	0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64, 0x12, 0x34, 0x0a, 0x08, 0x72, 0x65, 0x63,
+	0x65, 0x69, 0x76, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d,
+	0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53,
+	0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x72, 0x12,
+	0xa6, 0x01, 0x0a, 0x07, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e,
+	0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x71, 0xc8, 0xde,
+	0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73,
+	0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f,
+	0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79,
+	0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65,
+	0x67, 0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52,
+	0x07, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x73, 0x42, 0xc4, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d,
+	0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x2e,
+	0x76, 0x31, 0x42, 0x0b, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
+	0x01, 0x5a, 0x38, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67,
+	0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69,
+	0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x2f,
+	0x76, 0x31, 0x3b, 0x72, 0x65, 0x77, 0x61, 0x72, 0x64, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x52,
+	0x58, 0xaa, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x52, 0x65, 0x77, 0x61,
+	0x72, 0x64, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c,
+	0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1d, 0x4e, 0x65, 0x74, 0x77,
+	0x6f, 0x72, 0x6b, 0x5c, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x13, 0x4e, 0x65, 0x74, 0x77,
+	0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x3a, 0x3a, 0x56, 0x31, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (

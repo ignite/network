@@ -35,12 +35,12 @@ func (k Keeper) EmitProjectAuctionCreated(
 			projectID,
 		)
 	}
-	coordinator, err := k.profileKeeper.GetCoordinator(ctx, project.CoordinatorID)
+	coordinator, err := k.profileKeeper.GetCoordinator(ctx, project.CoordinatorId)
 	if err != nil {
 		return false, sdkerrors.Wrapf(profiletypes.ErrCoordinatorInvalid,
 			"project %d coordinator doesn't exist %d",
 			projectID,
-			project.CoordinatorID,
+			project.CoordinatorId,
 		)
 	}
 
@@ -51,8 +51,8 @@ func (k Keeper) EmitProjectAuctionCreated(
 
 	err = sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvents(
 		&types.EventProjectAuctionCreated{
-			ProjectID: projectID,
-			AuctionID: auctionID,
+			ProjectId: projectID,
+			AuctionId: auctionID,
 		},
 	)
 	if err != nil {

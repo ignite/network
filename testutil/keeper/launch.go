@@ -64,5 +64,5 @@ func (tm TestMsgServers) CreateChain(ctx context.Context, r *rand.Rand, coordAdd
 	msgCreateChain := sample.MsgCreateChain(r, coordAddress, genesisURL, hasProject, projectID)
 	res, err := tm.LaunchSrv.CreateChain(ctx, &msgCreateChain)
 	require.NoError(tm.T, err)
-	return res.LaunchID
+	return res.LaunchId
 }

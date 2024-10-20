@@ -8,7 +8,7 @@ import (
 // NewRewardPool returns a new RewardPool object
 func NewRewardPool(launchID uint64, currentRewardHeight int64) RewardPool {
 	return RewardPool{
-		LaunchID:            launchID,
+		LaunchId:            launchID,
 		CurrentRewardHeight: currentRewardHeight,
 		Closed:              false,
 	}

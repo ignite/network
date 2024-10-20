@@ -57,15 +57,15 @@ func TestMsgRequestAddAccount(t *testing.T) {
 			inputState: inputState{
 				noAccount: true,
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 0,
+					CoordinatorId: 0,
 					Address:       sample.Address(r),
 					Active:        true,
 				},
 				chain: types.Chain{
-					LaunchID:        0,
+					LaunchId:        0,
 					LaunchTriggered: true,
 					IsMainnet:       false,
-					CoordinatorID:   0,
+					CoordinatorId:   0,
 				},
 				fee: sdk.Coins(nil),
 			},
@@ -77,15 +77,15 @@ func TestMsgRequestAddAccount(t *testing.T) {
 			inputState: inputState{
 				noAccount: true,
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 0,
+					CoordinatorId: 0,
 					Address:       sample.Address(r),
 					Active:        true,
 				},
 				chain: types.Chain{
-					LaunchID:        1,
+					LaunchId:        1,
 					LaunchTriggered: false,
 					IsMainnet:       true,
-					CoordinatorID:   1,
+					CoordinatorId:   1,
 				},
 				fee: sdk.Coins(nil),
 			},
@@ -98,10 +98,10 @@ func TestMsgRequestAddAccount(t *testing.T) {
 				noAccount:     true,
 				noCoordinator: true,
 				chain: types.Chain{
-					LaunchID:        2,
+					LaunchId:        2,
 					LaunchTriggered: false,
 					IsMainnet:       false,
-					CoordinatorID:   2,
+					CoordinatorId:   2,
 				},
 				fee: sdk.Coins(nil),
 			},
@@ -113,18 +113,18 @@ func TestMsgRequestAddAccount(t *testing.T) {
 			inputState: inputState{
 				account: types.GenesisAccount{
 					Address:  addr,
-					LaunchID: 3,
+					LaunchId: 3,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 3,
+					CoordinatorId: 3,
 					Address:       coordAddr,
 					Active:        true,
 				},
 				chain: types.Chain{
-					LaunchID:        3,
+					LaunchId:        3,
 					LaunchTriggered: false,
 					IsMainnet:       false,
-					CoordinatorID:   3,
+					CoordinatorId:   3,
 				},
 				fee: sdk.Coins(nil),
 			},
@@ -136,15 +136,15 @@ func TestMsgRequestAddAccount(t *testing.T) {
 			inputState: inputState{
 				noAccount: true,
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 4,
+					CoordinatorId: 4,
 					Address:       sample.Address(r),
 					Active:        false,
 				},
 				chain: types.Chain{
-					LaunchID:        4,
+					LaunchId:        4,
 					LaunchTriggered: false,
 					IsMainnet:       false,
-					CoordinatorID:   4,
+					CoordinatorId:   4,
 				},
 				fee: sdk.Coins(nil),
 			},
@@ -156,15 +156,15 @@ func TestMsgRequestAddAccount(t *testing.T) {
 			inputState: inputState{
 				noAccount: true,
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 5,
+					CoordinatorId: 5,
 					Address:       coordAddr,
 					Active:        true,
 				},
 				chain: types.Chain{
-					LaunchID:        5,
+					LaunchId:        5,
 					LaunchTriggered: false,
 					IsMainnet:       false,
-					CoordinatorID:   5,
+					CoordinatorId:   5,
 				},
 				fee: sdk.Coins(nil),
 			},
@@ -193,15 +193,15 @@ func TestMsgRequestAddAccount(t *testing.T) {
 			inputState: inputState{
 				noAccount: true,
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 6,
+					CoordinatorId: 6,
 					Address:       sample.Address(r),
 					Active:        true,
 				},
 				chain: types.Chain{
-					LaunchID:        6,
+					LaunchId:        6,
 					LaunchTriggered: false,
 					IsMainnet:       true,
-					CoordinatorID:   6,
+					CoordinatorId:   6,
 				},
 				fee: sdk.Coins(nil),
 			},
@@ -218,15 +218,15 @@ func TestMsgRequestAddAccount(t *testing.T) {
 			inputState: inputState{
 				noAccount: true,
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 5,
+					CoordinatorId: 5,
 					Address:       coordAddr,
 					Active:        true,
 				},
 				chain: types.Chain{
-					LaunchID:        5,
+					LaunchId:        5,
 					LaunchTriggered: false,
 					IsMainnet:       false,
-					CoordinatorID:   5,
+					CoordinatorId:   5,
 				},
 				fee: sdk.NewCoins(sdk.NewCoin(sdk.DefaultBondDenom, sdkmath.NewInt(1000))),
 			},
@@ -243,15 +243,15 @@ func TestMsgRequestAddAccount(t *testing.T) {
 			inputState: inputState{
 				noAccount: true,
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 5,
+					CoordinatorId: 5,
 					Address:       coordAddr,
 					Active:        true,
 				},
 				chain: types.Chain{
-					LaunchID:        5,
+					LaunchId:        5,
 					LaunchTriggered: false,
 					IsMainnet:       false,
-					CoordinatorID:   5,
+					CoordinatorId:   5,
 				},
 				fee: fee,
 			},
@@ -269,24 +269,24 @@ func TestMsgRequestAddAccount(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// initialize input state
 			if !tt.inputState.noCoordinator {
-				err := tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorID, tt.inputState.coordinator)
+				err := tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorId, tt.inputState.coordinator)
 				require.NoError(t, err)
 				addr, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.inputState.coordinator.Address)
 				require.NoError(t, err)
 				err = tk.ProfileKeeper.CoordinatorByAddress.Set(ctx, addr, profiletypes.CoordinatorByAddress{
-					CoordinatorID: tt.inputState.coordinator.CoordinatorID,
+					CoordinatorId: tt.inputState.coordinator.CoordinatorId,
 					Address:       tt.inputState.coordinator.Address,
 				})
 				require.NoError(t, err)
 			}
 			if !tt.inputState.noChain {
-				err := tk.LaunchKeeper.Chain.Set(ctx, tt.inputState.chain.LaunchID, tt.inputState.chain)
+				err := tk.LaunchKeeper.Chain.Set(ctx, tt.inputState.chain.LaunchId, tt.inputState.chain)
 				require.NoError(t, err)
 			}
 			if !tt.inputState.noAccount {
 				addr, err := tk.LaunchKeeper.AddressCodec().StringToBytes(tt.inputState.account.Address)
 				require.NoError(t, err)
-				err = tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(tt.inputState.account.LaunchID, sdk.AccAddress(addr)), tt.inputState.account)
+				err = tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(tt.inputState.account.LaunchId, sdk.AccAddress(addr)), tt.inputState.account)
 				require.NoError(t, err)
 			}
 			if !tt.inputState.fee.Empty() {
@@ -303,7 +303,7 @@ func TestMsgRequestAddAccount(t *testing.T) {
 					"RequestCreated",
 					ctx,
 					tt.msg.Creator,
-					tt.msg.LaunchID,
+					tt.msg.LaunchId,
 					tt.wantID,
 					tt.msg.Content,
 				).Return(nil).Once()
@@ -315,10 +315,10 @@ func TestMsgRequestAddAccount(t *testing.T) {
 				return
 			}
 			require.NoError(t, err)
-			require.Equal(t, tt.wantID, got.RequestID)
+			require.Equal(t, tt.wantID, got.RequestId)
 			require.Equal(t, tt.wantApprove, got.AutoApproved)
 
-			request, err := tk.LaunchKeeper.Request.Get(ctx, collections.Join(tt.msg.LaunchID, got.RequestID))
+			request, err := tk.LaunchKeeper.Request.Get(ctx, collections.Join(tt.msg.LaunchId, got.RequestId))
 			require.NoError(t, err, "request not found")
 
 			if !tt.wantApprove {

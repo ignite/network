@@ -54,8 +54,8 @@ message MsgUpdateParamsResponse {}
 message MsgCreateProject {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  string projectName = 2;
-  repeated cosmos.base.v1beta1.Coin totalSupply = 3 [
+  string project_name = 2;
+  repeated cosmos.base.v1beta1.Coin total_supply = 3 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",
@@ -66,13 +66,13 @@ message MsgCreateProject {
 }
 
 message MsgCreateProjectResponse {
-  uint64 projectID = 1;
+  uint64 project_id = 1;
 }
 
 message MsgEditProject {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 projectID = 2;
+  uint64 project_id = 2;
   string name = 3;
   bytes metadata = 4;
 }
@@ -82,8 +82,8 @@ message MsgEditProjectResponse {}
 message MsgUpdateTotalSupply {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 projectID = 2;
-  repeated cosmos.base.v1beta1.Coin totalSupplyUpdate = 3 [
+  uint64 project_id = 2;
+  repeated cosmos.base.v1beta1.Coin total_supply_update = 3 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",
@@ -97,8 +97,8 @@ message MsgUpdateTotalSupplyResponse {}
 message MsgUpdateSpecialAllocations {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 projectID = 2;
-  SpecialAllocations specialAllocations = 3 [(gogoproto.nullable) = false];
+  uint64 project_id = 2;
+  SpecialAllocations special_allocations = 3 [(gogoproto.nullable) = false];
 }
 
 message MsgUpdateSpecialAllocationsResponse {}
@@ -106,20 +106,20 @@ message MsgUpdateSpecialAllocationsResponse {}
 message MsgInitializeMainnet {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 projectID = 2;
-  string sourceURL = 3;
-  string sourceHash = 4;
-  string mainnetChainID = 5;
+  uint64 project_id = 2;
+  string source_url = 3;
+  string source_hash = 4;
+  string mainnet_chain_id = 5;
 }
 
 message MsgInitializeMainnetResponse {
-  uint64 mainnetID = 1;
+  uint64 mainnet_id = 1;
 }
 
 message MsgMintVouchers {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 projectID = 2;
+  uint64 project_id = 2;
   repeated cosmos.base.v1beta1.Coin shares = 3 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
@@ -134,7 +134,7 @@ message MsgMintVouchersResponse {}
 message MsgBurnVouchers {
   option (cosmos.msg.v1.signer) = "sender";
   string sender = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 projectID = 2;
+  uint64 project_id = 2;
   repeated cosmos.base.v1beta1.Coin vouchers = 3 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
@@ -149,7 +149,7 @@ message MsgBurnVouchersResponse {}
 message MsgRedeemVouchers {
   option (cosmos.msg.v1.signer) = "sender";
   string sender = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 projectID = 2;
+  uint64 project_id = 2;
   string account = 3 [(cosmos_proto.scalar) = "cosmos.AddressString"];
   repeated cosmos.base.v1beta1.Coin vouchers = 4 [
     (gogoproto.nullable) = false,
@@ -165,7 +165,7 @@ message MsgRedeemVouchersResponse {}
 message MsgUnredeemVouchers {
   option (cosmos.msg.v1.signer) = "sender";
   string sender = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 projectID = 2;
+  uint64 project_id = 2;
   repeated cosmos.base.v1beta1.Coin shares = 3 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,

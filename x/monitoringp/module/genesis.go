@@ -17,25 +17,25 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 		}
 	}
 	// Set if defined
-	if genState.ConnectionChannelID != nil {
-		if err := k.ConnectionChannelID.Set(ctx, *genState.ConnectionChannelID); err != nil {
+	if genState.ConnectionChannelId != nil {
+		if err := k.ConnectionChannelID.Set(ctx, *genState.ConnectionChannelId); err != nil {
 			return err
 		}
 	}
 	// Set if defined
-	if genState.ConsumerClientID != nil {
-		if err := k.ConsumerClientID.Set(ctx, *genState.ConsumerClientID); err != nil {
+	if genState.ConsumerClientId != nil {
+		if err := k.ConsumerClientID.Set(ctx, *genState.ConsumerClientId); err != nil {
 			return err
 		}
 	}
 	// this line is used by starport scaffolding # genesis/module/init
-	k.SetPort(ctx, genState.PortID)
+	k.SetPort(ctx, genState.PortId)
 	// Only try to bind to port if it is not already bound, since we may already own
 	// port capability from capability InitGenesis
-	if k.ShouldBound(ctx, genState.PortID) {
+	if k.ShouldBound(ctx, genState.PortId) {
 		// module binds to the port on InitChain
 		// and claims the returned capability
-		err := k.BindPort(ctx, genState.PortID)
+		err := k.BindPort(ctx, genState.PortId)
 		if err != nil {
 			return errors.Wrap(err, "could not claim port capability")
 		}
@@ -54,7 +54,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) (*types.GenesisState, error
 		return nil, err
 	}
 
-	genesis.PortID = k.GetPort(ctx)
+	genesis.PortId = k.GetPort(ctx)
 	// Get all monitoringInfo
 	monitoringInfo, err := k.MonitoringInfo.Get(ctx)
 	if err == nil {
@@ -63,12 +63,12 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) (*types.GenesisState, error
 	// Get all connectionChannelID
 	connectionChannelID, err := k.ConnectionChannelID.Get(ctx)
 	if err == nil {
-		genesis.ConnectionChannelID = &connectionChannelID
+		genesis.ConnectionChannelId = &connectionChannelID
 	}
 	// Get all consumerClientID
 	consumerClientID, err := k.ConsumerClientID.Get(ctx)
 	if err == nil {
-		genesis.ConsumerClientID = &consumerClientID
+		genesis.ConsumerClientId = &consumerClientID
 	}
 	// this line is used by starport scaffolding # genesis/module/export
 

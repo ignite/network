@@ -32,18 +32,18 @@ genesis:
             denom: uspn
     launch:
       params:
-        launchTimeRange:
-          minLaunchTime: 5s
-        revertDelay: 5s
+        launch_time_range:
+          min_launch_time: 5s
+        revert_delay: 5s
     mint:
       params:
-        mintDenom: uspn
+        mint_denom: uspn
     monitoringp:
       params:
-        consumerChainID: orbit-1
-        consumerRevisionHeight: "1"
-        consumerUnbondingPeriod: "2"
-        lastBlockHeight: "1"
+        consumer_chain_id: orbit-1
+        consumer_revision_height: "1"
+        consumer_unbonding_period: "2"
+        last_block_height: "1"
     staking:
       params:
         bond_denom: uspn

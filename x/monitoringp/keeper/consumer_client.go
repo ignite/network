@@ -22,7 +22,7 @@ func (k Keeper) InitializeConsumerClient(ctx sdk.Context) (string, error) {
 	}
 
 	// initialize the client state
-	clientState, err := k.initializeClientState(ctx, params.ConsumerChainID)
+	clientState, err := k.initializeClientState(ctx, params.ConsumerChainId)
 	if err != nil {
 		return "", sdkerrors.Wrap(types.ErrInvalidClientState, err.Error())
 	}
@@ -44,7 +44,7 @@ func (k Keeper) InitializeConsumerClient(ctx sdk.Context) (string, error) {
 
 	// register the IBC client
 	err = k.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-		ClientID: clientID,
+		ClientId: clientID,
 	})
 	return clientID, err
 }

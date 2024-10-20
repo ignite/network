@@ -156,15 +156,15 @@ func TestMsgCreateChain(t *testing.T) {
 				return
 			}
 			require.NoError(t, err)
-			require.EqualValues(t, tc.wantedChainID, got.LaunchID)
+			require.EqualValues(t, tc.wantedChainID, got.LaunchId)
 
 			// The chain must exist in the store
-			chain, err := tk.LaunchKeeper.GetChain(ctx, got.LaunchID)
+			chain, err := tk.LaunchKeeper.GetChain(ctx, got.LaunchId)
 			require.NoError(t, err)
-			require.EqualValues(t, coordMap[tc.msg.Coordinator], chain.CoordinatorID)
-			require.EqualValues(t, got.LaunchID, chain.LaunchID)
-			require.EqualValues(t, tc.msg.GenesisChainID, chain.GenesisChainID)
-			require.EqualValues(t, tc.msg.SourceURL, chain.SourceURL)
+			require.EqualValues(t, coordMap[tc.msg.Coordinator], chain.CoordinatorId)
+			require.EqualValues(t, got.LaunchId, chain.LaunchId)
+			require.EqualValues(t, tc.msg.GenesisChainId, chain.GenesisChainId)
+			require.EqualValues(t, tc.msg.SourceUrl, chain.SourceUrl)
 			require.EqualValues(t, tc.msg.SourceHash, chain.SourceHash)
 			require.EqualValues(t, tc.msg.Metadata, chain.Metadata)
 			require.EqualValues(t, tc.msg.InitialGenesis, chain.InitialGenesis)
@@ -175,10 +175,10 @@ func TestMsgCreateChain(t *testing.T) {
 			require.Equal(t, tc.msg.HasProject, chain.HasProject)
 
 			if tc.msg.HasProject {
-				require.Equal(t, tc.msg.ProjectID, chain.ProjectID)
-				projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, tc.msg.ProjectID)
+				require.Equal(t, tc.msg.ProjectId, chain.ProjectId)
+				projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, tc.msg.ProjectId)
 				require.NoError(t, err)
-				require.Contains(t, projectChains.Chains, chain.LaunchID)
+				require.Contains(t, projectChains.Chains, chain.LaunchId)
 			}
 
 			// check fee deduction

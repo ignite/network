@@ -29,7 +29,7 @@ func (q queryServer) ListLaunchIDFromChannelID(ctx context.Context, req *types.Q
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryAllLaunchIDFromChannelIDResponse{LaunchIDFromChannelID: launchIDFromChannelIDs, Pagination: pageRes}, nil
+	return &types.QueryAllLaunchIDFromChannelIDResponse{LaunchIdFromChannelId: launchIDFromChannelIDs, Pagination: pageRes}, nil
 }
 
 func (q queryServer) GetLaunchIDFromChannelID(ctx context.Context, req *types.QueryGetLaunchIDFromChannelIDRequest) (*types.QueryGetLaunchIDFromChannelIDResponse, error) {
@@ -37,7 +37,7 @@ func (q queryServer) GetLaunchIDFromChannelID(ctx context.Context, req *types.Qu
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	val, err := q.k.LaunchIDFromChannelID.Get(ctx, req.ChannelID)
+	val, err := q.k.LaunchIDFromChannelID.Get(ctx, req.ChannelId)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, status.Error(codes.NotFound, "not found")
@@ -46,5 +46,5 @@ func (q queryServer) GetLaunchIDFromChannelID(ctx context.Context, req *types.Qu
 		return nil, status.Error(codes.Internal, "internal error")
 	}
 
-	return &types.QueryGetLaunchIDFromChannelIDResponse{LaunchIDFromChannelID: val}, nil
+	return &types.QueryGetLaunchIDFromChannelIDResponse{LaunchIdFromChannelId: val}, nil
 }

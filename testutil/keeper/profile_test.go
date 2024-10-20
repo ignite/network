@@ -16,10 +16,10 @@ func TestTestMsgServers_CreateCoordinator(t *testing.T) {
 	id, addr := tm.CreateCoordinator(ctx, r)
 	coordinator, err := tk.ProfileKeeper.GetCoordinator(ctx, id)
 	require.NoError(t, err)
-	require.Equal(t, id, coordinator.CoordinatorID)
+	require.Equal(t, id, coordinator.CoordinatorId)
 	require.Equal(t, addr.String(), coordinator.Address)
 	coordinatorByAddress, err := tk.ProfileKeeper.GetCoordinatorByAddress(ctx, addr)
 	require.NoError(t, err)
-	require.Equal(t, id, coordinatorByAddress.CoordinatorID)
+	require.Equal(t, id, coordinatorByAddress.CoordinatorId)
 	require.Equal(t, addr.String(), coordinatorByAddress.Address)
 }

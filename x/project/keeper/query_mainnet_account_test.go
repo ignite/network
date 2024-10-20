@@ -21,10 +21,10 @@ func createNMainnetAccount(keeper keeper.Keeper, ctx context.Context, n int) []t
 	items := make([]types.MainnetAccount, n)
 	for i := range items {
 		address := sample.AccAddress(r)
-		items[i].ProjectID = uint64(i)
+		items[i].ProjectId = uint64(i)
 		items[i].Address = address.String()
 
-		_ = keeper.MainnetAccount.Set(ctx, collections.Join(items[i].ProjectID, address), items[i])
+		_ = keeper.MainnetAccount.Set(ctx, collections.Join(items[i].ProjectId, address), items[i])
 	}
 	return items
 }
@@ -43,7 +43,7 @@ func TestMainnetAccountQuerySingle(t *testing.T) {
 			desc: "First",
 			request: &types.QueryGetMainnetAccountRequest{
 				Address:   msgs[0].Address,
-				ProjectID: msgs[0].ProjectID,
+				ProjectId: msgs[0].ProjectId,
 			},
 			response: &types.QueryGetMainnetAccountResponse{MainnetAccount: msgs[0]},
 		},
@@ -51,7 +51,7 @@ func TestMainnetAccountQuerySingle(t *testing.T) {
 			desc: "Second",
 			request: &types.QueryGetMainnetAccountRequest{
 				Address:   msgs[1].Address,
-				ProjectID: msgs[1].ProjectID,
+				ProjectId: msgs[1].ProjectId,
 			},
 			response: &types.QueryGetMainnetAccountResponse{MainnetAccount: msgs[1]},
 		},
@@ -59,7 +59,7 @@ func TestMainnetAccountQuerySingle(t *testing.T) {
 			desc: "KeyNotFound",
 			request: &types.QueryGetMainnetAccountRequest{
 				Address:   sample.Address(r),
-				ProjectID: 100000,
+				ProjectId: 100000,
 			},
 			err: status.Error(codes.NotFound, "not found"),
 		},

@@ -20,7 +20,7 @@ func createNGenesisValidatorByLaunchID(keeper *keeper.Keeper, ctx context.Contex
 	for i := range items {
 		addr := sample.AccAddress(r)
 		items[i] = sample.GenesisValidator(r, uint64(launchID), addr.String())
-		_ = keeper.GenesisValidator.Set(ctx, collections.Join(items[i].LaunchID, addr), items[i])
+		_ = keeper.GenesisValidator.Set(ctx, collections.Join(items[i].LaunchId, addr), items[i])
 	}
 	return items
 }

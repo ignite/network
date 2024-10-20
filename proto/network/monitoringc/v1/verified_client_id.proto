@@ -4,6 +4,6 @@ package network.monitoringc.v1;
 option go_package = "github.com/ignite/network/x/monitoringc/types";
 
 message VerifiedClientID {
-  uint64 launchID = 1;
-  repeated string clientIDs = 2;
+  uint64 launch_id = 1;
+  repeated string client_id_list = 2;
 }

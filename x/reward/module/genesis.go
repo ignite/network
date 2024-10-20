@@ -11,7 +11,7 @@ import (
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) error {
 	// Set all the rewardPool
 	for _, elem := range genState.RewardPoolList {
-		if err := k.RewardPool.Set(ctx, elem.LaunchID, elem); err != nil {
+		if err := k.RewardPool.Set(ctx, elem.LaunchId, elem); err != nil {
 			return err
 		}
 	}

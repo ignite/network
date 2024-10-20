@@ -26,7 +26,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 			Description: sample.CoordinatorDescription(r),
 		})
 		require.NoError(t, err)
-		coordID = res.CoordinatorID
+		coordID = res.CoordinatorId
 		res, err = ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
 			Address:     coordAddr2,
 			Description: sample.CoordinatorDescription(r),
@@ -36,11 +36,11 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 
 	// Set a regular project and a project with an already initialized mainnet
 	project := sample.Project(r, 0)
-	project.CoordinatorID = coordID
+	project.CoordinatorId = coordID
 	require.NoError(t, tk.ProjectKeeper.Project.Set(ctx, 0, project))
 
 	project = sample.Project(r, 1)
-	project.CoordinatorID = coordID
+	project.CoordinatorId = coordID
 	project.MainnetInitialized = true
 	require.NoError(t, tk.ProjectKeeper.Project.Set(ctx, 1, project))
 
@@ -52,7 +52,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 		{
 			name: "should update total supply",
 			msg: types.MsgUpdateTotalSupply{
-				ProjectID:         0,
+				ProjectId:         0,
 				Coordinator:       coordAddr1,
 				TotalSupplyUpdate: sample.TotalSupply(r),
 			},
@@ -60,7 +60,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 		{
 			name: "should allow update total supply again",
 			msg: types.MsgUpdateTotalSupply{
-				ProjectID:         0,
+				ProjectId:         0,
 				Coordinator:       coordAddr1,
 				TotalSupplyUpdate: sample.TotalSupply(r),
 			},
@@ -68,7 +68,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 		{
 			name: "should fail if project not found",
 			msg: types.MsgUpdateTotalSupply{
-				ProjectID:         100,
+				ProjectId:         100,
 				Coordinator:       coordAddr1,
 				TotalSupplyUpdate: sample.TotalSupply(r),
 			},
@@ -77,7 +77,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 		{
 			name: "should fail with non existing coordinator",
 			msg: types.MsgUpdateTotalSupply{
-				ProjectID:         0,
+				ProjectId:         0,
 				Coordinator:       sample.Address(r),
 				TotalSupplyUpdate: sample.TotalSupply(r),
 			},
@@ -86,7 +86,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 		{
 			name: "should fail if coordinator is not associated with project",
 			msg: types.MsgUpdateTotalSupply{
-				ProjectID:         0,
+				ProjectId:         0,
 				Coordinator:       coordAddr2,
 				TotalSupplyUpdate: sample.TotalSupply(r),
 			},
@@ -95,7 +95,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 		{
 			name: "cannot update total supply when mainnet is initialized",
 			msg: types.MsgUpdateTotalSupply{
-				ProjectID:         1,
+				ProjectId:         1,
 				Coordinator:       coordAddr1,
 				TotalSupplyUpdate: sample.TotalSupply(r),
 			},
@@ -104,7 +104,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 		{
 			name: "should fail if total supply outside of valid range",
 			msg: types.MsgUpdateTotalSupply{
-				ProjectID:         0,
+				ProjectId:         0,
 				Coordinator:       coordAddr1,
 				TotalSupplyUpdate: sample.CoinsWithRange(r, 10, 20),
 			},
@@ -114,7 +114,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			var previousTotalSupply sdk.Coins
 			if tc.err == nil {
-				project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
+				project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectId)
 				require.NoError(t, err)
 				previousTotalSupply = project.TotalSupply
 			}
@@ -125,7 +125,7 @@ func TestMsgUpdateTotalSupply(t *testing.T) {
 				return
 			}
 			require.NoError(t, err)
-			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
+			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectId)
 			require.NoError(t, err)
 			require.True(t, project.TotalSupply.Equal(
 				types.UpdateTotalSupply(previousTotalSupply, tc.msg.TotalSupplyUpdate),

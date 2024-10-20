@@ -28,9 +28,9 @@ func (k msgServer) UpdateTotalSupply(ctx context.Context, msg *types.MsgUpdateTo
 		return nil, ignterrors.Critical("failed to get project params")
 	}
 
-	project, err := k.GetProject(ctx, msg.ProjectID)
+	project, err := k.GetProject(ctx, msg.ProjectId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectId)
 	}
 
 	// Get the coordinator ID associated to the sender address
@@ -39,15 +39,15 @@ func (k msgServer) UpdateTotalSupply(ctx context.Context, msg *types.MsgUpdateTo
 		return nil, err
 	}
 
-	if project.CoordinatorID != coordinatorID {
+	if project.CoordinatorId != coordinatorID {
 		return nil, sdkerrors.Wrap(profiletypes.ErrCoordinatorInvalid, fmt.Sprintf(
 			"coordinator of the project is %d",
-			project.CoordinatorID,
+			project.CoordinatorId,
 		))
 	}
 
 	if project.MainnetInitialized {
-		return nil, sdkerrors.Wrapf(types.ErrMainnetInitialized, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(types.ErrMainnetInitialized, "%d", msg.ProjectId)
 	}
 
 	// Validate provided totalSupply
@@ -59,12 +59,12 @@ func (k msgServer) UpdateTotalSupply(ctx context.Context, msg *types.MsgUpdateTo
 	}
 
 	project.TotalSupply = types.UpdateTotalSupply(project.TotalSupply, msg.TotalSupplyUpdate)
-	if err := k.Project.Set(ctx, project.ProjectID, project); err != nil {
+	if err := k.Project.Set(ctx, project.ProjectId, project); err != nil {
 		return nil, ignterrors.Criticalf("project not set %s", err.Error())
 	}
 
 	return &types.MsgUpdateTotalSupplyResponse{}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(&types.EventProjectTotalSupplyUpdated{
-		ProjectID:          project.ProjectID,
+		ProjectId:          project.ProjectId,
 		CoordinatorAddress: msg.Coordinator,
 		TotalSupply:        project.TotalSupply,
 	})

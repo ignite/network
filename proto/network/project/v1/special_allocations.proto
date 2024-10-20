@@ -9,14 +9,14 @@ import "gogoproto/gogo.proto";
 option go_package = "github.com/ignite/network/x/project/types";
 
 message SpecialAllocations {
-  repeated cosmos.base.v1beta1.Coin genesisDistribution = 1 [
+  repeated cosmos.base.v1beta1.Coin genesis_distribution = 1 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",
     (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
     (gogoproto.castrepeated) = "Shares"
   ];
-  repeated cosmos.base.v1beta1.Coin claimableAirdrop = 2 [
+  repeated cosmos.base.v1beta1.Coin claimable_airdrop = 2 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",

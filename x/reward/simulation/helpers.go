@@ -28,7 +28,7 @@ func FindRandomChainWithCoordBalance(
 		chains[i], chains[j] = chains[j], chains[i]
 	})
 	for _, c := range chains {
-		_, err := k.RewardPool.Get(ctx, c.LaunchID)
+		_, err := k.RewardPool.Get(ctx, c.LaunchId)
 		if hasRewardPool != (err != nil) {
 			continue
 		}
@@ -39,7 +39,7 @@ func FindRandomChainWithCoordBalance(
 		}
 
 		// check if the coordinator is still in the store and active
-		coordinator, err := k.GetProfileKeeper().GetCoordinator(ctx, c.CoordinatorID)
+		coordinator, err := k.GetProfileKeeper().GetCoordinator(ctx, c.CoordinatorId)
 		if err != nil || !coordinator.Active {
 			continue
 		}

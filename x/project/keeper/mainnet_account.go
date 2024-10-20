@@ -52,7 +52,7 @@ func (k Keeper) MainnetAccountBalance(ctx context.Context, projectID uint64, add
 	}
 
 	return types.MainnetAccountBalance{
-		ProjectID: acc.ProjectID,
+		ProjectId: acc.ProjectId,
 		Address:   acc.Address,
 		Coins:     balance,
 	}, nil
@@ -80,7 +80,7 @@ func (k Keeper) ListMainnetAccountBalance(ctx context.Context, projectID uint64)
 		// add the balance if not zero
 		if !balance.IsZero() {
 			mainnetAccountBalance := types.MainnetAccountBalance{
-				ProjectID: acc.ProjectID,
+				ProjectId: acc.ProjectId,
 				Address:   acc.Address,
 				Coins:     balance,
 			}

@@ -175,7 +175,7 @@ func TestMsgEditChain(t *testing.T) {
 			var previousChain types.Chain
 			var found bool
 			if tc.err == nil {
-				previousChain, err = tk.LaunchKeeper.GetChain(ctx, tc.msg.LaunchID)
+				previousChain, err = tk.LaunchKeeper.GetChain(ctx, tc.msg.LaunchId)
 				require.NoError(t, err)
 			}
 
@@ -188,11 +188,11 @@ func TestMsgEditChain(t *testing.T) {
 			require.NoError(t, err)
 
 			// The chain must continue to exist in the store
-			chain, err := tk.LaunchKeeper.GetChain(ctx, tc.msg.LaunchID)
+			chain, err := tk.LaunchKeeper.GetChain(ctx, tc.msg.LaunchId)
 			require.NoError(t, err)
 
 			// Unchanged values
-			require.EqualValues(t, previousChain.CoordinatorID, chain.CoordinatorID)
+			require.EqualValues(t, previousChain.CoordinatorId, chain.CoordinatorId)
 			require.EqualValues(t, previousChain.CreatedAt, chain.CreatedAt)
 			require.EqualValues(t, previousChain.LaunchTime, chain.LaunchTime)
 			require.EqualValues(t, previousChain.LaunchTriggered, chain.LaunchTriggered)
@@ -203,20 +203,20 @@ func TestMsgEditChain(t *testing.T) {
 				require.EqualValues(t, previousChain.Metadata, chain.Metadata)
 			}
 
-			if tc.msg.SetProjectID {
+			if tc.msg.SetProjectId {
 				require.True(t, chain.HasProject)
-				require.EqualValues(t, tc.msg.ProjectID, chain.ProjectID)
+				require.EqualValues(t, tc.msg.ProjectId, chain.ProjectId)
 				// ensure project exist
-				_, err := tk.ProjectKeeper.GetProject(ctx, chain.ProjectID)
+				_, err := tk.ProjectKeeper.GetProject(ctx, chain.ProjectId)
 				require.NoError(t, err)
 				// ensure project chains exist
-				projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, chain.ProjectID)
+				projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, chain.ProjectId)
 				require.NoError(t, err)
 
 				// check that the chain launch ID is in the project chains
 				found = false
 				for _, chainID := range projectChains.Chains {
-					if chainID == chain.LaunchID {
+					if chainID == chain.LaunchId {
 						found = true
 						break
 					}

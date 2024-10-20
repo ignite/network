@@ -54,13 +54,13 @@ message MsgUpdateParamsResponse {}
 message MsgCreateChain {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  string genesisChainID = 2;
-  string sourceURL = 3;
-  string sourceHash = 4;
-  InitialGenesis initialGenesis = 5 [(gogoproto.nullable) = false];
-  bool hasProject = 6;
-  uint64 projectID = 7;
-  repeated cosmos.base.v1beta1.Coin accountBalance = 8 [
+  string genesis_chain_id = 2;
+  string source_url = 3;
+  string source_hash = 4;
+  InitialGenesis initial_genesis = 5 [(gogoproto.nullable) = false];
+  bool has_project = 6;
+  uint64 project_id = 7;
+  repeated cosmos.base.v1beta1.Coin account_balance = 8 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",
@@ -71,15 +71,15 @@ message MsgCreateChain {
 }
 
 message MsgCreateChainResponse {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
 }
 
 message MsgEditChain {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 launchID = 2;
-  bool setProjectID = 3;
-  uint64 projectID = 4;
+  uint64 launch_id = 2;
+  bool set_project_id = 3;
+  uint64 project_id = 4;
   bytes metadata = 5;
 }
 
@@ -88,11 +88,11 @@ message MsgEditChainResponse {}
 message MsgUpdateLaunchInformation {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 launchID = 2;
-  string genesisChainID = 3;
-  string sourceURL = 4;
-  string sourceHash = 5;
-  InitialGenesis initialGenesis = 6;
+  uint64 launch_id = 2;
+  string genesis_chain_id = 3;
+  string source_url = 4;
+  string source_hash = 5;
+  InitialGenesis initial_genesis = 6;
 }
 
 message MsgUpdateLaunchInformationResponse {}
@@ -100,20 +100,20 @@ message MsgUpdateLaunchInformationResponse {}
 message MsgSendRequest {
   option (cosmos.msg.v1.signer) = "creator";
   string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 launchID = 2;
+  uint64 launch_id = 2;
   RequestContent content = 3 [(gogoproto.nullable) = false];
 }
 
 message MsgSendRequestResponse {
-  uint64 requestID = 1;
-  bool autoApproved = 2;
+  uint64 request_id = 1;
+  bool auto_approved = 2;
 }
 
 message MsgSettleRequest {
   option (cosmos.msg.v1.signer) = "signer";
   string signer = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 launchID = 2;
-  uint64 requestID = 3;
+  uint64 launch_id = 2;
+  uint64 request_id = 3;
   bool approve = 4;
 }
 
@@ -122,8 +122,8 @@ message MsgSettleRequestResponse {}
 message MsgTriggerLaunch {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 launchID = 2;
-  google.protobuf.Timestamp launchTime = 3 [
+  uint64 launch_id = 2;
+  google.protobuf.Timestamp launch_time = 3 [
     (gogoproto.nullable) = false,
     (gogoproto.stdtime) = true
   ];
@@ -134,7 +134,7 @@ message MsgTriggerLaunchResponse {}
 message MsgRevertLaunch {
   option (cosmos.msg.v1.signer) = "coordinator";
   string coordinator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 launchID = 2;
+  uint64 launch_id = 2;
 }
 
 message MsgRevertLaunchResponse {}

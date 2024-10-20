@@ -68,13 +68,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "Participate",
 					Use:            "participate [auction-id] [tier-id]",
 					Short:          "Send a Participate tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "auctionID"}, {ProtoField: "tierID"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "auction_id"}, {ProtoField: "tier_id"}},
 				},
 				{
 					RpcMethod:      "WithdrawAllocations",
 					Use:            "withdraw-allocations [auction-id]",
 					Short:          "Send a WithdrawAllocations tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "auctionID"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "auction_id"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

@@ -25,10 +25,10 @@ func CoordinatorAddrNotFoundInvariant(k Keeper) sdk.Invariant {
 			return sdk.FormatInvariant(types.ModuleName, coordinatorIDNotFoundRoute, err.Error()), true
 		}
 		for _, coordinatorByAddres := range all {
-			if _, err := k.GetCoordinator(ctx, coordinatorByAddres.CoordinatorID); err != nil {
+			if _, err := k.GetCoordinator(ctx, coordinatorByAddres.CoordinatorId); err != nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, coordinatorIDNotFoundRoute,
-					fmt.Sprintf("%s: %d", err, coordinatorByAddres.CoordinatorID),
+					fmt.Sprintf("%s: %d", err, coordinatorByAddres.CoordinatorId),
 				), true
 			}
 		}

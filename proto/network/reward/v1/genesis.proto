@@ -16,5 +16,5 @@ message GenesisState {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
-  repeated RewardPool rewardPoolList = 2 [(gogoproto.nullable) = false];
+  repeated RewardPool reward_pool_list = 2 [(gogoproto.nullable) = false];
 }

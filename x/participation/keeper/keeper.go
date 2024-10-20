@@ -59,8 +59,8 @@ func NewKeeper(
 		stakingKeeper:          stakingKeeper,
 		fundraisingKeeper:      fundraisingKeeper,
 		Params:                 collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
-		AuctionUsedAllocations: collections.NewMap(sb, types.AuctionUsedAllocationsKey, "auctionUsedAllocations", collections.PairKeyCodec(sdk.LengthPrefixedAddressKey(sdk.AccAddressKey), collections.Uint64Key), codec.CollValue[types.AuctionUsedAllocations](cdc)),
-		UsedAllocations:        collections.NewMap(sb, types.UsedAllocationsKey, "usedAllocations", collections.StringKey, codec.CollValue[types.UsedAllocations](cdc)),
+		AuctionUsedAllocations: collections.NewMap(sb, types.AuctionUsedAllocationsKey, "auction_used_allocations", collections.PairKeyCodec(sdk.LengthPrefixedAddressKey(sdk.AccAddressKey), collections.Uint64Key), codec.CollValue[types.AuctionUsedAllocations](cdc)),
+		UsedAllocations:        collections.NewMap(sb, types.UsedAllocationsKey, "used_allocations", collections.StringKey, codec.CollValue[types.UsedAllocations](cdc)),
 		// this line is used by starport scaffolding # collection/instantiate
 	}
 

@@ -42,11 +42,11 @@ func SimulateMsgRevertLaunch(
 		}
 
 		// Find coordinator account
-		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, chain.LaunchID)
+		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, chain.LaunchId)
 		if err != nil {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), err.Error()), nil, nil
 		}
-		msg = sample.MsgRevertLaunch(simAccount.Address.String(), chain.LaunchID)
+		msg = sample.MsgRevertLaunch(simAccount.Address.String(), chain.LaunchId)
 		txCtx := simulation.OperationInput{
 			R:               r,
 			App:             app,

@@ -14,9 +14,9 @@ message Params {
   option (amino.name) = "network/x/project/Params";
   option (gogoproto.equal) = true;
 
-  TotalSupplyRange totalSupplyRange = 1 [(gogoproto.nullable) = false];
+  TotalSupplyRange total_supply_range = 1 [(gogoproto.nullable) = false];
 
-  repeated cosmos.base.v1beta1.Coin projectCreationFee = 2 [
+  repeated cosmos.base.v1beta1.Coin project_creation_fee = 2 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",
@@ -24,18 +24,18 @@ message Params {
     (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
   ];
 
-  uint64 maxMetadataLength = 3;
+  uint64 max_metadata_length = 3;
 }
 
 // TotalSupplyRange defines the range of allowed values for total supply
 message TotalSupplyRange {
-  string minTotalSupply = 1 [
+  string min_total_supply = 1 [
     (gogoproto.nullable) = false,
     (gogoproto.customtype) = "cosmossdk.io/math.Int",
     (cosmos_proto.scalar) = "cosmos.Int"
   ];
 
-  string maxTotalSupply = 2 [
+  string max_total_supply = 2 [
     (gogoproto.nullable) = false,
     (gogoproto.customtype) = "cosmossdk.io/math.Int",
     (cosmos_proto.scalar) = "cosmos.Int"

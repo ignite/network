@@ -45,12 +45,12 @@ func TestGenesisState_Validate(t *testing.T) {
 				AuctionUsedAllocationsList: []types.AuctionUsedAllocations{
 					{
 						Address:        addr1,
-						AuctionID:      auctionID1,
+						AuctionId:      auctionID1,
 						NumAllocations: sdkmath.ZeroInt(),
 					},
 					{
 						Address:        addr2,
-						AuctionID:      auctionID2,
+						AuctionId:      auctionID2,
 						NumAllocations: sdkmath.ZeroInt(),
 					},
 				},
@@ -71,13 +71,13 @@ func TestGenesisState_Validate(t *testing.T) {
 				AuctionUsedAllocationsList: []types.AuctionUsedAllocations{
 					{
 						Address:        addr1,
-						AuctionID:      auctionID1,
+						AuctionId:      auctionID1,
 						NumAllocations: sdkmath.NewInt(2),
 						Withdrawn:      false,
 					},
 					{
 						Address:        addr1,
-						AuctionID:      auctionID2,
+						AuctionId:      auctionID2,
 						NumAllocations: sdkmath.NewInt(3),
 						Withdrawn:      false,
 					},
@@ -113,12 +113,12 @@ func TestGenesisState_Validate(t *testing.T) {
 				AuctionUsedAllocationsList: []types.AuctionUsedAllocations{
 					{
 						Address:        addr1,
-						AuctionID:      auctionID1,
+						AuctionId:      auctionID1,
 						NumAllocations: sdkmath.ZeroInt(),
 					},
 					{
 						Address:        addr1,
-						AuctionID:      auctionID1,
+						AuctionId:      auctionID1,
 						NumAllocations: sdkmath.ZeroInt(),
 					},
 				},
@@ -131,7 +131,7 @@ func TestGenesisState_Validate(t *testing.T) {
 				AuctionUsedAllocationsList: []types.AuctionUsedAllocations{
 					{
 						Address:   addr1,
-						AuctionID: auctionID1,
+						AuctionId: auctionID1,
 					},
 				},
 			},
@@ -149,13 +149,13 @@ func TestGenesisState_Validate(t *testing.T) {
 				AuctionUsedAllocationsList: []types.AuctionUsedAllocations{
 					{
 						Address:        addr1,
-						AuctionID:      auctionID1,
+						AuctionId:      auctionID1,
 						NumAllocations: sdkmath.NewInt(2),
 						Withdrawn:      false,
 					},
 					{
 						Address:        addr1,
-						AuctionID:      auctionID2,
+						AuctionId:      auctionID2,
 						NumAllocations: sdkmath.NewInt(8),
 						Withdrawn:      true,
 					},

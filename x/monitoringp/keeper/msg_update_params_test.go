@@ -38,7 +38,7 @@ func TestMsgUpdateParams(t *testing.T) {
 				Authority: k.GetAuthority(),
 				Params: types.Params{
 					LastBlockHeight:         types.DefaultLastBlockHeight,
-					ConsumerChainID:         types.DefaultConsumerChainID,
+					ConsumerChainId:         types.DefaultConsumerChainID,
 					ConsumerUnbondingPeriod: networktypes.DefaultUnbondingPeriod,
 					ConsumerRevisionHeight:  networktypes.DefaultRevisionHeight,
 				},

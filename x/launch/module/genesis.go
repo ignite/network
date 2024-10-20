@@ -12,7 +12,7 @@ import (
 func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState) error {
 	// Set all the chain
 	for _, elem := range genState.ChainList {
-		if err := k.Chain.Set(ctx, elem.LaunchID, elem); err != nil {
+		if err := k.Chain.Set(ctx, elem.LaunchId, elem); err != nil {
 			return err
 		}
 	}
@@ -28,7 +28,7 @@ func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState)
 		if err != nil {
 			return err
 		}
-		if err := k.GenesisAccount.Set(ctx, collections.Join(elem.LaunchID, sdk.AccAddress(address)), elem); err != nil {
+		if err := k.GenesisAccount.Set(ctx, collections.Join(elem.LaunchId, sdk.AccAddress(address)), elem); err != nil {
 			return err
 		}
 	}
@@ -39,7 +39,7 @@ func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState)
 		if err != nil {
 			return err
 		}
-		if err := k.GenesisValidator.Set(ctx, collections.Join(elem.LaunchID, sdk.AccAddress(address)), elem); err != nil {
+		if err := k.GenesisValidator.Set(ctx, collections.Join(elem.LaunchId, sdk.AccAddress(address)), elem); err != nil {
 			return err
 		}
 	}
@@ -50,26 +50,26 @@ func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState)
 		if err != nil {
 			return err
 		}
-		if err := k.VestingAccount.Set(ctx, collections.Join(elem.LaunchID, sdk.AccAddress(address)), elem); err != nil {
+		if err := k.VestingAccount.Set(ctx, collections.Join(elem.LaunchId, sdk.AccAddress(address)), elem); err != nil {
 			return err
 		}
 	}
 
 	// Set all the request
 	for _, elem := range genState.RequestList {
-		if err := k.Request.Set(ctx, collections.Join(elem.LaunchID, elem.RequestID), elem); err != nil {
+		if err := k.Request.Set(ctx, collections.Join(elem.LaunchId, elem.RequestId), elem); err != nil {
 			return err
 		}
 	}
 	for _, elem := range genState.RequestCounters {
-		if err := k.RequestSeq.Set(ctx, elem.LaunchID, elem.Counter); err != nil {
+		if err := k.RequestSeq.Set(ctx, elem.LaunchId, elem.Counter); err != nil {
 			return err
 		}
 	}
 
 	// Set all the paramChange
 	for _, elem := range genState.ParamChangeList {
-		if err := k.ParamChange.Set(ctx, collections.Join(elem.LaunchID, types.ParamChangeSubKey(elem.Module, elem.Param)), elem); err != nil {
+		if err := k.ParamChange.Set(ctx, collections.Join(elem.LaunchId, types.ParamChangeSubKey(elem.Module, elem.Param)), elem); err != nil {
 			return err
 		}
 	}
@@ -130,12 +130,12 @@ func ExportGenesis(ctx sdk.Context, k *keeper.Keeper) (*types.GenesisState, erro
 	// Get request counts
 	for _, elem := range genesis.RequestList {
 		// Get request count
-		counter, err := k.GetRequestCounter(ctx, elem.LaunchID)
+		counter, err := k.GetRequestCounter(ctx, elem.LaunchId)
 		if err != nil {
 			return nil, err
 		}
 		genesis.RequestCounters = append(genesis.RequestCounters, types.RequestCounter{
-			LaunchID: elem.LaunchID,
+			LaunchId: elem.LaunchId,
 			Counter:  counter,
 		})
 	}

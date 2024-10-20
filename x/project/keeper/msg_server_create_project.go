@@ -76,15 +76,15 @@ func (k msgServer) CreateProject(ctx context.Context, msg *types.MsgCreateProjec
 
 	// Initialize the list of project chains
 	if err := k.ProjectChains.Set(ctx, projectID, types.ProjectChains{
-		ProjectID: projectID,
+		ProjectId: projectID,
 		Chains:    []uint64{},
 	}); err != nil {
 		return nil, ignterrors.Criticalf("project chains not set %s", err.Error())
 	}
 
-	return &types.MsgCreateProjectResponse{ProjectID: projectID}, sdkCtx.EventManager().EmitTypedEvent(&types.EventProjectCreated{
-		ProjectID:          projectID,
+	return &types.MsgCreateProjectResponse{ProjectId: projectID}, sdkCtx.EventManager().EmitTypedEvent(&types.EventProjectCreated{
+		ProjectId:          projectID,
 		CoordinatorAddress: msg.Coordinator,
-		CoordinatorID:      coordinatorID,
+		CoordinatorId:      coordinatorID,
 	})
 }

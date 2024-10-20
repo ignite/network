@@ -22,24 +22,24 @@ func (k msgServer) UnredeemVouchers(ctx context.Context, msg *types.MsgUnredeemV
 		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid sender address %s", err.Error())
 	}
 
-	project, err := k.GetProject(ctx, msg.ProjectID)
+	project, err := k.GetProject(ctx, msg.ProjectId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectId)
 	}
 
-	mainnetLaunched, err := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectID)
+	mainnetLaunched, err := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectId)
 	if err != nil {
 		return nil, ignterrors.Critical(err.Error())
 	}
 	if mainnetLaunched {
 		return nil, sdkerrors.Wrap(types.ErrMainnetLaunchTriggered, fmt.Sprintf(
 			"mainnet %d launch is already triggered",
-			project.MainnetID,
+			project.MainnetId,
 		))
 	}
 
 	// Check if the account already exists
-	account, err := k.MainnetAccount.Get(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(sender)))
+	account, err := k.MainnetAccount.Get(ctx, collections.Join(msg.ProjectId, sdk.AccAddress(sender)))
 	if err != nil {
 		return nil, sdkerrors.Wrapf(types.ErrAccountNotFound, "%s: %s", err.Error(), msg.Sender)
 	}
@@ -53,21 +53,21 @@ func (k msgServer) UnredeemVouchers(ctx context.Context, msg *types.MsgUnredeemV
 	// If the account no longer has shares, it can be removed from the store
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	if types.IsEqualShares(account.Shares, types.EmptyShares()) {
-		if err := k.MainnetAccount.Remove(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(sender))); err != nil {
+		if err := k.MainnetAccount.Remove(ctx, collections.Join(msg.ProjectId, sdk.AccAddress(sender))); err != nil {
 			return nil, ignterrors.Criticalf("can't remove mainnet account %s", err.Error())
 		}
 		if err := sdkCtx.EventManager().EmitTypedEvent(&types.EventMainnetAccountRemoved{
-			ProjectID: project.ProjectID,
+			ProjectId: project.ProjectId,
 			Address:   account.Address,
 		}); err != nil {
 			return nil, err
 		}
 	} else {
-		if err := k.MainnetAccount.Set(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(sender)), account); err != nil {
+		if err := k.MainnetAccount.Set(ctx, collections.Join(msg.ProjectId, sdk.AccAddress(sender)), account); err != nil {
 			return nil, ignterrors.Criticalf("can't set mainnet account %s", err.Error())
 		}
 		if err := sdkCtx.EventManager().EmitTypedEvent(&types.EventMainnetAccountUpdated{
-			ProjectID: account.ProjectID,
+			ProjectId: account.ProjectId,
 			Address:   account.Address,
 			Shares:    account.Shares,
 		}); err != nil {
@@ -76,7 +76,7 @@ func (k msgServer) UnredeemVouchers(ctx context.Context, msg *types.MsgUnredeemV
 	}
 
 	// Mint vouchers from the removed shares and send them to sender balance
-	vouchers, err := types.SharesToVouchers(msg.Shares, msg.ProjectID)
+	vouchers, err := types.SharesToVouchers(msg.Shares, msg.ProjectId)
 	if err != nil {
 		return nil, ignterrors.Criticalf("verified shares are invalid %s", err.Error())
 	}

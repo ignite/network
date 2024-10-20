@@ -270,26 +270,26 @@ func (x *_GenesisState_7_list) IsValid() bool {
 }
 
 var (
-	md_GenesisState                                  protoreflect.MessageDescriptor
-	fd_GenesisState_params                           protoreflect.FieldDescriptor
-	fd_GenesisState_portID                           protoreflect.FieldDescriptor
-	fd_GenesisState_launchIDFromChannelIDList        protoreflect.FieldDescriptor
-	fd_GenesisState_launchIDFromVerifiedClientIDList protoreflect.FieldDescriptor
-	fd_GenesisState_monitoringHistoryList            protoreflect.FieldDescriptor
-	fd_GenesisState_verifiedClientIDList             protoreflect.FieldDescriptor
-	fd_GenesisState_providerClientIDList             protoreflect.FieldDescriptor
+	md_GenesisState                                        protoreflect.MessageDescriptor
+	fd_GenesisState_params                                 protoreflect.FieldDescriptor
+	fd_GenesisState_port_id                                protoreflect.FieldDescriptor
+	fd_GenesisState_launch_id_from_channel_id_list         protoreflect.FieldDescriptor
+	fd_GenesisState_launch_id_from_verified_client_id_list protoreflect.FieldDescriptor
+	fd_GenesisState_monitoring_history_list                protoreflect.FieldDescriptor
+	fd_GenesisState_verified_client_id_list                protoreflect.FieldDescriptor
+	fd_GenesisState_provider_client_id_list                protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_monitoringc_v1_genesis_proto_init()
 	md_GenesisState = File_network_monitoringc_v1_genesis_proto.Messages().ByName("GenesisState")
 	fd_GenesisState_params = md_GenesisState.Fields().ByName("params")
-	fd_GenesisState_portID = md_GenesisState.Fields().ByName("portID")
-	fd_GenesisState_launchIDFromChannelIDList = md_GenesisState.Fields().ByName("launchIDFromChannelIDList")
-	fd_GenesisState_launchIDFromVerifiedClientIDList = md_GenesisState.Fields().ByName("launchIDFromVerifiedClientIDList")
-	fd_GenesisState_monitoringHistoryList = md_GenesisState.Fields().ByName("monitoringHistoryList")
-	fd_GenesisState_verifiedClientIDList = md_GenesisState.Fields().ByName("verifiedClientIDList")
-	fd_GenesisState_providerClientIDList = md_GenesisState.Fields().ByName("providerClientIDList")
+	fd_GenesisState_port_id = md_GenesisState.Fields().ByName("port_id")
+	fd_GenesisState_launch_id_from_channel_id_list = md_GenesisState.Fields().ByName("launch_id_from_channel_id_list")
+	fd_GenesisState_launch_id_from_verified_client_id_list = md_GenesisState.Fields().ByName("launch_id_from_verified_client_id_list")
+	fd_GenesisState_monitoring_history_list = md_GenesisState.Fields().ByName("monitoring_history_list")
+	fd_GenesisState_verified_client_id_list = md_GenesisState.Fields().ByName("verified_client_id_list")
+	fd_GenesisState_provider_client_id_list = md_GenesisState.Fields().ByName("provider_client_id_list")
 }
 
 var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
@@ -363,39 +363,39 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
-	if x.PortID != "" {
-		value := protoreflect.ValueOfString(x.PortID)
-		if !f(fd_GenesisState_portID, value) {
+	if x.PortId != "" {
+		value := protoreflect.ValueOfString(x.PortId)
+		if !f(fd_GenesisState_port_id, value) {
 			return
 		}
 	}
-	if len(x.LaunchIDFromChannelIDList) != 0 {
-		value := protoreflect.ValueOfList(&_GenesisState_3_list{list: &x.LaunchIDFromChannelIDList})
-		if !f(fd_GenesisState_launchIDFromChannelIDList, value) {
+	if len(x.LaunchIdFromChannelIdList) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_3_list{list: &x.LaunchIdFromChannelIdList})
+		if !f(fd_GenesisState_launch_id_from_channel_id_list, value) {
 			return
 		}
 	}
-	if len(x.LaunchIDFromVerifiedClientIDList) != 0 {
-		value := protoreflect.ValueOfList(&_GenesisState_4_list{list: &x.LaunchIDFromVerifiedClientIDList})
-		if !f(fd_GenesisState_launchIDFromVerifiedClientIDList, value) {
+	if len(x.LaunchIdFromVerifiedClientIdList) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_4_list{list: &x.LaunchIdFromVerifiedClientIdList})
+		if !f(fd_GenesisState_launch_id_from_verified_client_id_list, value) {
 			return
 		}
 	}
 	if len(x.MonitoringHistoryList) != 0 {
 		value := protoreflect.ValueOfList(&_GenesisState_5_list{list: &x.MonitoringHistoryList})
-		if !f(fd_GenesisState_monitoringHistoryList, value) {
+		if !f(fd_GenesisState_monitoring_history_list, value) {
 			return
 		}
 	}
-	if len(x.VerifiedClientIDList) != 0 {
-		value := protoreflect.ValueOfList(&_GenesisState_6_list{list: &x.VerifiedClientIDList})
-		if !f(fd_GenesisState_verifiedClientIDList, value) {
+	if len(x.VerifiedClientIdList) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_6_list{list: &x.VerifiedClientIdList})
+		if !f(fd_GenesisState_verified_client_id_list, value) {
 			return
 		}
 	}
-	if len(x.ProviderClientIDList) != 0 {
-		value := protoreflect.ValueOfList(&_GenesisState_7_list{list: &x.ProviderClientIDList})
-		if !f(fd_GenesisState_providerClientIDList, value) {
+	if len(x.ProviderClientIdList) != 0 {
+		value := protoreflect.ValueOfList(&_GenesisState_7_list{list: &x.ProviderClientIdList})
+		if !f(fd_GenesisState_provider_client_id_list, value) {
 			return
 		}
 	}
@@ -416,18 +416,18 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 	switch fd.FullName() {
 	case "network.monitoringc.v1.GenesisState.params":
 		return x.Params != nil
-	case "network.monitoringc.v1.GenesisState.portID":
-		return x.PortID != ""
-	case "network.monitoringc.v1.GenesisState.launchIDFromChannelIDList":
-		return len(x.LaunchIDFromChannelIDList) != 0
-	case "network.monitoringc.v1.GenesisState.launchIDFromVerifiedClientIDList":
-		return len(x.LaunchIDFromVerifiedClientIDList) != 0
-	case "network.monitoringc.v1.GenesisState.monitoringHistoryList":
+	case "network.monitoringc.v1.GenesisState.port_id":
+		return x.PortId != ""
+	case "network.monitoringc.v1.GenesisState.launch_id_from_channel_id_list":
+		return len(x.LaunchIdFromChannelIdList) != 0
+	case "network.monitoringc.v1.GenesisState.launch_id_from_verified_client_id_list":
+		return len(x.LaunchIdFromVerifiedClientIdList) != 0
+	case "network.monitoringc.v1.GenesisState.monitoring_history_list":
 		return len(x.MonitoringHistoryList) != 0
-	case "network.monitoringc.v1.GenesisState.verifiedClientIDList":
-		return len(x.VerifiedClientIDList) != 0
-	case "network.monitoringc.v1.GenesisState.providerClientIDList":
-		return len(x.ProviderClientIDList) != 0
+	case "network.monitoringc.v1.GenesisState.verified_client_id_list":
+		return len(x.VerifiedClientIdList) != 0
+	case "network.monitoringc.v1.GenesisState.provider_client_id_list":
+		return len(x.ProviderClientIdList) != 0
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.GenesisState"))
@@ -446,18 +446,18 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "network.monitoringc.v1.GenesisState.params":
 		x.Params = nil
-	case "network.monitoringc.v1.GenesisState.portID":
-		x.PortID = ""
-	case "network.monitoringc.v1.GenesisState.launchIDFromChannelIDList":
-		x.LaunchIDFromChannelIDList = nil
-	case "network.monitoringc.v1.GenesisState.launchIDFromVerifiedClientIDList":
-		x.LaunchIDFromVerifiedClientIDList = nil
-	case "network.monitoringc.v1.GenesisState.monitoringHistoryList":
+	case "network.monitoringc.v1.GenesisState.port_id":
+		x.PortId = ""
+	case "network.monitoringc.v1.GenesisState.launch_id_from_channel_id_list":
+		x.LaunchIdFromChannelIdList = nil
+	case "network.monitoringc.v1.GenesisState.launch_id_from_verified_client_id_list":
+		x.LaunchIdFromVerifiedClientIdList = nil
+	case "network.monitoringc.v1.GenesisState.monitoring_history_list":
 		x.MonitoringHistoryList = nil
-	case "network.monitoringc.v1.GenesisState.verifiedClientIDList":
-		x.VerifiedClientIDList = nil
-	case "network.monitoringc.v1.GenesisState.providerClientIDList":
-		x.ProviderClientIDList = nil
+	case "network.monitoringc.v1.GenesisState.verified_client_id_list":
+		x.VerifiedClientIdList = nil
+	case "network.monitoringc.v1.GenesisState.provider_client_id_list":
+		x.ProviderClientIdList = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.GenesisState"))
@@ -477,38 +477,38 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 	case "network.monitoringc.v1.GenesisState.params":
 		value := x.Params
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.monitoringc.v1.GenesisState.portID":
-		value := x.PortID
+	case "network.monitoringc.v1.GenesisState.port_id":
+		value := x.PortId
 		return protoreflect.ValueOfString(value)
-	case "network.monitoringc.v1.GenesisState.launchIDFromChannelIDList":
-		if len(x.LaunchIDFromChannelIDList) == 0 {
+	case "network.monitoringc.v1.GenesisState.launch_id_from_channel_id_list":
+		if len(x.LaunchIdFromChannelIdList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_3_list{})
 		}
-		listValue := &_GenesisState_3_list{list: &x.LaunchIDFromChannelIDList}
+		listValue := &_GenesisState_3_list{list: &x.LaunchIdFromChannelIdList}
 		return protoreflect.ValueOfList(listValue)
-	case "network.monitoringc.v1.GenesisState.launchIDFromVerifiedClientIDList":
-		if len(x.LaunchIDFromVerifiedClientIDList) == 0 {
+	case "network.monitoringc.v1.GenesisState.launch_id_from_verified_client_id_list":
+		if len(x.LaunchIdFromVerifiedClientIdList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_4_list{})
 		}
-		listValue := &_GenesisState_4_list{list: &x.LaunchIDFromVerifiedClientIDList}
+		listValue := &_GenesisState_4_list{list: &x.LaunchIdFromVerifiedClientIdList}
 		return protoreflect.ValueOfList(listValue)
-	case "network.monitoringc.v1.GenesisState.monitoringHistoryList":
+	case "network.monitoringc.v1.GenesisState.monitoring_history_list":
 		if len(x.MonitoringHistoryList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_5_list{})
 		}
 		listValue := &_GenesisState_5_list{list: &x.MonitoringHistoryList}
 		return protoreflect.ValueOfList(listValue)
-	case "network.monitoringc.v1.GenesisState.verifiedClientIDList":
-		if len(x.VerifiedClientIDList) == 0 {
+	case "network.monitoringc.v1.GenesisState.verified_client_id_list":
+		if len(x.VerifiedClientIdList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_6_list{})
 		}
-		listValue := &_GenesisState_6_list{list: &x.VerifiedClientIDList}
+		listValue := &_GenesisState_6_list{list: &x.VerifiedClientIdList}
 		return protoreflect.ValueOfList(listValue)
-	case "network.monitoringc.v1.GenesisState.providerClientIDList":
-		if len(x.ProviderClientIDList) == 0 {
+	case "network.monitoringc.v1.GenesisState.provider_client_id_list":
+		if len(x.ProviderClientIdList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_7_list{})
 		}
-		listValue := &_GenesisState_7_list{list: &x.ProviderClientIDList}
+		listValue := &_GenesisState_7_list{list: &x.ProviderClientIdList}
 		return protoreflect.ValueOfList(listValue)
 	default:
 		if descriptor.IsExtension() {
@@ -532,28 +532,28 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 	switch fd.FullName() {
 	case "network.monitoringc.v1.GenesisState.params":
 		x.Params = value.Message().Interface().(*Params)
-	case "network.monitoringc.v1.GenesisState.portID":
-		x.PortID = value.Interface().(string)
-	case "network.monitoringc.v1.GenesisState.launchIDFromChannelIDList":
+	case "network.monitoringc.v1.GenesisState.port_id":
+		x.PortId = value.Interface().(string)
+	case "network.monitoringc.v1.GenesisState.launch_id_from_channel_id_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_3_list)
-		x.LaunchIDFromChannelIDList = *clv.list
-	case "network.monitoringc.v1.GenesisState.launchIDFromVerifiedClientIDList":
+		x.LaunchIdFromChannelIdList = *clv.list
+	case "network.monitoringc.v1.GenesisState.launch_id_from_verified_client_id_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_4_list)
-		x.LaunchIDFromVerifiedClientIDList = *clv.list
-	case "network.monitoringc.v1.GenesisState.monitoringHistoryList":
+		x.LaunchIdFromVerifiedClientIdList = *clv.list
+	case "network.monitoringc.v1.GenesisState.monitoring_history_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_5_list)
 		x.MonitoringHistoryList = *clv.list
-	case "network.monitoringc.v1.GenesisState.verifiedClientIDList":
+	case "network.monitoringc.v1.GenesisState.verified_client_id_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_6_list)
-		x.VerifiedClientIDList = *clv.list
-	case "network.monitoringc.v1.GenesisState.providerClientIDList":
+		x.VerifiedClientIdList = *clv.list
+	case "network.monitoringc.v1.GenesisState.provider_client_id_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_7_list)
-		x.ProviderClientIDList = *clv.list
+		x.ProviderClientIdList = *clv.list
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.GenesisState"))
@@ -579,38 +579,38 @@ func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) p
 			x.Params = new(Params)
 		}
 		return protoreflect.ValueOfMessage(x.Params.ProtoReflect())
-	case "network.monitoringc.v1.GenesisState.launchIDFromChannelIDList":
-		if x.LaunchIDFromChannelIDList == nil {
-			x.LaunchIDFromChannelIDList = []*LaunchIDFromChannelID{}
+	case "network.monitoringc.v1.GenesisState.launch_id_from_channel_id_list":
+		if x.LaunchIdFromChannelIdList == nil {
+			x.LaunchIdFromChannelIdList = []*LaunchIDFromChannelID{}
 		}
-		value := &_GenesisState_3_list{list: &x.LaunchIDFromChannelIDList}
+		value := &_GenesisState_3_list{list: &x.LaunchIdFromChannelIdList}
 		return protoreflect.ValueOfList(value)
-	case "network.monitoringc.v1.GenesisState.launchIDFromVerifiedClientIDList":
-		if x.LaunchIDFromVerifiedClientIDList == nil {
-			x.LaunchIDFromVerifiedClientIDList = []*LaunchIDFromVerifiedClientID{}
+	case "network.monitoringc.v1.GenesisState.launch_id_from_verified_client_id_list":
+		if x.LaunchIdFromVerifiedClientIdList == nil {
+			x.LaunchIdFromVerifiedClientIdList = []*LaunchIDFromVerifiedClientID{}
 		}
-		value := &_GenesisState_4_list{list: &x.LaunchIDFromVerifiedClientIDList}
+		value := &_GenesisState_4_list{list: &x.LaunchIdFromVerifiedClientIdList}
 		return protoreflect.ValueOfList(value)
-	case "network.monitoringc.v1.GenesisState.monitoringHistoryList":
+	case "network.monitoringc.v1.GenesisState.monitoring_history_list":
 		if x.MonitoringHistoryList == nil {
 			x.MonitoringHistoryList = []*MonitoringHistory{}
 		}
 		value := &_GenesisState_5_list{list: &x.MonitoringHistoryList}
 		return protoreflect.ValueOfList(value)
-	case "network.monitoringc.v1.GenesisState.verifiedClientIDList":
-		if x.VerifiedClientIDList == nil {
-			x.VerifiedClientIDList = []*VerifiedClientID{}
+	case "network.monitoringc.v1.GenesisState.verified_client_id_list":
+		if x.VerifiedClientIdList == nil {
+			x.VerifiedClientIdList = []*VerifiedClientID{}
 		}
-		value := &_GenesisState_6_list{list: &x.VerifiedClientIDList}
+		value := &_GenesisState_6_list{list: &x.VerifiedClientIdList}
 		return protoreflect.ValueOfList(value)
-	case "network.monitoringc.v1.GenesisState.providerClientIDList":
-		if x.ProviderClientIDList == nil {
-			x.ProviderClientIDList = []*ProviderClientID{}
+	case "network.monitoringc.v1.GenesisState.provider_client_id_list":
+		if x.ProviderClientIdList == nil {
+			x.ProviderClientIdList = []*ProviderClientID{}
 		}
-		value := &_GenesisState_7_list{list: &x.ProviderClientIDList}
+		value := &_GenesisState_7_list{list: &x.ProviderClientIdList}
 		return protoreflect.ValueOfList(value)
-	case "network.monitoringc.v1.GenesisState.portID":
-		panic(fmt.Errorf("field portID of message network.monitoringc.v1.GenesisState is not mutable"))
+	case "network.monitoringc.v1.GenesisState.port_id":
+		panic(fmt.Errorf("field port_id of message network.monitoringc.v1.GenesisState is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.GenesisState"))
@@ -627,21 +627,21 @@ func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) 
 	case "network.monitoringc.v1.GenesisState.params":
 		m := new(Params)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.monitoringc.v1.GenesisState.portID":
+	case "network.monitoringc.v1.GenesisState.port_id":
 		return protoreflect.ValueOfString("")
-	case "network.monitoringc.v1.GenesisState.launchIDFromChannelIDList":
+	case "network.monitoringc.v1.GenesisState.launch_id_from_channel_id_list":
 		list := []*LaunchIDFromChannelID{}
 		return protoreflect.ValueOfList(&_GenesisState_3_list{list: &list})
-	case "network.monitoringc.v1.GenesisState.launchIDFromVerifiedClientIDList":
+	case "network.monitoringc.v1.GenesisState.launch_id_from_verified_client_id_list":
 		list := []*LaunchIDFromVerifiedClientID{}
 		return protoreflect.ValueOfList(&_GenesisState_4_list{list: &list})
-	case "network.monitoringc.v1.GenesisState.monitoringHistoryList":
+	case "network.monitoringc.v1.GenesisState.monitoring_history_list":
 		list := []*MonitoringHistory{}
 		return protoreflect.ValueOfList(&_GenesisState_5_list{list: &list})
-	case "network.monitoringc.v1.GenesisState.verifiedClientIDList":
+	case "network.monitoringc.v1.GenesisState.verified_client_id_list":
 		list := []*VerifiedClientID{}
 		return protoreflect.ValueOfList(&_GenesisState_6_list{list: &list})
-	case "network.monitoringc.v1.GenesisState.providerClientIDList":
+	case "network.monitoringc.v1.GenesisState.provider_client_id_list":
 		list := []*ProviderClientID{}
 		return protoreflect.ValueOfList(&_GenesisState_7_list{list: &list})
 	default:
@@ -717,18 +717,18 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			l = options.Size(x.Params)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.PortID)
+		l = len(x.PortId)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if len(x.LaunchIDFromChannelIDList) > 0 {
-			for _, e := range x.LaunchIDFromChannelIDList {
+		if len(x.LaunchIdFromChannelIdList) > 0 {
+			for _, e := range x.LaunchIdFromChannelIdList {
 				l = options.Size(e)
 				n += 1 + l + runtime.Sov(uint64(l))
 			}
 		}
-		if len(x.LaunchIDFromVerifiedClientIDList) > 0 {
-			for _, e := range x.LaunchIDFromVerifiedClientIDList {
+		if len(x.LaunchIdFromVerifiedClientIdList) > 0 {
+			for _, e := range x.LaunchIdFromVerifiedClientIdList {
 				l = options.Size(e)
 				n += 1 + l + runtime.Sov(uint64(l))
 			}
@@ -739,14 +739,14 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				n += 1 + l + runtime.Sov(uint64(l))
 			}
 		}
-		if len(x.VerifiedClientIDList) > 0 {
-			for _, e := range x.VerifiedClientIDList {
+		if len(x.VerifiedClientIdList) > 0 {
+			for _, e := range x.VerifiedClientIdList {
 				l = options.Size(e)
 				n += 1 + l + runtime.Sov(uint64(l))
 			}
 		}
-		if len(x.ProviderClientIDList) > 0 {
-			for _, e := range x.ProviderClientIDList {
+		if len(x.ProviderClientIdList) > 0 {
+			for _, e := range x.ProviderClientIdList {
 				l = options.Size(e)
 				n += 1 + l + runtime.Sov(uint64(l))
 			}
@@ -780,9 +780,9 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.ProviderClientIDList) > 0 {
-			for iNdEx := len(x.ProviderClientIDList) - 1; iNdEx >= 0; iNdEx-- {
-				encoded, err := options.Marshal(x.ProviderClientIDList[iNdEx])
+		if len(x.ProviderClientIdList) > 0 {
+			for iNdEx := len(x.ProviderClientIdList) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.ProviderClientIdList[iNdEx])
 				if err != nil {
 					return protoiface.MarshalOutput{
 						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -796,9 +796,9 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				dAtA[i] = 0x3a
 			}
 		}
-		if len(x.VerifiedClientIDList) > 0 {
-			for iNdEx := len(x.VerifiedClientIDList) - 1; iNdEx >= 0; iNdEx-- {
-				encoded, err := options.Marshal(x.VerifiedClientIDList[iNdEx])
+		if len(x.VerifiedClientIdList) > 0 {
+			for iNdEx := len(x.VerifiedClientIdList) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.VerifiedClientIdList[iNdEx])
 				if err != nil {
 					return protoiface.MarshalOutput{
 						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -828,9 +828,9 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				dAtA[i] = 0x2a
 			}
 		}
-		if len(x.LaunchIDFromVerifiedClientIDList) > 0 {
-			for iNdEx := len(x.LaunchIDFromVerifiedClientIDList) - 1; iNdEx >= 0; iNdEx-- {
-				encoded, err := options.Marshal(x.LaunchIDFromVerifiedClientIDList[iNdEx])
+		if len(x.LaunchIdFromVerifiedClientIdList) > 0 {
+			for iNdEx := len(x.LaunchIdFromVerifiedClientIdList) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.LaunchIdFromVerifiedClientIdList[iNdEx])
 				if err != nil {
 					return protoiface.MarshalOutput{
 						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -844,9 +844,9 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				dAtA[i] = 0x22
 			}
 		}
-		if len(x.LaunchIDFromChannelIDList) > 0 {
-			for iNdEx := len(x.LaunchIDFromChannelIDList) - 1; iNdEx >= 0; iNdEx-- {
-				encoded, err := options.Marshal(x.LaunchIDFromChannelIDList[iNdEx])
+		if len(x.LaunchIdFromChannelIdList) > 0 {
+			for iNdEx := len(x.LaunchIdFromChannelIdList) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.LaunchIdFromChannelIdList[iNdEx])
 				if err != nil {
 					return protoiface.MarshalOutput{
 						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -860,10 +860,10 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				dAtA[i] = 0x1a
 			}
 		}
-		if len(x.PortID) > 0 {
-			i -= len(x.PortID)
-			copy(dAtA[i:], x.PortID)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.PortID)))
+		if len(x.PortId) > 0 {
+			i -= len(x.PortId)
+			copy(dAtA[i:], x.PortId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.PortId)))
 			i--
 			dAtA[i] = 0x12
 		}
@@ -968,7 +968,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PortID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PortId", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -996,11 +996,11 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.PortID = string(dAtA[iNdEx:postIndex])
+				x.PortId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 3:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchIDFromChannelIDList", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchIdFromChannelIdList", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -1027,14 +1027,14 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.LaunchIDFromChannelIDList = append(x.LaunchIDFromChannelIDList, &LaunchIDFromChannelID{})
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.LaunchIDFromChannelIDList[len(x.LaunchIDFromChannelIDList)-1]); err != nil {
+				x.LaunchIdFromChannelIdList = append(x.LaunchIdFromChannelIdList, &LaunchIDFromChannelID{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.LaunchIdFromChannelIdList[len(x.LaunchIdFromChannelIdList)-1]); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
 			case 4:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchIDFromVerifiedClientIDList", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchIdFromVerifiedClientIdList", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -1061,8 +1061,8 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.LaunchIDFromVerifiedClientIDList = append(x.LaunchIDFromVerifiedClientIDList, &LaunchIDFromVerifiedClientID{})
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.LaunchIDFromVerifiedClientIDList[len(x.LaunchIDFromVerifiedClientIDList)-1]); err != nil {
+				x.LaunchIdFromVerifiedClientIdList = append(x.LaunchIdFromVerifiedClientIdList, &LaunchIDFromVerifiedClientID{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.LaunchIdFromVerifiedClientIdList[len(x.LaunchIdFromVerifiedClientIdList)-1]); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
@@ -1102,7 +1102,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 6:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field VerifiedClientIDList", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field VerifiedClientIdList", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -1129,14 +1129,14 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.VerifiedClientIDList = append(x.VerifiedClientIDList, &VerifiedClientID{})
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.VerifiedClientIDList[len(x.VerifiedClientIDList)-1]); err != nil {
+				x.VerifiedClientIdList = append(x.VerifiedClientIdList, &VerifiedClientID{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.VerifiedClientIdList[len(x.VerifiedClientIdList)-1]); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
 			case 7:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProviderClientIDList", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProviderClientIdList", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -1163,8 +1163,8 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.ProviderClientIDList = append(x.ProviderClientIDList, &ProviderClientID{})
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ProviderClientIDList[len(x.ProviderClientIDList)-1]); err != nil {
+				x.ProviderClientIdList = append(x.ProviderClientIdList, &ProviderClientID{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ProviderClientIdList[len(x.ProviderClientIdList)-1]); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
@@ -1224,12 +1224,12 @@ type GenesisState struct {
 
 	// params defines all the parameters of the module.
 	Params                           *Params                         `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
-	PortID                           string                          `protobuf:"bytes,2,opt,name=portID,proto3" json:"portID,omitempty"`
-	LaunchIDFromChannelIDList        []*LaunchIDFromChannelID        `protobuf:"bytes,3,rep,name=launchIDFromChannelIDList,proto3" json:"launchIDFromChannelIDList,omitempty"`
-	LaunchIDFromVerifiedClientIDList []*LaunchIDFromVerifiedClientID `protobuf:"bytes,4,rep,name=launchIDFromVerifiedClientIDList,proto3" json:"launchIDFromVerifiedClientIDList,omitempty"`
-	MonitoringHistoryList            []*MonitoringHistory            `protobuf:"bytes,5,rep,name=monitoringHistoryList,proto3" json:"monitoringHistoryList,omitempty"`
-	VerifiedClientIDList             []*VerifiedClientID             `protobuf:"bytes,6,rep,name=verifiedClientIDList,proto3" json:"verifiedClientIDList,omitempty"`
-	ProviderClientIDList             []*ProviderClientID             `protobuf:"bytes,7,rep,name=providerClientIDList,proto3" json:"providerClientIDList,omitempty"`
+	PortId                           string                          `protobuf:"bytes,2,opt,name=port_id,json=portId,proto3" json:"port_id,omitempty"`
+	LaunchIdFromChannelIdList        []*LaunchIDFromChannelID        `protobuf:"bytes,3,rep,name=launch_id_from_channel_id_list,json=launchIdFromChannelIdList,proto3" json:"launch_id_from_channel_id_list,omitempty"`
+	LaunchIdFromVerifiedClientIdList []*LaunchIDFromVerifiedClientID `protobuf:"bytes,4,rep,name=launch_id_from_verified_client_id_list,json=launchIdFromVerifiedClientIdList,proto3" json:"launch_id_from_verified_client_id_list,omitempty"`
+	MonitoringHistoryList            []*MonitoringHistory            `protobuf:"bytes,5,rep,name=monitoring_history_list,json=monitoringHistoryList,proto3" json:"monitoring_history_list,omitempty"`
+	VerifiedClientIdList             []*VerifiedClientID             `protobuf:"bytes,6,rep,name=verified_client_id_list,json=verifiedClientIdList,proto3" json:"verified_client_id_list,omitempty"`
+	ProviderClientIdList             []*ProviderClientID             `protobuf:"bytes,7,rep,name=provider_client_id_list,json=providerClientIdList,proto3" json:"provider_client_id_list,omitempty"`
 }
 
 func (x *GenesisState) Reset() {
@@ -1259,23 +1259,23 @@ func (x *GenesisState) GetParams() *Params {
 	return nil
 }
 
-func (x *GenesisState) GetPortID() string {
+func (x *GenesisState) GetPortId() string {
 	if x != nil {
-		return x.PortID
+		return x.PortId
 	}
 	return ""
 }
 
-func (x *GenesisState) GetLaunchIDFromChannelIDList() []*LaunchIDFromChannelID {
+func (x *GenesisState) GetLaunchIdFromChannelIdList() []*LaunchIDFromChannelID {
 	if x != nil {
-		return x.LaunchIDFromChannelIDList
+		return x.LaunchIdFromChannelIdList
 	}
 	return nil
 }
 
-func (x *GenesisState) GetLaunchIDFromVerifiedClientIDList() []*LaunchIDFromVerifiedClientID {
+func (x *GenesisState) GetLaunchIdFromVerifiedClientIdList() []*LaunchIDFromVerifiedClientID {
 	if x != nil {
-		return x.LaunchIDFromVerifiedClientIDList
+		return x.LaunchIdFromVerifiedClientIdList
 	}
 	return nil
 }
@@ -1287,16 +1287,16 @@ func (x *GenesisState) GetMonitoringHistoryList() []*MonitoringHistory {
 	return nil
 }
 
-func (x *GenesisState) GetVerifiedClientIDList() []*VerifiedClientID {
+func (x *GenesisState) GetVerifiedClientIdList() []*VerifiedClientID {
 	if x != nil {
-		return x.VerifiedClientIDList
+		return x.VerifiedClientIdList
 	}
 	return nil
 }
 
-func (x *GenesisState) GetProviderClientIDList() []*ProviderClientID {
+func (x *GenesisState) GetProviderClientIdList() []*ProviderClientID {
 	if x != nil {
-		return x.ProviderClientIDList
+		return x.ProviderClientIdList
 	}
 	return nil
 }
@@ -1329,64 +1329,65 @@ var file_network_monitoringc_v1_genesis_proto_rawDesc = []byte{
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f,
 	0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2f, 0x76, 0x31, 0x2f, 0x76,
 	0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x5f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x69,
-	0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x94, 0x05, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65,
+	0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa8, 0x05, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65,
 	0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x41, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61,
 	0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
 	0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76,
 	0x31, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7,
-	0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x70,
-	0x6f, 0x72, 0x74, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x6f, 0x72,
-	0x74, 0x49, 0x44, 0x12, 0x71, 0x0a, 0x19, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x46,
-	0x72, 0x6f, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x44, 0x4c, 0x69, 0x73, 0x74,
-	0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
-	0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e,
-	0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x46, 0x72, 0x6f, 0x6d, 0x43, 0x68, 0x61, 0x6e,
-	0x6e, 0x65, 0x6c, 0x49, 0x44, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x19, 0x6c, 0x61, 0x75,
-	0x6e, 0x63, 0x68, 0x49, 0x44, 0x46, 0x72, 0x6f, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c,
-	0x49, 0x44, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x86, 0x01, 0x0a, 0x20, 0x6c, 0x61, 0x75, 0x6e, 0x63,
-	0x68, 0x49, 0x44, 0x46, 0x72, 0x6f, 0x6d, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x43,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x04, 0x20, 0x03, 0x28,
-	0x0b, 0x32, 0x34, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69,
-	0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63,
-	0x68, 0x49, 0x44, 0x46, 0x72, 0x6f, 0x6d, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x43,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x20, 0x6c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x46, 0x72, 0x6f, 0x6d, 0x56, 0x65, 0x72, 0x69, 0x66,
-	0x69, 0x65, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x4c, 0x69, 0x73, 0x74, 0x12,
-	0x65, 0x0a, 0x15, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x48, 0x69, 0x73,
-	0x74, 0x6f, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x29,
-	0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72,
-	0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69,
-	0x6e, 0x67, 0x48, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x79, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52,
-	0x15, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x48, 0x69, 0x73, 0x74, 0x6f,
-	0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x62, 0x0a, 0x14, 0x76, 0x65, 0x72, 0x69, 0x66, 0x69,
-	0x65, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x06,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d,
-	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x65,
-	0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x42, 0x04,
-	0xc8, 0xde, 0x1f, 0x00, 0x52, 0x14, 0x76, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x43, 0x6c,
-	0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x62, 0x0a, 0x14, 0x70, 0x72,
-	0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x4c, 0x69,
-	0x73, 0x74, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
+	0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x70,
+	0x6f, 0x72, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x6f,
+	0x72, 0x74, 0x49, 0x64, 0x12, 0x76, 0x0a, 0x1e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69,
+	0x64, 0x5f, 0x66, 0x72, 0x6f, 0x6d, 0x5f, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x5f, 0x69,
+	0x64, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e,
+	0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x46, 0x72,
+	0x6f, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x44, 0x42, 0x04, 0xc8, 0xde, 0x1f,
+	0x00, 0x52, 0x19, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64, 0x46, 0x72, 0x6f, 0x6d, 0x43,
+	0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x64, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x8c, 0x01, 0x0a,
+	0x26, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x5f, 0x66, 0x72, 0x6f, 0x6d, 0x5f,
+	0x76, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x5f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f,
+	0x69, 0x64, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x34, 0x2e,
+	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69,
+	0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x46,
+	0x72, 0x6f, 0x6d, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x49, 0x44, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x20, 0x6c, 0x61, 0x75, 0x6e, 0x63,
+	0x68, 0x49, 0x64, 0x46, 0x72, 0x6f, 0x6d, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x67, 0x0a, 0x17, 0x6d,
+	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x5f, 0x68, 0x69, 0x73, 0x74, 0x6f, 0x72,
+	0x79, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x29, 0x2e, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e,
+	0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67,
+	0x48, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x79, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x15, 0x6d,
+	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x48, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x79,
+	0x4c, 0x69, 0x73, 0x74, 0x12, 0x65, 0x0a, 0x17, 0x76, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64,
+	0x5f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18,
+	0x06, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
+	0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x56,
+	0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x42,
+	0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x14, 0x76, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x65, 0x0a, 0x17, 0x70,
+	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x5f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x69,
+	0x64, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e,
+	0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x43, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x14, 0x70, 0x72,
+	0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x4c, 0x69,
+	0x73, 0x74, 0x42, 0xe8, 0x01, 0x0a, 0x1a, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
 	0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76,
-	0x31, 0x2e, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
-	0x49, 0x44, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x14, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64,
-	0x65, 0x72, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x4c, 0x69, 0x73, 0x74, 0x42, 0xe8,
-	0x01, 0x0a, 0x1a, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d,
-	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x47,
-	0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x42, 0x67,
-	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65,
-	0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74,
-	0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63,
-	0x2f, 0x76, 0x31, 0x3b, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x76,
-	0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4d, 0x58, 0xaa, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72,
-	0x6b, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x56, 0x31,
-	0xca, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74,
-	0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x22, 0x4e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x5c,
-	0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02,
-	0x18, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f,
-	0x72, 0x69, 0x6e, 0x67, 0x63, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x31, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
+	0x01, 0x5a, 0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67,
+	0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69,
+	0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72,
+	0x69, 0x6e, 0x67, 0x63, 0x2f, 0x76, 0x31, 0x3b, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69,
+	0x6e, 0x67, 0x63, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4d, 0x58, 0xaa, 0x02, 0x16, 0x4e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67,
+	0x63, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d,
+	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x22,
+	0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69,
+	0x6e, 0x67, 0x63, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61,
+	0x74, 0x61, 0xea, 0x02, 0x18, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4d, 0x6f,
+	0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1413,11 +1414,11 @@ var file_network_monitoringc_v1_genesis_proto_goTypes = []interface{}{
 }
 var file_network_monitoringc_v1_genesis_proto_depIdxs = []int32{
 	1, // 0: network.monitoringc.v1.GenesisState.params:type_name -> network.monitoringc.v1.Params
-	2, // 1: network.monitoringc.v1.GenesisState.launchIDFromChannelIDList:type_name -> network.monitoringc.v1.LaunchIDFromChannelID
-	3, // 2: network.monitoringc.v1.GenesisState.launchIDFromVerifiedClientIDList:type_name -> network.monitoringc.v1.LaunchIDFromVerifiedClientID
-	4, // 3: network.monitoringc.v1.GenesisState.monitoringHistoryList:type_name -> network.monitoringc.v1.MonitoringHistory
-	5, // 4: network.monitoringc.v1.GenesisState.verifiedClientIDList:type_name -> network.monitoringc.v1.VerifiedClientID
-	6, // 5: network.monitoringc.v1.GenesisState.providerClientIDList:type_name -> network.monitoringc.v1.ProviderClientID
+	2, // 1: network.monitoringc.v1.GenesisState.launch_id_from_channel_id_list:type_name -> network.monitoringc.v1.LaunchIDFromChannelID
+	3, // 2: network.monitoringc.v1.GenesisState.launch_id_from_verified_client_id_list:type_name -> network.monitoringc.v1.LaunchIDFromVerifiedClientID
+	4, // 3: network.monitoringc.v1.GenesisState.monitoring_history_list:type_name -> network.monitoringc.v1.MonitoringHistory
+	5, // 4: network.monitoringc.v1.GenesisState.verified_client_id_list:type_name -> network.monitoringc.v1.VerifiedClientID
+	6, // 5: network.monitoringc.v1.GenesisState.provider_client_id_list:type_name -> network.monitoringc.v1.ProviderClientID
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name

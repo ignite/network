@@ -26,9 +26,9 @@ func (k msgServer) SendRequest(ctx context.Context, msg *types.MsgSendRequest) (
 		return nil, ignterrors.Critical("failed to get launch params")
 	}
 
-	chain, err := k.GetChain(ctx, msg.LaunchID)
+	chain, err := k.GetChain(ctx, msg.LaunchId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchId)
 	}
 
 	// check if request is valid for mainnet
@@ -39,25 +39,25 @@ func (k msgServer) SendRequest(ctx context.Context, msg *types.MsgSendRequest) (
 
 	// no request can be sent if the launch of the chain is triggered
 	if chain.LaunchTriggered {
-		return nil, sdkerrors.Wrapf(types.ErrTriggeredLaunch, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(types.ErrTriggeredLaunch, "%d", msg.LaunchId)
 	}
 
-	coordinator, err := k.profileKeeper.GetCoordinator(ctx, chain.CoordinatorID)
+	coordinator, err := k.profileKeeper.GetCoordinator(ctx, chain.CoordinatorId)
 	if err != nil {
 		return nil, sdkerrors.Wrapf(types.ErrChainInactive,
-			"the chain %d coordinator %d not found", chain.LaunchID, chain.CoordinatorID)
+			"the chain %d coordinator %d not found", chain.LaunchId, chain.CoordinatorId)
 	}
 
 	// only chain with active coordinator can receive a request
 	if !coordinator.Active {
 		return nil, sdkerrors.Wrapf(profiletypes.ErrCoordinatorInactive,
-			"the chain %d coordinator is inactive", chain.LaunchID)
+			"the chain %d coordinator is inactive", chain.LaunchId)
 	}
 
 	// create the request from the content
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	request := types.Request{
-		LaunchID:  msg.LaunchID,
+		LaunchId:  msg.LaunchId,
 		Creator:   msg.Creator,
 		CreatedAt: sdkCtx.BlockTime().Unix(),
 		Content:   msg.Content,
@@ -82,7 +82,7 @@ func (k msgServer) SendRequest(ctx context.Context, msg *types.MsgSendRequest) (
 		}
 	}
 
-	request.RequestID, err = k.AppendRequest(ctx, request)
+	request.RequestId, err = k.AppendRequest(ctx, request)
 	if err != nil {
 		return nil, err
 	}
@@ -95,9 +95,9 @@ func (k msgServer) SendRequest(ctx context.Context, msg *types.MsgSendRequest) (
 	}
 
 	// call request created hook
-	err = k.RequestCreated(ctx, msg.Creator, msg.LaunchID, request.RequestID, msg.Content)
+	err = k.RequestCreated(ctx, msg.Creator, msg.LaunchId, request.RequestId, msg.Content)
 	return &types.MsgSendRequestResponse{
-		RequestID:    request.RequestID,
+		RequestId:    request.RequestId,
 		AutoApproved: approved,
 	}, err
 }

@@ -16,12 +16,12 @@ func TestCoordinatorAddrNotFoundInvariant(t *testing.T) {
 	t.Run("should not break with valid state", func(t *testing.T) {
 		var err error
 		coordinator := sample.Coordinator(r, sample.Address(r))
-		coordinator.CoordinatorID, err = tk.ProfileKeeper.AppendCoordinator(ctx, coordinator)
+		coordinator.CoordinatorId, err = tk.ProfileKeeper.AppendCoordinator(ctx, coordinator)
 		require.NoError(t, err)
 		acc := sample.AccAddress(r)
 		err = tk.ProfileKeeper.CoordinatorByAddress.Set(ctx, acc, types.CoordinatorByAddress{
 			Address:       acc.String(),
-			CoordinatorID: coordinator.CoordinatorID,
+			CoordinatorId: coordinator.CoordinatorId,
 		})
 		require.NoError(t, err)
 		msg, broken := keeper.CoordinatorAddrNotFoundInvariant(tk.ProfileKeeper)(ctx)
@@ -32,7 +32,7 @@ func TestCoordinatorAddrNotFoundInvariant(t *testing.T) {
 		acc := sample.AccAddress(r)
 		err := tk.ProfileKeeper.CoordinatorByAddress.Set(ctx, acc, types.CoordinatorByAddress{
 			Address:       acc.String(),
-			CoordinatorID: 10,
+			CoordinatorId: 10,
 		})
 		require.NoError(t, err)
 		msg, broken := keeper.CoordinatorAddrNotFoundInvariant(tk.ProfileKeeper)(ctx)

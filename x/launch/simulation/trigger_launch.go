@@ -32,12 +32,12 @@ func SimulateMsgTriggerLaunch(
 		}
 
 		// Find coordinator account
-		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, chain.LaunchID)
+		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, chain.LaunchId)
 		if err != nil {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), err.Error()), nil, nil
 		}
 
-		msg = sample.MsgTriggerLaunch(r, simAccount.Address.String(), chain.LaunchID, ctx.BlockTime())
+		msg = sample.MsgTriggerLaunch(r, simAccount.Address.String(), chain.LaunchId, ctx.BlockTime())
 
 		txCtx := simulation.OperationInput{
 			R:               r,

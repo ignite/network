@@ -57,8 +57,8 @@ message MsgUpdateValidatorDescription {
 message MsgUpdateValidatorDescriptionResponse {}
 
 message MsgAddValidatorOperatorAddress {
-  string validatorAddress = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  string operatorAddress = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string validator_address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string operator_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }
 
 message MsgAddValidatorOperatorAddressResponse {}
@@ -70,7 +70,7 @@ message MsgCreateCoordinator {
 }
 
 message MsgCreateCoordinatorResponse {
-  uint64 coordinatorID = 1;
+  uint64 coordinator_id = 1;
 }
 
 message MsgUpdateCoordinatorDescription {
@@ -84,7 +84,7 @@ message MsgUpdateCoordinatorDescriptionResponse {}
 message MsgUpdateCoordinatorAddress {
   option (cosmos.msg.v1.signer) = "address";
   string address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  string newAddress = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string new_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }
 
 message MsgUpdateCoordinatorAddressResponse {}
@@ -95,5 +95,5 @@ message MsgDisableCoordinator {
 }
 
 message MsgDisableCoordinatorResponse {
-  uint64 coordinatorID = 1;
+  uint64 coordinator_id = 1;
 }

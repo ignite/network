@@ -7,6 +7,6 @@ import "network/types/monitoring.proto";
 option go_package = "github.com/ignite/network/x/monitoringc/types";
 
 message MonitoringHistory {
-  uint64 launchID = 1;
-  network.types.MonitoringPacket latestMonitoringPacket = 2 [(gogoproto.nullable) = false];
+  uint64 launch_id = 1;
+  network.types.MonitoringPacket latest_monitoring_packet = 2 [(gogoproto.nullable) = false];
 }

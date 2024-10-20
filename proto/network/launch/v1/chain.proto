@@ -9,34 +9,34 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/ignite/network/x/launch/types";
 
 message Chain {
-  uint64 launchID = 1;
-  uint64 coordinatorID = 2;
-  string genesisChainID = 3;
-  int64 createdAt = 4;
+  uint64 launch_id = 1;
+  uint64 coordinator_id = 2;
+  string genesis_chain_id = 3;
+  int64 created_at = 4;
 
-  string sourceURL = 5;
-  string sourceHash = 6;
+  string source_url = 5;
+  string source_hash = 6;
 
-  InitialGenesis initialGenesis = 7 [(gogoproto.nullable) = false];
+  InitialGenesis initial_genesis = 7 [(gogoproto.nullable) = false];
 
-  bool hasProject = 8;
-  uint64 projectID = 9;
-  bool isMainnet = 10;
+  bool has_project = 8;
+  uint64 project_id = 9;
+  bool is_mainnet = 10;
 
-  bool launchTriggered = 11;
-  google.protobuf.Timestamp launchTime = 12 [
+  bool launch_triggered = 11;
+  google.protobuf.Timestamp launch_time = 12 [
     (gogoproto.nullable) = false,
     (gogoproto.stdtime) = true
   ];
 
-  int64 consumerRevisionHeight = 13;
+  int64 consumer_revision_height = 13;
 
-  bool monitoringConnected = 14;
+  bool monitoring_connected = 14;
 
-  // account balance is the balance given to approved accounts
+  // account_balance is the balance given to approved accounts
   // for this chain.  If not set, the balances used will be those
   // contained in the requests
-  repeated cosmos.base.v1beta1.Coin accountBalance = 15 [
+  repeated cosmos.base.v1beta1.Coin account_balance = 15 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",
@@ -49,9 +49,9 @@ message Chain {
 
 message InitialGenesis {
   oneof source {
-    DefaultInitialGenesis defaultInitialGenesis = 1;
-    GenesisURL genesisURL = 2;
-    GenesisConfig genesisConfig = 3;
+    DefaultInitialGenesis default_initial_genesis = 1;
+    GenesisURL genesis_url = 2;
+    GenesisConfig genesis_config = 3;
   }
 }
 
@@ -66,7 +66,7 @@ message GenesisURL {
 }
 
 // GenesisConfig specifies using a custom genesis from a Ignite CLI config file
-// the file is located in the root specified by sourceURL
+// the file is located in the root specified by source_url
 message GenesisConfig {
   string file = 1;
 }

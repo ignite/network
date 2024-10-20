@@ -16,7 +16,7 @@ func TestNewDefaultInitialGenesis(t *testing.T) {
 		initialDefaultGenesis := initialGenesis.GetDefaultInitialGenesis()
 		require.NotNil(t, initialDefaultGenesis)
 
-		genesisURL := initialGenesis.GetGenesisURL()
+		genesisURL := initialGenesis.GetGenesisUrl()
 		require.Nil(t, genesisURL)
 	})
 }
@@ -27,7 +27,7 @@ func TestNewGenesisURL(t *testing.T) {
 		hash := sample.GenesisHash(r)
 		initialGenesis := types.NewGenesisURL(url, hash)
 
-		genesisURL := initialGenesis.GetGenesisURL()
+		genesisURL := initialGenesis.GetGenesisUrl()
 		require.NotNil(t, genesisURL)
 		require.EqualValues(t, url, genesisURL.Url)
 		require.EqualValues(t, hash, genesisURL.Hash)

@@ -87,11 +87,11 @@ func NewKeeper(
 		bankKeeper:         bankKeeper,
 		launchKeeper:       launchKeeper,
 		Params:             collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
-		MainnetAccount:     collections.NewMap(sb, types.MainnetAccountKey, "mainnetAccount", collections.PairKeyCodec(collections.Uint64Key, sdk.LengthPrefixedAddressKey(sdk.AccAddressKey)), codec.CollValue[types.MainnetAccount](cdc)),
+		MainnetAccount:     collections.NewMap(sb, types.MainnetAccountKey, "mainnet_account", collections.PairKeyCodec(collections.Uint64Key, sdk.LengthPrefixedAddressKey(sdk.AccAddressKey)), codec.CollValue[types.MainnetAccount](cdc)),
 		ProjectSeq:         collections.NewSequence(sb, types.ProjectCountKey, "project_seq"),
 		Project:            collections.NewMap(sb, types.ProjectKey, "project", collections.Uint64Key, codec.CollValue[types.Project](cdc)),
-		ProjectChains:      collections.NewMap(sb, types.ProjectChainsKey, "projectChains", collections.Uint64Key, codec.CollValue[types.ProjectChains](cdc)),
-		TotalShares:        collections.NewItem(sb, types.TotalSharesKey, "totalShares", collections.Uint64Value),
+		ProjectChains:      collections.NewMap(sb, types.ProjectChainsKey, "project_chains", collections.Uint64Key, codec.CollValue[types.ProjectChains](cdc)),
+		TotalShares:        collections.NewItem(sb, types.TotalSharesKey, "total_shares", collections.Uint64Value),
 		// this line is used by starport scaffolding # collection/instantiate
 	}
 

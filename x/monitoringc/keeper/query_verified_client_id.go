@@ -16,7 +16,7 @@ func (q queryServer) GetVerifiedClientID(ctx context.Context, req *types.QueryGe
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	val, err := q.k.VerifiedClientID.Get(ctx, req.LaunchID)
+	val, err := q.k.VerifiedClientID.Get(ctx, req.LaunchId)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, status.Error(codes.NotFound, "not found")
@@ -25,5 +25,5 @@ func (q queryServer) GetVerifiedClientID(ctx context.Context, req *types.QueryGe
 		return nil, status.Error(codes.Internal, "internal error")
 	}
 
-	return &types.QueryGetVerifiedClientIDResponse{VerifiedClientID: val}, nil
+	return &types.QueryGetVerifiedClientIDResponse{VerifiedClientId: val}, nil
 }

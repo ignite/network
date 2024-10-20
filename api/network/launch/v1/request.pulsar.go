@@ -15,22 +15,22 @@ import (
 )
 
 var (
-	md_Request           protoreflect.MessageDescriptor
-	fd_Request_launchID  protoreflect.FieldDescriptor
-	fd_Request_requestID protoreflect.FieldDescriptor
-	fd_Request_creator   protoreflect.FieldDescriptor
-	fd_Request_createdAt protoreflect.FieldDescriptor
-	fd_Request_content   protoreflect.FieldDescriptor
-	fd_Request_status    protoreflect.FieldDescriptor
+	md_Request            protoreflect.MessageDescriptor
+	fd_Request_launch_id  protoreflect.FieldDescriptor
+	fd_Request_request_id protoreflect.FieldDescriptor
+	fd_Request_creator    protoreflect.FieldDescriptor
+	fd_Request_created_at protoreflect.FieldDescriptor
+	fd_Request_content    protoreflect.FieldDescriptor
+	fd_Request_status     protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_request_proto_init()
 	md_Request = File_network_launch_v1_request_proto.Messages().ByName("Request")
-	fd_Request_launchID = md_Request.Fields().ByName("launchID")
-	fd_Request_requestID = md_Request.Fields().ByName("requestID")
+	fd_Request_launch_id = md_Request.Fields().ByName("launch_id")
+	fd_Request_request_id = md_Request.Fields().ByName("request_id")
 	fd_Request_creator = md_Request.Fields().ByName("creator")
-	fd_Request_createdAt = md_Request.Fields().ByName("createdAt")
+	fd_Request_created_at = md_Request.Fields().ByName("created_at")
 	fd_Request_content = md_Request.Fields().ByName("content")
 	fd_Request_status = md_Request.Fields().ByName("status")
 }
@@ -100,15 +100,15 @@ func (x *fastReflection_Request) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_Request) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_Request_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_Request_launch_id, value) {
 			return
 		}
 	}
-	if x.RequestID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.RequestID)
-		if !f(fd_Request_requestID, value) {
+	if x.RequestId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.RequestId)
+		if !f(fd_Request_request_id, value) {
 			return
 		}
 	}
@@ -120,7 +120,7 @@ func (x *fastReflection_Request) Range(f func(protoreflect.FieldDescriptor, prot
 	}
 	if x.CreatedAt != int64(0) {
 		value := protoreflect.ValueOfInt64(x.CreatedAt)
-		if !f(fd_Request_createdAt, value) {
+		if !f(fd_Request_created_at, value) {
 			return
 		}
 	}
@@ -151,13 +151,13 @@ func (x *fastReflection_Request) Range(f func(protoreflect.FieldDescriptor, prot
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_Request) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.launch.v1.Request.launchID":
-		return x.LaunchID != uint64(0)
-	case "network.launch.v1.Request.requestID":
-		return x.RequestID != uint64(0)
+	case "network.launch.v1.Request.launch_id":
+		return x.LaunchId != uint64(0)
+	case "network.launch.v1.Request.request_id":
+		return x.RequestId != uint64(0)
 	case "network.launch.v1.Request.creator":
 		return x.Creator != ""
-	case "network.launch.v1.Request.createdAt":
+	case "network.launch.v1.Request.created_at":
 		return x.CreatedAt != int64(0)
 	case "network.launch.v1.Request.content":
 		return x.Content != nil
@@ -179,13 +179,13 @@ func (x *fastReflection_Request) Has(fd protoreflect.FieldDescriptor) bool {
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Request) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.launch.v1.Request.launchID":
-		x.LaunchID = uint64(0)
-	case "network.launch.v1.Request.requestID":
-		x.RequestID = uint64(0)
+	case "network.launch.v1.Request.launch_id":
+		x.LaunchId = uint64(0)
+	case "network.launch.v1.Request.request_id":
+		x.RequestId = uint64(0)
 	case "network.launch.v1.Request.creator":
 		x.Creator = ""
-	case "network.launch.v1.Request.createdAt":
+	case "network.launch.v1.Request.created_at":
 		x.CreatedAt = int64(0)
 	case "network.launch.v1.Request.content":
 		x.Content = nil
@@ -207,16 +207,16 @@ func (x *fastReflection_Request) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_Request) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.launch.v1.Request.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.Request.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.Request.requestID":
-		value := x.RequestID
+	case "network.launch.v1.Request.request_id":
+		value := x.RequestId
 		return protoreflect.ValueOfUint64(value)
 	case "network.launch.v1.Request.creator":
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.Request.createdAt":
+	case "network.launch.v1.Request.created_at":
 		value := x.CreatedAt
 		return protoreflect.ValueOfInt64(value)
 	case "network.launch.v1.Request.content":
@@ -245,13 +245,13 @@ func (x *fastReflection_Request) Get(descriptor protoreflect.FieldDescriptor) pr
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Request) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.launch.v1.Request.launchID":
-		x.LaunchID = value.Uint()
-	case "network.launch.v1.Request.requestID":
-		x.RequestID = value.Uint()
+	case "network.launch.v1.Request.launch_id":
+		x.LaunchId = value.Uint()
+	case "network.launch.v1.Request.request_id":
+		x.RequestId = value.Uint()
 	case "network.launch.v1.Request.creator":
 		x.Creator = value.Interface().(string)
-	case "network.launch.v1.Request.createdAt":
+	case "network.launch.v1.Request.created_at":
 		x.CreatedAt = value.Int()
 	case "network.launch.v1.Request.content":
 		x.Content = value.Message().Interface().(*RequestContent)
@@ -282,14 +282,14 @@ func (x *fastReflection_Request) Mutable(fd protoreflect.FieldDescriptor) protor
 			x.Content = new(RequestContent)
 		}
 		return protoreflect.ValueOfMessage(x.Content.ProtoReflect())
-	case "network.launch.v1.Request.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.Request is not mutable"))
-	case "network.launch.v1.Request.requestID":
-		panic(fmt.Errorf("field requestID of message network.launch.v1.Request is not mutable"))
+	case "network.launch.v1.Request.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.Request is not mutable"))
+	case "network.launch.v1.Request.request_id":
+		panic(fmt.Errorf("field request_id of message network.launch.v1.Request is not mutable"))
 	case "network.launch.v1.Request.creator":
 		panic(fmt.Errorf("field creator of message network.launch.v1.Request is not mutable"))
-	case "network.launch.v1.Request.createdAt":
-		panic(fmt.Errorf("field createdAt of message network.launch.v1.Request is not mutable"))
+	case "network.launch.v1.Request.created_at":
+		panic(fmt.Errorf("field created_at of message network.launch.v1.Request is not mutable"))
 	case "network.launch.v1.Request.status":
 		panic(fmt.Errorf("field status of message network.launch.v1.Request is not mutable"))
 	default:
@@ -305,13 +305,13 @@ func (x *fastReflection_Request) Mutable(fd protoreflect.FieldDescriptor) protor
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_Request) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.Request.launchID":
+	case "network.launch.v1.Request.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.Request.requestID":
+	case "network.launch.v1.Request.request_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.launch.v1.Request.creator":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.Request.createdAt":
+	case "network.launch.v1.Request.created_at":
 		return protoreflect.ValueOfInt64(int64(0))
 	case "network.launch.v1.Request.content":
 		m := new(RequestContent)
@@ -387,11 +387,11 @@ func (x *fastReflection_Request) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
-		if x.RequestID != 0 {
-			n += 1 + runtime.Sov(uint64(x.RequestID))
+		if x.RequestId != 0 {
+			n += 1 + runtime.Sov(uint64(x.RequestId))
 		}
 		l = len(x.Creator)
 		if l > 0 {
@@ -467,13 +467,13 @@ func (x *fastReflection_Request) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x1a
 		}
-		if x.RequestID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.RequestID))
+		if x.RequestId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.RequestId))
 			i--
 			dAtA[i] = 0x10
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -528,9 +528,9 @@ func (x *fastReflection_Request) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -540,16 +540,16 @@ func (x *fastReflection_Request) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RequestID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field RequestId", wireType)
 				}
-				x.RequestID = 0
+				x.RequestId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -559,7 +559,7 @@ func (x *fastReflection_Request) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.RequestID |= uint64(b&0x7F) << shift
+					x.RequestId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -706,24 +706,24 @@ func (x *fastReflection_Request) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_RequestContent                  protoreflect.MessageDescriptor
-	fd_RequestContent_genesisAccount   protoreflect.FieldDescriptor
-	fd_RequestContent_vestingAccount   protoreflect.FieldDescriptor
-	fd_RequestContent_genesisValidator protoreflect.FieldDescriptor
-	fd_RequestContent_accountRemoval   protoreflect.FieldDescriptor
-	fd_RequestContent_validatorRemoval protoreflect.FieldDescriptor
-	fd_RequestContent_paramChange      protoreflect.FieldDescriptor
+	md_RequestContent                   protoreflect.MessageDescriptor
+	fd_RequestContent_genesis_account   protoreflect.FieldDescriptor
+	fd_RequestContent_vesting_account   protoreflect.FieldDescriptor
+	fd_RequestContent_genesis_validator protoreflect.FieldDescriptor
+	fd_RequestContent_account_removal   protoreflect.FieldDescriptor
+	fd_RequestContent_validator_removal protoreflect.FieldDescriptor
+	fd_RequestContent_param_change      protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_request_proto_init()
 	md_RequestContent = File_network_launch_v1_request_proto.Messages().ByName("RequestContent")
-	fd_RequestContent_genesisAccount = md_RequestContent.Fields().ByName("genesisAccount")
-	fd_RequestContent_vestingAccount = md_RequestContent.Fields().ByName("vestingAccount")
-	fd_RequestContent_genesisValidator = md_RequestContent.Fields().ByName("genesisValidator")
-	fd_RequestContent_accountRemoval = md_RequestContent.Fields().ByName("accountRemoval")
-	fd_RequestContent_validatorRemoval = md_RequestContent.Fields().ByName("validatorRemoval")
-	fd_RequestContent_paramChange = md_RequestContent.Fields().ByName("paramChange")
+	fd_RequestContent_genesis_account = md_RequestContent.Fields().ByName("genesis_account")
+	fd_RequestContent_vesting_account = md_RequestContent.Fields().ByName("vesting_account")
+	fd_RequestContent_genesis_validator = md_RequestContent.Fields().ByName("genesis_validator")
+	fd_RequestContent_account_removal = md_RequestContent.Fields().ByName("account_removal")
+	fd_RequestContent_validator_removal = md_RequestContent.Fields().ByName("validator_removal")
+	fd_RequestContent_param_change = md_RequestContent.Fields().ByName("param_change")
 }
 
 var _ protoreflect.Message = (*fastReflection_RequestContent)(nil)
@@ -796,37 +796,37 @@ func (x *fastReflection_RequestContent) Range(f func(protoreflect.FieldDescripto
 		case *RequestContent_GenesisAccount:
 			v := o.GenesisAccount
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_RequestContent_genesisAccount, value) {
+			if !f(fd_RequestContent_genesis_account, value) {
 				return
 			}
 		case *RequestContent_VestingAccount:
 			v := o.VestingAccount
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_RequestContent_vestingAccount, value) {
+			if !f(fd_RequestContent_vesting_account, value) {
 				return
 			}
 		case *RequestContent_GenesisValidator:
 			v := o.GenesisValidator
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_RequestContent_genesisValidator, value) {
+			if !f(fd_RequestContent_genesis_validator, value) {
 				return
 			}
 		case *RequestContent_AccountRemoval:
 			v := o.AccountRemoval
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_RequestContent_accountRemoval, value) {
+			if !f(fd_RequestContent_account_removal, value) {
 				return
 			}
 		case *RequestContent_ValidatorRemoval:
 			v := o.ValidatorRemoval
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_RequestContent_validatorRemoval, value) {
+			if !f(fd_RequestContent_validator_removal, value) {
 				return
 			}
 		case *RequestContent_ParamChange:
 			v := o.ParamChange
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_RequestContent_paramChange, value) {
+			if !f(fd_RequestContent_param_change, value) {
 				return
 			}
 		}
@@ -846,7 +846,7 @@ func (x *fastReflection_RequestContent) Range(f func(protoreflect.FieldDescripto
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_RequestContent) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestContent.genesisAccount":
+	case "network.launch.v1.RequestContent.genesis_account":
 		if x.Content == nil {
 			return false
 		} else if _, ok := x.Content.(*RequestContent_GenesisAccount); ok {
@@ -854,7 +854,7 @@ func (x *fastReflection_RequestContent) Has(fd protoreflect.FieldDescriptor) boo
 		} else {
 			return false
 		}
-	case "network.launch.v1.RequestContent.vestingAccount":
+	case "network.launch.v1.RequestContent.vesting_account":
 		if x.Content == nil {
 			return false
 		} else if _, ok := x.Content.(*RequestContent_VestingAccount); ok {
@@ -862,7 +862,7 @@ func (x *fastReflection_RequestContent) Has(fd protoreflect.FieldDescriptor) boo
 		} else {
 			return false
 		}
-	case "network.launch.v1.RequestContent.genesisValidator":
+	case "network.launch.v1.RequestContent.genesis_validator":
 		if x.Content == nil {
 			return false
 		} else if _, ok := x.Content.(*RequestContent_GenesisValidator); ok {
@@ -870,7 +870,7 @@ func (x *fastReflection_RequestContent) Has(fd protoreflect.FieldDescriptor) boo
 		} else {
 			return false
 		}
-	case "network.launch.v1.RequestContent.accountRemoval":
+	case "network.launch.v1.RequestContent.account_removal":
 		if x.Content == nil {
 			return false
 		} else if _, ok := x.Content.(*RequestContent_AccountRemoval); ok {
@@ -878,7 +878,7 @@ func (x *fastReflection_RequestContent) Has(fd protoreflect.FieldDescriptor) boo
 		} else {
 			return false
 		}
-	case "network.launch.v1.RequestContent.validatorRemoval":
+	case "network.launch.v1.RequestContent.validator_removal":
 		if x.Content == nil {
 			return false
 		} else if _, ok := x.Content.(*RequestContent_ValidatorRemoval); ok {
@@ -886,7 +886,7 @@ func (x *fastReflection_RequestContent) Has(fd protoreflect.FieldDescriptor) boo
 		} else {
 			return false
 		}
-	case "network.launch.v1.RequestContent.paramChange":
+	case "network.launch.v1.RequestContent.param_change":
 		if x.Content == nil {
 			return false
 		} else if _, ok := x.Content.(*RequestContent_ParamChange); ok {
@@ -910,17 +910,17 @@ func (x *fastReflection_RequestContent) Has(fd protoreflect.FieldDescriptor) boo
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_RequestContent) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestContent.genesisAccount":
+	case "network.launch.v1.RequestContent.genesis_account":
 		x.Content = nil
-	case "network.launch.v1.RequestContent.vestingAccount":
+	case "network.launch.v1.RequestContent.vesting_account":
 		x.Content = nil
-	case "network.launch.v1.RequestContent.genesisValidator":
+	case "network.launch.v1.RequestContent.genesis_validator":
 		x.Content = nil
-	case "network.launch.v1.RequestContent.accountRemoval":
+	case "network.launch.v1.RequestContent.account_removal":
 		x.Content = nil
-	case "network.launch.v1.RequestContent.validatorRemoval":
+	case "network.launch.v1.RequestContent.validator_removal":
 		x.Content = nil
-	case "network.launch.v1.RequestContent.paramChange":
+	case "network.launch.v1.RequestContent.param_change":
 		x.Content = nil
 	default:
 		if fd.IsExtension() {
@@ -938,7 +938,7 @@ func (x *fastReflection_RequestContent) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_RequestContent) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.launch.v1.RequestContent.genesisAccount":
+	case "network.launch.v1.RequestContent.genesis_account":
 		if x.Content == nil {
 			return protoreflect.ValueOfMessage((*GenesisAccount)(nil).ProtoReflect())
 		} else if v, ok := x.Content.(*RequestContent_GenesisAccount); ok {
@@ -946,7 +946,7 @@ func (x *fastReflection_RequestContent) Get(descriptor protoreflect.FieldDescrip
 		} else {
 			return protoreflect.ValueOfMessage((*GenesisAccount)(nil).ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.vestingAccount":
+	case "network.launch.v1.RequestContent.vesting_account":
 		if x.Content == nil {
 			return protoreflect.ValueOfMessage((*VestingAccount)(nil).ProtoReflect())
 		} else if v, ok := x.Content.(*RequestContent_VestingAccount); ok {
@@ -954,7 +954,7 @@ func (x *fastReflection_RequestContent) Get(descriptor protoreflect.FieldDescrip
 		} else {
 			return protoreflect.ValueOfMessage((*VestingAccount)(nil).ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.genesisValidator":
+	case "network.launch.v1.RequestContent.genesis_validator":
 		if x.Content == nil {
 			return protoreflect.ValueOfMessage((*GenesisValidator)(nil).ProtoReflect())
 		} else if v, ok := x.Content.(*RequestContent_GenesisValidator); ok {
@@ -962,7 +962,7 @@ func (x *fastReflection_RequestContent) Get(descriptor protoreflect.FieldDescrip
 		} else {
 			return protoreflect.ValueOfMessage((*GenesisValidator)(nil).ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.accountRemoval":
+	case "network.launch.v1.RequestContent.account_removal":
 		if x.Content == nil {
 			return protoreflect.ValueOfMessage((*AccountRemoval)(nil).ProtoReflect())
 		} else if v, ok := x.Content.(*RequestContent_AccountRemoval); ok {
@@ -970,7 +970,7 @@ func (x *fastReflection_RequestContent) Get(descriptor protoreflect.FieldDescrip
 		} else {
 			return protoreflect.ValueOfMessage((*AccountRemoval)(nil).ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.validatorRemoval":
+	case "network.launch.v1.RequestContent.validator_removal":
 		if x.Content == nil {
 			return protoreflect.ValueOfMessage((*ValidatorRemoval)(nil).ProtoReflect())
 		} else if v, ok := x.Content.(*RequestContent_ValidatorRemoval); ok {
@@ -978,7 +978,7 @@ func (x *fastReflection_RequestContent) Get(descriptor protoreflect.FieldDescrip
 		} else {
 			return protoreflect.ValueOfMessage((*ValidatorRemoval)(nil).ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.paramChange":
+	case "network.launch.v1.RequestContent.param_change":
 		if x.Content == nil {
 			return protoreflect.ValueOfMessage((*ParamChange)(nil).ProtoReflect())
 		} else if v, ok := x.Content.(*RequestContent_ParamChange); ok {
@@ -1006,22 +1006,22 @@ func (x *fastReflection_RequestContent) Get(descriptor protoreflect.FieldDescrip
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_RequestContent) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestContent.genesisAccount":
+	case "network.launch.v1.RequestContent.genesis_account":
 		cv := value.Message().Interface().(*GenesisAccount)
 		x.Content = &RequestContent_GenesisAccount{GenesisAccount: cv}
-	case "network.launch.v1.RequestContent.vestingAccount":
+	case "network.launch.v1.RequestContent.vesting_account":
 		cv := value.Message().Interface().(*VestingAccount)
 		x.Content = &RequestContent_VestingAccount{VestingAccount: cv}
-	case "network.launch.v1.RequestContent.genesisValidator":
+	case "network.launch.v1.RequestContent.genesis_validator":
 		cv := value.Message().Interface().(*GenesisValidator)
 		x.Content = &RequestContent_GenesisValidator{GenesisValidator: cv}
-	case "network.launch.v1.RequestContent.accountRemoval":
+	case "network.launch.v1.RequestContent.account_removal":
 		cv := value.Message().Interface().(*AccountRemoval)
 		x.Content = &RequestContent_AccountRemoval{AccountRemoval: cv}
-	case "network.launch.v1.RequestContent.validatorRemoval":
+	case "network.launch.v1.RequestContent.validator_removal":
 		cv := value.Message().Interface().(*ValidatorRemoval)
 		x.Content = &RequestContent_ValidatorRemoval{ValidatorRemoval: cv}
-	case "network.launch.v1.RequestContent.paramChange":
+	case "network.launch.v1.RequestContent.param_change":
 		cv := value.Message().Interface().(*ParamChange)
 		x.Content = &RequestContent_ParamChange{ParamChange: cv}
 	default:
@@ -1044,7 +1044,7 @@ func (x *fastReflection_RequestContent) Set(fd protoreflect.FieldDescriptor, val
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_RequestContent) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestContent.genesisAccount":
+	case "network.launch.v1.RequestContent.genesis_account":
 		if x.Content == nil {
 			value := &GenesisAccount{}
 			oneofValue := &RequestContent_GenesisAccount{GenesisAccount: value}
@@ -1060,7 +1060,7 @@ func (x *fastReflection_RequestContent) Mutable(fd protoreflect.FieldDescriptor)
 			x.Content = oneofValue
 			return protoreflect.ValueOfMessage(value.ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.vestingAccount":
+	case "network.launch.v1.RequestContent.vesting_account":
 		if x.Content == nil {
 			value := &VestingAccount{}
 			oneofValue := &RequestContent_VestingAccount{VestingAccount: value}
@@ -1076,7 +1076,7 @@ func (x *fastReflection_RequestContent) Mutable(fd protoreflect.FieldDescriptor)
 			x.Content = oneofValue
 			return protoreflect.ValueOfMessage(value.ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.genesisValidator":
+	case "network.launch.v1.RequestContent.genesis_validator":
 		if x.Content == nil {
 			value := &GenesisValidator{}
 			oneofValue := &RequestContent_GenesisValidator{GenesisValidator: value}
@@ -1092,7 +1092,7 @@ func (x *fastReflection_RequestContent) Mutable(fd protoreflect.FieldDescriptor)
 			x.Content = oneofValue
 			return protoreflect.ValueOfMessage(value.ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.accountRemoval":
+	case "network.launch.v1.RequestContent.account_removal":
 		if x.Content == nil {
 			value := &AccountRemoval{}
 			oneofValue := &RequestContent_AccountRemoval{AccountRemoval: value}
@@ -1108,7 +1108,7 @@ func (x *fastReflection_RequestContent) Mutable(fd protoreflect.FieldDescriptor)
 			x.Content = oneofValue
 			return protoreflect.ValueOfMessage(value.ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.validatorRemoval":
+	case "network.launch.v1.RequestContent.validator_removal":
 		if x.Content == nil {
 			value := &ValidatorRemoval{}
 			oneofValue := &RequestContent_ValidatorRemoval{ValidatorRemoval: value}
@@ -1124,7 +1124,7 @@ func (x *fastReflection_RequestContent) Mutable(fd protoreflect.FieldDescriptor)
 			x.Content = oneofValue
 			return protoreflect.ValueOfMessage(value.ProtoReflect())
 		}
-	case "network.launch.v1.RequestContent.paramChange":
+	case "network.launch.v1.RequestContent.param_change":
 		if x.Content == nil {
 			value := &ParamChange{}
 			oneofValue := &RequestContent_ParamChange{ParamChange: value}
@@ -1153,22 +1153,22 @@ func (x *fastReflection_RequestContent) Mutable(fd protoreflect.FieldDescriptor)
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_RequestContent) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestContent.genesisAccount":
+	case "network.launch.v1.RequestContent.genesis_account":
 		value := &GenesisAccount{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.RequestContent.vestingAccount":
+	case "network.launch.v1.RequestContent.vesting_account":
 		value := &VestingAccount{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.RequestContent.genesisValidator":
+	case "network.launch.v1.RequestContent.genesis_validator":
 		value := &GenesisValidator{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.RequestContent.accountRemoval":
+	case "network.launch.v1.RequestContent.account_removal":
 		value := &AccountRemoval{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.RequestContent.validatorRemoval":
+	case "network.launch.v1.RequestContent.validator_removal":
 		value := &ValidatorRemoval{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.RequestContent.paramChange":
+	case "network.launch.v1.RequestContent.param_change":
 		value := &ParamChange{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
@@ -1190,17 +1190,17 @@ func (x *fastReflection_RequestContent) WhichOneof(d protoreflect.OneofDescripto
 		}
 		switch x.Content.(type) {
 		case *RequestContent_GenesisAccount:
-			return x.Descriptor().Fields().ByName("genesisAccount")
+			return x.Descriptor().Fields().ByName("genesis_account")
 		case *RequestContent_VestingAccount:
-			return x.Descriptor().Fields().ByName("vestingAccount")
+			return x.Descriptor().Fields().ByName("vesting_account")
 		case *RequestContent_GenesisValidator:
-			return x.Descriptor().Fields().ByName("genesisValidator")
+			return x.Descriptor().Fields().ByName("genesis_validator")
 		case *RequestContent_AccountRemoval:
-			return x.Descriptor().Fields().ByName("accountRemoval")
+			return x.Descriptor().Fields().ByName("account_removal")
 		case *RequestContent_ValidatorRemoval:
-			return x.Descriptor().Fields().ByName("validatorRemoval")
+			return x.Descriptor().Fields().ByName("validator_removal")
 		case *RequestContent_ParamChange:
-			return x.Descriptor().Fields().ByName("paramChange")
+			return x.Descriptor().Fields().ByName("param_change")
 		}
 	default:
 		panic(fmt.Errorf("%s is not a oneof field in network.launch.v1.RequestContent", d.FullName()))
@@ -2606,10 +2606,10 @@ type Request struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LaunchID  uint64          `protobuf:"varint,1,opt,name=launchID,proto3" json:"launchID,omitempty"`
-	RequestID uint64          `protobuf:"varint,2,opt,name=requestID,proto3" json:"requestID,omitempty"`
+	LaunchId  uint64          `protobuf:"varint,1,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
+	RequestId uint64          `protobuf:"varint,2,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
 	Creator   string          `protobuf:"bytes,3,opt,name=creator,proto3" json:"creator,omitempty"`
-	CreatedAt int64           `protobuf:"varint,4,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	CreatedAt int64           `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	Content   *RequestContent `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
 	Status    Request_Status  `protobuf:"varint,6,opt,name=status,proto3,enum=network.launch.v1.Request_Status" json:"status,omitempty"`
 }
@@ -2634,16 +2634,16 @@ func (*Request) Descriptor() ([]byte, []int) {
 	return file_network_launch_v1_request_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Request) GetLaunchID() uint64 {
+func (x *Request) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
 
-func (x *Request) GetRequestID() uint64 {
+func (x *Request) GetRequestId() uint64 {
 	if x != nil {
-		return x.RequestID
+		return x.RequestId
 	}
 	return 0
 }
@@ -2766,27 +2766,27 @@ type isRequestContent_Content interface {
 }
 
 type RequestContent_GenesisAccount struct {
-	GenesisAccount *GenesisAccount `protobuf:"bytes,1,opt,name=genesisAccount,proto3,oneof"`
+	GenesisAccount *GenesisAccount `protobuf:"bytes,1,opt,name=genesis_account,json=genesisAccount,proto3,oneof"`
 }
 
 type RequestContent_VestingAccount struct {
-	VestingAccount *VestingAccount `protobuf:"bytes,2,opt,name=vestingAccount,proto3,oneof"`
+	VestingAccount *VestingAccount `protobuf:"bytes,2,opt,name=vesting_account,json=vestingAccount,proto3,oneof"`
 }
 
 type RequestContent_GenesisValidator struct {
-	GenesisValidator *GenesisValidator `protobuf:"bytes,3,opt,name=genesisValidator,proto3,oneof"`
+	GenesisValidator *GenesisValidator `protobuf:"bytes,3,opt,name=genesis_validator,json=genesisValidator,proto3,oneof"`
 }
 
 type RequestContent_AccountRemoval struct {
-	AccountRemoval *AccountRemoval `protobuf:"bytes,4,opt,name=accountRemoval,proto3,oneof"`
+	AccountRemoval *AccountRemoval `protobuf:"bytes,4,opt,name=account_removal,json=accountRemoval,proto3,oneof"`
 }
 
 type RequestContent_ValidatorRemoval struct {
-	ValidatorRemoval *ValidatorRemoval `protobuf:"bytes,5,opt,name=validatorRemoval,proto3,oneof"`
+	ValidatorRemoval *ValidatorRemoval `protobuf:"bytes,5,opt,name=validator_removal,json=validatorRemoval,proto3,oneof"`
 }
 
 type RequestContent_ParamChange struct {
-	ParamChange *ParamChange `protobuf:"bytes,6,opt,name=paramChange,proto3,oneof"`
+	ParamChange *ParamChange `protobuf:"bytes,6,opt,name=param_change,json=paramChange,proto3,oneof"`
 }
 
 func (*RequestContent_GenesisAccount) isRequestContent_Content() {}
@@ -2890,81 +2890,81 @@ var file_network_launch_v1_request_proto_rawDesc = []byte{
 	0x61, 0x6d, 0x5f, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
 	0x27, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f,
 	0x76, 0x31, 0x2f, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xc6, 0x02, 0x0a, 0x07, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44,
-	0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x44, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x04, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x44, 0x12, 0x32,
-	0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x42,
-	0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72,
-	0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74,
-	0x6f, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x18,
-	0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74,
-	0x12, 0x41, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e,
-	0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x6e,
-	0x74, 0x65, 0x6e, 0x74, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74,
-	0x65, 0x6e, 0x74, 0x12, 0x39, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06, 0x20,
-	0x01, 0x28, 0x0e, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e,
-	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x31,
-	0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x45, 0x4e, 0x44,
-	0x49, 0x4e, 0x47, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x41, 0x50, 0x50, 0x52, 0x4f, 0x56, 0x45,
-	0x44, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x52, 0x45, 0x4a, 0x45, 0x43, 0x54, 0x45, 0x44, 0x10,
-	0x02, 0x22, 0xec, 0x03, 0x0a, 0x0e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x6e,
-	0x74, 0x65, 0x6e, 0x74, 0x12, 0x4b, 0x0a, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x41,
-	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e,
-	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31,
-	0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x48,
-	0x00, 0x52, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x12, 0x4b, 0x0a, 0x0e, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f,
-	0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x65,
-	0x73, 0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x48, 0x00, 0x52, 0x0e,
-	0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x51,
-	0x0a, 0x10, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74,
-	0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x6e,
-	0x65, 0x73, 0x69, 0x73, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x48, 0x00, 0x52,
-	0x10, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f,
-	0x72, 0x12, 0x4b, 0x0a, 0x0e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x6d, 0x6f,
-	0x76, 0x61, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63,
-	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x48, 0x00, 0x52, 0x0e,
-	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x12, 0x51,
-	0x0a, 0x10, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x6d, 0x6f, 0x76,
-	0x61, 0x6c, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x61, 0x6c,
-	0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x48, 0x00, 0x52,
-	0x10, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x61,
-	0x6c, 0x12, 0x42, 0x0a, 0x0b, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65,
-	0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
-	0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x48, 0x00, 0x52, 0x0b, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x43,
-	0x68, 0x61, 0x6e, 0x67, 0x65, 0x42, 0x09, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
-	0x22, 0x44, 0x0a, 0x0e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x6d, 0x6f, 0x76,
-	0x61, 0x6c, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e,
-	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x4c, 0x0a, 0x10, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61,
-	0x74, 0x6f, 0x72, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x12, 0x38, 0x0a, 0x0a, 0x76, 0x61,
-	0x6c, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18,
-	0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65,
-	0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x0a, 0x76, 0x61, 0x6c, 0x41, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x42, 0xc5, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74,
-	0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x42, 0x0c,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x38,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74,
-	0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f, 0x76, 0x31, 0x3b,
-	0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4c, 0x58, 0xaa, 0x02,
-	0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e,
-	0x56, 0x31, 0xca, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75,
-	0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
-	0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x13, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
-	0x3a, 0x3a, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xc9, 0x02, 0x0a, 0x07, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49,
+	0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64,
+	0x12, 0x32, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64,
+	0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x63, 0x72, 0x65,
+	0x61, 0x74, 0x6f, 0x72, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f,
+	0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x64, 0x41, 0x74, 0x12, 0x41, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c,
+	0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x07, 0x63,
+	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x12, 0x39, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x18, 0x06, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x22, 0x31, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x0b, 0x0a, 0x07, 0x50,
+	0x45, 0x4e, 0x44, 0x49, 0x4e, 0x47, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x41, 0x50, 0x50, 0x52,
+	0x4f, 0x56, 0x45, 0x44, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x52, 0x45, 0x4a, 0x45, 0x43, 0x54,
+	0x45, 0x44, 0x10, 0x02, 0x22, 0xf2, 0x03, 0x0a, 0x0e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x12, 0x4c, 0x0a, 0x0f, 0x67, 0x65, 0x6e, 0x65, 0x73,
+	0x69, 0x73, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x41, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x48, 0x00, 0x52, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x41, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x4c, 0x0a, 0x0f, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67,
+	0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21,
+	0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e,
+	0x76, 0x31, 0x2e, 0x56, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x48, 0x00, 0x52, 0x0e, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x12, 0x52, 0x0a, 0x11, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x5f, 0x76,
+	0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23,
+	0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e,
+	0x76, 0x31, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61,
+	0x74, 0x6f, 0x72, 0x48, 0x00, 0x52, 0x10, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x56, 0x61,
+	0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x4c, 0x0a, 0x0f, 0x61, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x5f, 0x72, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x6d, 0x6f,
+	0x76, 0x61, 0x6c, 0x48, 0x00, 0x52, 0x0e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65,
+	0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x12, 0x52, 0x0a, 0x11, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74,
+	0x6f, 0x72, 0x5f, 0x72, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x23, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63,
+	0x68, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x65,
+	0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x48, 0x00, 0x52, 0x10, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74,
+	0x6f, 0x72, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x12, 0x43, 0x0a, 0x0c, 0x70, 0x61, 0x72,
+	0x61, 0x6d, 0x5f, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x1e, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x48,
+	0x00, 0x52, 0x0b, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x42, 0x09,
+	0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x44, 0x0a, 0x0e, 0x41, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x61, 0x6c, 0x12, 0x32, 0x0a, 0x07, 0x61,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4,
+	0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22,
+	0x4c, 0x0a, 0x10, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x52, 0x65, 0x6d, 0x6f,
+	0x76, 0x61, 0x6c, 0x12, 0x38, 0x0a, 0x0a, 0x76, 0x61, 0x6c, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e,
+	0x67, 0x52, 0x0a, 0x76, 0x61, 0x6c, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x42, 0xc5, 0x01,
+	0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61,
+	0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x38, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6c,
+	0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f, 0x76, 0x31, 0x3b, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x76,
+	0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4c, 0x58, 0xaa, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72,
+	0x6b, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x11, 0x4e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0xe2,
+	0x02, 0x1d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea,
+	0x02, 0x13, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4c, 0x61, 0x75, 0x6e, 0x63,
+	0x68, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2995,12 +2995,12 @@ var file_network_launch_v1_request_proto_goTypes = []interface{}{
 var file_network_launch_v1_request_proto_depIdxs = []int32{
 	2, // 0: network.launch.v1.Request.content:type_name -> network.launch.v1.RequestContent
 	0, // 1: network.launch.v1.Request.status:type_name -> network.launch.v1.Request.Status
-	5, // 2: network.launch.v1.RequestContent.genesisAccount:type_name -> network.launch.v1.GenesisAccount
-	6, // 3: network.launch.v1.RequestContent.vestingAccount:type_name -> network.launch.v1.VestingAccount
-	7, // 4: network.launch.v1.RequestContent.genesisValidator:type_name -> network.launch.v1.GenesisValidator
-	3, // 5: network.launch.v1.RequestContent.accountRemoval:type_name -> network.launch.v1.AccountRemoval
-	4, // 6: network.launch.v1.RequestContent.validatorRemoval:type_name -> network.launch.v1.ValidatorRemoval
-	8, // 7: network.launch.v1.RequestContent.paramChange:type_name -> network.launch.v1.ParamChange
+	5, // 2: network.launch.v1.RequestContent.genesis_account:type_name -> network.launch.v1.GenesisAccount
+	6, // 3: network.launch.v1.RequestContent.vesting_account:type_name -> network.launch.v1.VestingAccount
+	7, // 4: network.launch.v1.RequestContent.genesis_validator:type_name -> network.launch.v1.GenesisValidator
+	3, // 5: network.launch.v1.RequestContent.account_removal:type_name -> network.launch.v1.AccountRemoval
+	4, // 6: network.launch.v1.RequestContent.validator_removal:type_name -> network.launch.v1.ValidatorRemoval
+	8, // 7: network.launch.v1.RequestContent.param_change:type_name -> network.launch.v1.ParamChange
 	8, // [8:8] is the sub-list for method output_type
 	8, // [8:8] is the sub-list for method input_type
 	8, // [8:8] is the sub-list for extension type_name

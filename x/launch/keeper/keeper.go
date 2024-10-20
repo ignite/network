@@ -72,12 +72,12 @@ func NewKeeper(
 		Params:             collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
 		ChainSeq:           collections.NewSequence(sb, types.ChainCountKey, "chain_seq"),
 		Chain:              collections.NewMap(sb, types.ChainKey, "chain", collections.Uint64Key, codec.CollValue[types.Chain](cdc)),
-		GenesisAccount:     collections.NewMap(sb, types.GenesisAccountKey, "genesisAccount", collections.PairKeyCodec(collections.Uint64Key, sdk.LengthPrefixedAddressKey(sdk.AccAddressKey)), codec.CollValue[types.GenesisAccount](cdc)),
-		GenesisValidator:   collections.NewMap(sb, types.GenesisValidatorKey, "genesisValidator", collections.PairKeyCodec(collections.Uint64Key, sdk.LengthPrefixedAddressKey(sdk.AccAddressKey)), codec.CollValue[types.GenesisValidator](cdc)),
-		VestingAccount:     collections.NewMap(sb, types.VestingAccountKey, "vestingAccount", collections.PairKeyCodec(collections.Uint64Key, sdk.LengthPrefixedAddressKey(sdk.AccAddressKey)), codec.CollValue[types.VestingAccount](cdc)),
+		GenesisAccount:     collections.NewMap(sb, types.GenesisAccountKey, "genesis_account", collections.PairKeyCodec(collections.Uint64Key, sdk.LengthPrefixedAddressKey(sdk.AccAddressKey)), codec.CollValue[types.GenesisAccount](cdc)),
+		GenesisValidator:   collections.NewMap(sb, types.GenesisValidatorKey, "genesis_validator", collections.PairKeyCodec(collections.Uint64Key, sdk.LengthPrefixedAddressKey(sdk.AccAddressKey)), codec.CollValue[types.GenesisValidator](cdc)),
+		VestingAccount:     collections.NewMap(sb, types.VestingAccountKey, "vesting_account", collections.PairKeyCodec(collections.Uint64Key, sdk.LengthPrefixedAddressKey(sdk.AccAddressKey)), codec.CollValue[types.VestingAccount](cdc)),
 		RequestSeq:         collections.NewMap(sb, types.RequestCountKey, "request_seq", collections.Uint64Key, collections.Uint64Value),
 		Request:            collections.NewMap(sb, types.RequestKey, "request", collections.PairKeyCodec(collections.Uint64Key, collections.Uint64Key), codec.CollValue[types.Request](cdc)),
-		ParamChange:        collections.NewMap(sb, types.ParamChangeKey, "paramChange", collections.PairKeyCodec(collections.Uint64Key, collections.StringKey), codec.CollValue[types.ParamChange](cdc)),
+		ParamChange:        collections.NewMap(sb, types.ParamChangeKey, "param_change", collections.PairKeyCodec(collections.Uint64Key, collections.StringKey), codec.CollValue[types.ParamChange](cdc)),
 		// this line is used by starport scaffolding # collection/instantiate
 	}
 
@@ -156,5 +156,5 @@ func (k Keeper) EnableMonitoringConnection(ctx context.Context, launchID uint64)
 		return types.ErrChainMonitoringConnected
 	}
 	chain.MonitoringConnected = true
-	return k.Chain.Set(ctx, chain.LaunchID, chain)
+	return k.Chain.Set(ctx, chain.LaunchId, chain)
 }

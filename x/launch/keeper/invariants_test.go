@@ -51,7 +51,7 @@ func TestInvalidChainInvariant(t *testing.T) {
 		project := sample.Project(r, 0)
 		projectID, err := tk.ProjectKeeper.AppendProject(ctx, project)
 		require.NoError(t, err)
-		chain.ProjectID = projectID
+		chain.ProjectId = projectID
 		chain.HasProject = true
 		_, err = tk.LaunchKeeper.AppendChain(ctx, chain)
 		require.NoError(t, err)
@@ -62,7 +62,7 @@ func TestInvalidChainInvariant(t *testing.T) {
 	t.Run("should break with an invalid chain", func(t *testing.T) {
 		ctx, tk, _ := testkeeper.NewTestSetup(t)
 		chain := sample.Chain(r, 0, 0)
-		chain.GenesisChainID = "_invalid_"
+		chain.GenesisChainId = "_invalid_"
 		_, err := tk.LaunchKeeper.AppendChain(ctx, chain)
 		require.NoError(t, err)
 		msg, broken := keeper.InvalidChainInvariant(tk.LaunchKeeper)(ctx)
@@ -73,7 +73,7 @@ func TestInvalidChainInvariant(t *testing.T) {
 		ctx, tk, _ := testkeeper.NewTestSetup(t)
 		chain := sample.Chain(r, 0, 0)
 		chain.HasProject = true
-		chain.ProjectID = 1000
+		chain.ProjectId = 1000
 		_, err := tk.LaunchKeeper.AppendChain(ctx, chain)
 		require.NoError(t, err)
 		msg, broken := keeper.InvalidChainInvariant(tk.LaunchKeeper)(ctx)

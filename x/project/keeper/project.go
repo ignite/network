@@ -16,7 +16,7 @@ func (k Keeper) AppendProject(ctx context.Context, project types.Project) (uint6
 	if err != nil {
 		return 0, fmt.Errorf("failed to get next project sequence %s", err.Error())
 	}
-	project.ProjectID = projectID
+	project.ProjectId = projectID
 	if err := k.Project.Set(ctx, projectID, project); err != nil {
 		return 0, fmt.Errorf("project not set %s", err.Error())
 	}

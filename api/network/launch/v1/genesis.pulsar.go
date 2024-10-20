@@ -372,30 +372,30 @@ func (x *_GenesisState_9_list) IsValid() bool {
 }
 
 var (
-	md_GenesisState                      protoreflect.MessageDescriptor
-	fd_GenesisState_params               protoreflect.FieldDescriptor
-	fd_GenesisState_chainList            protoreflect.FieldDescriptor
-	fd_GenesisState_chainCount           protoreflect.FieldDescriptor
-	fd_GenesisState_genesisAccountList   protoreflect.FieldDescriptor
-	fd_GenesisState_vestingAccountList   protoreflect.FieldDescriptor
-	fd_GenesisState_genesisValidatorList protoreflect.FieldDescriptor
-	fd_GenesisState_requestList          protoreflect.FieldDescriptor
-	fd_GenesisState_requestCounters      protoreflect.FieldDescriptor
-	fd_GenesisState_paramChangeList      protoreflect.FieldDescriptor
+	md_GenesisState                        protoreflect.MessageDescriptor
+	fd_GenesisState_params                 protoreflect.FieldDescriptor
+	fd_GenesisState_chain_list             protoreflect.FieldDescriptor
+	fd_GenesisState_chain_count            protoreflect.FieldDescriptor
+	fd_GenesisState_genesis_account_list   protoreflect.FieldDescriptor
+	fd_GenesisState_vesting_account_list   protoreflect.FieldDescriptor
+	fd_GenesisState_genesis_validator_list protoreflect.FieldDescriptor
+	fd_GenesisState_request_list           protoreflect.FieldDescriptor
+	fd_GenesisState_request_counters       protoreflect.FieldDescriptor
+	fd_GenesisState_param_change_list      protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_genesis_proto_init()
 	md_GenesisState = File_network_launch_v1_genesis_proto.Messages().ByName("GenesisState")
 	fd_GenesisState_params = md_GenesisState.Fields().ByName("params")
-	fd_GenesisState_chainList = md_GenesisState.Fields().ByName("chainList")
-	fd_GenesisState_chainCount = md_GenesisState.Fields().ByName("chainCount")
-	fd_GenesisState_genesisAccountList = md_GenesisState.Fields().ByName("genesisAccountList")
-	fd_GenesisState_vestingAccountList = md_GenesisState.Fields().ByName("vestingAccountList")
-	fd_GenesisState_genesisValidatorList = md_GenesisState.Fields().ByName("genesisValidatorList")
-	fd_GenesisState_requestList = md_GenesisState.Fields().ByName("requestList")
-	fd_GenesisState_requestCounters = md_GenesisState.Fields().ByName("requestCounters")
-	fd_GenesisState_paramChangeList = md_GenesisState.Fields().ByName("paramChangeList")
+	fd_GenesisState_chain_list = md_GenesisState.Fields().ByName("chain_list")
+	fd_GenesisState_chain_count = md_GenesisState.Fields().ByName("chain_count")
+	fd_GenesisState_genesis_account_list = md_GenesisState.Fields().ByName("genesis_account_list")
+	fd_GenesisState_vesting_account_list = md_GenesisState.Fields().ByName("vesting_account_list")
+	fd_GenesisState_genesis_validator_list = md_GenesisState.Fields().ByName("genesis_validator_list")
+	fd_GenesisState_request_list = md_GenesisState.Fields().ByName("request_list")
+	fd_GenesisState_request_counters = md_GenesisState.Fields().ByName("request_counters")
+	fd_GenesisState_param_change_list = md_GenesisState.Fields().ByName("param_change_list")
 }
 
 var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
@@ -471,49 +471,49 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 	}
 	if len(x.ChainList) != 0 {
 		value := protoreflect.ValueOfList(&_GenesisState_2_list{list: &x.ChainList})
-		if !f(fd_GenesisState_chainList, value) {
+		if !f(fd_GenesisState_chain_list, value) {
 			return
 		}
 	}
 	if x.ChainCount != uint64(0) {
 		value := protoreflect.ValueOfUint64(x.ChainCount)
-		if !f(fd_GenesisState_chainCount, value) {
+		if !f(fd_GenesisState_chain_count, value) {
 			return
 		}
 	}
 	if len(x.GenesisAccountList) != 0 {
 		value := protoreflect.ValueOfList(&_GenesisState_4_list{list: &x.GenesisAccountList})
-		if !f(fd_GenesisState_genesisAccountList, value) {
+		if !f(fd_GenesisState_genesis_account_list, value) {
 			return
 		}
 	}
 	if len(x.VestingAccountList) != 0 {
 		value := protoreflect.ValueOfList(&_GenesisState_5_list{list: &x.VestingAccountList})
-		if !f(fd_GenesisState_vestingAccountList, value) {
+		if !f(fd_GenesisState_vesting_account_list, value) {
 			return
 		}
 	}
 	if len(x.GenesisValidatorList) != 0 {
 		value := protoreflect.ValueOfList(&_GenesisState_6_list{list: &x.GenesisValidatorList})
-		if !f(fd_GenesisState_genesisValidatorList, value) {
+		if !f(fd_GenesisState_genesis_validator_list, value) {
 			return
 		}
 	}
 	if len(x.RequestList) != 0 {
 		value := protoreflect.ValueOfList(&_GenesisState_7_list{list: &x.RequestList})
-		if !f(fd_GenesisState_requestList, value) {
+		if !f(fd_GenesisState_request_list, value) {
 			return
 		}
 	}
 	if len(x.RequestCounters) != 0 {
 		value := protoreflect.ValueOfList(&_GenesisState_8_list{list: &x.RequestCounters})
-		if !f(fd_GenesisState_requestCounters, value) {
+		if !f(fd_GenesisState_request_counters, value) {
 			return
 		}
 	}
 	if len(x.ParamChangeList) != 0 {
 		value := protoreflect.ValueOfList(&_GenesisState_9_list{list: &x.ParamChangeList})
-		if !f(fd_GenesisState_paramChangeList, value) {
+		if !f(fd_GenesisState_param_change_list, value) {
 			return
 		}
 	}
@@ -534,21 +534,21 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 	switch fd.FullName() {
 	case "network.launch.v1.GenesisState.params":
 		return x.Params != nil
-	case "network.launch.v1.GenesisState.chainList":
+	case "network.launch.v1.GenesisState.chain_list":
 		return len(x.ChainList) != 0
-	case "network.launch.v1.GenesisState.chainCount":
+	case "network.launch.v1.GenesisState.chain_count":
 		return x.ChainCount != uint64(0)
-	case "network.launch.v1.GenesisState.genesisAccountList":
+	case "network.launch.v1.GenesisState.genesis_account_list":
 		return len(x.GenesisAccountList) != 0
-	case "network.launch.v1.GenesisState.vestingAccountList":
+	case "network.launch.v1.GenesisState.vesting_account_list":
 		return len(x.VestingAccountList) != 0
-	case "network.launch.v1.GenesisState.genesisValidatorList":
+	case "network.launch.v1.GenesisState.genesis_validator_list":
 		return len(x.GenesisValidatorList) != 0
-	case "network.launch.v1.GenesisState.requestList":
+	case "network.launch.v1.GenesisState.request_list":
 		return len(x.RequestList) != 0
-	case "network.launch.v1.GenesisState.requestCounters":
+	case "network.launch.v1.GenesisState.request_counters":
 		return len(x.RequestCounters) != 0
-	case "network.launch.v1.GenesisState.paramChangeList":
+	case "network.launch.v1.GenesisState.param_change_list":
 		return len(x.ParamChangeList) != 0
 	default:
 		if fd.IsExtension() {
@@ -568,21 +568,21 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "network.launch.v1.GenesisState.params":
 		x.Params = nil
-	case "network.launch.v1.GenesisState.chainList":
+	case "network.launch.v1.GenesisState.chain_list":
 		x.ChainList = nil
-	case "network.launch.v1.GenesisState.chainCount":
+	case "network.launch.v1.GenesisState.chain_count":
 		x.ChainCount = uint64(0)
-	case "network.launch.v1.GenesisState.genesisAccountList":
+	case "network.launch.v1.GenesisState.genesis_account_list":
 		x.GenesisAccountList = nil
-	case "network.launch.v1.GenesisState.vestingAccountList":
+	case "network.launch.v1.GenesisState.vesting_account_list":
 		x.VestingAccountList = nil
-	case "network.launch.v1.GenesisState.genesisValidatorList":
+	case "network.launch.v1.GenesisState.genesis_validator_list":
 		x.GenesisValidatorList = nil
-	case "network.launch.v1.GenesisState.requestList":
+	case "network.launch.v1.GenesisState.request_list":
 		x.RequestList = nil
-	case "network.launch.v1.GenesisState.requestCounters":
+	case "network.launch.v1.GenesisState.request_counters":
 		x.RequestCounters = nil
-	case "network.launch.v1.GenesisState.paramChangeList":
+	case "network.launch.v1.GenesisState.param_change_list":
 		x.ParamChangeList = nil
 	default:
 		if fd.IsExtension() {
@@ -603,46 +603,46 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 	case "network.launch.v1.GenesisState.params":
 		value := x.Params
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.GenesisState.chainList":
+	case "network.launch.v1.GenesisState.chain_list":
 		if len(x.ChainList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_2_list{})
 		}
 		listValue := &_GenesisState_2_list{list: &x.ChainList}
 		return protoreflect.ValueOfList(listValue)
-	case "network.launch.v1.GenesisState.chainCount":
+	case "network.launch.v1.GenesisState.chain_count":
 		value := x.ChainCount
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.GenesisState.genesisAccountList":
+	case "network.launch.v1.GenesisState.genesis_account_list":
 		if len(x.GenesisAccountList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_4_list{})
 		}
 		listValue := &_GenesisState_4_list{list: &x.GenesisAccountList}
 		return protoreflect.ValueOfList(listValue)
-	case "network.launch.v1.GenesisState.vestingAccountList":
+	case "network.launch.v1.GenesisState.vesting_account_list":
 		if len(x.VestingAccountList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_5_list{})
 		}
 		listValue := &_GenesisState_5_list{list: &x.VestingAccountList}
 		return protoreflect.ValueOfList(listValue)
-	case "network.launch.v1.GenesisState.genesisValidatorList":
+	case "network.launch.v1.GenesisState.genesis_validator_list":
 		if len(x.GenesisValidatorList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_6_list{})
 		}
 		listValue := &_GenesisState_6_list{list: &x.GenesisValidatorList}
 		return protoreflect.ValueOfList(listValue)
-	case "network.launch.v1.GenesisState.requestList":
+	case "network.launch.v1.GenesisState.request_list":
 		if len(x.RequestList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_7_list{})
 		}
 		listValue := &_GenesisState_7_list{list: &x.RequestList}
 		return protoreflect.ValueOfList(listValue)
-	case "network.launch.v1.GenesisState.requestCounters":
+	case "network.launch.v1.GenesisState.request_counters":
 		if len(x.RequestCounters) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_8_list{})
 		}
 		listValue := &_GenesisState_8_list{list: &x.RequestCounters}
 		return protoreflect.ValueOfList(listValue)
-	case "network.launch.v1.GenesisState.paramChangeList":
+	case "network.launch.v1.GenesisState.param_change_list":
 		if len(x.ParamChangeList) == 0 {
 			return protoreflect.ValueOfList(&_GenesisState_9_list{})
 		}
@@ -670,33 +670,33 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 	switch fd.FullName() {
 	case "network.launch.v1.GenesisState.params":
 		x.Params = value.Message().Interface().(*Params)
-	case "network.launch.v1.GenesisState.chainList":
+	case "network.launch.v1.GenesisState.chain_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_2_list)
 		x.ChainList = *clv.list
-	case "network.launch.v1.GenesisState.chainCount":
+	case "network.launch.v1.GenesisState.chain_count":
 		x.ChainCount = value.Uint()
-	case "network.launch.v1.GenesisState.genesisAccountList":
+	case "network.launch.v1.GenesisState.genesis_account_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_4_list)
 		x.GenesisAccountList = *clv.list
-	case "network.launch.v1.GenesisState.vestingAccountList":
+	case "network.launch.v1.GenesisState.vesting_account_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_5_list)
 		x.VestingAccountList = *clv.list
-	case "network.launch.v1.GenesisState.genesisValidatorList":
+	case "network.launch.v1.GenesisState.genesis_validator_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_6_list)
 		x.GenesisValidatorList = *clv.list
-	case "network.launch.v1.GenesisState.requestList":
+	case "network.launch.v1.GenesisState.request_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_7_list)
 		x.RequestList = *clv.list
-	case "network.launch.v1.GenesisState.requestCounters":
+	case "network.launch.v1.GenesisState.request_counters":
 		lv := value.List()
 		clv := lv.(*_GenesisState_8_list)
 		x.RequestCounters = *clv.list
-	case "network.launch.v1.GenesisState.paramChangeList":
+	case "network.launch.v1.GenesisState.param_change_list":
 		lv := value.List()
 		clv := lv.(*_GenesisState_9_list)
 		x.ParamChangeList = *clv.list
@@ -725,50 +725,50 @@ func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) p
 			x.Params = new(Params)
 		}
 		return protoreflect.ValueOfMessage(x.Params.ProtoReflect())
-	case "network.launch.v1.GenesisState.chainList":
+	case "network.launch.v1.GenesisState.chain_list":
 		if x.ChainList == nil {
 			x.ChainList = []*Chain{}
 		}
 		value := &_GenesisState_2_list{list: &x.ChainList}
 		return protoreflect.ValueOfList(value)
-	case "network.launch.v1.GenesisState.genesisAccountList":
+	case "network.launch.v1.GenesisState.genesis_account_list":
 		if x.GenesisAccountList == nil {
 			x.GenesisAccountList = []*GenesisAccount{}
 		}
 		value := &_GenesisState_4_list{list: &x.GenesisAccountList}
 		return protoreflect.ValueOfList(value)
-	case "network.launch.v1.GenesisState.vestingAccountList":
+	case "network.launch.v1.GenesisState.vesting_account_list":
 		if x.VestingAccountList == nil {
 			x.VestingAccountList = []*VestingAccount{}
 		}
 		value := &_GenesisState_5_list{list: &x.VestingAccountList}
 		return protoreflect.ValueOfList(value)
-	case "network.launch.v1.GenesisState.genesisValidatorList":
+	case "network.launch.v1.GenesisState.genesis_validator_list":
 		if x.GenesisValidatorList == nil {
 			x.GenesisValidatorList = []*GenesisValidator{}
 		}
 		value := &_GenesisState_6_list{list: &x.GenesisValidatorList}
 		return protoreflect.ValueOfList(value)
-	case "network.launch.v1.GenesisState.requestList":
+	case "network.launch.v1.GenesisState.request_list":
 		if x.RequestList == nil {
 			x.RequestList = []*Request{}
 		}
 		value := &_GenesisState_7_list{list: &x.RequestList}
 		return protoreflect.ValueOfList(value)
-	case "network.launch.v1.GenesisState.requestCounters":
+	case "network.launch.v1.GenesisState.request_counters":
 		if x.RequestCounters == nil {
 			x.RequestCounters = []*RequestCounter{}
 		}
 		value := &_GenesisState_8_list{list: &x.RequestCounters}
 		return protoreflect.ValueOfList(value)
-	case "network.launch.v1.GenesisState.paramChangeList":
+	case "network.launch.v1.GenesisState.param_change_list":
 		if x.ParamChangeList == nil {
 			x.ParamChangeList = []*ParamChange{}
 		}
 		value := &_GenesisState_9_list{list: &x.ParamChangeList}
 		return protoreflect.ValueOfList(value)
-	case "network.launch.v1.GenesisState.chainCount":
-		panic(fmt.Errorf("field chainCount of message network.launch.v1.GenesisState is not mutable"))
+	case "network.launch.v1.GenesisState.chain_count":
+		panic(fmt.Errorf("field chain_count of message network.launch.v1.GenesisState is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.launch.v1.GenesisState"))
@@ -785,27 +785,27 @@ func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) 
 	case "network.launch.v1.GenesisState.params":
 		m := new(Params)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.launch.v1.GenesisState.chainList":
+	case "network.launch.v1.GenesisState.chain_list":
 		list := []*Chain{}
 		return protoreflect.ValueOfList(&_GenesisState_2_list{list: &list})
-	case "network.launch.v1.GenesisState.chainCount":
+	case "network.launch.v1.GenesisState.chain_count":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.GenesisState.genesisAccountList":
+	case "network.launch.v1.GenesisState.genesis_account_list":
 		list := []*GenesisAccount{}
 		return protoreflect.ValueOfList(&_GenesisState_4_list{list: &list})
-	case "network.launch.v1.GenesisState.vestingAccountList":
+	case "network.launch.v1.GenesisState.vesting_account_list":
 		list := []*VestingAccount{}
 		return protoreflect.ValueOfList(&_GenesisState_5_list{list: &list})
-	case "network.launch.v1.GenesisState.genesisValidatorList":
+	case "network.launch.v1.GenesisState.genesis_validator_list":
 		list := []*GenesisValidator{}
 		return protoreflect.ValueOfList(&_GenesisState_6_list{list: &list})
-	case "network.launch.v1.GenesisState.requestList":
+	case "network.launch.v1.GenesisState.request_list":
 		list := []*Request{}
 		return protoreflect.ValueOfList(&_GenesisState_7_list{list: &list})
-	case "network.launch.v1.GenesisState.requestCounters":
+	case "network.launch.v1.GenesisState.request_counters":
 		list := []*RequestCounter{}
 		return protoreflect.ValueOfList(&_GenesisState_8_list{list: &list})
-	case "network.launch.v1.GenesisState.paramChangeList":
+	case "network.launch.v1.GenesisState.param_change_list":
 		list := []*ParamChange{}
 		return protoreflect.ValueOfList(&_GenesisState_9_list{list: &list})
 	default:
@@ -1464,15 +1464,15 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_RequestCounter          protoreflect.MessageDescriptor
-	fd_RequestCounter_launchID protoreflect.FieldDescriptor
-	fd_RequestCounter_counter  protoreflect.FieldDescriptor
+	md_RequestCounter           protoreflect.MessageDescriptor
+	fd_RequestCounter_launch_id protoreflect.FieldDescriptor
+	fd_RequestCounter_counter   protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_genesis_proto_init()
 	md_RequestCounter = File_network_launch_v1_genesis_proto.Messages().ByName("RequestCounter")
-	fd_RequestCounter_launchID = md_RequestCounter.Fields().ByName("launchID")
+	fd_RequestCounter_launch_id = md_RequestCounter.Fields().ByName("launch_id")
 	fd_RequestCounter_counter = md_RequestCounter.Fields().ByName("counter")
 }
 
@@ -1541,9 +1541,9 @@ func (x *fastReflection_RequestCounter) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_RequestCounter) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_RequestCounter_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_RequestCounter_launch_id, value) {
 			return
 		}
 	}
@@ -1568,8 +1568,8 @@ func (x *fastReflection_RequestCounter) Range(f func(protoreflect.FieldDescripto
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_RequestCounter) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestCounter.launchID":
-		return x.LaunchID != uint64(0)
+	case "network.launch.v1.RequestCounter.launch_id":
+		return x.LaunchId != uint64(0)
 	case "network.launch.v1.RequestCounter.counter":
 		return x.Counter != uint64(0)
 	default:
@@ -1588,8 +1588,8 @@ func (x *fastReflection_RequestCounter) Has(fd protoreflect.FieldDescriptor) boo
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_RequestCounter) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestCounter.launchID":
-		x.LaunchID = uint64(0)
+	case "network.launch.v1.RequestCounter.launch_id":
+		x.LaunchId = uint64(0)
 	case "network.launch.v1.RequestCounter.counter":
 		x.Counter = uint64(0)
 	default:
@@ -1608,8 +1608,8 @@ func (x *fastReflection_RequestCounter) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_RequestCounter) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.launch.v1.RequestCounter.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.RequestCounter.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
 	case "network.launch.v1.RequestCounter.counter":
 		value := x.Counter
@@ -1634,8 +1634,8 @@ func (x *fastReflection_RequestCounter) Get(descriptor protoreflect.FieldDescrip
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_RequestCounter) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestCounter.launchID":
-		x.LaunchID = value.Uint()
+	case "network.launch.v1.RequestCounter.launch_id":
+		x.LaunchId = value.Uint()
 	case "network.launch.v1.RequestCounter.counter":
 		x.Counter = value.Uint()
 	default:
@@ -1658,8 +1658,8 @@ func (x *fastReflection_RequestCounter) Set(fd protoreflect.FieldDescriptor, val
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_RequestCounter) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestCounter.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.RequestCounter is not mutable"))
+	case "network.launch.v1.RequestCounter.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.RequestCounter is not mutable"))
 	case "network.launch.v1.RequestCounter.counter":
 		panic(fmt.Errorf("field counter of message network.launch.v1.RequestCounter is not mutable"))
 	default:
@@ -1675,7 +1675,7 @@ func (x *fastReflection_RequestCounter) Mutable(fd protoreflect.FieldDescriptor)
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_RequestCounter) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.RequestCounter.launchID":
+	case "network.launch.v1.RequestCounter.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.launch.v1.RequestCounter.counter":
 		return protoreflect.ValueOfUint64(uint64(0))
@@ -1748,8 +1748,8 @@ func (x *fastReflection_RequestCounter) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		if x.Counter != 0 {
 			n += 1 + runtime.Sov(uint64(x.Counter))
@@ -1788,8 +1788,8 @@ func (x *fastReflection_RequestCounter) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x10
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -1844,9 +1844,9 @@ func (x *fastReflection_RequestCounter) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1856,7 +1856,7 @@ func (x *fastReflection_RequestCounter) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1936,14 +1936,14 @@ type GenesisState struct {
 
 	// params defines all the parameters of the module.
 	Params               *Params             `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
-	ChainList            []*Chain            `protobuf:"bytes,2,rep,name=chainList,proto3" json:"chainList,omitempty"`
-	ChainCount           uint64              `protobuf:"varint,3,opt,name=chainCount,proto3" json:"chainCount,omitempty"`
-	GenesisAccountList   []*GenesisAccount   `protobuf:"bytes,4,rep,name=genesisAccountList,proto3" json:"genesisAccountList,omitempty"`
-	VestingAccountList   []*VestingAccount   `protobuf:"bytes,5,rep,name=vestingAccountList,proto3" json:"vestingAccountList,omitempty"`
-	GenesisValidatorList []*GenesisValidator `protobuf:"bytes,6,rep,name=genesisValidatorList,proto3" json:"genesisValidatorList,omitempty"`
-	RequestList          []*Request          `protobuf:"bytes,7,rep,name=requestList,proto3" json:"requestList,omitempty"`
-	RequestCounters      []*RequestCounter   `protobuf:"bytes,8,rep,name=requestCounters,proto3" json:"requestCounters,omitempty"`
-	ParamChangeList      []*ParamChange      `protobuf:"bytes,9,rep,name=paramChangeList,proto3" json:"paramChangeList,omitempty"`
+	ChainList            []*Chain            `protobuf:"bytes,2,rep,name=chain_list,json=chainList,proto3" json:"chain_list,omitempty"`
+	ChainCount           uint64              `protobuf:"varint,3,opt,name=chain_count,json=chainCount,proto3" json:"chain_count,omitempty"`
+	GenesisAccountList   []*GenesisAccount   `protobuf:"bytes,4,rep,name=genesis_account_list,json=genesisAccountList,proto3" json:"genesis_account_list,omitempty"`
+	VestingAccountList   []*VestingAccount   `protobuf:"bytes,5,rep,name=vesting_account_list,json=vestingAccountList,proto3" json:"vesting_account_list,omitempty"`
+	GenesisValidatorList []*GenesisValidator `protobuf:"bytes,6,rep,name=genesis_validator_list,json=genesisValidatorList,proto3" json:"genesis_validator_list,omitempty"`
+	RequestList          []*Request          `protobuf:"bytes,7,rep,name=request_list,json=requestList,proto3" json:"request_list,omitempty"`
+	RequestCounters      []*RequestCounter   `protobuf:"bytes,8,rep,name=request_counters,json=requestCounters,proto3" json:"request_counters,omitempty"`
+	ParamChangeList      []*ParamChange      `protobuf:"bytes,9,rep,name=param_change_list,json=paramChangeList,proto3" json:"param_change_list,omitempty"`
 }
 
 func (x *GenesisState) Reset() {
@@ -2034,7 +2034,7 @@ type RequestCounter struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LaunchID uint64 `protobuf:"varint,1,opt,name=launchID,proto3" json:"launchID,omitempty"`
+	LaunchId uint64 `protobuf:"varint,1,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
 	Counter  uint64 `protobuf:"varint,2,opt,name=counter,proto3" json:"counter,omitempty"`
 }
 
@@ -2058,9 +2058,9 @@ func (*RequestCounter) Descriptor() ([]byte, []int) {
 	return file_network_launch_v1_genesis_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *RequestCounter) GetLaunchID() uint64 {
+func (x *RequestCounter) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -2097,66 +2097,67 @@ var file_network_launch_v1_genesis_proto_rawDesc = []byte{
 	0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x27, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
 	0x2f, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f, 0x76, 0x31, 0x2f, 0x76, 0x65, 0x73, 0x74, 0x69,
 	0x6e, 0x67, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x22, 0xa2, 0x05, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74,
+	0x22, 0xae, 0x05, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74,
 	0x65, 0x12, 0x3c, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x19, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e,
 	0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde,
 	0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12,
-	0x3c, 0x0a, 0x09, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03,
-	0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75,
-	0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x42, 0x04, 0xc8, 0xde,
-	0x1f, 0x00, 0x52, 0x09, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x1e, 0x0a,
-	0x0a, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x04, 0x52, 0x0a, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x57, 0x0a,
-	0x12, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x4c,
-	0x69, 0x73, 0x74, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65,
-	0x6e, 0x65, 0x73, 0x69, 0x73, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x04, 0xc8, 0xde,
-	0x1f, 0x00, 0x52, 0x12, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x41, 0x63, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x57, 0x0a, 0x12, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e,
-	0x67, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x05, 0x20, 0x03,
-	0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75,
-	0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x41, 0x63,
-	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x12, 0x76, 0x65, 0x73,
-	0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12,
-	0x5d, 0x0a, 0x14, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61,
-	0x74, 0x6f, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x06, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x23, 0x2e,
+	0x3d, 0x0a, 0x0a, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61,
+	0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x42, 0x04, 0xc8,
+	0xde, 0x1f, 0x00, 0x52, 0x09, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x1f,
+	0x0a, 0x0b, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x0a, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12,
+	0x59, 0x0a, 0x14, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x21, 0x2e,
 	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76,
-	0x31, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74,
-	0x6f, 0x72, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x14, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69,
-	0x73, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x42,
-	0x0a, 0x0b, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x07, 0x20,
-	0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x42,
-	0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0b, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x4c, 0x69,
-	0x73, 0x74, 0x12, 0x51, 0x0a, 0x0f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x75,
-	0x6e, 0x74, 0x65, 0x72, 0x73, 0x18, 0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x42, 0x04,
-	0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x75,
-	0x6e, 0x74, 0x65, 0x72, 0x73, 0x12, 0x4e, 0x0a, 0x0f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x43, 0x68,
-	0x61, 0x6e, 0x67, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x09, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e,
-	0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e,
-	0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x42, 0x04,
-	0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x67,
-	0x65, 0x4c, 0x69, 0x73, 0x74, 0x22, 0x46, 0x0a, 0x0e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63,
-	0x68, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63,
-	0x68, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x42, 0xc5, 0x01,
-	0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73,
-	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x38, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f, 0x76, 0x31, 0x3b, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x76,
-	0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4c, 0x58, 0xaa, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72,
-	0x6b, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x11, 0x4e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0xe2,
-	0x02, 0x1d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68,
-	0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea,
-	0x02, 0x13, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4c, 0x61, 0x75, 0x6e, 0x63,
-	0x68, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x31, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x12, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x41,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x59, 0x0a, 0x14, 0x76, 0x65,
+	0x73, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x6c, 0x69,
+	0x73, 0x74, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x65, 0x73,
+	0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x04, 0xc8, 0xde, 0x1f,
+	0x00, 0x52, 0x12, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x5f, 0x0a, 0x16, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73,
+	0x5f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18,
+	0x06, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
+	0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69,
+	0x73, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00,
+	0x52, 0x14, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74,
+	0x6f, 0x72, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x43, 0x0a, 0x0c, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x5f, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31,
+	0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0b,
+	0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x52, 0x0a, 0x10, 0x72,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x18,
+	0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
+	0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0f,
+	0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x12,
+	0x50, 0x0a, 0x11, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x5f, 0x63, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x5f,
+	0x6c, 0x69, 0x73, 0x74, 0x18, 0x09, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6e, 0x65, 0x74,
+	0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00,
+	0x52, 0x0f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x4c, 0x69, 0x73,
+	0x74, 0x22, 0x47, 0x0a, 0x0e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x43, 0x6f, 0x75, 0x6e,
+	0x74, 0x65, 0x72, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64,
+	0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x42, 0xc5, 0x01, 0x0a, 0x15, 0x63,
+	0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63,
+	0x68, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x50, 0x01, 0x5a, 0x38, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6c, 0x61, 0x75, 0x6e,
+	0x63, 0x68, 0x2f, 0x76, 0x31, 0x3b, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x76, 0x31, 0xa2, 0x02,
+	0x03, 0x4e, 0x4c, 0x58, 0xaa, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4c,
+	0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1d, 0x4e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31,
+	0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x13, 0x4e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x3a, 0x3a,
+	0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2185,13 +2186,13 @@ var file_network_launch_v1_genesis_proto_goTypes = []interface{}{
 }
 var file_network_launch_v1_genesis_proto_depIdxs = []int32{
 	2, // 0: network.launch.v1.GenesisState.params:type_name -> network.launch.v1.Params
-	3, // 1: network.launch.v1.GenesisState.chainList:type_name -> network.launch.v1.Chain
-	4, // 2: network.launch.v1.GenesisState.genesisAccountList:type_name -> network.launch.v1.GenesisAccount
-	5, // 3: network.launch.v1.GenesisState.vestingAccountList:type_name -> network.launch.v1.VestingAccount
-	6, // 4: network.launch.v1.GenesisState.genesisValidatorList:type_name -> network.launch.v1.GenesisValidator
-	7, // 5: network.launch.v1.GenesisState.requestList:type_name -> network.launch.v1.Request
-	1, // 6: network.launch.v1.GenesisState.requestCounters:type_name -> network.launch.v1.RequestCounter
-	8, // 7: network.launch.v1.GenesisState.paramChangeList:type_name -> network.launch.v1.ParamChange
+	3, // 1: network.launch.v1.GenesisState.chain_list:type_name -> network.launch.v1.Chain
+	4, // 2: network.launch.v1.GenesisState.genesis_account_list:type_name -> network.launch.v1.GenesisAccount
+	5, // 3: network.launch.v1.GenesisState.vesting_account_list:type_name -> network.launch.v1.VestingAccount
+	6, // 4: network.launch.v1.GenesisState.genesis_validator_list:type_name -> network.launch.v1.GenesisValidator
+	7, // 5: network.launch.v1.GenesisState.request_list:type_name -> network.launch.v1.Request
+	1, // 6: network.launch.v1.GenesisState.request_counters:type_name -> network.launch.v1.RequestCounter
+	8, // 7: network.launch.v1.GenesisState.param_change_list:type_name -> network.launch.v1.ParamChange
 	8, // [8:8] is the sub-list for method output_type
 	8, // [8:8] is the sub-list for method input_type
 	8, // [8:8] is the sub-list for extension type_name

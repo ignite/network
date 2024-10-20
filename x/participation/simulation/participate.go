@@ -47,7 +47,7 @@ func SimulateMsgParticipate(
 		msg = types.NewMsgParticipate(
 			simAccount.Address.String(),
 			auction.GetId(),
-			tier.TierID,
+			tier.TierId,
 		)
 
 		txCtx := simulation.OperationInput{

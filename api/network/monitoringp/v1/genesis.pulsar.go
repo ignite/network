@@ -15,22 +15,22 @@ import (
 )
 
 var (
-	md_GenesisState                     protoreflect.MessageDescriptor
-	fd_GenesisState_params              protoreflect.FieldDescriptor
-	fd_GenesisState_portID              protoreflect.FieldDescriptor
-	fd_GenesisState_monitoringInfo      protoreflect.FieldDescriptor
-	fd_GenesisState_connectionChannelID protoreflect.FieldDescriptor
-	fd_GenesisState_consumerClientID    protoreflect.FieldDescriptor
+	md_GenesisState                       protoreflect.MessageDescriptor
+	fd_GenesisState_params                protoreflect.FieldDescriptor
+	fd_GenesisState_port_id               protoreflect.FieldDescriptor
+	fd_GenesisState_monitoring_info       protoreflect.FieldDescriptor
+	fd_GenesisState_connection_channel_id protoreflect.FieldDescriptor
+	fd_GenesisState_consumer_client_id    protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_monitoringp_v1_genesis_proto_init()
 	md_GenesisState = File_network_monitoringp_v1_genesis_proto.Messages().ByName("GenesisState")
 	fd_GenesisState_params = md_GenesisState.Fields().ByName("params")
-	fd_GenesisState_portID = md_GenesisState.Fields().ByName("portID")
-	fd_GenesisState_monitoringInfo = md_GenesisState.Fields().ByName("monitoringInfo")
-	fd_GenesisState_connectionChannelID = md_GenesisState.Fields().ByName("connectionChannelID")
-	fd_GenesisState_consumerClientID = md_GenesisState.Fields().ByName("consumerClientID")
+	fd_GenesisState_port_id = md_GenesisState.Fields().ByName("port_id")
+	fd_GenesisState_monitoring_info = md_GenesisState.Fields().ByName("monitoring_info")
+	fd_GenesisState_connection_channel_id = md_GenesisState.Fields().ByName("connection_channel_id")
+	fd_GenesisState_consumer_client_id = md_GenesisState.Fields().ByName("consumer_client_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_GenesisState)(nil)
@@ -104,27 +104,27 @@ func (x *fastReflection_GenesisState) Range(f func(protoreflect.FieldDescriptor,
 			return
 		}
 	}
-	if x.PortID != "" {
-		value := protoreflect.ValueOfString(x.PortID)
-		if !f(fd_GenesisState_portID, value) {
+	if x.PortId != "" {
+		value := protoreflect.ValueOfString(x.PortId)
+		if !f(fd_GenesisState_port_id, value) {
 			return
 		}
 	}
 	if x.MonitoringInfo != nil {
 		value := protoreflect.ValueOfMessage(x.MonitoringInfo.ProtoReflect())
-		if !f(fd_GenesisState_monitoringInfo, value) {
+		if !f(fd_GenesisState_monitoring_info, value) {
 			return
 		}
 	}
-	if x.ConnectionChannelID != nil {
-		value := protoreflect.ValueOfMessage(x.ConnectionChannelID.ProtoReflect())
-		if !f(fd_GenesisState_connectionChannelID, value) {
+	if x.ConnectionChannelId != nil {
+		value := protoreflect.ValueOfMessage(x.ConnectionChannelId.ProtoReflect())
+		if !f(fd_GenesisState_connection_channel_id, value) {
 			return
 		}
 	}
-	if x.ConsumerClientID != nil {
-		value := protoreflect.ValueOfMessage(x.ConsumerClientID.ProtoReflect())
-		if !f(fd_GenesisState_consumerClientID, value) {
+	if x.ConsumerClientId != nil {
+		value := protoreflect.ValueOfMessage(x.ConsumerClientId.ProtoReflect())
+		if !f(fd_GenesisState_consumer_client_id, value) {
 			return
 		}
 	}
@@ -145,14 +145,14 @@ func (x *fastReflection_GenesisState) Has(fd protoreflect.FieldDescriptor) bool 
 	switch fd.FullName() {
 	case "network.monitoringp.v1.GenesisState.params":
 		return x.Params != nil
-	case "network.monitoringp.v1.GenesisState.portID":
-		return x.PortID != ""
-	case "network.monitoringp.v1.GenesisState.monitoringInfo":
+	case "network.monitoringp.v1.GenesisState.port_id":
+		return x.PortId != ""
+	case "network.monitoringp.v1.GenesisState.monitoring_info":
 		return x.MonitoringInfo != nil
-	case "network.monitoringp.v1.GenesisState.connectionChannelID":
-		return x.ConnectionChannelID != nil
-	case "network.monitoringp.v1.GenesisState.consumerClientID":
-		return x.ConsumerClientID != nil
+	case "network.monitoringp.v1.GenesisState.connection_channel_id":
+		return x.ConnectionChannelId != nil
+	case "network.monitoringp.v1.GenesisState.consumer_client_id":
+		return x.ConsumerClientId != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringp.v1.GenesisState"))
@@ -171,14 +171,14 @@ func (x *fastReflection_GenesisState) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
 	case "network.monitoringp.v1.GenesisState.params":
 		x.Params = nil
-	case "network.monitoringp.v1.GenesisState.portID":
-		x.PortID = ""
-	case "network.monitoringp.v1.GenesisState.monitoringInfo":
+	case "network.monitoringp.v1.GenesisState.port_id":
+		x.PortId = ""
+	case "network.monitoringp.v1.GenesisState.monitoring_info":
 		x.MonitoringInfo = nil
-	case "network.monitoringp.v1.GenesisState.connectionChannelID":
-		x.ConnectionChannelID = nil
-	case "network.monitoringp.v1.GenesisState.consumerClientID":
-		x.ConsumerClientID = nil
+	case "network.monitoringp.v1.GenesisState.connection_channel_id":
+		x.ConnectionChannelId = nil
+	case "network.monitoringp.v1.GenesisState.consumer_client_id":
+		x.ConsumerClientId = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringp.v1.GenesisState"))
@@ -198,17 +198,17 @@ func (x *fastReflection_GenesisState) Get(descriptor protoreflect.FieldDescripto
 	case "network.monitoringp.v1.GenesisState.params":
 		value := x.Params
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.portID":
-		value := x.PortID
+	case "network.monitoringp.v1.GenesisState.port_id":
+		value := x.PortId
 		return protoreflect.ValueOfString(value)
-	case "network.monitoringp.v1.GenesisState.monitoringInfo":
+	case "network.monitoringp.v1.GenesisState.monitoring_info":
 		value := x.MonitoringInfo
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.connectionChannelID":
-		value := x.ConnectionChannelID
+	case "network.monitoringp.v1.GenesisState.connection_channel_id":
+		value := x.ConnectionChannelId
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.consumerClientID":
-		value := x.ConsumerClientID
+	case "network.monitoringp.v1.GenesisState.consumer_client_id":
+		value := x.ConsumerClientId
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
@@ -232,14 +232,14 @@ func (x *fastReflection_GenesisState) Set(fd protoreflect.FieldDescriptor, value
 	switch fd.FullName() {
 	case "network.monitoringp.v1.GenesisState.params":
 		x.Params = value.Message().Interface().(*Params)
-	case "network.monitoringp.v1.GenesisState.portID":
-		x.PortID = value.Interface().(string)
-	case "network.monitoringp.v1.GenesisState.monitoringInfo":
+	case "network.monitoringp.v1.GenesisState.port_id":
+		x.PortId = value.Interface().(string)
+	case "network.monitoringp.v1.GenesisState.monitoring_info":
 		x.MonitoringInfo = value.Message().Interface().(*MonitoringInfo)
-	case "network.monitoringp.v1.GenesisState.connectionChannelID":
-		x.ConnectionChannelID = value.Message().Interface().(*ConnectionChannelID)
-	case "network.monitoringp.v1.GenesisState.consumerClientID":
-		x.ConsumerClientID = value.Message().Interface().(*ConsumerClientID)
+	case "network.monitoringp.v1.GenesisState.connection_channel_id":
+		x.ConnectionChannelId = value.Message().Interface().(*ConnectionChannelID)
+	case "network.monitoringp.v1.GenesisState.consumer_client_id":
+		x.ConsumerClientId = value.Message().Interface().(*ConsumerClientID)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringp.v1.GenesisState"))
@@ -265,23 +265,23 @@ func (x *fastReflection_GenesisState) Mutable(fd protoreflect.FieldDescriptor) p
 			x.Params = new(Params)
 		}
 		return protoreflect.ValueOfMessage(x.Params.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.monitoringInfo":
+	case "network.monitoringp.v1.GenesisState.monitoring_info":
 		if x.MonitoringInfo == nil {
 			x.MonitoringInfo = new(MonitoringInfo)
 		}
 		return protoreflect.ValueOfMessage(x.MonitoringInfo.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.connectionChannelID":
-		if x.ConnectionChannelID == nil {
-			x.ConnectionChannelID = new(ConnectionChannelID)
+	case "network.monitoringp.v1.GenesisState.connection_channel_id":
+		if x.ConnectionChannelId == nil {
+			x.ConnectionChannelId = new(ConnectionChannelID)
 		}
-		return protoreflect.ValueOfMessage(x.ConnectionChannelID.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.consumerClientID":
-		if x.ConsumerClientID == nil {
-			x.ConsumerClientID = new(ConsumerClientID)
+		return protoreflect.ValueOfMessage(x.ConnectionChannelId.ProtoReflect())
+	case "network.monitoringp.v1.GenesisState.consumer_client_id":
+		if x.ConsumerClientId == nil {
+			x.ConsumerClientId = new(ConsumerClientID)
 		}
-		return protoreflect.ValueOfMessage(x.ConsumerClientID.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.portID":
-		panic(fmt.Errorf("field portID of message network.monitoringp.v1.GenesisState is not mutable"))
+		return protoreflect.ValueOfMessage(x.ConsumerClientId.ProtoReflect())
+	case "network.monitoringp.v1.GenesisState.port_id":
+		panic(fmt.Errorf("field port_id of message network.monitoringp.v1.GenesisState is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringp.v1.GenesisState"))
@@ -298,15 +298,15 @@ func (x *fastReflection_GenesisState) NewField(fd protoreflect.FieldDescriptor) 
 	case "network.monitoringp.v1.GenesisState.params":
 		m := new(Params)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.portID":
+	case "network.monitoringp.v1.GenesisState.port_id":
 		return protoreflect.ValueOfString("")
-	case "network.monitoringp.v1.GenesisState.monitoringInfo":
+	case "network.monitoringp.v1.GenesisState.monitoring_info":
 		m := new(MonitoringInfo)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.connectionChannelID":
+	case "network.monitoringp.v1.GenesisState.connection_channel_id":
 		m := new(ConnectionChannelID)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.monitoringp.v1.GenesisState.consumerClientID":
+	case "network.monitoringp.v1.GenesisState.consumer_client_id":
 		m := new(ConsumerClientID)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
@@ -382,7 +382,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			l = options.Size(x.Params)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		l = len(x.PortID)
+		l = len(x.PortId)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -390,12 +390,12 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			l = options.Size(x.MonitoringInfo)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.ConnectionChannelID != nil {
-			l = options.Size(x.ConnectionChannelID)
+		if x.ConnectionChannelId != nil {
+			l = options.Size(x.ConnectionChannelId)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.ConsumerClientID != nil {
-			l = options.Size(x.ConsumerClientID)
+		if x.ConsumerClientId != nil {
+			l = options.Size(x.ConsumerClientId)
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
@@ -427,8 +427,8 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.ConsumerClientID != nil {
-			encoded, err := options.Marshal(x.ConsumerClientID)
+		if x.ConsumerClientId != nil {
+			encoded, err := options.Marshal(x.ConsumerClientId)
 			if err != nil {
 				return protoiface.MarshalOutput{
 					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -441,8 +441,8 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x2a
 		}
-		if x.ConnectionChannelID != nil {
-			encoded, err := options.Marshal(x.ConnectionChannelID)
+		if x.ConnectionChannelId != nil {
+			encoded, err := options.Marshal(x.ConnectionChannelId)
 			if err != nil {
 				return protoiface.MarshalOutput{
 					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -469,10 +469,10 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x1a
 		}
-		if len(x.PortID) > 0 {
-			i -= len(x.PortID)
-			copy(dAtA[i:], x.PortID)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.PortID)))
+		if len(x.PortId) > 0 {
+			i -= len(x.PortId)
+			copy(dAtA[i:], x.PortId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.PortId)))
 			i--
 			dAtA[i] = 0x12
 		}
@@ -577,7 +577,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PortID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PortId", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -605,7 +605,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.PortID = string(dAtA[iNdEx:postIndex])
+				x.PortId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 3:
 				if wireType != 2 {
@@ -645,7 +645,7 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 4:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ConnectionChannelID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ConnectionChannelId", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -672,16 +672,16 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				if x.ConnectionChannelID == nil {
-					x.ConnectionChannelID = &ConnectionChannelID{}
+				if x.ConnectionChannelId == nil {
+					x.ConnectionChannelId = &ConnectionChannelID{}
 				}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ConnectionChannelID); err != nil {
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ConnectionChannelId); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
 			case 5:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ConsumerClientID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ConsumerClientId", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -708,10 +708,10 @@ func (x *fastReflection_GenesisState) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				if x.ConsumerClientID == nil {
-					x.ConsumerClientID = &ConsumerClientID{}
+				if x.ConsumerClientId == nil {
+					x.ConsumerClientId = &ConsumerClientID{}
 				}
-				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ConsumerClientID); err != nil {
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ConsumerClientId); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
 				iNdEx = postIndex
@@ -771,10 +771,10 @@ type GenesisState struct {
 
 	// params defines all the parameters of the module.
 	Params              *Params              `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
-	PortID              string               `protobuf:"bytes,2,opt,name=portID,proto3" json:"portID,omitempty"`
-	MonitoringInfo      *MonitoringInfo      `protobuf:"bytes,3,opt,name=monitoringInfo,proto3" json:"monitoringInfo,omitempty"`
-	ConnectionChannelID *ConnectionChannelID `protobuf:"bytes,4,opt,name=connectionChannelID,proto3" json:"connectionChannelID,omitempty"`
-	ConsumerClientID    *ConsumerClientID    `protobuf:"bytes,5,opt,name=consumerClientID,proto3" json:"consumerClientID,omitempty"`
+	PortId              string               `protobuf:"bytes,2,opt,name=port_id,json=portId,proto3" json:"port_id,omitempty"`
+	MonitoringInfo      *MonitoringInfo      `protobuf:"bytes,3,opt,name=monitoring_info,json=monitoringInfo,proto3" json:"monitoring_info,omitempty"`
+	ConnectionChannelId *ConnectionChannelID `protobuf:"bytes,4,opt,name=connection_channel_id,json=connectionChannelId,proto3" json:"connection_channel_id,omitempty"`
+	ConsumerClientId    *ConsumerClientID    `protobuf:"bytes,5,opt,name=consumer_client_id,json=consumerClientId,proto3" json:"consumer_client_id,omitempty"`
 }
 
 func (x *GenesisState) Reset() {
@@ -804,9 +804,9 @@ func (x *GenesisState) GetParams() *Params {
 	return nil
 }
 
-func (x *GenesisState) GetPortID() string {
+func (x *GenesisState) GetPortId() string {
 	if x != nil {
-		return x.PortID
+		return x.PortId
 	}
 	return ""
 }
@@ -818,16 +818,16 @@ func (x *GenesisState) GetMonitoringInfo() *MonitoringInfo {
 	return nil
 }
 
-func (x *GenesisState) GetConnectionChannelID() *ConnectionChannelID {
+func (x *GenesisState) GetConnectionChannelId() *ConnectionChannelID {
 	if x != nil {
-		return x.ConnectionChannelID
+		return x.ConnectionChannelId
 	}
 	return nil
 }
 
-func (x *GenesisState) GetConsumerClientID() *ConsumerClientID {
+func (x *GenesisState) GetConsumerClientId() *ConsumerClientID {
 	if x != nil {
-		return x.ConsumerClientID
+		return x.ConsumerClientId
 	}
 	return nil
 }
@@ -853,45 +853,45 @@ var file_network_monitoringp_v1_genesis_proto_rawDesc = []byte{
 	0x69, 0x6e, 0x66, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x23, 0x6e, 0x65, 0x74, 0x77,
 	0x6f, 0x72, 0x6b, 0x2f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x2f,
 	0x76, 0x31, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
-	0xee, 0x02, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65,
+	0xf4, 0x02, 0x0a, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65,
 	0x12, 0x41, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x1e, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74,
 	0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
 	0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x6f, 0x72, 0x74, 0x49, 0x44, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x6f, 0x72, 0x74, 0x49, 0x44, 0x12, 0x4e, 0x0a, 0x0e, 0x6d,
-	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x49, 0x6e, 0x66, 0x6f, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f,
-	0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x6f, 0x6e,
-	0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0e, 0x6d, 0x6f, 0x6e,
-	0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x5d, 0x0a, 0x13, 0x63,
-	0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c,
-	0x49, 0x44, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2b, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x2e, 0x76,
-	0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x68, 0x61, 0x6e,
-	0x6e, 0x65, 0x6c, 0x49, 0x44, 0x52, 0x13, 0x63, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x44, 0x12, 0x54, 0x0a, 0x10, 0x63, 0x6f,
-	0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x18, 0x05,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d,
-	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f,
-	0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x52, 0x10,
-	0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44,
-	0x42, 0xe8, 0x01, 0x0a, 0x1a, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
-	0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x2e, 0x76, 0x31, 0x42,
-	0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
-	0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69,
-	0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e,
-	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e,
-	0x67, 0x70, 0x2f, 0x76, 0x31, 0x3b, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67,
-	0x70, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4d, 0x58, 0xaa, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x2e,
-	0x56, 0x31, 0xca, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e,
-	0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x22, 0x4e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67,
-	0x70, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
-	0xea, 0x02, 0x18, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4d, 0x6f, 0x6e, 0x69,
-	0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x61, 0x6d, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x70, 0x6f, 0x72, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x6f, 0x72, 0x74, 0x49, 0x64, 0x12, 0x4f, 0x0a, 0x0f,
+	0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
+	0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x2e, 0x76, 0x31, 0x2e, 0x4d,
+	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0e, 0x6d,
+	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x5f, 0x0a,
+	0x15, 0x63, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x63, 0x68, 0x61, 0x6e,
+	0x6e, 0x65, 0x6c, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2b, 0x2e, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e,
+	0x67, 0x70, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x44, 0x52, 0x13, 0x63, 0x6f, 0x6e, 0x6e, 0x65,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x64, 0x12, 0x56,
+	0x0a, 0x12, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x5f, 0x63, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6e, 0x65, 0x74,
+	0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70,
+	0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x43, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x49, 0x44, 0x52, 0x10, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x43, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x42, 0xe8, 0x01, 0x0a, 0x1a, 0x63, 0x6f, 0x6d, 0x2e, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e,
+	0x67, 0x70, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x50, 0x72,
+	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6d, 0x6f, 0x6e,
+	0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x2f, 0x76, 0x31, 0x3b, 0x6d, 0x6f, 0x6e, 0x69,
+	0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4d, 0x58, 0xaa,
+	0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f,
+	0x72, 0x69, 0x6e, 0x67, 0x70, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x5c, 0x56,
+	0x31, 0xe2, 0x02, 0x22, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69,
+	0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
+	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x18, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x3a, 0x3a, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x70, 0x3a, 0x3a, 0x56,
+	0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -916,9 +916,9 @@ var file_network_monitoringp_v1_genesis_proto_goTypes = []interface{}{
 }
 var file_network_monitoringp_v1_genesis_proto_depIdxs = []int32{
 	1, // 0: network.monitoringp.v1.GenesisState.params:type_name -> network.monitoringp.v1.Params
-	2, // 1: network.monitoringp.v1.GenesisState.monitoringInfo:type_name -> network.monitoringp.v1.MonitoringInfo
-	3, // 2: network.monitoringp.v1.GenesisState.connectionChannelID:type_name -> network.monitoringp.v1.ConnectionChannelID
-	4, // 3: network.monitoringp.v1.GenesisState.consumerClientID:type_name -> network.monitoringp.v1.ConsumerClientID
+	2, // 1: network.monitoringp.v1.GenesisState.monitoring_info:type_name -> network.monitoringp.v1.MonitoringInfo
+	3, // 2: network.monitoringp.v1.GenesisState.connection_channel_id:type_name -> network.monitoringp.v1.ConnectionChannelID
+	4, // 3: network.monitoringp.v1.GenesisState.consumer_client_id:type_name -> network.monitoringp.v1.ConsumerClientID
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name

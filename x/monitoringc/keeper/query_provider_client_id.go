@@ -17,7 +17,7 @@ func (q queryServer) ListProviderClientID(ctx context.Context, req *types.QueryA
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	providerClientIDs, pageRes, err := query.CollectionPaginate(
+	providerClientIdList, pageRes, err := query.CollectionPaginate(
 		ctx,
 		q.k.ProviderClientID,
 		req.Pagination,
@@ -29,7 +29,7 @@ func (q queryServer) ListProviderClientID(ctx context.Context, req *types.QueryA
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryAllProviderClientIDResponse{ProviderClientID: providerClientIDs, Pagination: pageRes}, nil
+	return &types.QueryAllProviderClientIDResponse{ProviderClientId: providerClientIdList, Pagination: pageRes}, nil
 }
 
 func (q queryServer) GetProviderClientID(ctx context.Context, req *types.QueryGetProviderClientIDRequest) (*types.QueryGetProviderClientIDResponse, error) {
@@ -37,7 +37,7 @@ func (q queryServer) GetProviderClientID(ctx context.Context, req *types.QueryGe
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	val, err := q.k.ProviderClientID.Get(ctx, req.LaunchID)
+	val, err := q.k.ProviderClientID.Get(ctx, req.LaunchId)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, status.Error(codes.NotFound, "not found")
@@ -46,5 +46,5 @@ func (q queryServer) GetProviderClientID(ctx context.Context, req *types.QueryGe
 		return nil, status.Error(codes.Internal, "internal error")
 	}
 
-	return &types.QueryGetProviderClientIDResponse{ProviderClientID: val}, nil
+	return &types.QueryGetProviderClientIDResponse{ProviderClientId: val}, nil
 }

@@ -8,7 +8,7 @@ import (
 
 // Validate checks the chain has valid data
 func (m Chain) Validate() error {
-	if _, _, err := chainid.ParseGenesisChainID(m.GenesisChainID); err != nil {
+	if _, _, err := chainid.ParseGenesisChainID(m.GenesisChainId); err != nil {
 		return err
 	}
 

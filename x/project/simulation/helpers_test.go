@@ -100,7 +100,7 @@ func TestGetCoordSimAccountWithProjectID(t *testing.T) {
 		chain := sample.Chain(r, 0, coords[1])
 		chain.LaunchTriggered = true
 		chain.IsMainnet = true
-		prjt.MainnetID, err = tk.LaunchKeeper.AppendChain(ctx, chain)
+		prjt.MainnetId, err = tk.LaunchKeeper.AppendChain(ctx, chain)
 		require.NoError(t, err)
 		_, err = tk.ProjectKeeper.AppendProject(ctx, prjt)
 		require.NoError(t, err)
@@ -129,7 +129,7 @@ func TestGetCoordSimAccountWithProjectID(t *testing.T) {
 		chain := sample.Chain(r, 0, coords[1])
 		chain.LaunchTriggered = false
 		chain.IsMainnet = true
-		prjt.MainnetID, err = tk.LaunchKeeper.AppendChain(ctx, chain)
+		prjt.MainnetId, err = tk.LaunchKeeper.AppendChain(ctx, chain)
 		require.NoError(t, err)
 		_, err = tk.ProjectKeeper.AppendProject(ctx, prjt)
 		require.NoError(t, err)
@@ -146,7 +146,7 @@ func TestGetCoordSimAccountWithProjectID(t *testing.T) {
 		require.Contains(t, accs, acc)
 		_, err = tk.ProjectKeeper.GetProject(ctx, id)
 		require.NoError(t, err)
-		require.EqualValues(t, id, prjt.ProjectID)
+		require.EqualValues(t, id, prjt.ProjectId)
 	})
 
 	t.Run("should find a project with no mainnet initialized", func(t *testing.T) {
@@ -174,7 +174,7 @@ func TestGetCoordSimAccountWithProjectID(t *testing.T) {
 		_, err = tk.ProjectKeeper.GetProject(ctx, id)
 		require.NoError(t, err)
 		require.EqualValues(t, idNoMainnet, id)
-		require.EqualValues(t, prjt.ProjectID, id)
+		require.EqualValues(t, prjt.ProjectId, id)
 		require.False(t, prjt.MainnetInitialized)
 	})
 }
@@ -249,14 +249,14 @@ func TestGetAccountWithVouchers(t *testing.T) {
 		chain := sample.Chain(r, 0, 0)
 		chain.LaunchTriggered = true
 		chain.IsMainnet = true
-		project.MainnetID, err = tk.LaunchKeeper.AppendChain(ctx, chain)
+		project.MainnetId, err = tk.LaunchKeeper.AppendChain(ctx, chain)
 		require.NoError(t, err)
-		project.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, project)
+		project.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, project)
 		require.NoError(t, err)
-		mint(acc.Address, sample.Vouchers(r, project.ProjectID))
+		mint(acc.Address, sample.Vouchers(r, project.ProjectId))
 		prjtID, acc, coins, found := simproject.GetAccountWithVouchers(r, ctx, tk.BankKeeper, tk.ProjectKeeper, accs, false)
 		require.True(t, found)
-		require.EqualValues(t, project.ProjectID, prjtID)
+		require.EqualValues(t, project.ProjectId, prjtID)
 		require.False(t, coins.Empty())
 		require.Contains(t, accs, acc)
 	})
@@ -265,12 +265,12 @@ func TestGetAccountWithVouchers(t *testing.T) {
 		acc, _ := simtypes.RandomAcc(r, accs)
 		project := sample.Project(r, 1)
 		project.MainnetInitialized = false
-		project.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, project)
+		project.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, project)
 		require.NoError(t, err)
-		mint(acc.Address, sample.Vouchers(r, project.ProjectID))
+		mint(acc.Address, sample.Vouchers(r, project.ProjectId))
 		prjtID, acc, coins, found := simproject.GetAccountWithVouchers(r, ctx, tk.BankKeeper, tk.ProjectKeeper, accs, true)
 		require.True(t, found)
-		require.EqualValues(t, project.ProjectID, prjtID)
+		require.EqualValues(t, project.ProjectId, prjtID)
 		require.False(t, coins.Empty())
 		require.Contains(t, accs, acc)
 	})
@@ -291,7 +291,7 @@ func TestGetAccountWithShares(t *testing.T) {
 		sampleAddr := sample.AccAddress(r)
 		projectID := uint64(10)
 		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(projectID, sampleAddr), projecttypes.MainnetAccount{
-			ProjectID: projectID,
+			ProjectId: projectID,
 			Address:   sampleAddr.String(),
 			Shares:    sample.Shares(r),
 		})
@@ -309,13 +309,13 @@ func TestGetAccountWithShares(t *testing.T) {
 		chain := sample.Chain(r, 0, 0)
 		chain.LaunchTriggered = true
 		chain.IsMainnet = true
-		project.MainnetID, err = tk.LaunchKeeper.AppendChain(ctx, chain)
+		project.MainnetId, err = tk.LaunchKeeper.AppendChain(ctx, chain)
 		require.NoError(t, err)
-		project.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, project)
+		project.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, project)
 		require.NoError(t, err)
 		share := sample.Shares(r)
-		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(project.ProjectID, acc.Address), projecttypes.MainnetAccount{
-			ProjectID: project.ProjectID,
+		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(project.ProjectId, acc.Address), projecttypes.MainnetAccount{
+			ProjectId: project.ProjectId,
 			Address:   acc.Address.String(),
 			Shares:    share,
 		})
@@ -323,7 +323,7 @@ func TestGetAccountWithShares(t *testing.T) {
 		prjtID, acc, shareRetrieved, found := simproject.GetAccountWithShares(r, ctx, tk.ProjectKeeper, accs, false)
 		require.True(t, found)
 		require.Contains(t, accs, acc)
-		require.EqualValues(t, project.ProjectID, prjtID)
+		require.EqualValues(t, project.ProjectId, prjtID)
 		require.EqualValues(t, share, shareRetrieved)
 	})
 
@@ -331,11 +331,11 @@ func TestGetAccountWithShares(t *testing.T) {
 		acc, _ := simtypes.RandomAcc(r, accs)
 		project := sample.Project(r, 1)
 		project.MainnetInitialized = false
-		project.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, project)
+		project.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, project)
 		require.NoError(t, err)
 		share := sample.Shares(r)
-		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(project.ProjectID, acc.Address), projecttypes.MainnetAccount{
-			ProjectID: project.ProjectID,
+		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(project.ProjectId, acc.Address), projecttypes.MainnetAccount{
+			ProjectId: project.ProjectId,
 			Address:   acc.Address.String(),
 			Shares:    share,
 		})
@@ -343,7 +343,7 @@ func TestGetAccountWithShares(t *testing.T) {
 		prjtID, acc, shareRetrieved, found := simproject.GetAccountWithShares(r, ctx, tk.ProjectKeeper, accs, true)
 		require.True(t, found)
 		require.Contains(t, accs, acc)
-		require.EqualValues(t, project.ProjectID, prjtID)
+		require.EqualValues(t, project.ProjectId, prjtID)
 		require.EqualValues(t, share, shareRetrieved)
 	})
 }

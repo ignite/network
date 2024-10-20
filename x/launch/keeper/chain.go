@@ -35,14 +35,14 @@ func (k Keeper) CreateNewChain(
 	}
 
 	chain := types.Chain{
-		CoordinatorID:   coordinatorID,
-		GenesisChainID:  genesisChainID,
+		CoordinatorId:   coordinatorID,
+		GenesisChainId:  genesisChainID,
 		CreatedAt:       sdkCtx.BlockTime().Unix(),
-		SourceURL:       sourceURL,
+		SourceUrl:       sourceURL,
 		SourceHash:      sourceHash,
 		InitialGenesis:  initialGenesis,
 		HasProject:      hasProject,
-		ProjectID:       projectID,
+		ProjectId:       projectID,
 		IsMainnet:       isMainnet,
 		LaunchTriggered: false,
 		LaunchTime:      time.Unix(0, 0).UTC(),
@@ -60,11 +60,11 @@ func (k Keeper) CreateNewChain(
 		if err != nil {
 			return 0, sdkerrors.Wrapf(err, "%d", projectID)
 		}
-		if project.CoordinatorID != coordinatorID {
+		if project.CoordinatorId != coordinatorID {
 			return 0, fmt.Errorf(
 				"chain coordinator %d and project coordinator %d don't match",
 				coordinatorID,
-				project.CoordinatorID,
+				project.CoordinatorId,
 			)
 		}
 	}
@@ -80,9 +80,9 @@ func (k Keeper) CreateNewChain(
 	}
 
 	return launchID, sdkCtx.EventManager().EmitTypedEvent(&types.EventChainCreated{
-		LaunchID:           launchID,
+		LaunchId:           launchID,
 		CoordinatorAddress: coordinator.Address,
-		CoordinatorID:      coordinatorID,
+		CoordinatorId:      coordinatorID,
 	})
 }
 
@@ -92,7 +92,7 @@ func (k Keeper) AppendChain(ctx context.Context, chain types.Chain) (uint64, err
 	if err != nil {
 		return 0, ignterrors.Criticalf("failed to get next chain sequence %s", err.Error())
 	}
-	chain.LaunchID = launchID
+	chain.LaunchId = launchID
 	if err := k.Chain.Set(ctx, launchID, chain); err != nil {
 		return 0, ignterrors.Criticalf("chain not set %s", err.Error())
 	}

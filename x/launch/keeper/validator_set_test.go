@@ -24,35 +24,35 @@ func TestKeeper_CheckValidatorSet(t *testing.T) {
 		invalidValidatorSet  = tmtypes.ValidatorSet{}
 	)
 	notTriggeredLaunchID, err := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
-		CoordinatorID:   0,
+		CoordinatorId:   0,
 		LaunchTriggered: false,
-		GenesisChainID:  "spn-1",
+		GenesisChainId:  "spn-1",
 	})
 	require.NoError(t, err)
 	invalidChainIDLaunchID, err := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
-		CoordinatorID:   0,
+		CoordinatorId:   0,
 		LaunchTriggered: true,
-		GenesisChainID:  "spn-10",
+		GenesisChainId:  "spn-10",
 	})
 	require.NoError(t, err)
 	monitoringConnectedLaunchID, err := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
-		CoordinatorID:       0,
+		CoordinatorId:       0,
 		LaunchTriggered:     true,
-		GenesisChainID:      "spn-1",
+		GenesisChainId:      "spn-1",
 		MonitoringConnected: true,
 	})
 	require.NoError(t, err)
 	launchID, err := tk.LaunchKeeper.AppendChain(ctx, types.Chain{
-		CoordinatorID:   0,
+		CoordinatorId:   0,
 		LaunchTriggered: true,
-		GenesisChainID:  "spn-1",
+		GenesisChainId:  "spn-1",
 	})
 	require.NoError(t, err)
 
 	for _, validator := range validators {
 		addr := sdk.AccAddress(validator.Address().Bytes())
 		err = tk.LaunchKeeper.GenesisValidator.Set(ctx, collections.Join(launchID, addr), types.GenesisValidator{
-			LaunchID:       launchID,
+			LaunchId:       launchID,
 			Address:        addr.String(),
 			ConsPubKey:     validator.Bytes(),
 			SelfDelegation: sdk.NewCoin("spn", sdkmath.NewInt(1000)),

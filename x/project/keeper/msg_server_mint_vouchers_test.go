@@ -33,7 +33,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			Description: sample.CoordinatorDescription(r),
 		})
 		require.NoError(t, err)
-		coordID = res.CoordinatorID
+		coordID = res.CoordinatorId
 		res, err = ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
 			Address:     coordNoProject,
 			Description: sample.CoordinatorDescription(r),
@@ -43,10 +43,10 @@ func TestMsgMintVouchers(t *testing.T) {
 
 	// Set project
 	project := sample.Project(r, 0)
-	project.CoordinatorID = coordID
+	project.CoordinatorId = coordID
 	projectID, err := tk.ProjectKeeper.AppendProject(ctx, project)
 	require.NoError(t, err)
-	project.ProjectID = projectID
+	project.ProjectId = projectID
 
 	for _, tc := range []struct {
 		name string
@@ -57,7 +57,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			name: "should allow minting  vouchers",
 			msg: types.MsgMintVouchers{
 				Coordinator: coord,
-				ProjectID:   0,
+				ProjectId:   0,
 				Shares:      shares,
 			},
 		},
@@ -65,7 +65,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			name: "should allow minting same vouchers again",
 			msg: types.MsgMintVouchers{
 				Coordinator: coord,
-				ProjectID:   0,
+				ProjectId:   0,
 				Shares:      shares,
 			},
 		},
@@ -73,7 +73,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			name: "should allow minting other vouchers",
 			msg: types.MsgMintVouchers{
 				Coordinator: coord,
-				ProjectID:   0,
+				ProjectId:   0,
 				Shares:      sample.Shares(r),
 			},
 		},
@@ -81,7 +81,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			name: "should not mint more than total shares",
 			msg: types.MsgMintVouchers{
 				Coordinator: coord,
-				ProjectID:   0,
+				ProjectId:   0,
 				Shares:      sharesTooBig,
 			},
 			err: types.ErrTotalSharesLimit,
@@ -90,7 +90,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			name: "should fail with non existing project",
 			msg: types.MsgMintVouchers{
 				Coordinator: coord,
-				ProjectID:   1000,
+				ProjectId:   1000,
 				Shares:      shares,
 			},
 			err: types.ErrProjectNotFound,
@@ -99,7 +99,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			name: "should fail with non existing coordinator",
 			msg: types.MsgMintVouchers{
 				Coordinator: sample.Address(r),
-				ProjectID:   0,
+				ProjectId:   0,
 				Shares:      shares,
 			},
 			err: profiletypes.ErrCoordinatorAddressNotFound,
@@ -108,7 +108,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			name: "should fail with invalid coordinator",
 			msg: types.MsgMintVouchers{
 				Coordinator: coordNoProject,
-				ProjectID:   0,
+				ProjectId:   0,
 				Shares:      shares,
 			},
 			err: profiletypes.ErrCoordinatorInvalid,
@@ -123,7 +123,7 @@ func TestMsgMintVouchers(t *testing.T) {
 
 			// Get values before message execution
 			if tc.err == nil {
-				previousProject, err = tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
+				previousProject, err = tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectId)
 				require.NoError(t, err)
 
 				previousBalance = tk.BankKeeper.GetAllBalances(ctx, coordAddr)
@@ -137,7 +137,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			}
 			require.NoError(t, err)
 
-			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
+			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectId)
 			require.NoError(t, err)
 
 			// Allocated shares of the project must be increased
@@ -145,7 +145,7 @@ func TestMsgMintVouchers(t *testing.T) {
 			require.True(t, types.IsEqualShares(expectedShares, project.AllocatedShares))
 
 			// Check coordinator balance
-			minted, err := types.SharesToVouchers(tc.msg.Shares, tc.msg.ProjectID)
+			minted, err := types.SharesToVouchers(tc.msg.Shares, tc.msg.ProjectId)
 			require.NoError(t, err)
 			balance := tk.BankKeeper.GetAllBalances(ctx, coordAddr)
 			require.True(t, balance.Equal(previousBalance.Add(minted...)))

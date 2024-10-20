@@ -38,7 +38,7 @@ func (q queryServer) GetProject(ctx context.Context, req *types.QueryGetProjectR
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	project, err := q.k.Project.Get(ctx, req.ProjectID)
+	project, err := q.k.Project.Get(ctx, req.ProjectId)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, sdkerrors.ErrKeyNotFound

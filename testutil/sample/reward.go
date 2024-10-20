@@ -19,7 +19,7 @@ func RewardPool(r *rand.Rand, launchID uint64) reward.RewardPool {
 	)
 
 	return reward.RewardPool{
-		LaunchID:            launchID,
+		LaunchId:            launchID,
 		Provider:            Address(r),
 		InitialCoins:        initialCoins,
 		RemainingCoins:      remainingCoins,
@@ -41,7 +41,7 @@ func RewardPoolWithCoinsRangeAmount(r *rand.Rand, launchID uint64, denom1, denom
 		max,
 	)
 	return reward.RewardPool{
-		LaunchID:            launchID,
+		LaunchId:            launchID,
 		Provider:            Address(r),
 		InitialCoins:        initialCoins,
 		RemainingCoins:      remainingCoins,

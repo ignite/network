@@ -61,15 +61,15 @@ func Test_msgServer_CreateClient(t *testing.T) {
 		sample.Metadata(r, 20),
 	))
 	require.NoError(t, err)
-	chainWithInvalidChainID := sample.Chain(r, resCreateChain.LaunchID+1, resCoord.CoordinatorID)
-	chainWithInvalidChainID.GenesisChainID = "invalid_chain_id"
-	err = tk.LaunchKeeper.Chain.Set(ctx, chainWithInvalidChainID.LaunchID, chainWithInvalidChainID)
+	chainWithInvalidChainID := sample.Chain(r, resCreateChain.LaunchId+1, resCoord.CoordinatorId)
+	chainWithInvalidChainID.GenesisChainId = "invalid_chain_id"
+	err = tk.LaunchKeeper.Chain.Set(ctx, chainWithInvalidChainID.LaunchId, chainWithInvalidChainID)
 	require.NoError(t, err)
 	_, err = ts.LaunchSrv.SendRequest(ctx, launchtypes.NewMsgSendRequest(
 		coordAddr,
-		resCreateChain.LaunchID,
+		resCreateChain.LaunchId,
 		launchtypes.NewGenesisValidator(
-			resCreateChain.LaunchID,
+			resCreateChain.LaunchId,
 			sample.Address(r),
 			sample.Bytes(r, 100),
 			consPubKey,
@@ -80,7 +80,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 	require.NoError(t, err)
 	_, err = ts.LaunchSrv.TriggerLaunch(ctx, launchtypes.NewMsgTriggerLaunch(
 		coordAddr,
-		resCreateChain.LaunchID,
+		resCreateChain.LaunchId,
 		ctx.BlockTime().Add(launchtypes.DefaultMinLaunchTime),
 	))
 	require.NoError(t, err)
@@ -94,7 +94,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 			name: "invalid chain ID",
 			msg: *types.NewMsgCreateClient(
 				sample.Address(r),
-				chainWithInvalidChainID.LaunchID,
+				chainWithInvalidChainID.LaunchId,
 				cs,
 				vs,
 				networktypes.DefaultUnbondingPeriod,
@@ -106,7 +106,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 			name: "invalid consensus state",
 			msg: *types.NewMsgCreateClient(
 				sample.Address(r),
-				resCreateChain.LaunchID,
+				resCreateChain.LaunchId,
 				networktypes.NewConsensusState(
 					"",
 					"",
@@ -134,7 +134,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 			name: "empty validator set",
 			msg: *types.NewMsgCreateClient(
 				sample.Address(r),
-				resCreateChain.LaunchID,
+				resCreateChain.LaunchId,
 				sample.ConsensusState(0),
 				networktypes.ValidatorSet{},
 				networktypes.DefaultUnbondingPeriod,
@@ -146,7 +146,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 			name: "invalid validator set",
 			msg: *types.NewMsgCreateClient(
 				sample.Address(r),
-				resCreateChain.LaunchID,
+				resCreateChain.LaunchId,
 				sample.ConsensusState(0),
 				sample.ValidatorSet(1),
 				networktypes.DefaultUnbondingPeriod,
@@ -158,7 +158,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 			name: "verified client should be created",
 			msg: *types.NewMsgCreateClient(
 				sample.Address(r),
-				resCreateChain.LaunchID,
+				resCreateChain.LaunchId,
 				cs,
 				vs,
 				networktypes.DefaultUnbondingPeriod,
@@ -176,18 +176,18 @@ func Test_msgServer_CreateClient(t *testing.T) {
 			require.NoError(t, err)
 
 			// verify the client is created
-			verifiedClients, err := tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, tt.msg.LaunchID)
+			verifiedClients, err := tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, tt.msg.LaunchId)
 			require.NoError(t, err, "verified client ID should be added in the list")
-			require.EqualValues(t, tt.msg.LaunchID, verifiedClients.LaunchID)
-			require.Contains(t, verifiedClients.ClientIDs, res.ClientID)
+			require.EqualValues(t, tt.msg.LaunchId, verifiedClients.LaunchId)
+			require.Contains(t, verifiedClients.ClientIdList, res.ClientId)
 
-			launchIDFromClient, err := tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Get(ctx, res.ClientID)
+			launchIDFromClient, err := tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Get(ctx, res.ClientId)
 			require.NoError(t, err, "launch ID should be registered for the verified client ID")
-			require.EqualValues(t, res.ClientID, launchIDFromClient.ClientID)
-			require.EqualValues(t, tt.msg.LaunchID, launchIDFromClient.LaunchID)
+			require.EqualValues(t, res.ClientId, launchIDFromClient.ClientId)
+			require.EqualValues(t, tt.msg.LaunchId, launchIDFromClient.LaunchId)
 
 			// IBC client should be created
-			clientState, found := tk.IBCKeeper.ClientKeeper.GetClientState(ctx, res.ClientID)
+			clientState, found := tk.IBCKeeper.ClientKeeper.GetClientState(ctx, res.ClientId)
 			require.True(t, found, "IBC consumer client state should be created")
 			cs, ok := clientState.(*ibctmtypes.ClientState)
 			require.True(t, ok)

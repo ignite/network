@@ -41,13 +41,13 @@ func TestMsgRevertLaunch(t *testing.T) {
 			name: "should allow reverting launch if revert delay reached",
 			inputState: inputState{
 				chain: types.Chain{
-					LaunchID:        0,
-					CoordinatorID:   0,
+					LaunchId:        0,
+					CoordinatorId:   0,
 					LaunchTriggered: true,
 					LaunchTime:      sampleTime,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 0,
+					CoordinatorId: 0,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -56,7 +56,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 				blockHeight:        100,
 			},
 			msg: types.MsgRevertLaunch{
-				LaunchID:    0,
+				LaunchId:    0,
 				Coordinator: sampleAddr,
 			},
 		},
@@ -64,13 +64,13 @@ func TestMsgRevertLaunch(t *testing.T) {
 			name: "should allow reverting launch if revert delay reached and chain has no monitoring connection but verified client ID",
 			inputState: inputState{
 				chain: types.Chain{
-					LaunchID:        0,
-					CoordinatorID:   0,
+					LaunchId:        0,
+					CoordinatorId:   0,
 					LaunchTriggered: true,
 					LaunchTime:      sampleTime,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 0,
+					CoordinatorId: 0,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -79,7 +79,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 				blockHeight:      100,
 			},
 			msg: types.MsgRevertLaunch{
-				LaunchID:    0,
+				LaunchId:    0,
 				Coordinator: sampleAddr,
 			},
 		},
@@ -87,13 +87,13 @@ func TestMsgRevertLaunch(t *testing.T) {
 			name: "should prevent reverting launch if revert delay not reached",
 			inputState: inputState{
 				chain: types.Chain{
-					LaunchID:        1,
-					CoordinatorID:   1,
+					LaunchId:        1,
+					CoordinatorId:   1,
 					LaunchTriggered: true,
 					LaunchTime:      sampleTime,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 1,
+					CoordinatorId: 1,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -102,7 +102,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 				blockHeight:        100,
 			},
 			msg: types.MsgRevertLaunch{
-				LaunchID:    1,
+				LaunchId:    1,
 				Coordinator: sampleAddr,
 			},
 			err: types.ErrRevertDelayNotReached,
@@ -111,12 +111,12 @@ func TestMsgRevertLaunch(t *testing.T) {
 			name: "should prevent reverting launch if revert delay not reached",
 			inputState: inputState{
 				chain: types.Chain{
-					LaunchID:        2,
-					CoordinatorID:   2,
+					LaunchId:        2,
+					CoordinatorId:   2,
 					LaunchTriggered: false,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 2,
+					CoordinatorId: 2,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -125,7 +125,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 				blockHeight:        100,
 			},
 			msg: types.MsgRevertLaunch{
-				LaunchID:    2,
+				LaunchId:    2,
 				Coordinator: sampleAddr,
 			},
 			err: types.ErrNotTriggeredLaunch,
@@ -134,8 +134,8 @@ func TestMsgRevertLaunch(t *testing.T) {
 			name: "should allow reverting launch if revert delay reached",
 			inputState: inputState{
 				chain: types.Chain{
-					LaunchID:        3,
-					CoordinatorID:   3,
+					LaunchId:        3,
+					CoordinatorId:   3,
 					LaunchTriggered: true,
 					LaunchTime:      sampleTime,
 				},
@@ -145,7 +145,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 				blockHeight:        100,
 			},
 			msg: types.MsgRevertLaunch{
-				LaunchID:    3,
+				LaunchId:    3,
 				Coordinator: sample.Address(r),
 			},
 			err: profiletypes.ErrCoordinatorAddressNotFound,
@@ -154,13 +154,13 @@ func TestMsgRevertLaunch(t *testing.T) {
 			name: "should allow reverting launch if revert delay reached",
 			inputState: inputState{
 				chain: types.Chain{
-					LaunchID:        4,
-					CoordinatorID:   1000,
+					LaunchId:        4,
+					CoordinatorId:   1000,
 					LaunchTriggered: true,
 					LaunchTime:      sampleTime,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 4,
+					CoordinatorId: 4,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -169,7 +169,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 				blockHeight:        100,
 			},
 			msg: types.MsgRevertLaunch{
-				LaunchID:    4,
+				LaunchId:    4,
 				Coordinator: sampleAddr,
 			},
 			err: profiletypes.ErrCoordinatorInvalid,
@@ -179,7 +179,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 			inputState: inputState{
 				noChain: true,
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 5,
+					CoordinatorId: 5,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -188,7 +188,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 				blockHeight:        100,
 			},
 			msg: types.MsgRevertLaunch{
-				LaunchID:    1000,
+				LaunchId:    1000,
 				Coordinator: sampleAddr,
 			},
 			err: types.ErrChainNotFound,
@@ -197,14 +197,14 @@ func TestMsgRevertLaunch(t *testing.T) {
 			name: "should prevent reverting launch if monitoring module is connected",
 			inputState: inputState{
 				chain: types.Chain{
-					LaunchID:            6,
-					CoordinatorID:       6,
+					LaunchId:            6,
+					CoordinatorId:       6,
 					LaunchTriggered:     true,
 					LaunchTime:          sampleTime,
 					MonitoringConnected: true,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 6,
+					CoordinatorId: 6,
 					Address:       sampleAddr,
 					Active:        true,
 				},
@@ -213,7 +213,7 @@ func TestMsgRevertLaunch(t *testing.T) {
 				blockHeight:        100,
 			},
 			msg: types.MsgRevertLaunch{
-				LaunchID:    6,
+				LaunchId:    6,
 				Coordinator: sampleAddr,
 			},
 			err: types.ErrChainMonitoringConnected,
@@ -222,17 +222,17 @@ func TestMsgRevertLaunch(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// initialize input state
 			if !tt.inputState.noChain {
-				err = tk.LaunchKeeper.Chain.Set(ctx, tt.inputState.chain.LaunchID, tt.inputState.chain)
+				err = tk.LaunchKeeper.Chain.Set(ctx, tt.inputState.chain.LaunchId, tt.inputState.chain)
 				require.NoError(t, err)
 			}
 			if !tt.inputState.noCoordinator {
-				err = tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorID, tt.inputState.coordinator)
+				err = tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorId, tt.inputState.coordinator)
 				require.NoError(t, err)
 				addr, err := tk.ProfileKeeper.AddressCodec().StringToBytes(tt.inputState.coordinator.Address)
 				require.NoError(t, err)
 				err = tk.ProfileKeeper.CoordinatorByAddress.Set(ctx, addr, profiletypes.CoordinatorByAddress{
 					Address:       tt.inputState.coordinator.Address,
-					CoordinatorID: tt.inputState.coordinator.CoordinatorID,
+					CoordinatorId: tt.inputState.coordinator.CoordinatorId,
 				})
 				require.NoError(t, err)
 			}
@@ -243,14 +243,14 @@ func TestMsgRevertLaunch(t *testing.T) {
 				ctx = ctx.WithBlockHeight(tt.inputState.blockHeight)
 			}
 			if !tt.inputState.noVerifiedClientID {
-				err = tk.MonitoringConsumerKeeper.VerifiedClientID.Set(ctx, tt.inputState.chain.LaunchID, monitoringctypes.VerifiedClientID{
-					LaunchID:  tt.inputState.chain.LaunchID,
-					ClientIDs: []string{tt.inputState.verifiedClientID},
+				err = tk.MonitoringConsumerKeeper.VerifiedClientID.Set(ctx, tt.inputState.chain.LaunchId, monitoringctypes.VerifiedClientID{
+					LaunchId:     tt.inputState.chain.LaunchId,
+					ClientIdList: []string{tt.inputState.verifiedClientID},
 				})
 				require.NoError(t, err)
 				err = tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Set(ctx, tt.inputState.verifiedClientID, monitoringctypes.LaunchIDFromVerifiedClientID{
-					LaunchID: tt.inputState.chain.LaunchID,
-					ClientID: tt.inputState.verifiedClientID,
+					LaunchId: tt.inputState.chain.LaunchId,
+					ClientId: tt.inputState.verifiedClientID,
 				})
 				require.NoError(t, err)
 			}
@@ -264,12 +264,12 @@ func TestMsgRevertLaunch(t *testing.T) {
 			require.NoError(t, err)
 
 			// Check value of chain
-			chain, err := tk.LaunchKeeper.GetChain(ctx, tt.msg.LaunchID)
+			chain, err := tk.LaunchKeeper.GetChain(ctx, tt.msg.LaunchId)
 			require.NoError(t, err)
 			require.False(t, chain.LaunchTriggered)
 
 			// check that monitoringc client ids are removed
-			_, err = tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, tt.msg.LaunchID)
+			_, err = tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, tt.msg.LaunchId)
 			require.Error(t, err)
 			_, err = tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Get(ctx, tt.inputState.verifiedClientID)
 			require.Error(t, err)

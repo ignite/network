@@ -44,7 +44,7 @@ func GetCoordSimAccount(
 	// Find the account linked to this address
 	for _, acc := range accs {
 		if acc.Address.String() == coord.Address && coord.Active {
-			return acc, coord.CoordinatorID, true
+			return acc, coord.CoordinatorId, true
 		}
 	}
 	return simtypes.Account{}, 0, false
@@ -94,7 +94,7 @@ func GetCoordSimAccountWithProjectID(
 	if !requireNoMainnetInitialized && requireNoMainnetLaunchTriggered {
 		var prjtFound bool
 		for _, project := range projects {
-			launched, _ := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectID)
+			launched, _ := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectId)
 			if !launched {
 				prjt = project
 				prjtFound = true
@@ -107,13 +107,13 @@ func GetCoordSimAccountWithProjectID(
 	}
 
 	// Find the sim account of the project coordinator
-	coord, err := pk.GetCoordinator(ctx, prjt.CoordinatorID)
+	coord, err := pk.GetCoordinator(ctx, prjt.CoordinatorId)
 	if err != nil {
 		return simtypes.Account{}, 0, false
 	}
 	for _, acc := range accs {
 		if acc.Address.String() == coord.Address && coord.Active {
-			return acc, prjt.ProjectID, true
+			return acc, prjt.ProjectId, true
 		}
 	}
 
@@ -178,7 +178,7 @@ func GetAccountWithVouchers(
 			if err != nil {
 				return false
 			}
-			launched, err := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectID)
+			launched, err := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectId)
 			if err != nil || launched {
 				return false
 			}
@@ -248,11 +248,11 @@ func GetAccountWithShares(
 	var mainnetAccount types.MainnetAccount
 	for _, mAcc := range mainnetAccounts {
 		if requireNoMainnetLaunchTriggered {
-			project, err := k.GetProject(ctx, mAcc.ProjectID)
+			project, err := k.GetProject(ctx, mAcc.ProjectId)
 			if err != nil {
 				continue
 			}
-			launched, _ := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectID)
+			launched, _ := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectId)
 			if launched {
 				continue
 			}
@@ -264,7 +264,7 @@ func GetAccountWithShares(
 	// Find the associated sim account
 	for _, acc := range accs {
 		if acc.Address.String() == mainnetAccount.Address {
-			return mainnetAccount.ProjectID, acc, mainnetAccount.Shares, true
+			return mainnetAccount.ProjectId, acc, mainnetAccount.Shares, true
 		}
 	}
 	return 0, simtypes.Account{}, nil, false

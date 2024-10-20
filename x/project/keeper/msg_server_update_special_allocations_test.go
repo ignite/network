@@ -32,7 +32,7 @@ func Test_msgServer_UpdateSpecialAllocations(t *testing.T) {
 			Description: sample.CoordinatorDescription(r),
 		})
 		require.NoError(t, err)
-		coordID = res.CoordinatorID
+		coordID = res.CoordinatorId
 		res, err = ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
 			Address:     coordAddrNoProject,
 			Description: sample.CoordinatorDescription(r),
@@ -47,7 +47,7 @@ func Test_msgServer_UpdateSpecialAllocations(t *testing.T) {
 		sa types.SpecialAllocations,
 	) *types.Project {
 		c := sample.Project(r, projectID)
-		c.CoordinatorID = coordID
+		c.CoordinatorId = coordID
 		c.AllocatedShares = as
 		c.SpecialAllocations = sa
 		return &c
@@ -73,7 +73,7 @@ func Test_msgServer_UpdateSpecialAllocations(t *testing.T) {
 
 	projectNoExistentMainnet := newProject(100, types.EmptyShares(), types.EmptySpecialAllocations())
 	projectNoExistentMainnet.MainnetInitialized = true
-	projectNoExistentMainnet.MainnetID = 100
+	projectNoExistentMainnet.MainnetId = 100
 
 	tests := []struct {
 		name                    string
@@ -320,14 +320,14 @@ func Test_msgServer_UpdateSpecialAllocations(t *testing.T) {
 				// link mainnet to project if defined
 				if tt.state.mainnet != nil {
 					tt.state.mainnet.IsMainnet = true
-					tt.state.mainnet.ProjectID = tt.state.project.ProjectID
+					tt.state.mainnet.ProjectId = tt.state.project.ProjectId
 					tt.state.project.MainnetInitialized = true
-					tt.state.project.MainnetID = tt.state.mainnet.LaunchID
+					tt.state.project.MainnetId = tt.state.mainnet.LaunchId
 
-					require.NoError(t, tk.LaunchKeeper.Chain.Set(ctx, tt.state.mainnet.LaunchID, *tt.state.mainnet))
+					require.NoError(t, tk.LaunchKeeper.Chain.Set(ctx, tt.state.mainnet.LaunchId, *tt.state.mainnet))
 				}
 
-				require.NoError(t, tk.ProjectKeeper.Project.Set(ctx, tt.state.project.ProjectID, *tt.state.project))
+				require.NoError(t, tk.ProjectKeeper.Project.Set(ctx, tt.state.project.ProjectId, *tt.state.project))
 			}
 
 			_, err := ts.ProjectSrv.UpdateSpecialAllocations(ctx, &tt.msg)
@@ -338,7 +338,7 @@ func Test_msgServer_UpdateSpecialAllocations(t *testing.T) {
 			}
 
 			// fetch project
-			prjt, err := tk.ProjectKeeper.GetProject(ctx, tt.msg.ProjectID)
+			prjt, err := tk.ProjectKeeper.GetProject(ctx, tt.msg.ProjectId)
 			require.NoError(t, err)
 
 			// check genesis distribution

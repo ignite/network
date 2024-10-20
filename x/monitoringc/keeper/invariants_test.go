@@ -21,8 +21,8 @@ func TestMissingVerifiedClientIDInvariant(t *testing.T) {
 			err := tk.MonitoringConsumerKeeper.AddVerifiedClientID(ctx, launchID, clientID)
 			require.NoError(t, err)
 			err = tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Set(ctx, clientID, types.LaunchIDFromVerifiedClientID{
-				ClientID: clientID,
-				LaunchID: launchID,
+				ClientId: clientID,
+				LaunchId: launchID,
 			})
 			require.NoError(t, err)
 		}

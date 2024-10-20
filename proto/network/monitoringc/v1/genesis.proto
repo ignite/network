@@ -20,10 +20,10 @@ message GenesisState {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
-  string portID = 2;
-  repeated LaunchIDFromChannelID launchIDFromChannelIDList = 3 [(gogoproto.nullable) = false];
-  repeated LaunchIDFromVerifiedClientID launchIDFromVerifiedClientIDList = 4 [(gogoproto.nullable) = false];
-  repeated MonitoringHistory monitoringHistoryList = 5 [(gogoproto.nullable) = false];
-  repeated VerifiedClientID verifiedClientIDList = 6 [(gogoproto.nullable) = false];
-  repeated ProviderClientID providerClientIDList = 7 [(gogoproto.nullable) = false];
+  string port_id = 2;
+  repeated LaunchIDFromChannelID launch_id_from_channel_id_list = 3 [(gogoproto.nullable) = false];
+  repeated LaunchIDFromVerifiedClientID launch_id_from_verified_client_id_list = 4 [(gogoproto.nullable) = false];
+  repeated MonitoringHistory monitoring_history_list = 5 [(gogoproto.nullable) = false];
+  repeated VerifiedClientID verified_client_id_list = 6 [(gogoproto.nullable) = false];
+  repeated ProviderClientID provider_client_id_list = 7 [(gogoproto.nullable) = false];
 }

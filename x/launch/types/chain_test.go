@@ -13,7 +13,7 @@ import (
 
 func TestChain_Validate(t *testing.T) {
 	invalidGenesisChainID := sample.Chain(r, 0, 0)
-	invalidGenesisChainID.GenesisChainID = "invalid"
+	invalidGenesisChainID.GenesisChainId = "invalid"
 
 	mainnetWithoutProject := sample.Chain(r, 0, 0)
 	mainnetWithoutProject.IsMainnet = true

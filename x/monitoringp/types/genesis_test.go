@@ -25,13 +25,13 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "should allow valid genesis state",
 			genState: &types.GenesisState{
-				PortID: types.PortID,
-				ConsumerClientID: &types.ConsumerClientID{
-					ClientID: "29",
+				PortId: types.PortID,
+				ConsumerClientId: &types.ConsumerClientID{
+					ClientId: "29",
 				},
 				Params: types.DefaultParams(),
-				ConnectionChannelID: &types.ConnectionChannelID{
-					ChannelID: "67",
+				ConnectionChannelId: &types.ConnectionChannelID{
+					ChannelId: "67",
 				},
 				MonitoringInfo: &types.MonitoringInfo{},
 				// this line is used by starport scaffolding # types/genesis/validField
@@ -41,9 +41,9 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "should prevent invalid params",
 			genState: &types.GenesisState{
-				PortID: types.PortID,
-				ConsumerClientID: &types.ConsumerClientID{
-					ClientID: "29",
+				PortId: types.PortID,
+				ConsumerClientId: &types.ConsumerClientID{
+					ClientId: "29",
 				},
 				Params: types.NewParams(
 					1000,
@@ -59,13 +59,13 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "should prevent invalid monitoring info",
 			genState: &types.GenesisState{
-				PortID: types.PortID,
-				ConsumerClientID: &types.ConsumerClientID{
-					ClientID: "29",
+				PortId: types.PortID,
+				ConsumerClientId: &types.ConsumerClientID{
+					ClientId: "29",
 				},
 				Params: types.DefaultParams(),
-				ConnectionChannelID: &types.ConnectionChannelID{
-					ChannelID: "67",
+				ConnectionChannelId: &types.ConnectionChannelID{
+					ChannelId: "67",
 				},
 				// Block count is lower than sum of relative signatures
 				MonitoringInfo: &types.MonitoringInfo{

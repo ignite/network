@@ -17,18 +17,18 @@ import (
 )
 
 var (
-	md_EventProjectCreated                    protoreflect.MessageDescriptor
-	fd_EventProjectCreated_projectID          protoreflect.FieldDescriptor
-	fd_EventProjectCreated_coordinatorAddress protoreflect.FieldDescriptor
-	fd_EventProjectCreated_coordinatorID      protoreflect.FieldDescriptor
+	md_EventProjectCreated                     protoreflect.MessageDescriptor
+	fd_EventProjectCreated_project_id          protoreflect.FieldDescriptor
+	fd_EventProjectCreated_coordinator_address protoreflect.FieldDescriptor
+	fd_EventProjectCreated_coordinator_id      protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventProjectCreated = File_network_project_v1_events_proto.Messages().ByName("EventProjectCreated")
-	fd_EventProjectCreated_projectID = md_EventProjectCreated.Fields().ByName("projectID")
-	fd_EventProjectCreated_coordinatorAddress = md_EventProjectCreated.Fields().ByName("coordinatorAddress")
-	fd_EventProjectCreated_coordinatorID = md_EventProjectCreated.Fields().ByName("coordinatorID")
+	fd_EventProjectCreated_project_id = md_EventProjectCreated.Fields().ByName("project_id")
+	fd_EventProjectCreated_coordinator_address = md_EventProjectCreated.Fields().ByName("coordinator_address")
+	fd_EventProjectCreated_coordinator_id = md_EventProjectCreated.Fields().ByName("coordinator_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventProjectCreated)(nil)
@@ -96,21 +96,21 @@ func (x *fastReflection_EventProjectCreated) Interface() protoreflect.ProtoMessa
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventProjectCreated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventProjectCreated_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventProjectCreated_project_id, value) {
 			return
 		}
 	}
 	if x.CoordinatorAddress != "" {
 		value := protoreflect.ValueOfString(x.CoordinatorAddress)
-		if !f(fd_EventProjectCreated_coordinatorAddress, value) {
+		if !f(fd_EventProjectCreated_coordinator_address, value) {
 			return
 		}
 	}
-	if x.CoordinatorID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.CoordinatorID)
-		if !f(fd_EventProjectCreated_coordinatorID, value) {
+	if x.CoordinatorId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.CoordinatorId)
+		if !f(fd_EventProjectCreated_coordinator_id, value) {
 			return
 		}
 	}
@@ -129,12 +129,12 @@ func (x *fastReflection_EventProjectCreated) Range(f func(protoreflect.FieldDesc
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventProjectCreated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectCreated.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.project.v1.EventProjectCreated.coordinatorAddress":
+	case "network.project.v1.EventProjectCreated.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.project.v1.EventProjectCreated.coordinator_address":
 		return x.CoordinatorAddress != ""
-	case "network.project.v1.EventProjectCreated.coordinatorID":
-		return x.CoordinatorID != uint64(0)
+	case "network.project.v1.EventProjectCreated.coordinator_id":
+		return x.CoordinatorId != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectCreated"))
@@ -151,12 +151,12 @@ func (x *fastReflection_EventProjectCreated) Has(fd protoreflect.FieldDescriptor
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectCreated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectCreated.projectID":
-		x.ProjectID = uint64(0)
-	case "network.project.v1.EventProjectCreated.coordinatorAddress":
+	case "network.project.v1.EventProjectCreated.project_id":
+		x.ProjectId = uint64(0)
+	case "network.project.v1.EventProjectCreated.coordinator_address":
 		x.CoordinatorAddress = ""
-	case "network.project.v1.EventProjectCreated.coordinatorID":
-		x.CoordinatorID = uint64(0)
+	case "network.project.v1.EventProjectCreated.coordinator_id":
+		x.CoordinatorId = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectCreated"))
@@ -173,14 +173,14 @@ func (x *fastReflection_EventProjectCreated) Clear(fd protoreflect.FieldDescript
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventProjectCreated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventProjectCreated.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventProjectCreated.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.EventProjectCreated.coordinatorAddress":
+	case "network.project.v1.EventProjectCreated.coordinator_address":
 		value := x.CoordinatorAddress
 		return protoreflect.ValueOfString(value)
-	case "network.project.v1.EventProjectCreated.coordinatorID":
-		value := x.CoordinatorID
+	case "network.project.v1.EventProjectCreated.coordinator_id":
+		value := x.CoordinatorId
 		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
@@ -202,12 +202,12 @@ func (x *fastReflection_EventProjectCreated) Get(descriptor protoreflect.FieldDe
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectCreated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectCreated.projectID":
-		x.ProjectID = value.Uint()
-	case "network.project.v1.EventProjectCreated.coordinatorAddress":
+	case "network.project.v1.EventProjectCreated.project_id":
+		x.ProjectId = value.Uint()
+	case "network.project.v1.EventProjectCreated.coordinator_address":
 		x.CoordinatorAddress = value.Interface().(string)
-	case "network.project.v1.EventProjectCreated.coordinatorID":
-		x.CoordinatorID = value.Uint()
+	case "network.project.v1.EventProjectCreated.coordinator_id":
+		x.CoordinatorId = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectCreated"))
@@ -228,12 +228,12 @@ func (x *fastReflection_EventProjectCreated) Set(fd protoreflect.FieldDescriptor
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectCreated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectCreated.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventProjectCreated is not mutable"))
-	case "network.project.v1.EventProjectCreated.coordinatorAddress":
-		panic(fmt.Errorf("field coordinatorAddress of message network.project.v1.EventProjectCreated is not mutable"))
-	case "network.project.v1.EventProjectCreated.coordinatorID":
-		panic(fmt.Errorf("field coordinatorID of message network.project.v1.EventProjectCreated is not mutable"))
+	case "network.project.v1.EventProjectCreated.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventProjectCreated is not mutable"))
+	case "network.project.v1.EventProjectCreated.coordinator_address":
+		panic(fmt.Errorf("field coordinator_address of message network.project.v1.EventProjectCreated is not mutable"))
+	case "network.project.v1.EventProjectCreated.coordinator_id":
+		panic(fmt.Errorf("field coordinator_id of message network.project.v1.EventProjectCreated is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectCreated"))
@@ -247,11 +247,11 @@ func (x *fastReflection_EventProjectCreated) Mutable(fd protoreflect.FieldDescri
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventProjectCreated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectCreated.projectID":
+	case "network.project.v1.EventProjectCreated.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.EventProjectCreated.coordinatorAddress":
+	case "network.project.v1.EventProjectCreated.coordinator_address":
 		return protoreflect.ValueOfString("")
-	case "network.project.v1.EventProjectCreated.coordinatorID":
+	case "network.project.v1.EventProjectCreated.coordinator_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -322,15 +322,15 @@ func (x *fastReflection_EventProjectCreated) ProtoMethods() *protoiface.Methods 
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.CoordinatorAddress)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.CoordinatorID != 0 {
-			n += 1 + runtime.Sov(uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			n += 1 + runtime.Sov(uint64(x.CoordinatorId))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -361,8 +361,8 @@ func (x *fastReflection_EventProjectCreated) ProtoMethods() *protoiface.Methods 
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.CoordinatorID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorId))
 			i--
 			dAtA[i] = 0x18
 		}
@@ -373,8 +373,8 @@ func (x *fastReflection_EventProjectCreated) ProtoMethods() *protoiface.Methods 
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -429,9 +429,9 @@ func (x *fastReflection_EventProjectCreated) ProtoMethods() *protoiface.Methods 
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -441,7 +441,7 @@ func (x *fastReflection_EventProjectCreated) ProtoMethods() *protoiface.Methods 
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -480,9 +480,9 @@ func (x *fastReflection_EventProjectCreated) ProtoMethods() *protoiface.Methods 
 				iNdEx = postIndex
 			case 3:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorId", wireType)
 				}
-				x.CoordinatorID = 0
+				x.CoordinatorId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -492,7 +492,7 @@ func (x *fastReflection_EventProjectCreated) ProtoMethods() *protoiface.Methods 
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.CoordinatorID |= uint64(b&0x7F) << shift
+					x.CoordinatorId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -533,16 +533,16 @@ func (x *fastReflection_EventProjectCreated) ProtoMethods() *protoiface.Methods 
 }
 
 var (
-	md_EventProjectChainAdded           protoreflect.MessageDescriptor
-	fd_EventProjectChainAdded_projectID protoreflect.FieldDescriptor
-	fd_EventProjectChainAdded_launchID  protoreflect.FieldDescriptor
+	md_EventProjectChainAdded            protoreflect.MessageDescriptor
+	fd_EventProjectChainAdded_project_id protoreflect.FieldDescriptor
+	fd_EventProjectChainAdded_launch_id  protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventProjectChainAdded = File_network_project_v1_events_proto.Messages().ByName("EventProjectChainAdded")
-	fd_EventProjectChainAdded_projectID = md_EventProjectChainAdded.Fields().ByName("projectID")
-	fd_EventProjectChainAdded_launchID = md_EventProjectChainAdded.Fields().ByName("launchID")
+	fd_EventProjectChainAdded_project_id = md_EventProjectChainAdded.Fields().ByName("project_id")
+	fd_EventProjectChainAdded_launch_id = md_EventProjectChainAdded.Fields().ByName("launch_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventProjectChainAdded)(nil)
@@ -610,15 +610,15 @@ func (x *fastReflection_EventProjectChainAdded) Interface() protoreflect.ProtoMe
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventProjectChainAdded) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventProjectChainAdded_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventProjectChainAdded_project_id, value) {
 			return
 		}
 	}
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_EventProjectChainAdded_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_EventProjectChainAdded_launch_id, value) {
 			return
 		}
 	}
@@ -637,10 +637,10 @@ func (x *fastReflection_EventProjectChainAdded) Range(f func(protoreflect.FieldD
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventProjectChainAdded) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectChainAdded.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.project.v1.EventProjectChainAdded.launchID":
-		return x.LaunchID != uint64(0)
+	case "network.project.v1.EventProjectChainAdded.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.project.v1.EventProjectChainAdded.launch_id":
+		return x.LaunchId != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectChainAdded"))
@@ -657,10 +657,10 @@ func (x *fastReflection_EventProjectChainAdded) Has(fd protoreflect.FieldDescrip
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectChainAdded) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectChainAdded.projectID":
-		x.ProjectID = uint64(0)
-	case "network.project.v1.EventProjectChainAdded.launchID":
-		x.LaunchID = uint64(0)
+	case "network.project.v1.EventProjectChainAdded.project_id":
+		x.ProjectId = uint64(0)
+	case "network.project.v1.EventProjectChainAdded.launch_id":
+		x.LaunchId = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectChainAdded"))
@@ -677,11 +677,11 @@ func (x *fastReflection_EventProjectChainAdded) Clear(fd protoreflect.FieldDescr
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventProjectChainAdded) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventProjectChainAdded.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventProjectChainAdded.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.EventProjectChainAdded.launchID":
-		value := x.LaunchID
+	case "network.project.v1.EventProjectChainAdded.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
@@ -703,10 +703,10 @@ func (x *fastReflection_EventProjectChainAdded) Get(descriptor protoreflect.Fiel
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectChainAdded) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectChainAdded.projectID":
-		x.ProjectID = value.Uint()
-	case "network.project.v1.EventProjectChainAdded.launchID":
-		x.LaunchID = value.Uint()
+	case "network.project.v1.EventProjectChainAdded.project_id":
+		x.ProjectId = value.Uint()
+	case "network.project.v1.EventProjectChainAdded.launch_id":
+		x.LaunchId = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectChainAdded"))
@@ -727,10 +727,10 @@ func (x *fastReflection_EventProjectChainAdded) Set(fd protoreflect.FieldDescrip
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectChainAdded) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectChainAdded.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventProjectChainAdded is not mutable"))
-	case "network.project.v1.EventProjectChainAdded.launchID":
-		panic(fmt.Errorf("field launchID of message network.project.v1.EventProjectChainAdded is not mutable"))
+	case "network.project.v1.EventProjectChainAdded.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventProjectChainAdded is not mutable"))
+	case "network.project.v1.EventProjectChainAdded.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.project.v1.EventProjectChainAdded is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectChainAdded"))
@@ -744,9 +744,9 @@ func (x *fastReflection_EventProjectChainAdded) Mutable(fd protoreflect.FieldDes
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventProjectChainAdded) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectChainAdded.projectID":
+	case "network.project.v1.EventProjectChainAdded.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.EventProjectChainAdded.launchID":
+	case "network.project.v1.EventProjectChainAdded.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -817,11 +817,11 @@ func (x *fastReflection_EventProjectChainAdded) ProtoMethods() *protoiface.Metho
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -852,13 +852,13 @@ func (x *fastReflection_EventProjectChainAdded) ProtoMethods() *protoiface.Metho
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x10
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -913,9 +913,9 @@ func (x *fastReflection_EventProjectChainAdded) ProtoMethods() *protoiface.Metho
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -925,16 +925,16 @@ func (x *fastReflection_EventProjectChainAdded) ProtoMethods() *protoiface.Metho
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -944,7 +944,7 @@ func (x *fastReflection_EventProjectChainAdded) ProtoMethods() *protoiface.Metho
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -985,19 +985,19 @@ func (x *fastReflection_EventProjectChainAdded) ProtoMethods() *protoiface.Metho
 }
 
 var (
-	md_EventProjectInfoUpdated                    protoreflect.MessageDescriptor
-	fd_EventProjectInfoUpdated_projectID          protoreflect.FieldDescriptor
-	fd_EventProjectInfoUpdated_coordinatorAddress protoreflect.FieldDescriptor
-	fd_EventProjectInfoUpdated_projectName        protoreflect.FieldDescriptor
-	fd_EventProjectInfoUpdated_metadata           protoreflect.FieldDescriptor
+	md_EventProjectInfoUpdated                     protoreflect.MessageDescriptor
+	fd_EventProjectInfoUpdated_project_id          protoreflect.FieldDescriptor
+	fd_EventProjectInfoUpdated_coordinator_address protoreflect.FieldDescriptor
+	fd_EventProjectInfoUpdated_project_name        protoreflect.FieldDescriptor
+	fd_EventProjectInfoUpdated_metadata            protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventProjectInfoUpdated = File_network_project_v1_events_proto.Messages().ByName("EventProjectInfoUpdated")
-	fd_EventProjectInfoUpdated_projectID = md_EventProjectInfoUpdated.Fields().ByName("projectID")
-	fd_EventProjectInfoUpdated_coordinatorAddress = md_EventProjectInfoUpdated.Fields().ByName("coordinatorAddress")
-	fd_EventProjectInfoUpdated_projectName = md_EventProjectInfoUpdated.Fields().ByName("projectName")
+	fd_EventProjectInfoUpdated_project_id = md_EventProjectInfoUpdated.Fields().ByName("project_id")
+	fd_EventProjectInfoUpdated_coordinator_address = md_EventProjectInfoUpdated.Fields().ByName("coordinator_address")
+	fd_EventProjectInfoUpdated_project_name = md_EventProjectInfoUpdated.Fields().ByName("project_name")
 	fd_EventProjectInfoUpdated_metadata = md_EventProjectInfoUpdated.Fields().ByName("metadata")
 }
 
@@ -1066,21 +1066,21 @@ func (x *fastReflection_EventProjectInfoUpdated) Interface() protoreflect.ProtoM
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventProjectInfoUpdated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventProjectInfoUpdated_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventProjectInfoUpdated_project_id, value) {
 			return
 		}
 	}
 	if x.CoordinatorAddress != "" {
 		value := protoreflect.ValueOfString(x.CoordinatorAddress)
-		if !f(fd_EventProjectInfoUpdated_coordinatorAddress, value) {
+		if !f(fd_EventProjectInfoUpdated_coordinator_address, value) {
 			return
 		}
 	}
 	if x.ProjectName != "" {
 		value := protoreflect.ValueOfString(x.ProjectName)
-		if !f(fd_EventProjectInfoUpdated_projectName, value) {
+		if !f(fd_EventProjectInfoUpdated_project_name, value) {
 			return
 		}
 	}
@@ -1105,11 +1105,11 @@ func (x *fastReflection_EventProjectInfoUpdated) Range(f func(protoreflect.Field
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventProjectInfoUpdated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectInfoUpdated.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.project.v1.EventProjectInfoUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectInfoUpdated.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.project.v1.EventProjectInfoUpdated.coordinator_address":
 		return x.CoordinatorAddress != ""
-	case "network.project.v1.EventProjectInfoUpdated.projectName":
+	case "network.project.v1.EventProjectInfoUpdated.project_name":
 		return x.ProjectName != ""
 	case "network.project.v1.EventProjectInfoUpdated.metadata":
 		return len(x.Metadata) != 0
@@ -1129,11 +1129,11 @@ func (x *fastReflection_EventProjectInfoUpdated) Has(fd protoreflect.FieldDescri
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectInfoUpdated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectInfoUpdated.projectID":
-		x.ProjectID = uint64(0)
-	case "network.project.v1.EventProjectInfoUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectInfoUpdated.project_id":
+		x.ProjectId = uint64(0)
+	case "network.project.v1.EventProjectInfoUpdated.coordinator_address":
 		x.CoordinatorAddress = ""
-	case "network.project.v1.EventProjectInfoUpdated.projectName":
+	case "network.project.v1.EventProjectInfoUpdated.project_name":
 		x.ProjectName = ""
 	case "network.project.v1.EventProjectInfoUpdated.metadata":
 		x.Metadata = nil
@@ -1153,13 +1153,13 @@ func (x *fastReflection_EventProjectInfoUpdated) Clear(fd protoreflect.FieldDesc
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventProjectInfoUpdated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventProjectInfoUpdated.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventProjectInfoUpdated.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.EventProjectInfoUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectInfoUpdated.coordinator_address":
 		value := x.CoordinatorAddress
 		return protoreflect.ValueOfString(value)
-	case "network.project.v1.EventProjectInfoUpdated.projectName":
+	case "network.project.v1.EventProjectInfoUpdated.project_name":
 		value := x.ProjectName
 		return protoreflect.ValueOfString(value)
 	case "network.project.v1.EventProjectInfoUpdated.metadata":
@@ -1185,11 +1185,11 @@ func (x *fastReflection_EventProjectInfoUpdated) Get(descriptor protoreflect.Fie
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectInfoUpdated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectInfoUpdated.projectID":
-		x.ProjectID = value.Uint()
-	case "network.project.v1.EventProjectInfoUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectInfoUpdated.project_id":
+		x.ProjectId = value.Uint()
+	case "network.project.v1.EventProjectInfoUpdated.coordinator_address":
 		x.CoordinatorAddress = value.Interface().(string)
-	case "network.project.v1.EventProjectInfoUpdated.projectName":
+	case "network.project.v1.EventProjectInfoUpdated.project_name":
 		x.ProjectName = value.Interface().(string)
 	case "network.project.v1.EventProjectInfoUpdated.metadata":
 		x.Metadata = value.Bytes()
@@ -1213,12 +1213,12 @@ func (x *fastReflection_EventProjectInfoUpdated) Set(fd protoreflect.FieldDescri
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectInfoUpdated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectInfoUpdated.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventProjectInfoUpdated is not mutable"))
-	case "network.project.v1.EventProjectInfoUpdated.coordinatorAddress":
-		panic(fmt.Errorf("field coordinatorAddress of message network.project.v1.EventProjectInfoUpdated is not mutable"))
-	case "network.project.v1.EventProjectInfoUpdated.projectName":
-		panic(fmt.Errorf("field projectName of message network.project.v1.EventProjectInfoUpdated is not mutable"))
+	case "network.project.v1.EventProjectInfoUpdated.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventProjectInfoUpdated is not mutable"))
+	case "network.project.v1.EventProjectInfoUpdated.coordinator_address":
+		panic(fmt.Errorf("field coordinator_address of message network.project.v1.EventProjectInfoUpdated is not mutable"))
+	case "network.project.v1.EventProjectInfoUpdated.project_name":
+		panic(fmt.Errorf("field project_name of message network.project.v1.EventProjectInfoUpdated is not mutable"))
 	case "network.project.v1.EventProjectInfoUpdated.metadata":
 		panic(fmt.Errorf("field metadata of message network.project.v1.EventProjectInfoUpdated is not mutable"))
 	default:
@@ -1234,11 +1234,11 @@ func (x *fastReflection_EventProjectInfoUpdated) Mutable(fd protoreflect.FieldDe
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventProjectInfoUpdated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectInfoUpdated.projectID":
+	case "network.project.v1.EventProjectInfoUpdated.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.EventProjectInfoUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectInfoUpdated.coordinator_address":
 		return protoreflect.ValueOfString("")
-	case "network.project.v1.EventProjectInfoUpdated.projectName":
+	case "network.project.v1.EventProjectInfoUpdated.project_name":
 		return protoreflect.ValueOfString("")
 	case "network.project.v1.EventProjectInfoUpdated.metadata":
 		return protoreflect.ValueOfBytes(nil)
@@ -1311,8 +1311,8 @@ func (x *fastReflection_EventProjectInfoUpdated) ProtoMethods() *protoiface.Meth
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.CoordinatorAddress)
 		if l > 0 {
@@ -1376,8 +1376,8 @@ func (x *fastReflection_EventProjectInfoUpdated) ProtoMethods() *protoiface.Meth
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -1432,9 +1432,9 @@ func (x *fastReflection_EventProjectInfoUpdated) ProtoMethods() *protoiface.Meth
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1444,7 +1444,7 @@ func (x *fastReflection_EventProjectInfoUpdated) ProtoMethods() *protoiface.Meth
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1634,18 +1634,18 @@ func (x *_EventProjectSharesUpdated_3_list) IsValid() bool {
 }
 
 var (
-	md_EventProjectSharesUpdated                    protoreflect.MessageDescriptor
-	fd_EventProjectSharesUpdated_projectID          protoreflect.FieldDescriptor
-	fd_EventProjectSharesUpdated_coordinatorAddress protoreflect.FieldDescriptor
-	fd_EventProjectSharesUpdated_allocatedShares    protoreflect.FieldDescriptor
+	md_EventProjectSharesUpdated                     protoreflect.MessageDescriptor
+	fd_EventProjectSharesUpdated_project_id          protoreflect.FieldDescriptor
+	fd_EventProjectSharesUpdated_coordinator_address protoreflect.FieldDescriptor
+	fd_EventProjectSharesUpdated_allocated_shares    protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventProjectSharesUpdated = File_network_project_v1_events_proto.Messages().ByName("EventProjectSharesUpdated")
-	fd_EventProjectSharesUpdated_projectID = md_EventProjectSharesUpdated.Fields().ByName("projectID")
-	fd_EventProjectSharesUpdated_coordinatorAddress = md_EventProjectSharesUpdated.Fields().ByName("coordinatorAddress")
-	fd_EventProjectSharesUpdated_allocatedShares = md_EventProjectSharesUpdated.Fields().ByName("allocatedShares")
+	fd_EventProjectSharesUpdated_project_id = md_EventProjectSharesUpdated.Fields().ByName("project_id")
+	fd_EventProjectSharesUpdated_coordinator_address = md_EventProjectSharesUpdated.Fields().ByName("coordinator_address")
+	fd_EventProjectSharesUpdated_allocated_shares = md_EventProjectSharesUpdated.Fields().ByName("allocated_shares")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventProjectSharesUpdated)(nil)
@@ -1713,21 +1713,21 @@ func (x *fastReflection_EventProjectSharesUpdated) Interface() protoreflect.Prot
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventProjectSharesUpdated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventProjectSharesUpdated_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventProjectSharesUpdated_project_id, value) {
 			return
 		}
 	}
 	if x.CoordinatorAddress != "" {
 		value := protoreflect.ValueOfString(x.CoordinatorAddress)
-		if !f(fd_EventProjectSharesUpdated_coordinatorAddress, value) {
+		if !f(fd_EventProjectSharesUpdated_coordinator_address, value) {
 			return
 		}
 	}
 	if len(x.AllocatedShares) != 0 {
 		value := protoreflect.ValueOfList(&_EventProjectSharesUpdated_3_list{list: &x.AllocatedShares})
-		if !f(fd_EventProjectSharesUpdated_allocatedShares, value) {
+		if !f(fd_EventProjectSharesUpdated_allocated_shares, value) {
 			return
 		}
 	}
@@ -1746,11 +1746,11 @@ func (x *fastReflection_EventProjectSharesUpdated) Range(f func(protoreflect.Fie
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventProjectSharesUpdated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectSharesUpdated.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.project.v1.EventProjectSharesUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectSharesUpdated.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.project.v1.EventProjectSharesUpdated.coordinator_address":
 		return x.CoordinatorAddress != ""
-	case "network.project.v1.EventProjectSharesUpdated.allocatedShares":
+	case "network.project.v1.EventProjectSharesUpdated.allocated_shares":
 		return len(x.AllocatedShares) != 0
 	default:
 		if fd.IsExtension() {
@@ -1768,11 +1768,11 @@ func (x *fastReflection_EventProjectSharesUpdated) Has(fd protoreflect.FieldDesc
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectSharesUpdated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectSharesUpdated.projectID":
-		x.ProjectID = uint64(0)
-	case "network.project.v1.EventProjectSharesUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectSharesUpdated.project_id":
+		x.ProjectId = uint64(0)
+	case "network.project.v1.EventProjectSharesUpdated.coordinator_address":
 		x.CoordinatorAddress = ""
-	case "network.project.v1.EventProjectSharesUpdated.allocatedShares":
+	case "network.project.v1.EventProjectSharesUpdated.allocated_shares":
 		x.AllocatedShares = nil
 	default:
 		if fd.IsExtension() {
@@ -1790,13 +1790,13 @@ func (x *fastReflection_EventProjectSharesUpdated) Clear(fd protoreflect.FieldDe
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventProjectSharesUpdated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventProjectSharesUpdated.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventProjectSharesUpdated.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.EventProjectSharesUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectSharesUpdated.coordinator_address":
 		value := x.CoordinatorAddress
 		return protoreflect.ValueOfString(value)
-	case "network.project.v1.EventProjectSharesUpdated.allocatedShares":
+	case "network.project.v1.EventProjectSharesUpdated.allocated_shares":
 		if len(x.AllocatedShares) == 0 {
 			return protoreflect.ValueOfList(&_EventProjectSharesUpdated_3_list{})
 		}
@@ -1822,11 +1822,11 @@ func (x *fastReflection_EventProjectSharesUpdated) Get(descriptor protoreflect.F
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectSharesUpdated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectSharesUpdated.projectID":
-		x.ProjectID = value.Uint()
-	case "network.project.v1.EventProjectSharesUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectSharesUpdated.project_id":
+		x.ProjectId = value.Uint()
+	case "network.project.v1.EventProjectSharesUpdated.coordinator_address":
 		x.CoordinatorAddress = value.Interface().(string)
-	case "network.project.v1.EventProjectSharesUpdated.allocatedShares":
+	case "network.project.v1.EventProjectSharesUpdated.allocated_shares":
 		lv := value.List()
 		clv := lv.(*_EventProjectSharesUpdated_3_list)
 		x.AllocatedShares = *clv.list
@@ -1850,16 +1850,16 @@ func (x *fastReflection_EventProjectSharesUpdated) Set(fd protoreflect.FieldDesc
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectSharesUpdated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectSharesUpdated.allocatedShares":
+	case "network.project.v1.EventProjectSharesUpdated.allocated_shares":
 		if x.AllocatedShares == nil {
 			x.AllocatedShares = []*v1beta1.Coin{}
 		}
 		value := &_EventProjectSharesUpdated_3_list{list: &x.AllocatedShares}
 		return protoreflect.ValueOfList(value)
-	case "network.project.v1.EventProjectSharesUpdated.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventProjectSharesUpdated is not mutable"))
-	case "network.project.v1.EventProjectSharesUpdated.coordinatorAddress":
-		panic(fmt.Errorf("field coordinatorAddress of message network.project.v1.EventProjectSharesUpdated is not mutable"))
+	case "network.project.v1.EventProjectSharesUpdated.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventProjectSharesUpdated is not mutable"))
+	case "network.project.v1.EventProjectSharesUpdated.coordinator_address":
+		panic(fmt.Errorf("field coordinator_address of message network.project.v1.EventProjectSharesUpdated is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectSharesUpdated"))
@@ -1873,11 +1873,11 @@ func (x *fastReflection_EventProjectSharesUpdated) Mutable(fd protoreflect.Field
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventProjectSharesUpdated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectSharesUpdated.projectID":
+	case "network.project.v1.EventProjectSharesUpdated.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.EventProjectSharesUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectSharesUpdated.coordinator_address":
 		return protoreflect.ValueOfString("")
-	case "network.project.v1.EventProjectSharesUpdated.allocatedShares":
+	case "network.project.v1.EventProjectSharesUpdated.allocated_shares":
 		list := []*v1beta1.Coin{}
 		return protoreflect.ValueOfList(&_EventProjectSharesUpdated_3_list{list: &list})
 	default:
@@ -1949,8 +1949,8 @@ func (x *fastReflection_EventProjectSharesUpdated) ProtoMethods() *protoiface.Me
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.CoordinatorAddress)
 		if l > 0 {
@@ -2014,8 +2014,8 @@ func (x *fastReflection_EventProjectSharesUpdated) ProtoMethods() *protoiface.Me
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -2070,9 +2070,9 @@ func (x *fastReflection_EventProjectSharesUpdated) ProtoMethods() *protoiface.Me
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -2082,7 +2082,7 @@ func (x *fastReflection_EventProjectSharesUpdated) ProtoMethods() *protoiface.Me
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -2240,18 +2240,18 @@ func (x *_EventProjectTotalSupplyUpdated_3_list) IsValid() bool {
 }
 
 var (
-	md_EventProjectTotalSupplyUpdated                    protoreflect.MessageDescriptor
-	fd_EventProjectTotalSupplyUpdated_projectID          protoreflect.FieldDescriptor
-	fd_EventProjectTotalSupplyUpdated_coordinatorAddress protoreflect.FieldDescriptor
-	fd_EventProjectTotalSupplyUpdated_totalSupply        protoreflect.FieldDescriptor
+	md_EventProjectTotalSupplyUpdated                     protoreflect.MessageDescriptor
+	fd_EventProjectTotalSupplyUpdated_project_id          protoreflect.FieldDescriptor
+	fd_EventProjectTotalSupplyUpdated_coordinator_address protoreflect.FieldDescriptor
+	fd_EventProjectTotalSupplyUpdated_total_supply        protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventProjectTotalSupplyUpdated = File_network_project_v1_events_proto.Messages().ByName("EventProjectTotalSupplyUpdated")
-	fd_EventProjectTotalSupplyUpdated_projectID = md_EventProjectTotalSupplyUpdated.Fields().ByName("projectID")
-	fd_EventProjectTotalSupplyUpdated_coordinatorAddress = md_EventProjectTotalSupplyUpdated.Fields().ByName("coordinatorAddress")
-	fd_EventProjectTotalSupplyUpdated_totalSupply = md_EventProjectTotalSupplyUpdated.Fields().ByName("totalSupply")
+	fd_EventProjectTotalSupplyUpdated_project_id = md_EventProjectTotalSupplyUpdated.Fields().ByName("project_id")
+	fd_EventProjectTotalSupplyUpdated_coordinator_address = md_EventProjectTotalSupplyUpdated.Fields().ByName("coordinator_address")
+	fd_EventProjectTotalSupplyUpdated_total_supply = md_EventProjectTotalSupplyUpdated.Fields().ByName("total_supply")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventProjectTotalSupplyUpdated)(nil)
@@ -2319,21 +2319,21 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) Interface() protoreflect
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventProjectTotalSupplyUpdated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventProjectTotalSupplyUpdated_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventProjectTotalSupplyUpdated_project_id, value) {
 			return
 		}
 	}
 	if x.CoordinatorAddress != "" {
 		value := protoreflect.ValueOfString(x.CoordinatorAddress)
-		if !f(fd_EventProjectTotalSupplyUpdated_coordinatorAddress, value) {
+		if !f(fd_EventProjectTotalSupplyUpdated_coordinator_address, value) {
 			return
 		}
 	}
 	if len(x.TotalSupply) != 0 {
 		value := protoreflect.ValueOfList(&_EventProjectTotalSupplyUpdated_3_list{list: &x.TotalSupply})
-		if !f(fd_EventProjectTotalSupplyUpdated_totalSupply, value) {
+		if !f(fd_EventProjectTotalSupplyUpdated_total_supply, value) {
 			return
 		}
 	}
@@ -2352,11 +2352,11 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) Range(f func(protoreflec
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventProjectTotalSupplyUpdated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectTotalSupplyUpdated.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinator_address":
 		return x.CoordinatorAddress != ""
-	case "network.project.v1.EventProjectTotalSupplyUpdated.totalSupply":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.total_supply":
 		return len(x.TotalSupply) != 0
 	default:
 		if fd.IsExtension() {
@@ -2374,11 +2374,11 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) Has(fd protoreflect.Fiel
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectTotalSupplyUpdated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectTotalSupplyUpdated.projectID":
-		x.ProjectID = uint64(0)
-	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.project_id":
+		x.ProjectId = uint64(0)
+	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinator_address":
 		x.CoordinatorAddress = ""
-	case "network.project.v1.EventProjectTotalSupplyUpdated.totalSupply":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.total_supply":
 		x.TotalSupply = nil
 	default:
 		if fd.IsExtension() {
@@ -2396,13 +2396,13 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) Clear(fd protoreflect.Fi
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventProjectTotalSupplyUpdated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventProjectTotalSupplyUpdated.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventProjectTotalSupplyUpdated.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinator_address":
 		value := x.CoordinatorAddress
 		return protoreflect.ValueOfString(value)
-	case "network.project.v1.EventProjectTotalSupplyUpdated.totalSupply":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.total_supply":
 		if len(x.TotalSupply) == 0 {
 			return protoreflect.ValueOfList(&_EventProjectTotalSupplyUpdated_3_list{})
 		}
@@ -2428,11 +2428,11 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) Get(descriptor protorefl
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectTotalSupplyUpdated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectTotalSupplyUpdated.projectID":
-		x.ProjectID = value.Uint()
-	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.project_id":
+		x.ProjectId = value.Uint()
+	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinator_address":
 		x.CoordinatorAddress = value.Interface().(string)
-	case "network.project.v1.EventProjectTotalSupplyUpdated.totalSupply":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.total_supply":
 		lv := value.List()
 		clv := lv.(*_EventProjectTotalSupplyUpdated_3_list)
 		x.TotalSupply = *clv.list
@@ -2456,16 +2456,16 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) Set(fd protoreflect.Fiel
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectTotalSupplyUpdated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectTotalSupplyUpdated.totalSupply":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.total_supply":
 		if x.TotalSupply == nil {
 			x.TotalSupply = []*v1beta1.Coin{}
 		}
 		value := &_EventProjectTotalSupplyUpdated_3_list{list: &x.TotalSupply}
 		return protoreflect.ValueOfList(value)
-	case "network.project.v1.EventProjectTotalSupplyUpdated.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventProjectTotalSupplyUpdated is not mutable"))
-	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinatorAddress":
-		panic(fmt.Errorf("field coordinatorAddress of message network.project.v1.EventProjectTotalSupplyUpdated is not mutable"))
+	case "network.project.v1.EventProjectTotalSupplyUpdated.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventProjectTotalSupplyUpdated is not mutable"))
+	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinator_address":
+		panic(fmt.Errorf("field coordinator_address of message network.project.v1.EventProjectTotalSupplyUpdated is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectTotalSupplyUpdated"))
@@ -2479,11 +2479,11 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) Mutable(fd protoreflect.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventProjectTotalSupplyUpdated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectTotalSupplyUpdated.projectID":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinatorAddress":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.coordinator_address":
 		return protoreflect.ValueOfString("")
-	case "network.project.v1.EventProjectTotalSupplyUpdated.totalSupply":
+	case "network.project.v1.EventProjectTotalSupplyUpdated.total_supply":
 		list := []*v1beta1.Coin{}
 		return protoreflect.ValueOfList(&_EventProjectTotalSupplyUpdated_3_list{list: &list})
 	default:
@@ -2555,8 +2555,8 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) ProtoMethods() *protoifa
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.CoordinatorAddress)
 		if l > 0 {
@@ -2620,8 +2620,8 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) ProtoMethods() *protoifa
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -2676,9 +2676,9 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) ProtoMethods() *protoifa
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -2688,7 +2688,7 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) ProtoMethods() *protoifa
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -2795,18 +2795,18 @@ func (x *fastReflection_EventProjectTotalSupplyUpdated) ProtoMethods() *protoifa
 }
 
 var (
-	md_EventProjectMainnetInitialized                    protoreflect.MessageDescriptor
-	fd_EventProjectMainnetInitialized_projectID          protoreflect.FieldDescriptor
-	fd_EventProjectMainnetInitialized_coordinatorAddress protoreflect.FieldDescriptor
-	fd_EventProjectMainnetInitialized_mainnetID          protoreflect.FieldDescriptor
+	md_EventProjectMainnetInitialized                     protoreflect.MessageDescriptor
+	fd_EventProjectMainnetInitialized_project_id          protoreflect.FieldDescriptor
+	fd_EventProjectMainnetInitialized_coordinator_address protoreflect.FieldDescriptor
+	fd_EventProjectMainnetInitialized_mainnet_id          protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventProjectMainnetInitialized = File_network_project_v1_events_proto.Messages().ByName("EventProjectMainnetInitialized")
-	fd_EventProjectMainnetInitialized_projectID = md_EventProjectMainnetInitialized.Fields().ByName("projectID")
-	fd_EventProjectMainnetInitialized_coordinatorAddress = md_EventProjectMainnetInitialized.Fields().ByName("coordinatorAddress")
-	fd_EventProjectMainnetInitialized_mainnetID = md_EventProjectMainnetInitialized.Fields().ByName("mainnetID")
+	fd_EventProjectMainnetInitialized_project_id = md_EventProjectMainnetInitialized.Fields().ByName("project_id")
+	fd_EventProjectMainnetInitialized_coordinator_address = md_EventProjectMainnetInitialized.Fields().ByName("coordinator_address")
+	fd_EventProjectMainnetInitialized_mainnet_id = md_EventProjectMainnetInitialized.Fields().ByName("mainnet_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventProjectMainnetInitialized)(nil)
@@ -2874,21 +2874,21 @@ func (x *fastReflection_EventProjectMainnetInitialized) Interface() protoreflect
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventProjectMainnetInitialized) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventProjectMainnetInitialized_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventProjectMainnetInitialized_project_id, value) {
 			return
 		}
 	}
 	if x.CoordinatorAddress != "" {
 		value := protoreflect.ValueOfString(x.CoordinatorAddress)
-		if !f(fd_EventProjectMainnetInitialized_coordinatorAddress, value) {
+		if !f(fd_EventProjectMainnetInitialized_coordinator_address, value) {
 			return
 		}
 	}
-	if x.MainnetID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.MainnetID)
-		if !f(fd_EventProjectMainnetInitialized_mainnetID, value) {
+	if x.MainnetId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.MainnetId)
+		if !f(fd_EventProjectMainnetInitialized_mainnet_id, value) {
 			return
 		}
 	}
@@ -2907,12 +2907,12 @@ func (x *fastReflection_EventProjectMainnetInitialized) Range(f func(protoreflec
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventProjectMainnetInitialized) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectMainnetInitialized.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.project.v1.EventProjectMainnetInitialized.coordinatorAddress":
+	case "network.project.v1.EventProjectMainnetInitialized.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.project.v1.EventProjectMainnetInitialized.coordinator_address":
 		return x.CoordinatorAddress != ""
-	case "network.project.v1.EventProjectMainnetInitialized.mainnetID":
-		return x.MainnetID != uint64(0)
+	case "network.project.v1.EventProjectMainnetInitialized.mainnet_id":
+		return x.MainnetId != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectMainnetInitialized"))
@@ -2929,12 +2929,12 @@ func (x *fastReflection_EventProjectMainnetInitialized) Has(fd protoreflect.Fiel
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectMainnetInitialized) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectMainnetInitialized.projectID":
-		x.ProjectID = uint64(0)
-	case "network.project.v1.EventProjectMainnetInitialized.coordinatorAddress":
+	case "network.project.v1.EventProjectMainnetInitialized.project_id":
+		x.ProjectId = uint64(0)
+	case "network.project.v1.EventProjectMainnetInitialized.coordinator_address":
 		x.CoordinatorAddress = ""
-	case "network.project.v1.EventProjectMainnetInitialized.mainnetID":
-		x.MainnetID = uint64(0)
+	case "network.project.v1.EventProjectMainnetInitialized.mainnet_id":
+		x.MainnetId = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectMainnetInitialized"))
@@ -2951,14 +2951,14 @@ func (x *fastReflection_EventProjectMainnetInitialized) Clear(fd protoreflect.Fi
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventProjectMainnetInitialized) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventProjectMainnetInitialized.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventProjectMainnetInitialized.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.EventProjectMainnetInitialized.coordinatorAddress":
+	case "network.project.v1.EventProjectMainnetInitialized.coordinator_address":
 		value := x.CoordinatorAddress
 		return protoreflect.ValueOfString(value)
-	case "network.project.v1.EventProjectMainnetInitialized.mainnetID":
-		value := x.MainnetID
+	case "network.project.v1.EventProjectMainnetInitialized.mainnet_id":
+		value := x.MainnetId
 		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
@@ -2980,12 +2980,12 @@ func (x *fastReflection_EventProjectMainnetInitialized) Get(descriptor protorefl
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectMainnetInitialized) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectMainnetInitialized.projectID":
-		x.ProjectID = value.Uint()
-	case "network.project.v1.EventProjectMainnetInitialized.coordinatorAddress":
+	case "network.project.v1.EventProjectMainnetInitialized.project_id":
+		x.ProjectId = value.Uint()
+	case "network.project.v1.EventProjectMainnetInitialized.coordinator_address":
 		x.CoordinatorAddress = value.Interface().(string)
-	case "network.project.v1.EventProjectMainnetInitialized.mainnetID":
-		x.MainnetID = value.Uint()
+	case "network.project.v1.EventProjectMainnetInitialized.mainnet_id":
+		x.MainnetId = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectMainnetInitialized"))
@@ -3006,12 +3006,12 @@ func (x *fastReflection_EventProjectMainnetInitialized) Set(fd protoreflect.Fiel
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectMainnetInitialized) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectMainnetInitialized.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventProjectMainnetInitialized is not mutable"))
-	case "network.project.v1.EventProjectMainnetInitialized.coordinatorAddress":
-		panic(fmt.Errorf("field coordinatorAddress of message network.project.v1.EventProjectMainnetInitialized is not mutable"))
-	case "network.project.v1.EventProjectMainnetInitialized.mainnetID":
-		panic(fmt.Errorf("field mainnetID of message network.project.v1.EventProjectMainnetInitialized is not mutable"))
+	case "network.project.v1.EventProjectMainnetInitialized.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventProjectMainnetInitialized is not mutable"))
+	case "network.project.v1.EventProjectMainnetInitialized.coordinator_address":
+		panic(fmt.Errorf("field coordinator_address of message network.project.v1.EventProjectMainnetInitialized is not mutable"))
+	case "network.project.v1.EventProjectMainnetInitialized.mainnet_id":
+		panic(fmt.Errorf("field mainnet_id of message network.project.v1.EventProjectMainnetInitialized is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectMainnetInitialized"))
@@ -3025,11 +3025,11 @@ func (x *fastReflection_EventProjectMainnetInitialized) Mutable(fd protoreflect.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventProjectMainnetInitialized) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectMainnetInitialized.projectID":
+	case "network.project.v1.EventProjectMainnetInitialized.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.EventProjectMainnetInitialized.coordinatorAddress":
+	case "network.project.v1.EventProjectMainnetInitialized.coordinator_address":
 		return protoreflect.ValueOfString("")
-	case "network.project.v1.EventProjectMainnetInitialized.mainnetID":
+	case "network.project.v1.EventProjectMainnetInitialized.mainnet_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -3100,15 +3100,15 @@ func (x *fastReflection_EventProjectMainnetInitialized) ProtoMethods() *protoifa
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.CoordinatorAddress)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.MainnetID != 0 {
-			n += 1 + runtime.Sov(uint64(x.MainnetID))
+		if x.MainnetId != 0 {
+			n += 1 + runtime.Sov(uint64(x.MainnetId))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -3139,8 +3139,8 @@ func (x *fastReflection_EventProjectMainnetInitialized) ProtoMethods() *protoifa
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.MainnetID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.MainnetID))
+		if x.MainnetId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.MainnetId))
 			i--
 			dAtA[i] = 0x18
 		}
@@ -3151,8 +3151,8 @@ func (x *fastReflection_EventProjectMainnetInitialized) ProtoMethods() *protoifa
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -3207,9 +3207,9 @@ func (x *fastReflection_EventProjectMainnetInitialized) ProtoMethods() *protoifa
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -3219,7 +3219,7 @@ func (x *fastReflection_EventProjectMainnetInitialized) ProtoMethods() *protoifa
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -3258,9 +3258,9 @@ func (x *fastReflection_EventProjectMainnetInitialized) ProtoMethods() *protoifa
 				iNdEx = postIndex
 			case 3:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MainnetID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MainnetId", wireType)
 				}
-				x.MainnetID = 0
+				x.MainnetId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -3270,7 +3270,7 @@ func (x *fastReflection_EventProjectMainnetInitialized) ProtoMethods() *protoifa
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.MainnetID |= uint64(b&0x7F) << shift
+					x.MainnetId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -3362,16 +3362,16 @@ func (x *_EventMainnetAccountCreated_3_list) IsValid() bool {
 }
 
 var (
-	md_EventMainnetAccountCreated           protoreflect.MessageDescriptor
-	fd_EventMainnetAccountCreated_projectID protoreflect.FieldDescriptor
-	fd_EventMainnetAccountCreated_address   protoreflect.FieldDescriptor
-	fd_EventMainnetAccountCreated_shares    protoreflect.FieldDescriptor
+	md_EventMainnetAccountCreated            protoreflect.MessageDescriptor
+	fd_EventMainnetAccountCreated_project_id protoreflect.FieldDescriptor
+	fd_EventMainnetAccountCreated_address    protoreflect.FieldDescriptor
+	fd_EventMainnetAccountCreated_shares     protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventMainnetAccountCreated = File_network_project_v1_events_proto.Messages().ByName("EventMainnetAccountCreated")
-	fd_EventMainnetAccountCreated_projectID = md_EventMainnetAccountCreated.Fields().ByName("projectID")
+	fd_EventMainnetAccountCreated_project_id = md_EventMainnetAccountCreated.Fields().ByName("project_id")
 	fd_EventMainnetAccountCreated_address = md_EventMainnetAccountCreated.Fields().ByName("address")
 	fd_EventMainnetAccountCreated_shares = md_EventMainnetAccountCreated.Fields().ByName("shares")
 }
@@ -3441,9 +3441,9 @@ func (x *fastReflection_EventMainnetAccountCreated) Interface() protoreflect.Pro
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventMainnetAccountCreated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventMainnetAccountCreated_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventMainnetAccountCreated_project_id, value) {
 			return
 		}
 	}
@@ -3474,8 +3474,8 @@ func (x *fastReflection_EventMainnetAccountCreated) Range(f func(protoreflect.Fi
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventMainnetAccountCreated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountCreated.projectID":
-		return x.ProjectID != uint64(0)
+	case "network.project.v1.EventMainnetAccountCreated.project_id":
+		return x.ProjectId != uint64(0)
 	case "network.project.v1.EventMainnetAccountCreated.address":
 		return x.Address != ""
 	case "network.project.v1.EventMainnetAccountCreated.shares":
@@ -3496,8 +3496,8 @@ func (x *fastReflection_EventMainnetAccountCreated) Has(fd protoreflect.FieldDes
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetAccountCreated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountCreated.projectID":
-		x.ProjectID = uint64(0)
+	case "network.project.v1.EventMainnetAccountCreated.project_id":
+		x.ProjectId = uint64(0)
 	case "network.project.v1.EventMainnetAccountCreated.address":
 		x.Address = ""
 	case "network.project.v1.EventMainnetAccountCreated.shares":
@@ -3518,8 +3518,8 @@ func (x *fastReflection_EventMainnetAccountCreated) Clear(fd protoreflect.FieldD
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventMainnetAccountCreated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventMainnetAccountCreated.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventMainnetAccountCreated.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
 	case "network.project.v1.EventMainnetAccountCreated.address":
 		value := x.Address
@@ -3550,8 +3550,8 @@ func (x *fastReflection_EventMainnetAccountCreated) Get(descriptor protoreflect.
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetAccountCreated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountCreated.projectID":
-		x.ProjectID = value.Uint()
+	case "network.project.v1.EventMainnetAccountCreated.project_id":
+		x.ProjectId = value.Uint()
 	case "network.project.v1.EventMainnetAccountCreated.address":
 		x.Address = value.Interface().(string)
 	case "network.project.v1.EventMainnetAccountCreated.shares":
@@ -3584,8 +3584,8 @@ func (x *fastReflection_EventMainnetAccountCreated) Mutable(fd protoreflect.Fiel
 		}
 		value := &_EventMainnetAccountCreated_3_list{list: &x.Shares}
 		return protoreflect.ValueOfList(value)
-	case "network.project.v1.EventMainnetAccountCreated.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventMainnetAccountCreated is not mutable"))
+	case "network.project.v1.EventMainnetAccountCreated.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventMainnetAccountCreated is not mutable"))
 	case "network.project.v1.EventMainnetAccountCreated.address":
 		panic(fmt.Errorf("field address of message network.project.v1.EventMainnetAccountCreated is not mutable"))
 	default:
@@ -3601,7 +3601,7 @@ func (x *fastReflection_EventMainnetAccountCreated) Mutable(fd protoreflect.Fiel
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventMainnetAccountCreated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountCreated.projectID":
+	case "network.project.v1.EventMainnetAccountCreated.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.project.v1.EventMainnetAccountCreated.address":
 		return protoreflect.ValueOfString("")
@@ -3677,8 +3677,8 @@ func (x *fastReflection_EventMainnetAccountCreated) ProtoMethods() *protoiface.M
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.Address)
 		if l > 0 {
@@ -3742,8 +3742,8 @@ func (x *fastReflection_EventMainnetAccountCreated) ProtoMethods() *protoiface.M
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -3798,9 +3798,9 @@ func (x *fastReflection_EventMainnetAccountCreated) ProtoMethods() *protoiface.M
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -3810,7 +3810,7 @@ func (x *fastReflection_EventMainnetAccountCreated) ProtoMethods() *protoiface.M
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -3968,16 +3968,16 @@ func (x *_EventMainnetAccountUpdated_3_list) IsValid() bool {
 }
 
 var (
-	md_EventMainnetAccountUpdated           protoreflect.MessageDescriptor
-	fd_EventMainnetAccountUpdated_projectID protoreflect.FieldDescriptor
-	fd_EventMainnetAccountUpdated_address   protoreflect.FieldDescriptor
-	fd_EventMainnetAccountUpdated_shares    protoreflect.FieldDescriptor
+	md_EventMainnetAccountUpdated            protoreflect.MessageDescriptor
+	fd_EventMainnetAccountUpdated_project_id protoreflect.FieldDescriptor
+	fd_EventMainnetAccountUpdated_address    protoreflect.FieldDescriptor
+	fd_EventMainnetAccountUpdated_shares     protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventMainnetAccountUpdated = File_network_project_v1_events_proto.Messages().ByName("EventMainnetAccountUpdated")
-	fd_EventMainnetAccountUpdated_projectID = md_EventMainnetAccountUpdated.Fields().ByName("projectID")
+	fd_EventMainnetAccountUpdated_project_id = md_EventMainnetAccountUpdated.Fields().ByName("project_id")
 	fd_EventMainnetAccountUpdated_address = md_EventMainnetAccountUpdated.Fields().ByName("address")
 	fd_EventMainnetAccountUpdated_shares = md_EventMainnetAccountUpdated.Fields().ByName("shares")
 }
@@ -4047,9 +4047,9 @@ func (x *fastReflection_EventMainnetAccountUpdated) Interface() protoreflect.Pro
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventMainnetAccountUpdated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventMainnetAccountUpdated_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventMainnetAccountUpdated_project_id, value) {
 			return
 		}
 	}
@@ -4080,8 +4080,8 @@ func (x *fastReflection_EventMainnetAccountUpdated) Range(f func(protoreflect.Fi
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventMainnetAccountUpdated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountUpdated.projectID":
-		return x.ProjectID != uint64(0)
+	case "network.project.v1.EventMainnetAccountUpdated.project_id":
+		return x.ProjectId != uint64(0)
 	case "network.project.v1.EventMainnetAccountUpdated.address":
 		return x.Address != ""
 	case "network.project.v1.EventMainnetAccountUpdated.shares":
@@ -4102,8 +4102,8 @@ func (x *fastReflection_EventMainnetAccountUpdated) Has(fd protoreflect.FieldDes
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetAccountUpdated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountUpdated.projectID":
-		x.ProjectID = uint64(0)
+	case "network.project.v1.EventMainnetAccountUpdated.project_id":
+		x.ProjectId = uint64(0)
 	case "network.project.v1.EventMainnetAccountUpdated.address":
 		x.Address = ""
 	case "network.project.v1.EventMainnetAccountUpdated.shares":
@@ -4124,8 +4124,8 @@ func (x *fastReflection_EventMainnetAccountUpdated) Clear(fd protoreflect.FieldD
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventMainnetAccountUpdated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventMainnetAccountUpdated.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventMainnetAccountUpdated.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
 	case "network.project.v1.EventMainnetAccountUpdated.address":
 		value := x.Address
@@ -4156,8 +4156,8 @@ func (x *fastReflection_EventMainnetAccountUpdated) Get(descriptor protoreflect.
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetAccountUpdated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountUpdated.projectID":
-		x.ProjectID = value.Uint()
+	case "network.project.v1.EventMainnetAccountUpdated.project_id":
+		x.ProjectId = value.Uint()
 	case "network.project.v1.EventMainnetAccountUpdated.address":
 		x.Address = value.Interface().(string)
 	case "network.project.v1.EventMainnetAccountUpdated.shares":
@@ -4190,8 +4190,8 @@ func (x *fastReflection_EventMainnetAccountUpdated) Mutable(fd protoreflect.Fiel
 		}
 		value := &_EventMainnetAccountUpdated_3_list{list: &x.Shares}
 		return protoreflect.ValueOfList(value)
-	case "network.project.v1.EventMainnetAccountUpdated.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventMainnetAccountUpdated is not mutable"))
+	case "network.project.v1.EventMainnetAccountUpdated.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventMainnetAccountUpdated is not mutable"))
 	case "network.project.v1.EventMainnetAccountUpdated.address":
 		panic(fmt.Errorf("field address of message network.project.v1.EventMainnetAccountUpdated is not mutable"))
 	default:
@@ -4207,7 +4207,7 @@ func (x *fastReflection_EventMainnetAccountUpdated) Mutable(fd protoreflect.Fiel
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventMainnetAccountUpdated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountUpdated.projectID":
+	case "network.project.v1.EventMainnetAccountUpdated.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.project.v1.EventMainnetAccountUpdated.address":
 		return protoreflect.ValueOfString("")
@@ -4283,8 +4283,8 @@ func (x *fastReflection_EventMainnetAccountUpdated) ProtoMethods() *protoiface.M
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.Address)
 		if l > 0 {
@@ -4348,8 +4348,8 @@ func (x *fastReflection_EventMainnetAccountUpdated) ProtoMethods() *protoiface.M
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -4404,9 +4404,9 @@ func (x *fastReflection_EventMainnetAccountUpdated) ProtoMethods() *protoiface.M
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -4416,7 +4416,7 @@ func (x *fastReflection_EventMainnetAccountUpdated) ProtoMethods() *protoiface.M
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -4523,15 +4523,15 @@ func (x *fastReflection_EventMainnetAccountUpdated) ProtoMethods() *protoiface.M
 }
 
 var (
-	md_EventMainnetAccountRemoved           protoreflect.MessageDescriptor
-	fd_EventMainnetAccountRemoved_projectID protoreflect.FieldDescriptor
-	fd_EventMainnetAccountRemoved_address   protoreflect.FieldDescriptor
+	md_EventMainnetAccountRemoved            protoreflect.MessageDescriptor
+	fd_EventMainnetAccountRemoved_project_id protoreflect.FieldDescriptor
+	fd_EventMainnetAccountRemoved_address    protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventMainnetAccountRemoved = File_network_project_v1_events_proto.Messages().ByName("EventMainnetAccountRemoved")
-	fd_EventMainnetAccountRemoved_projectID = md_EventMainnetAccountRemoved.Fields().ByName("projectID")
+	fd_EventMainnetAccountRemoved_project_id = md_EventMainnetAccountRemoved.Fields().ByName("project_id")
 	fd_EventMainnetAccountRemoved_address = md_EventMainnetAccountRemoved.Fields().ByName("address")
 }
 
@@ -4600,9 +4600,9 @@ func (x *fastReflection_EventMainnetAccountRemoved) Interface() protoreflect.Pro
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventMainnetAccountRemoved) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventMainnetAccountRemoved_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventMainnetAccountRemoved_project_id, value) {
 			return
 		}
 	}
@@ -4627,8 +4627,8 @@ func (x *fastReflection_EventMainnetAccountRemoved) Range(f func(protoreflect.Fi
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventMainnetAccountRemoved) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountRemoved.projectID":
-		return x.ProjectID != uint64(0)
+	case "network.project.v1.EventMainnetAccountRemoved.project_id":
+		return x.ProjectId != uint64(0)
 	case "network.project.v1.EventMainnetAccountRemoved.address":
 		return x.Address != ""
 	default:
@@ -4647,8 +4647,8 @@ func (x *fastReflection_EventMainnetAccountRemoved) Has(fd protoreflect.FieldDes
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetAccountRemoved) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountRemoved.projectID":
-		x.ProjectID = uint64(0)
+	case "network.project.v1.EventMainnetAccountRemoved.project_id":
+		x.ProjectId = uint64(0)
 	case "network.project.v1.EventMainnetAccountRemoved.address":
 		x.Address = ""
 	default:
@@ -4667,8 +4667,8 @@ func (x *fastReflection_EventMainnetAccountRemoved) Clear(fd protoreflect.FieldD
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventMainnetAccountRemoved) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventMainnetAccountRemoved.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventMainnetAccountRemoved.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
 	case "network.project.v1.EventMainnetAccountRemoved.address":
 		value := x.Address
@@ -4693,8 +4693,8 @@ func (x *fastReflection_EventMainnetAccountRemoved) Get(descriptor protoreflect.
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetAccountRemoved) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountRemoved.projectID":
-		x.ProjectID = value.Uint()
+	case "network.project.v1.EventMainnetAccountRemoved.project_id":
+		x.ProjectId = value.Uint()
 	case "network.project.v1.EventMainnetAccountRemoved.address":
 		x.Address = value.Interface().(string)
 	default:
@@ -4717,8 +4717,8 @@ func (x *fastReflection_EventMainnetAccountRemoved) Set(fd protoreflect.FieldDes
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetAccountRemoved) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountRemoved.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventMainnetAccountRemoved is not mutable"))
+	case "network.project.v1.EventMainnetAccountRemoved.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventMainnetAccountRemoved is not mutable"))
 	case "network.project.v1.EventMainnetAccountRemoved.address":
 		panic(fmt.Errorf("field address of message network.project.v1.EventMainnetAccountRemoved is not mutable"))
 	default:
@@ -4734,7 +4734,7 @@ func (x *fastReflection_EventMainnetAccountRemoved) Mutable(fd protoreflect.Fiel
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventMainnetAccountRemoved) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetAccountRemoved.projectID":
+	case "network.project.v1.EventMainnetAccountRemoved.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.project.v1.EventMainnetAccountRemoved.address":
 		return protoreflect.ValueOfString("")
@@ -4807,8 +4807,8 @@ func (x *fastReflection_EventMainnetAccountRemoved) ProtoMethods() *protoiface.M
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.Address)
 		if l > 0 {
@@ -4850,8 +4850,8 @@ func (x *fastReflection_EventMainnetAccountRemoved) ProtoMethods() *protoiface.M
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -4906,9 +4906,9 @@ func (x *fastReflection_EventMainnetAccountRemoved) ProtoMethods() *protoiface.M
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -4918,7 +4918,7 @@ func (x *fastReflection_EventMainnetAccountRemoved) ProtoMethods() *protoiface.M
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -4991,18 +4991,18 @@ func (x *fastReflection_EventMainnetAccountRemoved) ProtoMethods() *protoiface.M
 }
 
 var (
-	md_EventMainnetVestingAccountCreated                protoreflect.MessageDescriptor
-	fd_EventMainnetVestingAccountCreated_projectID      protoreflect.FieldDescriptor
-	fd_EventMainnetVestingAccountCreated_address        protoreflect.FieldDescriptor
-	fd_EventMainnetVestingAccountCreated_vestingOptions protoreflect.FieldDescriptor
+	md_EventMainnetVestingAccountCreated                 protoreflect.MessageDescriptor
+	fd_EventMainnetVestingAccountCreated_project_id      protoreflect.FieldDescriptor
+	fd_EventMainnetVestingAccountCreated_address         protoreflect.FieldDescriptor
+	fd_EventMainnetVestingAccountCreated_vesting_options protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventMainnetVestingAccountCreated = File_network_project_v1_events_proto.Messages().ByName("EventMainnetVestingAccountCreated")
-	fd_EventMainnetVestingAccountCreated_projectID = md_EventMainnetVestingAccountCreated.Fields().ByName("projectID")
+	fd_EventMainnetVestingAccountCreated_project_id = md_EventMainnetVestingAccountCreated.Fields().ByName("project_id")
 	fd_EventMainnetVestingAccountCreated_address = md_EventMainnetVestingAccountCreated.Fields().ByName("address")
-	fd_EventMainnetVestingAccountCreated_vestingOptions = md_EventMainnetVestingAccountCreated.Fields().ByName("vestingOptions")
+	fd_EventMainnetVestingAccountCreated_vesting_options = md_EventMainnetVestingAccountCreated.Fields().ByName("vesting_options")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventMainnetVestingAccountCreated)(nil)
@@ -5070,9 +5070,9 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) Interface() protorefl
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventMainnetVestingAccountCreated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventMainnetVestingAccountCreated_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventMainnetVestingAccountCreated_project_id, value) {
 			return
 		}
 	}
@@ -5084,7 +5084,7 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) Range(f func(protoref
 	}
 	if x.VestingOptions != nil {
 		value := protoreflect.ValueOfMessage(x.VestingOptions.ProtoReflect())
-		if !f(fd_EventMainnetVestingAccountCreated_vestingOptions, value) {
+		if !f(fd_EventMainnetVestingAccountCreated_vesting_options, value) {
 			return
 		}
 	}
@@ -5103,11 +5103,11 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) Range(f func(protoref
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventMainnetVestingAccountCreated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountCreated.projectID":
-		return x.ProjectID != uint64(0)
+	case "network.project.v1.EventMainnetVestingAccountCreated.project_id":
+		return x.ProjectId != uint64(0)
 	case "network.project.v1.EventMainnetVestingAccountCreated.address":
 		return x.Address != ""
-	case "network.project.v1.EventMainnetVestingAccountCreated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountCreated.vesting_options":
 		return x.VestingOptions != nil
 	default:
 		if fd.IsExtension() {
@@ -5125,11 +5125,11 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) Has(fd protoreflect.F
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetVestingAccountCreated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountCreated.projectID":
-		x.ProjectID = uint64(0)
+	case "network.project.v1.EventMainnetVestingAccountCreated.project_id":
+		x.ProjectId = uint64(0)
 	case "network.project.v1.EventMainnetVestingAccountCreated.address":
 		x.Address = ""
-	case "network.project.v1.EventMainnetVestingAccountCreated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountCreated.vesting_options":
 		x.VestingOptions = nil
 	default:
 		if fd.IsExtension() {
@@ -5147,13 +5147,13 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) Clear(fd protoreflect
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventMainnetVestingAccountCreated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountCreated.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventMainnetVestingAccountCreated.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
 	case "network.project.v1.EventMainnetVestingAccountCreated.address":
 		value := x.Address
 		return protoreflect.ValueOfString(value)
-	case "network.project.v1.EventMainnetVestingAccountCreated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountCreated.vesting_options":
 		value := x.VestingOptions
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
@@ -5176,11 +5176,11 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) Get(descriptor protor
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetVestingAccountCreated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountCreated.projectID":
-		x.ProjectID = value.Uint()
+	case "network.project.v1.EventMainnetVestingAccountCreated.project_id":
+		x.ProjectId = value.Uint()
 	case "network.project.v1.EventMainnetVestingAccountCreated.address":
 		x.Address = value.Interface().(string)
-	case "network.project.v1.EventMainnetVestingAccountCreated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountCreated.vesting_options":
 		x.VestingOptions = value.Message().Interface().(*ShareVestingOptions)
 	default:
 		if fd.IsExtension() {
@@ -5202,13 +5202,13 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) Set(fd protoreflect.F
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetVestingAccountCreated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountCreated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountCreated.vesting_options":
 		if x.VestingOptions == nil {
 			x.VestingOptions = new(ShareVestingOptions)
 		}
 		return protoreflect.ValueOfMessage(x.VestingOptions.ProtoReflect())
-	case "network.project.v1.EventMainnetVestingAccountCreated.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventMainnetVestingAccountCreated is not mutable"))
+	case "network.project.v1.EventMainnetVestingAccountCreated.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventMainnetVestingAccountCreated is not mutable"))
 	case "network.project.v1.EventMainnetVestingAccountCreated.address":
 		panic(fmt.Errorf("field address of message network.project.v1.EventMainnetVestingAccountCreated is not mutable"))
 	default:
@@ -5224,11 +5224,11 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) Mutable(fd protorefle
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventMainnetVestingAccountCreated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountCreated.projectID":
+	case "network.project.v1.EventMainnetVestingAccountCreated.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.project.v1.EventMainnetVestingAccountCreated.address":
 		return protoreflect.ValueOfString("")
-	case "network.project.v1.EventMainnetVestingAccountCreated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountCreated.vesting_options":
 		m := new(ShareVestingOptions)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
@@ -5300,8 +5300,8 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) ProtoMethods() *proto
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.Address)
 		if l > 0 {
@@ -5361,8 +5361,8 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) ProtoMethods() *proto
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -5417,9 +5417,9 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) ProtoMethods() *proto
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -5429,7 +5429,7 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) ProtoMethods() *proto
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -5538,18 +5538,18 @@ func (x *fastReflection_EventMainnetVestingAccountCreated) ProtoMethods() *proto
 }
 
 var (
-	md_EventMainnetVestingAccountUpdated                protoreflect.MessageDescriptor
-	fd_EventMainnetVestingAccountUpdated_projectID      protoreflect.FieldDescriptor
-	fd_EventMainnetVestingAccountUpdated_address        protoreflect.FieldDescriptor
-	fd_EventMainnetVestingAccountUpdated_vestingOptions protoreflect.FieldDescriptor
+	md_EventMainnetVestingAccountUpdated                 protoreflect.MessageDescriptor
+	fd_EventMainnetVestingAccountUpdated_project_id      protoreflect.FieldDescriptor
+	fd_EventMainnetVestingAccountUpdated_address         protoreflect.FieldDescriptor
+	fd_EventMainnetVestingAccountUpdated_vesting_options protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventMainnetVestingAccountUpdated = File_network_project_v1_events_proto.Messages().ByName("EventMainnetVestingAccountUpdated")
-	fd_EventMainnetVestingAccountUpdated_projectID = md_EventMainnetVestingAccountUpdated.Fields().ByName("projectID")
+	fd_EventMainnetVestingAccountUpdated_project_id = md_EventMainnetVestingAccountUpdated.Fields().ByName("project_id")
 	fd_EventMainnetVestingAccountUpdated_address = md_EventMainnetVestingAccountUpdated.Fields().ByName("address")
-	fd_EventMainnetVestingAccountUpdated_vestingOptions = md_EventMainnetVestingAccountUpdated.Fields().ByName("vestingOptions")
+	fd_EventMainnetVestingAccountUpdated_vesting_options = md_EventMainnetVestingAccountUpdated.Fields().ByName("vesting_options")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventMainnetVestingAccountUpdated)(nil)
@@ -5617,9 +5617,9 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) Interface() protorefl
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventMainnetVestingAccountUpdated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventMainnetVestingAccountUpdated_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventMainnetVestingAccountUpdated_project_id, value) {
 			return
 		}
 	}
@@ -5631,7 +5631,7 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) Range(f func(protoref
 	}
 	if x.VestingOptions != nil {
 		value := protoreflect.ValueOfMessage(x.VestingOptions.ProtoReflect())
-		if !f(fd_EventMainnetVestingAccountUpdated_vestingOptions, value) {
+		if !f(fd_EventMainnetVestingAccountUpdated_vesting_options, value) {
 			return
 		}
 	}
@@ -5650,11 +5650,11 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) Range(f func(protoref
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventMainnetVestingAccountUpdated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountUpdated.projectID":
-		return x.ProjectID != uint64(0)
+	case "network.project.v1.EventMainnetVestingAccountUpdated.project_id":
+		return x.ProjectId != uint64(0)
 	case "network.project.v1.EventMainnetVestingAccountUpdated.address":
 		return x.Address != ""
-	case "network.project.v1.EventMainnetVestingAccountUpdated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountUpdated.vesting_options":
 		return x.VestingOptions != nil
 	default:
 		if fd.IsExtension() {
@@ -5672,11 +5672,11 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) Has(fd protoreflect.F
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetVestingAccountUpdated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountUpdated.projectID":
-		x.ProjectID = uint64(0)
+	case "network.project.v1.EventMainnetVestingAccountUpdated.project_id":
+		x.ProjectId = uint64(0)
 	case "network.project.v1.EventMainnetVestingAccountUpdated.address":
 		x.Address = ""
-	case "network.project.v1.EventMainnetVestingAccountUpdated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountUpdated.vesting_options":
 		x.VestingOptions = nil
 	default:
 		if fd.IsExtension() {
@@ -5694,13 +5694,13 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) Clear(fd protoreflect
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventMainnetVestingAccountUpdated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountUpdated.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventMainnetVestingAccountUpdated.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
 	case "network.project.v1.EventMainnetVestingAccountUpdated.address":
 		value := x.Address
 		return protoreflect.ValueOfString(value)
-	case "network.project.v1.EventMainnetVestingAccountUpdated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountUpdated.vesting_options":
 		value := x.VestingOptions
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
@@ -5723,11 +5723,11 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) Get(descriptor protor
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetVestingAccountUpdated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountUpdated.projectID":
-		x.ProjectID = value.Uint()
+	case "network.project.v1.EventMainnetVestingAccountUpdated.project_id":
+		x.ProjectId = value.Uint()
 	case "network.project.v1.EventMainnetVestingAccountUpdated.address":
 		x.Address = value.Interface().(string)
-	case "network.project.v1.EventMainnetVestingAccountUpdated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountUpdated.vesting_options":
 		x.VestingOptions = value.Message().Interface().(*ShareVestingOptions)
 	default:
 		if fd.IsExtension() {
@@ -5749,13 +5749,13 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) Set(fd protoreflect.F
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventMainnetVestingAccountUpdated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountUpdated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountUpdated.vesting_options":
 		if x.VestingOptions == nil {
 			x.VestingOptions = new(ShareVestingOptions)
 		}
 		return protoreflect.ValueOfMessage(x.VestingOptions.ProtoReflect())
-	case "network.project.v1.EventMainnetVestingAccountUpdated.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventMainnetVestingAccountUpdated is not mutable"))
+	case "network.project.v1.EventMainnetVestingAccountUpdated.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventMainnetVestingAccountUpdated is not mutable"))
 	case "network.project.v1.EventMainnetVestingAccountUpdated.address":
 		panic(fmt.Errorf("field address of message network.project.v1.EventMainnetVestingAccountUpdated is not mutable"))
 	default:
@@ -5771,11 +5771,11 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) Mutable(fd protorefle
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventMainnetVestingAccountUpdated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventMainnetVestingAccountUpdated.projectID":
+	case "network.project.v1.EventMainnetVestingAccountUpdated.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.project.v1.EventMainnetVestingAccountUpdated.address":
 		return protoreflect.ValueOfString("")
-	case "network.project.v1.EventMainnetVestingAccountUpdated.vestingOptions":
+	case "network.project.v1.EventMainnetVestingAccountUpdated.vesting_options":
 		m := new(ShareVestingOptions)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
@@ -5847,8 +5847,8 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) ProtoMethods() *proto
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.Address)
 		if l > 0 {
@@ -5908,8 +5908,8 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) ProtoMethods() *proto
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -5964,9 +5964,9 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) ProtoMethods() *proto
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -5976,7 +5976,7 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) ProtoMethods() *proto
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -6085,16 +6085,16 @@ func (x *fastReflection_EventMainnetVestingAccountUpdated) ProtoMethods() *proto
 }
 
 var (
-	md_EventProjectAuctionCreated           protoreflect.MessageDescriptor
-	fd_EventProjectAuctionCreated_projectID protoreflect.FieldDescriptor
-	fd_EventProjectAuctionCreated_auctionID protoreflect.FieldDescriptor
+	md_EventProjectAuctionCreated            protoreflect.MessageDescriptor
+	fd_EventProjectAuctionCreated_project_id protoreflect.FieldDescriptor
+	fd_EventProjectAuctionCreated_auction_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_events_proto_init()
 	md_EventProjectAuctionCreated = File_network_project_v1_events_proto.Messages().ByName("EventProjectAuctionCreated")
-	fd_EventProjectAuctionCreated_projectID = md_EventProjectAuctionCreated.Fields().ByName("projectID")
-	fd_EventProjectAuctionCreated_auctionID = md_EventProjectAuctionCreated.Fields().ByName("auctionID")
+	fd_EventProjectAuctionCreated_project_id = md_EventProjectAuctionCreated.Fields().ByName("project_id")
+	fd_EventProjectAuctionCreated_auction_id = md_EventProjectAuctionCreated.Fields().ByName("auction_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_EventProjectAuctionCreated)(nil)
@@ -6162,15 +6162,15 @@ func (x *fastReflection_EventProjectAuctionCreated) Interface() protoreflect.Pro
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_EventProjectAuctionCreated) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_EventProjectAuctionCreated_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_EventProjectAuctionCreated_project_id, value) {
 			return
 		}
 	}
-	if x.AuctionID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.AuctionID)
-		if !f(fd_EventProjectAuctionCreated_auctionID, value) {
+	if x.AuctionId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.AuctionId)
+		if !f(fd_EventProjectAuctionCreated_auction_id, value) {
 			return
 		}
 	}
@@ -6189,10 +6189,10 @@ func (x *fastReflection_EventProjectAuctionCreated) Range(f func(protoreflect.Fi
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_EventProjectAuctionCreated) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectAuctionCreated.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.project.v1.EventProjectAuctionCreated.auctionID":
-		return x.AuctionID != uint64(0)
+	case "network.project.v1.EventProjectAuctionCreated.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.project.v1.EventProjectAuctionCreated.auction_id":
+		return x.AuctionId != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectAuctionCreated"))
@@ -6209,10 +6209,10 @@ func (x *fastReflection_EventProjectAuctionCreated) Has(fd protoreflect.FieldDes
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectAuctionCreated) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectAuctionCreated.projectID":
-		x.ProjectID = uint64(0)
-	case "network.project.v1.EventProjectAuctionCreated.auctionID":
-		x.AuctionID = uint64(0)
+	case "network.project.v1.EventProjectAuctionCreated.project_id":
+		x.ProjectId = uint64(0)
+	case "network.project.v1.EventProjectAuctionCreated.auction_id":
+		x.AuctionId = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectAuctionCreated"))
@@ -6229,11 +6229,11 @@ func (x *fastReflection_EventProjectAuctionCreated) Clear(fd protoreflect.FieldD
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_EventProjectAuctionCreated) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.EventProjectAuctionCreated.projectID":
-		value := x.ProjectID
+	case "network.project.v1.EventProjectAuctionCreated.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.EventProjectAuctionCreated.auctionID":
-		value := x.AuctionID
+	case "network.project.v1.EventProjectAuctionCreated.auction_id":
+		value := x.AuctionId
 		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
@@ -6255,10 +6255,10 @@ func (x *fastReflection_EventProjectAuctionCreated) Get(descriptor protoreflect.
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectAuctionCreated) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectAuctionCreated.projectID":
-		x.ProjectID = value.Uint()
-	case "network.project.v1.EventProjectAuctionCreated.auctionID":
-		x.AuctionID = value.Uint()
+	case "network.project.v1.EventProjectAuctionCreated.project_id":
+		x.ProjectId = value.Uint()
+	case "network.project.v1.EventProjectAuctionCreated.auction_id":
+		x.AuctionId = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectAuctionCreated"))
@@ -6279,10 +6279,10 @@ func (x *fastReflection_EventProjectAuctionCreated) Set(fd protoreflect.FieldDes
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_EventProjectAuctionCreated) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectAuctionCreated.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.EventProjectAuctionCreated is not mutable"))
-	case "network.project.v1.EventProjectAuctionCreated.auctionID":
-		panic(fmt.Errorf("field auctionID of message network.project.v1.EventProjectAuctionCreated is not mutable"))
+	case "network.project.v1.EventProjectAuctionCreated.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.EventProjectAuctionCreated is not mutable"))
+	case "network.project.v1.EventProjectAuctionCreated.auction_id":
+		panic(fmt.Errorf("field auction_id of message network.project.v1.EventProjectAuctionCreated is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.project.v1.EventProjectAuctionCreated"))
@@ -6296,9 +6296,9 @@ func (x *fastReflection_EventProjectAuctionCreated) Mutable(fd protoreflect.Fiel
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_EventProjectAuctionCreated) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.EventProjectAuctionCreated.projectID":
+	case "network.project.v1.EventProjectAuctionCreated.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.EventProjectAuctionCreated.auctionID":
+	case "network.project.v1.EventProjectAuctionCreated.auction_id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -6369,11 +6369,11 @@ func (x *fastReflection_EventProjectAuctionCreated) ProtoMethods() *protoiface.M
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
-		if x.AuctionID != 0 {
-			n += 1 + runtime.Sov(uint64(x.AuctionID))
+		if x.AuctionId != 0 {
+			n += 1 + runtime.Sov(uint64(x.AuctionId))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -6404,13 +6404,13 @@ func (x *fastReflection_EventProjectAuctionCreated) ProtoMethods() *protoiface.M
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.AuctionID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.AuctionID))
+		if x.AuctionId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.AuctionId))
 			i--
 			dAtA[i] = 0x10
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -6465,9 +6465,9 @@ func (x *fastReflection_EventProjectAuctionCreated) ProtoMethods() *protoiface.M
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -6477,16 +6477,16 @@ func (x *fastReflection_EventProjectAuctionCreated) ProtoMethods() *protoiface.M
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field AuctionID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field AuctionId", wireType)
 				}
-				x.AuctionID = 0
+				x.AuctionId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -6496,7 +6496,7 @@ func (x *fastReflection_EventProjectAuctionCreated) ProtoMethods() *protoiface.M
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.AuctionID |= uint64(b&0x7F) << shift
+					x.AuctionId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -6554,9 +6554,9 @@ type EventProjectCreated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID          uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	CoordinatorID      uint64 `protobuf:"varint,3,opt,name=coordinatorID,proto3" json:"coordinatorID,omitempty"`
+	ProjectId          uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	CoordinatorId      uint64 `protobuf:"varint,3,opt,name=coordinator_id,json=coordinatorId,proto3" json:"coordinator_id,omitempty"`
 }
 
 func (x *EventProjectCreated) Reset() {
@@ -6579,9 +6579,9 @@ func (*EventProjectCreated) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *EventProjectCreated) GetProjectID() uint64 {
+func (x *EventProjectCreated) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -6593,9 +6593,9 @@ func (x *EventProjectCreated) GetCoordinatorAddress() string {
 	return ""
 }
 
-func (x *EventProjectCreated) GetCoordinatorID() uint64 {
+func (x *EventProjectCreated) GetCoordinatorId() uint64 {
 	if x != nil {
-		return x.CoordinatorID
+		return x.CoordinatorId
 	}
 	return 0
 }
@@ -6605,8 +6605,8 @@ type EventProjectChainAdded struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	LaunchID  uint64 `protobuf:"varint,2,opt,name=launchID,proto3" json:"launchID,omitempty"`
+	ProjectId uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	LaunchId  uint64 `protobuf:"varint,2,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
 }
 
 func (x *EventProjectChainAdded) Reset() {
@@ -6629,16 +6629,16 @@ func (*EventProjectChainAdded) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *EventProjectChainAdded) GetProjectID() uint64 {
+func (x *EventProjectChainAdded) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
 
-func (x *EventProjectChainAdded) GetLaunchID() uint64 {
+func (x *EventProjectChainAdded) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -6648,9 +6648,9 @@ type EventProjectInfoUpdated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID          uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	ProjectName        string `protobuf:"bytes,3,opt,name=projectName,proto3" json:"projectName,omitempty"`
+	ProjectId          uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	ProjectName        string `protobuf:"bytes,3,opt,name=project_name,json=projectName,proto3" json:"project_name,omitempty"`
 	Metadata           []byte `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
 }
 
@@ -6674,9 +6674,9 @@ func (*EventProjectInfoUpdated) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *EventProjectInfoUpdated) GetProjectID() uint64 {
+func (x *EventProjectInfoUpdated) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -6707,9 +6707,9 @@ type EventProjectSharesUpdated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID          uint64          `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string          `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	AllocatedShares    []*v1beta1.Coin `protobuf:"bytes,3,rep,name=allocatedShares,proto3" json:"allocatedShares,omitempty"`
+	ProjectId          uint64          `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string          `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	AllocatedShares    []*v1beta1.Coin `protobuf:"bytes,3,rep,name=allocated_shares,json=allocatedShares,proto3" json:"allocated_shares,omitempty"`
 }
 
 func (x *EventProjectSharesUpdated) Reset() {
@@ -6732,9 +6732,9 @@ func (*EventProjectSharesUpdated) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *EventProjectSharesUpdated) GetProjectID() uint64 {
+func (x *EventProjectSharesUpdated) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -6758,9 +6758,9 @@ type EventProjectTotalSupplyUpdated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID          uint64          `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string          `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	TotalSupply        []*v1beta1.Coin `protobuf:"bytes,3,rep,name=totalSupply,proto3" json:"totalSupply,omitempty"`
+	ProjectId          uint64          `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string          `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	TotalSupply        []*v1beta1.Coin `protobuf:"bytes,3,rep,name=total_supply,json=totalSupply,proto3" json:"total_supply,omitempty"`
 }
 
 func (x *EventProjectTotalSupplyUpdated) Reset() {
@@ -6783,9 +6783,9 @@ func (*EventProjectTotalSupplyUpdated) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *EventProjectTotalSupplyUpdated) GetProjectID() uint64 {
+func (x *EventProjectTotalSupplyUpdated) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -6809,9 +6809,9 @@ type EventProjectMainnetInitialized struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID          uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	MainnetID          uint64 `protobuf:"varint,3,opt,name=mainnetID,proto3" json:"mainnetID,omitempty"`
+	ProjectId          uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	MainnetId          uint64 `protobuf:"varint,3,opt,name=mainnet_id,json=mainnetId,proto3" json:"mainnet_id,omitempty"`
 }
 
 func (x *EventProjectMainnetInitialized) Reset() {
@@ -6834,9 +6834,9 @@ func (*EventProjectMainnetInitialized) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *EventProjectMainnetInitialized) GetProjectID() uint64 {
+func (x *EventProjectMainnetInitialized) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -6848,9 +6848,9 @@ func (x *EventProjectMainnetInitialized) GetCoordinatorAddress() string {
 	return ""
 }
 
-func (x *EventProjectMainnetInitialized) GetMainnetID() uint64 {
+func (x *EventProjectMainnetInitialized) GetMainnetId() uint64 {
 	if x != nil {
-		return x.MainnetID
+		return x.MainnetId
 	}
 	return 0
 }
@@ -6860,7 +6860,7 @@ type EventMainnetAccountCreated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID uint64          `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId uint64          `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address   string          `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	Shares    []*v1beta1.Coin `protobuf:"bytes,3,rep,name=shares,proto3" json:"shares,omitempty"`
 }
@@ -6885,9 +6885,9 @@ func (*EventMainnetAccountCreated) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *EventMainnetAccountCreated) GetProjectID() uint64 {
+func (x *EventMainnetAccountCreated) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -6911,7 +6911,7 @@ type EventMainnetAccountUpdated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID uint64          `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId uint64          `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address   string          `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	Shares    []*v1beta1.Coin `protobuf:"bytes,3,rep,name=shares,proto3" json:"shares,omitempty"`
 }
@@ -6936,9 +6936,9 @@ func (*EventMainnetAccountUpdated) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *EventMainnetAccountUpdated) GetProjectID() uint64 {
+func (x *EventMainnetAccountUpdated) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -6962,7 +6962,7 @@ type EventMainnetAccountRemoved struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address   string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 }
 
@@ -6986,9 +6986,9 @@ func (*EventMainnetAccountRemoved) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *EventMainnetAccountRemoved) GetProjectID() uint64 {
+func (x *EventMainnetAccountRemoved) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -7005,9 +7005,9 @@ type EventMainnetVestingAccountCreated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID      uint64               `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId      uint64               `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address        string               `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
-	VestingOptions *ShareVestingOptions `protobuf:"bytes,3,opt,name=vestingOptions,proto3" json:"vestingOptions,omitempty"`
+	VestingOptions *ShareVestingOptions `protobuf:"bytes,3,opt,name=vesting_options,json=vestingOptions,proto3" json:"vesting_options,omitempty"`
 }
 
 func (x *EventMainnetVestingAccountCreated) Reset() {
@@ -7030,9 +7030,9 @@ func (*EventMainnetVestingAccountCreated) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *EventMainnetVestingAccountCreated) GetProjectID() uint64 {
+func (x *EventMainnetVestingAccountCreated) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -7056,9 +7056,9 @@ type EventMainnetVestingAccountUpdated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID      uint64               `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId      uint64               `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address        string               `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
-	VestingOptions *ShareVestingOptions `protobuf:"bytes,3,opt,name=vestingOptions,proto3" json:"vestingOptions,omitempty"`
+	VestingOptions *ShareVestingOptions `protobuf:"bytes,3,opt,name=vesting_options,json=vestingOptions,proto3" json:"vesting_options,omitempty"`
 }
 
 func (x *EventMainnetVestingAccountUpdated) Reset() {
@@ -7081,9 +7081,9 @@ func (*EventMainnetVestingAccountUpdated) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *EventMainnetVestingAccountUpdated) GetProjectID() uint64 {
+func (x *EventMainnetVestingAccountUpdated) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -7107,8 +7107,8 @@ type EventProjectAuctionCreated struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	AuctionID uint64 `protobuf:"varint,2,opt,name=auctionID,proto3" json:"auctionID,omitempty"`
+	ProjectId uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	AuctionId uint64 `protobuf:"varint,2,opt,name=auction_id,json=auctionId,proto3" json:"auction_id,omitempty"`
 }
 
 func (x *EventProjectAuctionCreated) Reset() {
@@ -7131,16 +7131,16 @@ func (*EventProjectAuctionCreated) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_events_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *EventProjectAuctionCreated) GetProjectID() uint64 {
+func (x *EventProjectAuctionCreated) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
 
-func (x *EventProjectAuctionCreated) GetAuctionID() uint64 {
+func (x *EventProjectAuctionCreated) GetAuctionId() uint64 {
 	if x != nil {
-		return x.AuctionID
+		return x.AuctionId
 	}
 	return 0
 }
@@ -7159,166 +7159,167 @@ var file_network_project_v1_events_proto_rawDesc = []byte{
 	0x6f, 0x74, 0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67,
 	0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x20, 0x6e, 0x65, 0x74, 0x77, 0x6f,
 	0x72, 0x6b, 0x2f, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2f, 0x76, 0x31, 0x2f, 0x76, 0x65,
-	0x73, 0x74, 0x69, 0x6e, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa3, 0x01, 0x0a, 0x13,
+	0x73, 0x74, 0x69, 0x6e, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa6, 0x01, 0x0a, 0x13,
 	0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x43, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49,
-	0x44, 0x12, 0x48, 0x0a, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72,
-	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2,
-	0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
-	0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x24, 0x0a, 0x0d, 0x63,
-	0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x44, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49,
-	0x44, 0x22, 0x52, 0x0a, 0x16, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63,
-	0x74, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x41, 0x64, 0x64, 0x65, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70,
-	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09,
-	0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x75,
-	0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75,
-	0x6e, 0x63, 0x68, 0x49, 0x44, 0x22, 0xbf, 0x01, 0x0a, 0x17, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50,
-	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12,
-	0x48, 0x0a, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d,
-	0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53,
-	0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74,
-	0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x20, 0x0a, 0x0b, 0x70, 0x72, 0x6f,
-	0x6a, 0x65, 0x63, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
-	0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d,
-	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x6d,
-	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x22, 0x9a, 0x02, 0x0a, 0x19, 0x45, 0x76, 0x65, 0x6e,
-	0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x55, 0x70,
-	0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
-	0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63,
-	0x74, 0x49, 0x44, 0x12, 0x48, 0x0a, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74,
-	0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42,
+	0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
+	0x49, 0x64, 0x12, 0x49, 0x0a, 0x13, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f,
+	0x72, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42,
 	0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72,
 	0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64,
-	0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x94, 0x01,
-	0x0a, 0x0f, 0x61, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x64, 0x53, 0x68, 0x61, 0x72, 0x65,
-	0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
-	0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f,
-	0x69, 0x6e, 0x42, 0x4f, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43,
-	0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f, 0x06, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x9a, 0xe7, 0xb0,
-	0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7,
-	0xb0, 0x2a, 0x01, 0x52, 0x0f, 0x61, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x64, 0x53, 0x68,
-	0x61, 0x72, 0x65, 0x73, 0x22, 0xb9, 0x02, 0x0a, 0x1e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72,
-	0x6f, 0x6a, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x75, 0x70, 0x70, 0x6c, 0x79,
-	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65,
-	0x63, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a,
-	0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x48, 0x0a, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
-	0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x12, 0x63, 0x6f, 0x6f,
-	0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12,
-	0xae, 0x01, 0x0a, 0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x18,
-	0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62,
-	0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e,
-	0x42, 0x71, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d,
-	0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69,
-	0x6e, 0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64,
-	0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0,
-	0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7,
-	0xb0, 0x2a, 0x01, 0x52, 0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x75, 0x70, 0x70, 0x6c, 0x79,
-	0x22, 0xa6, 0x01, 0x0a, 0x1e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63,
-	0x74, 0x4d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x69,
-	0x7a, 0x65, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49,
-	0x44, 0x12, 0x48, 0x0a, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72,
-	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2,
-	0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
-	0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x6d,
-	0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x49, 0x44, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09,
-	0x6d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x49, 0x44, 0x22, 0xf3, 0x01, 0x0a, 0x1a, 0x45, 0x76,
-	0x65, 0x6e, 0x74, 0x4d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a,
-	0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f,
-	0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73,
-	0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e,
-	0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x82, 0x01, 0x0a, 0x06, 0x73,
-	0x68, 0x61, 0x72, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61,
-	0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x4f, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
-	0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70,
-	0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f, 0x06, 0x53, 0x68, 0x61, 0x72, 0x65,
-	0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69,
-	0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x73, 0x68, 0x61, 0x72, 0x65, 0x73, 0x22,
-	0xf3, 0x01, 0x0a, 0x1a, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74,
-	0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1c,
-	0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x32, 0x0a, 0x07,
-	0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2,
-	0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x12, 0x82, 0x01, 0x0a, 0x06, 0x73, 0x68, 0x61, 0x72, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28,
-	0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e,
-	0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x4f, 0xc8, 0xde,
-	0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73,
-	0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f,
-	0x06, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61,
-	0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x73,
-	0x68, 0x61, 0x72, 0x65, 0x73, 0x22, 0x6e, 0x0a, 0x1a, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x61,
-	0x69, 0x6e, 0x6e, 0x65, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x6d, 0x6f,
-	0x76, 0x65, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49,
-	0x44, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01,
+	0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x25, 0x0a,
+	0x0e, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74,
+	0x6f, 0x72, 0x49, 0x64, 0x22, 0x54, 0x0a, 0x16, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f,
+	0x6a, 0x65, 0x63, 0x74, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x41, 0x64, 0x64, 0x65, 0x64, 0x12, 0x1d,
+	0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x1b, 0x0a,
+	0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64, 0x22, 0xc2, 0x01, 0x0a, 0x17, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a,
+	0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x49, 0x0a, 0x13, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
+	0x61, 0x74, 0x6f, 0x72, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0xcc, 0x01, 0x0a, 0x21, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d,
-	0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x56, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63,
-	0x6f, 0x75, 0x6e, 0x74, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70,
-	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09,
-	0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74,
-	0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x55, 0x0a,
-	0x0e, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
-	0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x68, 0x61, 0x72, 0x65,
-	0x56, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x04,
-	0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0e, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x4f, 0x70, 0x74,
-	0x69, 0x6f, 0x6e, 0x73, 0x22, 0xcc, 0x01, 0x0a, 0x21, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x61,
-	0x69, 0x6e, 0x6e, 0x65, 0x74, 0x56, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f,
-	0x75, 0x6e, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72,
-	0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70,
-	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x12, 0x63, 0x6f,
+	0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x12, 0x21, 0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x4e,
+	0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x22,
+	0x9d, 0x02, 0x0a, 0x19, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
+	0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a,
+	0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x49, 0x0a, 0x13,
+	0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x61, 0x64, 0x64, 0x72,
 	0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63,
 	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72,
-	0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x55, 0x0a, 0x0e,
-	0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x03,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70,
-	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x68, 0x61, 0x72, 0x65, 0x56,
-	0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x04, 0xc8,
-	0xde, 0x1f, 0x00, 0x52, 0x0e, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x4f, 0x70, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x22, 0x58, 0x0a, 0x1a, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x6a,
-	0x65, 0x63, 0x74, 0x41, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
-	0x64, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12,
-	0x1c, 0x0a, 0x09, 0x61, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x09, 0x61, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x44, 0x42, 0xcb, 0x01,
-	0x0a, 0x16, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70, 0x72,
-	0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x76, 0x31, 0x42, 0x0b, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73,
-	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x70,
-	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2f, 0x76, 0x31, 0x3b, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63,
-	0x74, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x50, 0x58, 0xaa, 0x02, 0x12, 0x4e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x2e, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x56, 0x31, 0xca, 0x02,
-	0x12, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
-	0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1e, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x50, 0x72,
-	0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61,
-	0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x14, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a,
-	0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x69, 0x6e, 0x67, 0x52, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72,
+	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x95, 0x01, 0x0a, 0x10, 0x61, 0x6c, 0x6c, 0x6f,
+	0x63, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x73, 0x68, 0x61, 0x72, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65,
+	0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x4f, 0xc8,
+	0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d,
+	0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf,
+	0x1f, 0x06, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67,
+	0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x0f,
+	0x61, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x64, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x22,
+	0xbc, 0x02, 0x0a, 0x1e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
+	0x54, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49,
+	0x64, 0x12, 0x49, 0x0a, 0x13, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72,
+	0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18,
+	0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69,
+	0x6e, 0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0xaf, 0x01, 0x0a,
+	0x0c, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x73, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x18, 0x03, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73,
+	0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x71,
+	0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
+	0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa,
+	0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f,
+	0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f,
+	0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c,
+	0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a,
+	0x01, 0x52, 0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x22, 0xa9,
+	0x01, 0x0a, 0x1e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x4d,
+	0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x69, 0x7a, 0x65,
+	0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64,
+	0x12, 0x49, 0x0a, 0x13, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x5f,
+	0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2,
+	0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
+	0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x12, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e,
+	0x61, 0x74, 0x6f, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x6d,
+	0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x09, 0x6d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x49, 0x64, 0x22, 0xf4, 0x01, 0x0a, 0x1a, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x4d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f,
+	0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70,
+	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63,
+	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72,
+	0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x82, 0x01, 0x0a,
+	0x06, 0x73, 0x68, 0x61, 0x72, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e,
+	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65,
+	0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x4f, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde,
+	0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74,
+	0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f, 0x06, 0x53, 0x68, 0x61,
+	0x72, 0x65, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x63,
+	0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x73, 0x68, 0x61, 0x72, 0x65,
+	0x73, 0x22, 0xf4, 0x01, 0x0a, 0x1a, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d, 0x61, 0x69, 0x6e, 0x6e,
+	0x65, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64,
+	0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12,
+	0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x12, 0x82, 0x01, 0x0a, 0x06, 0x73, 0x68, 0x61, 0x72, 0x65, 0x73, 0x18, 0x03,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61,
+	0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42,
+	0x4f, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
+	0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e,
+	0xaa, 0xdf, 0x1f, 0x06, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c,
+	0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01,
+	0x52, 0x06, 0x73, 0x68, 0x61, 0x72, 0x65, 0x73, 0x22, 0x6f, 0x0a, 0x1a, 0x45, 0x76, 0x65, 0x6e,
+	0x74, 0x4d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52,
+	0x65, 0x6d, 0x6f, 0x76, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a,
+	0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67,
+	0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0xce, 0x01, 0x0a, 0x21, 0x45, 0x76,
+	0x65, 0x6e, 0x74, 0x4d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x56, 0x65, 0x73, 0x74, 0x69, 0x6e,
+	0x67, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12,
+	0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x32,
+	0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42,
+	0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x12, 0x56, 0x0a, 0x0f, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x6f, 0x70,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x6e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x76, 0x31,
+	0x2e, 0x53, 0x68, 0x61, 0x72, 0x65, 0x56, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x4f, 0x70, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0e, 0x76, 0x65, 0x73, 0x74,
+	0x69, 0x6e, 0x67, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0xce, 0x01, 0x0a, 0x21, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x4d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x56, 0x65, 0x73, 0x74, 0x69,
+	0x6e, 0x67, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64,
+	0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12,
+	0x32, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x42, 0x18, 0xd2, 0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x12, 0x56, 0x0a, 0x0f, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x6f,
+	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x76,
+	0x31, 0x2e, 0x53, 0x68, 0x61, 0x72, 0x65, 0x56, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x4f, 0x70,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0e, 0x76, 0x65, 0x73,
+	0x74, 0x69, 0x6e, 0x67, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x5a, 0x0a, 0x1a, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x41, 0x75, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f,
+	0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70,
+	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x75, 0x63, 0x74,
+	0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x61, 0x75,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x42, 0xcb, 0x01, 0x0a, 0x16, 0x63, 0x6f, 0x6d, 0x2e,
+	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e,
+	0x76, 0x31, 0x42, 0x0b, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
+	0x01, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67,
+	0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69,
+	0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
+	0x2f, 0x76, 0x31, 0x3b, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x76, 0x31, 0xa2, 0x02, 0x03,
+	0x4e, 0x50, 0x58, 0xaa, 0x02, 0x12, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x50, 0x72,
+	0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x12, 0x4e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x6b, 0x5c, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1e,
+	0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5c,
+	0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02,
+	0x14, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63,
+	0x74, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -7351,12 +7352,12 @@ var file_network_project_v1_events_proto_goTypes = []interface{}{
 	(*ShareVestingOptions)(nil),               // 13: network.project.v1.ShareVestingOptions
 }
 var file_network_project_v1_events_proto_depIdxs = []int32{
-	12, // 0: network.project.v1.EventProjectSharesUpdated.allocatedShares:type_name -> cosmos.base.v1beta1.Coin
-	12, // 1: network.project.v1.EventProjectTotalSupplyUpdated.totalSupply:type_name -> cosmos.base.v1beta1.Coin
+	12, // 0: network.project.v1.EventProjectSharesUpdated.allocated_shares:type_name -> cosmos.base.v1beta1.Coin
+	12, // 1: network.project.v1.EventProjectTotalSupplyUpdated.total_supply:type_name -> cosmos.base.v1beta1.Coin
 	12, // 2: network.project.v1.EventMainnetAccountCreated.shares:type_name -> cosmos.base.v1beta1.Coin
 	12, // 3: network.project.v1.EventMainnetAccountUpdated.shares:type_name -> cosmos.base.v1beta1.Coin
-	13, // 4: network.project.v1.EventMainnetVestingAccountCreated.vestingOptions:type_name -> network.project.v1.ShareVestingOptions
-	13, // 5: network.project.v1.EventMainnetVestingAccountUpdated.vestingOptions:type_name -> network.project.v1.ShareVestingOptions
+	13, // 4: network.project.v1.EventMainnetVestingAccountCreated.vesting_options:type_name -> network.project.v1.ShareVestingOptions
+	13, // 5: network.project.v1.EventMainnetVestingAccountUpdated.vesting_options:type_name -> network.project.v1.ShareVestingOptions
 	6,  // [6:6] is the sub-list for method output_type
 	6,  // [6:6] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name

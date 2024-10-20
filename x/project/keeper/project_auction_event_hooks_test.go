@@ -56,8 +56,8 @@ func TestKeeper_EmitProjectAuctionCreated(t *testing.T) {
 			name: "should return error if selling coin is a voucher of a project with non existing coordinator",
 			inputState: inputState{
 				project: types.Project{
-					ProjectID:     10,
-					CoordinatorID: 20,
+					ProjectId:     10,
+					CoordinatorId: 20,
 				},
 				noCoordinator: true,
 			},
@@ -68,11 +68,11 @@ func TestKeeper_EmitProjectAuctionCreated(t *testing.T) {
 			name: "should prevent emitting event if the auctioneer is not the coordinator of the project",
 			inputState: inputState{
 				project: types.Project{
-					ProjectID:     100,
-					CoordinatorID: 200,
+					ProjectId:     100,
+					CoordinatorId: 200,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 200,
+					CoordinatorId: 200,
 					Address:       sample.Address(r),
 				},
 			},
@@ -84,11 +84,11 @@ func TestKeeper_EmitProjectAuctionCreated(t *testing.T) {
 			name: "should allow emitting event if the auctioneer is the coordinator of the project",
 			inputState: inputState{
 				project: types.Project{
-					ProjectID:     1000,
-					CoordinatorID: 2000,
+					ProjectId:     1000,
+					CoordinatorId: 2000,
 				},
 				coordinator: profiletypes.Coordinator{
-					CoordinatorID: 2000,
+					CoordinatorId: 2000,
 					Address:       coordinator,
 				},
 			},
@@ -101,11 +101,11 @@ func TestKeeper_EmitProjectAuctionCreated(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// initialize input state
 			if !tt.inputState.noProject {
-				err := tk.ProjectKeeper.Project.Set(ctx, tt.inputState.project.ProjectID, tt.inputState.project)
+				err := tk.ProjectKeeper.Project.Set(ctx, tt.inputState.project.ProjectId, tt.inputState.project)
 				require.NoError(t, err)
 			}
 			if !tt.inputState.noCoordinator {
-				err := tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorID, tt.inputState.coordinator)
+				err := tk.ProfileKeeper.Coordinator.Set(ctx, tt.inputState.coordinator.CoordinatorId, tt.inputState.coordinator)
 				require.NoError(t, err)
 			}
 
@@ -119,11 +119,11 @@ func TestKeeper_EmitProjectAuctionCreated(t *testing.T) {
 
 			// clean state
 			if !tt.inputState.noProject {
-				err := tk.ProjectKeeper.Project.Remove(ctx, tt.inputState.project.ProjectID)
+				err := tk.ProjectKeeper.Project.Remove(ctx, tt.inputState.project.ProjectId)
 				require.NoError(t, err)
 			}
 			if !tt.inputState.noCoordinator {
-				err := tk.ProfileKeeper.Coordinator.Remove(ctx, tt.inputState.coordinator.CoordinatorID)
+				err := tk.ProfileKeeper.Coordinator.Remove(ctx, tt.inputState.coordinator.CoordinatorId)
 				require.NoError(t, err)
 			}
 		})

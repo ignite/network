@@ -873,24 +873,24 @@ func (x *fastReflection_MsgUpdateParamsResponse) ProtoMethods() *protoiface.Meth
 }
 
 var (
-	md_MsgCreateClient                 protoreflect.MessageDescriptor
-	fd_MsgCreateClient_creator         protoreflect.FieldDescriptor
-	fd_MsgCreateClient_launchID        protoreflect.FieldDescriptor
-	fd_MsgCreateClient_consensusState  protoreflect.FieldDescriptor
-	fd_MsgCreateClient_validatorSet    protoreflect.FieldDescriptor
-	fd_MsgCreateClient_unbondingPeriod protoreflect.FieldDescriptor
-	fd_MsgCreateClient_revisionHeight  protoreflect.FieldDescriptor
+	md_MsgCreateClient                  protoreflect.MessageDescriptor
+	fd_MsgCreateClient_creator          protoreflect.FieldDescriptor
+	fd_MsgCreateClient_launch_id        protoreflect.FieldDescriptor
+	fd_MsgCreateClient_consensus_state  protoreflect.FieldDescriptor
+	fd_MsgCreateClient_validator_set    protoreflect.FieldDescriptor
+	fd_MsgCreateClient_unbonding_period protoreflect.FieldDescriptor
+	fd_MsgCreateClient_revision_height  protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_monitoringc_v1_tx_proto_init()
 	md_MsgCreateClient = File_network_monitoringc_v1_tx_proto.Messages().ByName("MsgCreateClient")
 	fd_MsgCreateClient_creator = md_MsgCreateClient.Fields().ByName("creator")
-	fd_MsgCreateClient_launchID = md_MsgCreateClient.Fields().ByName("launchID")
-	fd_MsgCreateClient_consensusState = md_MsgCreateClient.Fields().ByName("consensusState")
-	fd_MsgCreateClient_validatorSet = md_MsgCreateClient.Fields().ByName("validatorSet")
-	fd_MsgCreateClient_unbondingPeriod = md_MsgCreateClient.Fields().ByName("unbondingPeriod")
-	fd_MsgCreateClient_revisionHeight = md_MsgCreateClient.Fields().ByName("revisionHeight")
+	fd_MsgCreateClient_launch_id = md_MsgCreateClient.Fields().ByName("launch_id")
+	fd_MsgCreateClient_consensus_state = md_MsgCreateClient.Fields().ByName("consensus_state")
+	fd_MsgCreateClient_validator_set = md_MsgCreateClient.Fields().ByName("validator_set")
+	fd_MsgCreateClient_unbonding_period = md_MsgCreateClient.Fields().ByName("unbonding_period")
+	fd_MsgCreateClient_revision_height = md_MsgCreateClient.Fields().ByName("revision_height")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgCreateClient)(nil)
@@ -964,33 +964,33 @@ func (x *fastReflection_MsgCreateClient) Range(f func(protoreflect.FieldDescript
 			return
 		}
 	}
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_MsgCreateClient_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_MsgCreateClient_launch_id, value) {
 			return
 		}
 	}
 	if x.ConsensusState != nil {
 		value := protoreflect.ValueOfMessage(x.ConsensusState.ProtoReflect())
-		if !f(fd_MsgCreateClient_consensusState, value) {
+		if !f(fd_MsgCreateClient_consensus_state, value) {
 			return
 		}
 	}
 	if x.ValidatorSet != nil {
 		value := protoreflect.ValueOfMessage(x.ValidatorSet.ProtoReflect())
-		if !f(fd_MsgCreateClient_validatorSet, value) {
+		if !f(fd_MsgCreateClient_validator_set, value) {
 			return
 		}
 	}
 	if x.UnbondingPeriod != int64(0) {
 		value := protoreflect.ValueOfInt64(x.UnbondingPeriod)
-		if !f(fd_MsgCreateClient_unbondingPeriod, value) {
+		if !f(fd_MsgCreateClient_unbonding_period, value) {
 			return
 		}
 	}
 	if x.RevisionHeight != uint64(0) {
 		value := protoreflect.ValueOfUint64(x.RevisionHeight)
-		if !f(fd_MsgCreateClient_revisionHeight, value) {
+		if !f(fd_MsgCreateClient_revision_height, value) {
 			return
 		}
 	}
@@ -1011,15 +1011,15 @@ func (x *fastReflection_MsgCreateClient) Has(fd protoreflect.FieldDescriptor) bo
 	switch fd.FullName() {
 	case "network.monitoringc.v1.MsgCreateClient.creator":
 		return x.Creator != ""
-	case "network.monitoringc.v1.MsgCreateClient.launchID":
-		return x.LaunchID != uint64(0)
-	case "network.monitoringc.v1.MsgCreateClient.consensusState":
+	case "network.monitoringc.v1.MsgCreateClient.launch_id":
+		return x.LaunchId != uint64(0)
+	case "network.monitoringc.v1.MsgCreateClient.consensus_state":
 		return x.ConsensusState != nil
-	case "network.monitoringc.v1.MsgCreateClient.validatorSet":
+	case "network.monitoringc.v1.MsgCreateClient.validator_set":
 		return x.ValidatorSet != nil
-	case "network.monitoringc.v1.MsgCreateClient.unbondingPeriod":
+	case "network.monitoringc.v1.MsgCreateClient.unbonding_period":
 		return x.UnbondingPeriod != int64(0)
-	case "network.monitoringc.v1.MsgCreateClient.revisionHeight":
+	case "network.monitoringc.v1.MsgCreateClient.revision_height":
 		return x.RevisionHeight != uint64(0)
 	default:
 		if fd.IsExtension() {
@@ -1039,15 +1039,15 @@ func (x *fastReflection_MsgCreateClient) Clear(fd protoreflect.FieldDescriptor) 
 	switch fd.FullName() {
 	case "network.monitoringc.v1.MsgCreateClient.creator":
 		x.Creator = ""
-	case "network.monitoringc.v1.MsgCreateClient.launchID":
-		x.LaunchID = uint64(0)
-	case "network.monitoringc.v1.MsgCreateClient.consensusState":
+	case "network.monitoringc.v1.MsgCreateClient.launch_id":
+		x.LaunchId = uint64(0)
+	case "network.monitoringc.v1.MsgCreateClient.consensus_state":
 		x.ConsensusState = nil
-	case "network.monitoringc.v1.MsgCreateClient.validatorSet":
+	case "network.monitoringc.v1.MsgCreateClient.validator_set":
 		x.ValidatorSet = nil
-	case "network.monitoringc.v1.MsgCreateClient.unbondingPeriod":
+	case "network.monitoringc.v1.MsgCreateClient.unbonding_period":
 		x.UnbondingPeriod = int64(0)
-	case "network.monitoringc.v1.MsgCreateClient.revisionHeight":
+	case "network.monitoringc.v1.MsgCreateClient.revision_height":
 		x.RevisionHeight = uint64(0)
 	default:
 		if fd.IsExtension() {
@@ -1068,19 +1068,19 @@ func (x *fastReflection_MsgCreateClient) Get(descriptor protoreflect.FieldDescri
 	case "network.monitoringc.v1.MsgCreateClient.creator":
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
-	case "network.monitoringc.v1.MsgCreateClient.launchID":
-		value := x.LaunchID
+	case "network.monitoringc.v1.MsgCreateClient.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
-	case "network.monitoringc.v1.MsgCreateClient.consensusState":
+	case "network.monitoringc.v1.MsgCreateClient.consensus_state":
 		value := x.ConsensusState
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.monitoringc.v1.MsgCreateClient.validatorSet":
+	case "network.monitoringc.v1.MsgCreateClient.validator_set":
 		value := x.ValidatorSet
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.monitoringc.v1.MsgCreateClient.unbondingPeriod":
+	case "network.monitoringc.v1.MsgCreateClient.unbonding_period":
 		value := x.UnbondingPeriod
 		return protoreflect.ValueOfInt64(value)
-	case "network.monitoringc.v1.MsgCreateClient.revisionHeight":
+	case "network.monitoringc.v1.MsgCreateClient.revision_height":
 		value := x.RevisionHeight
 		return protoreflect.ValueOfUint64(value)
 	default:
@@ -1105,15 +1105,15 @@ func (x *fastReflection_MsgCreateClient) Set(fd protoreflect.FieldDescriptor, va
 	switch fd.FullName() {
 	case "network.monitoringc.v1.MsgCreateClient.creator":
 		x.Creator = value.Interface().(string)
-	case "network.monitoringc.v1.MsgCreateClient.launchID":
-		x.LaunchID = value.Uint()
-	case "network.monitoringc.v1.MsgCreateClient.consensusState":
+	case "network.monitoringc.v1.MsgCreateClient.launch_id":
+		x.LaunchId = value.Uint()
+	case "network.monitoringc.v1.MsgCreateClient.consensus_state":
 		x.ConsensusState = value.Message().Interface().(*types.ConsensusState)
-	case "network.monitoringc.v1.MsgCreateClient.validatorSet":
+	case "network.monitoringc.v1.MsgCreateClient.validator_set":
 		x.ValidatorSet = value.Message().Interface().(*types.ValidatorSet)
-	case "network.monitoringc.v1.MsgCreateClient.unbondingPeriod":
+	case "network.monitoringc.v1.MsgCreateClient.unbonding_period":
 		x.UnbondingPeriod = value.Int()
-	case "network.monitoringc.v1.MsgCreateClient.revisionHeight":
+	case "network.monitoringc.v1.MsgCreateClient.revision_height":
 		x.RevisionHeight = value.Uint()
 	default:
 		if fd.IsExtension() {
@@ -1135,24 +1135,24 @@ func (x *fastReflection_MsgCreateClient) Set(fd protoreflect.FieldDescriptor, va
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateClient) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.MsgCreateClient.consensusState":
+	case "network.monitoringc.v1.MsgCreateClient.consensus_state":
 		if x.ConsensusState == nil {
 			x.ConsensusState = new(types.ConsensusState)
 		}
 		return protoreflect.ValueOfMessage(x.ConsensusState.ProtoReflect())
-	case "network.monitoringc.v1.MsgCreateClient.validatorSet":
+	case "network.monitoringc.v1.MsgCreateClient.validator_set":
 		if x.ValidatorSet == nil {
 			x.ValidatorSet = new(types.ValidatorSet)
 		}
 		return protoreflect.ValueOfMessage(x.ValidatorSet.ProtoReflect())
 	case "network.monitoringc.v1.MsgCreateClient.creator":
 		panic(fmt.Errorf("field creator of message network.monitoringc.v1.MsgCreateClient is not mutable"))
-	case "network.monitoringc.v1.MsgCreateClient.launchID":
-		panic(fmt.Errorf("field launchID of message network.monitoringc.v1.MsgCreateClient is not mutable"))
-	case "network.monitoringc.v1.MsgCreateClient.unbondingPeriod":
-		panic(fmt.Errorf("field unbondingPeriod of message network.monitoringc.v1.MsgCreateClient is not mutable"))
-	case "network.monitoringc.v1.MsgCreateClient.revisionHeight":
-		panic(fmt.Errorf("field revisionHeight of message network.monitoringc.v1.MsgCreateClient is not mutable"))
+	case "network.monitoringc.v1.MsgCreateClient.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.monitoringc.v1.MsgCreateClient is not mutable"))
+	case "network.monitoringc.v1.MsgCreateClient.unbonding_period":
+		panic(fmt.Errorf("field unbonding_period of message network.monitoringc.v1.MsgCreateClient is not mutable"))
+	case "network.monitoringc.v1.MsgCreateClient.revision_height":
+		panic(fmt.Errorf("field revision_height of message network.monitoringc.v1.MsgCreateClient is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.MsgCreateClient"))
@@ -1168,17 +1168,17 @@ func (x *fastReflection_MsgCreateClient) NewField(fd protoreflect.FieldDescripto
 	switch fd.FullName() {
 	case "network.monitoringc.v1.MsgCreateClient.creator":
 		return protoreflect.ValueOfString("")
-	case "network.monitoringc.v1.MsgCreateClient.launchID":
+	case "network.monitoringc.v1.MsgCreateClient.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.monitoringc.v1.MsgCreateClient.consensusState":
+	case "network.monitoringc.v1.MsgCreateClient.consensus_state":
 		m := new(types.ConsensusState)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.monitoringc.v1.MsgCreateClient.validatorSet":
+	case "network.monitoringc.v1.MsgCreateClient.validator_set":
 		m := new(types.ValidatorSet)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.monitoringc.v1.MsgCreateClient.unbondingPeriod":
+	case "network.monitoringc.v1.MsgCreateClient.unbonding_period":
 		return protoreflect.ValueOfInt64(int64(0))
-	case "network.monitoringc.v1.MsgCreateClient.revisionHeight":
+	case "network.monitoringc.v1.MsgCreateClient.revision_height":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
@@ -1253,8 +1253,8 @@ func (x *fastReflection_MsgCreateClient) ProtoMethods() *protoiface.Methods {
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
 		if x.ConsensusState != nil {
 			l = options.Size(x.ConsensusState)
@@ -1337,8 +1337,8 @@ func (x *fastReflection_MsgCreateClient) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x1a
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x10
 		}
@@ -1432,9 +1432,9 @@ func (x *fastReflection_MsgCreateClient) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1444,7 +1444,7 @@ func (x *fastReflection_MsgCreateClient) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1595,14 +1595,14 @@ func (x *fastReflection_MsgCreateClient) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_MsgCreateClientResponse          protoreflect.MessageDescriptor
-	fd_MsgCreateClientResponse_clientID protoreflect.FieldDescriptor
+	md_MsgCreateClientResponse           protoreflect.MessageDescriptor
+	fd_MsgCreateClientResponse_client_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_monitoringc_v1_tx_proto_init()
 	md_MsgCreateClientResponse = File_network_monitoringc_v1_tx_proto.Messages().ByName("MsgCreateClientResponse")
-	fd_MsgCreateClientResponse_clientID = md_MsgCreateClientResponse.Fields().ByName("clientID")
+	fd_MsgCreateClientResponse_client_id = md_MsgCreateClientResponse.Fields().ByName("client_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgCreateClientResponse)(nil)
@@ -1670,9 +1670,9 @@ func (x *fastReflection_MsgCreateClientResponse) Interface() protoreflect.ProtoM
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_MsgCreateClientResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ClientID != "" {
-		value := protoreflect.ValueOfString(x.ClientID)
-		if !f(fd_MsgCreateClientResponse_clientID, value) {
+	if x.ClientId != "" {
+		value := protoreflect.ValueOfString(x.ClientId)
+		if !f(fd_MsgCreateClientResponse_client_id, value) {
 			return
 		}
 	}
@@ -1691,8 +1691,8 @@ func (x *fastReflection_MsgCreateClientResponse) Range(f func(protoreflect.Field
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_MsgCreateClientResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.MsgCreateClientResponse.clientID":
-		return x.ClientID != ""
+	case "network.monitoringc.v1.MsgCreateClientResponse.client_id":
+		return x.ClientId != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.MsgCreateClientResponse"))
@@ -1709,8 +1709,8 @@ func (x *fastReflection_MsgCreateClientResponse) Has(fd protoreflect.FieldDescri
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateClientResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.MsgCreateClientResponse.clientID":
-		x.ClientID = ""
+	case "network.monitoringc.v1.MsgCreateClientResponse.client_id":
+		x.ClientId = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.MsgCreateClientResponse"))
@@ -1727,8 +1727,8 @@ func (x *fastReflection_MsgCreateClientResponse) Clear(fd protoreflect.FieldDesc
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_MsgCreateClientResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.monitoringc.v1.MsgCreateClientResponse.clientID":
-		value := x.ClientID
+	case "network.monitoringc.v1.MsgCreateClientResponse.client_id":
+		value := x.ClientId
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
@@ -1750,8 +1750,8 @@ func (x *fastReflection_MsgCreateClientResponse) Get(descriptor protoreflect.Fie
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateClientResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.MsgCreateClientResponse.clientID":
-		x.ClientID = value.Interface().(string)
+	case "network.monitoringc.v1.MsgCreateClientResponse.client_id":
+		x.ClientId = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.MsgCreateClientResponse"))
@@ -1772,8 +1772,8 @@ func (x *fastReflection_MsgCreateClientResponse) Set(fd protoreflect.FieldDescri
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateClientResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.MsgCreateClientResponse.clientID":
-		panic(fmt.Errorf("field clientID of message network.monitoringc.v1.MsgCreateClientResponse is not mutable"))
+	case "network.monitoringc.v1.MsgCreateClientResponse.client_id":
+		panic(fmt.Errorf("field client_id of message network.monitoringc.v1.MsgCreateClientResponse is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.MsgCreateClientResponse"))
@@ -1787,7 +1787,7 @@ func (x *fastReflection_MsgCreateClientResponse) Mutable(fd protoreflect.FieldDe
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_MsgCreateClientResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.MsgCreateClientResponse.clientID":
+	case "network.monitoringc.v1.MsgCreateClientResponse.client_id":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
@@ -1858,7 +1858,7 @@ func (x *fastReflection_MsgCreateClientResponse) ProtoMethods() *protoiface.Meth
 		var n int
 		var l int
 		_ = l
-		l = len(x.ClientID)
+		l = len(x.ClientId)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -1891,10 +1891,10 @@ func (x *fastReflection_MsgCreateClientResponse) ProtoMethods() *protoiface.Meth
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.ClientID) > 0 {
-			i -= len(x.ClientID)
-			copy(dAtA[i:], x.ClientID)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ClientID)))
+		if len(x.ClientId) > 0 {
+			i -= len(x.ClientId)
+			copy(dAtA[i:], x.ClientId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ClientId)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -1949,7 +1949,7 @@ func (x *fastReflection_MsgCreateClientResponse) ProtoMethods() *protoiface.Meth
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ClientID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ClientId", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -1977,7 +1977,7 @@ func (x *fastReflection_MsgCreateClientResponse) ProtoMethods() *protoiface.Meth
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.ClientID = string(dAtA[iNdEx:postIndex])
+				x.ClientId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -2107,11 +2107,11 @@ type MsgCreateClient struct {
 	unknownFields protoimpl.UnknownFields
 
 	Creator         string                `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	LaunchID        uint64                `protobuf:"varint,2,opt,name=launchID,proto3" json:"launchID,omitempty"`
-	ConsensusState  *types.ConsensusState `protobuf:"bytes,3,opt,name=consensusState,proto3" json:"consensusState,omitempty"`
-	ValidatorSet    *types.ValidatorSet   `protobuf:"bytes,4,opt,name=validatorSet,proto3" json:"validatorSet,omitempty"`
-	UnbondingPeriod int64                 `protobuf:"varint,5,opt,name=unbondingPeriod,proto3" json:"unbondingPeriod,omitempty"`
-	RevisionHeight  uint64                `protobuf:"varint,6,opt,name=revisionHeight,proto3" json:"revisionHeight,omitempty"`
+	LaunchId        uint64                `protobuf:"varint,2,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
+	ConsensusState  *types.ConsensusState `protobuf:"bytes,3,opt,name=consensus_state,json=consensusState,proto3" json:"consensus_state,omitempty"`
+	ValidatorSet    *types.ValidatorSet   `protobuf:"bytes,4,opt,name=validator_set,json=validatorSet,proto3" json:"validator_set,omitempty"`
+	UnbondingPeriod int64                 `protobuf:"varint,5,opt,name=unbonding_period,json=unbondingPeriod,proto3" json:"unbonding_period,omitempty"`
+	RevisionHeight  uint64                `protobuf:"varint,6,opt,name=revision_height,json=revisionHeight,proto3" json:"revision_height,omitempty"`
 }
 
 func (x *MsgCreateClient) Reset() {
@@ -2141,9 +2141,9 @@ func (x *MsgCreateClient) GetCreator() string {
 	return ""
 }
 
-func (x *MsgCreateClient) GetLaunchID() uint64 {
+func (x *MsgCreateClient) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
@@ -2181,7 +2181,7 @@ type MsgCreateClientResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClientID string `protobuf:"bytes,1,opt,name=clientID,proto3" json:"clientID,omitempty"`
+	ClientId string `protobuf:"bytes,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
 }
 
 func (x *MsgCreateClientResponse) Reset() {
@@ -2204,9 +2204,9 @@ func (*MsgCreateClientResponse) Descriptor() ([]byte, []int) {
 	return file_network_monitoringc_v1_tx_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *MsgCreateClientResponse) GetClientID() string {
+func (x *MsgCreateClientResponse) GetClientId() string {
 	if x != nil {
-		return x.ClientID
+		return x.ClientId
 	}
 	return ""
 }
@@ -2241,61 +2241,61 @@ var file_network_monitoringc_v1_tx_proto_rawDesc = []byte{
 	0x78, 0x2f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2f, 0x4d, 0x73,
 	0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x19, 0x0a,
 	0x17, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xd5, 0x02, 0x0a, 0x0f, 0x4d, 0x73, 0x67,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xda, 0x02, 0x0a, 0x0f, 0x4d, 0x73, 0x67,
 	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x12, 0x32, 0x0a, 0x07,
 	0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2,
 	0xb4, 0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
 	0x73, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72,
-	0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x12, 0x4b, 0x0a, 0x0e,
-	0x63, 0x6f, 0x6e, 0x73, 0x65, 0x6e, 0x73, 0x75, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x18, 0x03,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x74,
-	0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x6e, 0x73, 0x65, 0x6e, 0x73, 0x75, 0x73, 0x53, 0x74,
-	0x61, 0x74, 0x65, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0e, 0x63, 0x6f, 0x6e, 0x73, 0x65,
-	0x6e, 0x73, 0x75, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x45, 0x0a, 0x0c, 0x76, 0x61, 0x6c,
-	0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x1b, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e,
-	0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x42, 0x04, 0xc8, 0xde,
-	0x1f, 0x00, 0x52, 0x0c, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x53, 0x65, 0x74,
-	0x12, 0x28, 0x0a, 0x0f, 0x75, 0x6e, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x50, 0x65, 0x72,
-	0x69, 0x6f, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0f, 0x75, 0x6e, 0x62, 0x6f, 0x6e,
-	0x64, 0x69, 0x6e, 0x67, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x12, 0x26, 0x0a, 0x0e, 0x72, 0x65,
-	0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x06, 0x20, 0x01,
-	0x28, 0x04, 0x52, 0x0e, 0x72, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x48, 0x65, 0x69, 0x67,
-	0x68, 0x74, 0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72,
-	0x22, 0x35, 0x0a, 0x17, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69,
-	0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x63,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x32, 0xe0, 0x01, 0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12,
-	0x68, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12,
+	0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64, 0x12, 0x4c, 0x0a,
+	0x0f, 0x63, 0x6f, 0x6e, 0x73, 0x65, 0x6e, 0x73, 0x75, 0x73, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x65,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x6e, 0x73, 0x65, 0x6e, 0x73, 0x75, 0x73,
+	0x53, 0x74, 0x61, 0x74, 0x65, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0e, 0x63, 0x6f, 0x6e,
+	0x73, 0x65, 0x6e, 0x73, 0x75, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x46, 0x0a, 0x0d, 0x76,
+	0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x73, 0x65, 0x74, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x74, 0x79, 0x70,
+	0x65, 0x73, 0x2e, 0x56, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x42,
+	0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0c, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x6f, 0x72,
+	0x53, 0x65, 0x74, 0x12, 0x29, 0x0a, 0x10, 0x75, 0x6e, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e, 0x67,
+	0x5f, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0f, 0x75,
+	0x6e, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x12, 0x27,
+	0x0a, 0x0f, 0x72, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x68, 0x65, 0x69, 0x67, 0x68,
+	0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0e, 0x72, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f,
+	0x6e, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74, 0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72,
+	0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x36, 0x0a, 0x17, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x1b, 0x0a, 0x09, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x32, 0xe0, 0x01,
+	0x0a, 0x03, 0x4d, 0x73, 0x67, 0x12, 0x68, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x27, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
+	0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4d,
+	0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x2f,
+	0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72,
+	0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x68, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x12,
 	0x27, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f,
-	0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61,
-	0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x2f, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x1a, 0x2f, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
 	0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76,
-	0x31, 0x2e, 0x4d, 0x73, 0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x68, 0x0a, 0x0c, 0x43, 0x72, 0x65,
-	0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x12, 0x27, 0x2e, 0x6e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e,
-	0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65,
-	0x6e, 0x74, 0x1a, 0x2f, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e,
-	0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x73, 0x67, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01, 0x42, 0xe3, 0x01, 0x0a, 0x1a, 0x63,
-	0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74,
-	0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x42, 0x07, 0x54, 0x78, 0x50, 0x72, 0x6f,
-	0x74, 0x6f, 0x50, 0x01, 0x5a, 0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f,
-	0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6d, 0x6f, 0x6e, 0x69,
-	0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2f, 0x76, 0x31, 0x3b, 0x6d, 0x6f, 0x6e, 0x69, 0x74,
-	0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4d, 0x58, 0xaa, 0x02,
-	0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72,
-	0x69, 0x6e, 0x67, 0x63, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72,
-	0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x5c, 0x56, 0x31,
-	0xe2, 0x02, 0x22, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74,
-	0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74,
-	0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x18, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a,
-	0x3a, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x3a, 0x3a, 0x56, 0x31,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x31, 0x2e, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x1a, 0x05, 0x80, 0xe7, 0xb0, 0x2a, 0x01,
+	0x42, 0xe3, 0x01, 0x0a, 0x1a, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x42,
+	0x07, 0x54, 0x78, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x42, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72,
+	0x6b, 0x2f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2f, 0x76, 0x31,
+	0x3b, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x76, 0x31, 0xa2, 0x02,
+	0x03, 0x4e, 0x4d, 0x58, 0xaa, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4d,
+	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x16,
+	0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69,
+	0x6e, 0x67, 0x63, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x22, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x5c, 0x56, 0x31, 0x5c,
+	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x18, 0x4e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e,
+	0x67, 0x63, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2322,8 +2322,8 @@ var file_network_monitoringc_v1_tx_proto_goTypes = []interface{}{
 }
 var file_network_monitoringc_v1_tx_proto_depIdxs = []int32{
 	4, // 0: network.monitoringc.v1.MsgUpdateParams.params:type_name -> network.monitoringc.v1.Params
-	5, // 1: network.monitoringc.v1.MsgCreateClient.consensusState:type_name -> network.types.ConsensusState
-	6, // 2: network.monitoringc.v1.MsgCreateClient.validatorSet:type_name -> network.types.ValidatorSet
+	5, // 1: network.monitoringc.v1.MsgCreateClient.consensus_state:type_name -> network.types.ConsensusState
+	6, // 2: network.monitoringc.v1.MsgCreateClient.validator_set:type_name -> network.types.ValidatorSet
 	0, // 3: network.monitoringc.v1.Msg.UpdateParams:input_type -> network.monitoringc.v1.MsgUpdateParams
 	2, // 4: network.monitoringc.v1.Msg.CreateClient:input_type -> network.monitoringc.v1.MsgCreateClient
 	1, // 5: network.monitoringc.v1.Msg.UpdateParams:output_type -> network.monitoringc.v1.MsgUpdateParamsResponse

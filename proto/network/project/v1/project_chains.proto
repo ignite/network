@@ -4,6 +4,6 @@ package network.project.v1;
 option go_package = "github.com/ignite/network/x/project/types";
 
 message ProjectChains {
-  uint64 projectID = 1;
+  uint64 project_id = 1;
   repeated uint64 chains = 2;
 }

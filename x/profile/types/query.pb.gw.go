@@ -62,15 +62,15 @@ func request_Query_GetCoordinator_0(ctx context.Context, marshaler runtime.Marsh
 		_   = err
 	)
 
-	val, ok = pathParams["ID"]
+	val, ok = pathParams["coordinator_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "coordinator_id")
 	}
 
-	protoReq.ID, err = runtime.Uint64(val)
+	protoReq.CoordinatorId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "coordinator_id", err)
 	}
 
 	msg, err := client.GetCoordinator(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -89,15 +89,15 @@ func local_request_Query_GetCoordinator_0(ctx context.Context, marshaler runtime
 		_   = err
 	)
 
-	val, ok = pathParams["ID"]
+	val, ok = pathParams["coordinator_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "ID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "coordinator_id")
 	}
 
-	protoReq.ID, err = runtime.Uint64(val)
+	protoReq.CoordinatorId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "ID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "coordinator_id", err)
 	}
 
 	msg, err := server.GetCoordinator(ctx, &protoReq)
@@ -296,15 +296,15 @@ func request_Query_GetValidatorByOperatorAddress_0(ctx context.Context, marshale
 		_   = err
 	)
 
-	val, ok = pathParams["operatorAddress"]
+	val, ok = pathParams["operator_address"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operatorAddress")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operator_address")
 	}
 
 	protoReq.OperatorAddress, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operatorAddress", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operator_address", err)
 	}
 
 	msg, err := client.GetValidatorByOperatorAddress(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -323,15 +323,15 @@ func local_request_Query_GetValidatorByOperatorAddress_0(ctx context.Context, ma
 		_   = err
 	)
 
-	val, ok = pathParams["operatorAddress"]
+	val, ok = pathParams["operator_address"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operatorAddress")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operator_address")
 	}
 
 	protoReq.OperatorAddress, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operatorAddress", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operator_address", err)
 	}
 
 	msg, err := server.GetValidatorByOperatorAddress(ctx, &protoReq)
@@ -693,7 +693,7 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 var (
 	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"ignite", "network", "profile", "v1", "params"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_GetCoordinator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "profile", "coordinator", "ID"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetCoordinator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "profile", "coordinator", "coordinator_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
 	pattern_Query_ListCoordinator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"ignite", "network", "profile", "coordinator"}, "", runtime.AssumeColonVerbOpt(false)))
 
@@ -703,7 +703,7 @@ var (
 
 	pattern_Query_GetCoordinatorByAddress_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "profile", "get_coordinator_by_address", "address"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_GetValidatorByOperatorAddress_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "profile", "get_validator_by_operator_address", "operatorAddress"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetValidatorByOperatorAddress_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "profile", "get_validator_by_operator_address", "operator_address"}, "", runtime.AssumeColonVerbOpt(false)))
 )
 
 var (

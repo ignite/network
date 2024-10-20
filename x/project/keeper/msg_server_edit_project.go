@@ -36,9 +36,9 @@ func (k msgServer) EditProject(ctx context.Context, msg *types.MsgEditProject) (
 		)
 	}
 
-	project, err := k.GetProject(ctx, msg.ProjectID)
+	project, err := k.GetProject(ctx, msg.ProjectId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectId)
 	}
 
 	// Get the coordinator ID associated to the sender address
@@ -47,10 +47,10 @@ func (k msgServer) EditProject(ctx context.Context, msg *types.MsgEditProject) (
 		return nil, err
 	}
 
-	if project.CoordinatorID != coordID {
+	if project.CoordinatorId != coordID {
 		return nil, sdkerrors.Wrap(profiletypes.ErrCoordinatorInvalid, fmt.Sprintf(
 			"coordinator of the project is %d",
-			project.CoordinatorID,
+			project.CoordinatorId,
 		))
 	}
 
@@ -62,12 +62,12 @@ func (k msgServer) EditProject(ctx context.Context, msg *types.MsgEditProject) (
 		project.Metadata = msg.Metadata
 	}
 
-	if err := k.Project.Set(ctx, project.ProjectID, project); err != nil {
+	if err := k.Project.Set(ctx, project.ProjectId, project); err != nil {
 		return nil, ignterrors.Criticalf("project not set %s", err.Error())
 	}
 
 	return &types.MsgEditProjectResponse{}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(&types.EventProjectInfoUpdated{
-		ProjectID:          project.ProjectID,
+		ProjectId:          project.ProjectId,
 		CoordinatorAddress: msg.Coordinator,
 		ProjectName:        project.ProjectName,
 		Metadata:           project.Metadata,

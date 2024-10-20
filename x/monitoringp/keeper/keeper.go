@@ -78,9 +78,9 @@ func NewKeeper(
 		capabilityScopedFn:  capabilityScopedFn,
 		stakingKeeper:       stakingKeeper,
 		Params:              collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
-		MonitoringInfo:      collections.NewItem(sb, types.MonitoringInfoKey, "monitoringInfo", codec.CollValue[types.MonitoringInfo](cdc)),
-		ConnectionChannelID: collections.NewItem(sb, types.ConnectionChannelIDKey, "connectionChannelID", codec.CollValue[types.ConnectionChannelID](cdc)),
-		ConsumerClientID:    collections.NewItem(sb, types.ConsumerClientIDKey, "consumerClientID", codec.CollValue[types.ConsumerClientID](cdc)),
+		MonitoringInfo:      collections.NewItem(sb, types.MonitoringInfoKey, "monitoring_info", codec.CollValue[types.MonitoringInfo](cdc)),
+		ConnectionChannelID: collections.NewItem(sb, types.ConnectionChannelIDKey, "connection_channel_id", codec.CollValue[types.ConnectionChannelID](cdc)),
+		ConsumerClientID:    collections.NewItem(sb, types.ConsumerClientIDKey, "consumer_client_id", codec.CollValue[types.ConsumerClientID](cdc)),
 		// this line is used by starport scaffolding # collection/instantiate
 	}
 

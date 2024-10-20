@@ -10,26 +10,26 @@ import "network/project/v1/special_allocations.proto";
 option go_package = "github.com/ignite/network/x/project/types";
 
 message Project {
-  uint64 projectID = 1;
-  string projectName = 2;
-  uint64 coordinatorID = 3;
-  int64 createdAt = 4;
-  uint64 mainnetID = 5;
-  bool mainnetInitialized = 6;
-  repeated cosmos.base.v1beta1.Coin totalSupply = 7 [
+  uint64 project_id = 1;
+  string project_name = 2;
+  uint64 coordinator_id = 3;
+  int64 created_at = 4;
+  uint64 mainnet_id = 5;
+  bool mainnet_initialized = 6;
+  repeated cosmos.base.v1beta1.Coin total_supply = 7 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",
     (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
     (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
   ];
-  repeated cosmos.base.v1beta1.Coin allocatedShares = 8 [
+  repeated cosmos.base.v1beta1.Coin allocated_shares = 8 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",
     (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
     (gogoproto.castrepeated) = "Shares"
   ];
-  SpecialAllocations specialAllocations = 9 [(gogoproto.nullable) = false];
+  SpecialAllocations special_allocations = 9 [(gogoproto.nullable) = false];
   bytes metadata = 10;
 }

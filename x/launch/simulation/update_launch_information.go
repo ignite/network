@@ -30,7 +30,7 @@ func SimulateMsgUpdateLaunchInformation(
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "chain not found"), nil, nil
 		}
 
-		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, chain.LaunchID)
+		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, chain.LaunchId)
 		if err != nil {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "coordinator account not found"), nil, nil
 		}
@@ -38,7 +38,7 @@ func SimulateMsgUpdateLaunchInformation(
 		modify := r.Intn(100) < 50
 		msg = sample.MsgUpdateLaunchInformation(r,
 			simAccount.Address.String(),
-			chain.LaunchID,
+			chain.LaunchId,
 			modify,
 			!modify,
 			modify,

@@ -17,9 +17,9 @@ import (
 func createNProjectChains(keeper keeper.Keeper, ctx context.Context, n int) []types.ProjectChains {
 	items := make([]types.ProjectChains, n)
 	for i := range items {
-		items[i].ProjectID = uint64(i)
+		items[i].ProjectId = uint64(i)
 
-		_ = keeper.ProjectChains.Set(ctx, items[i].ProjectID, items[i])
+		_ = keeper.ProjectChains.Set(ctx, items[i].ProjectId, items[i])
 	}
 	return items
 }
@@ -37,21 +37,21 @@ func TestProjectChainsQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryGetProjectChainsRequest{
-				ProjectID: msgs[0].ProjectID,
+				ProjectId: msgs[0].ProjectId,
 			},
 			response: &types.QueryGetProjectChainsResponse{ProjectChains: msgs[0]},
 		},
 		{
 			desc: "Second",
 			request: &types.QueryGetProjectChainsRequest{
-				ProjectID: msgs[1].ProjectID,
+				ProjectId: msgs[1].ProjectId,
 			},
 			response: &types.QueryGetProjectChainsResponse{ProjectChains: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
 			request: &types.QueryGetProjectChainsRequest{
-				ProjectID: 100000,
+				ProjectId: 100000,
 			},
 			err: status.Error(codes.NotFound, "not found"),
 		},

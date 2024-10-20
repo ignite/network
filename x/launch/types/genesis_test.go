@@ -23,56 +23,56 @@ func TestGenesisState_Validate(t *testing.T) {
 		// Those are samples we can use for each fields when they are not the one to test
 		sampleChains = []types.Chain{
 			{
-				LaunchID:       launchID1,
-				GenesisChainID: genesisChainID,
+				LaunchId:       launchID1,
+				GenesisChainId: genesisChainID,
 			},
 			{
-				LaunchID:       launchID2,
-				GenesisChainID: genesisChainID,
+				LaunchId:       launchID2,
+				GenesisChainId: genesisChainID,
 			},
 		}
 		sampleGenesisAccounts = []types.GenesisAccount{
 			{
-				LaunchID: launchID1,
+				LaunchId: launchID1,
 				Address:  addr1,
 			},
 			{
-				LaunchID: launchID1,
+				LaunchId: launchID1,
 				Address:  addr2,
 			},
 			{
-				LaunchID: launchID2,
+				LaunchId: launchID2,
 				Address:  addr1,
 			},
 			{
-				LaunchID: launchID2,
+				LaunchId: launchID2,
 				Address:  addr2,
 			},
 		}
 		sampleVestingAccounts = []types.VestingAccount{
 			{
-				LaunchID: launchID1,
+				LaunchId: launchID1,
 				Address:  vestingAddress,
 			},
 			{
-				LaunchID: launchID2,
+				LaunchId: launchID2,
 				Address:  vestingAddress,
 			},
 		}
 		sampleGenesisValidators = []types.GenesisValidator{genesisValidator}
 		sampleRequests          = []types.Request{
 			{
-				LaunchID:  launchID1,
-				RequestID: 0,
+				LaunchId:  launchID1,
+				RequestId: 0,
 			},
 			{
-				LaunchID:  launchID1,
-				RequestID: 1,
+				LaunchId:  launchID1,
+				RequestId: 1,
 			},
 		}
 		sampleRequestCounters = []types.RequestCounter{
 			{
-				LaunchID: launchID1,
+				LaunchId: launchID1,
 				Counter:  10,
 			},
 		}
@@ -109,8 +109,8 @@ func TestGenesisState_Validate(t *testing.T) {
 			genState: &types.GenesisState{
 				ChainList: []types.Chain{
 					{
-						LaunchID:       launchID1,
-						GenesisChainID: "invalid_chain_id",
+						LaunchId:       launchID1,
+						GenesisChainId: "invalid_chain_id",
 					},
 				},
 				ChainCount: 10,
@@ -122,12 +122,12 @@ func TestGenesisState_Validate(t *testing.T) {
 			genState: &types.GenesisState{
 				ChainList: []types.Chain{
 					{
-						LaunchID:       launchID1,
-						GenesisChainID: genesisChainID,
+						LaunchId:       launchID1,
+						GenesisChainId: genesisChainID,
 					},
 					{
-						LaunchID:       launchID1,
-						GenesisChainID: genesisChainID,
+						LaunchId:       launchID1,
+						GenesisChainId: genesisChainID,
 					},
 				},
 				ChainCount: 10,
@@ -140,8 +140,8 @@ func TestGenesisState_Validate(t *testing.T) {
 			genState: &types.GenesisState{
 				ChainList: []types.Chain{
 					{
-						LaunchID:       12,
-						GenesisChainID: genesisChainID,
+						LaunchId:       12,
+						GenesisChainId: genesisChainID,
 					},
 				},
 				ChainCount: 10,
@@ -156,11 +156,11 @@ func TestGenesisState_Validate(t *testing.T) {
 				ChainCount: 10,
 				GenesisAccountList: []types.GenesisAccount{
 					{
-						LaunchID: launchID1,
+						LaunchId: launchID1,
 						Address:  addr1,
 					},
 					{
-						LaunchID: launchID1,
+						LaunchId: launchID1,
 						Address:  addr1,
 					},
 				},
@@ -175,7 +175,7 @@ func TestGenesisState_Validate(t *testing.T) {
 				ChainCount: 10,
 				GenesisAccountList: []types.GenesisAccount{
 					{
-						LaunchID: noExistLaunchID,
+						LaunchId: noExistLaunchID,
 						Address:  addr1,
 					},
 				},
@@ -190,11 +190,11 @@ func TestGenesisState_Validate(t *testing.T) {
 				ChainCount: 10,
 				VestingAccountList: []types.VestingAccount{
 					{
-						LaunchID: launchID1,
+						LaunchId: launchID1,
 						Address:  vestingAddress,
 					},
 					{
-						LaunchID: launchID1,
+						LaunchId: launchID1,
 						Address:  vestingAddress,
 					},
 				},
@@ -209,7 +209,7 @@ func TestGenesisState_Validate(t *testing.T) {
 				ChainCount: 10,
 				VestingAccountList: []types.VestingAccount{
 					{
-						LaunchID: noExistLaunchID,
+						LaunchId: noExistLaunchID,
 						Address:  vestingAddress,
 					},
 				},
@@ -223,13 +223,13 @@ func TestGenesisState_Validate(t *testing.T) {
 				ChainCount: 10,
 				GenesisAccountList: []types.GenesisAccount{
 					{
-						LaunchID: launchID1,
+						LaunchId: launchID1,
 						Address:  addr1,
 					},
 				},
 				VestingAccountList: []types.VestingAccount{
 					{
-						LaunchID: launchID1,
+						LaunchId: launchID1,
 						Address:  addr1,
 					},
 				},
@@ -282,12 +282,12 @@ func TestGenesisState_Validate(t *testing.T) {
 				RequestCounters: sampleRequestCounters,
 				RequestList: []types.Request{
 					{
-						LaunchID:  launchID1,
-						RequestID: 0,
+						LaunchId:  launchID1,
+						RequestId: 0,
 					},
 					{
-						LaunchID:  launchID1,
-						RequestID: 0,
+						LaunchId:  launchID1,
+						RequestId: 0,
 					},
 				},
 				Params: types.DefaultParams(),
@@ -302,8 +302,8 @@ func TestGenesisState_Validate(t *testing.T) {
 				RequestCounters: sampleRequestCounters,
 				RequestList: []types.Request{
 					{
-						LaunchID:  noExistLaunchID,
-						RequestID: 0,
+						LaunchId:  noExistLaunchID,
+						RequestId: 0,
 					},
 				},
 				Params: types.DefaultParams(),
@@ -317,14 +317,14 @@ func TestGenesisState_Validate(t *testing.T) {
 				ChainCount: 10,
 				RequestCounters: []types.RequestCounter{
 					{
-						LaunchID: launchID2,
+						LaunchId: launchID2,
 						Counter:  1,
 					},
 				},
 				RequestList: []types.Request{
 					{
-						LaunchID:  launchID1,
-						RequestID: 0,
+						LaunchId:  launchID1,
+						RequestId: 0,
 					},
 				},
 				Params: types.DefaultParams(),
@@ -338,11 +338,11 @@ func TestGenesisState_Validate(t *testing.T) {
 				ChainCount: 10,
 				RequestCounters: []types.RequestCounter{
 					{
-						LaunchID: launchID1,
+						LaunchId: launchID1,
 						Counter:  0,
 					},
 					{
-						LaunchID: launchID1,
+						LaunchId: launchID1,
 						Counter:  1,
 					},
 				},
@@ -357,7 +357,7 @@ func TestGenesisState_Validate(t *testing.T) {
 				ChainCount: 10,
 				RequestCounters: []types.RequestCounter{
 					{
-						LaunchID: noExistLaunchID,
+						LaunchId: noExistLaunchID,
 						Counter:  0,
 					},
 				},
@@ -372,14 +372,14 @@ func TestGenesisState_Validate(t *testing.T) {
 				ChainCount: 10,
 				RequestCounters: []types.RequestCounter{
 					{
-						LaunchID: launchID1,
+						LaunchId: launchID1,
 						Counter:  5,
 					},
 				},
 				RequestList: []types.Request{
 					{
-						LaunchID:  launchID1,
-						RequestID: 10,
+						LaunchId:  launchID1,
+						RequestId: 10,
 					},
 				},
 				Params: types.DefaultParams(),
@@ -397,30 +397,30 @@ func TestGenesisState_Validate(t *testing.T) {
 
 			launchIDMap := make(map[uint64]struct{})
 			for _, elem := range tc.genState.ChainList {
-				launchIDMap[elem.LaunchID] = struct{}{}
+				launchIDMap[elem.LaunchId] = struct{}{}
 			}
 
 			for _, acc := range tc.genState.RequestList {
 				// check if the chain exist for requests
-				_, ok := launchIDMap[acc.LaunchID]
+				_, ok := launchIDMap[acc.LaunchId]
 				require.True(t, ok)
 			}
 
 			for _, acc := range tc.genState.GenesisValidatorList {
 				// check if the chain exist for validators
-				_, ok := launchIDMap[acc.LaunchID]
+				_, ok := launchIDMap[acc.LaunchId]
 				require.True(t, ok)
 			}
 
 			for _, acc := range tc.genState.GenesisAccountList {
 				// check if the chain exist for genesis accounts
-				_, ok := launchIDMap[acc.LaunchID]
+				_, ok := launchIDMap[acc.LaunchId]
 				require.True(t, ok)
 			}
 
 			for _, acc := range tc.genState.VestingAccountList {
 				// check if the chain exist for vesting accounts
-				_, ok := launchIDMap[acc.LaunchID]
+				_, ok := launchIDMap[acc.LaunchId]
 				require.True(t, ok)
 			}
 		})

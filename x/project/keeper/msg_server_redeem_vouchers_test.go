@@ -32,7 +32,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 
 	// Set projects
 	project.AllocatedShares = shares
-	project.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, project)
+	project.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, project)
 	require.NoError(t, err)
 
 	projectMainnetLaunched.MainnetInitialized = true
@@ -40,19 +40,19 @@ func TestMsgRedeemVouchers(t *testing.T) {
 	chainLaunched := sample.Chain(r, 0, 0)
 	chainLaunched.LaunchTriggered = true
 	chainLaunched.IsMainnet = true
-	projectMainnetLaunched.MainnetID, err = tk.LaunchKeeper.AppendChain(ctx, chainLaunched)
+	projectMainnetLaunched.MainnetId, err = tk.LaunchKeeper.AppendChain(ctx, chainLaunched)
 	require.NoError(t, err)
-	projectMainnetLaunched.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetLaunched)
+	projectMainnetLaunched.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetLaunched)
 	require.NoError(t, err)
 
-	vouchers, err := types.SharesToVouchers(shares, project.ProjectID)
+	vouchers, err := types.SharesToVouchers(shares, project.ProjectId)
 	require.NoError(t, err)
 
 	invalidProjectID := uint64(10000)
 	vouchersErr, err := types.SharesToVouchers(shares, invalidProjectID)
 	require.NoError(t, err)
 
-	vouchersMainnet, err := types.SharesToVouchers(shares, projectMainnetLaunched.ProjectID)
+	vouchersMainnet, err := types.SharesToVouchers(shares, projectMainnetLaunched.ProjectId)
 	require.NoError(t, err)
 
 	t.Run("should allow setting test balances", func(t *testing.T) {
@@ -61,8 +61,8 @@ func TestMsgRedeemVouchers(t *testing.T) {
 		err = tk.BankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, addr, vouchers)
 		require.NoError(t, err)
 
-		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(project.ProjectID, existAddr), types.MainnetAccount{
-			ProjectID: project.ProjectID,
+		err = tk.ProjectKeeper.MainnetAccount.Set(ctx, collections.Join(project.ProjectId, existAddr), types.MainnetAccount{
+			ProjectId: project.ProjectId,
 			Address:   existAddr.String(),
 			Shares:    shares,
 		})
@@ -83,7 +83,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    existAddr.String(),
 				Account:   existAddr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[0]),
 			},
 		},
@@ -92,7 +92,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    existAddr.String(),
 				Account:   existAddr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[1]),
 			},
 		},
@@ -101,7 +101,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    existAddr.String(),
 				Account:   existAddr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[2]),
 			},
 		},
@@ -110,7 +110,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    addr.String(),
 				Account:   sample.Address(r),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  vouchers,
 			},
 		},
@@ -119,7 +119,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    addr.String(),
 				Account:   addr.String(),
-				ProjectID: invalidProjectID,
+				ProjectId: invalidProjectID,
 				Vouchers:  vouchersErr,
 			},
 			err: types.ErrProjectNotFound,
@@ -129,7 +129,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    addr.String(),
 				Account:   addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  vouchersErr,
 			},
 			err: types.ErrNoMatchVouchers,
@@ -139,7 +139,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    "invalid_address",
 				Account:   addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  vouchers,
 			},
 			err: types.ErrInvalidSigner,
@@ -149,7 +149,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    addr.String(),
 				Account:   addr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  vouchersTooBig,
 			},
 			err: types.ErrInsufficientVouchers,
@@ -160,7 +160,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    existAddr.String(),
 				Account:   existAddr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  vouchers,
 			},
 			err: types.ErrInsufficientVouchers,
@@ -170,7 +170,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    existAddr.String(),
 				Account:   existAddr.String(),
-				ProjectID: project.ProjectID,
+				ProjectId: project.ProjectId,
 				Vouchers:  sdk.NewCoins(vouchers[0]),
 			},
 			err: types.ErrInsufficientVouchers,
@@ -180,7 +180,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			msg: types.MsgRedeemVouchers{
 				Sender:    addr.String(),
 				Account:   addr.String(),
-				ProjectID: projectMainnetLaunched.ProjectID,
+				ProjectId: projectMainnetLaunched.ProjectId,
 				Vouchers:  vouchersMainnet,
 			},
 			err: types.ErrMainnetLaunchTriggered,
@@ -197,7 +197,7 @@ func TestMsgRedeemVouchers(t *testing.T) {
 				accountAddr, err = tk.ProjectKeeper.AddressCodec().StringToBytes(tc.msg.Account)
 				require.NoError(t, err)
 
-				previousAccount, err = tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectID, accountAddr)
+				previousAccount, err = tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectId, accountAddr)
 				if err != nil {
 					require.ErrorIs(t, err, types.ErrMainnetAccountNotFound)
 					foundAccount = false
@@ -217,10 +217,10 @@ func TestMsgRedeemVouchers(t *testing.T) {
 			}
 			require.NoError(t, err)
 
-			shares, err := types.VouchersToShares(tc.msg.Vouchers, tc.msg.ProjectID)
+			shares, err := types.VouchersToShares(tc.msg.Vouchers, tc.msg.ProjectId)
 			require.NoError(t, err)
 
-			account, err := tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectID, accountAddr)
+			account, err := tk.ProjectKeeper.GetMainnetAccount(ctx, tc.msg.ProjectId, accountAddr)
 			require.NoError(t, err)
 
 			// Check account shares

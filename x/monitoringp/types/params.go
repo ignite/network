@@ -25,7 +25,7 @@ func NewParams(
 	return Params{
 		LastBlockHeight:         lastBlockHeight,
 		ConsumerConsensusState:  ccs,
-		ConsumerChainID:         consumerChainID,
+		ConsumerChainId:         consumerChainID,
 		ConsumerUnbondingPeriod: consumerUnbondingpPeriod,
 		ConsumerRevisionHeight:  consumerRevisionHeight,
 	}
@@ -48,7 +48,7 @@ func (p Params) Validate() error {
 	if err := validateLastBlockHeight(p.LastBlockHeight); err != nil {
 		return err
 	}
-	if err := validateConsumerChainID(p.ConsumerChainID); err != nil {
+	if err := validateConsumerChainID(p.ConsumerChainId); err != nil {
 		return err
 	}
 	if err := validateConsumerConsensusState(p.ConsumerConsensusState); err != nil {

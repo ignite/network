@@ -27,7 +27,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "get-coordinator [id]",
 					Short:          "Gets a Coordinator by id",
 					Alias:          []string{"show-coordinator"},
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "ID"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "coordinator_id"}},
 				},
 				{
 					RpcMethod: "ListValidator",
@@ -51,7 +51,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "GetValidatorByOperatorAddress",
 					Use:            "get-validator-by-operator-address [operatorAddress]",
 					Short:          "Query GetValidatorByOperatorAddress",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "operatorAddress"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "operator_address"}},
 				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
@@ -85,7 +85,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "UpdateCoordinatorAddress",
 					Use:            "update-coordinator-address [new-address]",
 					Short:          "Send a UpdateCoordinatorAddress tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "newAddress"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "new_address"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

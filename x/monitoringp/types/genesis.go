@@ -5,10 +5,10 @@ import host "github.com/cosmos/ibc-go/v8/modules/core/24-host"
 // DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		PortID:              PortID,
+		PortId:              PortID,
 		MonitoringInfo:      nil,
-		ConnectionChannelID: nil,
-		ConsumerClientID:    nil,
+		ConnectionChannelId: nil,
+		ConsumerClientId:    nil,
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -17,7 +17,7 @@ func DefaultGenesis() *GenesisState {
 // Validate performs basic genesis state validation returning an error upon any
 // failure.
 func (gs GenesisState) Validate() error {
-	if err := host.PortIdentifierValidator(gs.PortID); err != nil {
+	if err := host.PortIdentifierValidator(gs.PortId); err != nil {
 		return err
 	}
 	// this line is used by starport scaffolding # genesis/types/validate

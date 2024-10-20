@@ -33,7 +33,7 @@ func (gs GenesisState) Validate() error {
 	auctionUsedAllocationsSum := make(map[string]sdkmath.Int)
 	for _, elem := range gs.AuctionUsedAllocationsList {
 		address := elem.Address
-		index := fmt.Sprint(elem.Address, elem.AuctionID)
+		index := fmt.Sprint(elem.Address, elem.AuctionId)
 		_, ok := auctionUsedAllocationsSum[address]
 		if !ok {
 			auctionUsedAllocationsSum[address] = sdkmath.ZeroInt()

@@ -28,9 +28,9 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type EventProjectCreated struct {
-	ProjectID          uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	CoordinatorID      uint64 `protobuf:"varint,3,opt,name=coordinatorID,proto3" json:"coordinatorID,omitempty"`
+	ProjectId          uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	CoordinatorId      uint64 `protobuf:"varint,3,opt,name=coordinator_id,json=coordinatorId,proto3" json:"coordinator_id,omitempty"`
 }
 
 func (m *EventProjectCreated) Reset()         { *m = EventProjectCreated{} }
@@ -66,9 +66,9 @@ func (m *EventProjectCreated) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventProjectCreated proto.InternalMessageInfo
 
-func (m *EventProjectCreated) GetProjectID() uint64 {
+func (m *EventProjectCreated) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -80,16 +80,16 @@ func (m *EventProjectCreated) GetCoordinatorAddress() string {
 	return ""
 }
 
-func (m *EventProjectCreated) GetCoordinatorID() uint64 {
+func (m *EventProjectCreated) GetCoordinatorId() uint64 {
 	if m != nil {
-		return m.CoordinatorID
+		return m.CoordinatorId
 	}
 	return 0
 }
 
 type EventProjectChainAdded struct {
-	ProjectID uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	LaunchID  uint64 `protobuf:"varint,2,opt,name=launchID,proto3" json:"launchID,omitempty"`
+	ProjectId uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	LaunchId  uint64 `protobuf:"varint,2,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
 }
 
 func (m *EventProjectChainAdded) Reset()         { *m = EventProjectChainAdded{} }
@@ -125,24 +125,24 @@ func (m *EventProjectChainAdded) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventProjectChainAdded proto.InternalMessageInfo
 
-func (m *EventProjectChainAdded) GetProjectID() uint64 {
+func (m *EventProjectChainAdded) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
 
-func (m *EventProjectChainAdded) GetLaunchID() uint64 {
+func (m *EventProjectChainAdded) GetLaunchId() uint64 {
 	if m != nil {
-		return m.LaunchID
+		return m.LaunchId
 	}
 	return 0
 }
 
 type EventProjectInfoUpdated struct {
-	ProjectID          uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	ProjectName        string `protobuf:"bytes,3,opt,name=projectName,proto3" json:"projectName,omitempty"`
+	ProjectId          uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	ProjectName        string `protobuf:"bytes,3,opt,name=project_name,json=projectName,proto3" json:"project_name,omitempty"`
 	Metadata           []byte `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
 }
 
@@ -179,9 +179,9 @@ func (m *EventProjectInfoUpdated) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventProjectInfoUpdated proto.InternalMessageInfo
 
-func (m *EventProjectInfoUpdated) GetProjectID() uint64 {
+func (m *EventProjectInfoUpdated) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -208,9 +208,9 @@ func (m *EventProjectInfoUpdated) GetMetadata() []byte {
 }
 
 type EventProjectSharesUpdated struct {
-	ProjectID          uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	AllocatedShares    Shares `protobuf:"bytes,3,rep,name=allocatedShares,proto3,casttype=github.com/cosmos/cosmos-sdk/types.Coin,castrepeated=Shares" json:"allocatedShares"`
+	ProjectId          uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	AllocatedShares    Shares `protobuf:"bytes,3,rep,name=allocated_shares,json=allocatedShares,proto3,casttype=github.com/cosmos/cosmos-sdk/types.Coin,castrepeated=Shares" json:"allocated_shares"`
 }
 
 func (m *EventProjectSharesUpdated) Reset()         { *m = EventProjectSharesUpdated{} }
@@ -246,9 +246,9 @@ func (m *EventProjectSharesUpdated) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventProjectSharesUpdated proto.InternalMessageInfo
 
-func (m *EventProjectSharesUpdated) GetProjectID() uint64 {
+func (m *EventProjectSharesUpdated) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -268,9 +268,9 @@ func (m *EventProjectSharesUpdated) GetAllocatedShares() Shares {
 }
 
 type EventProjectTotalSupplyUpdated struct {
-	ProjectID          uint64                                   `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string                                   `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	TotalSupply        github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,3,rep,name=totalSupply,proto3,casttype=github.com/cosmos/cosmos-sdk/types.Coin,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"totalSupply"`
+	ProjectId          uint64                                   `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string                                   `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	TotalSupply        github_com_cosmos_cosmos_sdk_types.Coins `protobuf:"bytes,3,rep,name=total_supply,json=totalSupply,proto3,casttype=github.com/cosmos/cosmos-sdk/types.Coin,castrepeated=github.com/cosmos/cosmos-sdk/types.Coins" json:"total_supply"`
 }
 
 func (m *EventProjectTotalSupplyUpdated) Reset()         { *m = EventProjectTotalSupplyUpdated{} }
@@ -306,9 +306,9 @@ func (m *EventProjectTotalSupplyUpdated) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventProjectTotalSupplyUpdated proto.InternalMessageInfo
 
-func (m *EventProjectTotalSupplyUpdated) GetProjectID() uint64 {
+func (m *EventProjectTotalSupplyUpdated) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -328,9 +328,9 @@ func (m *EventProjectTotalSupplyUpdated) GetTotalSupply() github_com_cosmos_cosm
 }
 
 type EventProjectMainnetInitialized struct {
-	ProjectID          uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinatorAddress,proto3" json:"coordinatorAddress,omitempty"`
-	MainnetID          uint64 `protobuf:"varint,3,opt,name=mainnetID,proto3" json:"mainnetID,omitempty"`
+	ProjectId          uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CoordinatorAddress string `protobuf:"bytes,2,opt,name=coordinator_address,json=coordinatorAddress,proto3" json:"coordinator_address,omitempty"`
+	MainnetId          uint64 `protobuf:"varint,3,opt,name=mainnet_id,json=mainnetId,proto3" json:"mainnet_id,omitempty"`
 }
 
 func (m *EventProjectMainnetInitialized) Reset()         { *m = EventProjectMainnetInitialized{} }
@@ -366,9 +366,9 @@ func (m *EventProjectMainnetInitialized) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventProjectMainnetInitialized proto.InternalMessageInfo
 
-func (m *EventProjectMainnetInitialized) GetProjectID() uint64 {
+func (m *EventProjectMainnetInitialized) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -380,15 +380,15 @@ func (m *EventProjectMainnetInitialized) GetCoordinatorAddress() string {
 	return ""
 }
 
-func (m *EventProjectMainnetInitialized) GetMainnetID() uint64 {
+func (m *EventProjectMainnetInitialized) GetMainnetId() uint64 {
 	if m != nil {
-		return m.MainnetID
+		return m.MainnetId
 	}
 	return 0
 }
 
 type EventMainnetAccountCreated struct {
-	ProjectID uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address   string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	Shares    Shares `protobuf:"bytes,3,rep,name=shares,proto3,casttype=github.com/cosmos/cosmos-sdk/types.Coin,castrepeated=Shares" json:"shares"`
 }
@@ -426,9 +426,9 @@ func (m *EventMainnetAccountCreated) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventMainnetAccountCreated proto.InternalMessageInfo
 
-func (m *EventMainnetAccountCreated) GetProjectID() uint64 {
+func (m *EventMainnetAccountCreated) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -448,7 +448,7 @@ func (m *EventMainnetAccountCreated) GetShares() Shares {
 }
 
 type EventMainnetAccountUpdated struct {
-	ProjectID uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address   string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 	Shares    Shares `protobuf:"bytes,3,rep,name=shares,proto3,casttype=github.com/cosmos/cosmos-sdk/types.Coin,castrepeated=Shares" json:"shares"`
 }
@@ -486,9 +486,9 @@ func (m *EventMainnetAccountUpdated) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventMainnetAccountUpdated proto.InternalMessageInfo
 
-func (m *EventMainnetAccountUpdated) GetProjectID() uint64 {
+func (m *EventMainnetAccountUpdated) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -508,7 +508,7 @@ func (m *EventMainnetAccountUpdated) GetShares() Shares {
 }
 
 type EventMainnetAccountRemoved struct {
-	ProjectID uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address   string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
 }
 
@@ -545,9 +545,9 @@ func (m *EventMainnetAccountRemoved) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventMainnetAccountRemoved proto.InternalMessageInfo
 
-func (m *EventMainnetAccountRemoved) GetProjectID() uint64 {
+func (m *EventMainnetAccountRemoved) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -560,9 +560,9 @@ func (m *EventMainnetAccountRemoved) GetAddress() string {
 }
 
 type EventMainnetVestingAccountCreated struct {
-	ProjectID      uint64              `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId      uint64              `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address        string              `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
-	VestingOptions ShareVestingOptions `protobuf:"bytes,3,opt,name=vestingOptions,proto3" json:"vestingOptions"`
+	VestingOptions ShareVestingOptions `protobuf:"bytes,3,opt,name=vesting_options,json=vestingOptions,proto3" json:"vesting_options"`
 }
 
 func (m *EventMainnetVestingAccountCreated) Reset()         { *m = EventMainnetVestingAccountCreated{} }
@@ -598,9 +598,9 @@ func (m *EventMainnetVestingAccountCreated) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventMainnetVestingAccountCreated proto.InternalMessageInfo
 
-func (m *EventMainnetVestingAccountCreated) GetProjectID() uint64 {
+func (m *EventMainnetVestingAccountCreated) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -620,9 +620,9 @@ func (m *EventMainnetVestingAccountCreated) GetVestingOptions() ShareVestingOpti
 }
 
 type EventMainnetVestingAccountUpdated struct {
-	ProjectID      uint64              `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
+	ProjectId      uint64              `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	Address        string              `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
-	VestingOptions ShareVestingOptions `protobuf:"bytes,3,opt,name=vestingOptions,proto3" json:"vestingOptions"`
+	VestingOptions ShareVestingOptions `protobuf:"bytes,3,opt,name=vesting_options,json=vestingOptions,proto3" json:"vesting_options"`
 }
 
 func (m *EventMainnetVestingAccountUpdated) Reset()         { *m = EventMainnetVestingAccountUpdated{} }
@@ -658,9 +658,9 @@ func (m *EventMainnetVestingAccountUpdated) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventMainnetVestingAccountUpdated proto.InternalMessageInfo
 
-func (m *EventMainnetVestingAccountUpdated) GetProjectID() uint64 {
+func (m *EventMainnetVestingAccountUpdated) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
@@ -680,8 +680,8 @@ func (m *EventMainnetVestingAccountUpdated) GetVestingOptions() ShareVestingOpti
 }
 
 type EventProjectAuctionCreated struct {
-	ProjectID uint64 `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	AuctionID uint64 `protobuf:"varint,2,opt,name=auctionID,proto3" json:"auctionID,omitempty"`
+	ProjectId uint64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	AuctionId uint64 `protobuf:"varint,2,opt,name=auction_id,json=auctionId,proto3" json:"auction_id,omitempty"`
 }
 
 func (m *EventProjectAuctionCreated) Reset()         { *m = EventProjectAuctionCreated{} }
@@ -717,16 +717,16 @@ func (m *EventProjectAuctionCreated) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_EventProjectAuctionCreated proto.InternalMessageInfo
 
-func (m *EventProjectAuctionCreated) GetProjectID() uint64 {
+func (m *EventProjectAuctionCreated) GetProjectId() uint64 {
 	if m != nil {
-		return m.ProjectID
+		return m.ProjectId
 	}
 	return 0
 }
 
-func (m *EventProjectAuctionCreated) GetAuctionID() uint64 {
+func (m *EventProjectAuctionCreated) GetAuctionId() uint64 {
 	if m != nil {
-		return m.AuctionID
+		return m.AuctionId
 	}
 	return 0
 }
@@ -749,51 +749,52 @@ func init() {
 func init() { proto.RegisterFile("network/project/v1/events.proto", fileDescriptor_aee279bbd5727584) }
 
 var fileDescriptor_aee279bbd5727584 = []byte{
-	// 690 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x56, 0x31, 0x6f, 0xd3, 0x40,
-	0x14, 0xce, 0xb5, 0x51, 0x21, 0x97, 0x02, 0xc2, 0x54, 0x90, 0x46, 0x95, 0x63, 0x2c, 0xa4, 0x86,
-	0x4a, 0xb5, 0x95, 0xf2, 0x0b, 0x92, 0x16, 0x89, 0x0c, 0x50, 0xe4, 0xd2, 0x0a, 0xb1, 0x54, 0x17,
-	0xfb, 0x70, 0x8e, 0xda, 0x77, 0xc6, 0x77, 0x31, 0x94, 0x91, 0x5f, 0xc0, 0xc0, 0xd4, 0x15, 0x09,
-	0x21, 0x06, 0xd4, 0x81, 0x85, 0x89, 0xb5, 0x03, 0x43, 0xc5, 0xc4, 0x54, 0x50, 0x3b, 0xf4, 0x07,
-	0xb0, 0x31, 0x21, 0xdb, 0xd7, 0xc4, 0x29, 0xad, 0x1a, 0x86, 0x04, 0xb1, 0x24, 0xb9, 0x77, 0xdf,
-	0xbd, 0xf7, 0x7d, 0xcf, 0x5f, 0xce, 0x0f, 0x56, 0x28, 0x16, 0xcf, 0x58, 0xb8, 0x61, 0x06, 0x21,
-	0x7b, 0x82, 0x6d, 0x61, 0x46, 0x35, 0x13, 0x47, 0x98, 0x0a, 0x6e, 0x04, 0x21, 0x13, 0x4c, 0x51,
-	0x24, 0xc0, 0x90, 0x00, 0x23, 0xaa, 0x95, 0x2f, 0x23, 0x9f, 0x50, 0x66, 0x26, 0x9f, 0x29, 0xac,
-	0xac, 0xda, 0x8c, 0xfb, 0x8c, 0x9b, 0x2d, 0xc4, 0xb1, 0x19, 0xd5, 0x5a, 0x58, 0xa0, 0x9a, 0x69,
-	0x33, 0x42, 0xe5, 0xfe, 0x74, 0xba, 0xbf, 0x9e, 0xac, 0xcc, 0x74, 0x21, 0xb7, 0xa6, 0x5c, 0xe6,
-	0xb2, 0x34, 0x1e, 0xff, 0x92, 0x51, 0xed, 0x04, 0x62, 0x11, 0xe6, 0x82, 0x50, 0x37, 0x45, 0xe8,
-	0x6f, 0x00, 0xbc, 0x72, 0x3b, 0xa6, 0x7a, 0x3f, 0x45, 0x2c, 0x86, 0x18, 0x09, 0xec, 0x28, 0x33,
-	0xb0, 0x20, 0xcf, 0x34, 0x97, 0x4a, 0x40, 0x03, 0xd5, 0xbc, 0xd5, 0x0b, 0x28, 0x77, 0xa0, 0x62,
-	0x33, 0x16, 0x3a, 0x84, 0x22, 0xc1, 0xc2, 0xba, 0xe3, 0x84, 0x98, 0xf3, 0xd2, 0x98, 0x06, 0xaa,
-	0x85, 0x46, 0xe9, 0xeb, 0xc7, 0xf9, 0x29, 0xc9, 0x4d, 0xee, 0xac, 0x88, 0x90, 0x50, 0xd7, 0x3a,
-	0xe1, 0x8c, 0x72, 0x03, 0x5e, 0xc8, 0x44, 0x9b, 0x4b, 0xa5, 0xf1, 0xa4, 0x56, 0x7f, 0x50, 0xb7,
-	0xe0, 0xd5, 0x3e, 0x92, 0x6d, 0x44, 0x68, 0xdd, 0x71, 0xce, 0xe4, 0x59, 0x86, 0xe7, 0x3d, 0xd4,
-	0xa1, 0x76, 0xbb, 0xb9, 0x94, 0xb0, 0xcb, 0x5b, 0xdd, 0xb5, 0xfe, 0x19, 0xc0, 0x6b, 0xd9, 0xa4,
-	0x4d, 0xfa, 0x98, 0xad, 0x06, 0xce, 0x48, 0xd5, 0x6b, 0xb0, 0x28, 0xd3, 0xde, 0x43, 0x3e, 0x4e,
-	0xb4, 0x17, 0xac, 0x6c, 0x28, 0x56, 0xe0, 0x63, 0x81, 0x1c, 0x24, 0x50, 0x29, 0xaf, 0x81, 0xea,
-	0xa4, 0xd5, 0x5d, 0xeb, 0x5b, 0x63, 0x70, 0x3a, 0xab, 0x60, 0xa5, 0x8d, 0x42, 0xcc, 0x47, 0xad,
-	0xe1, 0x35, 0x80, 0x97, 0x90, 0xe7, 0x31, 0x3b, 0xae, 0x9a, 0x52, 0x28, 0x8d, 0x6b, 0xe3, 0xd5,
-	0xe2, 0xc2, 0xb4, 0x21, 0x93, 0xc4, 0x7e, 0x36, 0xa4, 0x9f, 0x8d, 0x45, 0x46, 0x68, 0x63, 0x79,
-	0x67, 0xaf, 0x92, 0xfb, 0xb5, 0x57, 0x99, 0x75, 0x89, 0x68, 0x77, 0x5a, 0x86, 0xcd, 0x7c, 0xe9,
-	0x67, 0xf9, 0x35, 0xcf, 0x9d, 0x0d, 0x53, 0x6c, 0x06, 0x98, 0x27, 0x07, 0xde, 0x7f, 0xaf, 0x4c,
-	0xa4, 0xb9, 0xb7, 0x0e, 0xb7, 0xe7, 0x26, 0x3d, 0xec, 0x22, 0x7b, 0x73, 0x3d, 0xfe, 0x6b, 0xf0,
-	0x77, 0x87, 0xdb, 0x73, 0xc0, 0x3a, 0x4e, 0x41, 0xff, 0x34, 0x06, 0xd5, 0x6c, 0x73, 0x1e, 0x30,
-	0x81, 0xbc, 0x95, 0x4e, 0x10, 0x78, 0x9b, 0xa3, 0xee, 0xd0, 0x07, 0x00, 0x8b, 0xa2, 0x57, 0xfe,
-	0xec, 0xee, 0x3c, 0xfd, 0xfb, 0xee, 0x54, 0x07, 0x84, 0x9e, 0xd6, 0xbf, 0x2c, 0x41, 0xfd, 0x2d,
-	0xe8, 0xef, 0xdd, 0x5d, 0x44, 0x28, 0xc5, 0xa2, 0x49, 0x89, 0x20, 0xc8, 0x23, 0x2f, 0x46, 0xd8,
-	0xbb, 0x19, 0x58, 0xf0, 0x65, 0xf5, 0xa3, 0xbb, 0xa1, 0x17, 0xd0, 0x7f, 0x02, 0x58, 0x4e, 0x88,
-	0x4a, 0x86, 0x75, 0xdb, 0x66, 0x1d, 0x3a, 0xe0, 0x25, 0xb6, 0x00, 0xcf, 0xa1, 0x01, 0x99, 0x1d,
-	0x01, 0x95, 0x97, 0x00, 0x4e, 0xf0, 0x7f, 0xe5, 0x71, 0x59, 0xf9, 0x34, 0xd5, 0x83, 0xd9, 0xfa,
-	0xbf, 0x55, 0x4d, 0x4f, 0x14, 0x6d, 0x61, 0x9f, 0x45, 0xc3, 0x10, 0xad, 0x7f, 0x01, 0xf0, 0x7a,
-	0xb6, 0xe0, 0x5a, 0xfa, 0xde, 0x1c, 0xba, 0xc5, 0x56, 0xe1, 0x45, 0xf9, 0x8a, 0x5e, 0x0e, 0x04,
-	0x61, 0x94, 0x27, 0xb6, 0x2f, 0x2e, 0xcc, 0x1a, 0x7f, 0x0e, 0x11, 0x46, 0xd2, 0xb9, 0xb5, 0x3e,
-	0x78, 0x23, 0x1f, 0x3f, 0x01, 0xeb, 0x58, 0x92, 0x33, 0xe4, 0x0c, 0xcf, 0x3b, 0x43, 0x92, 0xf3,
-	0x50, 0xba, 0x41, 0xde, 0x50, 0xf5, 0x8e, 0x1d, 0xc7, 0x07, 0x7b, 0x2a, 0x33, 0xb0, 0x80, 0x52,
-	0x7c, 0x77, 0x2c, 0xe8, 0x05, 0x1a, 0x8b, 0x3b, 0xfb, 0x2a, 0xd8, 0xdd, 0x57, 0xc1, 0x8f, 0x7d,
-	0x15, 0xbc, 0x3a, 0x50, 0x73, 0xbb, 0x07, 0x6a, 0xee, 0xdb, 0x81, 0x9a, 0x7b, 0x74, 0x33, 0x63,
-	0x69, 0xe2, 0x52, 0x22, 0xb0, 0x79, 0x34, 0x5f, 0x3d, 0xef, 0x4e, 0x58, 0x89, 0xb3, 0x5b, 0x13,
-	0xc9, 0x74, 0x75, 0xeb, 0x77, 0x00, 0x00, 0x00, 0xff, 0xff, 0x3c, 0x21, 0xdc, 0x3a, 0x1a, 0x0a,
-	0x00, 0x00,
+	// 718 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xd4, 0x56, 0x41, 0x4f, 0x13, 0x41,
+	0x14, 0xee, 0x14, 0x82, 0x74, 0x5a, 0x41, 0x17, 0xa2, 0xa5, 0x86, 0x6d, 0xd9, 0xc4, 0x50, 0x49,
+	0xd8, 0x4d, 0xf1, 0x17, 0xb4, 0xc4, 0xc3, 0x1e, 0x14, 0x53, 0x90, 0x03, 0x97, 0x66, 0xba, 0x33,
+	0xb6, 0x23, 0xdd, 0x99, 0xba, 0x33, 0x5d, 0xc5, 0xa3, 0xbf, 0xc0, 0x8b, 0x17, 0x13, 0xaf, 0x46,
+	0xbd, 0xc8, 0xc1, 0xa3, 0x27, 0x4f, 0x9c, 0x0c, 0xf1, 0xe4, 0x09, 0x0d, 0x1c, 0xf8, 0x03, 0x9e,
+	0x3c, 0x99, 0xdd, 0x19, 0x60, 0x89, 0x10, 0xea, 0xa1, 0x35, 0x5e, 0xda, 0xce, 0xf7, 0xde, 0xcc,
+	0xfb, 0xde, 0xb7, 0x5f, 0x67, 0x1f, 0x2c, 0x32, 0x22, 0x9f, 0xf0, 0x60, 0xd3, 0xe9, 0x06, 0xfc,
+	0x11, 0xf1, 0xa4, 0x13, 0x56, 0x1c, 0x12, 0x12, 0x26, 0x85, 0xdd, 0x0d, 0xb8, 0xe4, 0x86, 0xa1,
+	0x13, 0x6c, 0x9d, 0x60, 0x87, 0x95, 0xc2, 0x55, 0xe4, 0x53, 0xc6, 0x9d, 0xf8, 0x53, 0xa5, 0x15,
+	0x4c, 0x8f, 0x0b, 0x9f, 0x0b, 0xa7, 0x89, 0x04, 0x71, 0xc2, 0x4a, 0x93, 0x48, 0x54, 0x71, 0x3c,
+	0x4e, 0x99, 0x8e, 0xcf, 0xa8, 0x78, 0x23, 0x5e, 0x39, 0x6a, 0xa1, 0x43, 0xd3, 0x2d, 0xde, 0xe2,
+	0x0a, 0x8f, 0x7e, 0x69, 0xb4, 0x74, 0x06, 0xb1, 0x90, 0x08, 0x49, 0x59, 0x4b, 0x65, 0x58, 0x6f,
+	0x00, 0x9c, 0xba, 0x13, 0x51, 0xbd, 0xaf, 0x32, 0x96, 0x03, 0x82, 0x24, 0xc1, 0xc6, 0x2c, 0x84,
+	0x7a, 0x4f, 0x83, 0xe2, 0x3c, 0x28, 0x81, 0xf2, 0x68, 0x3d, 0xa3, 0x11, 0x17, 0x1b, 0x2e, 0x9c,
+	0xf2, 0x38, 0x0f, 0x30, 0x65, 0x48, 0xf2, 0xa0, 0x81, 0x30, 0x0e, 0x88, 0x10, 0xf9, 0x74, 0x09,
+	0x94, 0x33, 0xb5, 0xfc, 0xd7, 0x8f, 0x8b, 0xd3, 0x9a, 0x5d, 0x55, 0x45, 0x56, 0x65, 0x40, 0x59,
+	0xab, 0x6e, 0x24, 0x36, 0xe9, 0x88, 0x71, 0x13, 0x4e, 0x24, 0x8f, 0xa2, 0x38, 0x3f, 0x12, 0x57,
+	0xbb, 0x9c, 0x40, 0x5d, 0x6c, 0xad, 0xc1, 0x6b, 0xa7, 0x78, 0xb6, 0x11, 0x65, 0x55, 0x8c, 0x2f,
+	0xa6, 0x7a, 0x03, 0x66, 0x3a, 0xa8, 0xc7, 0xbc, 0x76, 0x14, 0x4d, 0xc7, 0xd1, 0x71, 0x05, 0xb8,
+	0xd8, 0xfa, 0x0c, 0xe0, 0xf5, 0xe4, 0xb1, 0x2e, 0x7b, 0xc8, 0x1f, 0x74, 0xf1, 0x90, 0x25, 0x98,
+	0x83, 0xb9, 0xa3, 0x4a, 0x0c, 0xf9, 0x24, 0x16, 0x20, 0x53, 0xcf, 0x6a, 0xec, 0x1e, 0xf2, 0x89,
+	0x51, 0x80, 0xe3, 0x3e, 0x91, 0x08, 0x23, 0x89, 0xf2, 0xa3, 0x25, 0x50, 0xce, 0xd5, 0x8f, 0xd7,
+	0xd6, 0xeb, 0x34, 0x9c, 0x49, 0x36, 0xb1, 0xda, 0x46, 0x01, 0x11, 0xc3, 0x6f, 0xe3, 0x25, 0x80,
+	0x57, 0x50, 0xa7, 0xc3, 0xbd, 0xa8, 0x6e, 0x43, 0xc4, 0x2c, 0xf2, 0x23, 0xa5, 0x91, 0x72, 0x76,
+	0x69, 0xc6, 0xd6, 0xa7, 0x44, 0xd6, 0xb6, 0xb5, 0xb5, 0xed, 0x65, 0x4e, 0x59, 0x6d, 0x65, 0x67,
+	0xaf, 0x98, 0xfa, 0xb5, 0x57, 0x9c, 0x6f, 0x51, 0xd9, 0xee, 0x35, 0x6d, 0x8f, 0xfb, 0xda, 0xda,
+	0xfa, 0x6b, 0x51, 0xe0, 0x4d, 0x47, 0x6e, 0x75, 0x89, 0x88, 0x37, 0xbc, 0xff, 0x5e, 0x1c, 0x53,
+	0x1d, 0xbe, 0x3a, 0xdc, 0x5e, 0xc8, 0x75, 0x48, 0x0b, 0x79, 0x5b, 0x8d, 0xe8, 0x5f, 0x22, 0xde,
+	0x1e, 0x6e, 0x2f, 0x80, 0xfa, 0xe4, 0x31, 0x07, 0x95, 0x66, 0x7d, 0x4a, 0x43, 0x33, 0xa9, 0xcf,
+	0x1a, 0x97, 0xa8, 0xb3, 0xda, 0xeb, 0x76, 0x3b, 0x5b, 0xc3, 0x17, 0xe9, 0x03, 0x80, 0x39, 0x19,
+	0x11, 0x68, 0x88, 0x98, 0xc1, 0xc5, 0x02, 0x3d, 0xfe, 0x7b, 0x81, 0xca, 0x7d, 0xa6, 0x9e, 0x27,
+	0x61, 0x56, 0x9e, 0x48, 0x64, 0xbd, 0x03, 0xa7, 0xe5, 0xbb, 0x8b, 0x28, 0x63, 0x44, 0xba, 0x8c,
+	0x4a, 0x8a, 0x3a, 0xf4, 0xd9, 0x50, 0xe5, 0x9b, 0x85, 0xd0, 0x57, 0xf5, 0x4f, 0x6e, 0x8a, 0x8c,
+	0x46, 0x5c, 0x6c, 0xfd, 0x04, 0xb0, 0x10, 0x73, 0xd5, 0x24, 0xab, 0x9e, 0xc7, 0x7b, 0xac, 0xdf,
+	0x5b, 0x6d, 0x09, 0x5e, 0xea, 0x97, 0xdb, 0x51, 0xa2, 0xf1, 0x1c, 0xc0, 0xb1, 0x7f, 0x66, 0x75,
+	0x5d, 0xf9, 0xbc, 0xb6, 0xfb, 0x74, 0xf7, 0x7f, 0xdb, 0x36, 0x3f, 0xb3, 0xeb, 0x3a, 0xf1, 0x79,
+	0x38, 0x90, 0xae, 0xad, 0x2f, 0x00, 0xce, 0x25, 0x2b, 0xae, 0xab, 0x77, 0xe9, 0xe0, 0x5d, 0xb6,
+	0x0e, 0x27, 0xf5, 0x7b, 0xbb, 0xc1, 0xbb, 0x92, 0x72, 0x26, 0x62, 0xef, 0x67, 0x97, 0xe6, 0xed,
+	0x3f, 0x47, 0x0b, 0x3b, 0x16, 0x4f, 0x73, 0x5b, 0x51, 0xe9, 0xb5, 0xd1, 0xe8, 0x21, 0xd4, 0x27,
+	0xc2, 0x53, 0xe8, 0x05, 0x0d, 0x0d, 0xd0, 0x3f, 0x83, 0x6a, 0x68, 0x43, 0x5b, 0x42, 0xdf, 0x55,
+	0xd5, 0x9e, 0x17, 0xe1, 0x7d, 0x3e, 0x99, 0x59, 0x08, 0x91, 0xda, 0x70, 0x32, 0x2b, 0x64, 0x34,
+	0xe2, 0xe2, 0xda, 0xf2, 0xce, 0xbe, 0x09, 0x76, 0xf7, 0x4d, 0xf0, 0x63, 0xdf, 0x04, 0x2f, 0x0e,
+	0xcc, 0xd4, 0xee, 0x81, 0x99, 0xfa, 0x76, 0x60, 0xa6, 0x36, 0x6e, 0x25, 0x9c, 0x4d, 0x5b, 0x8c,
+	0x4a, 0xe2, 0x1c, 0x4d, 0x5e, 0x4f, 0x8f, 0x67, 0xaf, 0xd8, 0xe0, 0xcd, 0xb1, 0x78, 0xee, 0xba,
+	0xfd, 0x3b, 0x00, 0x00, 0xff, 0xff, 0xed, 0xf6, 0xfa, 0xa1, 0x34, 0x0a, 0x00, 0x00,
 }
 
 func (m *EventProjectCreated) Marshal() (dAtA []byte, err error) {
@@ -816,8 +817,8 @@ func (m *EventProjectCreated) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.CoordinatorID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.CoordinatorID))
+	if m.CoordinatorId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.CoordinatorId))
 		i--
 		dAtA[i] = 0x18
 	}
@@ -828,8 +829,8 @@ func (m *EventProjectCreated) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -856,13 +857,13 @@ func (m *EventProjectChainAdded) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	_ = i
 	var l int
 	_ = l
-	if m.LaunchID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.LaunchID))
+	if m.LaunchId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.LaunchId))
 		i--
 		dAtA[i] = 0x10
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -910,8 +911,8 @@ func (m *EventProjectInfoUpdated) MarshalToSizedBuffer(dAtA []byte) (int, error)
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -959,8 +960,8 @@ func (m *EventProjectSharesUpdated) MarshalToSizedBuffer(dAtA []byte) (int, erro
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -1008,8 +1009,8 @@ func (m *EventProjectTotalSupplyUpdated) MarshalToSizedBuffer(dAtA []byte) (int,
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -1036,8 +1037,8 @@ func (m *EventProjectMainnetInitialized) MarshalToSizedBuffer(dAtA []byte) (int,
 	_ = i
 	var l int
 	_ = l
-	if m.MainnetID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.MainnetID))
+	if m.MainnetId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.MainnetId))
 		i--
 		dAtA[i] = 0x18
 	}
@@ -1048,8 +1049,8 @@ func (m *EventProjectMainnetInitialized) MarshalToSizedBuffer(dAtA []byte) (int,
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -1097,8 +1098,8 @@ func (m *EventMainnetAccountCreated) MarshalToSizedBuffer(dAtA []byte) (int, err
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -1146,8 +1147,8 @@ func (m *EventMainnetAccountUpdated) MarshalToSizedBuffer(dAtA []byte) (int, err
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -1181,8 +1182,8 @@ func (m *EventMainnetAccountRemoved) MarshalToSizedBuffer(dAtA []byte) (int, err
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -1226,8 +1227,8 @@ func (m *EventMainnetVestingAccountCreated) MarshalToSizedBuffer(dAtA []byte) (i
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -1271,8 +1272,8 @@ func (m *EventMainnetVestingAccountUpdated) MarshalToSizedBuffer(dAtA []byte) (i
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -1299,13 +1300,13 @@ func (m *EventProjectAuctionCreated) MarshalToSizedBuffer(dAtA []byte) (int, err
 	_ = i
 	var l int
 	_ = l
-	if m.AuctionID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.AuctionID))
+	if m.AuctionId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.AuctionId))
 		i--
 		dAtA[i] = 0x10
 	}
-	if m.ProjectID != 0 {
-		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		i = encodeVarintEvents(dAtA, i, uint64(m.ProjectId))
 		i--
 		dAtA[i] = 0x8
 	}
@@ -1329,15 +1330,15 @@ func (m *EventProjectCreated) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.CoordinatorAddress)
 	if l > 0 {
 		n += 1 + l + sovEvents(uint64(l))
 	}
-	if m.CoordinatorID != 0 {
-		n += 1 + sovEvents(uint64(m.CoordinatorID))
+	if m.CoordinatorId != 0 {
+		n += 1 + sovEvents(uint64(m.CoordinatorId))
 	}
 	return n
 }
@@ -1348,11 +1349,11 @@ func (m *EventProjectChainAdded) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
-	if m.LaunchID != 0 {
-		n += 1 + sovEvents(uint64(m.LaunchID))
+	if m.LaunchId != 0 {
+		n += 1 + sovEvents(uint64(m.LaunchId))
 	}
 	return n
 }
@@ -1363,8 +1364,8 @@ func (m *EventProjectInfoUpdated) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.CoordinatorAddress)
 	if l > 0 {
@@ -1387,8 +1388,8 @@ func (m *EventProjectSharesUpdated) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.CoordinatorAddress)
 	if l > 0 {
@@ -1409,8 +1410,8 @@ func (m *EventProjectTotalSupplyUpdated) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.CoordinatorAddress)
 	if l > 0 {
@@ -1431,15 +1432,15 @@ func (m *EventProjectMainnetInitialized) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.CoordinatorAddress)
 	if l > 0 {
 		n += 1 + l + sovEvents(uint64(l))
 	}
-	if m.MainnetID != 0 {
-		n += 1 + sovEvents(uint64(m.MainnetID))
+	if m.MainnetId != 0 {
+		n += 1 + sovEvents(uint64(m.MainnetId))
 	}
 	return n
 }
@@ -1450,8 +1451,8 @@ func (m *EventMainnetAccountCreated) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.Address)
 	if l > 0 {
@@ -1472,8 +1473,8 @@ func (m *EventMainnetAccountUpdated) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.Address)
 	if l > 0 {
@@ -1494,8 +1495,8 @@ func (m *EventMainnetAccountRemoved) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.Address)
 	if l > 0 {
@@ -1510,8 +1511,8 @@ func (m *EventMainnetVestingAccountCreated) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.Address)
 	if l > 0 {
@@ -1528,8 +1529,8 @@ func (m *EventMainnetVestingAccountUpdated) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
 	l = len(m.Address)
 	if l > 0 {
@@ -1546,11 +1547,11 @@ func (m *EventProjectAuctionCreated) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.ProjectID != 0 {
-		n += 1 + sovEvents(uint64(m.ProjectID))
+	if m.ProjectId != 0 {
+		n += 1 + sovEvents(uint64(m.ProjectId))
 	}
-	if m.AuctionID != 0 {
-		n += 1 + sovEvents(uint64(m.AuctionID))
+	if m.AuctionId != 0 {
+		n += 1 + sovEvents(uint64(m.AuctionId))
 	}
 	return n
 }
@@ -1592,9 +1593,9 @@ func (m *EventProjectCreated) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -1604,7 +1605,7 @@ func (m *EventProjectCreated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1643,9 +1644,9 @@ func (m *EventProjectCreated) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 3:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CoordinatorID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field CoordinatorId", wireType)
 			}
-			m.CoordinatorID = 0
+			m.CoordinatorId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -1655,7 +1656,7 @@ func (m *EventProjectCreated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CoordinatorID |= uint64(b&0x7F) << shift
+				m.CoordinatorId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1712,9 +1713,9 @@ func (m *EventProjectChainAdded) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -1724,16 +1725,16 @@ func (m *EventProjectChainAdded) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 		case 2:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 			}
-			m.LaunchID = 0
+			m.LaunchId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -1743,7 +1744,7 @@ func (m *EventProjectChainAdded) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.LaunchID |= uint64(b&0x7F) << shift
+				m.LaunchId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1800,9 +1801,9 @@ func (m *EventProjectInfoUpdated) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -1812,7 +1813,7 @@ func (m *EventProjectInfoUpdated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1967,9 +1968,9 @@ func (m *EventProjectSharesUpdated) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -1979,7 +1980,7 @@ func (m *EventProjectSharesUpdated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2102,9 +2103,9 @@ func (m *EventProjectTotalSupplyUpdated) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -2114,7 +2115,7 @@ func (m *EventProjectTotalSupplyUpdated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2237,9 +2238,9 @@ func (m *EventProjectMainnetInitialized) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -2249,7 +2250,7 @@ func (m *EventProjectMainnetInitialized) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2288,9 +2289,9 @@ func (m *EventProjectMainnetInitialized) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 3:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MainnetID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MainnetId", wireType)
 			}
-			m.MainnetID = 0
+			m.MainnetId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -2300,7 +2301,7 @@ func (m *EventProjectMainnetInitialized) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.MainnetID |= uint64(b&0x7F) << shift
+				m.MainnetId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2357,9 +2358,9 @@ func (m *EventMainnetAccountCreated) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -2369,7 +2370,7 @@ func (m *EventMainnetAccountCreated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2492,9 +2493,9 @@ func (m *EventMainnetAccountUpdated) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -2504,7 +2505,7 @@ func (m *EventMainnetAccountUpdated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2627,9 +2628,9 @@ func (m *EventMainnetAccountRemoved) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -2639,7 +2640,7 @@ func (m *EventMainnetAccountRemoved) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2728,9 +2729,9 @@ func (m *EventMainnetVestingAccountCreated) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -2740,7 +2741,7 @@ func (m *EventMainnetVestingAccountCreated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2862,9 +2863,9 @@ func (m *EventMainnetVestingAccountUpdated) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -2874,7 +2875,7 @@ func (m *EventMainnetVestingAccountUpdated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2996,9 +2997,9 @@ func (m *EventProjectAuctionCreated) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 			}
-			m.ProjectID = 0
+			m.ProjectId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -3008,16 +3009,16 @@ func (m *EventProjectAuctionCreated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProjectID |= uint64(b&0x7F) << shift
+				m.ProjectId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
 		case 2:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AuctionID", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field AuctionId", wireType)
 			}
-			m.AuctionID = 0
+			m.AuctionId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowEvents
@@ -3027,7 +3028,7 @@ func (m *EventProjectAuctionCreated) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.AuctionID |= uint64(b&0x7F) << shift
+				m.AuctionId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}

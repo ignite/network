@@ -320,7 +320,7 @@ func TestKeeper_TransmitSignatures(t *testing.T) {
 			lastBlockHeight:    10,
 			currentBlockHeight: 11,
 			channelIDExist:     true,
-			channelID:          types.ConnectionChannelID{ChannelID: "channelID"},
+			channelID:          types.ConnectionChannelID{ChannelId: "channel_id"},
 			wantErr:            true,
 		},
 		{
@@ -345,7 +345,7 @@ func TestKeeper_TransmitSignatures(t *testing.T) {
 			lastBlockHeight:             10,
 			currentBlockHeight:          11,
 			channelIDExist:              true,
-			channelID:                   types.ConnectionChannelID{ChannelID: "channelID"},
+			channelID:                   types.ConnectionChannelID{ChannelId: "channel_id"},
 			expectedMonitoringInfoFound: false,
 		},
 	}

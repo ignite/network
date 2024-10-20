@@ -18,7 +18,7 @@ func (k Keeper) AppendCoordinator(ctx context.Context, coordinator types.Coordin
 	if err != nil {
 		return 0, ignterrors.Criticalf("failed to get next coordinator sequence %s", err.Error())
 	}
-	coordinator.CoordinatorID = cordinatorID
+	coordinator.CoordinatorId = cordinatorID
 	if err := k.Coordinator.Set(ctx, cordinatorID, coordinator); err != nil {
 		return 0, ignterrors.Criticalf("coordinator not set %s", err.Error())
 	}
@@ -30,7 +30,7 @@ func (k Keeper) CoordinatorIDFromAddress(ctx context.Context, address sdk.AccAdd
 	if errors.Is(err, collections.ErrNotFound) {
 		return 0, types.ErrCoordinatorAddressNotFound
 	}
-	return coordinatorByAddress.CoordinatorID, err
+	return coordinatorByAddress.CoordinatorId, err
 }
 
 func (k Keeper) GetCoordinator(ctx context.Context, coordinatorID uint64) (types.Coordinator, error) {
@@ -62,11 +62,11 @@ func (k Keeper) GetCoordinatorByAddress(ctx context.Context, address sdk.AccAddr
 		return types.CoordinatorByAddress{}, err
 	}
 
-	coordinator, err := k.GetCoordinator(ctx, coordinatorByAddress.CoordinatorID)
+	coordinator, err := k.GetCoordinator(ctx, coordinatorByAddress.CoordinatorId)
 	if errors.Is(err, types.ErrCoordinatorNotFound) {
 		// return critical error
 		return types.CoordinatorByAddress{}, ignterrors.Criticalf("a coordinator address is associated to a non-existent coordinator ID: %d",
-			coordinatorByAddress.CoordinatorID)
+			coordinatorByAddress.CoordinatorId)
 	} else if err != nil {
 		return types.CoordinatorByAddress{}, err
 	}
@@ -74,7 +74,7 @@ func (k Keeper) GetCoordinatorByAddress(ctx context.Context, address sdk.AccAddr
 	if !coordinator.Active {
 		// return critical error
 		return types.CoordinatorByAddress{}, ignterrors.Criticalf("a coordinator address is inactive and should not exist in the store: ID: %d",
-			coordinatorByAddress.CoordinatorID)
+			coordinatorByAddress.CoordinatorId)
 	}
 
 	return coordinatorByAddress, nil
@@ -84,11 +84,11 @@ func (k Keeper) GetCoordinatorByAddress(ctx context.Context, address sdk.AccAddr
 func (k Keeper) CoordinatorByAddresses(ctx context.Context) ([]types.CoordinatorByAddress, error) {
 	coordinatorByAddresses := make([]types.CoordinatorByAddress, 0)
 	err := k.CoordinatorByAddress.Walk(ctx, nil, func(_ sdk.AccAddress, coordinatorByAddress types.CoordinatorByAddress) (bool, error) {
-		coordinator, err := k.GetCoordinator(ctx, coordinatorByAddress.CoordinatorID)
+		coordinator, err := k.GetCoordinator(ctx, coordinatorByAddress.CoordinatorId)
 		if errors.Is(err, types.ErrCoordinatorNotFound) {
 			// return critical error
 			return true, ignterrors.Criticalf("a coordinator address is associated to a non-existent coordinator ID: %d",
-				coordinatorByAddress.CoordinatorID)
+				coordinatorByAddress.CoordinatorId)
 		} else if err != nil {
 			return true, err
 		}
@@ -96,7 +96,7 @@ func (k Keeper) CoordinatorByAddresses(ctx context.Context) ([]types.Coordinator
 		if !coordinator.Active {
 			// return critical error
 			return true, ignterrors.Criticalf("a coordinator address is inactive and should not exist in the store: ID: %d",
-				coordinatorByAddress.CoordinatorID)
+				coordinatorByAddress.CoordinatorId)
 		}
 
 		coordinatorByAddresses = append(coordinatorByAddresses, coordinatorByAddress)

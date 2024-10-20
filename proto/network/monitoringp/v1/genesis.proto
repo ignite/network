@@ -18,8 +18,8 @@ message GenesisState {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
-  string portID = 2;
-  MonitoringInfo monitoringInfo = 3;
-  ConnectionChannelID connectionChannelID = 4;
-  ConsumerClientID consumerClientID = 5;
+  string port_id = 2;
+  MonitoringInfo monitoring_info = 3;
+  ConnectionChannelID connection_channel_id = 4;
+  ConsumerClientID consumer_client_id = 5;
 }

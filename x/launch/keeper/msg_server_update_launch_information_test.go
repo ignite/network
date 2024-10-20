@@ -26,13 +26,13 @@ func TestMsgUpdateLaunchInformation(t *testing.T) {
 	// Create a chain
 	launchID := uint64(1)
 	chain := sample.Chain(r, launchID, coordID)
-	err := tk.LaunchKeeper.Chain.Set(ctx, chain.LaunchID, chain)
+	err := tk.LaunchKeeper.Chain.Set(ctx, chain.LaunchId, chain)
 	require.NoError(t, err)
 
 	launchIDLaunchTriggered := uint64(2)
 	chain = sample.Chain(r, launchIDLaunchTriggered, coordID)
 	chain.LaunchTriggered = true
-	err = tk.LaunchKeeper.Chain.Set(ctx, chain.LaunchID, chain)
+	err = tk.LaunchKeeper.Chain.Set(ctx, chain.LaunchId, chain)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -149,7 +149,7 @@ func TestMsgUpdateLaunchInformation(t *testing.T) {
 			var previousChain types.Chain
 			var err error
 			if tc.err == nil {
-				previousChain, err = tk.LaunchKeeper.GetChain(ctx, tc.msg.LaunchID)
+				previousChain, err = tk.LaunchKeeper.GetChain(ctx, tc.msg.LaunchId)
 				require.NoError(t, err)
 			}
 
@@ -162,26 +162,26 @@ func TestMsgUpdateLaunchInformation(t *testing.T) {
 			require.NoError(t, err)
 
 			// The chain must continue to exist in the store
-			chain, err := tk.LaunchKeeper.GetChain(ctx, tc.msg.LaunchID)
+			chain, err := tk.LaunchKeeper.GetChain(ctx, tc.msg.LaunchId)
 			require.NoError(t, err)
 
 			// Unchanged values
-			require.EqualValues(t, previousChain.CoordinatorID, chain.CoordinatorID)
+			require.EqualValues(t, previousChain.CoordinatorId, chain.CoordinatorId)
 			require.EqualValues(t, previousChain.CreatedAt, chain.CreatedAt)
 			require.EqualValues(t, previousChain.LaunchTime, chain.LaunchTime)
 			require.EqualValues(t, previousChain.LaunchTriggered, chain.LaunchTriggered)
 
 			// Compare changed values
-			if tc.msg.GenesisChainID != "" {
-				require.EqualValues(t, tc.msg.GenesisChainID, chain.GenesisChainID)
+			if tc.msg.GenesisChainId != "" {
+				require.EqualValues(t, tc.msg.GenesisChainId, chain.GenesisChainId)
 			} else {
-				require.EqualValues(t, previousChain.GenesisChainID, chain.GenesisChainID)
+				require.EqualValues(t, previousChain.GenesisChainId, chain.GenesisChainId)
 			}
-			if tc.msg.SourceURL != "" {
-				require.EqualValues(t, tc.msg.SourceURL, chain.SourceURL)
+			if tc.msg.SourceUrl != "" {
+				require.EqualValues(t, tc.msg.SourceUrl, chain.SourceUrl)
 				require.EqualValues(t, tc.msg.SourceHash, chain.SourceHash)
 			} else {
-				require.EqualValues(t, previousChain.SourceURL, chain.SourceURL)
+				require.EqualValues(t, previousChain.SourceUrl, chain.SourceUrl)
 				require.EqualValues(t, previousChain.SourceHash, chain.SourceHash)
 			}
 

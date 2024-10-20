@@ -62,15 +62,15 @@ func request_Query_GetChain_0(ctx context.Context, marshaler runtime.Marshaler, 
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	msg, err := client.GetChain(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -89,15 +89,15 @@ func local_request_Query_GetChain_0(ctx context.Context, marshaler runtime.Marsh
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	msg, err := server.GetChain(ctx, &protoReq)
@@ -152,15 +152,15 @@ func request_Query_GetGenesisAccount_0(ctx context.Context, marshaler runtime.Ma
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	val, ok = pathParams["address"]
@@ -190,15 +190,15 @@ func local_request_Query_GetGenesisAccount_0(ctx context.Context, marshaler runt
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	val, ok = pathParams["address"]
@@ -218,7 +218,7 @@ func local_request_Query_GetGenesisAccount_0(ctx context.Context, marshaler runt
 }
 
 var (
-	filter_Query_ListGenesisAccount_0 = &utilities.DoubleArray{Encoding: map[string]int{"launchID": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_Query_ListGenesisAccount_0 = &utilities.DoubleArray{Encoding: map[string]int{"launch_id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Query_ListGenesisAccount_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -232,15 +232,15 @@ func request_Query_ListGenesisAccount_0(ctx context.Context, marshaler runtime.M
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -266,15 +266,15 @@ func local_request_Query_ListGenesisAccount_0(ctx context.Context, marshaler run
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -300,15 +300,15 @@ func request_Query_GetGenesisValidator_0(ctx context.Context, marshaler runtime.
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	val, ok = pathParams["address"]
@@ -338,15 +338,15 @@ func local_request_Query_GetGenesisValidator_0(ctx context.Context, marshaler ru
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	val, ok = pathParams["address"]
@@ -366,7 +366,7 @@ func local_request_Query_GetGenesisValidator_0(ctx context.Context, marshaler ru
 }
 
 var (
-	filter_Query_ListGenesisValidator_0 = &utilities.DoubleArray{Encoding: map[string]int{"launchID": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_Query_ListGenesisValidator_0 = &utilities.DoubleArray{Encoding: map[string]int{"launch_id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Query_ListGenesisValidator_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -380,15 +380,15 @@ func request_Query_ListGenesisValidator_0(ctx context.Context, marshaler runtime
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -414,15 +414,15 @@ func local_request_Query_ListGenesisValidator_0(ctx context.Context, marshaler r
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -448,15 +448,15 @@ func request_Query_GetVestingAccount_0(ctx context.Context, marshaler runtime.Ma
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	val, ok = pathParams["address"]
@@ -486,15 +486,15 @@ func local_request_Query_GetVestingAccount_0(ctx context.Context, marshaler runt
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	val, ok = pathParams["address"]
@@ -514,7 +514,7 @@ func local_request_Query_GetVestingAccount_0(ctx context.Context, marshaler runt
 }
 
 var (
-	filter_Query_ListVestingAccount_0 = &utilities.DoubleArray{Encoding: map[string]int{"launchID": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_Query_ListVestingAccount_0 = &utilities.DoubleArray{Encoding: map[string]int{"launch_id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Query_ListVestingAccount_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -528,15 +528,15 @@ func request_Query_ListVestingAccount_0(ctx context.Context, marshaler runtime.M
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -562,15 +562,15 @@ func local_request_Query_ListVestingAccount_0(ctx context.Context, marshaler run
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -596,26 +596,26 @@ func request_Query_GetRequest_0(ctx context.Context, marshaler runtime.Marshaler
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
-	val, ok = pathParams["requestID"]
+	val, ok = pathParams["request_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "requestID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "request_id")
 	}
 
-	protoReq.RequestID, err = runtime.Uint64(val)
+	protoReq.RequestId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "requestID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "request_id", err)
 	}
 
 	msg, err := client.GetRequest(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -634,26 +634,26 @@ func local_request_Query_GetRequest_0(ctx context.Context, marshaler runtime.Mar
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
-	val, ok = pathParams["requestID"]
+	val, ok = pathParams["request_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "requestID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "request_id")
 	}
 
-	protoReq.RequestID, err = runtime.Uint64(val)
+	protoReq.RequestId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "requestID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "request_id", err)
 	}
 
 	msg, err := server.GetRequest(ctx, &protoReq)
@@ -662,7 +662,7 @@ func local_request_Query_GetRequest_0(ctx context.Context, marshaler runtime.Mar
 }
 
 var (
-	filter_Query_ListRequest_0 = &utilities.DoubleArray{Encoding: map[string]int{"launchID": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_Query_ListRequest_0 = &utilities.DoubleArray{Encoding: map[string]int{"launch_id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Query_ListRequest_0(ctx context.Context, marshaler runtime.Marshaler, client QueryClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -676,15 +676,15 @@ func request_Query_ListRequest_0(ctx context.Context, marshaler runtime.Marshale
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -710,15 +710,15 @@ func local_request_Query_ListRequest_0(ctx context.Context, marshaler runtime.Ma
 		_   = err
 	)
 
-	val, ok = pathParams["launchID"]
+	val, ok = pathParams["launch_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launchID")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "launch_id")
 	}
 
-	protoReq.LaunchID, err = runtime.Uint64(val)
+	protoReq.LaunchId, err = runtime.Uint64(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launchID", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "launch_id", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -1338,25 +1338,25 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 var (
 	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"ignite", "network", "launch", "v1", "params"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_GetChain_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "chain", "launchID"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetChain_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "chain", "launch_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
 	pattern_Query_ListChain_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"ignite", "network", "launch", "chain"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_GetGenesisAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"ignite", "network", "launch", "genesis_account", "launchID", "address"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetGenesisAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"ignite", "network", "launch", "genesis_account", "launch_id", "address"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_ListGenesisAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "genesis_account", "launchID"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_ListGenesisAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "genesis_account", "launch_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_GetGenesisValidator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"ignite", "network", "launch", "genesis_validator", "launchID", "address"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetGenesisValidator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"ignite", "network", "launch", "genesis_validator", "launch_id", "address"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_ListGenesisValidator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "genesis_validator", "launchID"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_ListGenesisValidator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "genesis_validator", "launch_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_GetVestingAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"ignite", "network", "launch", "vesting_account", "launchID", "address"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetVestingAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"ignite", "network", "launch", "vesting_account", "launch_id", "address"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_ListVestingAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "vesting_account", "launchID"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_ListVestingAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "vesting_account", "launch_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_GetRequest_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"ignite", "network", "launch", "request", "launchID", "requestID"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetRequest_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 1, 0, 4, 1, 5, 5}, []string{"ignite", "network", "launch", "request", "launch_id", "request_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_ListRequest_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "request", "launchID"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_ListRequest_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"ignite", "network", "launch", "request", "launch_id"}, "", runtime.AssumeColonVerbOpt(false)))
 
 	pattern_Query_ListParamChange_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"ignite", "network", "launch", "param_change"}, "", runtime.AssumeColonVerbOpt(false)))
 )

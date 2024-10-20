@@ -22,8 +22,8 @@ func createNRequest(keeper *keeper.Keeper, ctx context.Context, n int) []types.R
 	launchID := uint64(0)
 	for i := range items {
 		iu := uint64(i)
-		items[i].LaunchID = launchID
-		items[i].RequestID = iu
+		items[i].LaunchId = launchID
+		items[i].RequestId = iu
 		_ = keeper.Request.Set(ctx, collections.Join(launchID, iu), items[i])
 		_ = keeper.RequestSeq.Set(ctx, launchID, iu)
 	}
@@ -42,17 +42,17 @@ func TestRequestQuerySingle(t *testing.T) {
 	}{
 		{
 			desc:     "First",
-			request:  &types.QueryGetRequestRequest{LaunchID: msgs[0].LaunchID, RequestID: msgs[0].RequestID},
+			request:  &types.QueryGetRequestRequest{LaunchId: msgs[0].LaunchId, RequestId: msgs[0].RequestId},
 			response: &types.QueryGetRequestResponse{Request: msgs[0]},
 		},
 		{
 			desc:     "Second",
-			request:  &types.QueryGetRequestRequest{LaunchID: msgs[1].LaunchID, RequestID: msgs[1].RequestID},
+			request:  &types.QueryGetRequestRequest{LaunchId: msgs[1].LaunchId, RequestId: msgs[1].RequestId},
 			response: &types.QueryGetRequestResponse{Request: msgs[1]},
 		},
 		{
 			desc:    "KeyNotFound",
-			request: &types.QueryGetRequestRequest{LaunchID: uint64(len(msgs)), RequestID: uint64(len(msgs))},
+			request: &types.QueryGetRequestRequest{LaunchId: uint64(len(msgs)), RequestId: uint64(len(msgs))},
 			err:     sdkerrors.ErrKeyNotFound,
 		},
 		{

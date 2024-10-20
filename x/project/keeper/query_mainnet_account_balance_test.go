@@ -52,7 +52,7 @@ func createNMainnetAccountForProjectIDWithTotalSupply(
 		balance, err := acc.Shares.CoinsFromTotalSupply(totalSupply, totalShares)
 		require.NoError(t, err)
 		items[i] = types.MainnetAccountBalance{
-			ProjectID: projectID,
+			ProjectId: projectID,
 			Address:   acc.Address,
 			Coins:     balance,
 		}
@@ -76,7 +76,7 @@ func TestMainnetAccountBalanceQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryMainnetAccountBalanceRequest{
-				ProjectID: msgs[0].ProjectID,
+				ProjectId: msgs[0].ProjectId,
 				Address:   msgs[0].Address,
 			},
 			response: &types.QueryMainnetAccountBalanceResponse{MainnetAccountBalance: msgs[0]},
@@ -84,7 +84,7 @@ func TestMainnetAccountBalanceQuerySingle(t *testing.T) {
 		{
 			desc: "Second",
 			request: &types.QueryMainnetAccountBalanceRequest{
-				ProjectID: msgs[1].ProjectID,
+				ProjectId: msgs[1].ProjectId,
 				Address:   msgs[1].Address,
 			},
 			response: &types.QueryMainnetAccountBalanceResponse{MainnetAccountBalance: msgs[1]},
@@ -92,7 +92,7 @@ func TestMainnetAccountBalanceQuerySingle(t *testing.T) {
 		{
 			desc: "project not found",
 			request: &types.QueryMainnetAccountBalanceRequest{
-				ProjectID: 10000,
+				ProjectId: 10000,
 				Address:   sample.Address(r),
 			},
 			err: status.Error(codes.NotFound, "project not found"),
@@ -100,7 +100,7 @@ func TestMainnetAccountBalanceQuerySingle(t *testing.T) {
 		{
 			desc: "account not found",
 			request: &types.QueryMainnetAccountBalanceRequest{
-				ProjectID: projectID,
+				ProjectId: projectID,
 				Address:   sample.Address(r),
 			},
 			err: status.Error(codes.NotFound, "account not found"),
@@ -130,7 +130,7 @@ func TestMainnetAccountBalanceQueryPaginated(t *testing.T) {
 	)
 	request := func(projectID uint64, next []byte, offset, limit uint64, total bool) *types.QueryListMainnetAccountBalanceRequest {
 		return &types.QueryListMainnetAccountBalanceRequest{
-			ProjectID: projectID,
+			ProjectId: projectID,
 			Pagination: &query.PageRequest{
 				Key:        next,
 				Offset:     offset,
@@ -196,19 +196,19 @@ func TestMainnetAccountBalanceAll(t *testing.T) {
 	err = k.TotalShares.Set(ctx, totalShares)
 	require.NoError(t, err)
 	err = k.MainnetAccount.Set(ctx, collections.Join(projectID, addr1), types.MainnetAccount{
-		ProjectID: projectID,
+		ProjectId: projectID,
 		Address:   addr1.String(),
 		Shares:    tc.Shares(t, "100foo"),
 	})
 	require.NoError(t, err)
 	err = k.MainnetAccount.Set(ctx, collections.Join(projectID, addr2), types.MainnetAccount{
-		ProjectID: projectID,
+		ProjectId: projectID,
 		Address:   addr2.String(),
 		Shares:    tc.Shares(t, "100bar"),
 	})
 	require.NoError(t, err)
 	err = k.MainnetAccount.Set(ctx, collections.Join(projectID, addr3), types.MainnetAccount{
-		ProjectID: projectID,
+		ProjectId: projectID,
 		Address:   addr3.String(),
 		Shares:    tc.Shares(t, "100baz"),
 	})
@@ -216,7 +216,7 @@ func TestMainnetAccountBalanceAll(t *testing.T) {
 
 	t.Run("accounts with empty balance are skipped", func(t *testing.T) {
 		accountBalances, err := qs.ListMainnetAccountBalance(ctx, &types.QueryListMainnetAccountBalanceRequest{
-			ProjectID: projectID,
+			ProjectId: projectID,
 			Pagination: &query.PageRequest{
 				CountTotal: true,
 			},
@@ -227,12 +227,12 @@ func TestMainnetAccountBalanceAll(t *testing.T) {
 		balances := accountBalances.MainnetAccountBalance
 		require.Len(t, balances, 2)
 		require.Contains(t, balances, types.MainnetAccountBalance{
-			ProjectID: projectID,
+			ProjectId: projectID,
 			Address:   addr1.String(),
 			Coins:     tc.Coins(t, "1000foo"),
 		})
 		require.Contains(t, balances, types.MainnetAccountBalance{
-			ProjectID: projectID,
+			ProjectId: projectID,
 			Address:   addr2.String(),
 			Coins:     tc.Coins(t, "1000bar"),
 		})

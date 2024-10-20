@@ -26,24 +26,24 @@ func (k msgServer) WithdrawAllocations(ctx context.Context, msg *types.MsgWithdr
 		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid participant address %s", err.Error())
 	}
 
-	auction, err := k.fundraisingKeeper.GetAuction(ctx, msg.AuctionID)
+	auction, err := k.fundraisingKeeper.GetAuction(ctx, msg.AuctionId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.AuctionID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.AuctionId)
 	}
 
 	// only prevent time-based restrictions on withdrawals if the auction's status is not `CANCELLED`
 	if auction.GetStatus() != fundraisingtypes.AuctionStatusCancelled {
 		if !blockTime.After(auction.GetStartTime().Add(params.WithdrawalDelay)) {
-			return nil, sdkerrors.Wrapf(types.ErrAllocationWithdrawalTimeNotReached, "withdrawal for auction %d not yet allowed", msg.AuctionID)
+			return nil, sdkerrors.Wrapf(types.ErrAllocationWithdrawalTimeNotReached, "withdrawal for auction %d not yet allowed", msg.AuctionId)
 		}
 	}
 
-	auctionUsedAllocations, err := k.AuctionUsedAllocations.Get(ctx, collections.Join(sdk.AccAddress(participantAddress), msg.AuctionID))
+	auctionUsedAllocations, err := k.AuctionUsedAllocations.Get(ctx, collections.Join(sdk.AccAddress(participantAddress), msg.AuctionId))
 	if err != nil {
-		return nil, sdkerrors.Wrapf(types.ErrUsedAllocationsNotFound, "used allocations for auction %d not found", msg.AuctionID)
+		return nil, sdkerrors.Wrapf(types.ErrUsedAllocationsNotFound, "used allocations for auction %d not found", msg.AuctionId)
 	}
 	if auctionUsedAllocations.Withdrawn {
-		return nil, sdkerrors.Wrapf(types.ErrAllocationsAlreadyWithdrawn, "allocations for auction %d already claimed", msg.AuctionID)
+		return nil, sdkerrors.Wrapf(types.ErrAllocationsAlreadyWithdrawn, "allocations for auction %d already claimed", msg.AuctionId)
 	}
 
 	totalUsedAllocations, err := k.UsedAllocations.Get(ctx, msg.Participant)
@@ -58,7 +58,7 @@ func (k msgServer) WithdrawAllocations(ctx context.Context, msg *types.MsgWithdr
 	totalUsedAllocations.NumAllocations = totalUsedAllocations.NumAllocations.Sub(auctionUsedAllocations.NumAllocations)
 
 	auctionUsedAllocations.Withdrawn = true
-	if err = k.AuctionUsedAllocations.Set(ctx, collections.Join(sdk.AccAddress(participantAddress), auctionUsedAllocations.AuctionID), auctionUsedAllocations); err != nil {
+	if err = k.AuctionUsedAllocations.Set(ctx, collections.Join(sdk.AccAddress(participantAddress), auctionUsedAllocations.AuctionId), auctionUsedAllocations); err != nil {
 		return nil, ignterrors.Criticalf("unable to set auction used allocations entry for address %s", msg.Participant)
 	}
 
@@ -68,6 +68,6 @@ func (k msgServer) WithdrawAllocations(ctx context.Context, msg *types.MsgWithdr
 
 	return &types.MsgWithdrawAllocationsResponse{}, sdkCtx.EventManager().EmitTypedEvent(&types.EventAllocationsWithdrawn{
 		Participant: msg.Participant,
-		AuctionID:   msg.AuctionID,
+		AuctionId:   msg.AuctionId,
 	})
 }

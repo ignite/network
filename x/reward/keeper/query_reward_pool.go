@@ -37,7 +37,7 @@ func (q queryServer) GetRewardPool(ctx context.Context, req *types.QueryGetRewar
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	val, err := q.k.RewardPool.Get(ctx, req.LaunchID)
+	val, err := q.k.RewardPool.Get(ctx, req.LaunchId)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, status.Error(codes.NotFound, "not found")

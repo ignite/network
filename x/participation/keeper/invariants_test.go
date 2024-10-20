@@ -21,19 +21,19 @@ func TestMismatchUsedAllocationsInvariant(t *testing.T) {
 		auctionUsedAllocs = []types.AuctionUsedAllocations{
 			{
 				Address:        addr,
-				AuctionID:      1,
+				AuctionId:      1,
 				NumAllocations: sdkmath.OneInt(),
 				Withdrawn:      false,
 			},
 			{
 				Address:        addr,
-				AuctionID:      2,
+				AuctionId:      2,
 				NumAllocations: sdkmath.OneInt(),
 				Withdrawn:      false,
 			},
 			{
 				Address:        addr,
-				AuctionID:      3,
+				AuctionId:      3,
 				NumAllocations: sdkmath.NewInt(5),
 				Withdrawn:      true,
 			},
@@ -55,7 +55,7 @@ func TestMismatchUsedAllocationsInvariant(t *testing.T) {
 		err := tk.ParticipationKeeper.UsedAllocations.Set(ctx, accAddr.String(), validUsedAllocs)
 		require.NoError(t, err)
 		for _, auction := range auctionUsedAllocs {
-			err = tk.ParticipationKeeper.AuctionUsedAllocations.Set(ctx, collections.Join(accAddr, auction.AuctionID), auction)
+			err = tk.ParticipationKeeper.AuctionUsedAllocations.Set(ctx, collections.Join(accAddr, auction.AuctionId), auction)
 			require.NoError(t, err)
 		}
 		_, isValid := keeper.MismatchUsedAllocationsInvariant(tk.ParticipationKeeper)(ctx)
@@ -66,7 +66,7 @@ func TestMismatchUsedAllocationsInvariant(t *testing.T) {
 		err := tk.ParticipationKeeper.UsedAllocations.Set(ctx, accAddr.String(), invalidUsedAllocs)
 		require.NoError(t, err)
 		for _, auction := range auctionUsedAllocs {
-			err = tk.ParticipationKeeper.AuctionUsedAllocations.Set(ctx, collections.Join(accAddr, auction.AuctionID), auction)
+			err = tk.ParticipationKeeper.AuctionUsedAllocations.Set(ctx, collections.Join(accAddr, auction.AuctionId), auction)
 			require.NoError(t, err)
 			require.NoError(t, err)
 		}

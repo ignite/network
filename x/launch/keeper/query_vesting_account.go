@@ -23,7 +23,7 @@ func (q queryServer) ListVestingAccount(ctx context.Context, req *types.QueryAll
 		q.k.VestingAccount,
 		req.Pagination,
 		func(_ collections.Pair[uint64, sdk.AccAddress], value types.VestingAccount) (bool, error) {
-			return req.LaunchID == value.LaunchID, nil
+			return req.LaunchId == value.LaunchId, nil
 		},
 		func(_ collections.Pair[uint64, sdk.AccAddress], value types.VestingAccount) (types.VestingAccount, error) {
 			return value, nil
@@ -46,7 +46,7 @@ func (q queryServer) GetVestingAccount(ctx context.Context, req *types.QueryGetV
 		return nil, status.Error(codes.InvalidArgument, "invalid address")
 	}
 
-	val, err := q.k.VestingAccount.Get(ctx, collections.Join(req.LaunchID, sdk.AccAddress(address)))
+	val, err := q.k.VestingAccount.Get(ctx, collections.Join(req.LaunchId, sdk.AccAddress(address)))
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, status.Error(codes.NotFound, "not found")

@@ -23,9 +23,9 @@ func (k msgServer) RevertLaunch(ctx context.Context, msg *types.MsgRevertLaunch)
 		return nil, ignterrors.Critical("failed to get launch params")
 	}
 
-	chain, err := k.GetChain(ctx, msg.LaunchID)
+	chain, err := k.GetChain(ctx, msg.LaunchId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchId)
 	}
 
 	// Get the coordinator ID associated to the sender address
@@ -34,40 +34,40 @@ func (k msgServer) RevertLaunch(ctx context.Context, msg *types.MsgRevertLaunch)
 		return nil, err
 	}
 
-	if chain.CoordinatorID != coordinatorID {
+	if chain.CoordinatorId != coordinatorID {
 		return nil, sdkerrors.Wrapf(
 			profiletypes.ErrCoordinatorInvalid,
 			"coordinator of the chain is %d",
-			chain.CoordinatorID,
+			chain.CoordinatorId,
 		)
 	}
 
 	if !chain.LaunchTriggered {
-		return nil, sdkerrors.Wrapf(types.ErrNotTriggeredLaunch, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(types.ErrNotTriggeredLaunch, "%d", msg.LaunchId)
 	}
 
 	if chain.MonitoringConnected {
-		return nil, sdkerrors.Wrapf(types.ErrChainMonitoringConnected, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(types.ErrChainMonitoringConnected, "%d", msg.LaunchId)
 	}
 
 	// We must wait for a specific delay once the chain is launched before being able to revert it
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	if sdkCtx.BlockTime().Before(chain.LaunchTime.Add(params.RevertDelay)) {
-		return nil, sdkerrors.Wrapf(types.ErrRevertDelayNotReached, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(types.ErrRevertDelayNotReached, "%d", msg.LaunchId)
 	}
 
 	chain.LaunchTriggered = false
 	chain.LaunchTime = time.Unix(0, 0).UTC()
-	if err := k.Chain.Set(ctx, chain.LaunchID, chain); err != nil {
+	if err := k.Chain.Set(ctx, chain.LaunchId, chain); err != nil {
 		return nil, ignterrors.Criticalf("chain not set %s", err.Error())
 	}
 
 	// clear associated client IDs from monitoring
-	if err := k.monitoringcKeeper.ClearVerifiedClientIDs(ctx, msg.LaunchID); err != nil {
+	if err := k.monitoringcKeeper.ClearVerifiedClientIdList(ctx, msg.LaunchId); err != nil {
 		return nil, ignterrors.Criticalf("failed to clear monitoring client IDs %s", err.Error())
 	}
 	err = sdkCtx.EventManager().EmitTypedEvent(&types.EventLaunchReverted{
-		LaunchID: msg.LaunchID,
+		LaunchId: msg.LaunchId,
 	})
 
 	return &types.MsgRevertLaunchResponse{}, err

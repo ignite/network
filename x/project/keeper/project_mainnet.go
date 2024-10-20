@@ -16,12 +16,12 @@ func (k Keeper) IsProjectMainnetLaunchTriggered(ctx context.Context, projectID u
 	}
 
 	if project.MainnetInitialized {
-		chain, err := k.launchKeeper.GetChain(ctx, project.MainnetID)
+		chain, err := k.launchKeeper.GetChain(ctx, project.MainnetId)
 		if err != nil {
-			return false, fmt.Errorf("mainnet chain %d for project %d not found", project.MainnetID, projectID)
+			return false, fmt.Errorf("mainnet chain %d for project %d not found", project.MainnetId, projectID)
 		}
 		if !chain.IsMainnet {
-			return false, fmt.Errorf("chain %d for project %d is not a mainnet chain", project.MainnetID, projectID)
+			return false, fmt.Errorf("chain %d for project %d is not a mainnet chain", project.MainnetId, projectID)
 		}
 		if chain.LaunchTriggered {
 			return true, nil

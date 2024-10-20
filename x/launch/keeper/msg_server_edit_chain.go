@@ -21,9 +21,9 @@ func (k msgServer) EditChain(ctx context.Context, msg *types.MsgEditChain) (*typ
 		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
 	}
 
-	chain, err := k.GetChain(ctx, msg.LaunchID)
+	chain, err := k.GetChain(ctx, msg.LaunchId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchId)
 	}
 
 	params, err := k.Params.Get(ctx)
@@ -46,10 +46,10 @@ func (k msgServer) EditChain(ctx context.Context, msg *types.MsgEditChain) (*typ
 		return nil, err
 	}
 
-	if chain.CoordinatorID != coordinatorID {
+	if chain.CoordinatorId != coordinatorID {
 		return nil, sdkerrors.Wrap(profiletypes.ErrCoordinatorInvalid, fmt.Sprintf(
 			"coordinator of the chain is %d",
-			chain.CoordinatorID,
+			chain.CoordinatorId,
 		))
 	}
 
@@ -57,40 +57,40 @@ func (k msgServer) EditChain(ctx context.Context, msg *types.MsgEditChain) (*typ
 		chain.Metadata = msg.Metadata
 	}
 
-	if msg.SetProjectID {
+	if msg.SetProjectId {
 		// check if chain already has id associated
 		if chain.HasProject {
 			return nil, sdkerrors.Wrapf(types.ErrChainHasProject,
 				"project with id %d already associated with chain %d",
-				chain.ProjectID,
-				chain.LaunchID,
+				chain.ProjectId,
+				chain.LaunchId,
 			)
 		}
 
 		// check if chain coordinator is project coordinator
-		project, err := k.projectKeeper.GetProject(ctx, msg.ProjectID)
+		project, err := k.projectKeeper.GetProject(ctx, msg.ProjectId)
 		if err != nil {
-			return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectID)
+			return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectId)
 		}
 
-		if project.CoordinatorID != chain.CoordinatorID {
+		if project.CoordinatorId != chain.CoordinatorId {
 			return nil, sdkerrors.Wrapf(profiletypes.ErrCoordinatorInvalid,
 				"coordinator of the project is %d, chain coordinator is %d",
-				project.CoordinatorID,
-				chain.CoordinatorID,
+				project.CoordinatorId,
+				chain.CoordinatorId,
 			)
 		}
 
-		chain.ProjectID = msg.ProjectID
+		chain.ProjectId = msg.ProjectId
 		chain.HasProject = true
 
-		err = k.projectKeeper.AddChainToProject(ctx, chain.ProjectID, chain.LaunchID)
+		err = k.projectKeeper.AddChainToProject(ctx, chain.ProjectId, chain.LaunchId)
 		if err != nil {
 			return nil, sdkerrors.Wrap(types.ErrAddChainToProject, err.Error())
 		}
 	}
 
-	if err := k.Chain.Set(ctx, chain.LaunchID, chain); err != nil {
+	if err := k.Chain.Set(ctx, chain.LaunchId, chain); err != nil {
 		return nil, ignterrors.Criticalf("chain not set %s", err.Error())
 	}
 

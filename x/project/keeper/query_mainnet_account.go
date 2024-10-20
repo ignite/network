@@ -43,7 +43,7 @@ func (q queryServer) GetMainnetAccount(ctx context.Context, req *types.QueryGetM
 		return nil, status.Error(codes.InvalidArgument, "invalid address")
 	}
 
-	val, err := q.k.MainnetAccount.Get(ctx, collections.Join(req.ProjectID, sdk.AccAddress(address)))
+	val, err := q.k.MainnetAccount.Get(ctx, collections.Join(req.ProjectId, sdk.AccAddress(address)))
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, status.Error(codes.NotFound, "not found")

@@ -17,7 +17,7 @@ func NewMsgCreateClient(
 ) *MsgCreateClient {
 	return &MsgCreateClient{
 		Creator:         creator,
-		LaunchID:        launchID,
+		LaunchId:        launchID,
 		ConsensusState:  consensusState,
 		ValidatorSet:    validatorSet,
 		UnbondingPeriod: unbondingPeriod,

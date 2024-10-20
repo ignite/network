@@ -17,9 +17,9 @@ message GenesisState {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
-  repeated Validator validatorList = 2 [(gogoproto.nullable) = false];
-  repeated ValidatorByOperatorAddress validatorsByOperatorAddress = 3 [(gogoproto.nullable) = false];
-  repeated Coordinator coordinatorList = 4 [(gogoproto.nullable) = false];
-  uint64 coordinatorCount = 5;
-  repeated CoordinatorByAddress coordinatorsByAddress = 6 [(gogoproto.nullable) = false];
+  repeated Validator validator_list = 2 [(gogoproto.nullable) = false];
+  repeated ValidatorByOperatorAddress validators_by_operator_address = 3 [(gogoproto.nullable) = false];
+  repeated Coordinator coordinator_list = 4 [(gogoproto.nullable) = false];
+  uint64 coordinator_count = 5;
+  repeated CoordinatorByAddress coordinator_by_address = 6 [(gogoproto.nullable) = false];
 }

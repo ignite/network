@@ -18,9 +18,9 @@ import (
 func createNRewardPool(keeper keeper.Keeper, ctx context.Context, n int) []types.RewardPool {
 	items := make([]types.RewardPool, n)
 	for i := range items {
-		items[i].LaunchID = uint64(i)
+		items[i].LaunchId = uint64(i)
 
-		_ = keeper.RewardPool.Set(ctx, items[i].LaunchID, items[i])
+		_ = keeper.RewardPool.Set(ctx, items[i].LaunchId, items[i])
 	}
 	return items
 }
@@ -38,21 +38,21 @@ func TestRewardPoolQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryGetRewardPoolRequest{
-				LaunchID: msgs[0].LaunchID,
+				LaunchId: msgs[0].LaunchId,
 			},
 			response: &types.QueryGetRewardPoolResponse{RewardPool: msgs[0]},
 		},
 		{
 			desc: "Second",
 			request: &types.QueryGetRewardPoolRequest{
-				LaunchID: msgs[1].LaunchID,
+				LaunchId: msgs[1].LaunchId,
 			},
 			response: &types.QueryGetRewardPoolResponse{RewardPool: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
 			request: &types.QueryGetRewardPoolRequest{
-				LaunchID: 100000,
+				LaunchId: 100000,
 			},
 			err: status.Error(codes.NotFound, "not found"),
 		},

@@ -63,7 +63,7 @@ func NewKeeper(
 		profileKeeper: profileKeeper,
 		launchKeeper:  launchKeeper,
 		Params:        collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
-		RewardPool:    collections.NewMap(sb, types.RewardPoolKey, "rewardPool", collections.Uint64Key, codec.CollValue[types.RewardPool](cdc)),
+		RewardPool:    collections.NewMap(sb, types.RewardPoolKey, "reward_pool", collections.Uint64Key, codec.CollValue[types.RewardPool](cdc)),
 		// this line is used by starport scaffolding # collection/instantiate
 	}
 

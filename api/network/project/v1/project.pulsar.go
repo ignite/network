@@ -119,31 +119,31 @@ func (x *_Project_8_list) IsValid() bool {
 }
 
 var (
-	md_Project                    protoreflect.MessageDescriptor
-	fd_Project_projectID          protoreflect.FieldDescriptor
-	fd_Project_projectName        protoreflect.FieldDescriptor
-	fd_Project_coordinatorID      protoreflect.FieldDescriptor
-	fd_Project_createdAt          protoreflect.FieldDescriptor
-	fd_Project_mainnetID          protoreflect.FieldDescriptor
-	fd_Project_mainnetInitialized protoreflect.FieldDescriptor
-	fd_Project_totalSupply        protoreflect.FieldDescriptor
-	fd_Project_allocatedShares    protoreflect.FieldDescriptor
-	fd_Project_specialAllocations protoreflect.FieldDescriptor
-	fd_Project_metadata           protoreflect.FieldDescriptor
+	md_Project                     protoreflect.MessageDescriptor
+	fd_Project_project_id          protoreflect.FieldDescriptor
+	fd_Project_project_name        protoreflect.FieldDescriptor
+	fd_Project_coordinator_id      protoreflect.FieldDescriptor
+	fd_Project_created_at          protoreflect.FieldDescriptor
+	fd_Project_mainnet_id          protoreflect.FieldDescriptor
+	fd_Project_mainnet_initialized protoreflect.FieldDescriptor
+	fd_Project_total_supply        protoreflect.FieldDescriptor
+	fd_Project_allocated_shares    protoreflect.FieldDescriptor
+	fd_Project_special_allocations protoreflect.FieldDescriptor
+	fd_Project_metadata            protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_project_v1_project_proto_init()
 	md_Project = File_network_project_v1_project_proto.Messages().ByName("Project")
-	fd_Project_projectID = md_Project.Fields().ByName("projectID")
-	fd_Project_projectName = md_Project.Fields().ByName("projectName")
-	fd_Project_coordinatorID = md_Project.Fields().ByName("coordinatorID")
-	fd_Project_createdAt = md_Project.Fields().ByName("createdAt")
-	fd_Project_mainnetID = md_Project.Fields().ByName("mainnetID")
-	fd_Project_mainnetInitialized = md_Project.Fields().ByName("mainnetInitialized")
-	fd_Project_totalSupply = md_Project.Fields().ByName("totalSupply")
-	fd_Project_allocatedShares = md_Project.Fields().ByName("allocatedShares")
-	fd_Project_specialAllocations = md_Project.Fields().ByName("specialAllocations")
+	fd_Project_project_id = md_Project.Fields().ByName("project_id")
+	fd_Project_project_name = md_Project.Fields().ByName("project_name")
+	fd_Project_coordinator_id = md_Project.Fields().ByName("coordinator_id")
+	fd_Project_created_at = md_Project.Fields().ByName("created_at")
+	fd_Project_mainnet_id = md_Project.Fields().ByName("mainnet_id")
+	fd_Project_mainnet_initialized = md_Project.Fields().ByName("mainnet_initialized")
+	fd_Project_total_supply = md_Project.Fields().ByName("total_supply")
+	fd_Project_allocated_shares = md_Project.Fields().ByName("allocated_shares")
+	fd_Project_special_allocations = md_Project.Fields().ByName("special_allocations")
 	fd_Project_metadata = md_Project.Fields().ByName("metadata")
 }
 
@@ -212,57 +212,57 @@ func (x *fastReflection_Project) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_Project) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_Project_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_Project_project_id, value) {
 			return
 		}
 	}
 	if x.ProjectName != "" {
 		value := protoreflect.ValueOfString(x.ProjectName)
-		if !f(fd_Project_projectName, value) {
+		if !f(fd_Project_project_name, value) {
 			return
 		}
 	}
-	if x.CoordinatorID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.CoordinatorID)
-		if !f(fd_Project_coordinatorID, value) {
+	if x.CoordinatorId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.CoordinatorId)
+		if !f(fd_Project_coordinator_id, value) {
 			return
 		}
 	}
 	if x.CreatedAt != int64(0) {
 		value := protoreflect.ValueOfInt64(x.CreatedAt)
-		if !f(fd_Project_createdAt, value) {
+		if !f(fd_Project_created_at, value) {
 			return
 		}
 	}
-	if x.MainnetID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.MainnetID)
-		if !f(fd_Project_mainnetID, value) {
+	if x.MainnetId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.MainnetId)
+		if !f(fd_Project_mainnet_id, value) {
 			return
 		}
 	}
 	if x.MainnetInitialized != false {
 		value := protoreflect.ValueOfBool(x.MainnetInitialized)
-		if !f(fd_Project_mainnetInitialized, value) {
+		if !f(fd_Project_mainnet_initialized, value) {
 			return
 		}
 	}
 	if len(x.TotalSupply) != 0 {
 		value := protoreflect.ValueOfList(&_Project_7_list{list: &x.TotalSupply})
-		if !f(fd_Project_totalSupply, value) {
+		if !f(fd_Project_total_supply, value) {
 			return
 		}
 	}
 	if len(x.AllocatedShares) != 0 {
 		value := protoreflect.ValueOfList(&_Project_8_list{list: &x.AllocatedShares})
-		if !f(fd_Project_allocatedShares, value) {
+		if !f(fd_Project_allocated_shares, value) {
 			return
 		}
 	}
 	if x.SpecialAllocations != nil {
 		value := protoreflect.ValueOfMessage(x.SpecialAllocations.ProtoReflect())
-		if !f(fd_Project_specialAllocations, value) {
+		if !f(fd_Project_special_allocations, value) {
 			return
 		}
 	}
@@ -287,23 +287,23 @@ func (x *fastReflection_Project) Range(f func(protoreflect.FieldDescriptor, prot
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_Project) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.project.v1.Project.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.project.v1.Project.projectName":
+	case "network.project.v1.Project.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.project.v1.Project.project_name":
 		return x.ProjectName != ""
-	case "network.project.v1.Project.coordinatorID":
-		return x.CoordinatorID != uint64(0)
-	case "network.project.v1.Project.createdAt":
+	case "network.project.v1.Project.coordinator_id":
+		return x.CoordinatorId != uint64(0)
+	case "network.project.v1.Project.created_at":
 		return x.CreatedAt != int64(0)
-	case "network.project.v1.Project.mainnetID":
-		return x.MainnetID != uint64(0)
-	case "network.project.v1.Project.mainnetInitialized":
+	case "network.project.v1.Project.mainnet_id":
+		return x.MainnetId != uint64(0)
+	case "network.project.v1.Project.mainnet_initialized":
 		return x.MainnetInitialized != false
-	case "network.project.v1.Project.totalSupply":
+	case "network.project.v1.Project.total_supply":
 		return len(x.TotalSupply) != 0
-	case "network.project.v1.Project.allocatedShares":
+	case "network.project.v1.Project.allocated_shares":
 		return len(x.AllocatedShares) != 0
-	case "network.project.v1.Project.specialAllocations":
+	case "network.project.v1.Project.special_allocations":
 		return x.SpecialAllocations != nil
 	case "network.project.v1.Project.metadata":
 		return len(x.Metadata) != 0
@@ -323,23 +323,23 @@ func (x *fastReflection_Project) Has(fd protoreflect.FieldDescriptor) bool {
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Project) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.project.v1.Project.projectID":
-		x.ProjectID = uint64(0)
-	case "network.project.v1.Project.projectName":
+	case "network.project.v1.Project.project_id":
+		x.ProjectId = uint64(0)
+	case "network.project.v1.Project.project_name":
 		x.ProjectName = ""
-	case "network.project.v1.Project.coordinatorID":
-		x.CoordinatorID = uint64(0)
-	case "network.project.v1.Project.createdAt":
+	case "network.project.v1.Project.coordinator_id":
+		x.CoordinatorId = uint64(0)
+	case "network.project.v1.Project.created_at":
 		x.CreatedAt = int64(0)
-	case "network.project.v1.Project.mainnetID":
-		x.MainnetID = uint64(0)
-	case "network.project.v1.Project.mainnetInitialized":
+	case "network.project.v1.Project.mainnet_id":
+		x.MainnetId = uint64(0)
+	case "network.project.v1.Project.mainnet_initialized":
 		x.MainnetInitialized = false
-	case "network.project.v1.Project.totalSupply":
+	case "network.project.v1.Project.total_supply":
 		x.TotalSupply = nil
-	case "network.project.v1.Project.allocatedShares":
+	case "network.project.v1.Project.allocated_shares":
 		x.AllocatedShares = nil
-	case "network.project.v1.Project.specialAllocations":
+	case "network.project.v1.Project.special_allocations":
 		x.SpecialAllocations = nil
 	case "network.project.v1.Project.metadata":
 		x.Metadata = nil
@@ -359,37 +359,37 @@ func (x *fastReflection_Project) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_Project) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.project.v1.Project.projectID":
-		value := x.ProjectID
+	case "network.project.v1.Project.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.Project.projectName":
+	case "network.project.v1.Project.project_name":
 		value := x.ProjectName
 		return protoreflect.ValueOfString(value)
-	case "network.project.v1.Project.coordinatorID":
-		value := x.CoordinatorID
+	case "network.project.v1.Project.coordinator_id":
+		value := x.CoordinatorId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.Project.createdAt":
+	case "network.project.v1.Project.created_at":
 		value := x.CreatedAt
 		return protoreflect.ValueOfInt64(value)
-	case "network.project.v1.Project.mainnetID":
-		value := x.MainnetID
+	case "network.project.v1.Project.mainnet_id":
+		value := x.MainnetId
 		return protoreflect.ValueOfUint64(value)
-	case "network.project.v1.Project.mainnetInitialized":
+	case "network.project.v1.Project.mainnet_initialized":
 		value := x.MainnetInitialized
 		return protoreflect.ValueOfBool(value)
-	case "network.project.v1.Project.totalSupply":
+	case "network.project.v1.Project.total_supply":
 		if len(x.TotalSupply) == 0 {
 			return protoreflect.ValueOfList(&_Project_7_list{})
 		}
 		listValue := &_Project_7_list{list: &x.TotalSupply}
 		return protoreflect.ValueOfList(listValue)
-	case "network.project.v1.Project.allocatedShares":
+	case "network.project.v1.Project.allocated_shares":
 		if len(x.AllocatedShares) == 0 {
 			return protoreflect.ValueOfList(&_Project_8_list{})
 		}
 		listValue := &_Project_8_list{list: &x.AllocatedShares}
 		return protoreflect.ValueOfList(listValue)
-	case "network.project.v1.Project.specialAllocations":
+	case "network.project.v1.Project.special_allocations":
 		value := x.SpecialAllocations
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	case "network.project.v1.Project.metadata":
@@ -415,27 +415,27 @@ func (x *fastReflection_Project) Get(descriptor protoreflect.FieldDescriptor) pr
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Project) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.project.v1.Project.projectID":
-		x.ProjectID = value.Uint()
-	case "network.project.v1.Project.projectName":
+	case "network.project.v1.Project.project_id":
+		x.ProjectId = value.Uint()
+	case "network.project.v1.Project.project_name":
 		x.ProjectName = value.Interface().(string)
-	case "network.project.v1.Project.coordinatorID":
-		x.CoordinatorID = value.Uint()
-	case "network.project.v1.Project.createdAt":
+	case "network.project.v1.Project.coordinator_id":
+		x.CoordinatorId = value.Uint()
+	case "network.project.v1.Project.created_at":
 		x.CreatedAt = value.Int()
-	case "network.project.v1.Project.mainnetID":
-		x.MainnetID = value.Uint()
-	case "network.project.v1.Project.mainnetInitialized":
+	case "network.project.v1.Project.mainnet_id":
+		x.MainnetId = value.Uint()
+	case "network.project.v1.Project.mainnet_initialized":
 		x.MainnetInitialized = value.Bool()
-	case "network.project.v1.Project.totalSupply":
+	case "network.project.v1.Project.total_supply":
 		lv := value.List()
 		clv := lv.(*_Project_7_list)
 		x.TotalSupply = *clv.list
-	case "network.project.v1.Project.allocatedShares":
+	case "network.project.v1.Project.allocated_shares":
 		lv := value.List()
 		clv := lv.(*_Project_8_list)
 		x.AllocatedShares = *clv.list
-	case "network.project.v1.Project.specialAllocations":
+	case "network.project.v1.Project.special_allocations":
 		x.SpecialAllocations = value.Message().Interface().(*SpecialAllocations)
 	case "network.project.v1.Project.metadata":
 		x.Metadata = value.Bytes()
@@ -459,35 +459,35 @@ func (x *fastReflection_Project) Set(fd protoreflect.FieldDescriptor, value prot
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Project) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.Project.totalSupply":
+	case "network.project.v1.Project.total_supply":
 		if x.TotalSupply == nil {
 			x.TotalSupply = []*v1beta1.Coin{}
 		}
 		value := &_Project_7_list{list: &x.TotalSupply}
 		return protoreflect.ValueOfList(value)
-	case "network.project.v1.Project.allocatedShares":
+	case "network.project.v1.Project.allocated_shares":
 		if x.AllocatedShares == nil {
 			x.AllocatedShares = []*v1beta1.Coin{}
 		}
 		value := &_Project_8_list{list: &x.AllocatedShares}
 		return protoreflect.ValueOfList(value)
-	case "network.project.v1.Project.specialAllocations":
+	case "network.project.v1.Project.special_allocations":
 		if x.SpecialAllocations == nil {
 			x.SpecialAllocations = new(SpecialAllocations)
 		}
 		return protoreflect.ValueOfMessage(x.SpecialAllocations.ProtoReflect())
-	case "network.project.v1.Project.projectID":
-		panic(fmt.Errorf("field projectID of message network.project.v1.Project is not mutable"))
-	case "network.project.v1.Project.projectName":
-		panic(fmt.Errorf("field projectName of message network.project.v1.Project is not mutable"))
-	case "network.project.v1.Project.coordinatorID":
-		panic(fmt.Errorf("field coordinatorID of message network.project.v1.Project is not mutable"))
-	case "network.project.v1.Project.createdAt":
-		panic(fmt.Errorf("field createdAt of message network.project.v1.Project is not mutable"))
-	case "network.project.v1.Project.mainnetID":
-		panic(fmt.Errorf("field mainnetID of message network.project.v1.Project is not mutable"))
-	case "network.project.v1.Project.mainnetInitialized":
-		panic(fmt.Errorf("field mainnetInitialized of message network.project.v1.Project is not mutable"))
+	case "network.project.v1.Project.project_id":
+		panic(fmt.Errorf("field project_id of message network.project.v1.Project is not mutable"))
+	case "network.project.v1.Project.project_name":
+		panic(fmt.Errorf("field project_name of message network.project.v1.Project is not mutable"))
+	case "network.project.v1.Project.coordinator_id":
+		panic(fmt.Errorf("field coordinator_id of message network.project.v1.Project is not mutable"))
+	case "network.project.v1.Project.created_at":
+		panic(fmt.Errorf("field created_at of message network.project.v1.Project is not mutable"))
+	case "network.project.v1.Project.mainnet_id":
+		panic(fmt.Errorf("field mainnet_id of message network.project.v1.Project is not mutable"))
+	case "network.project.v1.Project.mainnet_initialized":
+		panic(fmt.Errorf("field mainnet_initialized of message network.project.v1.Project is not mutable"))
 	case "network.project.v1.Project.metadata":
 		panic(fmt.Errorf("field metadata of message network.project.v1.Project is not mutable"))
 	default:
@@ -503,25 +503,25 @@ func (x *fastReflection_Project) Mutable(fd protoreflect.FieldDescriptor) protor
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_Project) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.project.v1.Project.projectID":
+	case "network.project.v1.Project.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.Project.projectName":
+	case "network.project.v1.Project.project_name":
 		return protoreflect.ValueOfString("")
-	case "network.project.v1.Project.coordinatorID":
+	case "network.project.v1.Project.coordinator_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.Project.createdAt":
+	case "network.project.v1.Project.created_at":
 		return protoreflect.ValueOfInt64(int64(0))
-	case "network.project.v1.Project.mainnetID":
+	case "network.project.v1.Project.mainnet_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.project.v1.Project.mainnetInitialized":
+	case "network.project.v1.Project.mainnet_initialized":
 		return protoreflect.ValueOfBool(false)
-	case "network.project.v1.Project.totalSupply":
+	case "network.project.v1.Project.total_supply":
 		list := []*v1beta1.Coin{}
 		return protoreflect.ValueOfList(&_Project_7_list{list: &list})
-	case "network.project.v1.Project.allocatedShares":
+	case "network.project.v1.Project.allocated_shares":
 		list := []*v1beta1.Coin{}
 		return protoreflect.ValueOfList(&_Project_8_list{list: &list})
-	case "network.project.v1.Project.specialAllocations":
+	case "network.project.v1.Project.special_allocations":
 		m := new(SpecialAllocations)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	case "network.project.v1.Project.metadata":
@@ -595,21 +595,21 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		l = len(x.ProjectName)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
-		if x.CoordinatorID != 0 {
-			n += 1 + runtime.Sov(uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			n += 1 + runtime.Sov(uint64(x.CoordinatorId))
 		}
 		if x.CreatedAt != 0 {
 			n += 1 + runtime.Sov(uint64(x.CreatedAt))
 		}
-		if x.MainnetID != 0 {
-			n += 1 + runtime.Sov(uint64(x.MainnetID))
+		if x.MainnetId != 0 {
+			n += 1 + runtime.Sov(uint64(x.MainnetId))
 		}
 		if x.MainnetInitialized {
 			n += 2
@@ -726,8 +726,8 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x30
 		}
-		if x.MainnetID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.MainnetID))
+		if x.MainnetId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.MainnetId))
 			i--
 			dAtA[i] = 0x28
 		}
@@ -736,8 +736,8 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x20
 		}
-		if x.CoordinatorID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorId))
 			i--
 			dAtA[i] = 0x18
 		}
@@ -748,8 +748,8 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -804,9 +804,9 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -816,7 +816,7 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -855,9 +855,9 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 3:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorId", wireType)
 				}
-				x.CoordinatorID = 0
+				x.CoordinatorId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -867,7 +867,7 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.CoordinatorID |= uint64(b&0x7F) << shift
+					x.CoordinatorId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -893,9 +893,9 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 				}
 			case 5:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MainnetID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field MainnetId", wireType)
 				}
-				x.MainnetID = 0
+				x.MainnetId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -905,7 +905,7 @@ func (x *fastReflection_Project) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.MainnetID |= uint64(b&0x7F) << shift
+					x.MainnetId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1121,15 +1121,15 @@ type Project struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectID          uint64              `protobuf:"varint,1,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	ProjectName        string              `protobuf:"bytes,2,opt,name=projectName,proto3" json:"projectName,omitempty"`
-	CoordinatorID      uint64              `protobuf:"varint,3,opt,name=coordinatorID,proto3" json:"coordinatorID,omitempty"`
-	CreatedAt          int64               `protobuf:"varint,4,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	MainnetID          uint64              `protobuf:"varint,5,opt,name=mainnetID,proto3" json:"mainnetID,omitempty"`
-	MainnetInitialized bool                `protobuf:"varint,6,opt,name=mainnetInitialized,proto3" json:"mainnetInitialized,omitempty"`
-	TotalSupply        []*v1beta1.Coin     `protobuf:"bytes,7,rep,name=totalSupply,proto3" json:"totalSupply,omitempty"`
-	AllocatedShares    []*v1beta1.Coin     `protobuf:"bytes,8,rep,name=allocatedShares,proto3" json:"allocatedShares,omitempty"`
-	SpecialAllocations *SpecialAllocations `protobuf:"bytes,9,opt,name=specialAllocations,proto3" json:"specialAllocations,omitempty"`
+	ProjectId          uint64              `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	ProjectName        string              `protobuf:"bytes,2,opt,name=project_name,json=projectName,proto3" json:"project_name,omitempty"`
+	CoordinatorId      uint64              `protobuf:"varint,3,opt,name=coordinator_id,json=coordinatorId,proto3" json:"coordinator_id,omitempty"`
+	CreatedAt          int64               `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	MainnetId          uint64              `protobuf:"varint,5,opt,name=mainnet_id,json=mainnetId,proto3" json:"mainnet_id,omitempty"`
+	MainnetInitialized bool                `protobuf:"varint,6,opt,name=mainnet_initialized,json=mainnetInitialized,proto3" json:"mainnet_initialized,omitempty"`
+	TotalSupply        []*v1beta1.Coin     `protobuf:"bytes,7,rep,name=total_supply,json=totalSupply,proto3" json:"total_supply,omitempty"`
+	AllocatedShares    []*v1beta1.Coin     `protobuf:"bytes,8,rep,name=allocated_shares,json=allocatedShares,proto3" json:"allocated_shares,omitempty"`
+	SpecialAllocations *SpecialAllocations `protobuf:"bytes,9,opt,name=special_allocations,json=specialAllocations,proto3" json:"special_allocations,omitempty"`
 	Metadata           []byte              `protobuf:"bytes,10,opt,name=metadata,proto3" json:"metadata,omitempty"`
 }
 
@@ -1153,9 +1153,9 @@ func (*Project) Descriptor() ([]byte, []int) {
 	return file_network_project_v1_project_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Project) GetProjectID() uint64 {
+func (x *Project) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -1167,9 +1167,9 @@ func (x *Project) GetProjectName() string {
 	return ""
 }
 
-func (x *Project) GetCoordinatorID() uint64 {
+func (x *Project) GetCoordinatorId() uint64 {
 	if x != nil {
-		return x.CoordinatorID
+		return x.CoordinatorId
 	}
 	return 0
 }
@@ -1181,9 +1181,9 @@ func (x *Project) GetCreatedAt() int64 {
 	return 0
 }
 
-func (x *Project) GetMainnetID() uint64 {
+func (x *Project) GetMainnetId() uint64 {
 	if x != nil {
-		return x.MainnetID
+		return x.MainnetId
 	}
 	return 0
 }
@@ -1238,62 +1238,63 @@ var file_network_project_v1_project_proto_rawDesc = []byte{
 	0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x2c, 0x6e, 0x65, 0x74, 0x77,
 	0x6f, 0x72, 0x6b, 0x2f, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2f, 0x76, 0x31, 0x2f, 0x73,
 	0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x5f, 0x61, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x9d, 0x05, 0x0a, 0x07, 0x50, 0x72, 0x6f,
-	0x6a, 0x65, 0x63, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49,
-	0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
-	0x49, 0x44, 0x12, 0x20, 0x0a, 0x0b, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x4e, 0x61, 0x6d,
-	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
-	0x4e, 0x61, 0x6d, 0x65, 0x12, 0x24, 0x0a, 0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61,
-	0x74, 0x6f, 0x72, 0x49, 0x44, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x63, 0x6f, 0x6f,
-	0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x44, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x72,
-	0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x6d, 0x61, 0x69, 0x6e,
-	0x6e, 0x65, 0x74, 0x49, 0x44, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x6d, 0x61, 0x69,
-	0x6e, 0x6e, 0x65, 0x74, 0x49, 0x44, 0x12, 0x2e, 0x0a, 0x12, 0x6d, 0x61, 0x69, 0x6e, 0x6e, 0x65,
-	0x74, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x69, 0x7a, 0x65, 0x64, 0x18, 0x06, 0x20, 0x01,
-	0x28, 0x08, 0x52, 0x12, 0x6d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x69,
-	0x61, 0x6c, 0x69, 0x7a, 0x65, 0x64, 0x12, 0xae, 0x01, 0x0a, 0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c,
-	0x53, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63,
-	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74,
-	0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x71, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f,
-	0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d,
-	0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79,
-	0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43,
-	0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f,
-	0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x0b, 0x74, 0x6f, 0x74, 0x61,
-	0x6c, 0x53, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x12, 0x94, 0x01, 0x0a, 0x0f, 0x61, 0x6c, 0x6c, 0x6f,
-	0x63, 0x61, 0x74, 0x65, 0x64, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x18, 0x08, 0x20, 0x03, 0x28,
-	0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e,
-	0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x4f, 0xc8, 0xde,
-	0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73,
-	0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f,
-	0x06, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61,
-	0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x0f, 0x61,
-	0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x64, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x12, 0x5c,
-	0x0a, 0x12, 0x73, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x73, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6e, 0x65, 0x74,
-	0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x76, 0x31, 0x2e,
-	0x53, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x12, 0x73, 0x70, 0x65, 0x63, 0x69, 0x61,
-	0x6c, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1a, 0x0a, 0x08,
-	0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08,
-	0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x42, 0xcc, 0x01, 0x0a, 0x16, 0x63, 0x6f, 0x6d,
-	0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
-	0x2e, 0x76, 0x31, 0x42, 0x0c, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x50, 0x72, 0x6f, 0x74,
-	0x6f, 0x50, 0x01, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61,
-	0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x70, 0x72, 0x6f, 0x6a, 0x65,
-	0x63, 0x74, 0x2f, 0x76, 0x31, 0x3b, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x76, 0x31, 0xa2,
-	0x02, 0x03, 0x4e, 0x50, 0x58, 0xaa, 0x02, 0x12, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
-	0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x12, 0x4e, 0x65, 0x74,
-	0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5c, 0x56, 0x31, 0xe2,
-	0x02, 0x1e, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63,
-	0x74, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
-	0xea, 0x02, 0x14, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x50, 0x72, 0x6f, 0x6a,
-	0x65, 0x63, 0x74, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa6, 0x05, 0x0a, 0x07, 0x50, 0x72, 0x6f,
+	0x6a, 0x65, 0x63, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63,
+	0x74, 0x49, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x70, 0x72, 0x6f, 0x6a, 0x65,
+	0x63, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69,
+	0x6e, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d,
+	0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x64, 0x12, 0x1d, 0x0a,
+	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
+	0x6d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x09, 0x6d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x49, 0x64, 0x12, 0x2f, 0x0a, 0x13, 0x6d,
+	0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x5f, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x69, 0x7a,
+	0x65, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x12, 0x6d, 0x61, 0x69, 0x6e, 0x6e, 0x65,
+	0x74, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x69, 0x7a, 0x65, 0x64, 0x12, 0xaf, 0x01, 0x0a,
+	0x0c, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x73, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x18, 0x07, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73,
+	0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x71,
+	0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
+	0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa,
+	0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f,
+	0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f,
+	0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c,
+	0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a,
+	0x01, 0x52, 0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x75, 0x70, 0x70, 0x6c, 0x79, 0x12, 0x95,
+	0x01, 0x0a, 0x10, 0x61, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x73, 0x68, 0x61,
+	0x72, 0x65, 0x73, 0x18, 0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e,
+	0x43, 0x6f, 0x69, 0x6e, 0x42, 0x4f, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f, 0x27, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f,
+	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73,
+	0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f, 0x06, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x9a,
+	0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73,
+	0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x0f, 0x61, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x65, 0x64,
+	0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x12, 0x5d, 0x0a, 0x13, 0x73, 0x70, 0x65, 0x63, 0x69, 0x61,
+	0x6c, 0x5f, 0x61, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x09, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x70, 0x72,
+	0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c,
+	0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x04, 0xc8, 0xde, 0x1f,
+	0x00, 0x52, 0x12, 0x73, 0x70, 0x65, 0x63, 0x69, 0x61, 0x6c, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0x42, 0xcc, 0x01, 0x0a, 0x16, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72,
+	0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2e, 0x76, 0x31, 0x42, 0x0c, 0x50, 0x72,
+	0x6f, 0x6a, 0x65, 0x63, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x3a, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f,
+	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77,
+	0x6f, 0x72, 0x6b, 0x2f, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x2f, 0x76, 0x31, 0x3b, 0x70,
+	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x50, 0x58, 0xaa, 0x02,
+	0x12, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
+	0x2e, 0x56, 0x31, 0xca, 0x02, 0x12, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x50, 0x72,
+	0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1e, 0x4e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x6b, 0x5c, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x14, 0x4e, 0x65, 0x74, 0x77,
+	0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x3a, 0x3a, 0x56, 0x31,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1315,9 +1316,9 @@ var file_network_project_v1_project_proto_goTypes = []interface{}{
 	(*SpecialAllocations)(nil), // 2: network.project.v1.SpecialAllocations
 }
 var file_network_project_v1_project_proto_depIdxs = []int32{
-	1, // 0: network.project.v1.Project.totalSupply:type_name -> cosmos.base.v1beta1.Coin
-	1, // 1: network.project.v1.Project.allocatedShares:type_name -> cosmos.base.v1beta1.Coin
-	2, // 2: network.project.v1.Project.specialAllocations:type_name -> network.project.v1.SpecialAllocations
+	1, // 0: network.project.v1.Project.total_supply:type_name -> cosmos.base.v1beta1.Coin
+	1, // 1: network.project.v1.Project.allocated_shares:type_name -> cosmos.base.v1beta1.Coin
+	2, // 2: network.project.v1.Project.special_allocations:type_name -> network.project.v1.SpecialAllocations
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

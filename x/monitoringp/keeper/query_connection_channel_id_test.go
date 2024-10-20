@@ -29,7 +29,7 @@ func TestConnectionChannelIDQuery(t *testing.T) {
 		{
 			desc:     "First",
 			request:  &types.QueryGetConnectionChannelIDRequest{},
-			response: &types.QueryGetConnectionChannelIDResponse{ConnectionChannelID: item},
+			response: &types.QueryGetConnectionChannelIDResponse{ConnectionChannelId: item},
 		},
 		{
 			desc: "InvalidRequest",

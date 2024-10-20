@@ -29,21 +29,21 @@ func Test_OnRecvMonitoringPacket(t *testing.T) {
 	)
 
 	err := tk.MonitoringConsumerKeeper.LaunchIDFromChannelID.Set(ctx, invalidChannel, types.LaunchIDFromChannelID{
-		ChannelID: invalidChannel,
-		LaunchID:  10000,
+		ChannelId: invalidChannel,
+		LaunchId:  10000,
 	})
 	require.NoError(t, err)
-	chain.LaunchID, err = tk.LaunchKeeper.AppendChain(ctx, chain)
+	chain.LaunchId, err = tk.LaunchKeeper.AppendChain(ctx, chain)
 	require.NoError(t, err)
 	err = tk.MonitoringConsumerKeeper.LaunchIDFromChannelID.Set(ctx, validChannel, types.LaunchIDFromChannelID{
-		ChannelID: validChannel,
-		LaunchID:  chain.LaunchID,
+		ChannelId: validChannel,
+		LaunchId:  chain.LaunchId,
 	})
 	require.NoError(t, err)
 
 	t.Run("should allow set reward pool", func(t *testing.T) {
-		err := tk.RewardKeeper.RewardPool.Set(ctx, chain.LaunchID, rewardtypes.RewardPool{
-			LaunchID:         chain.LaunchID,
+		err := tk.RewardKeeper.RewardPool.Set(ctx, chain.LaunchId, rewardtypes.RewardPool{
+			LaunchId:         chain.LaunchId,
 			Provider:         sample.Address(r),
 			InitialCoins:     coins,
 			RemainingCoins:   coins,

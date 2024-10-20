@@ -65,40 +65,40 @@ genesis:
           name: Starport Network
           symbol: SPN
     claim:
-      airdropSupply:
+      airdrop_supply:
         supply:
           amount: "1000"
           denom: drop
-      claimRecordList:
+      claim_record_list:
         - address: spn1ezptsm3npn54qx9vvpah4nymre59ykr9exx2ul
           claimable: "400"
         - address: spn1aqn8ynvr3jmq67879qulzrwhchq5dtrvtx0nhe
           claimable: "500"
         - address: spn1pkdk6m2nh77nlaep84cylmkhjder3arey7rll5
           claimable: "100"
-      initialClaim:
+      initial_claim:
         enabled: true
-        missionID: "0"
-      missionCount: 4
-      missionList:
+        mission_id: "0"
+      mission_count: 4
+      mission_list:
         - description: "initial claim"
-          missionID: "0"
+          mission_id: "0"
           weight: "0.25"
         - description: "staking"
-          missionID: "1"
+          mission_id: "1"
           weight: "0.25"
         - description: "voting"
-          missionID: "2"
+          mission_id: "2"
           weight: "0.25"
         - description: "sending request"
-          missionID: "3"
+          mission_id: "3"
           weight: "0.25"
     crisis:
       constant_fee:
         denom: uspn
     fundraising:
       params:
-        auctionCreationFee:
+        auction_creation_fee:
           - amount: "100"
             denom: uspn
     gov:
@@ -108,52 +108,52 @@ genesis:
             denom: uspn
     launch:
       params:
-        launchTimeRange:
-          minLaunchTime: 5s
-        revertDelay: 5s
+        launch_time_range:
+          min_launch_time: 5s
+        revert_delay: 5s
     mint:
       params:
-        distributionProportions:
-          communityPool: "0.300000000000000000"
-          fundedAddresses: "0.400000000000000000"
+        distribution_proportions:
+          community_pool: "0.300000000000000000"
+          funded_addresses: "0.400000000000000000"
           staking: "0.300000000000000000"
-        fundedAddresses:
+        funded_addresses:
           - address: spn1ezptsm3npn54qx9vvpah4nymre59ykr9exx2ul
             weight: "0.400000000000000000"
           - address: spn1aqn8ynvr3jmq67879qulzrwhchq5dtrvtx0nhe
             weight: "0.300000000000000000"
           - address: spn1pkdk6m2nh77nlaep84cylmkhjder3arey7rll5
             weight: "0.300000000000000000"
-        mintDenom: uspn
+        mint_denom: uspn
     monitoringp:
       params:
-        consumerChainID: orbit-1
-        consumerRevisionHeight: "1"
-        consumerUnbondingPeriod: "2"
-        lastBlockHeight: "1"
+        consumer_chain_id: orbit-1
+        consumer_revision_height: "1"
+        consumer_unbonding_period: "2"
+        last_block_height: "1"
     participation:
       params:
-        allocationPrice:
+        allocation_price:
           bonded: "1000"
-        participationTierList:
+        participation_tier_list:
           - benefits:
-              maxBidAmount: "1000"
-            requiredAllocations: "1"
-            tierID: "1"
+              max_bid_amount: "1000"
+            required_allocations: "1"
+            tier_id: "1"
           - benefits:
-              maxBidAmount: "2000"
-            requiredAllocations: "2"
-            tierID: "2"
+              max_bid_amount: "2000"
+            required_allocations: "2"
+            tier_id: "2"
           - benefits:
-              maxBidAmount: "10000"
-            requiredAllocations: "5"
-            tierID: "3"
+              max_bid_amount: "10000"
+            required_allocations: "5"
+            tier_id: "3"
           - benefits:
-              maxBidAmount: "30000"
-            requiredAllocations: "10"
-            tierID: "4"
-        registrationPeriod: 604800s
-        withdrawalDelay: 1209600s
+              max_bid_amount: "30000"
+            required_allocations: "10"
+            tier_id: "4"
+        registration_period: 604800s
+        withdrawal_delay: 1209600s
     staking:
       params:
         bond_denom: uspn

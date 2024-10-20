@@ -31,7 +31,7 @@ func createRequestsFromSamples(
 	for i, s := range samples {
 		items[i] = sample.RequestWithContentAndCreator(r, launchID, s.Content, s.Creator)
 		items[i].Status = s.Status
-		items[i].RequestID, _ = k.AppendRequest(ctx, items[i])
+		items[i].RequestId, _ = k.AppendRequest(ctx, items[i])
 	}
 	return items
 }
@@ -122,11 +122,11 @@ func TestApplyRequest(t *testing.T) {
 		invalidContent = types.NewGenesisAccount(launchID, "", sdk.NewCoins())
 	)
 
-	coord.CoordinatorID = coordID
-	err := tk.ProfileKeeper.Coordinator.Set(ctx, coord.CoordinatorID, coord)
+	coord.CoordinatorId = coordID
+	err := tk.ProfileKeeper.Coordinator.Set(ctx, coord.CoordinatorId, coord)
 	require.NoError(t, err)
 	chain := sample.Chain(r, launchID, coordID)
-	err = tk.LaunchKeeper.Chain.Set(ctx, chain.LaunchID, chain)
+	err = tk.LaunchKeeper.Chain.Set(ctx, chain.LaunchId, chain)
 	require.NoError(t, err)
 
 	tests := []struct {
@@ -265,22 +265,22 @@ func TestCheckRequest(t *testing.T) {
 		duplicatedRequestRemovalContent = types.NewAccountRemoval(duplicatedAcc.String())
 	)
 
-	coord.CoordinatorID = coordID
-	err := tk.ProfileKeeper.Coordinator.Set(ctx, coord.CoordinatorID, coord)
+	coord.CoordinatorId = coordID
+	err := tk.ProfileKeeper.Coordinator.Set(ctx, coord.CoordinatorId, coord)
 	require.NoError(t, err)
 	chain := sample.Chain(r, launchID, coordID)
-	err = tk.LaunchKeeper.Chain.Set(ctx, chain.LaunchID, chain)
+	err = tk.LaunchKeeper.Chain.Set(ctx, chain.LaunchId, chain)
 	require.NoError(t, err)
 
 	err = tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(launchID, duplicatedAcc), types.GenesisAccount{
-		LaunchID: launchID,
+		LaunchId: launchID,
 		Address:  duplicatedAcc.String(),
 		Coins:    nil,
 	})
 	require.NoError(t, err)
 
 	err = tk.LaunchKeeper.VestingAccount.Set(ctx, collections.Join(launchID, duplicatedAcc), types.VestingAccount{
-		LaunchID:       launchID,
+		LaunchId:       launchID,
 		Address:        duplicatedAcc.String(),
 		VestingOptions: types.VestingOptions{},
 	})

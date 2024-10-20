@@ -66,5 +66,5 @@ func (tm TestMsgServers) CreateProject(ctx context.Context, r *rand.Rand, coordi
 	msgCreateProject := sample.MsgCreateProject(r, coordinatorAddress)
 	resProject, err := tm.ProjectSrv.CreateProject(ctx, &msgCreateProject)
 	require.NoError(tm.T, err)
-	return resProject.ProjectID
+	return resProject.ProjectId
 }

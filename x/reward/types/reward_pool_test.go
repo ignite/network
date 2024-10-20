@@ -30,7 +30,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should validate valid reward pool",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            sample.Address(r),
 				InitialCoins:        validInitialCoins,
 				RemainingCoins:      validRemainingCoins,
@@ -42,7 +42,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with empty initial coins",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            sample.Address(r),
 				LastRewardHeight:    50,
 				CurrentRewardHeight: 100,
@@ -53,7 +53,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with empty remaining coins",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            sample.Address(r),
 				InitialCoins:        sample.Coins(r),
 				LastRewardHeight:    50,
@@ -65,7 +65,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with invalid initial coins",
 			rewardPool: types.RewardPool{
-				LaunchID: 1,
+				LaunchId: 1,
 				Provider: sample.Address(r),
 				InitialCoins: sdk.Coins{sdk.Coin{
 					Denom:  "invalid denom",
@@ -81,7 +81,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with invalid current coins",
 			rewardPool: types.RewardPool{
-				LaunchID:     1,
+				LaunchId:     1,
 				Provider:     sample.Address(r),
 				InitialCoins: sample.CoinsWithRange(r, remainingCoinMax, initialCoinMax),
 				RemainingCoins: sdk.Coins{sdk.Coin{
@@ -97,7 +97,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with current coins greater than initial coins",
 			rewardPool: types.RewardPool{
-				LaunchID: 1,
+				LaunchId: 1,
 				Provider: sample.Address(r),
 				InitialCoins: sdk.Coins{sdk.Coin{
 					Denom:  "test",
@@ -116,7 +116,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with coins are not the same length",
 			rewardPool: types.RewardPool{
-				LaunchID: 1,
+				LaunchId: 1,
 				Provider: sample.Address(r),
 				InitialCoins: sdk.Coins{
 					sdk.Coin{
@@ -141,7 +141,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with coins are not of same denom set",
 			rewardPool: types.RewardPool{
-				LaunchID: 1,
+				LaunchId: 1,
 				Provider: sample.Address(r),
 				InitialCoins: sdk.Coins{sdk.Coin{
 					Denom:  "test2",
@@ -160,7 +160,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with current reward height lower than last reward height",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            sample.Address(r),
 				InitialCoins:        validInitialCoins,
 				RemainingCoins:      validRemainingCoins,
@@ -173,7 +173,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with current reward height is negative",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            sample.Address(r),
 				InitialCoins:        validInitialCoins,
 				RemainingCoins:      validRemainingCoins,
@@ -186,7 +186,7 @@ func TestRewardPool_Validate(t *testing.T) {
 		{
 			name: "should prevent with last reward height is negative",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            sample.Address(r),
 				InitialCoins:        validInitialCoins,
 				RemainingCoins:      validRemainingCoins,

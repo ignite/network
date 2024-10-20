@@ -68,43 +68,43 @@ func (x *_Chain_15_list) IsValid() bool {
 }
 
 var (
-	md_Chain                        protoreflect.MessageDescriptor
-	fd_Chain_launchID               protoreflect.FieldDescriptor
-	fd_Chain_coordinatorID          protoreflect.FieldDescriptor
-	fd_Chain_genesisChainID         protoreflect.FieldDescriptor
-	fd_Chain_createdAt              protoreflect.FieldDescriptor
-	fd_Chain_sourceURL              protoreflect.FieldDescriptor
-	fd_Chain_sourceHash             protoreflect.FieldDescriptor
-	fd_Chain_initialGenesis         protoreflect.FieldDescriptor
-	fd_Chain_hasProject             protoreflect.FieldDescriptor
-	fd_Chain_projectID              protoreflect.FieldDescriptor
-	fd_Chain_isMainnet              protoreflect.FieldDescriptor
-	fd_Chain_launchTriggered        protoreflect.FieldDescriptor
-	fd_Chain_launchTime             protoreflect.FieldDescriptor
-	fd_Chain_consumerRevisionHeight protoreflect.FieldDescriptor
-	fd_Chain_monitoringConnected    protoreflect.FieldDescriptor
-	fd_Chain_accountBalance         protoreflect.FieldDescriptor
-	fd_Chain_metadata               protoreflect.FieldDescriptor
+	md_Chain                          protoreflect.MessageDescriptor
+	fd_Chain_launch_id                protoreflect.FieldDescriptor
+	fd_Chain_coordinator_id           protoreflect.FieldDescriptor
+	fd_Chain_genesis_chain_id         protoreflect.FieldDescriptor
+	fd_Chain_created_at               protoreflect.FieldDescriptor
+	fd_Chain_source_url               protoreflect.FieldDescriptor
+	fd_Chain_source_hash              protoreflect.FieldDescriptor
+	fd_Chain_initial_genesis          protoreflect.FieldDescriptor
+	fd_Chain_has_project              protoreflect.FieldDescriptor
+	fd_Chain_project_id               protoreflect.FieldDescriptor
+	fd_Chain_is_mainnet               protoreflect.FieldDescriptor
+	fd_Chain_launch_triggered         protoreflect.FieldDescriptor
+	fd_Chain_launch_time              protoreflect.FieldDescriptor
+	fd_Chain_consumer_revision_height protoreflect.FieldDescriptor
+	fd_Chain_monitoring_connected     protoreflect.FieldDescriptor
+	fd_Chain_account_balance          protoreflect.FieldDescriptor
+	fd_Chain_metadata                 protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_chain_proto_init()
 	md_Chain = File_network_launch_v1_chain_proto.Messages().ByName("Chain")
-	fd_Chain_launchID = md_Chain.Fields().ByName("launchID")
-	fd_Chain_coordinatorID = md_Chain.Fields().ByName("coordinatorID")
-	fd_Chain_genesisChainID = md_Chain.Fields().ByName("genesisChainID")
-	fd_Chain_createdAt = md_Chain.Fields().ByName("createdAt")
-	fd_Chain_sourceURL = md_Chain.Fields().ByName("sourceURL")
-	fd_Chain_sourceHash = md_Chain.Fields().ByName("sourceHash")
-	fd_Chain_initialGenesis = md_Chain.Fields().ByName("initialGenesis")
-	fd_Chain_hasProject = md_Chain.Fields().ByName("hasProject")
-	fd_Chain_projectID = md_Chain.Fields().ByName("projectID")
-	fd_Chain_isMainnet = md_Chain.Fields().ByName("isMainnet")
-	fd_Chain_launchTriggered = md_Chain.Fields().ByName("launchTriggered")
-	fd_Chain_launchTime = md_Chain.Fields().ByName("launchTime")
-	fd_Chain_consumerRevisionHeight = md_Chain.Fields().ByName("consumerRevisionHeight")
-	fd_Chain_monitoringConnected = md_Chain.Fields().ByName("monitoringConnected")
-	fd_Chain_accountBalance = md_Chain.Fields().ByName("accountBalance")
+	fd_Chain_launch_id = md_Chain.Fields().ByName("launch_id")
+	fd_Chain_coordinator_id = md_Chain.Fields().ByName("coordinator_id")
+	fd_Chain_genesis_chain_id = md_Chain.Fields().ByName("genesis_chain_id")
+	fd_Chain_created_at = md_Chain.Fields().ByName("created_at")
+	fd_Chain_source_url = md_Chain.Fields().ByName("source_url")
+	fd_Chain_source_hash = md_Chain.Fields().ByName("source_hash")
+	fd_Chain_initial_genesis = md_Chain.Fields().ByName("initial_genesis")
+	fd_Chain_has_project = md_Chain.Fields().ByName("has_project")
+	fd_Chain_project_id = md_Chain.Fields().ByName("project_id")
+	fd_Chain_is_mainnet = md_Chain.Fields().ByName("is_mainnet")
+	fd_Chain_launch_triggered = md_Chain.Fields().ByName("launch_triggered")
+	fd_Chain_launch_time = md_Chain.Fields().ByName("launch_time")
+	fd_Chain_consumer_revision_height = md_Chain.Fields().ByName("consumer_revision_height")
+	fd_Chain_monitoring_connected = md_Chain.Fields().ByName("monitoring_connected")
+	fd_Chain_account_balance = md_Chain.Fields().ByName("account_balance")
 	fd_Chain_metadata = md_Chain.Fields().ByName("metadata")
 }
 
@@ -173,93 +173,93 @@ func (x *fastReflection_Chain) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_Chain) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_Chain_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_Chain_launch_id, value) {
 			return
 		}
 	}
-	if x.CoordinatorID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.CoordinatorID)
-		if !f(fd_Chain_coordinatorID, value) {
+	if x.CoordinatorId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.CoordinatorId)
+		if !f(fd_Chain_coordinator_id, value) {
 			return
 		}
 	}
-	if x.GenesisChainID != "" {
-		value := protoreflect.ValueOfString(x.GenesisChainID)
-		if !f(fd_Chain_genesisChainID, value) {
+	if x.GenesisChainId != "" {
+		value := protoreflect.ValueOfString(x.GenesisChainId)
+		if !f(fd_Chain_genesis_chain_id, value) {
 			return
 		}
 	}
 	if x.CreatedAt != int64(0) {
 		value := protoreflect.ValueOfInt64(x.CreatedAt)
-		if !f(fd_Chain_createdAt, value) {
+		if !f(fd_Chain_created_at, value) {
 			return
 		}
 	}
-	if x.SourceURL != "" {
-		value := protoreflect.ValueOfString(x.SourceURL)
-		if !f(fd_Chain_sourceURL, value) {
+	if x.SourceUrl != "" {
+		value := protoreflect.ValueOfString(x.SourceUrl)
+		if !f(fd_Chain_source_url, value) {
 			return
 		}
 	}
 	if x.SourceHash != "" {
 		value := protoreflect.ValueOfString(x.SourceHash)
-		if !f(fd_Chain_sourceHash, value) {
+		if !f(fd_Chain_source_hash, value) {
 			return
 		}
 	}
 	if x.InitialGenesis != nil {
 		value := protoreflect.ValueOfMessage(x.InitialGenesis.ProtoReflect())
-		if !f(fd_Chain_initialGenesis, value) {
+		if !f(fd_Chain_initial_genesis, value) {
 			return
 		}
 	}
 	if x.HasProject != false {
 		value := protoreflect.ValueOfBool(x.HasProject)
-		if !f(fd_Chain_hasProject, value) {
+		if !f(fd_Chain_has_project, value) {
 			return
 		}
 	}
-	if x.ProjectID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.ProjectID)
-		if !f(fd_Chain_projectID, value) {
+	if x.ProjectId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.ProjectId)
+		if !f(fd_Chain_project_id, value) {
 			return
 		}
 	}
 	if x.IsMainnet != false {
 		value := protoreflect.ValueOfBool(x.IsMainnet)
-		if !f(fd_Chain_isMainnet, value) {
+		if !f(fd_Chain_is_mainnet, value) {
 			return
 		}
 	}
 	if x.LaunchTriggered != false {
 		value := protoreflect.ValueOfBool(x.LaunchTriggered)
-		if !f(fd_Chain_launchTriggered, value) {
+		if !f(fd_Chain_launch_triggered, value) {
 			return
 		}
 	}
 	if x.LaunchTime != nil {
 		value := protoreflect.ValueOfMessage(x.LaunchTime.ProtoReflect())
-		if !f(fd_Chain_launchTime, value) {
+		if !f(fd_Chain_launch_time, value) {
 			return
 		}
 	}
 	if x.ConsumerRevisionHeight != int64(0) {
 		value := protoreflect.ValueOfInt64(x.ConsumerRevisionHeight)
-		if !f(fd_Chain_consumerRevisionHeight, value) {
+		if !f(fd_Chain_consumer_revision_height, value) {
 			return
 		}
 	}
 	if x.MonitoringConnected != false {
 		value := protoreflect.ValueOfBool(x.MonitoringConnected)
-		if !f(fd_Chain_monitoringConnected, value) {
+		if !f(fd_Chain_monitoring_connected, value) {
 			return
 		}
 	}
 	if len(x.AccountBalance) != 0 {
 		value := protoreflect.ValueOfList(&_Chain_15_list{list: &x.AccountBalance})
-		if !f(fd_Chain_accountBalance, value) {
+		if !f(fd_Chain_account_balance, value) {
 			return
 		}
 	}
@@ -284,35 +284,35 @@ func (x *fastReflection_Chain) Range(f func(protoreflect.FieldDescriptor, protor
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_Chain) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.launch.v1.Chain.launchID":
-		return x.LaunchID != uint64(0)
-	case "network.launch.v1.Chain.coordinatorID":
-		return x.CoordinatorID != uint64(0)
-	case "network.launch.v1.Chain.genesisChainID":
-		return x.GenesisChainID != ""
-	case "network.launch.v1.Chain.createdAt":
+	case "network.launch.v1.Chain.launch_id":
+		return x.LaunchId != uint64(0)
+	case "network.launch.v1.Chain.coordinator_id":
+		return x.CoordinatorId != uint64(0)
+	case "network.launch.v1.Chain.genesis_chain_id":
+		return x.GenesisChainId != ""
+	case "network.launch.v1.Chain.created_at":
 		return x.CreatedAt != int64(0)
-	case "network.launch.v1.Chain.sourceURL":
-		return x.SourceURL != ""
-	case "network.launch.v1.Chain.sourceHash":
+	case "network.launch.v1.Chain.source_url":
+		return x.SourceUrl != ""
+	case "network.launch.v1.Chain.source_hash":
 		return x.SourceHash != ""
-	case "network.launch.v1.Chain.initialGenesis":
+	case "network.launch.v1.Chain.initial_genesis":
 		return x.InitialGenesis != nil
-	case "network.launch.v1.Chain.hasProject":
+	case "network.launch.v1.Chain.has_project":
 		return x.HasProject != false
-	case "network.launch.v1.Chain.projectID":
-		return x.ProjectID != uint64(0)
-	case "network.launch.v1.Chain.isMainnet":
+	case "network.launch.v1.Chain.project_id":
+		return x.ProjectId != uint64(0)
+	case "network.launch.v1.Chain.is_mainnet":
 		return x.IsMainnet != false
-	case "network.launch.v1.Chain.launchTriggered":
+	case "network.launch.v1.Chain.launch_triggered":
 		return x.LaunchTriggered != false
-	case "network.launch.v1.Chain.launchTime":
+	case "network.launch.v1.Chain.launch_time":
 		return x.LaunchTime != nil
-	case "network.launch.v1.Chain.consumerRevisionHeight":
+	case "network.launch.v1.Chain.consumer_revision_height":
 		return x.ConsumerRevisionHeight != int64(0)
-	case "network.launch.v1.Chain.monitoringConnected":
+	case "network.launch.v1.Chain.monitoring_connected":
 		return x.MonitoringConnected != false
-	case "network.launch.v1.Chain.accountBalance":
+	case "network.launch.v1.Chain.account_balance":
 		return len(x.AccountBalance) != 0
 	case "network.launch.v1.Chain.metadata":
 		return len(x.Metadata) != 0
@@ -332,35 +332,35 @@ func (x *fastReflection_Chain) Has(fd protoreflect.FieldDescriptor) bool {
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Chain) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.launch.v1.Chain.launchID":
-		x.LaunchID = uint64(0)
-	case "network.launch.v1.Chain.coordinatorID":
-		x.CoordinatorID = uint64(0)
-	case "network.launch.v1.Chain.genesisChainID":
-		x.GenesisChainID = ""
-	case "network.launch.v1.Chain.createdAt":
+	case "network.launch.v1.Chain.launch_id":
+		x.LaunchId = uint64(0)
+	case "network.launch.v1.Chain.coordinator_id":
+		x.CoordinatorId = uint64(0)
+	case "network.launch.v1.Chain.genesis_chain_id":
+		x.GenesisChainId = ""
+	case "network.launch.v1.Chain.created_at":
 		x.CreatedAt = int64(0)
-	case "network.launch.v1.Chain.sourceURL":
-		x.SourceURL = ""
-	case "network.launch.v1.Chain.sourceHash":
+	case "network.launch.v1.Chain.source_url":
+		x.SourceUrl = ""
+	case "network.launch.v1.Chain.source_hash":
 		x.SourceHash = ""
-	case "network.launch.v1.Chain.initialGenesis":
+	case "network.launch.v1.Chain.initial_genesis":
 		x.InitialGenesis = nil
-	case "network.launch.v1.Chain.hasProject":
+	case "network.launch.v1.Chain.has_project":
 		x.HasProject = false
-	case "network.launch.v1.Chain.projectID":
-		x.ProjectID = uint64(0)
-	case "network.launch.v1.Chain.isMainnet":
+	case "network.launch.v1.Chain.project_id":
+		x.ProjectId = uint64(0)
+	case "network.launch.v1.Chain.is_mainnet":
 		x.IsMainnet = false
-	case "network.launch.v1.Chain.launchTriggered":
+	case "network.launch.v1.Chain.launch_triggered":
 		x.LaunchTriggered = false
-	case "network.launch.v1.Chain.launchTime":
+	case "network.launch.v1.Chain.launch_time":
 		x.LaunchTime = nil
-	case "network.launch.v1.Chain.consumerRevisionHeight":
+	case "network.launch.v1.Chain.consumer_revision_height":
 		x.ConsumerRevisionHeight = int64(0)
-	case "network.launch.v1.Chain.monitoringConnected":
+	case "network.launch.v1.Chain.monitoring_connected":
 		x.MonitoringConnected = false
-	case "network.launch.v1.Chain.accountBalance":
+	case "network.launch.v1.Chain.account_balance":
 		x.AccountBalance = nil
 	case "network.launch.v1.Chain.metadata":
 		x.Metadata = nil
@@ -380,49 +380,49 @@ func (x *fastReflection_Chain) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_Chain) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.launch.v1.Chain.launchID":
-		value := x.LaunchID
+	case "network.launch.v1.Chain.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.Chain.coordinatorID":
-		value := x.CoordinatorID
+	case "network.launch.v1.Chain.coordinator_id":
+		value := x.CoordinatorId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.Chain.genesisChainID":
-		value := x.GenesisChainID
+	case "network.launch.v1.Chain.genesis_chain_id":
+		value := x.GenesisChainId
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.Chain.createdAt":
+	case "network.launch.v1.Chain.created_at":
 		value := x.CreatedAt
 		return protoreflect.ValueOfInt64(value)
-	case "network.launch.v1.Chain.sourceURL":
-		value := x.SourceURL
+	case "network.launch.v1.Chain.source_url":
+		value := x.SourceUrl
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.Chain.sourceHash":
+	case "network.launch.v1.Chain.source_hash":
 		value := x.SourceHash
 		return protoreflect.ValueOfString(value)
-	case "network.launch.v1.Chain.initialGenesis":
+	case "network.launch.v1.Chain.initial_genesis":
 		value := x.InitialGenesis
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.Chain.hasProject":
+	case "network.launch.v1.Chain.has_project":
 		value := x.HasProject
 		return protoreflect.ValueOfBool(value)
-	case "network.launch.v1.Chain.projectID":
-		value := x.ProjectID
+	case "network.launch.v1.Chain.project_id":
+		value := x.ProjectId
 		return protoreflect.ValueOfUint64(value)
-	case "network.launch.v1.Chain.isMainnet":
+	case "network.launch.v1.Chain.is_mainnet":
 		value := x.IsMainnet
 		return protoreflect.ValueOfBool(value)
-	case "network.launch.v1.Chain.launchTriggered":
+	case "network.launch.v1.Chain.launch_triggered":
 		value := x.LaunchTriggered
 		return protoreflect.ValueOfBool(value)
-	case "network.launch.v1.Chain.launchTime":
+	case "network.launch.v1.Chain.launch_time":
 		value := x.LaunchTime
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.Chain.consumerRevisionHeight":
+	case "network.launch.v1.Chain.consumer_revision_height":
 		value := x.ConsumerRevisionHeight
 		return protoreflect.ValueOfInt64(value)
-	case "network.launch.v1.Chain.monitoringConnected":
+	case "network.launch.v1.Chain.monitoring_connected":
 		value := x.MonitoringConnected
 		return protoreflect.ValueOfBool(value)
-	case "network.launch.v1.Chain.accountBalance":
+	case "network.launch.v1.Chain.account_balance":
 		if len(x.AccountBalance) == 0 {
 			return protoreflect.ValueOfList(&_Chain_15_list{})
 		}
@@ -451,35 +451,35 @@ func (x *fastReflection_Chain) Get(descriptor protoreflect.FieldDescriptor) prot
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Chain) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.launch.v1.Chain.launchID":
-		x.LaunchID = value.Uint()
-	case "network.launch.v1.Chain.coordinatorID":
-		x.CoordinatorID = value.Uint()
-	case "network.launch.v1.Chain.genesisChainID":
-		x.GenesisChainID = value.Interface().(string)
-	case "network.launch.v1.Chain.createdAt":
+	case "network.launch.v1.Chain.launch_id":
+		x.LaunchId = value.Uint()
+	case "network.launch.v1.Chain.coordinator_id":
+		x.CoordinatorId = value.Uint()
+	case "network.launch.v1.Chain.genesis_chain_id":
+		x.GenesisChainId = value.Interface().(string)
+	case "network.launch.v1.Chain.created_at":
 		x.CreatedAt = value.Int()
-	case "network.launch.v1.Chain.sourceURL":
-		x.SourceURL = value.Interface().(string)
-	case "network.launch.v1.Chain.sourceHash":
+	case "network.launch.v1.Chain.source_url":
+		x.SourceUrl = value.Interface().(string)
+	case "network.launch.v1.Chain.source_hash":
 		x.SourceHash = value.Interface().(string)
-	case "network.launch.v1.Chain.initialGenesis":
+	case "network.launch.v1.Chain.initial_genesis":
 		x.InitialGenesis = value.Message().Interface().(*InitialGenesis)
-	case "network.launch.v1.Chain.hasProject":
+	case "network.launch.v1.Chain.has_project":
 		x.HasProject = value.Bool()
-	case "network.launch.v1.Chain.projectID":
-		x.ProjectID = value.Uint()
-	case "network.launch.v1.Chain.isMainnet":
+	case "network.launch.v1.Chain.project_id":
+		x.ProjectId = value.Uint()
+	case "network.launch.v1.Chain.is_mainnet":
 		x.IsMainnet = value.Bool()
-	case "network.launch.v1.Chain.launchTriggered":
+	case "network.launch.v1.Chain.launch_triggered":
 		x.LaunchTriggered = value.Bool()
-	case "network.launch.v1.Chain.launchTime":
+	case "network.launch.v1.Chain.launch_time":
 		x.LaunchTime = value.Message().Interface().(*timestamppb.Timestamp)
-	case "network.launch.v1.Chain.consumerRevisionHeight":
+	case "network.launch.v1.Chain.consumer_revision_height":
 		x.ConsumerRevisionHeight = value.Int()
-	case "network.launch.v1.Chain.monitoringConnected":
+	case "network.launch.v1.Chain.monitoring_connected":
 		x.MonitoringConnected = value.Bool()
-	case "network.launch.v1.Chain.accountBalance":
+	case "network.launch.v1.Chain.account_balance":
 		lv := value.List()
 		clv := lv.(*_Chain_15_list)
 		x.AccountBalance = *clv.list
@@ -505,46 +505,46 @@ func (x *fastReflection_Chain) Set(fd protoreflect.FieldDescriptor, value protor
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_Chain) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.Chain.initialGenesis":
+	case "network.launch.v1.Chain.initial_genesis":
 		if x.InitialGenesis == nil {
 			x.InitialGenesis = new(InitialGenesis)
 		}
 		return protoreflect.ValueOfMessage(x.InitialGenesis.ProtoReflect())
-	case "network.launch.v1.Chain.launchTime":
+	case "network.launch.v1.Chain.launch_time":
 		if x.LaunchTime == nil {
 			x.LaunchTime = new(timestamppb.Timestamp)
 		}
 		return protoreflect.ValueOfMessage(x.LaunchTime.ProtoReflect())
-	case "network.launch.v1.Chain.accountBalance":
+	case "network.launch.v1.Chain.account_balance":
 		if x.AccountBalance == nil {
 			x.AccountBalance = []*v1beta1.Coin{}
 		}
 		value := &_Chain_15_list{list: &x.AccountBalance}
 		return protoreflect.ValueOfList(value)
-	case "network.launch.v1.Chain.launchID":
-		panic(fmt.Errorf("field launchID of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.coordinatorID":
-		panic(fmt.Errorf("field coordinatorID of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.genesisChainID":
-		panic(fmt.Errorf("field genesisChainID of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.createdAt":
-		panic(fmt.Errorf("field createdAt of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.sourceURL":
-		panic(fmt.Errorf("field sourceURL of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.sourceHash":
-		panic(fmt.Errorf("field sourceHash of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.hasProject":
-		panic(fmt.Errorf("field hasProject of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.projectID":
-		panic(fmt.Errorf("field projectID of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.isMainnet":
-		panic(fmt.Errorf("field isMainnet of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.launchTriggered":
-		panic(fmt.Errorf("field launchTriggered of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.consumerRevisionHeight":
-		panic(fmt.Errorf("field consumerRevisionHeight of message network.launch.v1.Chain is not mutable"))
-	case "network.launch.v1.Chain.monitoringConnected":
-		panic(fmt.Errorf("field monitoringConnected of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.coordinator_id":
+		panic(fmt.Errorf("field coordinator_id of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.genesis_chain_id":
+		panic(fmt.Errorf("field genesis_chain_id of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.created_at":
+		panic(fmt.Errorf("field created_at of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.source_url":
+		panic(fmt.Errorf("field source_url of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.source_hash":
+		panic(fmt.Errorf("field source_hash of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.has_project":
+		panic(fmt.Errorf("field has_project of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.project_id":
+		panic(fmt.Errorf("field project_id of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.is_mainnet":
+		panic(fmt.Errorf("field is_mainnet of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.launch_triggered":
+		panic(fmt.Errorf("field launch_triggered of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.consumer_revision_height":
+		panic(fmt.Errorf("field consumer_revision_height of message network.launch.v1.Chain is not mutable"))
+	case "network.launch.v1.Chain.monitoring_connected":
+		panic(fmt.Errorf("field monitoring_connected of message network.launch.v1.Chain is not mutable"))
 	case "network.launch.v1.Chain.metadata":
 		panic(fmt.Errorf("field metadata of message network.launch.v1.Chain is not mutable"))
 	default:
@@ -560,37 +560,37 @@ func (x *fastReflection_Chain) Mutable(fd protoreflect.FieldDescriptor) protoref
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_Chain) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.Chain.launchID":
+	case "network.launch.v1.Chain.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.Chain.coordinatorID":
+	case "network.launch.v1.Chain.coordinator_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.Chain.genesisChainID":
+	case "network.launch.v1.Chain.genesis_chain_id":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.Chain.createdAt":
+	case "network.launch.v1.Chain.created_at":
 		return protoreflect.ValueOfInt64(int64(0))
-	case "network.launch.v1.Chain.sourceURL":
+	case "network.launch.v1.Chain.source_url":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.Chain.sourceHash":
+	case "network.launch.v1.Chain.source_hash":
 		return protoreflect.ValueOfString("")
-	case "network.launch.v1.Chain.initialGenesis":
+	case "network.launch.v1.Chain.initial_genesis":
 		m := new(InitialGenesis)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.launch.v1.Chain.hasProject":
+	case "network.launch.v1.Chain.has_project":
 		return protoreflect.ValueOfBool(false)
-	case "network.launch.v1.Chain.projectID":
+	case "network.launch.v1.Chain.project_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.launch.v1.Chain.isMainnet":
+	case "network.launch.v1.Chain.is_mainnet":
 		return protoreflect.ValueOfBool(false)
-	case "network.launch.v1.Chain.launchTriggered":
+	case "network.launch.v1.Chain.launch_triggered":
 		return protoreflect.ValueOfBool(false)
-	case "network.launch.v1.Chain.launchTime":
+	case "network.launch.v1.Chain.launch_time":
 		m := new(timestamppb.Timestamp)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
-	case "network.launch.v1.Chain.consumerRevisionHeight":
+	case "network.launch.v1.Chain.consumer_revision_height":
 		return protoreflect.ValueOfInt64(int64(0))
-	case "network.launch.v1.Chain.monitoringConnected":
+	case "network.launch.v1.Chain.monitoring_connected":
 		return protoreflect.ValueOfBool(false)
-	case "network.launch.v1.Chain.accountBalance":
+	case "network.launch.v1.Chain.account_balance":
 		list := []*v1beta1.Coin{}
 		return protoreflect.ValueOfList(&_Chain_15_list{list: &list})
 	case "network.launch.v1.Chain.metadata":
@@ -664,20 +664,20 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
-		if x.CoordinatorID != 0 {
-			n += 1 + runtime.Sov(uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			n += 1 + runtime.Sov(uint64(x.CoordinatorId))
 		}
-		l = len(x.GenesisChainID)
+		l = len(x.GenesisChainId)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.CreatedAt != 0 {
 			n += 1 + runtime.Sov(uint64(x.CreatedAt))
 		}
-		l = len(x.SourceURL)
+		l = len(x.SourceUrl)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -692,8 +692,8 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 		if x.HasProject {
 			n += 2
 		}
-		if x.ProjectID != 0 {
-			n += 1 + runtime.Sov(uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			n += 1 + runtime.Sov(uint64(x.ProjectId))
 		}
 		if x.IsMainnet {
 			n += 2
@@ -824,8 +824,8 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x50
 		}
-		if x.ProjectID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectID))
+		if x.ProjectId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.ProjectId))
 			i--
 			dAtA[i] = 0x48
 		}
@@ -860,10 +860,10 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x32
 		}
-		if len(x.SourceURL) > 0 {
-			i -= len(x.SourceURL)
-			copy(dAtA[i:], x.SourceURL)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.SourceURL)))
+		if len(x.SourceUrl) > 0 {
+			i -= len(x.SourceUrl)
+			copy(dAtA[i:], x.SourceUrl)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.SourceUrl)))
 			i--
 			dAtA[i] = 0x2a
 		}
@@ -872,20 +872,20 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x20
 		}
-		if len(x.GenesisChainID) > 0 {
-			i -= len(x.GenesisChainID)
-			copy(dAtA[i:], x.GenesisChainID)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.GenesisChainID)))
+		if len(x.GenesisChainId) > 0 {
+			i -= len(x.GenesisChainId)
+			copy(dAtA[i:], x.GenesisChainId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.GenesisChainId)))
 			i--
 			dAtA[i] = 0x1a
 		}
-		if x.CoordinatorID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorID))
+		if x.CoordinatorId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.CoordinatorId))
 			i--
 			dAtA[i] = 0x10
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -940,9 +940,9 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -952,16 +952,16 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 2:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CoordinatorId", wireType)
 				}
-				x.CoordinatorID = 0
+				x.CoordinatorId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -971,14 +971,14 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.CoordinatorID |= uint64(b&0x7F) << shift
+					x.CoordinatorId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 3:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GenesisChainID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GenesisChainId", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -1006,7 +1006,7 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.GenesisChainID = string(dAtA[iNdEx:postIndex])
+				x.GenesisChainId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 4:
 				if wireType != 0 {
@@ -1029,7 +1029,7 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 				}
 			case 5:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field SourceURL", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field SourceUrl", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -1057,7 +1057,7 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.SourceURL = string(dAtA[iNdEx:postIndex])
+				x.SourceUrl = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			case 6:
 				if wireType != 2 {
@@ -1149,9 +1149,9 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 				x.HasProject = bool(v != 0)
 			case 9:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ProjectId", wireType)
 				}
-				x.ProjectID = 0
+				x.ProjectId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -1161,7 +1161,7 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.ProjectID |= uint64(b&0x7F) << shift
+					x.ProjectId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
@@ -1385,18 +1385,18 @@ func (x *fastReflection_Chain) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_InitialGenesis                       protoreflect.MessageDescriptor
-	fd_InitialGenesis_defaultInitialGenesis protoreflect.FieldDescriptor
-	fd_InitialGenesis_genesisURL            protoreflect.FieldDescriptor
-	fd_InitialGenesis_genesisConfig         protoreflect.FieldDescriptor
+	md_InitialGenesis                         protoreflect.MessageDescriptor
+	fd_InitialGenesis_default_initial_genesis protoreflect.FieldDescriptor
+	fd_InitialGenesis_genesis_url             protoreflect.FieldDescriptor
+	fd_InitialGenesis_genesis_config          protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_launch_v1_chain_proto_init()
 	md_InitialGenesis = File_network_launch_v1_chain_proto.Messages().ByName("InitialGenesis")
-	fd_InitialGenesis_defaultInitialGenesis = md_InitialGenesis.Fields().ByName("defaultInitialGenesis")
-	fd_InitialGenesis_genesisURL = md_InitialGenesis.Fields().ByName("genesisURL")
-	fd_InitialGenesis_genesisConfig = md_InitialGenesis.Fields().ByName("genesisConfig")
+	fd_InitialGenesis_default_initial_genesis = md_InitialGenesis.Fields().ByName("default_initial_genesis")
+	fd_InitialGenesis_genesis_url = md_InitialGenesis.Fields().ByName("genesis_url")
+	fd_InitialGenesis_genesis_config = md_InitialGenesis.Fields().ByName("genesis_config")
 }
 
 var _ protoreflect.Message = (*fastReflection_InitialGenesis)(nil)
@@ -1469,19 +1469,19 @@ func (x *fastReflection_InitialGenesis) Range(f func(protoreflect.FieldDescripto
 		case *InitialGenesis_DefaultInitialGenesis:
 			v := o.DefaultInitialGenesis
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_InitialGenesis_defaultInitialGenesis, value) {
+			if !f(fd_InitialGenesis_default_initial_genesis, value) {
 				return
 			}
-		case *InitialGenesis_GenesisURL:
-			v := o.GenesisURL
+		case *InitialGenesis_GenesisUrl:
+			v := o.GenesisUrl
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_InitialGenesis_genesisURL, value) {
+			if !f(fd_InitialGenesis_genesis_url, value) {
 				return
 			}
 		case *InitialGenesis_GenesisConfig:
 			v := o.GenesisConfig
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_InitialGenesis_genesisConfig, value) {
+			if !f(fd_InitialGenesis_genesis_config, value) {
 				return
 			}
 		}
@@ -1501,7 +1501,7 @@ func (x *fastReflection_InitialGenesis) Range(f func(protoreflect.FieldDescripto
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_InitialGenesis) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.launch.v1.InitialGenesis.defaultInitialGenesis":
+	case "network.launch.v1.InitialGenesis.default_initial_genesis":
 		if x.Source == nil {
 			return false
 		} else if _, ok := x.Source.(*InitialGenesis_DefaultInitialGenesis); ok {
@@ -1509,15 +1509,15 @@ func (x *fastReflection_InitialGenesis) Has(fd protoreflect.FieldDescriptor) boo
 		} else {
 			return false
 		}
-	case "network.launch.v1.InitialGenesis.genesisURL":
+	case "network.launch.v1.InitialGenesis.genesis_url":
 		if x.Source == nil {
 			return false
-		} else if _, ok := x.Source.(*InitialGenesis_GenesisURL); ok {
+		} else if _, ok := x.Source.(*InitialGenesis_GenesisUrl); ok {
 			return true
 		} else {
 			return false
 		}
-	case "network.launch.v1.InitialGenesis.genesisConfig":
+	case "network.launch.v1.InitialGenesis.genesis_config":
 		if x.Source == nil {
 			return false
 		} else if _, ok := x.Source.(*InitialGenesis_GenesisConfig); ok {
@@ -1541,11 +1541,11 @@ func (x *fastReflection_InitialGenesis) Has(fd protoreflect.FieldDescriptor) boo
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_InitialGenesis) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.launch.v1.InitialGenesis.defaultInitialGenesis":
+	case "network.launch.v1.InitialGenesis.default_initial_genesis":
 		x.Source = nil
-	case "network.launch.v1.InitialGenesis.genesisURL":
+	case "network.launch.v1.InitialGenesis.genesis_url":
 		x.Source = nil
-	case "network.launch.v1.InitialGenesis.genesisConfig":
+	case "network.launch.v1.InitialGenesis.genesis_config":
 		x.Source = nil
 	default:
 		if fd.IsExtension() {
@@ -1563,7 +1563,7 @@ func (x *fastReflection_InitialGenesis) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_InitialGenesis) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.launch.v1.InitialGenesis.defaultInitialGenesis":
+	case "network.launch.v1.InitialGenesis.default_initial_genesis":
 		if x.Source == nil {
 			return protoreflect.ValueOfMessage((*DefaultInitialGenesis)(nil).ProtoReflect())
 		} else if v, ok := x.Source.(*InitialGenesis_DefaultInitialGenesis); ok {
@@ -1571,15 +1571,15 @@ func (x *fastReflection_InitialGenesis) Get(descriptor protoreflect.FieldDescrip
 		} else {
 			return protoreflect.ValueOfMessage((*DefaultInitialGenesis)(nil).ProtoReflect())
 		}
-	case "network.launch.v1.InitialGenesis.genesisURL":
+	case "network.launch.v1.InitialGenesis.genesis_url":
 		if x.Source == nil {
 			return protoreflect.ValueOfMessage((*GenesisURL)(nil).ProtoReflect())
-		} else if v, ok := x.Source.(*InitialGenesis_GenesisURL); ok {
-			return protoreflect.ValueOfMessage(v.GenesisURL.ProtoReflect())
+		} else if v, ok := x.Source.(*InitialGenesis_GenesisUrl); ok {
+			return protoreflect.ValueOfMessage(v.GenesisUrl.ProtoReflect())
 		} else {
 			return protoreflect.ValueOfMessage((*GenesisURL)(nil).ProtoReflect())
 		}
-	case "network.launch.v1.InitialGenesis.genesisConfig":
+	case "network.launch.v1.InitialGenesis.genesis_config":
 		if x.Source == nil {
 			return protoreflect.ValueOfMessage((*GenesisConfig)(nil).ProtoReflect())
 		} else if v, ok := x.Source.(*InitialGenesis_GenesisConfig); ok {
@@ -1607,13 +1607,13 @@ func (x *fastReflection_InitialGenesis) Get(descriptor protoreflect.FieldDescrip
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_InitialGenesis) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.launch.v1.InitialGenesis.defaultInitialGenesis":
+	case "network.launch.v1.InitialGenesis.default_initial_genesis":
 		cv := value.Message().Interface().(*DefaultInitialGenesis)
 		x.Source = &InitialGenesis_DefaultInitialGenesis{DefaultInitialGenesis: cv}
-	case "network.launch.v1.InitialGenesis.genesisURL":
+	case "network.launch.v1.InitialGenesis.genesis_url":
 		cv := value.Message().Interface().(*GenesisURL)
-		x.Source = &InitialGenesis_GenesisURL{GenesisURL: cv}
-	case "network.launch.v1.InitialGenesis.genesisConfig":
+		x.Source = &InitialGenesis_GenesisUrl{GenesisUrl: cv}
+	case "network.launch.v1.InitialGenesis.genesis_config":
 		cv := value.Message().Interface().(*GenesisConfig)
 		x.Source = &InitialGenesis_GenesisConfig{GenesisConfig: cv}
 	default:
@@ -1636,7 +1636,7 @@ func (x *fastReflection_InitialGenesis) Set(fd protoreflect.FieldDescriptor, val
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_InitialGenesis) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.InitialGenesis.defaultInitialGenesis":
+	case "network.launch.v1.InitialGenesis.default_initial_genesis":
 		if x.Source == nil {
 			value := &DefaultInitialGenesis{}
 			oneofValue := &InitialGenesis_DefaultInitialGenesis{DefaultInitialGenesis: value}
@@ -1652,23 +1652,23 @@ func (x *fastReflection_InitialGenesis) Mutable(fd protoreflect.FieldDescriptor)
 			x.Source = oneofValue
 			return protoreflect.ValueOfMessage(value.ProtoReflect())
 		}
-	case "network.launch.v1.InitialGenesis.genesisURL":
+	case "network.launch.v1.InitialGenesis.genesis_url":
 		if x.Source == nil {
 			value := &GenesisURL{}
-			oneofValue := &InitialGenesis_GenesisURL{GenesisURL: value}
+			oneofValue := &InitialGenesis_GenesisUrl{GenesisUrl: value}
 			x.Source = oneofValue
 			return protoreflect.ValueOfMessage(value.ProtoReflect())
 		}
 		switch m := x.Source.(type) {
-		case *InitialGenesis_GenesisURL:
-			return protoreflect.ValueOfMessage(m.GenesisURL.ProtoReflect())
+		case *InitialGenesis_GenesisUrl:
+			return protoreflect.ValueOfMessage(m.GenesisUrl.ProtoReflect())
 		default:
 			value := &GenesisURL{}
-			oneofValue := &InitialGenesis_GenesisURL{GenesisURL: value}
+			oneofValue := &InitialGenesis_GenesisUrl{GenesisUrl: value}
 			x.Source = oneofValue
 			return protoreflect.ValueOfMessage(value.ProtoReflect())
 		}
-	case "network.launch.v1.InitialGenesis.genesisConfig":
+	case "network.launch.v1.InitialGenesis.genesis_config":
 		if x.Source == nil {
 			value := &GenesisConfig{}
 			oneofValue := &InitialGenesis_GenesisConfig{GenesisConfig: value}
@@ -1697,13 +1697,13 @@ func (x *fastReflection_InitialGenesis) Mutable(fd protoreflect.FieldDescriptor)
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_InitialGenesis) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.launch.v1.InitialGenesis.defaultInitialGenesis":
+	case "network.launch.v1.InitialGenesis.default_initial_genesis":
 		value := &DefaultInitialGenesis{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.InitialGenesis.genesisURL":
+	case "network.launch.v1.InitialGenesis.genesis_url":
 		value := &GenesisURL{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
-	case "network.launch.v1.InitialGenesis.genesisConfig":
+	case "network.launch.v1.InitialGenesis.genesis_config":
 		value := &GenesisConfig{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
@@ -1725,11 +1725,11 @@ func (x *fastReflection_InitialGenesis) WhichOneof(d protoreflect.OneofDescripto
 		}
 		switch x.Source.(type) {
 		case *InitialGenesis_DefaultInitialGenesis:
-			return x.Descriptor().Fields().ByName("defaultInitialGenesis")
-		case *InitialGenesis_GenesisURL:
-			return x.Descriptor().Fields().ByName("genesisURL")
+			return x.Descriptor().Fields().ByName("default_initial_genesis")
+		case *InitialGenesis_GenesisUrl:
+			return x.Descriptor().Fields().ByName("genesis_url")
 		case *InitialGenesis_GenesisConfig:
-			return x.Descriptor().Fields().ByName("genesisConfig")
+			return x.Descriptor().Fields().ByName("genesis_config")
 		}
 	default:
 		panic(fmt.Errorf("%s is not a oneof field in network.launch.v1.InitialGenesis", d.FullName()))
@@ -1794,11 +1794,11 @@ func (x *fastReflection_InitialGenesis) ProtoMethods() *protoiface.Methods {
 			}
 			l = options.Size(x.DefaultInitialGenesis)
 			n += 1 + l + runtime.Sov(uint64(l))
-		case *InitialGenesis_GenesisURL:
+		case *InitialGenesis_GenesisUrl:
 			if x == nil {
 				break
 			}
-			l = options.Size(x.GenesisURL)
+			l = options.Size(x.GenesisUrl)
 			n += 1 + l + runtime.Sov(uint64(l))
 		case *InitialGenesis_GenesisConfig:
 			if x == nil {
@@ -1850,8 +1850,8 @@ func (x *fastReflection_InitialGenesis) ProtoMethods() *protoiface.Methods {
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
 			dAtA[i] = 0xa
-		case *InitialGenesis_GenesisURL:
-			encoded, err := options.Marshal(x.GenesisURL)
+		case *InitialGenesis_GenesisUrl:
+			encoded, err := options.Marshal(x.GenesisUrl)
 			if err != nil {
 				return protoiface.MarshalOutput{
 					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1963,7 +1963,7 @@ func (x *fastReflection_InitialGenesis) ProtoMethods() *protoiface.Methods {
 				iNdEx = postIndex
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GenesisURL", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field GenesisUrl", wireType)
 				}
 				var msglen int
 				for shift := uint(0); ; shift += 7 {
@@ -1994,7 +1994,7 @@ func (x *fastReflection_InitialGenesis) ProtoMethods() *protoiface.Methods {
 				if err := options.Unmarshal(dAtA[iNdEx:postIndex], v); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
-				x.Source = &InitialGenesis_GenesisURL{v}
+				x.Source = &InitialGenesis_GenesisUrl{v}
 				iNdEx = postIndex
 			case 3:
 				if wireType != 2 {
@@ -3344,24 +3344,24 @@ type Chain struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LaunchID               uint64                 `protobuf:"varint,1,opt,name=launchID,proto3" json:"launchID,omitempty"`
-	CoordinatorID          uint64                 `protobuf:"varint,2,opt,name=coordinatorID,proto3" json:"coordinatorID,omitempty"`
-	GenesisChainID         string                 `protobuf:"bytes,3,opt,name=genesisChainID,proto3" json:"genesisChainID,omitempty"`
-	CreatedAt              int64                  `protobuf:"varint,4,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
-	SourceURL              string                 `protobuf:"bytes,5,opt,name=sourceURL,proto3" json:"sourceURL,omitempty"`
-	SourceHash             string                 `protobuf:"bytes,6,opt,name=sourceHash,proto3" json:"sourceHash,omitempty"`
-	InitialGenesis         *InitialGenesis        `protobuf:"bytes,7,opt,name=initialGenesis,proto3" json:"initialGenesis,omitempty"`
-	HasProject             bool                   `protobuf:"varint,8,opt,name=hasProject,proto3" json:"hasProject,omitempty"`
-	ProjectID              uint64                 `protobuf:"varint,9,opt,name=projectID,proto3" json:"projectID,omitempty"`
-	IsMainnet              bool                   `protobuf:"varint,10,opt,name=isMainnet,proto3" json:"isMainnet,omitempty"`
-	LaunchTriggered        bool                   `protobuf:"varint,11,opt,name=launchTriggered,proto3" json:"launchTriggered,omitempty"`
-	LaunchTime             *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=launchTime,proto3" json:"launchTime,omitempty"`
-	ConsumerRevisionHeight int64                  `protobuf:"varint,13,opt,name=consumerRevisionHeight,proto3" json:"consumerRevisionHeight,omitempty"`
-	MonitoringConnected    bool                   `protobuf:"varint,14,opt,name=monitoringConnected,proto3" json:"monitoringConnected,omitempty"`
-	// account balance is the balance given to approved accounts
+	LaunchId               uint64                 `protobuf:"varint,1,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
+	CoordinatorId          uint64                 `protobuf:"varint,2,opt,name=coordinator_id,json=coordinatorId,proto3" json:"coordinator_id,omitempty"`
+	GenesisChainId         string                 `protobuf:"bytes,3,opt,name=genesis_chain_id,json=genesisChainId,proto3" json:"genesis_chain_id,omitempty"`
+	CreatedAt              int64                  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	SourceUrl              string                 `protobuf:"bytes,5,opt,name=source_url,json=sourceUrl,proto3" json:"source_url,omitempty"`
+	SourceHash             string                 `protobuf:"bytes,6,opt,name=source_hash,json=sourceHash,proto3" json:"source_hash,omitempty"`
+	InitialGenesis         *InitialGenesis        `protobuf:"bytes,7,opt,name=initial_genesis,json=initialGenesis,proto3" json:"initial_genesis,omitempty"`
+	HasProject             bool                   `protobuf:"varint,8,opt,name=has_project,json=hasProject,proto3" json:"has_project,omitempty"`
+	ProjectId              uint64                 `protobuf:"varint,9,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	IsMainnet              bool                   `protobuf:"varint,10,opt,name=is_mainnet,json=isMainnet,proto3" json:"is_mainnet,omitempty"`
+	LaunchTriggered        bool                   `protobuf:"varint,11,opt,name=launch_triggered,json=launchTriggered,proto3" json:"launch_triggered,omitempty"`
+	LaunchTime             *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=launch_time,json=launchTime,proto3" json:"launch_time,omitempty"`
+	ConsumerRevisionHeight int64                  `protobuf:"varint,13,opt,name=consumer_revision_height,json=consumerRevisionHeight,proto3" json:"consumer_revision_height,omitempty"`
+	MonitoringConnected    bool                   `protobuf:"varint,14,opt,name=monitoring_connected,json=monitoringConnected,proto3" json:"monitoring_connected,omitempty"`
+	// account_balance is the balance given to approved accounts
 	// for this chain.  If not set, the balances used will be those
 	// contained in the requests
-	AccountBalance []*v1beta1.Coin `protobuf:"bytes,15,rep,name=accountBalance,proto3" json:"accountBalance,omitempty"`
+	AccountBalance []*v1beta1.Coin `protobuf:"bytes,15,rep,name=account_balance,json=accountBalance,proto3" json:"account_balance,omitempty"`
 	Metadata       []byte          `protobuf:"bytes,16,opt,name=metadata,proto3" json:"metadata,omitempty"`
 }
 
@@ -3385,23 +3385,23 @@ func (*Chain) Descriptor() ([]byte, []int) {
 	return file_network_launch_v1_chain_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Chain) GetLaunchID() uint64 {
+func (x *Chain) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
 
-func (x *Chain) GetCoordinatorID() uint64 {
+func (x *Chain) GetCoordinatorId() uint64 {
 	if x != nil {
-		return x.CoordinatorID
+		return x.CoordinatorId
 	}
 	return 0
 }
 
-func (x *Chain) GetGenesisChainID() string {
+func (x *Chain) GetGenesisChainId() string {
 	if x != nil {
-		return x.GenesisChainID
+		return x.GenesisChainId
 	}
 	return ""
 }
@@ -3413,9 +3413,9 @@ func (x *Chain) GetCreatedAt() int64 {
 	return 0
 }
 
-func (x *Chain) GetSourceURL() string {
+func (x *Chain) GetSourceUrl() string {
 	if x != nil {
-		return x.SourceURL
+		return x.SourceUrl
 	}
 	return ""
 }
@@ -3441,9 +3441,9 @@ func (x *Chain) GetHasProject() bool {
 	return false
 }
 
-func (x *Chain) GetProjectID() uint64 {
+func (x *Chain) GetProjectId() uint64 {
 	if x != nil {
-		return x.ProjectID
+		return x.ProjectId
 	}
 	return 0
 }
@@ -3505,7 +3505,7 @@ type InitialGenesis struct {
 	// Types that are assignable to Source:
 	//
 	//	*InitialGenesis_DefaultInitialGenesis
-	//	*InitialGenesis_GenesisURL
+	//	*InitialGenesis_GenesisUrl
 	//	*InitialGenesis_GenesisConfig
 	Source isInitialGenesis_Source `protobuf_oneof:"source"`
 }
@@ -3544,9 +3544,9 @@ func (x *InitialGenesis) GetDefaultInitialGenesis() *DefaultInitialGenesis {
 	return nil
 }
 
-func (x *InitialGenesis) GetGenesisURL() *GenesisURL {
-	if x, ok := x.GetSource().(*InitialGenesis_GenesisURL); ok {
-		return x.GenesisURL
+func (x *InitialGenesis) GetGenesisUrl() *GenesisURL {
+	if x, ok := x.GetSource().(*InitialGenesis_GenesisUrl); ok {
+		return x.GenesisUrl
 	}
 	return nil
 }
@@ -3563,20 +3563,20 @@ type isInitialGenesis_Source interface {
 }
 
 type InitialGenesis_DefaultInitialGenesis struct {
-	DefaultInitialGenesis *DefaultInitialGenesis `protobuf:"bytes,1,opt,name=defaultInitialGenesis,proto3,oneof"`
+	DefaultInitialGenesis *DefaultInitialGenesis `protobuf:"bytes,1,opt,name=default_initial_genesis,json=defaultInitialGenesis,proto3,oneof"`
 }
 
-type InitialGenesis_GenesisURL struct {
-	GenesisURL *GenesisURL `protobuf:"bytes,2,opt,name=genesisURL,proto3,oneof"`
+type InitialGenesis_GenesisUrl struct {
+	GenesisUrl *GenesisURL `protobuf:"bytes,2,opt,name=genesis_url,json=genesisUrl,proto3,oneof"`
 }
 
 type InitialGenesis_GenesisConfig struct {
-	GenesisConfig *GenesisConfig `protobuf:"bytes,3,opt,name=genesisConfig,proto3,oneof"`
+	GenesisConfig *GenesisConfig `protobuf:"bytes,3,opt,name=genesis_config,json=genesisConfig,proto3,oneof"`
 }
 
 func (*InitialGenesis_DefaultInitialGenesis) isInitialGenesis_Source() {}
 
-func (*InitialGenesis_GenesisURL) isInitialGenesis_Source() {}
+func (*InitialGenesis_GenesisUrl) isInitialGenesis_Source() {}
 
 func (*InitialGenesis_GenesisConfig) isInitialGenesis_Source() {}
 
@@ -3653,7 +3653,7 @@ func (x *GenesisURL) GetHash() string {
 }
 
 // GenesisConfig specifies using a custom genesis from a Ignite CLI config file
-// the file is located in the root specified by sourceURL
+// the file is located in the root specified by source_url
 type GenesisConfig struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3701,94 +3701,96 @@ var file_network_launch_v1_chain_proto_rawDesc = []byte{
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d,
-	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa7, 0x06, 0x0a,
-	0x05, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
-	0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
-	0x49, 0x44, 0x12, 0x24, 0x0a, 0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f,
-	0x72, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x63, 0x6f, 0x6f, 0x72, 0x64,
-	0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x44, 0x12, 0x26, 0x0a, 0x0e, 0x67, 0x65, 0x6e, 0x65,
-	0x73, 0x69, 0x73, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x44,
-	0x12, 0x1c, 0x0a, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1c,
-	0x0a, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x55, 0x52, 0x4c, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x55, 0x52, 0x4c, 0x12, 0x1e, 0x0a, 0x0a,
-	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x48, 0x61, 0x73, 0x68, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x48, 0x61, 0x73, 0x68, 0x12, 0x4f, 0x0a, 0x0e,
-	0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x18, 0x07,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c,
-	0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0e, 0x69,
-	0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x12, 0x1e, 0x0a,
-	0x0a, 0x68, 0x61, 0x73, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28,
-	0x08, 0x52, 0x0a, 0x68, 0x61, 0x73, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x1c, 0x0a,
-	0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x09, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x1c, 0x0a, 0x09, 0x69,
-	0x73, 0x4d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09,
-	0x69, 0x73, 0x4d, 0x61, 0x69, 0x6e, 0x6e, 0x65, 0x74, 0x12, 0x28, 0x0a, 0x0f, 0x6c, 0x61, 0x75,
-	0x6e, 0x63, 0x68, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x65, 0x64, 0x18, 0x0b, 0x20, 0x01,
-	0x28, 0x08, 0x52, 0x0f, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65,
-	0x72, 0x65, 0x64, 0x12, 0x44, 0x0a, 0x0a, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x54, 0x69, 0x6d,
-	0x65, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74,
-	0x61, 0x6d, 0x70, 0x42, 0x08, 0xc8, 0xde, 0x1f, 0x00, 0x90, 0xdf, 0x1f, 0x01, 0x52, 0x0a, 0x6c,
-	0x61, 0x75, 0x6e, 0x63, 0x68, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x36, 0x0a, 0x16, 0x63, 0x6f, 0x6e,
-	0x73, 0x75, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x48, 0x65, 0x69,
-	0x67, 0x68, 0x74, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x03, 0x52, 0x16, 0x63, 0x6f, 0x6e, 0x73, 0x75,
-	0x6d, 0x65, 0x72, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x48, 0x65, 0x69, 0x67, 0x68,
-	0x74, 0x12, 0x30, 0x0a, 0x13, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x43,
+	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xb8, 0x06, 0x0a,
+	0x05, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x12, 0x1b, 0x0a, 0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63,
+	0x68, 0x49, 0x64, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74,
+	0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x63, 0x6f, 0x6f,
+	0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x64, 0x12, 0x28, 0x0a, 0x10, 0x67, 0x65,
+	0x6e, 0x65, 0x73, 0x69, 0x73, 0x5f, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43, 0x68, 0x61,
+	0x69, 0x6e, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f,
+	0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x64, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x75, 0x72,
+	0x6c, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x55,
+	0x72, 0x6c, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x68, 0x61, 0x73,
+	0x68, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x48,
+	0x61, 0x73, 0x68, 0x12, 0x50, 0x0a, 0x0f, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x5f, 0x67,
+	0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31,
+	0x2e, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x42,
+	0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0e, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65,
+	0x6e, 0x65, 0x73, 0x69, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x68, 0x61, 0x73, 0x5f, 0x70, 0x72, 0x6f,
+	0x6a, 0x65, 0x63, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x68, 0x61, 0x73, 0x50,
+	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x09, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a,
+	0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x69, 0x73, 0x5f, 0x6d, 0x61, 0x69, 0x6e,
+	0x6e, 0x65, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x69, 0x73, 0x4d, 0x61, 0x69,
+	0x6e, 0x6e, 0x65, 0x74, 0x12, 0x29, 0x0a, 0x10, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x74,
+	0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x65, 0x64, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0f,
+	0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x65, 0x64, 0x12,
+	0x45, 0x0a, 0x0b, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x18, 0x0c,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
+	0x42, 0x08, 0xc8, 0xde, 0x1f, 0x00, 0x90, 0xdf, 0x1f, 0x01, 0x52, 0x0a, 0x6c, 0x61, 0x75, 0x6e,
+	0x63, 0x68, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x38, 0x0a, 0x18, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d,
+	0x65, 0x72, 0x5f, 0x72, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x68, 0x65, 0x69, 0x67,
+	0x68, 0x74, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x03, 0x52, 0x16, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d,
+	0x65, 0x72, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74,
+	0x12, 0x31, 0x0a, 0x14, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x5f, 0x63,
 	0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x65, 0x64, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x08, 0x52, 0x13,
 	0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63,
-	0x74, 0x65, 0x64, 0x12, 0xb4, 0x01, 0x0a, 0x0e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42,
-	0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x18, 0x0f, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63,
-	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74,
-	0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x71, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde, 0x1f,
-	0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d,
-	0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79,
-	0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x43,
-	0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x5f,
-	0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x0e, 0x61, 0x63, 0x63, 0x6f,
-	0x75, 0x6e, 0x74, 0x42, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x10, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x6d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x22, 0x87, 0x02, 0x0a, 0x0e, 0x49, 0x6e, 0x69, 0x74, 0x69,
-	0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x12, 0x60, 0x0a, 0x15, 0x64, 0x65, 0x66,
-	0x61, 0x75, 0x6c, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73,
-	0x69, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x66,
-	0x61, 0x75, 0x6c, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73,
-	0x69, 0x73, 0x48, 0x00, 0x52, 0x15, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x49, 0x6e, 0x69,
-	0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x12, 0x3f, 0x0a, 0x0a, 0x67,
-	0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x55, 0x52, 0x4c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x1d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68,
-	0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x55, 0x52, 0x4c, 0x48, 0x00,
-	0x52, 0x0a, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x55, 0x52, 0x4c, 0x12, 0x48, 0x0a, 0x0d,
-	0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43,
-	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x48, 0x00, 0x52, 0x0d, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73,
-	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x42, 0x08, 0x0a, 0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
-	0x22, 0x17, 0x0a, 0x15, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x69,
-	0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x22, 0x32, 0x0a, 0x0a, 0x47, 0x65, 0x6e,
-	0x65, 0x73, 0x69, 0x73, 0x55, 0x52, 0x4c, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x61, 0x73,
-	0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x68, 0x61, 0x73, 0x68, 0x22, 0x23, 0x0a,
-	0x0d, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x12,
-	0x0a, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x66, 0x69,
-	0x6c, 0x65, 0x42, 0xc3, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x42, 0x0a, 0x43, 0x68,
-	0x61, 0x69, 0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x38, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72,
-	0x6b, 0x2f, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f, 0x76, 0x31, 0x3b, 0x6c, 0x61, 0x75, 0x6e,
-	0x63, 0x68, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4c, 0x58, 0xaa, 0x02, 0x11, 0x4e, 0x65, 0x74,
-	0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x56, 0x31, 0xca, 0x02,
-	0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5c,
-	0x56, 0x31, 0xe2, 0x02, 0x1d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61, 0x75,
-	0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61,
-	0x74, 0x61, 0xea, 0x02, 0x13, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4c, 0x61,
-	0x75, 0x6e, 0x63, 0x68, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x65, 0x64, 0x12, 0xb5, 0x01, 0x0a, 0x0f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f,
+	0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x18, 0x0f, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e,
+	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x76, 0x31, 0x62, 0x65,
+	0x74, 0x61, 0x31, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0x42, 0x71, 0xc8, 0xde, 0x1f, 0x00, 0xfa, 0xde,
+	0x1f, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74,
+	0x79, 0x70, 0x65, 0x73, 0x2e, 0x43, 0x6f, 0x69, 0x6e, 0xaa, 0xdf, 0x1f, 0x28, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2f, 0x63,
+	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2d, 0x73, 0x64, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e,
+	0x43, 0x6f, 0x69, 0x6e, 0x73, 0x9a, 0xe7, 0xb0, 0x2a, 0x0c, 0x6c, 0x65, 0x67, 0x61, 0x63, 0x79,
+	0x5f, 0x63, 0x6f, 0x69, 0x6e, 0x73, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x0e, 0x61, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x42, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d,
+	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x10, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x6d,
+	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x22, 0x8b, 0x02, 0x0a, 0x0e, 0x49, 0x6e, 0x69, 0x74,
+	0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x12, 0x62, 0x0a, 0x17, 0x64, 0x65,
+	0x66, 0x61, 0x75, 0x6c, 0x74, 0x5f, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x5f, 0x67, 0x65,
+	0x6e, 0x65, 0x73, 0x69, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x6e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e,
+	0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65,
+	0x6e, 0x65, 0x73, 0x69, 0x73, 0x48, 0x00, 0x52, 0x15, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74,
+	0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x12, 0x40,
+	0x0a, 0x0b, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61,
+	0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x55,
+	0x52, 0x4c, 0x48, 0x00, 0x52, 0x0a, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x55, 0x72, 0x6c,
+	0x12, 0x49, 0x0a, 0x0e, 0x67, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x5f, 0x63, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
+	0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x6e,
+	0x65, 0x73, 0x69, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x48, 0x00, 0x52, 0x0d, 0x67, 0x65,
+	0x6e, 0x65, 0x73, 0x69, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x42, 0x08, 0x0a, 0x06, 0x73,
+	0x6f, 0x75, 0x72, 0x63, 0x65, 0x22, 0x17, 0x0a, 0x15, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74,
+	0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x6c, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x22, 0x32,
+	0x0a, 0x0a, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x55, 0x52, 0x4c, 0x12, 0x10, 0x0a, 0x03,
+	0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x12, 0x12,
+	0x0a, 0x04, 0x68, 0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x68, 0x61,
+	0x73, 0x68, 0x22, 0x23, 0x0a, 0x0d, 0x47, 0x65, 0x6e, 0x65, 0x73, 0x69, 0x73, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x42, 0xc3, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e,
+	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2e, 0x76,
+	0x31, 0x42, 0x0a, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
+	0x38, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69,
+	0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x2f, 0x76, 0x31,
+	0x3b, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4c, 0x58, 0xaa,
+	0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68,
+	0x2e, 0x56, 0x31, 0xca, 0x02, 0x11, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4c, 0x61,
+	0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x1d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72,
+	0x6b, 0x5c, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d,
+	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x13, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72,
+	0x6b, 0x3a, 0x3a, 0x4c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3814,12 +3816,12 @@ var file_network_launch_v1_chain_proto_goTypes = []interface{}{
 	(*v1beta1.Coin)(nil),          // 6: cosmos.base.v1beta1.Coin
 }
 var file_network_launch_v1_chain_proto_depIdxs = []int32{
-	1, // 0: network.launch.v1.Chain.initialGenesis:type_name -> network.launch.v1.InitialGenesis
-	5, // 1: network.launch.v1.Chain.launchTime:type_name -> google.protobuf.Timestamp
-	6, // 2: network.launch.v1.Chain.accountBalance:type_name -> cosmos.base.v1beta1.Coin
-	2, // 3: network.launch.v1.InitialGenesis.defaultInitialGenesis:type_name -> network.launch.v1.DefaultInitialGenesis
-	3, // 4: network.launch.v1.InitialGenesis.genesisURL:type_name -> network.launch.v1.GenesisURL
-	4, // 5: network.launch.v1.InitialGenesis.genesisConfig:type_name -> network.launch.v1.GenesisConfig
+	1, // 0: network.launch.v1.Chain.initial_genesis:type_name -> network.launch.v1.InitialGenesis
+	5, // 1: network.launch.v1.Chain.launch_time:type_name -> google.protobuf.Timestamp
+	6, // 2: network.launch.v1.Chain.account_balance:type_name -> cosmos.base.v1beta1.Coin
+	2, // 3: network.launch.v1.InitialGenesis.default_initial_genesis:type_name -> network.launch.v1.DefaultInitialGenesis
+	3, // 4: network.launch.v1.InitialGenesis.genesis_url:type_name -> network.launch.v1.GenesisURL
+	4, // 5: network.launch.v1.InitialGenesis.genesis_config:type_name -> network.launch.v1.GenesisConfig
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
@@ -3896,7 +3898,7 @@ func file_network_launch_v1_chain_proto_init() {
 	}
 	file_network_launch_v1_chain_proto_msgTypes[1].OneofWrappers = []interface{}{
 		(*InitialGenesis_DefaultInitialGenesis)(nil),
-		(*InitialGenesis_GenesisURL)(nil),
+		(*InitialGenesis_GenesisUrl)(nil),
 		(*InitialGenesis_GenesisConfig)(nil),
 	}
 	type x struct{}

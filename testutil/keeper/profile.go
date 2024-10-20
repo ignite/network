@@ -71,5 +71,5 @@ func (tm TestMsgServers) CreateCoordinatorWithAddr(ctx context.Context, r *rand.
 		Description: sample.CoordinatorDescription(r),
 	})
 	require.NoError(tm.T, err)
-	return res.CoordinatorID, addr
+	return res.CoordinatorId, addr
 }

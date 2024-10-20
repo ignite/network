@@ -20,10 +20,10 @@ func (gs GenesisState) Validate() error {
 		if err := elem.Validate(); err != nil {
 			return err
 		}
-		if _, ok := rewardPoolIndexMap[elem.LaunchID]; ok {
+		if _, ok := rewardPoolIndexMap[elem.LaunchId]; ok {
 			return fmt.Errorf("duplicated index for rewardPool")
 		}
-		rewardPoolIndexMap[elem.LaunchID] = struct{}{}
+		rewardPoolIndexMap[elem.LaunchId] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

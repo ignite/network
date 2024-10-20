@@ -13,7 +13,7 @@ message MerkleRoot {
 // ConsensusState represents a Consensus State
 // it is compatible with the dumped state from `appd q ibc client self-consensus-state` command
 message ConsensusState {
-  string nextValidatorsHash = 1;
+  string next_validators_hash = 1;
   string timestamp = 2;
   MerkleRoot root = 3 [(gogoproto.nullable) = false];
 }
@@ -26,9 +26,9 @@ message PubKey {
 
 // Validator represents a validator in ValSet
 message Validator {
-  string proposerPriority = 1;
-  string votingPower = 2;
-  PubKey pubKey = 3 [(gogoproto.nullable) = false];
+  string proposer_priority = 1;
+  string voting_power = 2;
+  PubKey pub_key = 3 [(gogoproto.nullable) = false];
 }
 
 // ValidatorSet represents a Validator Set

@@ -42,12 +42,12 @@ func (k msgServer) CreateChain(ctx context.Context, msg *types.MsgCreateChain) (
 	launchID, err := k.CreateNewChain(
 		ctx,
 		coordinatorID,
-		msg.GenesisChainID,
-		msg.SourceURL,
+		msg.GenesisChainId,
+		msg.SourceUrl,
 		msg.SourceHash,
 		msg.InitialGenesis,
 		msg.HasProject,
-		msg.ProjectID,
+		msg.ProjectId,
 		false,
 		msg.AccountBalance,
 		msg.Metadata,
@@ -65,6 +65,6 @@ func (k msgServer) CreateChain(ctx context.Context, msg *types.MsgCreateChain) (
 	}
 
 	return &types.MsgCreateChainResponse{
-		LaunchID: launchID,
+		LaunchId: launchID,
 	}, nil
 }

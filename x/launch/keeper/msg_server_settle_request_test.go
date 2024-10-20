@@ -28,29 +28,29 @@ func TestMsgSettleRequest(t *testing.T) {
 	disableCoordinator.Active = false
 
 	var err error
-	coordinator1.CoordinatorID, err = tk.ProfileKeeper.AppendCoordinator(ctx, coordinator1)
+	coordinator1.CoordinatorId, err = tk.ProfileKeeper.AppendCoordinator(ctx, coordinator1)
 	require.NoError(t, err)
-	coordinator2.CoordinatorID, err = tk.ProfileKeeper.AppendCoordinator(ctx, coordinator2)
+	coordinator2.CoordinatorId, err = tk.ProfileKeeper.AppendCoordinator(ctx, coordinator2)
 	require.NoError(t, err)
-	disableCoordinator.CoordinatorID, err = tk.ProfileKeeper.AppendCoordinator(ctx, disableCoordinator)
+	disableCoordinator.CoordinatorId, err = tk.ProfileKeeper.AppendCoordinator(ctx, disableCoordinator)
 	require.NoError(t, err)
 
-	chains := createNChainForCoordinator(tk.LaunchKeeper, ctx, coordinator1.CoordinatorID, 4)
+	chains := createNChainForCoordinator(tk.LaunchKeeper, ctx, coordinator1.CoordinatorId, 4)
 	chains[0].LaunchTriggered = true
-	err = tk.LaunchKeeper.Chain.Set(ctx, chains[0].LaunchID, chains[0])
+	err = tk.LaunchKeeper.Chain.Set(ctx, chains[0].LaunchId, chains[0])
 	require.NoError(t, err)
-	chains[1].CoordinatorID = 99999
-	err = tk.LaunchKeeper.Chain.Set(ctx, chains[1].LaunchID, chains[1])
+	chains[1].CoordinatorId = 99999
+	err = tk.LaunchKeeper.Chain.Set(ctx, chains[1].LaunchId, chains[1])
 	require.NoError(t, err)
-	chains[3].CoordinatorID = disableCoordinator.CoordinatorID
-	err = tk.LaunchKeeper.Chain.Set(ctx, chains[3].LaunchID, chains[3])
+	chains[3].CoordinatorId = disableCoordinator.CoordinatorId
+	err = tk.LaunchKeeper.Chain.Set(ctx, chains[3].LaunchId, chains[3])
 	require.NoError(t, err)
 
 	requestSamples := make([]RequestSample, numReq)
 	for i := 0; i < numReq; i++ {
 		addr := sample.Address(r)
 		requestSamples[i] = RequestSample{
-			Content: sample.GenesisAccountContent(r, chains[2].LaunchID, addr),
+			Content: sample.GenesisAccountContent(r, chains[2].LaunchId, addr),
 			Creator: addr,
 			Status:  types.Request_PENDING,
 		}
@@ -58,10 +58,10 @@ func TestMsgSettleRequest(t *testing.T) {
 
 	// set one request to a non-pending status
 	requestSamples[numReq-1].Status = types.Request_APPROVED
-	requests := createRequestsFromSamples(tk.LaunchKeeper, ctx, chains[2].LaunchID, requestSamples)
+	requests := createRequestsFromSamples(tk.LaunchKeeper, ctx, chains[2].LaunchId, requestSamples)
 
 	invalidContentRequest := types.Request{
-		LaunchID: chains[2].LaunchID,
+		LaunchId: chains[2].LaunchId,
 	}
 	invalidContentRequestID, err := tk.LaunchKeeper.AppendRequest(ctx, invalidContentRequest)
 	require.NoError(t, err)
@@ -76,9 +76,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent settling request for non existing chain",
 			msg: types.MsgSettleRequest{
-				LaunchID:  invalidChain,
+				LaunchId:  invalidChain,
 				Signer:    coordinator1.Address,
-				RequestID: requests[0].RequestID,
+				RequestId: requests[0].RequestId,
 				Approve:   true,
 			},
 			err: types.ErrChainNotFound,
@@ -86,9 +86,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent settling request with launch triggered chain",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[0].LaunchID,
+				LaunchId:  chains[0].LaunchId,
 				Signer:    coordinator1.Address,
-				RequestID: requests[0].RequestID,
+				RequestId: requests[0].RequestId,
 				Approve:   true,
 			},
 			err: types.ErrTriggeredLaunch,
@@ -96,9 +96,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent settling request with coordinator not found",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[1].LaunchID,
+				LaunchId:  chains[1].LaunchId,
 				Signer:    coordinator1.Address,
-				RequestID: requests[0].RequestID,
+				RequestId: requests[0].RequestId,
 				Approve:   true,
 			},
 			err: types.ErrChainInactive,
@@ -106,9 +106,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent setting request if no address permission",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    coordinator2.Address,
-				RequestID: requests[0].RequestID,
+				RequestId: requests[0].RequestId,
 				Approve:   true,
 			},
 			err: types.ErrNoAddressPermission,
@@ -116,9 +116,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent setting request if request already settled",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    coordinator1.Address,
-				RequestID: requests[numReq-1].RequestID,
+				RequestId: requests[numReq-1].RequestId,
 				Approve:   true,
 			},
 			err: types.ErrRequestSettled,
@@ -126,9 +126,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent approving a request that does not exist",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    coordinator1.Address,
-				RequestID: 99999999,
+				RequestId: 99999999,
 				Approve:   true,
 			},
 			err: types.ErrRequestNotFound,
@@ -136,9 +136,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent applying a request with invalid contents",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    coordinator1.Address,
-				RequestID: invalidContentRequestID,
+				RequestId: invalidContentRequestID,
 				Approve:   true,
 			},
 			err: ignterrors.ErrCritical,
@@ -146,9 +146,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should allow approving request from coordinator",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    coordinator1.Address,
-				RequestID: requests[0].RequestID,
+				RequestId: requests[0].RequestId,
 				Approve:   true,
 			},
 			wantStatus: types.Request_APPROVED,
@@ -157,9 +157,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should allow approving a second request from coordinator",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    coordinator1.Address,
-				RequestID: requests[1].RequestID,
+				RequestId: requests[1].RequestId,
 				Approve:   true,
 			},
 			wantStatus: types.Request_APPROVED,
@@ -168,9 +168,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should allow rejecting request from coordinator",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    coordinator1.Address,
-				RequestID: requests[2].RequestID,
+				RequestId: requests[2].RequestId,
 				Approve:   false,
 			},
 			wantStatus: types.Request_REJECTED,
@@ -179,9 +179,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should allow rejecting request from request creator",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    requestSamples[3].Creator,
-				RequestID: requests[3].RequestID,
+				RequestId: requests[3].RequestId,
 				Approve:   false,
 			},
 			wantStatus: types.Request_REJECTED,
@@ -190,9 +190,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent rejecting a request from an account other than coordinator and request creator",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    requestSamples[3].Creator,
-				RequestID: requests[4].RequestID,
+				RequestId: requests[4].RequestId,
 				Approve:   false,
 			},
 			err: types.ErrNoAddressPermission,
@@ -200,9 +200,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent approving a request from an account other than coordinator",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[2].LaunchID,
+				LaunchId:  chains[2].LaunchId,
 				Signer:    requestSamples[5].Creator,
-				RequestID: requests[5].RequestID,
+				RequestId: requests[5].RequestId,
 				Approve:   true,
 			},
 			err: types.ErrNoAddressPermission,
@@ -210,9 +210,9 @@ func TestMsgSettleRequest(t *testing.T) {
 		{
 			name: "should prevent settling request from a disabled coordinator",
 			msg: types.MsgSettleRequest{
-				LaunchID:  chains[3].LaunchID,
+				LaunchId:  chains[3].LaunchId,
 				Signer:    disableCoordinator.Address,
-				RequestID: requests[5].RequestID,
+				RequestId: requests[5].RequestId,
 				Approve:   true,
 			},
 			err: profiletypes.ErrCoordinatorInactive,
@@ -227,12 +227,12 @@ func TestMsgSettleRequest(t *testing.T) {
 			}
 			require.NoError(t, err)
 
-			request, err := tk.LaunchKeeper.Request.Get(ctx, collections.Join(tt.msg.LaunchID, tt.msg.RequestID))
+			request, err := tk.LaunchKeeper.Request.Get(ctx, collections.Join(tt.msg.LaunchId, tt.msg.RequestId))
 			require.NoError(t, err, "request not found")
 			require.Equal(t, tt.wantStatus, request.Status)
 
 			checkAddr, err := tk.LaunchKeeper.AddressCodec().StringToBytes(tt.checkAddr)
-			_, err = tk.LaunchKeeper.GenesisAccount.Get(ctx, collections.Join(tt.msg.LaunchID, sdk.AccAddress(checkAddr)))
+			_, err = tk.LaunchKeeper.GenesisAccount.Get(ctx, collections.Join(tt.msg.LaunchId, sdk.AccAddress(checkAddr)))
 			if tt.msg.Approve {
 				require.NoError(t, err, "request apply performed")
 			} else {

@@ -31,14 +31,14 @@ func (k msgServer) Participate(ctx context.Context, msg *types.MsgParticipate) (
 	}
 
 	// check if auction exists
-	auction, err := k.fundraisingKeeper.GetAuction(ctx, msg.AuctionID)
+	auction, err := k.fundraisingKeeper.GetAuction(ctx, msg.AuctionId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.AuctionID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.AuctionId)
 	}
 
 	// check if auction is not in standby
 	if auction.GetStatus() != fundraisingtypes.AuctionStatusStandBy {
-		return nil, sdkerrors.Wrapf(types.ErrParticipationNotAllowed, "auction %d is not in standby", msg.AuctionID)
+		return nil, sdkerrors.Wrapf(types.ErrParticipationNotAllowed, "auction %d is not in standby", msg.AuctionId)
 	}
 
 	// check if auction allows participation at this time
@@ -47,29 +47,29 @@ func (k msgServer) Participate(ctx context.Context, msg *types.MsgParticipate) (
 		return nil, ignterrors.Criticalf("failed to get project params %s", err.Error())
 	}
 	if !isRegistrationEnabled {
-		return nil, sdkerrors.Wrapf(types.ErrParticipationNotAllowed, "participation period for auction %d not yet started", msg.AuctionID)
+		return nil, sdkerrors.Wrapf(types.ErrParticipationNotAllowed, "participation period for auction %d not yet started", msg.AuctionId)
 	}
 
 	// check if the user is already added as an allowed bidder for the auction
-	_, err = k.AuctionUsedAllocations.Get(ctx, collections.Join(sdk.AccAddress(participantAddress), msg.AuctionID))
+	_, err = k.AuctionUsedAllocations.Get(ctx, collections.Join(sdk.AccAddress(participantAddress), msg.AuctionId))
 	if err == nil {
 		return nil, sdkerrors.Wrapf(types.ErrAlreadyParticipating,
 			"address %s is already a participant for auction %d",
-			msg.Participant, msg.AuctionID)
+			msg.Participant, msg.AuctionId)
 	} else if !errors.Is(err, collections.ErrNotFound) {
 		return nil, ignterrors.Critical(err.Error())
 	}
 
-	tier, found := types.GetTierFromID(params.ParticipationTierList, msg.TierID)
+	tier, found := types.GetTierFromID(params.ParticipationTierList, msg.TierId)
 	if !found {
-		return nil, sdkerrors.Wrapf(types.ErrTierNotFound, "tier %d not found", msg.TierID)
+		return nil, sdkerrors.Wrapf(types.ErrTierNotFound, "tier %d not found", msg.TierId)
 	}
 
 	// check if user has enough available allocations to cover tier
 	if tier.RequiredAllocations.GT(availableAlloc) {
 		return nil, sdkerrors.Wrapf(types.ErrInsufficientAllocations,
 			"available allocations %s is less than required allocations %s for tier %d",
-			availableAlloc.String(), tier.RequiredAllocations.String(), tier.TierID)
+			availableAlloc.String(), tier.RequiredAllocations.String(), tier.TierId)
 	}
 
 	allowedBidder := fundraisingtypes.AllowedBidder{
@@ -77,7 +77,7 @@ func (k msgServer) Participate(ctx context.Context, msg *types.MsgParticipate) (
 		MaxBidAmount: tier.Benefits.MaxBidAmount,
 	}
 	if err := k.fundraisingKeeper.AddAllowedBidders(
-		ctx, msg.AuctionID,
+		ctx, msg.AuctionId,
 		[]fundraisingtypes.AllowedBidder{allowedBidder},
 	); err != nil {
 		return nil, sdkerrors.Wrap(types.ErrInvalidBidder, err.Error())
@@ -102,9 +102,9 @@ func (k msgServer) Participate(ctx context.Context, msg *types.MsgParticipate) (
 	}
 
 	// set auction used allocations
-	err = k.AuctionUsedAllocations.Set(ctx, collections.Join(sdk.AccAddress(participantAddress), msg.AuctionID), types.AuctionUsedAllocations{
+	err = k.AuctionUsedAllocations.Set(ctx, collections.Join(sdk.AccAddress(participantAddress), msg.AuctionId), types.AuctionUsedAllocations{
 		Address:        msg.Participant,
-		AuctionID:      msg.AuctionID,
+		AuctionId:      msg.AuctionId,
 		NumAllocations: tier.RequiredAllocations,
 		Withdrawn:      false,
 	})
@@ -114,7 +114,7 @@ func (k msgServer) Participate(ctx context.Context, msg *types.MsgParticipate) (
 
 	return &types.MsgParticipateResponse{}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(&types.EventAllocationsUsed{
 		Participant:    msg.Participant,
-		AuctionID:      msg.AuctionID,
+		AuctionId:      msg.AuctionId,
 		NumAllocations: tier.RequiredAllocations,
 	})
 }

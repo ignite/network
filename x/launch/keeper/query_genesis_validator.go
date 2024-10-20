@@ -23,7 +23,7 @@ func (q queryServer) ListGenesisValidator(ctx context.Context, req *types.QueryA
 		q.k.GenesisValidator,
 		req.Pagination,
 		func(_ collections.Pair[uint64, sdk.AccAddress], value types.GenesisValidator) (bool, error) {
-			return req.LaunchID == value.LaunchID, nil
+			return req.LaunchId == value.LaunchId, nil
 		},
 		func(_ collections.Pair[uint64, sdk.AccAddress], value types.GenesisValidator) (types.GenesisValidator, error) {
 			return value, nil
@@ -46,7 +46,7 @@ func (q queryServer) GetGenesisValidator(ctx context.Context, req *types.QueryGe
 		return nil, status.Error(codes.InvalidArgument, "invalid address")
 	}
 
-	val, err := q.k.GenesisValidator.Get(ctx, collections.Join(req.LaunchID, sdk.AccAddress(address)))
+	val, err := q.k.GenesisValidator.Get(ctx, collections.Join(req.LaunchId, sdk.AccAddress(address)))
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, status.Error(codes.NotFound, "not found")

@@ -16,7 +16,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 		if err != nil {
 			return err
 		}
-		if err := k.AuctionUsedAllocations.Set(ctx, collections.Join(sdk.AccAddress(address), elem.AuctionID), elem); err != nil {
+		if err := k.AuctionUsedAllocations.Set(ctx, collections.Join(sdk.AccAddress(address), elem.AuctionId), elem); err != nil {
 			return err
 		}
 	}

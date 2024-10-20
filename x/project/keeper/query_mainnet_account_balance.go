@@ -30,13 +30,13 @@ func (q queryServer) MainnetAccountBalance(ctx context.Context, req *types.Query
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	project, err := q.k.GetProject(ctx, req.ProjectID)
+	project, err := q.k.GetProject(ctx, req.ProjectId)
 	if err != nil {
 		return nil, status.Error(codes.NotFound, "project not found")
 	}
 
 	// get account balance
-	acc, err := q.k.GetMainnetAccount(ctx, req.ProjectID, address)
+	acc, err := q.k.GetMainnetAccount(ctx, req.ProjectId, address)
 	if err != nil {
 		return nil, status.Error(codes.NotFound, "account not found")
 	}
@@ -47,7 +47,7 @@ func (q queryServer) MainnetAccountBalance(ctx context.Context, req *types.Query
 	}
 
 	mainnetAccountBalance := types.MainnetAccountBalance{
-		ProjectID: acc.ProjectID,
+		ProjectId: acc.ProjectId,
 		Address:   acc.Address,
 		Coins:     balance,
 	}
@@ -66,7 +66,7 @@ func (q queryServer) ListMainnetAccountBalance(ctx context.Context, req *types.Q
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	project, err := q.k.GetProject(ctx, req.ProjectID)
+	project, err := q.k.GetProject(ctx, req.ProjectId)
 	if err != nil {
 		return nil, status.Error(codes.NotFound, "project not found")
 	}
@@ -85,7 +85,7 @@ func (q queryServer) ListMainnetAccountBalance(ctx context.Context, req *types.Q
 			// add the balance if not zero
 			if !balance.IsZero() {
 				mainnetAccountBalance := types.MainnetAccountBalance{
-					ProjectID: acc.ProjectID,
+					ProjectId: acc.ProjectId,
 					Address:   acc.Address,
 					Coins:     balance,
 				}

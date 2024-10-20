@@ -8,7 +8,7 @@ option go_package = "github.com/ignite/network/x/profile/types";
 
 message Validator {
   string address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  repeated string operatorAddresses = 2;
+  repeated string operator_addresses = 2;
   ValidatorDescription description = 3 [(gogoproto.nullable) = false];
 }
 
@@ -16,11 +16,11 @@ message ValidatorDescription {
   string identity = 1;
   string moniker = 2;
   string website = 3;
-  string securityContact = 4;
+  string security_contact = 4;
   string details = 5;
 }
 
 message ValidatorByOperatorAddress {
-  string operatorAddress = 1;
-  string validatorAddress = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string operator_address = 1;
+  string validator_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }

@@ -35,7 +35,7 @@ func (msg *MsgCreateProject) ValidateBasic() error {
 func NewMsgEditProject(coordinator string, projectID uint64, name string, metadata []byte) *MsgEditProject {
 	return &MsgEditProject{
 		Coordinator: coordinator,
-		ProjectID:   projectID,
+		ProjectId:   projectID,
 		Name:        name,
 		Metadata:    metadata,
 	}
@@ -62,7 +62,7 @@ func (msg *MsgEditProject) ValidateBasic() error {
 func NewMsgUpdateTotalSupply(coordinator string, projectID uint64, totalSupplyUpdate sdk.Coins) *MsgUpdateTotalSupply {
 	return &MsgUpdateTotalSupply{
 		Coordinator:       coordinator,
-		ProjectID:         projectID,
+		ProjectId:         projectID,
 		TotalSupplyUpdate: totalSupplyUpdate,
 	}
 }
@@ -86,7 +86,7 @@ func (msg *MsgUpdateTotalSupply) ValidateBasic() error {
 func NewMsgUpdateSpecialAllocations(coordinator string, projectID uint64, specialAllocations SpecialAllocations) *MsgUpdateSpecialAllocations {
 	return &MsgUpdateSpecialAllocations{
 		Coordinator:        coordinator,
-		ProjectID:          projectID,
+		ProjectId:          projectID,
 		SpecialAllocations: specialAllocations,
 	}
 }
@@ -105,10 +105,10 @@ func (msg *MsgUpdateSpecialAllocations) ValidateBasic() error {
 func NewMsgInitializeMainnet(coordinator string, projectID uint64, sourceURL string, sourceHash string, mainnetChainID string) *MsgInitializeMainnet {
 	return &MsgInitializeMainnet{
 		Coordinator:    coordinator,
-		ProjectID:      projectID,
-		SourceURL:      sourceURL,
+		ProjectId:      projectID,
+		SourceUrl:      sourceURL,
 		SourceHash:     sourceHash,
-		MainnetChainID: mainnetChainID,
+		MainnetChainId: mainnetChainID,
 	}
 }
 
@@ -117,13 +117,13 @@ func (msg MsgInitializeMainnet) Type() string {
 }
 
 func (msg *MsgInitializeMainnet) ValidateBasic() error {
-	if msg.SourceURL == "" {
+	if msg.SourceUrl == "" {
 		return sdkerrors.Wrap(ErrInvalidMainnetInfo, "empty source URL")
 	}
 	if msg.SourceHash == "" {
 		return sdkerrors.Wrap(ErrInvalidMainnetInfo, "empty source hash")
 	}
-	if _, _, err := chainid.ParseGenesisChainID(msg.MainnetChainID); err != nil {
+	if _, _, err := chainid.ParseGenesisChainID(msg.MainnetChainId); err != nil {
 		return sdkerrors.Wrapf(ErrInvalidMainnetInfo, err.Error())
 	}
 
@@ -133,7 +133,7 @@ func (msg *MsgInitializeMainnet) ValidateBasic() error {
 func NewMsgMintVouchers(coordinator string, projectID uint64, shares Shares) *MsgMintVouchers {
 	return &MsgMintVouchers{
 		Coordinator: coordinator,
-		ProjectID:   projectID,
+		ProjectId:   projectID,
 		Shares:      shares,
 	}
 }
@@ -157,7 +157,7 @@ func (msg *MsgMintVouchers) ValidateBasic() error {
 func NewMsgBurnVouchers(sender string, projectID uint64, vouchers sdk.Coins) *MsgBurnVouchers {
 	return &MsgBurnVouchers{
 		Sender:    sender,
-		ProjectID: projectID,
+		ProjectId: projectID,
 		Vouchers:  vouchers,
 	}
 }
@@ -175,7 +175,7 @@ func (msg *MsgBurnVouchers) ValidateBasic() error {
 		return sdkerrors.Wrap(ErrInvalidVouchers, "vouchers is empty")
 	}
 
-	if err := CheckVouchers(msg.Vouchers, msg.ProjectID); err != nil {
+	if err := CheckVouchers(msg.Vouchers, msg.ProjectId); err != nil {
 		return sdkerrors.Wrap(ErrNoMatchVouchers, err.Error())
 	}
 	return nil
@@ -184,7 +184,7 @@ func (msg *MsgBurnVouchers) ValidateBasic() error {
 func NewMsgRedeemVouchers(sender string, projectID uint64, account string, vouchers sdk.Coins) *MsgRedeemVouchers {
 	return &MsgRedeemVouchers{
 		Sender:    sender,
-		ProjectID: projectID,
+		ProjectId: projectID,
 		Account:   account,
 		Vouchers:  vouchers,
 	}
@@ -203,7 +203,7 @@ func (msg *MsgRedeemVouchers) ValidateBasic() error {
 		return sdkerrors.Wrap(ErrInvalidVouchers, "vouchers is empty")
 	}
 
-	if err := CheckVouchers(msg.Vouchers, msg.ProjectID); err != nil {
+	if err := CheckVouchers(msg.Vouchers, msg.ProjectId); err != nil {
 		return sdkerrors.Wrap(ErrNoMatchVouchers, err.Error())
 	}
 	return nil
@@ -212,7 +212,7 @@ func (msg *MsgRedeemVouchers) ValidateBasic() error {
 func NewMsgUnredeemVouchers(sender string, projectID uint64, shares Shares) *MsgUnredeemVouchers {
 	return &MsgUnredeemVouchers{
 		Sender:    sender,
-		ProjectID: projectID,
+		ProjectId: projectID,
 		Shares:    shares,
 	}
 }

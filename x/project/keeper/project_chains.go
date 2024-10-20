@@ -21,7 +21,7 @@ func (k Keeper) AddChainToProject(ctx context.Context, projectID, launchID uint6
 	projectChains, err := k.GetProjectChains(ctx, projectID)
 	if errors.Is(err, types.ErrProjectChainsNotFound) {
 		projectChains = types.ProjectChains{
-			ProjectID: projectID,
+			ProjectId: projectID,
 			Chains:    []uint64{launchID},
 		}
 	} else if err != nil {
@@ -35,12 +35,12 @@ func (k Keeper) AddChainToProject(ctx context.Context, projectID, launchID uint6
 		}
 		projectChains.Chains = append(projectChains.Chains, launchID)
 	}
-	if err := k.ProjectChains.Set(ctx, projectChains.ProjectID, projectChains); err != nil {
+	if err := k.ProjectChains.Set(ctx, projectChains.ProjectId, projectChains); err != nil {
 		return err
 	}
 	return sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(&types.EventProjectChainAdded{
-		ProjectID: projectID,
-		LaunchID:  launchID,
+		ProjectId: projectID,
+		LaunchId:  launchID,
 	})
 }
 

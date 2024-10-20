@@ -21,7 +21,7 @@ func ParticipationParams(r *rand.Rand) participation.Params {
 	maxBidCnt := sdkmath.NewInt(r.Int63n(10000) + 1)
 	for i := uint64(1); i <= numTiers; i++ {
 		tier := participation.Tier{
-			TierID:              i,
+			TierId:              i,
 			RequiredAllocations: allocCnt,
 			Benefits: participation.TierBenefits{
 				MaxBidAmount: maxBidCnt,
@@ -62,7 +62,7 @@ func ParticipationGenesisStateWithAllocations(r *rand.Rand) participation.Genesi
 		for j := 0; j < 3; j++ {
 			auctionUsedAllocs := participation.AuctionUsedAllocations{
 				Address:        addr,
-				AuctionID:      uint64(j),
+				AuctionId:      uint64(j),
 				NumAllocations: sdkmath.NewInt(r.Int63n(5) + 1),
 				Withdrawn:      false,
 			}

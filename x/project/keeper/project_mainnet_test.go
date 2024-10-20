@@ -19,11 +19,11 @@ func TestIsProjectMainnetLaunchTriggered(t *testing.T) {
 		chainLaunched := sample.Chain(r, 0, 0)
 		chainLaunched.LaunchTriggered = true
 		chainLaunched.IsMainnet = true
-		projectMainnetLaunched.MainnetID, err = tk.LaunchKeeper.AppendChain(ctx, chainLaunched)
+		projectMainnetLaunched.MainnetId, err = tk.LaunchKeeper.AppendChain(ctx, chainLaunched)
 		require.NoError(t, err)
-		projectMainnetLaunched.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetLaunched)
+		projectMainnetLaunched.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetLaunched)
 		require.NoError(t, err)
-		res, err := tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectMainnetLaunched.ProjectID)
+		res, err := tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectMainnetLaunched.ProjectId)
 		require.NoError(t, err)
 		require.True(t, res)
 	})
@@ -35,11 +35,11 @@ func TestIsProjectMainnetLaunchTriggered(t *testing.T) {
 		chain := sample.Chain(r, 0, 0)
 		chain.LaunchTriggered = false
 		chain.IsMainnet = true
-		projectMainnetInitialized.MainnetID, err = tk.LaunchKeeper.AppendChain(ctx, chain)
+		projectMainnetInitialized.MainnetId, err = tk.LaunchKeeper.AppendChain(ctx, chain)
 		require.NoError(t, err)
-		projectMainnetInitialized.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetInitialized)
+		projectMainnetInitialized.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetInitialized)
 		require.NoError(t, err)
-		res, err := tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectMainnetInitialized.ProjectID)
+		res, err := tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectMainnetInitialized.ProjectId)
 		require.NoError(t, err)
 		require.False(t, res)
 	})
@@ -48,9 +48,9 @@ func TestIsProjectMainnetLaunchTriggered(t *testing.T) {
 		var err error
 		projectMainnetNotInitialized := sample.Project(r, 2)
 		projectMainnetNotInitialized.MainnetInitialized = false
-		projectMainnetNotInitialized.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetNotInitialized)
+		projectMainnetNotInitialized.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetNotInitialized)
 		require.NoError(t, err)
-		res, err := tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectMainnetNotInitialized.ProjectID)
+		res, err := tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectMainnetNotInitialized.ProjectId)
 		require.NoError(t, err)
 		require.False(t, res)
 	})
@@ -59,10 +59,10 @@ func TestIsProjectMainnetLaunchTriggered(t *testing.T) {
 		var err error
 		projectMainnetNotFound := sample.Project(r, 3)
 		projectMainnetNotFound.MainnetInitialized = true
-		projectMainnetNotFound.MainnetID = 1000
-		projectMainnetNotFound.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetNotFound)
+		projectMainnetNotFound.MainnetId = 1000
+		projectMainnetNotFound.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, projectMainnetNotFound)
 		require.NoError(t, err)
-		_, err = tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectMainnetNotFound.ProjectID)
+		_, err = tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectMainnetNotFound.ProjectId)
 		require.Error(t, err)
 	})
 
@@ -73,11 +73,11 @@ func TestIsProjectMainnetLaunchTriggered(t *testing.T) {
 		chainNoMainnet := sample.Chain(r, 0, 0)
 		chainNoMainnet.LaunchTriggered = false
 		chainNoMainnet.IsMainnet = false
-		projectInvalidMainnet.MainnetID, err = tk.LaunchKeeper.AppendChain(ctx, chainNoMainnet)
+		projectInvalidMainnet.MainnetId, err = tk.LaunchKeeper.AppendChain(ctx, chainNoMainnet)
 		require.NoError(t, err)
-		projectInvalidMainnet.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, projectInvalidMainnet)
+		projectInvalidMainnet.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, projectInvalidMainnet)
 		require.NoError(t, err)
-		_, err = tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectInvalidMainnet.ProjectID)
+		_, err = tk.ProjectKeeper.IsProjectMainnetLaunchTriggered(ctx, projectInvalidMainnet.ProjectId)
 		require.Error(t, err)
 	})
 

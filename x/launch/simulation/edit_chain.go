@@ -30,7 +30,7 @@ func SimulateMsgEditChain(
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "chain not found"), nil, nil
 		}
 
-		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, chain.LaunchID)
+		simAccount, err := FindChainCoordinatorAccount(ctx, k, accs, chain.LaunchId)
 		if err != nil {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "coordinator account not found"), nil, nil
 		}
@@ -49,7 +49,7 @@ func SimulateMsgEditChain(
 		projectID := uint64(0)
 		ok := false
 		if setProjectID {
-			projectID, ok = FindCoordinatorProject(r, ctx, k.GetProjectKeeper(), chain.CoordinatorID, chain.LaunchID)
+			projectID, ok = FindCoordinatorProject(r, ctx, k.GetProjectKeeper(), chain.CoordinatorId, chain.LaunchId)
 			if !ok {
 				modify = true
 				setProjectID = false
@@ -58,7 +58,7 @@ func SimulateMsgEditChain(
 
 		msg = sample.MsgEditChain(r,
 			simAccount.Address.String(),
-			chain.LaunchID,
+			chain.LaunchId,
 			setProjectID,
 			projectID,
 			modify,

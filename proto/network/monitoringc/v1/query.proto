@@ -23,7 +23,7 @@ service Query {
 
   // Queries a list of LaunchIDFromChannelID items.
   rpc GetLaunchIDFromChannelID(QueryGetLaunchIDFromChannelIDRequest) returns (QueryGetLaunchIDFromChannelIDResponse) {
-    option (google.api.http).get = "/ignite/network/monitoringc/launch_id_from_channel_id/{channelID}";
+    option (google.api.http).get = "/ignite/network/monitoringc/launch_id_from_channel_id/{channel_id}";
   }
   rpc ListLaunchIDFromChannelID(QueryAllLaunchIDFromChannelIDRequest) returns (QueryAllLaunchIDFromChannelIDResponse) {
     option (google.api.http).get = "/ignite/network/monitoringc/launch_id_from_channel_id";
@@ -31,17 +31,17 @@ service Query {
 
   // Queries a list of MonitoringHistory items.
   rpc GetMonitoringHistory(QueryGetMonitoringHistoryRequest) returns (QueryGetMonitoringHistoryResponse) {
-    option (google.api.http).get = "/ignite/network/monitoringc/monitoring_history/{launchID}";
+    option (google.api.http).get = "/ignite/network/monitoringc/monitoring_history/{launch_id}";
   }
 
   // Queries a list of VerifiedClientID items.
   rpc GetVerifiedClientID(QueryGetVerifiedClientIDRequest) returns (QueryGetVerifiedClientIDResponse) {
-    option (google.api.http).get = "/ignite/network/monitoringc/verified_client_id/{launchID}";
+    option (google.api.http).get = "/ignite/network/monitoringc/verified_client_id/{launch_id}";
   }
 
   // Queries a list of ProviderClientID items.
   rpc GetProviderClientID(QueryGetProviderClientIDRequest) returns (QueryGetProviderClientIDResponse) {
-    option (google.api.http).get = "/ignite/network/monitoringc/provider_client_id/{launchID}";
+    option (google.api.http).get = "/ignite/network/monitoringc/provider_client_id/{launch_id}";
   }
   rpc ListProviderClientID(QueryAllProviderClientIDRequest) returns (QueryAllProviderClientIDResponse) {
     option (google.api.http).get = "/ignite/network/monitoringc/provider_client_id";
@@ -61,11 +61,11 @@ message QueryParamsResponse {
 }
 
 message QueryGetLaunchIDFromChannelIDRequest {
-  string channelID = 1;
+  string channel_id = 1;
 }
 
 message QueryGetLaunchIDFromChannelIDResponse {
-  LaunchIDFromChannelID launchIDFromChannelID = 1 [(gogoproto.nullable) = false];
+  LaunchIDFromChannelID launch_id_from_channel_id = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllLaunchIDFromChannelIDRequest {
@@ -73,32 +73,32 @@ message QueryAllLaunchIDFromChannelIDRequest {
 }
 
 message QueryAllLaunchIDFromChannelIDResponse {
-  repeated LaunchIDFromChannelID launchIDFromChannelID = 1 [(gogoproto.nullable) = false];
+  repeated LaunchIDFromChannelID launch_id_from_channel_id = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryGetMonitoringHistoryRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
 }
 
 message QueryGetMonitoringHistoryResponse {
-  MonitoringHistory monitoringHistory = 1 [(gogoproto.nullable) = false];
+  MonitoringHistory monitoring_history = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryGetVerifiedClientIDRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
 }
 
 message QueryGetVerifiedClientIDResponse {
-  VerifiedClientID verifiedClientID = 1 [(gogoproto.nullable) = false];
+  VerifiedClientID verified_client_id = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryGetProviderClientIDRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
 }
 
 message QueryGetProviderClientIDResponse {
-  ProviderClientID providerClientID = 1 [(gogoproto.nullable) = false];
+  ProviderClientID provider_client_id = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllProviderClientIDRequest {
@@ -106,6 +106,6 @@ message QueryAllProviderClientIDRequest {
 }
 
 message QueryAllProviderClientIDResponse {
-  repeated ProviderClientID providerClientID = 1 [(gogoproto.nullable) = false];
+  repeated ProviderClientID provider_client_id = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

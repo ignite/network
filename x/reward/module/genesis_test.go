@@ -17,10 +17,10 @@ func TestGenesis(t *testing.T) {
 
 		RewardPoolList: []types.RewardPool{
 			{
-				LaunchID: 0,
+				LaunchId: 0,
 			},
 			{
-				LaunchID: 1,
+				LaunchId: 1,
 			},
 		},
 		// this line is used by starport scaffolding # genesis/test/state

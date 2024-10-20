@@ -26,7 +26,7 @@ service Query {
 
   // Queries a list of Chain items.
   rpc GetChain(QueryGetChainRequest) returns (QueryGetChainResponse) {
-    option (google.api.http).get = "/ignite/network/launch/chain/{launchID}";
+    option (google.api.http).get = "/ignite/network/launch/chain/{launch_id}";
   }
   rpc ListChain(QueryAllChainRequest) returns (QueryAllChainResponse) {
     option (google.api.http).get = "/ignite/network/launch/chain";
@@ -34,34 +34,34 @@ service Query {
 
   // Queries a list of GenesisAccount items.
   rpc GetGenesisAccount(QueryGetGenesisAccountRequest) returns (QueryGetGenesisAccountResponse) {
-    option (google.api.http).get = "/ignite/network/launch/genesis_account/{launchID}/{address}";
+    option (google.api.http).get = "/ignite/network/launch/genesis_account/{launch_id}/{address}";
   }
   rpc ListGenesisAccount(QueryAllGenesisAccountRequest) returns (QueryAllGenesisAccountResponse) {
-    option (google.api.http).get = "/ignite/network/launch/genesis_account/{launchID}";
+    option (google.api.http).get = "/ignite/network/launch/genesis_account/{launch_id}";
   }
 
   // Queries a list of GenesisValidator items.
   rpc GetGenesisValidator(QueryGetGenesisValidatorRequest) returns (QueryGetGenesisValidatorResponse) {
-    option (google.api.http).get = "/ignite/network/launch/genesis_validator/{launchID}/{address}";
+    option (google.api.http).get = "/ignite/network/launch/genesis_validator/{launch_id}/{address}";
   }
   rpc ListGenesisValidator(QueryAllGenesisValidatorRequest) returns (QueryAllGenesisValidatorResponse) {
-    option (google.api.http).get = "/ignite/network/launch/genesis_validator/{launchID}";
+    option (google.api.http).get = "/ignite/network/launch/genesis_validator/{launch_id}";
   }
 
   // Queries a list of VestingAccount items.
   rpc GetVestingAccount(QueryGetVestingAccountRequest) returns (QueryGetVestingAccountResponse) {
-    option (google.api.http).get = "/ignite/network/launch/vesting_account/{launchID}/{address}";
+    option (google.api.http).get = "/ignite/network/launch/vesting_account/{launch_id}/{address}";
   }
   rpc ListVestingAccount(QueryAllVestingAccountRequest) returns (QueryAllVestingAccountResponse) {
-    option (google.api.http).get = "/ignite/network/launch/vesting_account/{launchID}";
+    option (google.api.http).get = "/ignite/network/launch/vesting_account/{launch_id}";
   }
 
   // Queries a list of Request items.
   rpc GetRequest(QueryGetRequestRequest) returns (QueryGetRequestResponse) {
-    option (google.api.http).get = "/ignite/network/launch/request/{launchID}/{requestID}";
+    option (google.api.http).get = "/ignite/network/launch/request/{launch_id}/{request_id}";
   }
   rpc ListRequest(QueryAllRequestRequest) returns (QueryAllRequestResponse) {
-    option (google.api.http).get = "/ignite/network/launch/request/{launchID}";
+    option (google.api.http).get = "/ignite/network/launch/request/{launch_id}";
   }
 
   rpc ListParamChange(QueryAllParamChangeRequest) returns (QueryAllParamChangeResponse) {
@@ -82,11 +82,11 @@ message QueryParamsResponse {
 }
 
 message QueryGetChainRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
 }
 
 message QueryGetChainResponse {
-  Chain Chain = 1 [(gogoproto.nullable) = false];
+  Chain chain = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllChainRequest {
@@ -94,92 +94,92 @@ message QueryAllChainRequest {
 }
 
 message QueryAllChainResponse {
-  repeated Chain Chain = 1 [(gogoproto.nullable) = false];
+  repeated Chain chain = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryGetGenesisAccountRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
   string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }
 
 message QueryGetGenesisAccountResponse {
-  GenesisAccount genesisAccount = 1 [(gogoproto.nullable) = false];
+  GenesisAccount genesis_account = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllGenesisAccountRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
   cosmos.base.query.v1beta1.PageRequest pagination = 2;
 }
 
 message QueryAllGenesisAccountResponse {
-  repeated GenesisAccount genesisAccount = 1 [(gogoproto.nullable) = false];
+  repeated GenesisAccount genesis_account = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryGetGenesisValidatorRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
   string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }
 
 message QueryGetGenesisValidatorResponse {
-  GenesisValidator genesisValidator = 1 [(gogoproto.nullable) = false];
+  GenesisValidator genesis_validator = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllGenesisValidatorRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
   cosmos.base.query.v1beta1.PageRequest pagination = 2;
 }
 
 message QueryAllGenesisValidatorResponse {
-  repeated GenesisValidator genesisValidator = 1 [(gogoproto.nullable) = false];
+  repeated GenesisValidator genesis_validator = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryGetVestingAccountRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
   string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }
 
 message QueryGetVestingAccountResponse {
-  VestingAccount vestingAccount = 1 [(gogoproto.nullable) = false];
+  VestingAccount vesting_account = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllVestingAccountRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
   cosmos.base.query.v1beta1.PageRequest pagination = 2;
 }
 
 message QueryAllVestingAccountResponse {
-  repeated VestingAccount vestingAccount = 1 [(gogoproto.nullable) = false];
+  repeated VestingAccount vesting_account = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryGetRequestRequest {
-  uint64 launchID = 1;
-  uint64 requestID = 2;
+  uint64 launch_id = 1;
+  uint64 request_id = 2;
 }
 
 message QueryGetRequestResponse {
-  Request Request = 1 [(gogoproto.nullable) = false];
+  Request request = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllRequestRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
   cosmos.base.query.v1beta1.PageRequest pagination = 2;
 }
 
 message QueryAllRequestResponse {
-  repeated Request Request = 1 [(gogoproto.nullable) = false];
+  repeated Request request = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryAllParamChangeRequest {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
   cosmos.base.query.v1beta1.PageRequest pagination = 2;
 }
 
 message QueryAllParamChangeResponse {
-  repeated ParamChange paramChange = 1 [(gogoproto.nullable) = false];
+  repeated ParamChange param_change = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

@@ -51,14 +51,14 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 	t.Run("should allow participation", func(t *testing.T) {
 		_, err := ts.ParticipationSrv.Participate(ctx, &types.MsgParticipate{
 			Participant: validParticipant.String(),
-			AuctionID:   auctionID,
-			TierID:      1,
+			AuctionId:   auctionID,
+			TierId:      1,
 		})
 		require.NoError(t, err)
 		_, err = ts.ParticipationSrv.Participate(ctx, &types.MsgParticipate{
 			Participant: validParticipant.String(),
-			AuctionID:   cancelledAuctionID,
-			TierID:      1,
+			AuctionId:   cancelledAuctionID,
+			TierId:      1,
 		})
 		require.NoError(t, err)
 	})
@@ -71,7 +71,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 	// manually insert entry for invalidParticipant for later test
 	err = tk.ParticipationKeeper.AuctionUsedAllocations.Set(ctx, collections.Join(invalidParticipant, auctionID), types.AuctionUsedAllocations{
 		Address:        invalidParticipant.String(),
-		AuctionID:      auctionID,
+		AuctionId:      auctionID,
 		NumAllocations: sdkmath.OneInt(),
 		Withdrawn:      true, // set withdrawn to true
 	})
@@ -87,7 +87,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 			name: "should allow to remove allocations",
 			msg: &types.MsgWithdrawAllocations{
 				Participant: validParticipant.String(),
-				AuctionID:   auctionID,
+				AuctionId:   auctionID,
 			},
 			blockTime: validWithdrawalTime,
 		},
@@ -95,7 +95,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 			name: "should allow to remove allocations if auction status is cancelled",
 			msg: &types.MsgWithdrawAllocations{
 				Participant: validParticipant.String(),
-				AuctionID:   cancelledAuctionID,
+				AuctionId:   cancelledAuctionID,
 			},
 			blockTime: auctionStartTime,
 		},
@@ -103,7 +103,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 			name: "should return auction not found",
 			msg: &types.MsgWithdrawAllocations{
 				Participant: validParticipant.String(),
-				AuctionID:   auctionID + 1000,
+				AuctionId:   auctionID + 1000,
 			},
 			blockTime: validWithdrawalTime,
 			err:       fundraisingtypes.ErrAuctionNotFound,
@@ -112,7 +112,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 			name: "should prevent withdrawal before withdrawal delay has passed",
 			msg: &types.MsgWithdrawAllocations{
 				Participant: validParticipant.String(),
-				AuctionID:   auctionID,
+				AuctionId:   auctionID,
 			},
 			blockTime: auctionStartTime,
 			err:       types.ErrAllocationWithdrawalTimeNotReached,
@@ -121,7 +121,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 			name: "should return used allocations not found",
 			msg: &types.MsgWithdrawAllocations{
 				Participant: sample.Address(r),
-				AuctionID:   auctionID,
+				AuctionId:   auctionID,
 			},
 			blockTime: validWithdrawalTime,
 			err:       types.ErrUsedAllocationsNotFound,
@@ -130,7 +130,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 			name: "should prevent withdrawal if already claimed",
 			msg: &types.MsgWithdrawAllocations{
 				Participant: invalidParticipant.String(),
-				AuctionID:   auctionID,
+				AuctionId:   auctionID,
 			},
 			blockTime: validWithdrawalTime,
 			err:       types.ErrAllocationsAlreadyWithdrawn,
@@ -144,7 +144,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 				require.NoError(t, err)
 			}
 
-			preAuctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(ctx, collections.Join(validParticipant, tt.msg.AuctionID))
+			preAuctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(ctx, collections.Join(validParticipant, tt.msg.AuctionId))
 			if tt.err == nil {
 				// check if valid only when no error expected
 				require.NoError(t, err)
@@ -163,7 +163,7 @@ func Test_msgServer_WithdrawAllocations(t *testing.T) {
 			// check auctionUsedAllocations is set to `withdrawn`
 			participantAddress, err := tk.ParticipationKeeper.AddressCodec().StringToBytes(tt.msg.Participant)
 			require.NoError(t, err)
-			postAuctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(tmpCtx, collections.Join(sdk.AccAddress(participantAddress), tt.msg.AuctionID))
+			postAuctionUsedAllocations, err := tk.ParticipationKeeper.AuctionUsedAllocations.Get(tmpCtx, collections.Join(sdk.AccAddress(participantAddress), tt.msg.AuctionId))
 			require.NoError(t, err)
 			require.True(t, postAuctionUsedAllocations.Withdrawn)
 			require.Equal(t, preAuctionUsedAllocations.NumAllocations, postAuctionUsedAllocations.NumAllocations)

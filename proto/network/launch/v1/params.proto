@@ -15,12 +15,12 @@ message Params {
   option (amino.name) = "network/x/launch/Params";
   option (gogoproto.equal) = true;
 
-  LaunchTimeRange launchTimeRange = 1 [(gogoproto.nullable) = false];
-  google.protobuf.Duration revertDelay = 2 [
+  LaunchTimeRange launch_time_range = 1 [(gogoproto.nullable) = false];
+  google.protobuf.Duration revert_delay = 2 [
     (gogoproto.nullable) = false,
     (gogoproto.stdduration) = true
   ];
-  repeated cosmos.base.v1beta1.Coin chainCreationFee = 3 [
+  repeated cosmos.base.v1beta1.Coin chain_creation_fee = 3 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
     (amino.encoding) = "legacy_coins",
@@ -28,22 +28,22 @@ message Params {
     (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
   ];
 
-  // requestFee is the fee for making a request to a chain
-  repeated cosmos.base.v1beta1.Coin requestFee = 4 [
+  // request_fee is the fee for making a request to a chain
+  repeated cosmos.base.v1beta1.Coin request_fee = 4 [
     (gogoproto.nullable) = false,
     (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
     (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
   ];
 
-  uint64 maxMetadataLength = 5;
+  uint64 max_metadata_length = 5;
 }
 
 message LaunchTimeRange {
-  google.protobuf.Duration minLaunchTime = 1 [
+  google.protobuf.Duration min_launch_time = 1 [
     (gogoproto.nullable) = false,
     (gogoproto.stdduration) = true
   ];
-  google.protobuf.Duration maxLaunchTime = 2 [
+  google.protobuf.Duration max_launch_time = 2 [
     (gogoproto.nullable) = false,
     (gogoproto.stdduration) = true
   ];

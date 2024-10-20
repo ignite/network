@@ -16,24 +16,24 @@ func (k msgServer) SettleRequest(ctx context.Context, msg *types.MsgSettleReques
 		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid signer address %s", err.Error())
 	}
 
-	chain, err := k.GetChain(ctx, msg.LaunchID)
+	chain, err := k.GetChain(ctx, msg.LaunchId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchId)
 	}
 
 	if chain.LaunchTriggered {
-		return nil, sdkerrors.Wrapf(types.ErrTriggeredLaunch, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(types.ErrTriggeredLaunch, "%d", msg.LaunchId)
 	}
 
-	coordinator, err := k.profileKeeper.GetCoordinator(ctx, chain.CoordinatorID)
+	coordinator, err := k.profileKeeper.GetCoordinator(ctx, chain.CoordinatorId)
 	if err != nil {
 		return nil, sdkerrors.Wrapf(types.ErrChainInactive,
-			"the chain %d coordinator %d not found", chain.LaunchID, chain.CoordinatorID)
+			"the chain %d coordinator %d not found", chain.LaunchId, chain.CoordinatorId)
 	}
 
 	if !coordinator.Active {
 		return nil, sdkerrors.Wrapf(profiletypes.ErrCoordinatorInactive,
-			"the chain %d coordinator inactive", chain.LaunchID)
+			"the chain %d coordinator inactive", chain.LaunchId)
 	}
 
 	if msg.Approve && msg.Signer != coordinator.Address {
@@ -41,15 +41,15 @@ func (k msgServer) SettleRequest(ctx context.Context, msg *types.MsgSettleReques
 	}
 
 	// first check if the request exists
-	request, err := k.Request.Get(ctx, collections.Join(msg.LaunchID, msg.RequestID))
+	request, err := k.Request.Get(ctx, collections.Join(msg.LaunchId, msg.RequestId))
 	if err != nil {
-		return nil, sdkerrors.Wrapf(types.ErrRequestNotFound, "failed to get request %d for chain %d", msg.RequestID, msg.LaunchID)
+		return nil, sdkerrors.Wrapf(types.ErrRequestNotFound, "failed to get request %d for chain %d", msg.RequestId, msg.LaunchId)
 	}
 
 	if request.Status != types.Request_PENDING {
 		return nil, sdkerrors.Wrapf(types.ErrRequestSettled,
 			"request %d is not pending",
-			msg.RequestID,
+			msg.RequestId,
 		)
 	}
 
@@ -68,13 +68,13 @@ func (k msgServer) SettleRequest(ctx context.Context, msg *types.MsgSettleReques
 		request.Status = types.Request_REJECTED
 	}
 
-	if err := k.Request.Set(ctx, collections.Join(request.LaunchID, request.RequestID), request); err != nil {
-		return nil, sdkerrors.Wrapf(types.ErrInvalidRequestContent, "failed to set request %d for launch %d", request.RequestID, request.LaunchID)
+	if err := k.Request.Set(ctx, collections.Join(request.LaunchId, request.RequestId), request); err != nil {
+		return nil, sdkerrors.Wrapf(types.ErrInvalidRequestContent, "failed to set request %d for launch %d", request.RequestId, request.LaunchId)
 	}
 
 	err = sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(&types.EventRequestSettled{
-		LaunchID:  msg.LaunchID,
-		RequestID: request.RequestID,
+		LaunchId:  msg.LaunchId,
+		RequestId: request.RequestId,
 		Approved:  msg.Approve,
 	})
 

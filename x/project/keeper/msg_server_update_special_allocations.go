@@ -23,9 +23,9 @@ func (k msgServer) UpdateSpecialAllocations(ctx context.Context, msg *types.MsgU
 		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
 	}
 
-	project, err := k.GetProject(ctx, msg.ProjectID)
+	project, err := k.GetProject(ctx, msg.ProjectId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectId)
 	}
 
 	// get the coordinator ID associated to the sender address
@@ -34,22 +34,22 @@ func (k msgServer) UpdateSpecialAllocations(ctx context.Context, msg *types.MsgU
 		return nil, err
 	}
 
-	if project.CoordinatorID != coordinatorID {
+	if project.CoordinatorId != coordinatorID {
 		return nil, sdkerrors.Wrap(profiletypes.ErrCoordinatorInvalid, fmt.Sprintf(
 			"coordinator of the project is %d",
-			project.CoordinatorID,
+			project.CoordinatorId,
 		))
 	}
 
 	// verify mainnet launch is not triggered
-	mainnetLaunched, err := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectID)
+	mainnetLaunched, err := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectId)
 	if err != nil {
 		return nil, ignterrors.Critical(err.Error())
 	}
 	if mainnetLaunched {
 		return nil, sdkerrors.Wrap(types.ErrMainnetLaunchTriggered, fmt.Sprintf(
 			"mainnet %d launch is already triggered",
-			project.MainnetID,
+			project.MainnetId,
 		))
 	}
 
@@ -73,17 +73,17 @@ func (k msgServer) UpdateSpecialAllocations(ctx context.Context, msg *types.MsgU
 		return nil, ignterrors.Criticalf("verified shares are invalid %s", err.Error())
 	}
 	if reached {
-		return nil, sdkerrors.Wrapf(types.ErrTotalSharesLimit, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(types.ErrTotalSharesLimit, "%d", msg.ProjectId)
 	}
 
 	project.SpecialAllocations = msg.SpecialAllocations
-	if err := k.Project.Set(ctx, project.ProjectID, project); err != nil {
+	if err := k.Project.Set(ctx, project.ProjectId, project); err != nil {
 		return nil, ignterrors.Criticalf("project not set %s", err.Error())
 	}
 
 	return &types.MsgUpdateSpecialAllocationsResponse{}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvents(
 		&types.EventProjectSharesUpdated{
-			ProjectID:          project.ProjectID,
+			ProjectId:          project.ProjectId,
 			CoordinatorAddress: msg.Coordinator,
 			AllocatedShares:    project.AllocatedShares,
 		})

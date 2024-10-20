@@ -23,24 +23,24 @@ func (k msgServer) RedeemVouchers(ctx context.Context, msg *types.MsgRedeemVouch
 		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid sender address %s", err.Error())
 	}
 
-	project, err := k.GetProject(ctx, msg.ProjectID)
+	project, err := k.GetProject(ctx, msg.ProjectId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectId)
 	}
 
-	mainnetLaunched, err := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectID)
+	mainnetLaunched, err := k.IsProjectMainnetLaunchTriggered(ctx, project.ProjectId)
 	if err != nil {
 		return nil, ignterrors.Critical(err.Error())
 	}
 	if mainnetLaunched {
 		return nil, sdkerrors.Wrap(types.ErrMainnetLaunchTriggered, fmt.Sprintf(
 			"mainnet %d launch is already triggered",
-			project.MainnetID,
+			project.MainnetId,
 		))
 	}
 
 	// Convert and validate vouchers first
-	shares, err := types.VouchersToShares(msg.Vouchers, msg.ProjectID)
+	shares, err := types.VouchersToShares(msg.Vouchers, msg.ProjectId)
 	if err != nil {
 		return nil, ignterrors.Criticalf("verified voucher are invalid %s", err.Error())
 	}
@@ -61,12 +61,12 @@ func (k msgServer) RedeemVouchers(ctx context.Context, msg *types.MsgRedeemVouch
 	}
 
 	found := true
-	account, err := k.MainnetAccount.Get(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(accountAddress)))
+	account, err := k.MainnetAccount.Get(ctx, collections.Join(msg.ProjectId, sdk.AccAddress(accountAddress)))
 	if errors.Is(err, collections.ErrNotFound) {
 		found = false
 		// If not, create the account
 		account = types.MainnetAccount{
-			ProjectID: project.ProjectID,
+			ProjectId: project.ProjectId,
 			Address:   msg.Account,
 			Shares:    types.EmptyShares(),
 		}
@@ -76,20 +76,20 @@ func (k msgServer) RedeemVouchers(ctx context.Context, msg *types.MsgRedeemVouch
 
 	// Increase the account shares
 	account.Shares = types.IncreaseShares(account.Shares, shares)
-	if err := k.MainnetAccount.Set(ctx, collections.Join(msg.ProjectID, sdk.AccAddress(accountAddress)), account); err != nil {
+	if err := k.MainnetAccount.Set(ctx, collections.Join(msg.ProjectId, sdk.AccAddress(accountAddress)), account); err != nil {
 		return nil, ignterrors.Criticalf("can't set mainnet account %s", err.Error())
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
 	if !found {
 		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventMainnetAccountCreated{
-			ProjectID: account.ProjectID,
+			ProjectId: account.ProjectId,
 			Address:   account.Address,
 			Shares:    account.Shares,
 		})
 	} else {
 		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventMainnetAccountUpdated{
-			ProjectID: account.ProjectID,
+			ProjectId: account.ProjectId,
 			Address:   account.Address,
 			Shares:    account.Shares,
 		})

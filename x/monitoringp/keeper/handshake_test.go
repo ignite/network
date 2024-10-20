@@ -39,7 +39,7 @@ func TestKeeper_VerifyClientIDFromChannelID(t *testing.T) {
 	t.Run("should return no error if the client exists and no connection is established", func(t *testing.T) {
 		ctx, tk, _ := monitoringpKeeperWithFooClient(t)
 		err := tk.MonitoringProviderKeeper.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: "foo",
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.VerifyClientIDFromConnID(ctx, "foo")
@@ -49,7 +49,7 @@ func TestKeeper_VerifyClientIDFromChannelID(t *testing.T) {
 	t.Run("should fail if connection client ID is not equal to consumerClientID", func(t *testing.T) {
 		ctx, tk, _ := monitoringpKeeperWithFooClient(t)
 		err := tk.MonitoringProviderKeeper.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: "notequal",
+			ClientId: "notequal",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.VerifyClientIDFromConnID(ctx, "foo")
@@ -59,7 +59,7 @@ func TestKeeper_VerifyClientIDFromChannelID(t *testing.T) {
 	t.Run("should fail if connection doesn't exist", func(t *testing.T) {
 		ctx, tk, _ := monitoringpKeeperWithFooClient(t)
 		err := tk.MonitoringProviderKeeper.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: "foo",
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.VerifyClientIDFromConnID(ctx, "bar")
@@ -75,11 +75,11 @@ func TestKeeper_VerifyClientIDFromChannelID(t *testing.T) {
 	t.Run("should fail if connection has already been established", func(t *testing.T) {
 		ctx, tk, _ := monitoringpKeeperWithFooClient(t)
 		err := tk.MonitoringProviderKeeper.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: "foo",
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.ConnectionChannelID.Set(ctx, types.ConnectionChannelID{
-			ChannelID: "bar",
+			ChannelId: "bar",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.VerifyClientIDFromConnID(ctx, "foo")
@@ -91,7 +91,7 @@ func TestKeeper_RegisterConnectionChannelID(t *testing.T) {
 	t.Run("should register the channel id", func(t *testing.T) {
 		ctx, tk, _ := monitoringpKeeperWithFooClient(t)
 		err := tk.MonitoringProviderKeeper.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: "foo",
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.RegisterConnectionChannelID(ctx, "foo")
@@ -99,18 +99,18 @@ func TestKeeper_RegisterConnectionChannelID(t *testing.T) {
 		channelID, err := tk.MonitoringProviderKeeper.ConnectionChannelID.Get(ctx)
 		require.NoError(t, err)
 		require.EqualValues(t, types.ConnectionChannelID{
-			ChannelID: "foo",
+			ChannelId: "foo",
 		}, channelID)
 	})
 
 	t.Run("should fail if connection has already been established", func(t *testing.T) {
 		ctx, tk, _ := monitoringpKeeperWithFooClient(t)
 		err := tk.MonitoringProviderKeeper.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: "foo",
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.ConnectionChannelID.Set(ctx, types.ConnectionChannelID{
-			ChannelID: "bar",
+			ChannelId: "bar",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.RegisterConnectionChannelID(ctx, "foo")
@@ -126,7 +126,7 @@ func TestKeeper_RegisterConnectionChannelID(t *testing.T) {
 	t.Run("should fail if the channel doesn't exist", func(t *testing.T) {
 		ctx, tk, _ := monitoringpKeeperWithFooClient(t)
 		err := tk.MonitoringProviderKeeper.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: "foo",
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.RegisterConnectionChannelID(ctx, "bar")
@@ -147,7 +147,7 @@ func TestKeeper_RegisterConnectionChannelID(t *testing.T) {
 			},
 		)
 		err := tk.MonitoringProviderKeeper.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: "foo",
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.RegisterConnectionChannelID(ctx, "foo")
@@ -168,7 +168,7 @@ func TestKeeper_RegisterConnectionChannelID(t *testing.T) {
 			},
 		)
 		err := tk.MonitoringProviderKeeper.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: "foo",
+			ClientId: "foo",
 		})
 		require.NoError(t, err)
 		err = tk.MonitoringProviderKeeper.RegisterConnectionChannelID(ctx, "foo")

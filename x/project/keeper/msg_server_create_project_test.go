@@ -151,20 +151,20 @@ func TestMsgCreateProject(t *testing.T) {
 				return
 			}
 			require.NoError(t, err)
-			require.Equal(t, tc.expectedID, got.ProjectID)
-			project, err := tk.ProjectKeeper.GetProject(ctx, got.ProjectID)
+			require.Equal(t, tc.expectedID, got.ProjectId)
+			project, err := tk.ProjectKeeper.GetProject(ctx, got.ProjectId)
 			require.NoError(t, err)
-			require.EqualValues(t, got.ProjectID, project.ProjectID)
+			require.EqualValues(t, got.ProjectId, project.ProjectId)
 			require.EqualValues(t, tc.msg.ProjectName, project.ProjectName)
-			require.EqualValues(t, coordinatorMap[tc.msg.Coordinator], project.CoordinatorID)
+			require.EqualValues(t, coordinatorMap[tc.msg.Coordinator], project.CoordinatorId)
 			require.False(t, project.MainnetInitialized)
 			require.True(t, tc.msg.TotalSupply.Equal(project.TotalSupply))
 			require.EqualValues(t, types.Shares(nil), project.AllocatedShares)
 
 			// Empty list of project chains
-			projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, got.ProjectID)
+			projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, got.ProjectId)
 			require.NoError(t, err)
-			require.EqualValues(t, got.ProjectID, projectChains.ProjectID)
+			require.EqualValues(t, got.ProjectId, projectChains.ProjectId)
 			require.Empty(t, projectChains.Chains)
 
 			// check fee deduction

@@ -22,12 +22,12 @@ func NewMsgCreateChain(
 ) *MsgCreateChain {
 	return &MsgCreateChain{
 		Coordinator:    coordinator,
-		GenesisChainID: genesisChainID,
-		SourceURL:      sourceUrl,
+		GenesisChainId: genesisChainID,
+		SourceUrl:      sourceUrl,
 		SourceHash:     sourceHash,
 		InitialGenesis: initialGenesis,
 		HasProject:     hasProject,
-		ProjectID:      projectID,
+		ProjectId:      projectID,
 		AccountBalance: accountBalance,
 		Metadata:       metadata,
 	}
@@ -38,7 +38,7 @@ func (msg MsgCreateChain) Type() string {
 }
 
 func (msg *MsgCreateChain) ValidateBasic() error {
-	if _, _, err := chainid.ParseGenesisChainID(msg.GenesisChainID); err != nil {
+	if _, _, err := chainid.ParseGenesisChainID(msg.GenesisChainId); err != nil {
 		return sdkerrors.Wrapf(ErrInvalidGenesisChainID, err.Error())
 	}
 
@@ -63,9 +63,9 @@ func NewMsgEditChain(
 ) *MsgEditChain {
 	return &MsgEditChain{
 		Coordinator:  coordinator,
-		LaunchID:     launchID,
-		SetProjectID: setProjectID,
-		ProjectID:    projectID,
+		LaunchId:     launchID,
+		SetProjectId: setProjectID,
+		ProjectId:    projectID,
 		Metadata:     metadata,
 	}
 }
@@ -75,7 +75,7 @@ func (msg MsgEditChain) Type() string {
 }
 
 func (msg *MsgEditChain) ValidateBasic() error {
-	if len(msg.Metadata) == 0 && !msg.SetProjectID {
+	if len(msg.Metadata) == 0 && !msg.SetProjectId {
 		return sdkerrors.Wrap(ErrCannotUpdateChain, "no value to edit")
 	}
 
@@ -92,9 +92,9 @@ func NewMsgUpdateLaunchInformation(
 ) *MsgUpdateLaunchInformation {
 	return &MsgUpdateLaunchInformation{
 		Coordinator:    coordinator,
-		LaunchID:       launchID,
-		GenesisChainID: genesisChainID,
-		SourceURL:      sourceURL,
+		LaunchId:       launchID,
+		GenesisChainId: genesisChainID,
+		SourceUrl:      sourceURL,
 		SourceHash:     sourceHash,
 		InitialGenesis: initialGenesis,
 	}
@@ -105,13 +105,13 @@ func (msg MsgUpdateLaunchInformation) Type() string {
 }
 
 func (msg *MsgUpdateLaunchInformation) ValidateBasic() error {
-	if msg.GenesisChainID != "" {
-		if _, _, err := chainid.ParseGenesisChainID(msg.GenesisChainID); err != nil {
+	if msg.GenesisChainId != "" {
+		if _, _, err := chainid.ParseGenesisChainID(msg.GenesisChainId); err != nil {
 			return sdkerrors.Wrapf(ErrInvalidGenesisChainID, err.Error())
 		}
 	}
 
-	if msg.GenesisChainID == "" && msg.SourceURL == "" && msg.InitialGenesis == nil {
+	if msg.GenesisChainId == "" && msg.SourceUrl == "" && msg.InitialGenesis == nil {
 		return sdkerrors.Wrap(ErrCannotUpdateChain, "no value to edit")
 	}
 
@@ -127,7 +127,7 @@ func (msg *MsgUpdateLaunchInformation) ValidateBasic() error {
 func NewMsgSendRequest(creator string, launchID uint64, content RequestContent) *MsgSendRequest {
 	return &MsgSendRequest{
 		Creator:  creator,
-		LaunchID: launchID,
+		LaunchId: launchID,
 		Content:  content,
 	}
 }
@@ -137,7 +137,7 @@ func (msg MsgSendRequest) Type() string {
 }
 
 func (msg *MsgSendRequest) ValidateBasic() error {
-	if err := msg.Content.Validate(msg.LaunchID); err != nil {
+	if err := msg.Content.Validate(msg.LaunchId); err != nil {
 		return sdkerrors.Wrapf(ErrInvalidRequestContent, err.Error())
 	}
 	return nil
@@ -146,8 +146,8 @@ func (msg *MsgSendRequest) ValidateBasic() error {
 func NewMsgSettleRequest(signer string, launchID uint64, requestID uint64, approve bool) *MsgSettleRequest {
 	return &MsgSettleRequest{
 		Signer:    signer,
-		LaunchID:  launchID,
-		RequestID: requestID,
+		LaunchId:  launchID,
+		RequestId: requestID,
 		Approve:   approve,
 	}
 }
@@ -159,7 +159,7 @@ func (msg MsgSettleRequest) Type() string {
 func NewMsgTriggerLaunch(coordinator string, launchID uint64, launchTime time.Time) *MsgTriggerLaunch {
 	return &MsgTriggerLaunch{
 		Coordinator: coordinator,
-		LaunchID:    launchID,
+		LaunchId:    launchID,
 		LaunchTime:  launchTime,
 	}
 }
@@ -171,7 +171,7 @@ func (msg MsgTriggerLaunch) Type() string {
 func NewMsgRevertLaunch(coordinator string, launchID uint64) *MsgRevertLaunch {
 	return &MsgRevertLaunch{
 		Coordinator: coordinator,
-		LaunchID:    launchID,
+		LaunchId:    launchID,
 	}
 }
 

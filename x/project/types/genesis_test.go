@@ -25,11 +25,11 @@ func TestGenesisState_Validate(t *testing.T) {
 	)
 	sharesProject1 := types.IncreaseShares(shares1, shares2)
 	project1.AllocatedShares = sharesProject1
-	project1.CoordinatorID = 0
+	project1.CoordinatorId = 0
 
 	sharesProject2 := types.IncreaseShares(shares3, shares4)
 	project2.AllocatedShares = sharesProject2
-	project2.CoordinatorID = 1
+	project2.CoordinatorId = 1
 
 	for _, tc := range []struct {
 		name         string
@@ -46,10 +46,10 @@ func TestGenesisState_Validate(t *testing.T) {
 				// this line is used by starport scaffolding # types/genesis/validField
 				ProjectChainsList: []types.ProjectChains{
 					{
-						ProjectID: project1.ProjectID,
+						ProjectId: project1.ProjectId,
 					},
 					{
-						ProjectID: project2.ProjectID,
+						ProjectId: project2.ProjectId,
 					},
 				},
 				ProjectList: []types.Project{
@@ -59,12 +59,12 @@ func TestGenesisState_Validate(t *testing.T) {
 				ProjectCount: 2,
 				MainnetAccountList: []types.MainnetAccount{
 					{
-						ProjectID: project1.ProjectID,
+						ProjectId: project1.ProjectId,
 						Address:   sample.Address(r),
 						Shares:    shares1,
 					},
 					{
-						ProjectID: project2.ProjectID,
+						ProjectId: project2.ProjectId,
 						Address:   sample.Address(r),
 						Shares:    shares3,
 					},
@@ -78,10 +78,10 @@ func TestGenesisState_Validate(t *testing.T) {
 			genState: &types.GenesisState{
 				ProjectChainsList: []types.ProjectChains{
 					{
-						ProjectID: 0,
+						ProjectId: 0,
 					},
 					{
-						ProjectID: 1,
+						ProjectId: 1,
 					},
 				},
 				ProjectList: []types.Project{
@@ -101,10 +101,10 @@ func TestGenesisState_Validate(t *testing.T) {
 			genState: &types.GenesisState{
 				ProjectChainsList: []types.ProjectChains{
 					{
-						ProjectID: 2,
+						ProjectId: 2,
 					},
 					{
-						ProjectID: 4,
+						ProjectId: 4,
 					},
 				},
 				ProjectList: []types.Project{
@@ -125,10 +125,10 @@ func TestGenesisState_Validate(t *testing.T) {
 				ProjectCount: 1,
 				ProjectChainsList: []types.ProjectChains{
 					{
-						ProjectID: 0,
+						ProjectId: 0,
 					},
 					{
-						ProjectID: 0,
+						ProjectId: 0,
 					},
 				},
 				TotalShares: networktypes.TotalShareNumber,
@@ -185,11 +185,11 @@ func TestGenesisState_Validate(t *testing.T) {
 				ProjectCount: 1,
 				MainnetAccountList: []types.MainnetAccount{
 					{
-						ProjectID: 0,
+						ProjectId: 0,
 						Address:   "0",
 					},
 					{
-						ProjectID: 0,
+						ProjectId: 0,
 						Address:   "0",
 					},
 				},
@@ -202,10 +202,10 @@ func TestGenesisState_Validate(t *testing.T) {
 			genState: &types.GenesisState{
 				ProjectList: []types.Project{
 					{
-						ProjectID:          0,
+						ProjectId:          0,
 						ProjectName:        "test",
-						CoordinatorID:      0,
-						MainnetID:          0,
+						CoordinatorId:      0,
+						MainnetId:          0,
 						MainnetInitialized: false,
 						TotalSupply:        nil,
 						AllocatedShares:    types.NewSharesFromCoins(tc2.Coins(t, fmt.Sprintf("%dstake", networktypes.TotalShareNumber+1))),
@@ -215,7 +215,7 @@ func TestGenesisState_Validate(t *testing.T) {
 				ProjectCount: 1,
 				MainnetAccountList: []types.MainnetAccount{
 					{
-						ProjectID: 0,
+						ProjectId: 0,
 						Address:   "0",
 					},
 				},
@@ -236,21 +236,21 @@ func TestGenesisState_Validate(t *testing.T) {
 
 			projectIDMap := make(map[uint64]types.Shares)
 			for _, elem := range tc.genState.ProjectList {
-				projectIDMap[elem.ProjectID] = elem.AllocatedShares
+				projectIDMap[elem.ProjectId] = elem.AllocatedShares
 			}
 			shares := make(map[uint64]types.Shares)
 
 			for _, acc := range tc.genState.MainnetAccountList {
 				// check if the project exists for mainnet accounts
-				_, ok := projectIDMap[acc.ProjectID]
+				_, ok := projectIDMap[acc.ProjectId]
 				require.True(t, ok)
 
 				// sum mainnet account shares
-				if _, ok := shares[acc.ProjectID]; !ok {
-					shares[acc.ProjectID] = types.EmptyShares()
+				if _, ok := shares[acc.ProjectId]; !ok {
+					shares[acc.ProjectId] = types.EmptyShares()
 				}
-				shares[acc.ProjectID] = types.IncreaseShares(
-					shares[acc.ProjectID],
+				shares[acc.ProjectId] = types.IncreaseShares(
+					shares[acc.ProjectId],
 					acc.Shares,
 				)
 			}

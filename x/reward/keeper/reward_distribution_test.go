@@ -231,7 +231,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should allow distributing rewards",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -256,7 +256,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should allow distributing reward with different signature ratios",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,1000bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,1000bbb"),
@@ -281,7 +281,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should allow current reward height to influence block ratio for reward distribution",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            provider,
 				InitialCoins:        tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:      tc.Coins(t, "100aaa,100bbb"),
@@ -307,7 +307,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should distribute all rewards if closing the reward pool ",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -332,7 +332,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should distribute part of the reward if last reward height not reached and reward pool not closed ",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -357,7 +357,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should distribute all rewards if last block height greater than reward pool last reward height ",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -382,7 +382,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should clamp block height to 1 if ratio GT 1",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            provider,
 				InitialCoins:        tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:      tc.Coins(t, "100aaa,100bbb"),
@@ -408,7 +408,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should distribute rewards to the operator address for validator with no profile ",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -435,7 +435,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should refund all rewards if the reward pool is closed and no signature counts are reported",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -455,7 +455,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should refund all rewards if the last reward height is reached and no signature counts are reported",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -476,7 +476,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 			name: "should refund all rewards relative to the block ratio if the reward " +
 				"pool is not closed and no signature counts are reported",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -496,7 +496,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should prevent invalid signature counts for negative reward pool with critical error",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            provider,
 				InitialCoins:        tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:      tc.Coins(t, "100aaa,100bbb"),
@@ -518,7 +518,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should return critical error for signatureRatio GT 1",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            provider,
 				InitialCoins:        tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:      tc.Coins(t, "100aaa,100bbb"),
@@ -551,7 +551,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should prevent distributing rewards from a closed reward pool",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -571,7 +571,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should prevent distributing rewards if signature counts are invalid",
 			rewardPool: types.RewardPool{
-				LaunchID:         1,
+				LaunchId:         1,
 				Provider:         provider,
 				InitialCoins:     tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:   tc.Coins(t, "100aaa,100bbb"),
@@ -592,7 +592,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should prevent providing a last block height lower than the current reward height",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            provider,
 				InitialCoins:        tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:      tc.Coins(t, "100aaa,100bbb"),
@@ -611,7 +611,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		{
 			name: "should prevent providing a last block height equals to the current reward height",
 			rewardPool: types.RewardPool{
-				LaunchID:            1,
+				LaunchId:            1,
 				Provider:            provider,
 				InitialCoins:        tc.Coins(t, "100aaa,100bbb"),
 				RemainingCoins:      tc.Coins(t, "100aaa,100bbb"),
@@ -632,7 +632,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			// set test reward pool if contains coins
 			if tt.rewardPool.RemainingCoins != nil {
-				err := tk.RewardKeeper.RewardPool.Set(ctx, tt.rewardPool.LaunchID, tt.rewardPool)
+				err := tk.RewardKeeper.RewardPool.Set(ctx, tt.rewardPool.LaunchId, tt.rewardPool)
 				require.NoError(t, err)
 				err = tk.BankKeeper.MintCoins(ctx, types.ModuleName, tt.rewardPool.RemainingCoins)
 				require.NoError(t, err)
@@ -696,7 +696,7 @@ func TestKeeper_DistributeRewards(t *testing.T) {
 			)
 
 			// remove the reward pool used for the test
-			require.NoError(t, tk.RewardKeeper.RewardPool.Remove(ctx, tt.rewardPool.LaunchID))
+			require.NoError(t, tk.RewardKeeper.RewardPool.Remove(ctx, tt.rewardPool.LaunchId))
 		})
 	}
 }

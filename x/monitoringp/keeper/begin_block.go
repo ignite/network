@@ -100,14 +100,16 @@ func (k Keeper) TransmitSignatures(ctx sdk.Context, blockHeight int64) (sequence
 			SignatureCounts: mi.SignatureCounts,
 		},
 		types.PortID,
-		cid.ChannelID,
+		cid.ChannelId,
 		clienttypes.ZeroHeight(),
 		uint64(ctx.BlockTime().Add(MonitoringPacketTimeoutDelay).UnixNano()),
 	)
 	if err != nil {
-		k.ConsumerClientID.Set(ctx, types.ConsumerClientID{
-			ClientID: err.Error(),
-		})
+		if err := k.ConsumerClientID.Set(ctx, types.ConsumerClientID{
+			ClientId: err.Error(),
+		}); err != nil {
+			return 0, err
+		}
 		return 0, err
 	}
 

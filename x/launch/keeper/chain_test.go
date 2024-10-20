@@ -16,8 +16,8 @@ import (
 func createNChainForCoordinator(keeper *keeper.Keeper, ctx context.Context, coordinatorID uint64, n int) []types.Chain {
 	items := make([]types.Chain, n)
 	for i := range items {
-		items[i].CoordinatorID = coordinatorID
-		items[i].LaunchID, _ = keeper.AppendChain(ctx, items[i])
+		items[i].CoordinatorId = coordinatorID
+		items[i].LaunchId, _ = keeper.AppendChain(ctx, items[i])
 	}
 	return items
 }
@@ -210,12 +210,12 @@ func TestKeeper_CreateNewChain(t *testing.T) {
 
 			chain, err := tk.LaunchKeeper.GetChain(ctx, id)
 			require.NoError(t, err)
-			require.EqualValues(t, tc.coordinatorID, chain.CoordinatorID)
-			require.EqualValues(t, tc.genesisChainID, chain.GenesisChainID)
-			require.EqualValues(t, tc.sourceURL, chain.SourceURL)
+			require.EqualValues(t, tc.coordinatorID, chain.CoordinatorId)
+			require.EqualValues(t, tc.genesisChainID, chain.GenesisChainId)
+			require.EqualValues(t, tc.sourceURL, chain.SourceUrl)
 			require.EqualValues(t, tc.sourceHash, chain.SourceHash)
 			require.EqualValues(t, tc.hasProject, chain.HasProject)
-			require.EqualValues(t, tc.projectID, chain.ProjectID)
+			require.EqualValues(t, tc.projectID, chain.ProjectId)
 			require.EqualValues(t, tc.isMainnet, chain.IsMainnet)
 			require.EqualValues(t, tc.metadata, chain.Metadata)
 			require.EqualValues(t, tc.initialGenesis, chain.InitialGenesis)
@@ -236,7 +236,7 @@ func TestGetChain(t *testing.T) {
 
 	t.Run("should get a chain", func(t *testing.T) {
 		for _, item := range items {
-			rst, err := tk.LaunchKeeper.GetChain(ctx, item.LaunchID)
+			rst, err := tk.LaunchKeeper.GetChain(ctx, item.LaunchId)
 			require.NoError(t, err)
 			require.Equal(t, item, rst)
 		}

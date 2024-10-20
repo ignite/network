@@ -29,7 +29,7 @@ func TestConsumerClientIDQuery(t *testing.T) {
 		{
 			desc:     "First",
 			request:  &types.QueryGetConsumerClientIDRequest{},
-			response: &types.QueryGetConsumerClientIDResponse{ConsumerClientID: item},
+			response: &types.QueryGetConsumerClientIDResponse{ConsumerClientId: item},
 		},
 		{
 			desc: "InvalidRequest",

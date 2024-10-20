@@ -23,7 +23,7 @@ func (q queryServer) ListRequest(ctx context.Context, req *types.QueryAllRequest
 		q.k.Request,
 		req.Pagination,
 		func(_ collections.Pair[uint64, uint64], value types.Request) (bool, error) {
-			return value.LaunchID == req.LaunchID, nil
+			return value.LaunchId == req.LaunchId, nil
 		},
 		func(_ collections.Pair[uint64, uint64], value types.Request) (types.Request, error) {
 			return value, nil
@@ -41,7 +41,7 @@ func (q queryServer) GetRequest(ctx context.Context, req *types.QueryGetRequestR
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	request, err := q.k.Request.Get(ctx, collections.Join(req.LaunchID, req.RequestID))
+	request, err := q.k.Request.Get(ctx, collections.Join(req.LaunchId, req.RequestId))
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, sdkerrors.ErrKeyNotFound

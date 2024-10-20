@@ -24,9 +24,9 @@ func (k msgServer) SetRewards(ctx context.Context, msg *types.MsgSetRewards) (*t
 	}
 
 	// determine if the chain exists
-	chain, err := k.launchKeeper.GetChain(ctx, msg.LaunchID)
+	chain, err := k.launchKeeper.GetChain(ctx, msg.LaunchId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.LaunchId)
 	}
 
 	// check coordinator
@@ -35,12 +35,12 @@ func (k msgServer) SetRewards(ctx context.Context, msg *types.MsgSetRewards) (*t
 		return nil, err
 	}
 
-	if chain.CoordinatorID != coordID {
+	if chain.CoordinatorId != coordID {
 		return nil, sdkerrors.Wrapf(types.ErrInvalidCoordinatorID, "%d", coordID)
 	}
 	// reward can't be changed once launch is triggered
 	if chain.LaunchTriggered {
-		return nil, sdkerrors.Wrapf(launchtypes.ErrTriggeredLaunch, "%d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(launchtypes.ErrTriggeredLaunch, "%d", msg.LaunchId)
 	}
 
 	var (
@@ -48,14 +48,14 @@ func (k msgServer) SetRewards(ctx context.Context, msg *types.MsgSetRewards) (*t
 		previousLastRewardHeight int64
 		poolFound                bool
 	)
-	rewardPool, err := k.RewardPool.Get(ctx, msg.LaunchID)
+	rewardPool, err := k.RewardPool.Get(ctx, msg.LaunchId)
 	if errors.Is(err, collections.ErrNotFound) {
 		poolFound = false
 		// create the reward pool and transfer tokens if not created yet
 		if err := k.bankKeeper.SendCoinsFromAccountToModule(ctx, provider, types.ModuleName, msg.Coins); err != nil {
 			return nil, sdkerrors.Wrap(types.ErrInsufficientFunds, err.Error())
 		}
-		rewardPool = types.NewRewardPool(msg.LaunchID, 0)
+		rewardPool = types.NewRewardPool(msg.LaunchId, 0)
 	} else if err != nil {
 		return nil, err
 	} else {
@@ -72,10 +72,10 @@ func (k msgServer) SetRewards(ctx context.Context, msg *types.MsgSetRewards) (*t
 		rewardPool.InitialCoins = sdk.NewCoins()
 		rewardPool.RemainingCoins = sdk.NewCoins()
 		rewardPool.LastRewardHeight = 0
-		if err := k.RewardPool.Remove(ctx, msg.LaunchID); err != nil {
+		if err := k.RewardPool.Remove(ctx, msg.LaunchId); err != nil {
 			return nil, err
 		}
-		if err := sdkCtx.EventManager().EmitTypedEvent(&types.EventRewardPoolRemoved{LaunchID: msg.LaunchID}); err != nil {
+		if err := sdkCtx.EventManager().EmitTypedEvent(&types.EventRewardPoolRemoved{LaunchId: msg.LaunchId}); err != nil {
 			return nil, err
 		}
 	} else {
@@ -83,12 +83,12 @@ func (k msgServer) SetRewards(ctx context.Context, msg *types.MsgSetRewards) (*t
 		rewardPool.RemainingCoins = msg.Coins
 		rewardPool.Provider = msg.Provider
 		rewardPool.LastRewardHeight = msg.LastRewardHeight
-		if err := k.RewardPool.Set(ctx, rewardPool.LaunchID, rewardPool); err != nil {
+		if err := k.RewardPool.Set(ctx, rewardPool.LaunchId, rewardPool); err != nil {
 			return nil, err
 		}
 		if !poolFound {
 			if err := sdkCtx.EventManager().EmitTypedEvent(&types.EventRewardPoolCreated{
-				LaunchID: rewardPool.LaunchID,
+				LaunchId: rewardPool.LaunchId,
 				Provider: rewardPool.Provider,
 			}); err != nil {
 				return nil, err

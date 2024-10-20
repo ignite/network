@@ -13,16 +13,16 @@ import (
 )
 
 var (
-	md_ProviderClientID          protoreflect.MessageDescriptor
-	fd_ProviderClientID_launchID protoreflect.FieldDescriptor
-	fd_ProviderClientID_clientID protoreflect.FieldDescriptor
+	md_ProviderClientID           protoreflect.MessageDescriptor
+	fd_ProviderClientID_launch_id protoreflect.FieldDescriptor
+	fd_ProviderClientID_client_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_monitoringc_v1_provider_client_id_proto_init()
 	md_ProviderClientID = File_network_monitoringc_v1_provider_client_id_proto.Messages().ByName("ProviderClientID")
-	fd_ProviderClientID_launchID = md_ProviderClientID.Fields().ByName("launchID")
-	fd_ProviderClientID_clientID = md_ProviderClientID.Fields().ByName("clientID")
+	fd_ProviderClientID_launch_id = md_ProviderClientID.Fields().ByName("launch_id")
+	fd_ProviderClientID_client_id = md_ProviderClientID.Fields().ByName("client_id")
 }
 
 var _ protoreflect.Message = (*fastReflection_ProviderClientID)(nil)
@@ -90,15 +90,15 @@ func (x *fastReflection_ProviderClientID) Interface() protoreflect.ProtoMessage 
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_ProviderClientID) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.LaunchID != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LaunchID)
-		if !f(fd_ProviderClientID_launchID, value) {
+	if x.LaunchId != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.LaunchId)
+		if !f(fd_ProviderClientID_launch_id, value) {
 			return
 		}
 	}
-	if x.ClientID != "" {
-		value := protoreflect.ValueOfString(x.ClientID)
-		if !f(fd_ProviderClientID_clientID, value) {
+	if x.ClientId != "" {
+		value := protoreflect.ValueOfString(x.ClientId)
+		if !f(fd_ProviderClientID_client_id, value) {
 			return
 		}
 	}
@@ -117,10 +117,10 @@ func (x *fastReflection_ProviderClientID) Range(f func(protoreflect.FieldDescrip
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_ProviderClientID) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.ProviderClientID.launchID":
-		return x.LaunchID != uint64(0)
-	case "network.monitoringc.v1.ProviderClientID.clientID":
-		return x.ClientID != ""
+	case "network.monitoringc.v1.ProviderClientID.launch_id":
+		return x.LaunchId != uint64(0)
+	case "network.monitoringc.v1.ProviderClientID.client_id":
+		return x.ClientId != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.ProviderClientID"))
@@ -137,10 +137,10 @@ func (x *fastReflection_ProviderClientID) Has(fd protoreflect.FieldDescriptor) b
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_ProviderClientID) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.ProviderClientID.launchID":
-		x.LaunchID = uint64(0)
-	case "network.monitoringc.v1.ProviderClientID.clientID":
-		x.ClientID = ""
+	case "network.monitoringc.v1.ProviderClientID.launch_id":
+		x.LaunchId = uint64(0)
+	case "network.monitoringc.v1.ProviderClientID.client_id":
+		x.ClientId = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.ProviderClientID"))
@@ -157,11 +157,11 @@ func (x *fastReflection_ProviderClientID) Clear(fd protoreflect.FieldDescriptor)
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_ProviderClientID) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.monitoringc.v1.ProviderClientID.launchID":
-		value := x.LaunchID
+	case "network.monitoringc.v1.ProviderClientID.launch_id":
+		value := x.LaunchId
 		return protoreflect.ValueOfUint64(value)
-	case "network.monitoringc.v1.ProviderClientID.clientID":
-		value := x.ClientID
+	case "network.monitoringc.v1.ProviderClientID.client_id":
+		value := x.ClientId
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
@@ -183,10 +183,10 @@ func (x *fastReflection_ProviderClientID) Get(descriptor protoreflect.FieldDescr
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_ProviderClientID) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.ProviderClientID.launchID":
-		x.LaunchID = value.Uint()
-	case "network.monitoringc.v1.ProviderClientID.clientID":
-		x.ClientID = value.Interface().(string)
+	case "network.monitoringc.v1.ProviderClientID.launch_id":
+		x.LaunchId = value.Uint()
+	case "network.monitoringc.v1.ProviderClientID.client_id":
+		x.ClientId = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.ProviderClientID"))
@@ -207,10 +207,10 @@ func (x *fastReflection_ProviderClientID) Set(fd protoreflect.FieldDescriptor, v
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_ProviderClientID) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.ProviderClientID.launchID":
-		panic(fmt.Errorf("field launchID of message network.monitoringc.v1.ProviderClientID is not mutable"))
-	case "network.monitoringc.v1.ProviderClientID.clientID":
-		panic(fmt.Errorf("field clientID of message network.monitoringc.v1.ProviderClientID is not mutable"))
+	case "network.monitoringc.v1.ProviderClientID.launch_id":
+		panic(fmt.Errorf("field launch_id of message network.monitoringc.v1.ProviderClientID is not mutable"))
+	case "network.monitoringc.v1.ProviderClientID.client_id":
+		panic(fmt.Errorf("field client_id of message network.monitoringc.v1.ProviderClientID is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.monitoringc.v1.ProviderClientID"))
@@ -224,9 +224,9 @@ func (x *fastReflection_ProviderClientID) Mutable(fd protoreflect.FieldDescripto
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_ProviderClientID) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.monitoringc.v1.ProviderClientID.launchID":
+	case "network.monitoringc.v1.ProviderClientID.launch_id":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "network.monitoringc.v1.ProviderClientID.clientID":
+	case "network.monitoringc.v1.ProviderClientID.client_id":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
@@ -297,10 +297,10 @@ func (x *fastReflection_ProviderClientID) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
-		if x.LaunchID != 0 {
-			n += 1 + runtime.Sov(uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			n += 1 + runtime.Sov(uint64(x.LaunchId))
 		}
-		l = len(x.ClientID)
+		l = len(x.ClientId)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -333,15 +333,15 @@ func (x *fastReflection_ProviderClientID) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.ClientID) > 0 {
-			i -= len(x.ClientID)
-			copy(dAtA[i:], x.ClientID)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ClientID)))
+		if len(x.ClientId) > 0 {
+			i -= len(x.ClientId)
+			copy(dAtA[i:], x.ClientId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ClientId)))
 			i--
 			dAtA[i] = 0x12
 		}
-		if x.LaunchID != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchID))
+		if x.LaunchId != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.LaunchId))
 			i--
 			dAtA[i] = 0x8
 		}
@@ -396,9 +396,9 @@ func (x *fastReflection_ProviderClientID) ProtoMethods() *protoiface.Methods {
 			switch fieldNum {
 			case 1:
 				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LaunchId", wireType)
 				}
-				x.LaunchID = 0
+				x.LaunchId = 0
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -408,14 +408,14 @@ func (x *fastReflection_ProviderClientID) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LaunchID |= uint64(b&0x7F) << shift
+					x.LaunchId |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
 			case 2:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ClientID", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ClientId", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -443,7 +443,7 @@ func (x *fastReflection_ProviderClientID) ProtoMethods() *protoiface.Methods {
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.ClientID = string(dAtA[iNdEx:postIndex])
+				x.ClientId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -498,8 +498,8 @@ type ProviderClientID struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LaunchID uint64 `protobuf:"varint,1,opt,name=launchID,proto3" json:"launchID,omitempty"`
-	ClientID string `protobuf:"bytes,2,opt,name=clientID,proto3" json:"clientID,omitempty"`
+	LaunchId uint64 `protobuf:"varint,1,opt,name=launch_id,json=launchId,proto3" json:"launch_id,omitempty"`
+	ClientId string `protobuf:"bytes,2,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
 }
 
 func (x *ProviderClientID) Reset() {
@@ -522,16 +522,16 @@ func (*ProviderClientID) Descriptor() ([]byte, []int) {
 	return file_network_monitoringc_v1_provider_client_id_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ProviderClientID) GetLaunchID() uint64 {
+func (x *ProviderClientID) GetLaunchId() uint64 {
 	if x != nil {
-		return x.LaunchID
+		return x.LaunchId
 	}
 	return 0
 }
 
-func (x *ProviderClientID) GetClientID() string {
+func (x *ProviderClientID) GetClientId() string {
 	if x != nil {
-		return x.ClientID
+		return x.ClientId
 	}
 	return ""
 }
@@ -543,28 +543,28 @@ var file_network_monitoringc_v1_provider_client_id_proto_rawDesc = []byte{
 	0x72, 0x69, 0x6e, 0x67, 0x63, 0x2f, 0x76, 0x31, 0x2f, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65,
 	0x72, 0x5f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x12, 0x16, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74,
-	0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x22, 0x4a, 0x0a, 0x10, 0x50, 0x72, 0x6f,
-	0x76, 0x69, 0x64, 0x65, 0x72, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x12, 0x1a, 0x0a,
-	0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52,
-	0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x44, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6c, 0x69,
-	0x65, 0x6e, 0x74, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6c, 0x69,
-	0x65, 0x6e, 0x74, 0x49, 0x44, 0x42, 0xf1, 0x01, 0x0a, 0x1a, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67,
-	0x63, 0x2e, 0x76, 0x31, 0x42, 0x15, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x43, 0x6c,
-	0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x42, 0x67,
-	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65,
-	0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74,
-	0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63,
-	0x2f, 0x76, 0x31, 0x3b, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x76,
-	0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4d, 0x58, 0xaa, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72,
-	0x6b, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x56, 0x31,
-	0xca, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74,
-	0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x22, 0x4e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x5c,
-	0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02,
-	0x18, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f,
-	0x72, 0x69, 0x6e, 0x67, 0x63, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x22, 0x4c, 0x0a, 0x10, 0x50, 0x72, 0x6f,
+	0x76, 0x69, 0x64, 0x65, 0x72, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x12, 0x1b, 0x0a,
+	0x09, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x08, 0x6c, 0x61, 0x75, 0x6e, 0x63, 0x68, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x63, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x42, 0xf1, 0x01, 0x0a, 0x1a, 0x63, 0x6f, 0x6d, 0x2e,
+	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69,
+	0x6e, 0x67, 0x63, 0x2e, 0x76, 0x31, 0x42, 0x15, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72,
+	0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
+	0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69,
+	0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e,
+	0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e,
+	0x67, 0x63, 0x2f, 0x76, 0x31, 0x3b, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67,
+	0x63, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4e, 0x4d, 0x58, 0xaa, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77,
+	0x6f, 0x72, 0x6b, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x2e,
+	0x56, 0x31, 0xca, 0x02, 0x16, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e,
+	0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x22, 0x4e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67,
+	0x63, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
+	0xea, 0x02, 0x18, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x4d, 0x6f, 0x6e, 0x69,
+	0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x63, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (

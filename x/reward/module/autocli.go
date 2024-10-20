@@ -27,7 +27,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:            "get-reward-pool [launch-id]",
 					Short:          "Gets a RewardPool",
 					Alias:          []string{"show-reward-pool"},
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launchID"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}},
 				},
 				// this line is used by ignite scaffolding # autocli/query
 			},
@@ -44,7 +44,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod:      "SetRewards",
 					Use:            "set-rewards [launch-id] [coins] [last-reward-height]",
 					Short:          "Send a SetRewards tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launchID"}, {ProtoField: "coins"}, {ProtoField: "lastRewardHeight"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}, {ProtoField: "coins"}, {ProtoField: "last_reward_height"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

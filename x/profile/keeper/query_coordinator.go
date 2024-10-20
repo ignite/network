@@ -38,7 +38,7 @@ func (q queryServer) GetCoordinator(ctx context.Context, req *types.QueryGetCoor
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	coordinator, err := q.k.Coordinator.Get(ctx, req.ID)
+	coordinator, err := q.k.Coordinator.Get(ctx, req.CoordinatorId)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, sdkerrors.ErrKeyNotFound
@@ -69,7 +69,7 @@ func (q queryServer) GetCoordinatorByAddress(ctx context.Context, req *types.Que
 		return nil, status.Error(codes.Internal, "internal error")
 	}
 
-	coordinator, err := q.k.Coordinator.Get(ctx, coordinatorByAddress.CoordinatorID)
+	coordinator, err := q.k.Coordinator.Get(ctx, coordinatorByAddress.CoordinatorId)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
 			return nil, sdkerrors.ErrKeyNotFound

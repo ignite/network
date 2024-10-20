@@ -51,17 +51,17 @@ message QueryParamsResponse {
 message QueryGetMonitoringInfoRequest {}
 
 message QueryGetMonitoringInfoResponse {
-  MonitoringInfo MonitoringInfo = 1 [(gogoproto.nullable) = false];
+  MonitoringInfo monitoring_info = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryGetConnectionChannelIDRequest {}
 
 message QueryGetConnectionChannelIDResponse {
-  ConnectionChannelID ConnectionChannelID = 1 [(gogoproto.nullable) = false];
+  ConnectionChannelID connection_channel_id = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryGetConsumerClientIDRequest {}
 
 message QueryGetConsumerClientIDResponse {
-  ConsumerClientID ConsumerClientID = 1 [(gogoproto.nullable) = false];
+  ConsumerClientID consumer_client_id = 1 [(gogoproto.nullable) = false];
 }

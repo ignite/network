@@ -17,14 +17,14 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 			return err
 		}
 
-		if err := k.MainnetAccount.Set(ctx, collections.Join(elem.ProjectID, sdk.AccAddress(address)), elem); err != nil {
+		if err := k.MainnetAccount.Set(ctx, collections.Join(elem.ProjectId, sdk.AccAddress(address)), elem); err != nil {
 			return err
 		}
 	}
 
 	// Set all the project
 	for _, elem := range genState.ProjectList {
-		if err := k.Project.Set(ctx, elem.ProjectID, elem); err != nil {
+		if err := k.Project.Set(ctx, elem.ProjectId, elem); err != nil {
 			return err
 		}
 	}
@@ -35,7 +35,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	}
 	// Set all the projectChains
 	for _, elem := range genState.ProjectChainsList {
-		if err := k.ProjectChains.Set(ctx, elem.ProjectID, elem); err != nil {
+		if err := k.ProjectChains.Set(ctx, elem.ProjectId, elem); err != nil {
 			return err
 		}
 	}

@@ -14,15 +14,15 @@ message Params {
   option (amino.name) = "network/x/participation/Params";
   option (gogoproto.equal) = true;
 
-  AllocationPrice allocationPrice = 1 [(gogoproto.nullable) = false];
-  repeated Tier participationTierList = 2 [(gogoproto.nullable) = false];
+  AllocationPrice allocation_price = 1 [(gogoproto.nullable) = false];
+  repeated Tier participation_tier_list = 2 [(gogoproto.nullable) = false];
   // Time frame before auction starts where MsgParticipate can be called
-  google.protobuf.Duration registrationPeriod = 3 [
+  google.protobuf.Duration registration_period = 3 [
     (gogoproto.nullable) = false,
     (gogoproto.stdduration) = true
   ];
   // Delay after auction starts when allocations can be withdrawn
-  google.protobuf.Duration withdrawalDelay = 4 [
+  google.protobuf.Duration withdrawal_delay = 4 [
     (gogoproto.nullable) = false,
     (gogoproto.stdduration) = true
   ];
@@ -39,8 +39,8 @@ message AllocationPrice {
 
 // Matches a number of required allocations with benefits
 message Tier {
-  uint64 tierID = 1;
-  string requiredAllocations = 2 [
+  uint64 tier_id = 1;
+  string required_allocations = 2 [
     (gogoproto.nullable) = false,
     (gogoproto.customtype) = "cosmossdk.io/math.Int",
     (cosmos_proto.scalar) = "cosmos.Int"
@@ -49,8 +49,8 @@ message Tier {
 }
 
 message TierBenefits {
-  // maximum amount an auction participant can bid
-  string maxBidAmount = 1 [
+  // max_bid_amount maximum amount an auction participant can bid
+  string max_bid_amount = 1 [
     (gogoproto.nullable) = false,
     (gogoproto.customtype) = "cosmossdk.io/math.Int",
     (cosmos_proto.scalar) = "cosmos.Int"

@@ -22,7 +22,7 @@ func createNGenesisValidator(keeper *keeper.Keeper, ctx context.Context, n int) 
 	launchID := uint64(0)
 	for i := range items {
 		address := sample.AccAddress(r)
-		items[i].LaunchID = launchID
+		items[i].LaunchId = launchID
 		items[i].Address = address.String()
 
 		_ = keeper.GenesisValidator.Set(ctx, collections.Join(launchID, address), items[i])
@@ -44,7 +44,7 @@ func TestGenesisValidatorQuerySingle(t *testing.T) {
 			desc: "First",
 			request: &types.QueryGetGenesisValidatorRequest{
 				Address:  msgs[0].Address,
-				LaunchID: msgs[0].LaunchID,
+				LaunchId: msgs[0].LaunchId,
 			},
 			response: &types.QueryGetGenesisValidatorResponse{GenesisValidator: msgs[0]},
 		},
@@ -52,7 +52,7 @@ func TestGenesisValidatorQuerySingle(t *testing.T) {
 			desc: "Second",
 			request: &types.QueryGetGenesisValidatorRequest{
 				Address:  msgs[1].Address,
-				LaunchID: msgs[1].LaunchID,
+				LaunchId: msgs[1].LaunchId,
 			},
 			response: &types.QueryGetGenesisValidatorResponse{GenesisValidator: msgs[1]},
 		},
@@ -60,7 +60,7 @@ func TestGenesisValidatorQuerySingle(t *testing.T) {
 			desc: "KeyNotFound",
 			request: &types.QueryGetGenesisValidatorRequest{
 				Address:  sample.Address(r),
-				LaunchID: 100000,
+				LaunchId: 100000,
 			},
 			err: status.Error(codes.NotFound, "not found"),
 		},

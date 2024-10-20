@@ -33,7 +33,7 @@ func FindCoordinatorAccount(
 		coordByAddress, err := k.CoordinatorByAddress.Get(ctx, acc.Address)
 		found := !errors.Is(err, collections.ErrNotFound)
 		if found == exist {
-			coord, err := k.Coordinator.Get(ctx, coordByAddress.CoordinatorID)
+			coord, err := k.Coordinator.Get(ctx, coordByAddress.CoordinatorId)
 			if err == nil && !coord.Active {
 				continue
 			}

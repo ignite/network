@@ -20,7 +20,7 @@ func TestInsufficientRewardsBalanceInvariant(t *testing.T) {
 		for i := uint64(0); i < uint64(10); i++ {
 			pool := sample.RewardPoolWithCoinsRangeAmount(r, i, denoms[0], denoms[1], denoms[2], 1, 10000)
 			tk.MintModule(ctx, types.ModuleName, pool.RemainingCoins)
-			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchID, pool))
+			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchId, pool))
 		}
 		msg, broken := keeper.InsufficientRewardsBalanceInvariant(tk.RewardKeeper)(ctx)
 		require.False(t, broken, msg)
@@ -33,7 +33,7 @@ func TestInsufficientRewardsBalanceInvariant(t *testing.T) {
 		for i := uint64(0); i < uint64(10); i++ {
 			pool := sample.RewardPoolWithCoinsRangeAmount(r, i, denoms[0], denoms[1], denoms[2], 1, 10000)
 			tk.MintModule(ctx, types.ModuleName, pool.RemainingCoins)
-			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchID, pool))
+			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchId, pool))
 		}
 		// add some invalid pools - mint a bit less for some coins
 		for i := uint64(10); i < uint64(20); i++ {
@@ -42,7 +42,7 @@ func TestInsufficientRewardsBalanceInvariant(t *testing.T) {
 			// decrease amount for coin at index 0 before minting
 			mintCoins = mintCoins.Sub(sdk.NewCoins(sdk.NewCoin(mintCoins.GetDenomByIndex(0), sdkmath.OneInt()))...)
 			tk.MintModule(ctx, types.ModuleName, mintCoins)
-			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchID, pool))
+			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchId, pool))
 		}
 		msg, broken := keeper.InsufficientRewardsBalanceInvariant(tk.RewardKeeper)(ctx)
 		require.True(t, broken, msg)
@@ -55,12 +55,12 @@ func TestInsufficientRewardsBalanceInvariant(t *testing.T) {
 		for i := uint64(0); i < uint64(10); i++ {
 			pool := sample.RewardPoolWithCoinsRangeAmount(r, i, denoms[0], denoms[1], denoms[2], 1, 10000)
 			tk.MintModule(ctx, types.ModuleName, pool.RemainingCoins)
-			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchID, pool))
+			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchId, pool))
 		}
 		// add some invalid pools - do not mint coins
 		for i := uint64(10); i < uint64(20); i++ {
 			pool := sample.RewardPool(r, i)
-			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchID, pool))
+			require.NoError(t, tk.RewardKeeper.RewardPool.Set(ctx, pool.LaunchId, pool))
 		}
 		msg, broken := keeper.InsufficientRewardsBalanceInvariant(tk.RewardKeeper)(ctx)
 		require.True(t, broken, msg)

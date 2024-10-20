@@ -46,12 +46,12 @@ func (k Keeper) GetNextRequestIDWithUpdate(ctx context.Context, launchID uint64)
 
 // AppendRequest appends a Request in the store with a new launch id and update the count
 func (k Keeper) AppendRequest(ctx context.Context, request types.Request) (uint64, error) {
-	requestID, err := k.GetNextRequestIDWithUpdate(ctx, request.LaunchID)
+	requestID, err := k.GetNextRequestIDWithUpdate(ctx, request.LaunchId)
 	if err != nil {
 		return 0, ignterrors.Criticalf("failed to get next request sequence %s", err.Error())
 	}
-	request.RequestID = requestID
-	if err := k.Request.Set(ctx, collections.Join(request.LaunchID, requestID), request); err != nil {
+	request.RequestId = requestID
+	if err := k.Request.Set(ctx, collections.Join(request.LaunchId, requestID), request); err != nil {
 		return 0, ignterrors.Criticalf("request not set %s", err.Error())
 	}
 	return requestID, nil
@@ -89,7 +89,7 @@ func ApplyRequest(
 	coord profiletypes.Coordinator,
 ) error {
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
-	err := CheckRequest(ctx, k, chain.LaunchID, request)
+	err := CheckRequest(ctx, k, chain.LaunchId, request)
 	if err != nil {
 		return err
 	}
@@ -105,14 +105,14 @@ func ApplyRequest(
 		if err != nil {
 			return err
 		}
-		if err := k.GenesisAccount.Set(ctx, collections.Join(ga.LaunchID, sdk.AccAddress(address)), *ga); err != nil {
+		if err := k.GenesisAccount.Set(ctx, collections.Join(ga.LaunchId, sdk.AccAddress(address)), *ga); err != nil {
 			return err
 		}
 
 		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventGenesisAccountAdded{
 			Address:            ga.Address,
 			Coins:              ga.Coins,
-			LaunchID:           chain.LaunchID,
+			LaunchId:           chain.LaunchId,
 			CoordinatorAddress: coord.Address,
 		})
 
@@ -124,7 +124,7 @@ func ApplyRequest(
 				dv := opt.DelayedVesting
 				va = &types.VestingAccount{
 					Address:  va.Address,
-					LaunchID: va.LaunchID,
+					LaunchId: va.LaunchId,
 					VestingOptions: *types.NewDelayedVesting(
 						chain.AccountBalance,
 						chain.AccountBalance,
@@ -138,14 +138,14 @@ func ApplyRequest(
 		if err != nil {
 			return err
 		}
-		if err := k.VestingAccount.Set(ctx, collections.Join(va.LaunchID, sdk.AccAddress(address)), *va); err != nil {
+		if err := k.VestingAccount.Set(ctx, collections.Join(va.LaunchId, sdk.AccAddress(address)), *va); err != nil {
 			return err
 		}
 
 		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventVestingAccountAdded{
 			Address:            va.Address,
 			VestingOptions:     va.VestingOptions,
-			LaunchID:           chain.LaunchID,
+			LaunchId:           chain.LaunchId,
 			CoordinatorAddress: coord.Address,
 		})
 
@@ -156,16 +156,16 @@ func ApplyRequest(
 		if err != nil {
 			return err
 		}
-		if err := k.GenesisAccount.Remove(ctx, collections.Join(chain.LaunchID, sdk.AccAddress(address))); err != nil && !errors.Is(err, collections.ErrNotFound) {
+		if err := k.GenesisAccount.Remove(ctx, collections.Join(chain.LaunchId, sdk.AccAddress(address))); err != nil && !errors.Is(err, collections.ErrNotFound) {
 			return err
 		}
-		if err := k.VestingAccount.Remove(ctx, collections.Join(chain.LaunchID, sdk.AccAddress(address))); err != nil && !errors.Is(err, collections.ErrNotFound) {
+		if err := k.VestingAccount.Remove(ctx, collections.Join(chain.LaunchId, sdk.AccAddress(address))); err != nil && !errors.Is(err, collections.ErrNotFound) {
 			return err
 		}
 
 		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventAccountRemoved{
 			Address:            ar.Address,
-			LaunchID:           chain.LaunchID,
+			LaunchId:           chain.LaunchId,
 			CoordinatorAddress: coord.Address,
 		})
 
@@ -176,7 +176,7 @@ func ApplyRequest(
 		if err != nil {
 			return err
 		}
-		if err := k.GenesisValidator.Set(ctx, collections.Join(chain.LaunchID, sdk.AccAddress(address)), *ga); err != nil {
+		if err := k.GenesisValidator.Set(ctx, collections.Join(chain.LaunchId, sdk.AccAddress(address)), *ga); err != nil {
 			return err
 		}
 
@@ -186,9 +186,9 @@ func ApplyRequest(
 			ConsPubKey:         ga.ConsPubKey,
 			SelfDelegation:     ga.SelfDelegation,
 			Peer:               ga.Peer,
-			LaunchID:           chain.LaunchID,
+			LaunchId:           chain.LaunchId,
 			HasProject:         chain.HasProject,
-			ProjectID:          chain.ProjectID,
+			ProjectId:          chain.ProjectId,
 			CoordinatorAddress: coord.Address,
 		})
 
@@ -199,27 +199,27 @@ func ApplyRequest(
 		if err != nil {
 			return err
 		}
-		if err := k.GenesisValidator.Remove(ctx, collections.Join(chain.LaunchID, sdk.AccAddress(address))); err != nil && !errors.Is(err, collections.ErrNotFound) {
+		if err := k.GenesisValidator.Remove(ctx, collections.Join(chain.LaunchId, sdk.AccAddress(address))); err != nil && !errors.Is(err, collections.ErrNotFound) {
 			return err
 		}
 
 		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventValidatorRemoved{
 			GenesisValidatorAccount: vr.ValAddress,
-			LaunchID:                chain.LaunchID,
+			LaunchId:                chain.LaunchId,
 			HasProject:              chain.HasProject,
-			ProjectID:               chain.ProjectID,
+			ProjectId:               chain.ProjectId,
 			CoordinatorAddress:      coord.Address,
 		})
 
 	case *types.RequestContent_ParamChange:
 		cp := requestContent.ParamChange
 
-		if err := k.ParamChange.Set(ctx, collections.Join(chain.LaunchID, types.ParamChangeSubKey(cp.Module, cp.Param)), *cp); err != nil {
+		if err := k.ParamChange.Set(ctx, collections.Join(chain.LaunchId, types.ParamChangeSubKey(cp.Module, cp.Param)), *cp); err != nil {
 			return err
 		}
 
 		err = sdkCtx.EventManager().EmitTypedEvent(&types.EventParamChanged{
-			LaunchID: cp.LaunchID,
+			LaunchId: cp.LaunchId,
 			Module:   cp.Module,
 			Param:    cp.Param,
 			Value:    cp.Value,

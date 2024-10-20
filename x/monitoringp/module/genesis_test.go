@@ -15,16 +15,16 @@ import (
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
-		PortID: types.PortID,
+		PortId: types.PortID,
 		MonitoringInfo: &types.MonitoringInfo{
 			Transmitted:     false,
 			SignatureCounts: networktypes.SignatureCounts{},
 		},
-		ConnectionChannelID: &types.ConnectionChannelID{
-			ChannelID: "98",
+		ConnectionChannelId: &types.ConnectionChannelID{
+			ChannelId: "98",
 		},
-		ConsumerClientID: &types.ConsumerClientID{
-			ClientID: "42",
+		ConsumerClientId: &types.ConsumerClientID{
+			ClientId: "42",
 		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
@@ -39,10 +39,10 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
-	require.Equal(t, genesisState.PortID, got.PortID)
+	require.Equal(t, genesisState.PortId, got.PortId)
 
 	require.Equal(t, genesisState.MonitoringInfo, got.MonitoringInfo)
-	require.Equal(t, genesisState.ConnectionChannelID, got.ConnectionChannelID)
-	require.Equal(t, genesisState.ConsumerClientID, got.ConsumerClientID)
+	require.Equal(t, genesisState.ConnectionChannelId, got.ConnectionChannelId)
+	require.Equal(t, genesisState.ConsumerClientId, got.ConsumerClientId)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

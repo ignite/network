@@ -8,8 +8,8 @@ option go_package = "github.com/ignite/network/x/participation/types";
 
 message EventAllocationsUsed {
   string participant = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 auctionID = 2;
-  string numAllocations = 3 [
+  uint64 auction_id = 2;
+  string num_allocations = 3 [
     (gogoproto.nullable) = false,
     (gogoproto.customtype) = "cosmossdk.io/math.Int",
     (cosmos_proto.scalar) = "cosmos.Int"
@@ -18,5 +18,5 @@ message EventAllocationsUsed {
 
 message EventAllocationsWithdrawn {
   string participant = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  uint64 auctionID = 2;
+  uint64 auction_id = 2;
 }

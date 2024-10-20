@@ -71,56 +71,56 @@ func ProfileGenesisState(r *rand.Rand, addresses ...string) profile.GenesisState
 	return profile.GenesisState{
 		CoordinatorList: []profile.Coordinator{
 			{
-				CoordinatorID: 0,
+				CoordinatorId: 0,
 				Address:       addresses[0],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 			{
-				CoordinatorID: 1,
+				CoordinatorId: 1,
 				Address:       addresses[1],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 			{
-				CoordinatorID: 2,
+				CoordinatorId: 2,
 				Address:       addresses[2],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 			{
-				CoordinatorID: 3,
+				CoordinatorId: 3,
 				Address:       addresses[3],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 			{
-				CoordinatorID: 4,
+				CoordinatorId: 4,
 				Address:       addresses[4],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 		},
-		CoordinatorsByAddress: []profile.CoordinatorByAddress{
+		CoordinatorByAddress: []profile.CoordinatorByAddress{
 			{
 				Address:       addresses[0],
-				CoordinatorID: 0,
+				CoordinatorId: 0,
 			},
 			{
 				Address:       addresses[1],
-				CoordinatorID: 1,
+				CoordinatorId: 1,
 			},
 			{
 				Address:       addresses[2],
-				CoordinatorID: 2,
+				CoordinatorId: 2,
 			},
 			{
 				Address:       addresses[3],
-				CoordinatorID: 3,
+				CoordinatorId: 3,
 			},
 			{
 				Address:       addresses[4],
-				CoordinatorID: 4,
+				CoordinatorId: 4,
 			},
 		},
 		CoordinatorCount: 5,

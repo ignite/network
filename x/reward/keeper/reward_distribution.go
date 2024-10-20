@@ -127,7 +127,7 @@ func (k Keeper) DistributeRewards(
 			return ignterrors.Criticalf("send rewards error: %s", err.Error())
 		}
 		if err := sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(&types.EventRewardsDistributed{
-			LaunchID: launchID,
+			LaunchId: launchID,
 			Receiver: address,
 			Rewards:  rewards,
 		}); err != nil {
@@ -150,7 +150,7 @@ func (k Keeper) DistributeRewards(
 		// close the pool
 		rewardPool.Closed = true
 		rewardPool.RemainingCoins = rewardPool.RemainingCoins.Sub(rewardPool.RemainingCoins...) // sub coins transferred
-		return k.RewardPool.Set(ctx, rewardPool.LaunchID, rewardPool)
+		return k.RewardPool.Set(ctx, rewardPool.LaunchId, rewardPool)
 	}
 
 	// Otherwise, the refund is relative to the block ratio and the reward pool is updated
@@ -185,7 +185,7 @@ func (k Keeper) DistributeRewards(
 
 	// update the current reward height for next reward
 	rewardPool.CurrentRewardHeight = lastBlockHeight
-	return k.RewardPool.Set(ctx, rewardPool.LaunchID, rewardPool)
+	return k.RewardPool.Set(ctx, rewardPool.LaunchId, rewardPool)
 }
 
 // CalculateRewards calculates the reward relative to the signature and block ratio

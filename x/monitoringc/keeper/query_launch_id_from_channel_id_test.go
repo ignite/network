@@ -19,9 +19,9 @@ import (
 func createNLaunchIDFromChannelID(keeper *keeper.Keeper, ctx context.Context, n int) []types.LaunchIDFromChannelID {
 	items := make([]types.LaunchIDFromChannelID, n)
 	for i := range items {
-		items[i].ChannelID = strconv.Itoa(i)
+		items[i].ChannelId = strconv.Itoa(i)
 
-		_ = keeper.LaunchIDFromChannelID.Set(ctx, items[i].ChannelID, items[i])
+		_ = keeper.LaunchIDFromChannelID.Set(ctx, items[i].ChannelId, items[i])
 	}
 	return items
 }
@@ -39,21 +39,21 @@ func TestLaunchIDFromChannelIDQuerySingle(t *testing.T) {
 		{
 			desc: "First",
 			request: &types.QueryGetLaunchIDFromChannelIDRequest{
-				ChannelID: msgs[0].ChannelID,
+				ChannelId: msgs[0].ChannelId,
 			},
-			response: &types.QueryGetLaunchIDFromChannelIDResponse{LaunchIDFromChannelID: msgs[0]},
+			response: &types.QueryGetLaunchIDFromChannelIDResponse{LaunchIdFromChannelId: msgs[0]},
 		},
 		{
 			desc: "Second",
 			request: &types.QueryGetLaunchIDFromChannelIDRequest{
-				ChannelID: msgs[1].ChannelID,
+				ChannelId: msgs[1].ChannelId,
 			},
-			response: &types.QueryGetLaunchIDFromChannelIDResponse{LaunchIDFromChannelID: msgs[1]},
+			response: &types.QueryGetLaunchIDFromChannelIDResponse{LaunchIdFromChannelId: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
 			request: &types.QueryGetLaunchIDFromChannelIDRequest{
-				ChannelID: strconv.Itoa(100000),
+				ChannelId: strconv.Itoa(100000),
 			},
 			err: status.Error(codes.NotFound, "not found"),
 		},
@@ -98,10 +98,10 @@ func TestLaunchIDFromChannelIDQueryPaginated(t *testing.T) {
 		for i := 0; i < len(msgs); i += step {
 			resp, err := qs.ListLaunchIDFromChannelID(ctx, request(nil, uint64(i), uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.LaunchIDFromChannelID), step)
+			require.LessOrEqual(t, len(resp.LaunchIdFromChannelId), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.LaunchIDFromChannelID),
+				nullify.Fill(resp.LaunchIdFromChannelId),
 			)
 		}
 	})
@@ -111,10 +111,10 @@ func TestLaunchIDFromChannelIDQueryPaginated(t *testing.T) {
 		for i := 0; i < len(msgs); i += step {
 			resp, err := qs.ListLaunchIDFromChannelID(ctx, request(next, 0, uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.LaunchIDFromChannelID), step)
+			require.LessOrEqual(t, len(resp.LaunchIdFromChannelId), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.LaunchIDFromChannelID),
+				nullify.Fill(resp.LaunchIdFromChannelId),
 			)
 			next = resp.Pagination.NextKey
 		}
@@ -125,7 +125,7 @@ func TestLaunchIDFromChannelIDQueryPaginated(t *testing.T) {
 		require.Equal(t, len(msgs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,
 			nullify.Fill(msgs),
-			nullify.Fill(resp.LaunchIDFromChannelID),
+			nullify.Fill(resp.LaunchIdFromChannelId),
 		)
 	})
 	t.Run("InvalidRequest", func(t *testing.T) {

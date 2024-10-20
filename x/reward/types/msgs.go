@@ -8,7 +8,7 @@ import (
 func NewMsgSetRewards(provider string, launchID uint64, coins sdk.Coins, lastRewardHeight int64) *MsgSetRewards {
 	return &MsgSetRewards{
 		Provider:         provider,
-		LaunchID:         launchID,
+		LaunchId:         launchID,
 		Coins:            coins,
 		LastRewardHeight: lastRewardHeight,
 	}

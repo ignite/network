@@ -25,5 +25,5 @@ func (q queryServer) GetConsumerClientID(ctx context.Context, req *types.QueryGe
 		return nil, status.Error(codes.Internal, "internal error")
 	}
 
-	return &types.QueryGetConsumerClientIDResponse{ConsumerClientID: val}, nil
+	return &types.QueryGetConsumerClientIDResponse{ConsumerClientId: val}, nil
 }

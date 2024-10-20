@@ -9,10 +9,10 @@ import "gogoproto/gogo.proto";
 option go_package = "github.com/ignite/network/x/launch/types";
 
 message GenesisValidator {
-  uint64 launchID = 1;
+  uint64 launch_id = 1;
   string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  bytes genTx = 3;
-  bytes consPubKey = 4;
+  bytes gen_tx = 3;
+  bytes cons_pub_key = 4;
   cosmos.base.v1beta1.Coin selfDelegation = 5 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true,
@@ -26,8 +26,8 @@ message Peer {
   string id = 1; // e.g.: 7786ace6ddb3d771024792a46540c88587e0e8cc
 
   oneof connection {
-    string tcpAddress = 2; // use a TCP address
-    HTTPTunnel httpTunnel = 3; // or use an HTTP tunnel
+    string tcp_address = 2; // use a TCP address
+    HTTPTunnel http_tunnel = 3; // or use an HTTP tunnel
     EmptyConnection none = 4; // or don't provide any connection
   }
 

@@ -22,14 +22,14 @@ func (k msgServer) CreateClient(ctx context.Context, msg *types.MsgCreateClient)
 		return nil, err
 	}
 
-	chain, err := k.launchKeeper.GetChain(ctx, msg.LaunchID)
+	chain, err := k.launchKeeper.GetChain(ctx, msg.LaunchId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(launchtypes.ErrChainNotFound, "invalid launch ID %d", msg.LaunchID)
+		return nil, sdkerrors.Wrapf(launchtypes.ErrChainNotFound, "invalid launch ID %d", msg.LaunchId)
 	}
 
 	// initialize the client state
 	clientState, err := k.initializeClientState(
-		chain.GenesisChainID,
+		chain.GenesisChainId,
 		msg.UnbondingPeriod,
 		msg.RevisionHeight,
 	)
@@ -49,8 +49,8 @@ func (k msgServer) CreateClient(ctx context.Context, msg *types.MsgCreateClient)
 	// verify the validator set
 	err = k.launchKeeper.CheckValidatorSet(
 		ctx,
-		msg.LaunchID,
-		chain.GenesisChainID,
+		msg.LaunchId,
+		chain.GenesisChainId,
 		tmValidatorSet,
 	)
 	if err != nil {
@@ -69,18 +69,18 @@ func (k msgServer) CreateClient(ctx context.Context, msg *types.MsgCreateClient)
 	}
 
 	// add the client ID as verified client ID
-	if err := k.AddVerifiedClientID(ctx, msg.LaunchID, clientID); err != nil {
+	if err := k.AddVerifiedClientID(ctx, msg.LaunchId, clientID); err != nil {
 		return nil, sdkerrors.Wrap(types.ErrClientCreationFailure, err.Error())
 	}
 	if err := k.LaunchIDFromVerifiedClientID.Set(ctx, clientID, types.LaunchIDFromVerifiedClientID{
-		LaunchID: msg.LaunchID,
-		ClientID: clientID,
+		LaunchId: msg.LaunchId,
+		ClientId: clientID,
 	}); err != nil {
 		return nil, sdkerrors.Wrap(types.ErrClientCreationFailure, err.Error())
 	}
 
 	return &types.MsgCreateClientResponse{
-		ClientID: clientID,
+		ClientId: clientID,
 	}, nil
 }
 

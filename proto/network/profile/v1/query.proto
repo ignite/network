@@ -22,7 +22,7 @@ service Query {
 
   // Queries a list of Coordinator items.
   rpc GetCoordinator(QueryGetCoordinatorRequest) returns (QueryGetCoordinatorResponse) {
-    option (google.api.http).get = "/ignite/network/profile/coordinator/{ID}";
+    option (google.api.http).get = "/ignite/network/profile/coordinator/{coordinator_id}";
   }
   rpc ListCoordinator(QueryAllCoordinatorRequest) returns (QueryAllCoordinatorResponse) {
     option (google.api.http).get = "/ignite/network/profile/coordinator";
@@ -43,7 +43,7 @@ service Query {
 
   // Queries a list of GetValidatorByOperatorAddress items.
   rpc GetValidatorByOperatorAddress(QueryGetValidatorByOperatorAddressRequest) returns (QueryGetValidatorByOperatorAddressResponse) {
-    option (google.api.http).get = "/ignite/network/profile/get_validator_by_operator_address/{operatorAddress}";
+    option (google.api.http).get = "/ignite/network/profile/get_validator_by_operator_address/{operator_address}";
   }
 }
 
@@ -60,11 +60,11 @@ message QueryParamsResponse {
 }
 
 message QueryGetCoordinatorRequest {
-  uint64 ID = 1;
+  uint64 coordinator_id = 1;
 }
 
 message QueryGetCoordinatorResponse {
-  Coordinator Coordinator = 1 [(gogoproto.nullable) = false];
+  Coordinator coordinator = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryAllCoordinatorRequest {
@@ -72,7 +72,7 @@ message QueryAllCoordinatorRequest {
 }
 
 message QueryAllCoordinatorResponse {
-  repeated Coordinator Coordinator = 1 [(gogoproto.nullable) = false];
+  repeated Coordinator coordinator = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
@@ -102,7 +102,7 @@ message QueryGetCoordinatorByAddressResponse {
 }
 
 message QueryGetValidatorByOperatorAddressRequest {
-  string operatorAddress = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string operator_address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 }
 
 message QueryGetValidatorByOperatorAddressResponse {

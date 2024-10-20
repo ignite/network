@@ -20,8 +20,8 @@ func NewDefaultInitialGenesis() InitialGenesis {
 // NewGenesisURL returns a InitialGenesis containing a GenesisURL
 func NewGenesisURL(url, hash string) InitialGenesis {
 	return InitialGenesis{
-		Source: &InitialGenesis_GenesisURL{
-			GenesisURL: &GenesisURL{
+		Source: &InitialGenesis_GenesisUrl{
+			GenesisUrl: &GenesisURL{
 				Url:  url,
 				Hash: hash,
 			},
@@ -44,11 +44,11 @@ func NewGenesisConfig(file string) InitialGenesis {
 func (m InitialGenesis) Validate() error {
 	switch initialGenesis := m.Source.(type) {
 	case *InitialGenesis_DefaultInitialGenesis:
-	case *InitialGenesis_GenesisURL:
-		if initialGenesis.GenesisURL.Url == "" {
+	case *InitialGenesis_GenesisUrl:
+		if initialGenesis.GenesisUrl.Url == "" {
 			return errors.New("no url provided")
 		}
-		if len(initialGenesis.GenesisURL.Hash) != HashLength {
+		if len(initialGenesis.GenesisUrl.Hash) != HashLength {
 			return errors.New("hash must be sha256")
 		}
 	case *InitialGenesis_GenesisConfig:

@@ -30,8 +30,8 @@ func TestMsgUpdateProjectName(t *testing.T) {
 			Description: sample.CoordinatorDescription(r),
 		})
 		require.NoError(t, err)
-		project.CoordinatorID = res.CoordinatorID
-		project.ProjectID, err = tk.ProjectKeeper.AppendProject(ctx, project)
+		project.CoordinatorId = res.CoordinatorId
+		project.ProjectId, err = tk.ProjectKeeper.AppendProject(ctx, project)
 		require.NoError(t, err)
 
 		res, err = ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
@@ -50,7 +50,7 @@ func TestMsgUpdateProjectName(t *testing.T) {
 			name: "should allow edit name and metadata",
 			msg: types.MsgEditProject{
 				Coordinator: coordAddr,
-				ProjectID:   project.ProjectID,
+				ProjectId:   project.ProjectId,
 				Name:        sample.ProjectName(r),
 				Metadata:    sample.Metadata(r, 20),
 			},
@@ -59,7 +59,7 @@ func TestMsgUpdateProjectName(t *testing.T) {
 			name: "should allow edit name",
 			msg: types.MsgEditProject{
 				Coordinator: coordAddr,
-				ProjectID:   project.ProjectID,
+				ProjectId:   project.ProjectId,
 				Name:        sample.ProjectName(r),
 				Metadata:    []byte{},
 			},
@@ -68,7 +68,7 @@ func TestMsgUpdateProjectName(t *testing.T) {
 			name: "should allow edit metadata",
 			msg: types.MsgEditProject{
 				Coordinator: coordAddr,
-				ProjectID:   project.ProjectID,
+				ProjectId:   project.ProjectId,
 				Name:        "",
 				Metadata:    sample.Metadata(r, 20),
 			},
@@ -77,7 +77,7 @@ func TestMsgUpdateProjectName(t *testing.T) {
 			name: "should fail if invalid project id",
 			msg: types.MsgEditProject{
 				Coordinator: coordAddr,
-				ProjectID:   100,
+				ProjectId:   100,
 				Name:        sample.ProjectName(r),
 				Metadata:    sample.Metadata(r, 20),
 			},
@@ -87,7 +87,7 @@ func TestMsgUpdateProjectName(t *testing.T) {
 			name: "should fail with invalid coordinator address",
 			msg: types.MsgEditProject{
 				Coordinator: sample.Address(r),
-				ProjectID:   project.ProjectID,
+				ProjectId:   project.ProjectId,
 				Name:        sample.ProjectName(r),
 				Metadata:    sample.Metadata(r, 20),
 			},
@@ -97,7 +97,7 @@ func TestMsgUpdateProjectName(t *testing.T) {
 			name: "should fail with wrong coordinator id",
 			msg: types.MsgEditProject{
 				Coordinator: coordAddrNoProject,
-				ProjectID:   project.ProjectID,
+				ProjectId:   project.ProjectId,
 				Name:        sample.ProjectName(r),
 				Metadata:    sample.Metadata(r, 20),
 			},
@@ -106,7 +106,7 @@ func TestMsgUpdateProjectName(t *testing.T) {
 		{
 			name: "should fail when the change had too long metadata",
 			msg: types.MsgEditProject{
-				ProjectID:   0,
+				ProjectId:   0,
 				Coordinator: sample.Address(r),
 				Name:        sample.ProjectName(r),
 				Metadata:    sample.Metadata(r, maxMetadataLength+1),
@@ -115,7 +115,7 @@ func TestMsgUpdateProjectName(t *testing.T) {
 		},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
-			previousProject, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
+			previousProject, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectId)
 			if err != nil && tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 				return
@@ -128,7 +128,7 @@ func TestMsgUpdateProjectName(t *testing.T) {
 			}
 			require.NoError(t, err)
 
-			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
+			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectId)
 			require.NoError(t, err)
 
 			if len(tc.msg.Name) > 0 {

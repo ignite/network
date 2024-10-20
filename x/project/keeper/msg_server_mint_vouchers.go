@@ -23,9 +23,9 @@ func (k msgServer) MintVouchers(ctx context.Context, msg *types.MsgMintVouchers)
 		return nil, sdkerrors.Wrapf(types.ErrInvalidSigner, "invalid coordinator address %s", err.Error())
 	}
 
-	project, err := k.GetProject(ctx, msg.ProjectID)
+	project, err := k.GetProject(ctx, msg.ProjectId)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(err, "%d", msg.ProjectId)
 	}
 
 	// Get the coordinator ID associated to the sender address
@@ -34,10 +34,10 @@ func (k msgServer) MintVouchers(ctx context.Context, msg *types.MsgMintVouchers)
 		return nil, err
 	}
 
-	if project.CoordinatorID != coordinatorID {
+	if project.CoordinatorId != coordinatorID {
 		return nil, sdkerrors.Wrap(profiletypes.ErrCoordinatorInvalid, fmt.Sprintf(
 			"coordinator of the project is %d",
-			project.CoordinatorID,
+			project.CoordinatorId,
 		))
 	}
 
@@ -53,11 +53,11 @@ func (k msgServer) MintVouchers(ctx context.Context, msg *types.MsgMintVouchers)
 		return nil, ignterrors.Criticalf("verified shares are invalid %s", err.Error())
 	}
 	if reached {
-		return nil, sdkerrors.Wrapf(types.ErrTotalSharesLimit, "%d", msg.ProjectID)
+		return nil, sdkerrors.Wrapf(types.ErrTotalSharesLimit, "%d", msg.ProjectId)
 	}
 
 	// Mint vouchers to the coordinator account
-	vouchers, err := types.SharesToVouchers(msg.Shares, msg.ProjectID)
+	vouchers, err := types.SharesToVouchers(msg.Shares, msg.ProjectId)
 	if err != nil {
 		return nil, ignterrors.Criticalf("verified shares are invalid %s", err.Error())
 	}
@@ -69,13 +69,13 @@ func (k msgServer) MintVouchers(ctx context.Context, msg *types.MsgMintVouchers)
 		return nil, ignterrors.Criticalf("can't send minted coins %s", err.Error())
 	}
 
-	if err := k.Project.Set(ctx, project.ProjectID, project); err != nil {
+	if err := k.Project.Set(ctx, project.ProjectId, project); err != nil {
 		return nil, ignterrors.Criticalf("can't set project %s", err.Error())
 	}
 
 	return &types.MsgMintVouchersResponse{}, sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(
 		&types.EventProjectSharesUpdated{
-			ProjectID:          project.ProjectID,
+			ProjectId:          project.ProjectId,
 			CoordinatorAddress: msg.Coordinator,
 			AllocatedShares:    project.AllocatedShares,
 		})

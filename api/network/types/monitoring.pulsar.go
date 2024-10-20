@@ -15,14 +15,14 @@ import (
 )
 
 var (
-	md_MonitoringPacketData                  protoreflect.MessageDescriptor
-	fd_MonitoringPacketData_monitoringPacket protoreflect.FieldDescriptor
+	md_MonitoringPacketData                   protoreflect.MessageDescriptor
+	fd_MonitoringPacketData_monitoring_packet protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_types_monitoring_proto_init()
 	md_MonitoringPacketData = File_network_types_monitoring_proto.Messages().ByName("MonitoringPacketData")
-	fd_MonitoringPacketData_monitoringPacket = md_MonitoringPacketData.Fields().ByName("monitoringPacket")
+	fd_MonitoringPacketData_monitoring_packet = md_MonitoringPacketData.Fields().ByName("monitoring_packet")
 }
 
 var _ protoreflect.Message = (*fastReflection_MonitoringPacketData)(nil)
@@ -95,7 +95,7 @@ func (x *fastReflection_MonitoringPacketData) Range(f func(protoreflect.FieldDes
 		case *MonitoringPacketData_MonitoringPacket:
 			v := o.MonitoringPacket
 			value := protoreflect.ValueOfMessage(v.ProtoReflect())
-			if !f(fd_MonitoringPacketData_monitoringPacket, value) {
+			if !f(fd_MonitoringPacketData_monitoring_packet, value) {
 				return
 			}
 		}
@@ -115,7 +115,7 @@ func (x *fastReflection_MonitoringPacketData) Range(f func(protoreflect.FieldDes
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_MonitoringPacketData) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacketData.monitoringPacket":
+	case "network.types.MonitoringPacketData.monitoring_packet":
 		if x.Packet == nil {
 			return false
 		} else if _, ok := x.Packet.(*MonitoringPacketData_MonitoringPacket); ok {
@@ -139,7 +139,7 @@ func (x *fastReflection_MonitoringPacketData) Has(fd protoreflect.FieldDescripto
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MonitoringPacketData) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacketData.monitoringPacket":
+	case "network.types.MonitoringPacketData.monitoring_packet":
 		x.Packet = nil
 	default:
 		if fd.IsExtension() {
@@ -157,7 +157,7 @@ func (x *fastReflection_MonitoringPacketData) Clear(fd protoreflect.FieldDescrip
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_MonitoringPacketData) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.types.MonitoringPacketData.monitoringPacket":
+	case "network.types.MonitoringPacketData.monitoring_packet":
 		if x.Packet == nil {
 			return protoreflect.ValueOfMessage((*MonitoringPacket)(nil).ProtoReflect())
 		} else if v, ok := x.Packet.(*MonitoringPacketData_MonitoringPacket); ok {
@@ -185,7 +185,7 @@ func (x *fastReflection_MonitoringPacketData) Get(descriptor protoreflect.FieldD
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MonitoringPacketData) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacketData.monitoringPacket":
+	case "network.types.MonitoringPacketData.monitoring_packet":
 		cv := value.Message().Interface().(*MonitoringPacket)
 		x.Packet = &MonitoringPacketData_MonitoringPacket{MonitoringPacket: cv}
 	default:
@@ -208,7 +208,7 @@ func (x *fastReflection_MonitoringPacketData) Set(fd protoreflect.FieldDescripto
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MonitoringPacketData) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacketData.monitoringPacket":
+	case "network.types.MonitoringPacketData.monitoring_packet":
 		if x.Packet == nil {
 			value := &MonitoringPacket{}
 			oneofValue := &MonitoringPacketData_MonitoringPacket{MonitoringPacket: value}
@@ -237,7 +237,7 @@ func (x *fastReflection_MonitoringPacketData) Mutable(fd protoreflect.FieldDescr
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_MonitoringPacketData) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacketData.monitoringPacket":
+	case "network.types.MonitoringPacketData.monitoring_packet":
 		value := &MonitoringPacket{}
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
@@ -259,7 +259,7 @@ func (x *fastReflection_MonitoringPacketData) WhichOneof(d protoreflect.OneofDes
 		}
 		switch x.Packet.(type) {
 		case *MonitoringPacketData_MonitoringPacket:
-			return x.Descriptor().Fields().ByName("monitoringPacket")
+			return x.Descriptor().Fields().ByName("monitoring_packet")
 		}
 	default:
 		panic(fmt.Errorf("%s is not a oneof field in network.types.MonitoringPacketData", d.FullName()))
@@ -845,16 +845,16 @@ func (x *fastReflection_MonitoringPacketAck) ProtoMethods() *protoiface.Methods 
 }
 
 var (
-	md_MonitoringPacket                 protoreflect.MessageDescriptor
-	fd_MonitoringPacket_blockHeight     protoreflect.FieldDescriptor
-	fd_MonitoringPacket_signatureCounts protoreflect.FieldDescriptor
+	md_MonitoringPacket                  protoreflect.MessageDescriptor
+	fd_MonitoringPacket_block_height     protoreflect.FieldDescriptor
+	fd_MonitoringPacket_signature_counts protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_types_monitoring_proto_init()
 	md_MonitoringPacket = File_network_types_monitoring_proto.Messages().ByName("MonitoringPacket")
-	fd_MonitoringPacket_blockHeight = md_MonitoringPacket.Fields().ByName("blockHeight")
-	fd_MonitoringPacket_signatureCounts = md_MonitoringPacket.Fields().ByName("signatureCounts")
+	fd_MonitoringPacket_block_height = md_MonitoringPacket.Fields().ByName("block_height")
+	fd_MonitoringPacket_signature_counts = md_MonitoringPacket.Fields().ByName("signature_counts")
 }
 
 var _ protoreflect.Message = (*fastReflection_MonitoringPacket)(nil)
@@ -924,13 +924,13 @@ func (x *fastReflection_MonitoringPacket) Interface() protoreflect.ProtoMessage 
 func (x *fastReflection_MonitoringPacket) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.BlockHeight != int64(0) {
 		value := protoreflect.ValueOfInt64(x.BlockHeight)
-		if !f(fd_MonitoringPacket_blockHeight, value) {
+		if !f(fd_MonitoringPacket_block_height, value) {
 			return
 		}
 	}
 	if x.SignatureCounts != nil {
 		value := protoreflect.ValueOfMessage(x.SignatureCounts.ProtoReflect())
-		if !f(fd_MonitoringPacket_signatureCounts, value) {
+		if !f(fd_MonitoringPacket_signature_counts, value) {
 			return
 		}
 	}
@@ -949,9 +949,9 @@ func (x *fastReflection_MonitoringPacket) Range(f func(protoreflect.FieldDescrip
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_MonitoringPacket) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacket.blockHeight":
+	case "network.types.MonitoringPacket.block_height":
 		return x.BlockHeight != int64(0)
-	case "network.types.MonitoringPacket.signatureCounts":
+	case "network.types.MonitoringPacket.signature_counts":
 		return x.SignatureCounts != nil
 	default:
 		if fd.IsExtension() {
@@ -969,9 +969,9 @@ func (x *fastReflection_MonitoringPacket) Has(fd protoreflect.FieldDescriptor) b
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MonitoringPacket) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacket.blockHeight":
+	case "network.types.MonitoringPacket.block_height":
 		x.BlockHeight = int64(0)
-	case "network.types.MonitoringPacket.signatureCounts":
+	case "network.types.MonitoringPacket.signature_counts":
 		x.SignatureCounts = nil
 	default:
 		if fd.IsExtension() {
@@ -989,10 +989,10 @@ func (x *fastReflection_MonitoringPacket) Clear(fd protoreflect.FieldDescriptor)
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_MonitoringPacket) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.types.MonitoringPacket.blockHeight":
+	case "network.types.MonitoringPacket.block_height":
 		value := x.BlockHeight
 		return protoreflect.ValueOfInt64(value)
-	case "network.types.MonitoringPacket.signatureCounts":
+	case "network.types.MonitoringPacket.signature_counts":
 		value := x.SignatureCounts
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
@@ -1015,9 +1015,9 @@ func (x *fastReflection_MonitoringPacket) Get(descriptor protoreflect.FieldDescr
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MonitoringPacket) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacket.blockHeight":
+	case "network.types.MonitoringPacket.block_height":
 		x.BlockHeight = value.Int()
-	case "network.types.MonitoringPacket.signatureCounts":
+	case "network.types.MonitoringPacket.signature_counts":
 		x.SignatureCounts = value.Message().Interface().(*SignatureCounts)
 	default:
 		if fd.IsExtension() {
@@ -1039,13 +1039,13 @@ func (x *fastReflection_MonitoringPacket) Set(fd protoreflect.FieldDescriptor, v
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MonitoringPacket) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacket.signatureCounts":
+	case "network.types.MonitoringPacket.signature_counts":
 		if x.SignatureCounts == nil {
 			x.SignatureCounts = new(SignatureCounts)
 		}
 		return protoreflect.ValueOfMessage(x.SignatureCounts.ProtoReflect())
-	case "network.types.MonitoringPacket.blockHeight":
-		panic(fmt.Errorf("field blockHeight of message network.types.MonitoringPacket is not mutable"))
+	case "network.types.MonitoringPacket.block_height":
+		panic(fmt.Errorf("field block_height of message network.types.MonitoringPacket is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.types.MonitoringPacket"))
@@ -1059,9 +1059,9 @@ func (x *fastReflection_MonitoringPacket) Mutable(fd protoreflect.FieldDescripto
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_MonitoringPacket) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.types.MonitoringPacket.blockHeight":
+	case "network.types.MonitoringPacket.block_height":
 		return protoreflect.ValueOfInt64(int64(0))
-	case "network.types.MonitoringPacket.signatureCounts":
+	case "network.types.MonitoringPacket.signature_counts":
 		m := new(SignatureCounts)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
@@ -1379,15 +1379,15 @@ func (x *_SignatureCounts_2_list) IsValid() bool {
 }
 
 var (
-	md_SignatureCounts            protoreflect.MessageDescriptor
-	fd_SignatureCounts_blockCount protoreflect.FieldDescriptor
-	fd_SignatureCounts_counts     protoreflect.FieldDescriptor
+	md_SignatureCounts             protoreflect.MessageDescriptor
+	fd_SignatureCounts_block_count protoreflect.FieldDescriptor
+	fd_SignatureCounts_counts      protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_types_monitoring_proto_init()
 	md_SignatureCounts = File_network_types_monitoring_proto.Messages().ByName("SignatureCounts")
-	fd_SignatureCounts_blockCount = md_SignatureCounts.Fields().ByName("blockCount")
+	fd_SignatureCounts_block_count = md_SignatureCounts.Fields().ByName("block_count")
 	fd_SignatureCounts_counts = md_SignatureCounts.Fields().ByName("counts")
 }
 
@@ -1458,7 +1458,7 @@ func (x *fastReflection_SignatureCounts) Interface() protoreflect.ProtoMessage {
 func (x *fastReflection_SignatureCounts) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.BlockCount != uint64(0) {
 		value := protoreflect.ValueOfUint64(x.BlockCount)
-		if !f(fd_SignatureCounts_blockCount, value) {
+		if !f(fd_SignatureCounts_block_count, value) {
 			return
 		}
 	}
@@ -1483,7 +1483,7 @@ func (x *fastReflection_SignatureCounts) Range(f func(protoreflect.FieldDescript
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_SignatureCounts) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.types.SignatureCounts.blockCount":
+	case "network.types.SignatureCounts.block_count":
 		return x.BlockCount != uint64(0)
 	case "network.types.SignatureCounts.counts":
 		return len(x.Counts) != 0
@@ -1503,7 +1503,7 @@ func (x *fastReflection_SignatureCounts) Has(fd protoreflect.FieldDescriptor) bo
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_SignatureCounts) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.types.SignatureCounts.blockCount":
+	case "network.types.SignatureCounts.block_count":
 		x.BlockCount = uint64(0)
 	case "network.types.SignatureCounts.counts":
 		x.Counts = nil
@@ -1523,7 +1523,7 @@ func (x *fastReflection_SignatureCounts) Clear(fd protoreflect.FieldDescriptor) 
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_SignatureCounts) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.types.SignatureCounts.blockCount":
+	case "network.types.SignatureCounts.block_count":
 		value := x.BlockCount
 		return protoreflect.ValueOfUint64(value)
 	case "network.types.SignatureCounts.counts":
@@ -1552,7 +1552,7 @@ func (x *fastReflection_SignatureCounts) Get(descriptor protoreflect.FieldDescri
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_SignatureCounts) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.types.SignatureCounts.blockCount":
+	case "network.types.SignatureCounts.block_count":
 		x.BlockCount = value.Uint()
 	case "network.types.SignatureCounts.counts":
 		lv := value.List()
@@ -1584,8 +1584,8 @@ func (x *fastReflection_SignatureCounts) Mutable(fd protoreflect.FieldDescriptor
 		}
 		value := &_SignatureCounts_2_list{list: &x.Counts}
 		return protoreflect.ValueOfList(value)
-	case "network.types.SignatureCounts.blockCount":
-		panic(fmt.Errorf("field blockCount of message network.types.SignatureCounts is not mutable"))
+	case "network.types.SignatureCounts.block_count":
+		panic(fmt.Errorf("field block_count of message network.types.SignatureCounts is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.types.SignatureCounts"))
@@ -1599,7 +1599,7 @@ func (x *fastReflection_SignatureCounts) Mutable(fd protoreflect.FieldDescriptor
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_SignatureCounts) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.types.SignatureCounts.blockCount":
+	case "network.types.SignatureCounts.block_count":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "network.types.SignatureCounts.counts":
 		list := []*SignatureCount{}
@@ -1870,16 +1870,16 @@ func (x *fastReflection_SignatureCounts) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_SignatureCount                    protoreflect.MessageDescriptor
-	fd_SignatureCount_opAddress          protoreflect.FieldDescriptor
-	fd_SignatureCount_RelativeSignatures protoreflect.FieldDescriptor
+	md_SignatureCount                     protoreflect.MessageDescriptor
+	fd_SignatureCount_op_address          protoreflect.FieldDescriptor
+	fd_SignatureCount_relative_signatures protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_network_types_monitoring_proto_init()
 	md_SignatureCount = File_network_types_monitoring_proto.Messages().ByName("SignatureCount")
-	fd_SignatureCount_opAddress = md_SignatureCount.Fields().ByName("opAddress")
-	fd_SignatureCount_RelativeSignatures = md_SignatureCount.Fields().ByName("RelativeSignatures")
+	fd_SignatureCount_op_address = md_SignatureCount.Fields().ByName("op_address")
+	fd_SignatureCount_relative_signatures = md_SignatureCount.Fields().ByName("relative_signatures")
 }
 
 var _ protoreflect.Message = (*fastReflection_SignatureCount)(nil)
@@ -1949,13 +1949,13 @@ func (x *fastReflection_SignatureCount) Interface() protoreflect.ProtoMessage {
 func (x *fastReflection_SignatureCount) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.OpAddress != "" {
 		value := protoreflect.ValueOfString(x.OpAddress)
-		if !f(fd_SignatureCount_opAddress, value) {
+		if !f(fd_SignatureCount_op_address, value) {
 			return
 		}
 	}
 	if x.RelativeSignatures != "" {
 		value := protoreflect.ValueOfString(x.RelativeSignatures)
-		if !f(fd_SignatureCount_RelativeSignatures, value) {
+		if !f(fd_SignatureCount_relative_signatures, value) {
 			return
 		}
 	}
@@ -1974,9 +1974,9 @@ func (x *fastReflection_SignatureCount) Range(f func(protoreflect.FieldDescripto
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_SignatureCount) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "network.types.SignatureCount.opAddress":
+	case "network.types.SignatureCount.op_address":
 		return x.OpAddress != ""
-	case "network.types.SignatureCount.RelativeSignatures":
+	case "network.types.SignatureCount.relative_signatures":
 		return x.RelativeSignatures != ""
 	default:
 		if fd.IsExtension() {
@@ -1994,9 +1994,9 @@ func (x *fastReflection_SignatureCount) Has(fd protoreflect.FieldDescriptor) boo
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_SignatureCount) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "network.types.SignatureCount.opAddress":
+	case "network.types.SignatureCount.op_address":
 		x.OpAddress = ""
-	case "network.types.SignatureCount.RelativeSignatures":
+	case "network.types.SignatureCount.relative_signatures":
 		x.RelativeSignatures = ""
 	default:
 		if fd.IsExtension() {
@@ -2014,10 +2014,10 @@ func (x *fastReflection_SignatureCount) Clear(fd protoreflect.FieldDescriptor) {
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_SignatureCount) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "network.types.SignatureCount.opAddress":
+	case "network.types.SignatureCount.op_address":
 		value := x.OpAddress
 		return protoreflect.ValueOfString(value)
-	case "network.types.SignatureCount.RelativeSignatures":
+	case "network.types.SignatureCount.relative_signatures":
 		value := x.RelativeSignatures
 		return protoreflect.ValueOfString(value)
 	default:
@@ -2040,9 +2040,9 @@ func (x *fastReflection_SignatureCount) Get(descriptor protoreflect.FieldDescrip
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_SignatureCount) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "network.types.SignatureCount.opAddress":
+	case "network.types.SignatureCount.op_address":
 		x.OpAddress = value.Interface().(string)
-	case "network.types.SignatureCount.RelativeSignatures":
+	case "network.types.SignatureCount.relative_signatures":
 		x.RelativeSignatures = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
@@ -2064,10 +2064,10 @@ func (x *fastReflection_SignatureCount) Set(fd protoreflect.FieldDescriptor, val
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_SignatureCount) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.types.SignatureCount.opAddress":
-		panic(fmt.Errorf("field opAddress of message network.types.SignatureCount is not mutable"))
-	case "network.types.SignatureCount.RelativeSignatures":
-		panic(fmt.Errorf("field RelativeSignatures of message network.types.SignatureCount is not mutable"))
+	case "network.types.SignatureCount.op_address":
+		panic(fmt.Errorf("field op_address of message network.types.SignatureCount is not mutable"))
+	case "network.types.SignatureCount.relative_signatures":
+		panic(fmt.Errorf("field relative_signatures of message network.types.SignatureCount is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: network.types.SignatureCount"))
@@ -2081,9 +2081,9 @@ func (x *fastReflection_SignatureCount) Mutable(fd protoreflect.FieldDescriptor)
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_SignatureCount) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "network.types.SignatureCount.opAddress":
+	case "network.types.SignatureCount.op_address":
 		return protoreflect.ValueOfString("")
-	case "network.types.SignatureCount.RelativeSignatures":
+	case "network.types.SignatureCount.relative_signatures":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
@@ -2418,7 +2418,7 @@ type isMonitoringPacketData_Packet interface {
 
 type MonitoringPacketData_MonitoringPacket struct {
 	// this line is used by starport scaffolding # ibc/packet/proto/field
-	MonitoringPacket *MonitoringPacket `protobuf:"bytes,1,opt,name=monitoringPacket,proto3,oneof"`
+	MonitoringPacket *MonitoringPacket `protobuf:"bytes,1,opt,name=monitoring_packet,json=monitoringPacket,proto3,oneof"`
 }
 
 func (*MonitoringPacketData_MonitoringPacket) isMonitoringPacketData_Packet() {}
@@ -2456,8 +2456,8 @@ type MonitoringPacket struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BlockHeight     int64            `protobuf:"varint,1,opt,name=blockHeight,proto3" json:"blockHeight,omitempty"`
-	SignatureCounts *SignatureCounts `protobuf:"bytes,2,opt,name=signatureCounts,proto3" json:"signatureCounts,omitempty"`
+	BlockHeight     int64            `protobuf:"varint,1,opt,name=block_height,json=blockHeight,proto3" json:"block_height,omitempty"`
+	SignatureCounts *SignatureCounts `protobuf:"bytes,2,opt,name=signature_counts,json=signatureCounts,proto3" json:"signature_counts,omitempty"`
 }
 
 func (x *MonitoringPacket) Reset() {
@@ -2500,7 +2500,7 @@ type SignatureCounts struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BlockCount uint64            `protobuf:"varint,1,opt,name=blockCount,proto3" json:"blockCount,omitempty"`
+	BlockCount uint64            `protobuf:"varint,1,opt,name=block_count,json=blockCount,proto3" json:"block_count,omitempty"`
 	Counts     []*SignatureCount `protobuf:"bytes,2,rep,name=counts,proto3" json:"counts,omitempty"`
 }
 
@@ -2545,8 +2545,8 @@ type SignatureCount struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OpAddress          string `protobuf:"bytes,1,opt,name=opAddress,proto3" json:"opAddress,omitempty"`
-	RelativeSignatures string `protobuf:"bytes,2,opt,name=RelativeSignatures,proto3" json:"RelativeSignatures,omitempty"`
+	OpAddress          string `protobuf:"bytes,1,opt,name=op_address,json=opAddress,proto3" json:"op_address,omitempty"`
+	RelativeSignatures string `protobuf:"bytes,2,opt,name=relative_signatures,json=relativeSignatures,proto3" json:"relative_signatures,omitempty"`
 }
 
 func (x *SignatureCount) Reset() {
@@ -2592,51 +2592,51 @@ var file_network_types_monitoring_proto_rawDesc = []byte{
 	0x19, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x63, 0x6f,
 	0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x22, 0x6f, 0x0a, 0x14, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50, 0x61,
-	0x63, 0x6b, 0x65, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x4d, 0x0a, 0x10, 0x6d, 0x6f, 0x6e, 0x69,
-	0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50, 0x61, 0x63, 0x6b, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x74, 0x79, 0x70,
-	0x65, 0x73, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50, 0x61, 0x63,
-	0x6b, 0x65, 0x74, 0x48, 0x00, 0x52, 0x10, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e,
-	0x67, 0x50, 0x61, 0x63, 0x6b, 0x65, 0x74, 0x42, 0x08, 0x0a, 0x06, 0x70, 0x61, 0x63, 0x6b, 0x65,
-	0x74, 0x22, 0x15, 0x0a, 0x13, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50,
-	0x61, 0x63, 0x6b, 0x65, 0x74, 0x41, 0x63, 0x6b, 0x22, 0x84, 0x01, 0x0a, 0x10, 0x4d, 0x6f, 0x6e,
-	0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50, 0x61, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x20, 0x0a,
-	0x0b, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x0b, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x48, 0x65, 0x69, 0x67, 0x68, 0x74, 0x12,
-	0x4e, 0x0a, 0x0f, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x43, 0x6f, 0x75, 0x6e,
-	0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f,
-	0x72, 0x6b, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75,
-	0x72, 0x65, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0f,
-	0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x22,
-	0x6e, 0x0a, 0x0f, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x43, 0x6f, 0x75, 0x6e,
-	0x74, 0x73, 0x12, 0x1e, 0x0a, 0x0a, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x43, 0x6f, 0x75,
-	0x6e, 0x74, 0x12, 0x3b, 0x0a, 0x06, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03,
-	0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x74, 0x79, 0x70,
-	0x65, 0x73, 0x2e, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x43, 0x6f, 0x75, 0x6e,
-	0x74, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x06, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x22,
-	0x91, 0x01, 0x0a, 0x0e, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x43, 0x6f, 0x75,
-	0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x6f, 0x70, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6f, 0x70, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x12, 0x61, 0x0a, 0x12, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x76, 0x65, 0x53, 0x69, 0x67, 0x6e,
-	0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x31, 0xc8, 0xde,
-	0x1f, 0x00, 0xda, 0xde, 0x1f, 0x1b, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e,
-	0x69, 0x6f, 0x2f, 0x6d, 0x61, 0x74, 0x68, 0x2e, 0x4c, 0x65, 0x67, 0x61, 0x63, 0x79, 0x44, 0x65,
-	0x63, 0xd2, 0xb4, 0x2d, 0x0a, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x44, 0x65, 0x63, 0x52,
-	0x12, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x76, 0x65, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75,
-	0x72, 0x65, 0x73, 0x42, 0xa6, 0x01, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x42, 0x0f, 0x4d, 0x6f, 0x6e, 0x69, 0x74,
-	0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x2b, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f,
-	0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77,
-	0x6f, 0x72, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0xa2, 0x02, 0x03, 0x4e, 0x54, 0x58, 0xaa,
-	0x02, 0x0d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x54, 0x79, 0x70, 0x65, 0x73, 0xca,
-	0x02, 0x0d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x54, 0x79, 0x70, 0x65, 0x73, 0xe2,
-	0x02, 0x19, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c, 0x54, 0x79, 0x70, 0x65, 0x73, 0x5c,
-	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0e, 0x4e, 0x65,
-	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x54, 0x79, 0x70, 0x65, 0x73, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x70, 0x0a, 0x14, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50, 0x61,
+	0x63, 0x6b, 0x65, 0x74, 0x44, 0x61, 0x74, 0x61, 0x12, 0x4e, 0x0a, 0x11, 0x6d, 0x6f, 0x6e, 0x69,
+	0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x5f, 0x70, 0x61, 0x63, 0x6b, 0x65, 0x74, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x74, 0x79,
+	0x70, 0x65, 0x73, 0x2e, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50, 0x61,
+	0x63, 0x6b, 0x65, 0x74, 0x48, 0x00, 0x52, 0x10, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69,
+	0x6e, 0x67, 0x50, 0x61, 0x63, 0x6b, 0x65, 0x74, 0x42, 0x08, 0x0a, 0x06, 0x70, 0x61, 0x63, 0x6b,
+	0x65, 0x74, 0x22, 0x15, 0x0a, 0x13, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67,
+	0x50, 0x61, 0x63, 0x6b, 0x65, 0x74, 0x41, 0x63, 0x6b, 0x22, 0x86, 0x01, 0x0a, 0x10, 0x4d, 0x6f,
+	0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50, 0x61, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x21,
+	0x0a, 0x0c, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x48, 0x65, 0x69, 0x67, 0x68,
+	0x74, 0x12, 0x4f, 0x0a, 0x10, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x5f, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6e, 0x65,
+	0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x53, 0x69, 0x67, 0x6e,
+	0x61, 0x74, 0x75, 0x72, 0x65, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x42, 0x04, 0xc8, 0xde, 0x1f,
+	0x00, 0x52, 0x0f, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x43, 0x6f, 0x75, 0x6e,
+	0x74, 0x73, 0x22, 0x6f, 0x0a, 0x0f, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x43,
+	0x6f, 0x75, 0x6e, 0x74, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x62, 0x6c, 0x6f, 0x63,
+	0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x3b, 0x0a, 0x06, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73,
+	0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b,
+	0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x2e, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65,
+	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x06, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x73, 0x22, 0x93, 0x01, 0x0a, 0x0e, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72,
+	0x65, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x6f, 0x70, 0x5f, 0x61, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6f, 0x70, 0x41, 0x64,
+	0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x62, 0x0a, 0x13, 0x72, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x76,
+	0x65, 0x5f, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x42, 0x31, 0xc8, 0xde, 0x1f, 0x00, 0xda, 0xde, 0x1f, 0x1b, 0x63, 0x6f, 0x73, 0x6d,
+	0x6f, 0x73, 0x73, 0x64, 0x6b, 0x2e, 0x69, 0x6f, 0x2f, 0x6d, 0x61, 0x74, 0x68, 0x2e, 0x4c, 0x65,
+	0x67, 0x61, 0x63, 0x79, 0x44, 0x65, 0x63, 0xd2, 0xb4, 0x2d, 0x0a, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
+	0x73, 0x2e, 0x44, 0x65, 0x63, 0x52, 0x12, 0x72, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x76, 0x65, 0x53,
+	0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x42, 0xa6, 0x01, 0x0a, 0x11, 0x63, 0x6f,
+	0x6d, 0x2e, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x73, 0x42,
+	0x0f, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x74, 0x6f,
+	0x50, 0x01, 0x5a, 0x2b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69,
+	0x67, 0x6e, 0x69, 0x74, 0x65, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x73, 0xa2,
+	0x02, 0x03, 0x4e, 0x54, 0x58, 0xaa, 0x02, 0x0d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x2e,
+	0x54, 0x79, 0x70, 0x65, 0x73, 0xca, 0x02, 0x0d, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c,
+	0x54, 0x79, 0x70, 0x65, 0x73, 0xe2, 0x02, 0x19, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x5c,
+	0x54, 0x79, 0x70, 0x65, 0x73, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0xea, 0x02, 0x0e, 0x4e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x3a, 0x3a, 0x54, 0x79, 0x70,
+	0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2660,8 +2660,8 @@ var file_network_types_monitoring_proto_goTypes = []interface{}{
 	(*SignatureCount)(nil),       // 4: network.types.SignatureCount
 }
 var file_network_types_monitoring_proto_depIdxs = []int32{
-	2, // 0: network.types.MonitoringPacketData.monitoringPacket:type_name -> network.types.MonitoringPacket
-	3, // 1: network.types.MonitoringPacket.signatureCounts:type_name -> network.types.SignatureCounts
+	2, // 0: network.types.MonitoringPacketData.monitoring_packet:type_name -> network.types.MonitoringPacket
+	3, // 1: network.types.MonitoringPacket.signature_counts:type_name -> network.types.SignatureCounts
 	4, // 2: network.types.SignatureCounts.counts:type_name -> network.types.SignatureCount
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type

@@ -53,18 +53,18 @@ func InvalidChainInvariant(k *Keeper) sdk.Invariant {
 			if err != nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, invalidChainRoute,
-					fmt.Sprintf("chain %d is invalid: %s", chain.LaunchID, err.Error()),
+					fmt.Sprintf("chain %d is invalid: %s", chain.LaunchId, err.Error()),
 				), true
 			}
 			// if chain as an associated project, check that it exists
 			if chain.HasProject {
-				_, err := k.projectKeeper.GetProject(ctx, chain.ProjectID)
+				_, err := k.projectKeeper.GetProject(ctx, chain.ProjectId)
 				if err != nil {
 					return sdk.FormatInvariant(
 						types.ModuleName, invalidChainRoute,
 						fmt.Sprintf("chain %d has an invalid associated project %d: %s",
-							chain.LaunchID,
-							chain.ProjectID,
+							chain.LaunchId,
+							chain.ProjectId,
 							err.Error(),
 						),
 					), true
@@ -88,14 +88,14 @@ func DuplicatedAccountInvariant(k *Keeper) sdk.Invariant {
 			if err != nil {
 				return sdk.FormatInvariant(types.ModuleName, invalidBech32, err.Error()), true
 			}
-			_, err = k.VestingAccount.Get(ctx, collections.Join(account.LaunchID, sdk.AccAddress(address)))
+			_, err = k.VestingAccount.Get(ctx, collections.Join(account.LaunchId, sdk.AccAddress(address)))
 			if err == nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, duplicatedAccountRoute,
 					fmt.Sprintf(
 						"account %s for chain %d found in vesting and genesis accounts",
 						account.Address,
-						account.LaunchID,
+						account.LaunchId,
 					),
 				), true
 			}
@@ -126,7 +126,7 @@ func UnknownRequestTypeInvariant(k *Keeper) sdk.Invariant {
 					"unknown request content type",
 				), true
 			}
-			if err := request.Content.Validate(request.LaunchID); err != nil {
+			if err := request.Content.Validate(request.LaunchId); err != nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, unknownRequestTypeRoute,
 					"invalid request",

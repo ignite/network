@@ -20,7 +20,7 @@ func (q queryServer) SpecialAllocationsBalance(ctx context.Context, req *types.Q
 		return nil, status.Errorf(codes.InvalidArgument, "can't get total shares %s", err.Error())
 	}
 
-	project, err := q.k.GetProject(ctx, req.ProjectID)
+	project, err := q.k.GetProject(ctx, req.ProjectId)
 	if err != nil {
 		return nil, status.Error(codes.NotFound, "project not found")
 	}

@@ -86,11 +86,11 @@ func NewKeeper(
 		launchKeeper:                 launchKeeper,
 		rewardKeeper:                 rewardKeeper,
 		Params:                       collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
-		LaunchIDFromChannelID:        collections.NewMap(sb, types.LaunchIDFromChannelIDKey, "launchIDFromChannelID", collections.StringKey, codec.CollValue[types.LaunchIDFromChannelID](cdc)),
-		LaunchIDFromVerifiedClientID: collections.NewMap(sb, types.LaunchIDFromVerifiedClientIDKey, "launchIDFromVerifiedClientID", collections.StringKey, codec.CollValue[types.LaunchIDFromVerifiedClientID](cdc)),
-		MonitoringHistory:            collections.NewMap(sb, types.MonitoringHistoryKey, "monitoringHistory", collections.Uint64Key, codec.CollValue[types.MonitoringHistory](cdc)),
-		VerifiedClientID:             collections.NewMap(sb, types.VerifiedClientIDKey, "verifiedClientID", collections.Uint64Key, codec.CollValue[types.VerifiedClientID](cdc)),
-		ProviderClientID:             collections.NewMap(sb, types.ProviderClientIDKey, "providerClientID", collections.Uint64Key, codec.CollValue[types.ProviderClientID](cdc)),
+		LaunchIDFromChannelID:        collections.NewMap(sb, types.LaunchIDFromChannelIDKey, "launch_id_from_channel_id", collections.StringKey, codec.CollValue[types.LaunchIDFromChannelID](cdc)),
+		LaunchIDFromVerifiedClientID: collections.NewMap(sb, types.LaunchIDFromVerifiedClientIDKey, "launch_id_from_verified_client_id", collections.StringKey, codec.CollValue[types.LaunchIDFromVerifiedClientID](cdc)),
+		MonitoringHistory:            collections.NewMap(sb, types.MonitoringHistoryKey, "monitoring_history", collections.Uint64Key, codec.CollValue[types.MonitoringHistory](cdc)),
+		VerifiedClientID:             collections.NewMap(sb, types.VerifiedClientIDKey, "verified_client_id", collections.Uint64Key, codec.CollValue[types.VerifiedClientID](cdc)),
+		ProviderClientID:             collections.NewMap(sb, types.ProviderClientIDKey, "provider_client_id", collections.Uint64Key, codec.CollValue[types.ProviderClientID](cdc)),
 		// this line is used by starport scaffolding # collection/instantiate
 	}
 
@@ -207,8 +207,8 @@ func (k Keeper) ScopedKeeper() exported.ScopedKeeper {
 	return k.capabilityScopedFn(types.ModuleName)
 }
 
-// ClearVerifiedClientIDs removes a set of verifiedClientID in the store from its launch ID
-func (k Keeper) ClearVerifiedClientIDs(ctx context.Context, launchID uint64) error {
+// ClearVerifiedClientIdList removes a set of verifiedClientID in the store from its launch ID
+func (k Keeper) ClearVerifiedClientIdList(ctx context.Context, launchID uint64) error {
 	verifiedClientID, err := k.VerifiedClientID.Get(ctx, launchID)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
@@ -220,7 +220,7 @@ func (k Keeper) ClearVerifiedClientIDs(ctx context.Context, launchID uint64) err
 		return err
 	}
 
-	for _, clientID := range verifiedClientID.GetClientIDs() {
+	for _, clientID := range verifiedClientID.GetClientIdList() {
 		if err := k.LaunchIDFromVerifiedClientID.Remove(ctx, clientID); err != nil {
 			return err
 		}

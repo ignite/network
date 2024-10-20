@@ -31,7 +31,7 @@ func TestMsgInitializeMainnet(t *testing.T) {
 			Description: sample.CoordinatorDescription(r),
 		})
 		require.NoError(t, err)
-		coordID = res.CoordinatorID
+		coordID = res.CoordinatorId
 		res, err = ts.ProfileSrv.CreateCoordinator(ctx, &profiletypes.MsgCreateCoordinator{
 			Address:     coordAddrNoProject,
 			Description: sample.CoordinatorDescription(r),
@@ -40,24 +40,24 @@ func TestMsgInitializeMainnet(t *testing.T) {
 	})
 
 	project := sample.Project(r, projectID)
-	project.CoordinatorID = coordID
+	project.CoordinatorId = coordID
 	err := tk.ProjectKeeper.Project.Set(ctx, projectID, project)
 	require.NoError(t, err)
 
 	projectMainnetInitialized := sample.Project(r, projectMainnetInitializedID)
-	projectMainnetInitialized.CoordinatorID = coordID
+	projectMainnetInitialized.CoordinatorId = coordID
 	projectMainnetInitialized.MainnetInitialized = true
 	err = tk.ProjectKeeper.Project.Set(ctx, projectMainnetInitializedID, projectMainnetInitialized)
 	require.NoError(t, err)
 
 	projectEmptySupply := sample.Project(r, projectEmptySupplyID)
-	projectEmptySupply.CoordinatorID = coordID
+	projectEmptySupply.CoordinatorId = coordID
 	projectEmptySupply.TotalSupply = sdk.NewCoins()
 	err = tk.ProjectKeeper.Project.Set(ctx, projectEmptySupplyID, projectEmptySupply)
 	require.NoError(t, err)
 
 	projectIncorrectCoord := sample.Project(r, projectIncorrectCoordID)
-	projectIncorrectCoord.CoordinatorID = coordID
+	projectIncorrectCoord.CoordinatorId = coordID
 	err = tk.ProjectKeeper.Project.Set(ctx, projectIncorrectCoordID, projectIncorrectCoord)
 	require.NoError(t, err)
 
@@ -69,65 +69,65 @@ func TestMsgInitializeMainnet(t *testing.T) {
 		{
 			name: "should allow initialize mainnet",
 			msg: types.MsgInitializeMainnet{
-				ProjectID:      projectID,
+				ProjectId:      projectID,
 				Coordinator:    coordAddr,
 				SourceHash:     sample.String(r, 30),
-				SourceURL:      sample.String(r, 20),
-				MainnetChainID: sample.GenesisChainID(r),
+				SourceUrl:      sample.String(r, 20),
+				MainnetChainId: sample.GenesisChainID(r),
 			},
 		},
 		{
 			name: "should fail if project not found",
 			msg: types.MsgInitializeMainnet{
-				ProjectID:      1000,
+				ProjectId:      1000,
 				Coordinator:    coordAddr,
 				SourceHash:     sample.String(r, 30),
-				SourceURL:      sample.String(r, 20),
-				MainnetChainID: sample.GenesisChainID(r),
+				SourceUrl:      sample.String(r, 20),
+				MainnetChainId: sample.GenesisChainID(r),
 			},
 			err: types.ErrProjectNotFound,
 		},
 		{
 			name: "should fail if mainnet already initialized",
 			msg: types.MsgInitializeMainnet{
-				ProjectID:      projectMainnetInitializedID,
+				ProjectId:      projectMainnetInitializedID,
 				Coordinator:    coordAddr,
 				SourceHash:     sample.String(r, 30),
-				SourceURL:      sample.String(r, 20),
-				MainnetChainID: sample.GenesisChainID(r),
+				SourceUrl:      sample.String(r, 20),
+				MainnetChainId: sample.GenesisChainID(r),
 			},
 			err: types.ErrMainnetInitialized,
 		},
 		{
 			name: "should fail if project has empty supply",
 			msg: types.MsgInitializeMainnet{
-				ProjectID:      projectEmptySupplyID,
+				ProjectId:      projectEmptySupplyID,
 				Coordinator:    coordAddr,
 				SourceHash:     sample.String(r, 30),
-				SourceURL:      sample.String(r, 20),
-				MainnetChainID: sample.GenesisChainID(r),
+				SourceUrl:      sample.String(r, 20),
+				MainnetChainId: sample.GenesisChainID(r),
 			},
 			err: types.ErrInvalidTotalSupply,
 		},
 		{
 			name: "should fail with non-existent coordinator",
 			msg: types.MsgInitializeMainnet{
-				ProjectID:      projectIncorrectCoordID,
+				ProjectId:      projectIncorrectCoordID,
 				Coordinator:    sample.Address(r),
 				SourceHash:     sample.String(r, 30),
-				SourceURL:      sample.String(r, 20),
-				MainnetChainID: sample.GenesisChainID(r),
+				SourceUrl:      sample.String(r, 20),
+				MainnetChainId: sample.GenesisChainID(r),
 			},
 			err: profiletypes.ErrCoordinatorAddressNotFound,
 		},
 		{
 			name: "should fail with invalid coordinator",
 			msg: types.MsgInitializeMainnet{
-				ProjectID:      projectIncorrectCoordID,
+				ProjectId:      projectIncorrectCoordID,
 				Coordinator:    coordAddrNoProject,
 				SourceHash:     sample.String(r, 30),
-				SourceURL:      sample.String(r, 20),
-				MainnetChainID: sample.GenesisChainID(r),
+				SourceUrl:      sample.String(r, 20),
+				MainnetChainId: sample.GenesisChainID(r),
 			},
 			err: profiletypes.ErrCoordinatorInvalid,
 		},
@@ -139,22 +139,22 @@ func TestMsgInitializeMainnet(t *testing.T) {
 				return
 			}
 			require.NoError(t, err)
-			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectID)
+			project, err := tk.ProjectKeeper.GetProject(ctx, tc.msg.ProjectId)
 			require.NoError(t, err)
 			require.True(t, project.MainnetInitialized)
-			require.EqualValues(t, res.MainnetID, project.MainnetID)
+			require.EqualValues(t, res.MainnetId, project.MainnetId)
 
 			// Chain is in launch module
-			chain, err := tk.LaunchKeeper.GetChain(ctx, project.MainnetID)
+			chain, err := tk.LaunchKeeper.GetChain(ctx, project.MainnetId)
 			require.NoError(t, err)
 			require.True(t, chain.HasProject)
 			require.True(t, chain.IsMainnet)
-			require.EqualValues(t, tc.msg.ProjectID, chain.ProjectID)
+			require.EqualValues(t, tc.msg.ProjectId, chain.ProjectId)
 
 			// Mainnet ID is listed in project chains
-			projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, tc.msg.ProjectID)
+			projectChains, err := tk.ProjectKeeper.GetProjectChains(ctx, tc.msg.ProjectId)
 			require.NoError(t, err)
-			require.Contains(t, projectChains.Chains, project.MainnetID)
+			require.Contains(t, projectChains.Chains, project.MainnetId)
 		})
 	}
 }

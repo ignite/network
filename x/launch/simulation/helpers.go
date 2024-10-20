@@ -84,11 +84,11 @@ func FindCoordinatorProject(
 
 	// check if project is already associated with chain
 	for _, project := range projects {
-		if project.CoordinatorID == coordID {
+		if project.CoordinatorId == coordID {
 			// get chain ids
-			projectChains, err := ck.GetProjectChains(ctx, project.ProjectID)
+			projectChains, err := ck.GetProjectChains(ctx, project.ProjectId)
 			if err != nil {
-				return project.ProjectID, true
+				return project.ProjectId, true
 			}
 
 			for _, projectChain := range projectChains.Chains {
@@ -97,7 +97,7 @@ func FindCoordinatorProject(
 				}
 			}
 
-			return project.ProjectID, true
+			return project.ProjectId, true
 		}
 	}
 
@@ -116,13 +116,13 @@ func FindChainCoordinatorAccount(
 		// No message if no coordinator address
 		return simtypes.Account{}, fmt.Errorf("chain %d not found", chainID)
 	}
-	coord, err := k.GetProfileKeeper().GetCoordinator(ctx, chain.CoordinatorID)
+	coord, err := k.GetProfileKeeper().GetCoordinator(ctx, chain.CoordinatorId)
 	if err != nil {
-		return simtypes.Account{}, fmt.Errorf("coordinator %d not found", chain.CoordinatorID)
+		return simtypes.Account{}, fmt.Errorf("coordinator %d not found", chain.CoordinatorId)
 	}
 
 	if !coord.Active {
-		return simtypes.Account{}, fmt.Errorf("coordinator %d inactive", chain.CoordinatorID)
+		return simtypes.Account{}, fmt.Errorf("coordinator %d inactive", chain.CoordinatorId)
 	}
 
 	return FindAccount(k, accs, coord.Address)
@@ -151,7 +151,7 @@ func FindRandomChain(
 			continue
 		}
 		// check if the coordinator is still in the store and active
-		coord, err := k.GetProfileKeeper().GetCoordinator(ctx, c.CoordinatorID)
+		coord, err := k.GetProfileKeeper().GetCoordinator(ctx, c.CoordinatorId)
 		if err != nil || !coord.Active {
 			continue
 		}
@@ -181,12 +181,12 @@ func FindRandomRequest(
 			continue
 		}
 
-		chain, err := k.GetChain(ctx, req.LaunchID)
+		chain, err := k.GetChain(ctx, req.LaunchId)
 		if err != nil || chain.LaunchTriggered {
 			continue
 		}
 		// check if the coordinator is still in the store and active
-		coord, err := k.GetProfileKeeper().GetCoordinator(ctx, chain.CoordinatorID)
+		coord, err := k.GetProfileKeeper().GetCoordinator(ctx, chain.CoordinatorId)
 		if err != nil || !coord.Active {
 			continue
 		}
@@ -201,13 +201,13 @@ func FindRandomRequest(
 			// if is validator removal, check if the validator exist
 			if _, err := k.GenesisValidator.Get(
 				ctx,
-				collections.Join(chain.LaunchID, sdk.AccAddress(valAddress)),
+				collections.Join(chain.LaunchId, sdk.AccAddress(valAddress)),
 			); err != nil {
 				continue
 			}
 		case *types.RequestContent_AccountRemoval:
 			// if is account removal, check if account exist
-			found, err := keeper.CheckAccount(ctx, k, chain.LaunchID, content.AccountRemoval.Address)
+			found, err := keeper.CheckAccount(ctx, k, chain.LaunchId, content.AccountRemoval.Address)
 			if err != nil || !found {
 				continue
 			}
@@ -234,12 +234,12 @@ func FindRandomValidator(
 		valAccs[i], valAccs[j] = valAccs[j], valAccs[i]
 	})
 	for _, acc := range valAccs {
-		if IsLaunchTriggeredChain(ctx, k, acc.LaunchID) {
+		if IsLaunchTriggeredChain(ctx, k, acc.LaunchId) {
 			continue
 		}
 		// get coordinator account for removal
 		var err error
-		simAccount, err = FindChainCoordinatorAccount(ctx, k, accs, acc.LaunchID)
+		simAccount, err = FindChainCoordinatorAccount(ctx, k, accs, acc.LaunchId)
 		if err != nil {
 			continue
 		}

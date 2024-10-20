@@ -21,7 +21,7 @@ func createNCoordinator(keeper keeper.Keeper, ctx context.Context, n int) []type
 	items := make([]types.Coordinator, n)
 	for i := range items {
 		iu := uint64(i)
-		items[i].CoordinatorID = iu
+		items[i].CoordinatorId = iu
 		_ = keeper.Coordinator.Set(ctx, iu, items[i])
 		_ = keeper.CoordinatorSeq.Set(ctx, iu)
 	}
@@ -40,17 +40,17 @@ func TestCoordinatorQuerySingle(t *testing.T) {
 	}{
 		{
 			desc:     "First",
-			request:  &types.QueryGetCoordinatorRequest{ID: msgs[0].CoordinatorID},
+			request:  &types.QueryGetCoordinatorRequest{CoordinatorId: msgs[0].CoordinatorId},
 			response: &types.QueryGetCoordinatorResponse{Coordinator: msgs[0]},
 		},
 		{
 			desc:     "Second",
-			request:  &types.QueryGetCoordinatorRequest{ID: msgs[1].CoordinatorID},
+			request:  &types.QueryGetCoordinatorRequest{CoordinatorId: msgs[1].CoordinatorId},
 			response: &types.QueryGetCoordinatorResponse{Coordinator: msgs[1]},
 		},
 		{
 			desc:    "KeyNotFound",
-			request: &types.QueryGetCoordinatorRequest{ID: uint64(len(msgs))},
+			request: &types.QueryGetCoordinatorRequest{CoordinatorId: uint64(len(msgs))},
 			err:     sdkerrors.ErrKeyNotFound,
 		},
 		{
@@ -136,12 +136,12 @@ func createNCoordinatorByAddress(keeper keeper.Keeper, ctx context.Context, n in
 	for i := range coordByAddress {
 		address := sample.AccAddress(r)
 		iu := uint64(i)
-		coordinators[i].CoordinatorID = iu
+		coordinators[i].CoordinatorId = iu
 		coordinators[i].Address = address.String()
 		_ = keeper.Coordinator.Set(ctx, iu, coordinators[i])
 		_ = keeper.CoordinatorSeq.Set(ctx, iu)
 
-		coordByAddress[i].CoordinatorID = iu
+		coordByAddress[i].CoordinatorId = iu
 		coordByAddress[i].Address = address.String()
 		_ = keeper.CoordinatorByAddress.Set(ctx, address, coordByAddress[i])
 

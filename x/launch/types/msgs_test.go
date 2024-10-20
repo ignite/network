@@ -21,7 +21,7 @@ func TestMsgCreateChain_ValidateBasic(t *testing.T) {
 	invalidConfigFile.InitialGenesis = invalidInitialGenesis
 
 	invalidGenesisChainID := sample.MsgCreateChain(r, sample.Address(r), "", false, 0)
-	invalidGenesisChainID.GenesisChainID = "invalid"
+	invalidGenesisChainID.GenesisChainId = "invalid"
 
 	msgInvalidCoins := sample.MsgCreateChain(r, sample.Address(r), "foo.com", false, 0)
 	msgInvalidCoins.AccountBalance = sdk.Coins{sdk.Coin{Denom: "invalid", Amount: sdkmath.NewInt(-1)}}
@@ -148,7 +148,7 @@ func TestMsgSendRequest_ValidateBasic(t *testing.T) {
 			name: "should validate valid message",
 			msg: types.MsgSendRequest{
 				Creator:  sample.Address(r),
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Content:  sample.RequestContent(r, launchID),
 			},
 		},
@@ -156,7 +156,7 @@ func TestMsgSendRequest_ValidateBasic(t *testing.T) {
 			name: "should prevent validate message with invalid request content",
 			msg: types.MsgSendRequest{
 				Creator:  sample.Address(r),
-				LaunchID: sample.Uint64(r),
+				LaunchId: sample.Uint64(r),
 				Content:  types.NewGenesisAccount(0, "", sdk.NewCoins()),
 			},
 			err: types.ErrInvalidRequestContent,
@@ -195,7 +195,7 @@ func TestMsgUpdateLaunchInformation_ValidateBasic(t *testing.T) {
 		false,
 		false,
 	)
-	msgInvalidGenesisChainID.GenesisChainID = "invalid"
+	msgInvalidGenesisChainID.GenesisChainId = "invalid"
 
 	for _, tc := range []struct {
 		desc  string

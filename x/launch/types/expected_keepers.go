@@ -20,7 +20,7 @@ type ProjectKeeper interface {
 }
 
 type MonitoringConsumerKeeper interface {
-	ClearVerifiedClientIDs(ctx context.Context, launchID uint64) error
+	ClearVerifiedClientIdList(ctx context.Context, launchID uint64) error
 }
 
 type ProfileKeeper interface {
