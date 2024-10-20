@@ -23,6 +23,9 @@ def undelegate_cmd(valNumber, amount):
     cmd.append('--chain-id')
     cmd.append(conf['chain_id'])
 
+    cmd.append('--keyring-backend')
+    cmd.append('test')
+
     cmd.append('-y')
 
     return cmd
