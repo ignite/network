@@ -1,5 +1,0 @@
-broadcast-mode = "sync"
-chain-id = "spn-1"
-keyring-backend = "test"
-node = "tcp://localhost:26657"
-output = "text"
