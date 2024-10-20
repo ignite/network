@@ -98,18 +98,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Skip:      true, // skipped because authority gated
 				},
 				{
-					RpcMethod: "CreateChain",
-					Use:       "create-chain [genesis-chain-id] [source-url] [source-hash]",
-					Short:     "Create a new chain for launch",
-					// TODO fix args
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "genesis_chain_id"}, {ProtoField: "source_url"}, {ProtoField: "source_hash"}},
-					FlagOptions: map[string]*autocliv1.FlagOptions{
-						"project_id":      {Name: "project_id", Usage: "The project id"},
-						"metadata":        {Name: "metadata", Usage: "Set metadata field for the chain"},
-						"account_balance": {Name: "account_balance", Usage: "Set the chain account coin balance"},
-					},
-				},
-				{
 					RpcMethod:      "EditChain",
 					Use:            "edit-chain [launch-id] [set-project-id] [project-id] [metadata]",
 					Short:          "Edit chain information",
@@ -117,18 +105,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					FlagOptions: map[string]*autocliv1.FlagOptions{
 						"project_id": {Name: "project_id", Usage: "Set the project ID if the chain is not associated with a project"},
 						"metadata":   {Name: "metadata", Usage: "Set metadata field for the chain"},
-					},
-				},
-				{
-					RpcMethod: "UpdateLaunchInformation",
-					Use:       "update-launch-information [launch-id]",
-					Short:     "Update initial information for the launch of the chain",
-					// TODO fix args (initial_genesis missing)
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}},
-					FlagOptions: map[string]*autocliv1.FlagOptions{
-						"genesis_chain_id": {Name: "genesis-chain-id", Usage: "Set the project ID if the chain is not associated with a project"},
-						"source_url":       {Name: "source-url", Usage: "Set metadata field for the chain"},
-						"source_hash":      {Name: "source-hash", Usage: "Set metadata field for the chain"},
 					},
 				},
 				{

@@ -6,10 +6,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/spf13/cobra"
 
-	"github.com/ignite/network/x/monitoringc/types"
+	"github.com/ignite/network/x/project/types"
 )
 
-// GetTxCmd returns the transaction commands for this module.
+// GetTxCmd returns the transaction commands for this module
 func GetTxCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:                        types.ModuleName,
@@ -19,8 +19,7 @@ func GetTxCmd() *cobra.Command {
 		RunE:                       client.ValidateCmd,
 	}
 
-	cmd.AddCommand(CmdCreateClient())
-	// this line is used by starport scaffolding # 1
+	cmd.AddCommand(CmdUpdateSpecialAllocations())
 
 	return cmd
 }

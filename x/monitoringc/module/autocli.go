@@ -66,13 +66,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
-				{
-					RpcMethod: "CreateClient",
-					Use:       "create-client [launch-id] [consensus-state-file] [validator-set-file]",
-					Short:     "Create a verified client ID to connect to the chain with the specified launch ID",
-					// TODO fix args
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}, {ProtoField: "consensus_state"}, {ProtoField: "validator_set"}},
-				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

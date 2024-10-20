@@ -109,13 +109,6 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "project_id"}, {ProtoField: "total_supply_update"}},
 				},
 				{
-					RpcMethod: "UpdateSpecialAllocations",
-					Use:       "update-special-allocations [project-id] [special-allocations]",
-					Short:     "Update special allocations for the project",
-					// TODO fix args
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "project_id"}, {ProtoField: "special_allocations"}},
-				},
-				{
 					RpcMethod:      "InitializeMainnet",
 					Use:            "initialize-mainnet [project-id] [source-url] [source-hash] [mainnet-chain-id]",
 					Short:          "Initialize the mainnet of the project to open gentxs submissions and fix total supply",
