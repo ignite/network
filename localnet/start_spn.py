@@ -35,7 +35,7 @@ def start_spn():
     save_genesis(genesis)
 
     # Set timestamp
-    genesis['genesis_time'] = "2022-02-10T10:29:59.410196Z"
+    genesis['genesis_time'] = "2024-10-20T02:28:23.033821Z"
 
     # Set chain ID
     genesis['chain_id'] = conf['chain_id']
