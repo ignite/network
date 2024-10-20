@@ -7,6 +7,7 @@ from utils import cmd_devnull, cmd, initialize_project, date_f
 sale_template_file = './auctions/sale_template.json'
 sale_file = './auctions/sale.json'
 
+
 def set_sale_json(selling_denom, selling_amount, paying_denom, price, start_time, end_time):
     f = open(sale_template_file)
     jf = json.load(f)
@@ -18,6 +19,7 @@ def set_sale_json(selling_denom, selling_amount, paying_denom, price, start_time
     jf['end_time'] = end_time
     with open(sale_file, 'w', encoding='utf-8') as newF:
         json.dump(jf, newF, ensure_ascii=False, indent=4)
+
 
 if __name__ == "__main__":
     initialize_project()

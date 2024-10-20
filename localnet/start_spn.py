@@ -6,6 +6,7 @@ import yaml
 from clear import clear_home
 from utils import cmd_devnull
 
+
 def save_genesis(genesis):
     with open('./spn/node1/config/genesis.json', 'w', encoding='utf-8') as f:
         json.dump(genesis, f, ensure_ascii=False, indent=4)
@@ -13,6 +14,7 @@ def save_genesis(genesis):
         json.dump(genesis, f, ensure_ascii=False, indent=4)
     with open('./spn/node3/config/genesis.json', 'w', encoding='utf-8') as f:
         json.dump(genesis, f, ensure_ascii=False, indent=4)
+
 
 def start_spn():
     if pathlib.PurePath(os.getcwd()).name != 'localnet':
@@ -40,15 +42,15 @@ def start_spn():
 
     # Set staking params
     genesis['app_state']['staking']['params']['max_validators'] = conf['max_validators']
-    genesis['app_state']['staking']['params']['unbonding_time'] = str(conf['unbonding_time'])+"s"
+    genesis['app_state']['staking']['params']['unbonding_time'] = str(conf['unbonding_time']) + "s"
 
     # Create the gentxs
     for i in range(3):
         gentxCmd = 'networkd genesis gentx {valName} {selfDelegation} --chain-id {chainID} --moniker="{valName}" --home ./spn/node{i} --output-document ./gentx.json'.format(
             valName=conf['validator_names'][i],
-            selfDelegation=str(conf['validator_self_delegations'][i])+conf['staking_denom'],
+            selfDelegation=str(conf['validator_self_delegations'][i]) + conf['staking_denom'],
             chainID=conf['chain_id'],
-            i=str(i+1),
+            i=str(i + 1),
         )
         cmd_devnull(gentxCmd)
         gentxFile = open('./gentx.json')
@@ -60,9 +62,12 @@ def start_spn():
     save_genesis(genesis)
 
     print('Starting the network')
-    subprocess.Popen(["networkd", "start", "--home", "./spn/node2"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    subprocess.Popen(["networkd", "start", "--home", "./spn/node3"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(["networkd", "start", "--home", "./spn/node2"], stdout=subprocess.DEVNULL,
+                     stderr=subprocess.DEVNULL)
+    subprocess.Popen(["networkd", "start", "--home", "./spn/node3"], stdout=subprocess.DEVNULL,
+                     stderr=subprocess.DEVNULL)
     subprocess.run(["networkd start --home ./spn/node1"], shell=True, check=True)
+
 
 if __name__ == "__main__":
     start_spn()

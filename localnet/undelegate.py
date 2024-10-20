@@ -10,6 +10,7 @@ if len(sys.argv) != 4:
 confFile = open('./conf.yml')
 conf = yaml.safe_load(confFile)
 
+
 def undelegate_cmd(valNumber, amount):
     cmd = ["networkd", "tx", "staking", "unbond"]
     cmd.append(conf['validator_addresses'][valNumber])
@@ -30,6 +31,7 @@ def undelegate_cmd(valNumber, amount):
 
     return cmd
 
+
 def undelegate(amounts):
     # Perform unbonding
     for s in amounts:
@@ -45,6 +47,7 @@ def undelegate(amounts):
             print('running: ' + " ".join(cmd))
             subprocess.run(cmd, check=True)
         i += 1
+
 
 if __name__ == "__main__":
     undelegate(sys.argv[1:])

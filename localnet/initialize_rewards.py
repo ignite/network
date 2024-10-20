@@ -56,7 +56,7 @@ def initialize_rewards(lastBlockHeight, selfDelegationVal1, selfDelegationVal2, 
     # Uncomment for testing incomplete validator set
     # cmd_devnull('networkd tx launch request-add-validator 1 ./node3/config/gentx/gentx.json "FyTmyvZhwRjwqhY6eWykTfiE+0mwe+U0aSo3ti8DCW8=" 16000000stake aaa foo.com --validator-address spn1ezptsm3npn54qx9vvpah4nymre59ykr9exx2ul --from alice -y')
 
-    cmd_devnull('networkd tx launch trigger-launch 1 5 --from alice -y')
+    cmd_devnull('networkd tx launch trigger-launch 1 5s --from alice --chain-id spn-1 --keyring-backend test -y')
 
 
 if __name__ == "__main__":

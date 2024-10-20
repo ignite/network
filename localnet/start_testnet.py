@@ -46,10 +46,11 @@ parser.add_argument('--self_delegation_3',
                     help='Self delegation for validator 3',
                     )
 parser.add_argument('--unbonding_time',
-                    default=1814400, # 21 days = 1814400 seconds
+                    default=1814400,  # 21 days = 1814400 seconds
                     type=int,
                     help='Staking unbonding time (unbonding period)',
                     )
+
 
 def save_genesis(genesis):
     with open('./testnet/node1/config/genesis.json', 'w', encoding='utf-8') as f:
@@ -58,6 +59,7 @@ def save_genesis(genesis):
         json.dump(genesis, f, ensure_ascii=False, indent=4)
     with open('./testnet/node3/config/genesis.json', 'w', encoding='utf-8') as f:
         json.dump(genesis, f, ensure_ascii=False, indent=4)
+
 
 def start_testnet(
         spnChainID,
@@ -81,7 +83,6 @@ def start_testnet(
     rootHash = conf['root']['hash']
     timestamp = conf['timestamp']
 
-
     # Open the genesis template
     genesisFile = open('./testnet/genesis_template.json')
     genesis = json.load(genesisFile)
@@ -95,28 +96,34 @@ def start_testnet(
     genesis['genesis_time'] = "2022-02-10T10:29:59.410196Z"
 
     # Set monitoring module param
-    genesis['app_state']['monitoringp']['params']['consumerChainID'] = spnChainID
-    genesis['app_state']['monitoringp']['params']['lastBlockHeight'] = lastBlockHeight
-    genesis['app_state']['monitoringp']['params']['consumerConsensusState']['timestamp'] = timestamp
-    genesis['app_state']['monitoringp']['params']['consumerConsensusState']['nextValidatorsHash'] = nextValidatorHash
-    genesis['app_state']['monitoringp']['params']['consumerConsensusState']['root']['hash'] = rootHash
-    genesis['app_state']['monitoringp']['params']['consumerUnbondingPeriod'] = spnUnbondingPeriod
-    genesis['app_state']['monitoringp']['params']['consumerRevisionHeight'] = revisionHeight
+    genesis['app_state']['monitoringp']['params']['consumer_chain_id'] = spnChainID
+    genesis['app_state']['monitoringp']['params']['last_block_height'] = lastBlockHeight
+    genesis['app_state']['monitoringp']['params']['consumer_consensus_state']['timestamp'] = timestamp
+    genesis['app_state']['monitoringp']['params']['consumer_consensus_state']['nextValidatorsHash'] = nextValidatorHash
+    genesis['app_state']['monitoringp']['params']['consumer_consensus_state']['root']['hash'] = rootHash
+    genesis['app_state']['monitoringp']['params']['consumer_unbonding_period'] = spnUnbondingPeriod
+    genesis['app_state']['monitoringp']['params']['consumer_revision_height'] = revisionHeight
 
     # Set staking max validators
     genesis['app_state']['staking']['params']['max_validators'] = maxValidator
-    genesis['app_state']['staking']['params']['unbonding_time'] = str(unbondingTime)+"s"
+    genesis['app_state']['staking']['params']['unbonding_time'] = str(unbondingTime) + "s"
 
     # Create the gentxs
-    cmd_devnull('networkd genesis gentx joe {} --chain-id {} --moniker="joe" --home ./testnet/node1 --output-document ./gentx1.json'.format(selfDelegationVal1, chainID))
+    cmd_devnull(
+        'networkd genesis gentx joe {} --chain-id {} --moniker="joe" --home ./testnet/node1 --output-document ./gentx1.json'.format(
+            selfDelegationVal1, chainID))
     gentx1File = open('./gentx1.json')
     gentx1 = json.load(gentx1File)
 
-    cmd_devnull('networkd genesis gentx steve {} --chain-id {} --moniker="steve" --home ./testnet/node2 --output-document ./gentx2.json'.format(selfDelegationVal2, chainID))
+    cmd_devnull(
+        'networkd genesis gentx steve {} --chain-id {} --moniker="steve" --home ./testnet/node2 --output-document ./gentx2.json'.format(
+            selfDelegationVal2, chainID))
     gentx2File = open('./gentx2.json')
     gentx2 = json.load(gentx2File)
 
-    cmd_devnull('networkd genesis gentx olivia {} --chain-id {} --moniker="olivia" --home ./testnet/node3 --output-document ./gentx3.json'.format(selfDelegationVal3, chainID))
+    cmd_devnull(
+        'networkd genesis gentx olivia {} --chain-id {} --moniker="olivia" --home ./testnet/node3 --output-document ./gentx3.json'.format(
+            selfDelegationVal3, chainID))
     gentx3File = open('./gentx3.json')
     gentx3 = json.load(gentx3File)
 
@@ -133,10 +140,13 @@ def start_testnet(
     save_genesis(genesis)
 
     print('Starting the network')
-    subprocess.Popen(["networkd", "start", "--home", "./testnet/node2"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    subprocess.Popen(["networkd", "start", "--home", "./testnet/node3"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(["networkd", "start", "--home", "./testnet/node2"], stdout=subprocess.DEVNULL,
+                     stderr=subprocess.DEVNULL)
+    subprocess.Popen(["networkd", "start", "--home", "./testnet/node3"], stdout=subprocess.DEVNULL,
+                     stderr=subprocess.DEVNULL)
     if background:
-        subprocess.Popen(["networkd", "start", "--home", "./testnet/node1"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.Popen(["networkd", "start", "--home", "./testnet/node1"], stdout=subprocess.DEVNULL,
+                         stderr=subprocess.DEVNULL)
     else:
         subprocess.run(["networkd start --home ./testnet/node1"], shell=True, check=True)
 

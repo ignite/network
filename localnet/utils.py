@@ -2,14 +2,18 @@ import subprocess
 
 val_address = 'spnvaloper15rz2rwnlgr7nf6eauz52usezffwrxc0muf4z5n'
 
+
 def cmd(command):
     subprocess.run([command], shell=True, check=True)
+
 
 def cmd_devnull(command):
     subprocess.run([command], shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+
 def date_f(d):
     return d.isoformat("T") + "Z"
+
 
 def initialize_project():
     cmd_devnull('networkd tx staking delegate {} 100000uspn --from bob -y'.format(val_address))
