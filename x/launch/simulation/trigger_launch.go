@@ -37,7 +37,7 @@ func SimulateMsgTriggerLaunch(
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), err.Error()), nil, nil
 		}
 
-		msg = sample.MsgTriggerLaunch(r, simAccount.Address.String(), chain.LaunchId, ctx.BlockTime())
+		msg = sample.MsgTriggerLaunch(r, simAccount.Address.String(), chain.LaunchId)
 
 		txCtx := simulation.OperationInput{
 			R:               r,

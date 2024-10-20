@@ -114,6 +114,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "approve"}, {ProtoField: "launch_id"}, {ProtoField: "request_id"}},
 				},
 				{
+					RpcMethod:      "TriggerLaunch",
+					Use:            "trigger-launch [launch-id] [launch-time]",
+					Short:          "Trigger the launch of a chain",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}, {ProtoField: "launch_time"}},
+				},
+				{
 					RpcMethod:      "RevertLaunch",
 					Use:            "revert-launch [launch-id]",
 					Short:          "Revert the launch of a chain",

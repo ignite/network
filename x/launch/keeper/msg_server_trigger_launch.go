@@ -46,16 +46,18 @@ func (k msgServer) TriggerLaunch(ctx context.Context, msg *types.MsgTriggerLaunc
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
-	if msg.LaunchTime.Before(sdkCtx.BlockTime().Add(params.LaunchTimeRange.MinLaunchTime)) {
+	blockTime := sdkCtx.BlockTime()
+	launchTime := blockTime.Add(msg.LaunchTime)
+	if launchTime.Before(blockTime.Add(params.LaunchTimeRange.MinLaunchTime)) {
 		return nil, sdkerrors.Wrapf(types.ErrLaunchTimeTooLow, "%s", msg.LaunchTime.String())
 	}
-	if msg.LaunchTime.After(sdkCtx.BlockTime().Add(params.LaunchTimeRange.MaxLaunchTime)) {
+	if launchTime.After(blockTime.Add(params.LaunchTimeRange.MaxLaunchTime)) {
 		return nil, sdkerrors.Wrapf(types.ErrLaunchTimeTooHigh, "%s", msg.LaunchTime.String())
 	}
 
 	// set launch timestamp
 	chain.LaunchTriggered = true
-	chain.LaunchTime = msg.LaunchTime
+	chain.LaunchTime = launchTime
 
 	// set revision height for monitoring IBC client
 	chain.ConsumerRevisionHeight = sdkCtx.BlockHeight()

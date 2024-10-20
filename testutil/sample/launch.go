@@ -316,7 +316,7 @@ func MsgRevertLaunch(coordinator string, launchID uint64) launch.MsgRevertLaunch
 }
 
 // MsgTriggerLaunch returns a sample MsgTriggerLaunch
-func MsgTriggerLaunch(r *rand.Rand, coordinator string, launchID uint64, currentTime time.Time) launch.MsgTriggerLaunch {
+func MsgTriggerLaunch(r *rand.Rand, coordinator string, launchID uint64) launch.MsgTriggerLaunch {
 	// Get a random duration between min and max launch time
 	launchTimeRange := launch.DefaultMaxLaunchTime.Milliseconds() - launch.DefaultMinLaunchTime.Milliseconds()
 	remainingTime := launch.DefaultMinLaunchTime + time.Millisecond*time.Duration(r.Int63n(launchTimeRange))
@@ -324,7 +324,7 @@ func MsgTriggerLaunch(r *rand.Rand, coordinator string, launchID uint64, current
 	return *launch.NewMsgTriggerLaunch(
 		coordinator,
 		launchID,
-		currentTime.Add(remainingTime),
+		remainingTime,
 	)
 }
 

@@ -156,7 +156,7 @@ func (msg MsgSettleRequest) Type() string {
 	return sdk.MsgTypeURL(&MsgSettleRequest{})
 }
 
-func NewMsgTriggerLaunch(coordinator string, launchID uint64, launchTime time.Time) *MsgTriggerLaunch {
+func NewMsgTriggerLaunch(coordinator string, launchID uint64, launchTime time.Duration) *MsgTriggerLaunch {
 	return &MsgTriggerLaunch{
 		Coordinator: coordinator,
 		LaunchId:    launchID,

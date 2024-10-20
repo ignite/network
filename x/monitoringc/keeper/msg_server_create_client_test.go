@@ -81,7 +81,7 @@ func Test_msgServer_CreateClient(t *testing.T) {
 	_, err = ts.LaunchSrv.TriggerLaunch(ctx, launchtypes.NewMsgTriggerLaunch(
 		coordAddr,
 		resCreateChain.LaunchId,
-		ctx.BlockTime().Add(launchtypes.DefaultMinLaunchTime),
+		launchtypes.DefaultMinLaunchTime,
 	))
 	require.NoError(t, err)
 

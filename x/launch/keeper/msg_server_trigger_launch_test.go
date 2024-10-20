@@ -46,7 +46,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			},
 			msg: types.MsgTriggerLaunch{
 				LaunchId:    0,
-				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
+				LaunchTime:  types.DefaultMinLaunchTime,
 				Coordinator: sampleAddr,
 			},
 		},
@@ -64,7 +64,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			},
 			msg: types.MsgTriggerLaunch{
 				LaunchId:    10,
-				LaunchTime:  sampleTime.Add(types.DefaultMaxLaunchTime),
+				LaunchTime:  types.DefaultMaxLaunchTime,
 				Coordinator: sampleAddr,
 			},
 		},
@@ -82,7 +82,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			},
 			msg: types.MsgTriggerLaunch{
 				LaunchId:    1000,
-				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
+				LaunchTime:  types.DefaultMinLaunchTime,
 				Coordinator: sampleAddr,
 			},
 			err: types.ErrChainNotFound,
@@ -97,7 +97,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			},
 			msg: types.MsgTriggerLaunch{
 				LaunchId:    2,
-				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
+				LaunchTime:  types.DefaultMinLaunchTime,
 				Coordinator: sample.Address(r),
 			},
 			err: profiletypes.ErrCoordinatorAddressNotFound,
@@ -116,7 +116,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			},
 			msg: types.MsgTriggerLaunch{
 				LaunchId:    3,
-				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
+				LaunchTime:  types.DefaultMinLaunchTime,
 				Coordinator: sampleAddr,
 			},
 			err: profiletypes.ErrCoordinatorInvalid,
@@ -139,7 +139,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			},
 			msg: types.MsgTriggerLaunch{
 				LaunchId:    5,
-				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime),
+				LaunchTime:  types.DefaultMinLaunchTime,
 				Coordinator: sampleAddr,
 			},
 			err: types.ErrTriggeredLaunch,
@@ -158,7 +158,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			},
 			msg: types.MsgTriggerLaunch{
 				LaunchId:    6,
-				LaunchTime:  sampleTime.Add(types.DefaultMinLaunchTime - time.Second),
+				LaunchTime:  types.DefaultMinLaunchTime - time.Second,
 				Coordinator: sampleAddr,
 			},
 			err: types.ErrLaunchTimeTooLow,
@@ -177,7 +177,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			},
 			msg: types.MsgTriggerLaunch{
 				LaunchId:    7,
-				LaunchTime:  sampleTime.Add(types.DefaultMaxLaunchTime + time.Second),
+				LaunchTime:  types.DefaultMaxLaunchTime + time.Second,
 				Coordinator: sampleAddr,
 			},
 			err: types.ErrLaunchTimeTooHigh,
@@ -219,7 +219,7 @@ func TestMsgTriggerLaunch(t *testing.T) {
 			chain, err := tk.LaunchKeeper.GetChain(ctx, tt.msg.LaunchId)
 			require.NoError(t, err)
 			require.True(t, chain.LaunchTriggered)
-			require.EqualValues(t, tt.msg.LaunchTime, chain.LaunchTime)
+			require.EqualValues(t, sampleTime.Add(tt.msg.LaunchTime), chain.LaunchTime)
 			require.EqualValues(t, tt.inputState.blockHeight, chain.ConsumerRevisionHeight)
 		})
 	}
