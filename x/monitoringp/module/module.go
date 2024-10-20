@@ -21,12 +21,10 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v8/modules/core/05-port/types"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/spf13/cobra"
 
 	// this line is used by starport scaffolding # 1
 
 	modulev1 "github.com/ignite/network/api/network/monitoringp/module/v1"
-	"github.com/ignite/network/x/monitoringp/client/cli"
 	"github.com/ignite/network/x/monitoringp/keeper"
 	"github.com/ignite/network/x/monitoringp/types"
 )
@@ -92,12 +90,6 @@ func (AppModuleBasic) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *r
 	if err := types.RegisterQueryHandlerClient(context.Background(), mux, types.NewQueryClient(clientCtx)); err != nil {
 		panic(err)
 	}
-}
-
-// GetTxCmd returns the root Tx command for the module.
-// These commands enrich the AutoCLI tx commands.
-func (a AppModuleBasic) GetTxCmd() *cobra.Command {
-	return cli.GetTxCmd()
 }
 
 // ----------------------------------------------------------------------------

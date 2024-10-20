@@ -14,14 +14,12 @@ func NewMsgUpdateValidatorDescription(
 	details string,
 ) *MsgUpdateValidatorDescription {
 	return &MsgUpdateValidatorDescription{
-		Address: address,
-		Description: ValidatorDescription{
-			Identity:        identity,
-			Moniker:         moniker,
-			Website:         website,
-			SecurityContact: securityContact,
-			Details:         details,
-		},
+		Address:         address,
+		Identity:        identity,
+		Moniker:         moniker,
+		Website:         website,
+		SecurityContact: securityContact,
+		Details:         details,
 	}
 }
 
@@ -50,11 +48,11 @@ func (msg *MsgAddValidatorOperatorAddress) Type() string {
 }
 
 func (msg *MsgUpdateValidatorDescription) ValidateBasic() error {
-	if msg.Description.Details == "" &&
-		msg.Description.Moniker == "" &&
-		msg.Description.Identity == "" &&
-		msg.Description.Website == "" &&
-		msg.Description.SecurityContact == "" {
+	if msg.Details == "" &&
+		msg.Moniker == "" &&
+		msg.Identity == "" &&
+		msg.Website == "" &&
+		msg.SecurityContact == "" {
 		return sdkerrors.Wrap(ErrEmptyDescription, msg.Address)
 	}
 	return nil

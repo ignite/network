@@ -20,38 +20,38 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod: "ListLaunchIDFromChannelID",
 					Use:       "list-launch-id-from-channel-id",
-					Short:     "List all LaunchIDFromChannelID",
+					Short:     "List all launch ID to channel ID associations",
 				},
 				{
 					RpcMethod:      "GetLaunchIDFromChannelID",
 					Use:            "get-launch-id-from-channel-id [channel-id]",
-					Short:          "Gets a LaunchIDFromChannelID",
+					Short:          "Get the launch ID for a channel ID",
 					Alias:          []string{"show-launch-id-from-channel-id"},
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "channel_id"}},
 				},
 				{
 					RpcMethod:      "GetMonitoringHistory",
 					Use:            "get-monitoring-history [launch-id]",
-					Short:          "Gets a MonitoringHistory",
+					Short:          "Get the monitoring history for a launch",
 					Alias:          []string{"show-monitoring-history"},
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}},
 				},
 				{
 					RpcMethod:      "GetVerifiedClientID",
 					Use:            "get-verified-client-id [launch-id]",
-					Short:          "Gets a VerifiedClientID",
+					Short:          "Get all verified client IDs for a launch",
 					Alias:          []string{"show-verified-client-id"},
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}},
 				},
 				{
 					RpcMethod: "ListProviderClientID",
 					Use:       "list-provider-client-id",
-					Short:     "List all ProviderClientID",
+					Short:     "List all provider client IDs",
 				},
 				{
 					RpcMethod:      "GetProviderClientID",
 					Use:            "get-provider-client-id [launch-id]",
-					Short:          "Gets a ProviderClientID",
+					Short:          "Get a provider client ID",
 					Alias:          []string{"show-provider-client-id"},
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}},
 				},
@@ -67,10 +67,11 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Skip:      true, // skipped because authority gated
 				},
 				{
-					RpcMethod:      "CreateClient",
-					Use:            "create-client [launch-id] [consensus-state] [validator-set] [unbonding-period] [revision-height]",
-					Short:          "Send a CreateClient tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}, {ProtoField: "consensus_state"}, {ProtoField: "validator_set"}, {ProtoField: "unbonding_period"}, {ProtoField: "revision_height"}},
+					RpcMethod: "CreateClient",
+					Use:       "create-client [launch-id] [consensus-state-file] [validator-set-file]",
+					Short:     "Create a verified client ID to connect to the chain with the specified launch ID",
+					// TODO fix args
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}, {ProtoField: "consensus_state"}, {ProtoField: "validator_set"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},

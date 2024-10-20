@@ -73,6 +73,8 @@ func TestMsgUpdateValidatorDescription(t *testing.T) {
 	var (
 		addr1       = sample.Address(r)
 		addr2       = sample.Address(r)
+		desc1       = sample.ValidatorDescription(addr1)
+		desc2       = sample.ValidatorDescription(addr2)
 		ctx, tk, ts = testkeeper.NewTestSetup(t)
 	)
 	tests := []struct {
@@ -83,20 +85,32 @@ func TestMsgUpdateValidatorDescription(t *testing.T) {
 		{
 			name: "should allow creating a new validator if doesn't exist",
 			msg: types.MsgUpdateValidatorDescription{
-				Address:     addr1,
-				Description: sample.ValidatorDescription(addr1),
+				Address:         addr1,
+				Identity:        desc1.Identity,
+				Moniker:         desc1.Moniker,
+				Website:         desc1.Website,
+				SecurityContact: desc1.SecurityContact,
+				Details:         desc1.Details,
 			},
 		}, {
 			name: "should allow updating an existing validator",
 			msg: types.MsgUpdateValidatorDescription{
-				Address:     addr1,
-				Description: sample.ValidatorDescription(addr2),
+				Address:         addr1,
+				Identity:        desc2.Identity,
+				Moniker:         desc2.Moniker,
+				Website:         desc2.Website,
+				SecurityContact: desc2.SecurityContact,
+				Details:         desc2.Details,
 			},
 		}, {
 			name: "should allow creating a second validator",
 			msg: types.MsgUpdateValidatorDescription{
-				Address:     addr2,
-				Description: sample.ValidatorDescription(addr2),
+				Address:         addr2,
+				Identity:        desc2.Identity,
+				Moniker:         desc2.Moniker,
+				Website:         desc2.Website,
+				SecurityContact: desc2.SecurityContact,
+				Details:         desc2.Details,
 			},
 		},
 	}
@@ -115,32 +129,32 @@ func TestMsgUpdateValidatorDescription(t *testing.T) {
 			require.NoError(t, err, "validator not found")
 			require.EqualValues(t, tt.msg.Address, validator.Address)
 
-			if len(tt.msg.Description.Identity) > 0 {
-				require.EqualValues(t, tt.msg.Description.Identity, validator.Description.Identity)
+			if len(tt.msg.Identity) > 0 {
+				require.EqualValues(t, tt.msg.Identity, validator.Description.Identity)
 			} else if oldErr != nil {
 				require.EqualValues(t, oldValidator.Description.Identity, oldValidator.Description.Identity)
 			}
 
-			if len(tt.msg.Description.Website) > 0 {
-				require.EqualValues(t, tt.msg.Description.Website, validator.Description.Website)
+			if len(tt.msg.Website) > 0 {
+				require.EqualValues(t, tt.msg.Website, validator.Description.Website)
 			} else if oldErr != nil {
 				require.EqualValues(t, oldValidator.Description.Website, oldValidator.Description.Website)
 			}
 
-			if len(tt.msg.Description.Details) > 0 {
-				require.EqualValues(t, tt.msg.Description.Details, validator.Description.Details)
+			if len(tt.msg.Details) > 0 {
+				require.EqualValues(t, tt.msg.Details, validator.Description.Details)
 			} else if oldErr != nil {
 				require.EqualValues(t, oldValidator.Description.Details, oldValidator.Description.Details)
 			}
 
-			if len(tt.msg.Description.Moniker) > 0 {
-				require.EqualValues(t, tt.msg.Description.Moniker, validator.Description.Moniker)
+			if len(tt.msg.Moniker) > 0 {
+				require.EqualValues(t, tt.msg.Moniker, validator.Description.Moniker)
 			} else if oldErr != nil {
 				require.EqualValues(t, oldValidator.Description.Moniker, oldValidator.Description.Moniker)
 			}
 
-			if len(tt.msg.Description.SecurityContact) > 0 {
-				require.EqualValues(t, tt.msg.Description.SecurityContact, validator.Description.SecurityContact)
+			if len(tt.msg.SecurityContact) > 0 {
+				require.EqualValues(t, tt.msg.SecurityContact, validator.Description.SecurityContact)
 			} else if oldErr != nil {
 				require.EqualValues(t, oldValidator.Description.SecurityContact, oldValidator.Description.SecurityContact)
 			}

@@ -32,20 +32,20 @@ func (k msgServer) UpdateValidatorDescription(ctx context.Context, msg *types.Ms
 		return nil, err
 	}
 
-	if len(msg.Description.Identity) > 0 {
-		validator.Description.Identity = msg.Description.Identity
+	if len(msg.Identity) > 0 {
+		validator.Description.Identity = msg.Identity
 	}
-	if len(msg.Description.Website) > 0 {
-		validator.Description.Website = msg.Description.Website
+	if len(msg.Website) > 0 {
+		validator.Description.Website = msg.Website
 	}
-	if len(msg.Description.Details) > 0 {
-		validator.Description.Details = msg.Description.Details
+	if len(msg.Details) > 0 {
+		validator.Description.Details = msg.Details
 	}
-	if len(msg.Description.Moniker) > 0 {
-		validator.Description.Moniker = msg.Description.Moniker
+	if len(msg.Moniker) > 0 {
+		validator.Description.Moniker = msg.Moniker
 	}
-	if len(msg.Description.SecurityContact) > 0 {
-		validator.Description.SecurityContact = msg.Description.SecurityContact
+	if len(msg.SecurityContact) > 0 {
+		validator.Description.SecurityContact = msg.SecurityContact
 	}
 
 	if errors.IsOf(err, collections.ErrNotFound) {

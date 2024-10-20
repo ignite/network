@@ -20,12 +20,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod: "ListRewardPool",
 					Use:       "list-reward-pool",
-					Short:     "List all RewardPool",
+					Short:     "List all reward pools",
 				},
 				{
 					RpcMethod:      "GetRewardPool",
 					Use:            "get-reward-pool [launch-id]",
-					Short:          "Gets a RewardPool",
+					Short:          "Get the reward pool for a launch",
 					Alias:          []string{"show-reward-pool"},
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}},
 				},
@@ -43,7 +43,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod:      "SetRewards",
 					Use:            "set-rewards [launch-id] [coins] [last-reward-height]",
-					Short:          "Send a SetRewards tx",
+					Short:          "Set rewards for being validator of a chain",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "launch_id"}, {ProtoField: "coins"}, {ProtoField: "last_reward_height"}},
 				},
 				// this line is used by ignite scaffolding # autocli/tx

@@ -51,7 +51,11 @@ message MsgUpdateParamsResponse {}
 message MsgUpdateValidatorDescription {
   option (cosmos.msg.v1.signer) = "address";
   string address = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-  ValidatorDescription description = 2 [(gogoproto.nullable) = false];
+  string identity = 2;
+  string moniker = 3;
+  string website = 4;
+  string security_contact = 5;
+  string details = 6;
 }
 
 message MsgUpdateValidatorDescriptionResponse {}

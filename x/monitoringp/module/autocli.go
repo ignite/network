@@ -20,19 +20,19 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				{
 					RpcMethod: "GetMonitoringInfo",
 					Use:       "get-monitoring-info",
-					Short:     "Gets a MonitoringInfo",
+					Short:     "Get the monitoring information",
 					Alias:     []string{"show-monitoring-info"},
 				},
 				{
 					RpcMethod: "GetConnectionChannelID",
 					Use:       "get-connection-channel-id",
-					Short:     "Gets a ConnectionChannelID",
+					Short:     "get the connection channel ID used for the IBC connection",
 					Alias:     []string{"show-connection-channel-id"},
 				},
 				{
 					RpcMethod: "GetConsumerClientID",
 					Use:       "get-consumer-client-id",
-					Short:     "Gets a ConsumerClientID",
+					Short:     "Get the consumer client ID used for the IBC connection",
 					Alias:     []string{"show-consumer-client-id"},
 				},
 				// this line is used by ignite scaffolding # autocli/query

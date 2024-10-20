@@ -55,21 +55,18 @@ func TestMsgUpdateValidatorDescription_ValidateBasic(t *testing.T) {
 		{
 			name: "should prevent validate emtpy description",
 			msg: types.MsgUpdateValidatorDescription{
-				Address:     addr,
-				Description: types.ValidatorDescription{},
+				Address: addr,
 			},
 			err: types.ErrEmptyDescription,
 		}, {
 			name: "should validate valid message",
 			msg: types.MsgUpdateValidatorDescription{
-				Address: sample.Address(r),
-				Description: types.ValidatorDescription{
-					Identity:        "identity",
-					Moniker:         "moniker",
-					Website:         "website",
-					SecurityContact: "security-contact",
-					Details:         "details",
-				},
+				Address:         sample.Address(r),
+				Identity:        "identity",
+				Moniker:         "moniker",
+				Website:         "website",
+				SecurityContact: "security-contact",
+				Details:         "details",
 			},
 		},
 	}
