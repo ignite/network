@@ -160,7 +160,7 @@ genesis:
   chain_id: spn-1
 validators:
   - name: alice
-    home: "~/.spn"
+    home: "$HOME/.spn"
     bonded: 100000000uspn
 #client:
 #  typescript:

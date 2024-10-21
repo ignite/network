@@ -102,7 +102,7 @@ if __name__ == "__main__":
         unbondingTime))
 
     # Perform IBC connection
-    cmd('hermes -c ./hermes/config.toml create connection spn-1 --client-a 07-tendermint-0 --client-b 07-tendermint-0')
-    cmd('hermes -c ./hermes/config.toml create channel --port-a monitoringc --port-b monitoringp spn-1 connection-0 -o ordered --channel-version monitoring-1')
+    cmd('hermes --config ./hermes/config.toml create connection --a-chain spn-1 --a-client 07-tendermint-0 --b-client 07-tendermint-0')
+    cmd('hermes --config ./hermes/config.toml create channel --a-port monitoringc --b-port monitoringp --a-chain spn-1 --a-connection connection-0 --order ordered --channel-version monitoring-1')
 
-    # hermes -c ./hermes/config.toml start
+    # hermes --config ./hermes/config.toml start
