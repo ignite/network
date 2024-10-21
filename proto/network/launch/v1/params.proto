@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package network.launch.v1;
+
+import "amino/amino.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "google/protobuf/duration.proto";
+
+option go_package = "github.com/ignite/network/x/launch/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "network/x/launch/Params";
+  option (gogoproto.equal) = true;
+
+  LaunchTimeRange launch_time_range = 1 [(gogoproto.nullable) = false];
+  google.protobuf.Duration revert_delay = 2 [
+    (gogoproto.nullable) = false,
+    (gogoproto.stdduration) = true
+  ];
+  repeated cosmos.base.v1beta1.Coin chain_creation_fee = 3 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+
+  // request_fee is the fee for making a request to a chain
+  repeated cosmos.base.v1beta1.Coin request_fee = 4 [
+    (gogoproto.nullable) = false,
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+
+  uint64 max_metadata_length = 5;
+}
+
+message LaunchTimeRange {
+  google.protobuf.Duration min_launch_time = 1 [
+    (gogoproto.nullable) = false,
+    (gogoproto.stdduration) = true
+  ];
+  google.protobuf.Duration max_launch_time = 2 [
+    (gogoproto.nullable) = false,
+    (gogoproto.stdduration) = true
+  ];
+}

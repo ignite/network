@@ -3,19 +3,18 @@ package types
 import (
 	"fmt"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
+	networktypes "github.com/ignite/network/pkg/types"
 )
 
-// DefaultGenesis returns the default Capability genesis state
+// DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		Projects:        []Project{},
-		ProjectCounter:  1,
-		ProjectChains:   []ProjectChains{},
-		MainnetAccounts: []MainnetAccount{},
-		Params:          DefaultParams(),
-		TotalShares:     spntypes.TotalShareNumber,
+		MainnetAccountList: []MainnetAccount{},
+		ProjectList:        []Project{},
+		ProjectChainsList:  []ProjectChains{},
+		TotalShares:        networktypes.TotalShareNumber,
 		// this line is used by starport scaffolding # genesis/types/default
+		Params: DefaultParams(),
 	}
 }
 
@@ -23,49 +22,47 @@ func DefaultGenesis() *GenesisState {
 // failure.
 func (gs GenesisState) Validate() error {
 	// Check for duplicated ID in project
-	projectIDMap := make(map[uint64]struct{})
-	projectCounter := gs.GetProjectCounter()
-	for _, project := range gs.Projects {
-		if _, ok := projectIDMap[project.ProjectID]; ok {
+	projectIDMap := make(map[uint64]bool)
+	projectCount := gs.GetProjectCount()
+	for _, elem := range gs.ProjectList {
+		if _, ok := projectIDMap[elem.ProjectId]; ok {
 			return fmt.Errorf("duplicated id for project")
 		}
-		if project.ProjectID >= projectCounter {
+		if elem.ProjectId >= projectCount {
 			return fmt.Errorf("project id should be lower or equal than the last id")
 		}
-		if err := project.Validate(gs.TotalShares); err != nil {
-			return fmt.Errorf("invalid project %d: %s", project.ProjectID, err.Error())
+		if err := elem.Validate(gs.TotalShares); err != nil {
+			return fmt.Errorf("invalid project %d: %s", elem.ProjectId, err.Error())
 		}
-		projectIDMap[project.ProjectID] = struct{}{}
+		projectIDMap[elem.ProjectId] = true
 	}
 
 	// Check for duplicated index in projectChains
-	projectChainsIndexMap := make(map[string]struct{})
-	for _, elem := range gs.ProjectChains {
-		if _, ok := projectIDMap[elem.ProjectID]; !ok {
-			return fmt.Errorf("project id %d doesn't exist for chains", elem.ProjectID)
+	projectChainsIndexMap := make(map[uint64]struct{})
+	for _, elem := range gs.ProjectChainsList {
+		if _, ok := projectIDMap[elem.ProjectId]; !ok {
+			return fmt.Errorf("project id %d doesn't exist for chains", elem.ProjectId)
 		}
-		index := string(ProjectChainsKey(elem.ProjectID))
-		if _, ok := projectChainsIndexMap[index]; ok {
+		if _, ok := projectChainsIndexMap[elem.ProjectId]; ok {
 			return fmt.Errorf("duplicated index for projectChains")
 		}
-		projectChainsIndexMap[index] = struct{}{}
+		projectChainsIndexMap[elem.ProjectId] = struct{}{}
 	}
 
 	// Check for duplicated index in mainnetAccount
-	mainnetAccountIndexMap := make(map[string]struct{})
-	for _, elem := range gs.MainnetAccounts {
-		if _, ok := projectIDMap[elem.ProjectID]; !ok {
+	mainnetAccountIndexMap := make(map[uint64]struct{})
+	for _, elem := range gs.MainnetAccountList {
+		if _, ok := projectIDMap[elem.ProjectId]; !ok {
 			return fmt.Errorf("project id %d doesn't exist for mainnet account %s",
-				elem.ProjectID, elem.Address)
+				elem.ProjectId, elem.Address)
 		}
-		index := string(AccountKeyPath(elem.ProjectID, elem.Address))
-		if _, ok := mainnetAccountIndexMap[index]; ok {
+		if _, ok := mainnetAccountIndexMap[elem.ProjectId]; ok {
 			return fmt.Errorf("duplicated index for mainnetAccount")
 		}
-		mainnetAccountIndexMap[index] = struct{}{}
+		mainnetAccountIndexMap[elem.ProjectId] = struct{}{}
 	}
 
 	// this line is used by starport scaffolding # genesis/types/validate
 
-	return gs.Params.ValidateBasic()
+	return gs.Params.Validate()
 }

@@ -3,28 +3,43 @@ package keeper_test
 import (
 	"testing"
 
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-
+	"cosmossdk.io/collections"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/launch/keeper"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/launch/keeper"
+	launch "github.com/ignite/network/x/launch/types"
 )
 
 func TestDuplicatedAccountInvariant(t *testing.T) {
 	ctx, tk, _ := testkeeper.NewTestSetup(t)
 	t.Run("should not break with valid state", func(t *testing.T) {
-		tk.LaunchKeeper.SetVestingAccount(ctx, sample.VestingAccount(r, 0, sample.Address(r)))
-		tk.LaunchKeeper.SetGenesisAccount(ctx, sample.GenesisAccount(r, 0, sample.Address(r)))
-		msg, broken := keeper.DuplicatedAccountInvariant(*tk.LaunchKeeper)(ctx)
+		launchID := uint64(0)
+		vestingAddress := sample.AccAddress(r)
+		vestingAccount := sample.VestingAccount(r, launchID, vestingAddress.String())
+		err := tk.LaunchKeeper.VestingAccount.Set(ctx, collections.Join(launchID, vestingAddress), vestingAccount)
+		require.NoError(t, err)
+
+		genesisAddress := sample.AccAddress(r)
+		genesisAccount := sample.GenesisAccount(r, launchID, genesisAddress.String())
+		err = tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(launchID, genesisAddress), genesisAccount)
+		require.NoError(t, err)
+
+		msg, broken := keeper.DuplicatedAccountInvariant(tk.LaunchKeeper)(ctx)
 		require.False(t, broken, msg)
 	})
 
 	t.Run("should break with duplicated account", func(t *testing.T) {
-		addr := sample.Address(r)
-		tk.LaunchKeeper.SetVestingAccount(ctx, sample.VestingAccount(r, 0, addr))
-		tk.LaunchKeeper.SetGenesisAccount(ctx, sample.GenesisAccount(r, 0, addr))
-		msg, broken := keeper.DuplicatedAccountInvariant(*tk.LaunchKeeper)(ctx)
+		launchID := uint64(0)
+		addr := sample.AccAddress(r)
+		err := tk.LaunchKeeper.VestingAccount.Set(ctx, collections.Join(launchID, addr), sample.VestingAccount(r, launchID, addr.String()))
+		require.NoError(t, err)
+		err = tk.LaunchKeeper.GenesisAccount.Set(ctx, collections.Join(launchID, addr), sample.GenesisAccount(r, launchID, addr.String()))
+		require.NoError(t, err)
+
+		msg, broken := keeper.DuplicatedAccountInvariant(tk.LaunchKeeper)(ctx)
 		require.True(t, broken, msg)
 	})
 }
@@ -34,19 +49,23 @@ func TestInvalidChainInvariant(t *testing.T) {
 		ctx, tk, _ := testkeeper.NewTestSetup(t)
 		chain := sample.Chain(r, 0, 0)
 		project := sample.Project(r, 0)
-		chain.ProjectID = tk.ProjectKeeper.AppendProject(ctx, project)
+		projectID, err := tk.ProjectKeeper.AppendProject(ctx, project)
+		require.NoError(t, err)
+		chain.ProjectId = projectID
 		chain.HasProject = true
-		_ = tk.LaunchKeeper.AppendChain(ctx, chain)
-		msg, broken := keeper.InvalidChainInvariant(*tk.LaunchKeeper)(ctx)
+		_, err = tk.LaunchKeeper.AppendChain(ctx, chain)
+		require.NoError(t, err)
+		msg, broken := keeper.InvalidChainInvariant(tk.LaunchKeeper)(ctx)
 		require.False(t, broken, msg)
 	})
 
 	t.Run("should break with an invalid chain", func(t *testing.T) {
 		ctx, tk, _ := testkeeper.NewTestSetup(t)
 		chain := sample.Chain(r, 0, 0)
-		chain.GenesisChainID = "_invalid_"
-		_ = tk.LaunchKeeper.AppendChain(ctx, chain)
-		msg, broken := keeper.InvalidChainInvariant(*tk.LaunchKeeper)(ctx)
+		chain.GenesisChainId = "_invalid_"
+		_, err := tk.LaunchKeeper.AppendChain(ctx, chain)
+		require.NoError(t, err)
+		msg, broken := keeper.InvalidChainInvariant(tk.LaunchKeeper)(ctx)
 		require.True(t, broken, msg)
 	})
 
@@ -54,9 +73,10 @@ func TestInvalidChainInvariant(t *testing.T) {
 		ctx, tk, _ := testkeeper.NewTestSetup(t)
 		chain := sample.Chain(r, 0, 0)
 		chain.HasProject = true
-		chain.ProjectID = 1000
-		_ = tk.LaunchKeeper.AppendChain(ctx, chain)
-		msg, broken := keeper.InvalidChainInvariant(*tk.LaunchKeeper)(ctx)
+		chain.ProjectId = 1000
+		_, err := tk.LaunchKeeper.AppendChain(ctx, chain)
+		require.NoError(t, err)
+		msg, broken := keeper.InvalidChainInvariant(tk.LaunchKeeper)(ctx)
 		require.True(t, broken, msg)
 	})
 }
@@ -64,16 +84,18 @@ func TestInvalidChainInvariant(t *testing.T) {
 func TestUnknownRequestTypeInvariant(t *testing.T) {
 	ctx, tk, _ := testkeeper.NewTestSetup(t)
 	t.Run("should not break with valid state", func(t *testing.T) {
-		tk.LaunchKeeper.AppendRequest(ctx, sample.Request(r, 0, sample.Address(r)))
-		msg, broken := keeper.UnknownRequestTypeInvariant(*tk.LaunchKeeper)(ctx)
+		_, err := tk.LaunchKeeper.AppendRequest(ctx, sample.Request(r, 0, sample.Address(r)))
+		require.NoError(t, err)
+		msg, broken := keeper.UnknownRequestTypeInvariant(tk.LaunchKeeper)(ctx)
 		require.False(t, broken, msg)
 	})
 
 	t.Run("should break with an invalid request", func(t *testing.T) {
-		tk.LaunchKeeper.AppendRequest(ctx, sample.RequestWithContent(r, 0,
-			sample.GenesisAccountContent(r, 0, "invalid"),
+		_, err := tk.LaunchKeeper.AppendRequest(ctx, sample.RequestWithContent(r, 0,
+			launch.NewGenesisAccount(0, sample.Address(r), sdk.NewCoins()),
 		))
-		msg, broken := keeper.UnknownRequestTypeInvariant(*tk.LaunchKeeper)(ctx)
+		require.NoError(t, err)
+		msg, broken := keeper.UnknownRequestTypeInvariant(tk.LaunchKeeper)(ctx)
 		require.True(t, broken, msg)
 	})
 }

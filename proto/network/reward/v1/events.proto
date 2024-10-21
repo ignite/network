@@ -1,0 +1,31 @@
+syntax = "proto3";
+package network.reward.v1;
+
+import "amino/amino.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "network/reward/v1/reward_pool.proto";
+
+option go_package = "github.com/ignite/network/x/reward/types";
+
+message EventRewardPoolCreated {
+  uint64 launch_id = 1;
+  string provider = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}
+
+message EventRewardPoolRemoved {
+  uint64 launch_id = 1;
+}
+
+message EventRewardsDistributed {
+  uint64 launch_id = 1;
+  string receiver = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  repeated cosmos.base.v1beta1.Coin rewards = 3 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+}

@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package network.monitoringc.v1;
+
+import "amino/amino.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "network/monitoringc/v1/launch_id_from_channel_id.proto";
+import "network/monitoringc/v1/monitoring_history.proto";
+import "network/monitoringc/v1/params.proto";
+import "network/monitoringc/v1/provider_client_id.proto";
+import "network/monitoringc/v1/verified_client_id.proto";
+
+option go_package = "github.com/ignite/network/x/monitoringc/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/ignite/network/monitoringc/v1/params";
+  }
+
+  // Queries a list of LaunchIDFromChannelID items.
+  rpc GetLaunchIDFromChannelID(QueryGetLaunchIDFromChannelIDRequest) returns (QueryGetLaunchIDFromChannelIDResponse) {
+    option (google.api.http).get = "/ignite/network/monitoringc/launch_id_from_channel_id/{channel_id}";
+  }
+  rpc ListLaunchIDFromChannelID(QueryAllLaunchIDFromChannelIDRequest) returns (QueryAllLaunchIDFromChannelIDResponse) {
+    option (google.api.http).get = "/ignite/network/monitoringc/launch_id_from_channel_id";
+  }
+
+  // Queries a list of MonitoringHistory items.
+  rpc GetMonitoringHistory(QueryGetMonitoringHistoryRequest) returns (QueryGetMonitoringHistoryResponse) {
+    option (google.api.http).get = "/ignite/network/monitoringc/monitoring_history/{launch_id}";
+  }
+
+  // Queries a list of VerifiedClientID items.
+  rpc GetVerifiedClientID(QueryGetVerifiedClientIDRequest) returns (QueryGetVerifiedClientIDResponse) {
+    option (google.api.http).get = "/ignite/network/monitoringc/verified_client_id/{launch_id}";
+  }
+
+  // Queries a list of ProviderClientID items.
+  rpc GetProviderClientID(QueryGetProviderClientIDRequest) returns (QueryGetProviderClientIDResponse) {
+    option (google.api.http).get = "/ignite/network/monitoringc/provider_client_id/{launch_id}";
+  }
+  rpc ListProviderClientID(QueryAllProviderClientIDRequest) returns (QueryAllProviderClientIDResponse) {
+    option (google.api.http).get = "/ignite/network/monitoringc/provider_client_id";
+  }
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
+
+message QueryGetLaunchIDFromChannelIDRequest {
+  string channel_id = 1;
+}
+
+message QueryGetLaunchIDFromChannelIDResponse {
+  LaunchIDFromChannelID launch_id_from_channel_id = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllLaunchIDFromChannelIDRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllLaunchIDFromChannelIDResponse {
+  repeated LaunchIDFromChannelID launch_id_from_channel_id = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetMonitoringHistoryRequest {
+  uint64 launch_id = 1;
+}
+
+message QueryGetMonitoringHistoryResponse {
+  MonitoringHistory monitoring_history = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetVerifiedClientIDRequest {
+  uint64 launch_id = 1;
+}
+
+message QueryGetVerifiedClientIDResponse {
+  VerifiedClientID verified_client_id = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetProviderClientIDRequest {
+  uint64 launch_id = 1;
+}
+
+message QueryGetProviderClientIDResponse {
+  ProviderClientID provider_client_id = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllProviderClientIDRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllProviderClientIDResponse {
+  repeated ProviderClientID provider_client_id = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}

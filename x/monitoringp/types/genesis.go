@@ -1,17 +1,14 @@
 package types
 
-import (
-	host "github.com/cosmos/ibc-go/v7/modules/core/24-host"
-	// this line is used by starport scaffolding # genesis/types/import
-)
+import host "github.com/cosmos/ibc-go/v8/modules/core/24-host"
 
-// DefaultGenesis returns the default Capability genesis state
+// DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		PortId:              PortID,
-		ConsumerClientID:    nil,
-		ConnectionChannelID: nil,
 		MonitoringInfo:      nil,
+		ConnectionChannelId: nil,
+		ConsumerClientId:    nil,
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -23,7 +20,6 @@ func (gs GenesisState) Validate() error {
 	if err := host.PortIdentifierValidator(gs.PortId); err != nil {
 		return err
 	}
-	// this line is used by starport scaffolding # genesis/types/validate
 
 	// check monitoring info validity
 	if gs.MonitoringInfo != nil {
@@ -31,6 +27,8 @@ func (gs GenesisState) Validate() error {
 			return err
 		}
 	}
+
+	// this line is used by starport scaffolding # genesis/types/validate
 
 	return gs.Params.Validate()
 }

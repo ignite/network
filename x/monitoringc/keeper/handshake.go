@@ -3,11 +3,11 @@ package keeper
 import (
 	sdkerrors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	connectiontypes "github.com/cosmos/ibc-go/v7/modules/core/03-connection/types"
-	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
-	"github.com/tendermint/spn/x/monitoringc/types"
-
+	connectiontypes "github.com/cosmos/ibc-go/v8/modules/core/03-connection/types"
+	channeltypes "github.com/cosmos/ibc-go/v8/modules/core/04-channel/types"
 	ignterrors "github.com/ignite/modules/pkg/errors"
+
+	"github.com/ignite/network/x/monitoringc/types"
 )
 
 // VerifyClientIDFromConnID verifies if the client ID associated with the provided connection ID
@@ -20,21 +20,20 @@ func (k Keeper) VerifyClientIDFromConnID(ctx sdk.Context, connID string) error {
 	}
 
 	// check if the client ID is verified
-	lidFromCid, found := k.GetLaunchIDFromVerifiedClientID(ctx, clientID)
-	if !found {
+	lidFromCid, err := k.LaunchIDFromVerifiedClientID.Get(ctx, clientID)
+	if err != nil {
 		return sdkerrors.Wrapf(types.ErrClientNotVerified, clientID)
 	}
 
 	// check if the connection with the provider for this launch ID is already established
-	pCid, found := k.GetProviderClientID(ctx, lidFromCid.LaunchID)
-	if found {
+	pCid, err := k.ProviderClientID.Get(ctx, lidFromCid.LaunchId)
+	if err == nil {
 		return sdkerrors.Wrapf(
 			types.ErrConnectionAlreadyEstablished,
 			"provider client ID for launch ID %d is: %s",
-			pCid.LaunchID, pCid.ClientID,
+			pCid.LaunchId, pCid.ClientId,
 		)
 	}
-
 	return nil
 }
 
@@ -52,23 +51,23 @@ func (k Keeper) RegisterProviderClientIDFromChannelID(ctx sdk.Context, channelID
 	}
 
 	// get the launch ID from the client ID
-	lidFromCid, found := k.GetLaunchIDFromVerifiedClientID(ctx, clientID)
-	if !found {
+	lidFromCid, err := k.LaunchIDFromVerifiedClientID.Get(ctx, clientID)
+	if err != nil {
 		// client should be verified at this phase, so a critical error is returned
-		return ignterrors.Criticalf("client ID %s should be verified during registration", clientID)
+		return ignterrors.Criticalf("client ID %s should be verified during registration %s", clientID, err)
 	}
 
 	// another connection could have been established between OnChanOpenInit and OnChanOpenAck
 	// so we check if provider client ID exists
-	pCid, found := k.GetProviderClientID(ctx, lidFromCid.LaunchID)
-	if found {
+	pCid, err := k.ProviderClientID.Get(ctx, lidFromCid.LaunchId)
+	if err == nil {
 		return sdkerrors.Wrapf(
 			types.ErrConnectionAlreadyEstablished,
 			"provider connection for launch ID %d has been established: %s",
-			pCid.LaunchID, pCid.ClientID,
+			pCid.LaunchId, pCid.ClientId,
 		)
 	}
-	launchID := lidFromCid.LaunchID
+	launchID := lidFromCid.LaunchId
 
 	// update the chain since it is not MonitoringConnected
 	if err = k.launchKeeper.EnableMonitoringConnection(ctx, launchID); err != nil {
@@ -76,18 +75,18 @@ func (k Keeper) RegisterProviderClientIDFromChannelID(ctx sdk.Context, channelID
 	}
 
 	// register the client for the provider
-	k.SetProviderClientID(ctx, types.ProviderClientID{
-		ClientID: clientID,
-		LaunchID: launchID,
+	err = k.ProviderClientID.Set(ctx, launchID, types.ProviderClientID{
+		ClientId: clientID,
+		LaunchId: launchID,
 	})
-
+	if err != nil {
+		return err
+	}
 	// associate the channel ID for the provider connection with the correct launch ID
-	k.SetLaunchIDFromChannelID(ctx, types.LaunchIDFromChannelID{
-		LaunchID:  launchID,
-		ChannelID: channelID,
+	return k.LaunchIDFromChannelID.Set(ctx, channelID, types.LaunchIDFromChannelID{
+		LaunchId:  launchID,
+		ChannelId: channelID,
 	})
-
-	return nil
 }
 
 // getClientIDFromConnID retrieves the client ID associated with a connection ID

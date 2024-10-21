@@ -12,6 +12,12 @@ release/
 
 # OS
 .DS_Store
+*.swp
+*.swo
+*.swl
+*.swm
+*.swn
+*.pyc
 
 # Localnet
 localnet/*/node?/data/*.db
@@ -32,3 +38,43 @@ cover.html
 
 # Frontend
 ignite-ui
+
+# Build
+vendor
+build
+tools/bin/*
+examples/build/*
+docs/_build
+docs/tutorial
+docs/node_modules
+docs/modules
+dist
+tools-stamp
+proto-tools-stamp
+buf-stamp
+*.dot
+*.ign
+
+# Data - ideally these don't exist
+app/data/*
+x/farming/client/lcd/keys/*
+mytestnet
+
+# Testing
+coverage.out
+profile.out
+sim_log_file
+
+# Vagrant
+.vagrant/
+*.box
+*.log
+vagrant
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Localnet
+data/

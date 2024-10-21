@@ -46,7 +46,7 @@ func NewGenesisAccount(launchID uint64, address string, coins sdk.Coins) Request
 	return RequestContent{
 		Content: &RequestContent_GenesisAccount{
 			GenesisAccount: &GenesisAccount{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Address:  address,
 				Coins:    coins,
 			},
@@ -56,16 +56,11 @@ func NewGenesisAccount(launchID uint64, address string, coins sdk.Coins) Request
 
 // Validate implements GenesisAccount validation
 func (m GenesisAccount) Validate(launchID uint64) error {
-	_, err := sdk.AccAddressFromBech32(m.Address)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidGenesisAddress, err.Error())
-	}
-
 	if !m.Coins.IsValid() || m.Coins.Empty() {
 		return sdkerrors.Wrap(ErrInvalidCoins, m.Address)
 	}
 
-	if m.LaunchID != launchID {
+	if m.LaunchId != launchID {
 		return ErrInvalidLaunchID
 	}
 
@@ -77,7 +72,7 @@ func NewVestingAccount(launchID uint64, address string, vestingOptions VestingOp
 	return RequestContent{
 		Content: &RequestContent_VestingAccount{
 			VestingAccount: &VestingAccount{
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				Address:        address,
 				VestingOptions: vestingOptions,
 			},
@@ -87,16 +82,11 @@ func NewVestingAccount(launchID uint64, address string, vestingOptions VestingOp
 
 // Validate implements VestingAccount validation
 func (m VestingAccount) Validate(launchID uint64) error {
-	_, err := sdk.AccAddressFromBech32(m.Address)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidVestingAddress, err.Error())
-	}
-
 	if err := m.VestingOptions.Validate(); err != nil {
 		return sdkerrors.Wrapf(ErrInvalidVestingOption, err.Error())
 	}
 
-	if m.LaunchID != launchID {
+	if m.LaunchId != launchID {
 		return ErrInvalidLaunchID
 	}
 
@@ -115,7 +105,7 @@ func NewGenesisValidator(
 	return RequestContent{
 		Content: &RequestContent_GenesisValidator{
 			GenesisValidator: &GenesisValidator{
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				Address:        address,
 				GenTx:          genTx,
 				ConsPubKey:     consPubKey,
@@ -128,11 +118,6 @@ func NewGenesisValidator(
 
 // Validate implements GenesisValidator validation
 func (m GenesisValidator) Validate(launchID uint64) error {
-	_, err := sdk.AccAddressFromBech32(m.Address)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidValidatorAddress, err.Error())
-	}
-
 	if len(m.GenTx) == 0 {
 		return sdkerrors.Wrap(ErrInvalidGenTx, "empty gentx")
 	}
@@ -153,7 +138,7 @@ func (m GenesisValidator) Validate(launchID uint64) error {
 		return sdkerrors.Wrap(ErrInvalidPeer, err.Error())
 	}
 
-	if m.LaunchID != launchID {
+	if m.LaunchId != launchID {
 		return ErrInvalidLaunchID
 	}
 
@@ -173,10 +158,6 @@ func NewAccountRemoval(address string) RequestContent {
 
 // Validate implements AccountRemoval validation
 func (m AccountRemoval) Validate() error {
-	_, err := sdk.AccAddressFromBech32(m.Address)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidGenesisAddress, err.Error())
-	}
 	return nil
 }
 
@@ -193,10 +174,6 @@ func NewValidatorRemoval(address string) RequestContent {
 
 // Validate implements ValidatorRemoval validation
 func (m ValidatorRemoval) Validate() error {
-	_, err := sdk.AccAddressFromBech32(m.ValAddress)
-	if err != nil {
-		return sdkerrors.Wrap(ErrInvalidValidatorAddress, err.Error())
-	}
 	return nil
 }
 
@@ -205,7 +182,7 @@ func NewParamChange(launchID uint64, module, param string, value []byte) Request
 	return RequestContent{
 		Content: &RequestContent_ParamChange{
 			ParamChange: &ParamChange{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Module:   module,
 				Param:    param,
 				Value:    value,
@@ -224,7 +201,7 @@ func (m ParamChange) Validate(launchID uint64) error {
 		return ErrInvalidParamName
 	}
 
-	if m.LaunchID != launchID {
+	if m.LaunchId != launchID {
 		return ErrInvalidLaunchID
 	}
 

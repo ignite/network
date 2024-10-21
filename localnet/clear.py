@@ -10,7 +10,7 @@ def clear_home(home):
         os.system('rm {}/node{}/config/write-file-atomic-*'.format(home, i))
         os.system('rm {}/node{}/config/genesis.json'.format(home, i))
         os.system("rm {}/node{}/config/addrbook.json".format(home, i))
-        os.system('spnd tendermint unsafe-reset-all --home {}/node{}'.format(home, i))
+        os.system('networkd tendermint unsafe-reset-all --home {}/node{}'.format(home, i))
 
 if __name__ == "__main__":
     clear_home('spn')

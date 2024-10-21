@@ -3,10 +3,10 @@ package keeper
 import (
 	sdkerrors "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	connectiontypes "github.com/cosmos/ibc-go/v7/modules/core/03-connection/types"
-	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
+	connectiontypes "github.com/cosmos/ibc-go/v8/modules/core/03-connection/types"
+	channeltypes "github.com/cosmos/ibc-go/v8/modules/core/04-channel/types"
 
-	"github.com/tendermint/spn/x/monitoringp/types"
+	"github.com/ignite/network/x/monitoringp/types"
 )
 
 // VerifyClientIDFromConnID verifies if the client ID associated with the provided connection ID
@@ -20,23 +20,22 @@ func (k Keeper) VerifyClientIDFromConnID(ctx sdk.Context, connID string) error {
 	}
 
 	// check no connection is already established
-	_, found := k.GetConnectionChannelID(ctx)
-	if found {
+	if _, err := k.ConnectionChannelID.Get(ctx); err == nil {
 		return types.ErrConsumerConnectionEstablished
 	}
 
 	// check if the consumer client ID exists
-	consumerClient, found := k.GetConsumerClientID(ctx)
-	if !found {
+	consumerClient, err := k.ConsumerClientID.Get(ctx)
+	if err != nil {
 		return types.ErrNoConsumerClient
 	}
 
-	if consumerClient.ClientID != clientID {
+	if consumerClient.ClientId != clientID {
 		return sdkerrors.Wrapf(
 			types.ErrInvalidClient,
 			"the client is not the consumer client, got %s, expected %s",
 			clientID,
-			consumerClient.ClientID,
+			consumerClient.ClientId,
 		)
 	}
 
@@ -58,10 +57,9 @@ func (k Keeper) RegisterConnectionChannelID(ctx sdk.Context, channelID string) e
 	}
 
 	// register the connection channel ID
-	k.SetConnectionChannelID(ctx, types.ConnectionChannelID{
-		ChannelID: channelID,
+	return k.ConnectionChannelID.Set(ctx, types.ConnectionChannelID{
+		ChannelId: channelID,
 	})
-	return nil
 }
 
 // getClientIDFromConnID retrieves the client ID associated with a connection ID

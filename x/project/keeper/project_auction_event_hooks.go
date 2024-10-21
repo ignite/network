@@ -1,21 +1,21 @@
 package keeper
 
 import (
+	"context"
 	"time"
 
 	sdkerrors "cosmossdk.io/errors"
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	fundraisingtypes "github.com/ignite/modules/x/fundraising/types"
 
-	fundraisingtypes "github.com/tendermint/fundraising/x/fundraising/types"
-
-	profiletypes "github.com/tendermint/spn/x/profile/types"
-	"github.com/tendermint/spn/x/project/types"
+	profiletypes "github.com/ignite/network/x/profile/types"
+	"github.com/ignite/network/x/project/types"
 )
 
 // EmitProjectAuctionCreated emits EventProjectAuctionCreated event if an auction is created for a project from a coordinator
 func (k Keeper) EmitProjectAuctionCreated(
-	ctx sdk.Context,
+	ctx context.Context,
 	auctionID uint64,
 	auctioneer string,
 	sellingCoin sdk.Coin,
@@ -27,32 +27,32 @@ func (k Keeper) EmitProjectAuctionCreated(
 	}
 
 	// verify the auctioneer is the coordinator of the project
-	project, found := k.GetProject(ctx, projectID)
-	if !found {
+	project, err := k.GetProject(ctx, projectID)
+	if err != nil {
 		return false, sdkerrors.Wrapf(types.ErrProjectNotFound,
 			"voucher %s is associated to an non-existing project %d",
 			sellingCoin.Denom,
 			projectID,
 		)
 	}
-	coord, found := k.profileKeeper.GetCoordinator(ctx, project.CoordinatorID)
-	if !found {
-		return false, sdkerrors.Wrapf(profiletypes.ErrCoordInvalid,
+	coordinator, err := k.profileKeeper.GetCoordinator(ctx, project.CoordinatorId)
+	if err != nil {
+		return false, sdkerrors.Wrapf(profiletypes.ErrCoordinatorInvalid,
 			"project %d coordinator doesn't exist %d",
 			projectID,
-			project.CoordinatorID,
+			project.CoordinatorId,
 		)
 	}
 
 	// if the coordinator if the auctioneer, we emit a ProjectAuctionCreated event
-	if coord.Address != auctioneer {
+	if coordinator.Address != auctioneer {
 		return false, nil
 	}
 
-	err = ctx.EventManager().EmitTypedEvents(
+	err = sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvents(
 		&types.EventProjectAuctionCreated{
-			ProjectID: projectID,
-			AuctionID: auctionID,
+			ProjectId: projectID,
+			AuctionId: auctionID,
 		},
 	)
 	if err != nil {
@@ -79,123 +79,129 @@ var _ fundraisingtypes.FundraisingHooks = ProjectAuctionEventHooks{}
 
 // AfterFixedPriceAuctionCreated emits a ProjectAuctionCreated event if created for a project
 func (h ProjectAuctionEventHooks) AfterFixedPriceAuctionCreated(
-	ctx sdk.Context,
+	ctx context.Context,
 	auctionID uint64,
 	auctioneer string,
-	_ sdk.Dec,
+	_ sdkmath.LegacyDec,
 	sellingCoin sdk.Coin,
 	_ string,
 	_ []fundraisingtypes.VestingSchedule,
 	_ time.Time,
 	_ time.Time,
-) {
-	// TODO: investigate error handling for hooks
-	// https://github.com/tendermint/spn/issues/869
-	_, _ = h.projectKeeper.EmitProjectAuctionCreated(ctx, auctionID, auctioneer, sellingCoin)
+) error {
+	_, err := h.projectKeeper.EmitProjectAuctionCreated(ctx, auctionID, auctioneer, sellingCoin)
+	return err
 }
 
 // AfterBatchAuctionCreated emits a ProjectAuctionCreated event if created for a project
 func (h ProjectAuctionEventHooks) AfterBatchAuctionCreated(
-	ctx sdk.Context,
+	ctx context.Context,
 	auctionID uint64,
 	auctioneer string,
-	_ sdk.Dec,
-	_ sdk.Dec,
+	_ sdkmath.LegacyDec,
+	_ sdkmath.LegacyDec,
 	sellingCoin sdk.Coin,
 	_ string,
 	_ []fundraisingtypes.VestingSchedule,
 	_ uint32,
-	_ sdk.Dec,
+	_ sdkmath.LegacyDec,
 	_ time.Time,
 	_ time.Time,
-) {
-	// TODO: investigate error handling for hooks
-	// https://github.com/tendermint/spn/issues/869
-	_, _ = h.projectKeeper.EmitProjectAuctionCreated(ctx, auctionID, auctioneer, sellingCoin)
+) error {
+	_, err := h.projectKeeper.EmitProjectAuctionCreated(ctx, auctionID, auctioneer, sellingCoin)
+	return err
 }
 
 // BeforeFixedPriceAuctionCreated implements FundraisingHooks
 func (h ProjectAuctionEventHooks) BeforeFixedPriceAuctionCreated(
-	_ sdk.Context,
+	_ context.Context,
 	_ string,
-	_ sdk.Dec,
+	_ sdkmath.LegacyDec,
 	_ sdk.Coin,
 	_ string,
 	_ []fundraisingtypes.VestingSchedule,
 	_ time.Time,
 	_ time.Time,
-) {
+) error {
+	return nil
 }
 
 // BeforeBatchAuctionCreated implements FundraisingHooks
 func (h ProjectAuctionEventHooks) BeforeBatchAuctionCreated(
-	_ sdk.Context,
+	_ context.Context,
 	_ string,
-	_ sdk.Dec,
-	_ sdk.Dec,
+	_ sdkmath.LegacyDec,
+	_ sdkmath.LegacyDec,
 	_ sdk.Coin,
 	_ string,
 	_ []fundraisingtypes.VestingSchedule,
 	_ uint32,
-	_ sdk.Dec,
+	_ sdkmath.LegacyDec,
 	_ time.Time,
 	_ time.Time,
-) {
+) error {
+	return nil
 }
 
 // BeforeAuctionCanceled implements FundraisingHooks
 func (h ProjectAuctionEventHooks) BeforeAuctionCanceled(
-	_ sdk.Context,
+	_ context.Context,
 	_ uint64,
 	_ string,
-) {
+) error {
+	return nil
 }
 
 // BeforeBidPlaced implements FundraisingHooks
 func (h ProjectAuctionEventHooks) BeforeBidPlaced(
-	_ sdk.Context,
+	_ context.Context,
 	_ uint64,
 	_ uint64,
 	_ string,
 	_ fundraisingtypes.BidType,
-	_ sdk.Dec,
+	_ sdkmath.LegacyDec,
 	_ sdk.Coin,
-) {
+) error {
+	return nil
 }
 
 // BeforeBidModified implements FundraisingHooks
 func (h ProjectAuctionEventHooks) BeforeBidModified(
-	_ sdk.Context,
+	_ context.Context,
 	_ uint64,
 	_ uint64,
 	_ string,
 	_ fundraisingtypes.BidType,
-	_ sdk.Dec,
+	_ sdkmath.LegacyDec,
 	_ sdk.Coin,
-) {
+) error {
+	return nil
 }
 
 // BeforeAllowedBiddersAdded implements FundraisingHooks
 func (h ProjectAuctionEventHooks) BeforeAllowedBiddersAdded(
-	_ sdk.Context,
+	_ context.Context,
 	_ []fundraisingtypes.AllowedBidder,
-) {
+) error {
+	return nil
 }
 
 // BeforeAllowedBidderUpdated implements FundraisingHooks
 func (h ProjectAuctionEventHooks) BeforeAllowedBidderUpdated(
-	_ sdk.Context,
+	_ context.Context,
 	_ uint64,
 	_ sdk.AccAddress,
 	_ sdkmath.Int,
-) {
+) error {
+	return nil
 }
 
 // BeforeSellingCoinsAllocated implements FundraisingHooks
 func (h ProjectAuctionEventHooks) BeforeSellingCoinsAllocated(
-	_ sdk.Context,
+	_ context.Context,
 	_ uint64,
 	_ map[string]sdkmath.Int,
 	_ map[string]sdkmath.Int,
-) {
+) error {
+	return nil
 }

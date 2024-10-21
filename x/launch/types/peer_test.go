@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/launch/types"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/launch/types"
 )
 
 func TestPeer_Validate(t *testing.T) {

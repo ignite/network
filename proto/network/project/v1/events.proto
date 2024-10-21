@@ -1,0 +1,104 @@
+syntax = "proto3";
+package network.project.v1;
+
+import "amino/amino.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "network/project/v1/vesting.proto";
+
+option go_package = "github.com/ignite/network/x/project/types";
+
+message EventProjectCreated {
+  uint64 project_id = 1;
+  string coordinator_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 coordinator_id = 3;
+}
+
+message EventProjectChainAdded {
+  uint64 project_id = 1;
+  uint64 launch_id = 2;
+}
+
+message EventProjectInfoUpdated {
+  uint64 project_id = 1;
+  string coordinator_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string project_name = 3;
+  bytes metadata = 4;
+}
+
+message EventProjectSharesUpdated {
+  uint64 project_id = 1;
+  string coordinator_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  repeated cosmos.base.v1beta1.Coin allocated_shares = 3 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "Shares"
+  ];
+}
+
+message EventProjectTotalSupplyUpdated {
+  uint64 project_id = 1;
+  string coordinator_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  repeated cosmos.base.v1beta1.Coin total_supply = 3 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+}
+
+message EventProjectMainnetInitialized {
+  uint64 project_id = 1;
+  string coordinator_address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 mainnet_id = 3;
+}
+
+message EventMainnetAccountCreated {
+  uint64 project_id = 1;
+  string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  repeated cosmos.base.v1beta1.Coin shares = 3 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "Shares"
+  ];
+}
+
+message EventMainnetAccountUpdated {
+  uint64 project_id = 1;
+  string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  repeated cosmos.base.v1beta1.Coin shares = 3 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "Shares"
+  ];
+}
+
+message EventMainnetAccountRemoved {
+  uint64 project_id = 1;
+  string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}
+
+message EventMainnetVestingAccountCreated {
+  uint64 project_id = 1;
+  string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  ShareVestingOptions vesting_options = 3 [(gogoproto.nullable) = false];
+}
+
+message EventMainnetVestingAccountUpdated {
+  uint64 project_id = 1;
+  string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  ShareVestingOptions vesting_options = 3 [(gogoproto.nullable) = false];
+}
+
+message EventProjectAuctionCreated {
+  uint64 project_id = 1;
+  uint64 auction_id = 2;
+}

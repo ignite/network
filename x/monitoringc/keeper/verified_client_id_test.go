@@ -1,36 +1,23 @@
 package keeper_test
 
 import (
-	"strconv"
 	"testing"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"cosmossdk.io/collections"
 	"github.com/stretchr/testify/require"
 
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/nullify"
-	"github.com/tendermint/spn/x/monitoringc/keeper"
-	"github.com/tendermint/spn/x/monitoringc/types"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/nullify"
+	"github.com/ignite/network/x/monitoringc/types"
 )
-
-func createNVerifiedClientID(ctx sdk.Context, keeper *keeper.Keeper, n int) []types.VerifiedClientID {
-	items := make([]types.VerifiedClientID, n)
-	for i := range items {
-		items[i].LaunchID = uint64(i)
-		items[i].ClientIDs = []string{strconv.Itoa(i)}
-		keeper.SetVerifiedClientID(ctx, items[i])
-	}
-	return items
-}
 
 func TestVerifiedClientIDGet(t *testing.T) {
 	ctx, tk, _ := testkeeper.NewTestSetup(t)
-
 	t.Run("should allow get", func(t *testing.T) {
 		items := createNVerifiedClientID(ctx, tk.MonitoringConsumerKeeper, 10)
 		for _, item := range items {
-			rst, found := tk.MonitoringConsumerKeeper.GetVerifiedClientID(ctx, item.LaunchID)
-			require.True(t, found)
+			rst, err := tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, item.LaunchId)
+			require.NoError(t, err)
 			require.Equal(t,
 				nullify.Fill(&item),
 				nullify.Fill(&rst),
@@ -43,26 +30,27 @@ func TestVerifiedClientIDClear(t *testing.T) {
 	ctx, tk, _ := testkeeper.NewTestSetup(t)
 	t.Run("should successfully clear entries", func(t *testing.T) {
 		items := createNVerifiedClientID(ctx, tk.MonitoringConsumerKeeper, 1)
-		launchID := items[0].LaunchID
-		clientID := items[0].ClientIDs[0]
+		launchID := items[0].LaunchId
+		clientID := items[0].ClientIdList[0]
 
-		tk.MonitoringConsumerKeeper.SetLaunchIDFromVerifiedClientID(ctx, types.LaunchIDFromVerifiedClientID{
-			ClientID: clientID,
-			LaunchID: launchID,
+		err := tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Set(ctx, clientID, types.LaunchIDFromVerifiedClientID{
+			ClientId: clientID,
+			LaunchId: launchID,
 		})
-		rst, found := tk.MonitoringConsumerKeeper.GetVerifiedClientID(ctx, launchID)
-		require.True(t, found)
+		require.NoError(t, err)
+		rst, err := tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, launchID)
+		require.NoError(t, err)
 		require.Equal(t,
 			nullify.Fill(&items[0]),
 			nullify.Fill(&rst),
 		)
 
-		tk.MonitoringConsumerKeeper.ClearVerifiedClientIDs(ctx, launchID)
-		_, found = tk.MonitoringConsumerKeeper.GetVerifiedClientID(ctx, launchID)
-		require.False(t, found)
-
-		_, found = tk.MonitoringConsumerKeeper.GetLaunchIDFromVerifiedClientID(ctx, clientID)
-		require.False(t, found)
+		err = tk.MonitoringConsumerKeeper.ClearVerifiedClientIdList(ctx, launchID)
+		require.NoError(t, err)
+		_, err = tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, launchID)
+		require.ErrorIs(t, err, collections.ErrNotFound)
+		_, err = tk.MonitoringConsumerKeeper.LaunchIDFromVerifiedClientID.Get(ctx, clientID)
+		require.ErrorIs(t, err, collections.ErrNotFound)
 	})
 }
 
@@ -71,9 +59,11 @@ func TestVerifiedClientIDGetAll(t *testing.T) {
 
 	t.Run("should allow get all", func(t *testing.T) {
 		items := createNVerifiedClientID(ctx, tk.MonitoringConsumerKeeper, 10)
+		allVerifiedClientID, err := tk.MonitoringConsumerKeeper.AllVerifiedClientID(ctx)
+		require.NoError(t, err)
 		require.ElementsMatch(t,
 			nullify.Fill(items),
-			nullify.Fill(tk.MonitoringConsumerKeeper.GetAllVerifiedClientID(ctx)),
+			nullify.Fill(allVerifiedClientID),
 		)
 	})
 }
@@ -85,15 +75,17 @@ func TestAddVerifiedClientID(t *testing.T) {
 			launchID         = uint64(1)
 			newClientID      = "2"
 			verifiedClientID = types.VerifiedClientID{
-				LaunchID:  launchID,
-				ClientIDs: []string{"1"},
+				LaunchId:     launchID,
+				ClientIdList: []string{"1"},
 			}
 		)
-		tk.MonitoringConsumerKeeper.SetVerifiedClientID(ctx, verifiedClientID)
-		tk.MonitoringConsumerKeeper.AddVerifiedClientID(ctx, launchID, newClientID)
-		got, found := tk.MonitoringConsumerKeeper.GetVerifiedClientID(ctx, launchID)
-		require.True(t, found)
-		verifiedClientID.ClientIDs = append(verifiedClientID.ClientIDs, newClientID)
+		err := tk.MonitoringConsumerKeeper.VerifiedClientID.Set(ctx, launchID, verifiedClientID)
+		require.NoError(t, err)
+		err = tk.MonitoringConsumerKeeper.AddVerifiedClientID(ctx, launchID, newClientID)
+		require.NoError(t, err)
+		got, err := tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, launchID)
+		require.NoError(t, err)
+		verifiedClientID.ClientIdList = append(verifiedClientID.ClientIdList, newClientID)
 		require.Equal(t, verifiedClientID, got)
 	})
 
@@ -102,25 +94,28 @@ func TestAddVerifiedClientID(t *testing.T) {
 			launchID         = uint64(2)
 			newClientID      = "2"
 			verifiedClientID = types.VerifiedClientID{
-				LaunchID:  launchID,
-				ClientIDs: []string{"1", newClientID},
+				LaunchId:     launchID,
+				ClientIdList: []string{"1", newClientID},
 			}
 		)
-		tk.MonitoringConsumerKeeper.SetVerifiedClientID(ctx, verifiedClientID)
-		tk.MonitoringConsumerKeeper.AddVerifiedClientID(ctx, launchID, newClientID)
-		got, found := tk.MonitoringConsumerKeeper.GetVerifiedClientID(ctx, launchID)
-		require.True(t, found)
+		err := tk.MonitoringConsumerKeeper.VerifiedClientID.Set(ctx, launchID, verifiedClientID)
+		require.NoError(t, err)
+		err = tk.MonitoringConsumerKeeper.AddVerifiedClientID(ctx, launchID, newClientID)
+		require.NoError(t, err)
+		got, err := tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, launchID)
+		require.NoError(t, err)
 		require.Equal(t, verifiedClientID, got)
 	})
 
 	t.Run("should update a non exiting verified client id", func(t *testing.T) {
 		verifiedClientID := types.VerifiedClientID{
-			LaunchID:  3,
-			ClientIDs: []string{"1"},
+			LaunchId:     3,
+			ClientIdList: []string{"1"},
 		}
-		tk.MonitoringConsumerKeeper.AddVerifiedClientID(ctx, verifiedClientID.LaunchID, verifiedClientID.ClientIDs[0])
-		got, found := tk.MonitoringConsumerKeeper.GetVerifiedClientID(ctx, verifiedClientID.LaunchID)
-		require.True(t, found)
+		err := tk.MonitoringConsumerKeeper.AddVerifiedClientID(ctx, verifiedClientID.LaunchId, verifiedClientID.ClientIdList[0])
+		require.NoError(t, err)
+		got, err := tk.MonitoringConsumerKeeper.VerifiedClientID.Get(ctx, verifiedClientID.LaunchId)
+		require.NoError(t, err)
 		require.Equal(t, verifiedClientID, got)
 	})
 }

@@ -8,6 +8,9 @@ import (
 	"time"
 
 	sdkmath "cosmossdk.io/math"
+	evidencetypes "cosmossdk.io/x/evidence/types"
+	"cosmossdk.io/x/feegrant"
+	upgradetypes "cosmossdk.io/x/upgrade/types"
 	"github.com/cometbft/cometbft/crypto"
 	"github.com/cometbft/cometbft/crypto/ed25519"
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -22,32 +25,28 @@ import (
 	consensusparamtypes "github.com/cosmos/cosmos-sdk/x/consensus/types"
 	crisistypes "github.com/cosmos/cosmos-sdk/x/crisis/types"
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
-	evidencetypes "github.com/cosmos/cosmos-sdk/x/evidence/types"
-	"github.com/cosmos/cosmos-sdk/x/feegrant"
-	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
-	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
-	icacontrollertypes "github.com/cosmos/ibc-go/v7/modules/apps/27-interchain-accounts/controller/types"
-	icatypes "github.com/cosmos/ibc-go/v7/modules/apps/27-interchain-accounts/types"
-	ibcfeetypes "github.com/cosmos/ibc-go/v7/modules/apps/29-fee/types"
-	ibctransfertypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
-	ibcclienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
-	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
-	ibctypes "github.com/cosmos/ibc-go/v7/modules/core/types"
-	ibctm "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
-	"github.com/stretchr/testify/require"
-	fundraising "github.com/tendermint/fundraising/x/fundraising/types"
-	launch "github.com/tendermint/spn/x/launch/types"
-	monitoringc "github.com/tendermint/spn/x/monitoringc/types"
-	monitoringp "github.com/tendermint/spn/x/monitoringp/types"
-	participation "github.com/tendermint/spn/x/participation/types"
-	profile "github.com/tendermint/spn/x/profile/types"
-	project "github.com/tendermint/spn/x/project/types"
-	reward "github.com/tendermint/spn/x/reward/types"
-
+	icacontrollertypes "github.com/cosmos/ibc-go/v8/modules/apps/27-interchain-accounts/controller/types"
+	icatypes "github.com/cosmos/ibc-go/v8/modules/apps/27-interchain-accounts/types"
+	ibcfeetypes "github.com/cosmos/ibc-go/v8/modules/apps/29-fee/types"
+	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
+	ibcclienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
+	channeltypes "github.com/cosmos/ibc-go/v8/modules/core/04-channel/types"
+	ibctypes "github.com/cosmos/ibc-go/v8/modules/core/types"
+	ibctm "github.com/cosmos/ibc-go/v8/modules/light-clients/07-tendermint"
 	claimtypes "github.com/ignite/modules/x/claim/types"
+	fundraisingtypes "github.com/ignite/modules/x/fundraising/types"
+	minttypes "github.com/ignite/modules/x/mint/types"
+	"github.com/stretchr/testify/require"
+
+	launch "github.com/ignite/network/x/launch/types"
+	monitoringc "github.com/ignite/network/x/monitoringc/types"
+	monitoringp "github.com/ignite/network/x/monitoringp/types"
+	participation "github.com/ignite/network/x/participation/types"
+	profile "github.com/ignite/network/x/profile/types"
+	project "github.com/ignite/network/x/project/types"
+	reward "github.com/ignite/network/x/reward/types"
 )
 
 func InterfaceRegistry() codectypes.InterfaceRegistry {
@@ -73,7 +72,7 @@ func InterfaceRegistry() codectypes.InterfaceRegistry {
 	vestingtypes.RegisterInterfaces(interfaceRegistry)
 	claimtypes.RegisterInterfaces(interfaceRegistry)
 	feegrant.RegisterInterfaces(interfaceRegistry)
-	govtypes.RegisterInterfaces(interfaceRegistry)
+	// govtypes.RegisterInterfaces(interfaceRegistry)
 	evidencetypes.RegisterInterfaces(interfaceRegistry)
 	crisistypes.RegisterInterfaces(interfaceRegistry)
 
@@ -85,7 +84,7 @@ func InterfaceRegistry() codectypes.InterfaceRegistry {
 	reward.RegisterInterfaces(interfaceRegistry)
 	participation.RegisterInterfaces(interfaceRegistry)
 	minttypes.RegisterInterfaces(interfaceRegistry)
-	fundraising.RegisterInterfaces(interfaceRegistry)
+	fundraisingtypes.RegisterInterfaces(interfaceRegistry)
 
 	return interfaceRegistry
 }
@@ -180,7 +179,7 @@ func OperatorAddress(r *rand.Rand) string {
 func Validator(t testing.TB, r *rand.Rand) stakingtypes.Validator {
 	seed := []byte(strconv.Itoa(r.Int()))
 	val, err := stakingtypes.NewValidator(
-		ValAddress(r),
+		ValAddress(r).String(),
 		cosmosed25519.GenPrivKeyFromSecret(seed).PubKey(),
 		stakingtypes.Description{})
 	require.NoError(t, err)
@@ -193,9 +192,9 @@ func Delegation(t testing.TB, r *rand.Rand, addr string) stakingtypes.Delegation
 	require.NoError(t, err)
 
 	return stakingtypes.NewDelegation(
-		delAcc,
-		ValAddress(r),
-		sdk.NewDec(int64(r.Intn(10000))),
+		delAcc.String(),
+		ValAddress(r).String(),
+		sdkmath.LegacyNewDec(int64(r.Intn(10000))),
 	)
 }
 

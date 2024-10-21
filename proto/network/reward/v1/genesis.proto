@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package network.reward.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "network/reward/v1/params.proto";
+import "network/reward/v1/reward_pool.proto";
+
+option go_package = "github.com/ignite/network/x/reward/types";
+
+// GenesisState defines the reward module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+  repeated RewardPool reward_pool_list = 2 [(gogoproto.nullable) = false];
+}

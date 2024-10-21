@@ -10,7 +10,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/spf13/cobra"
 
-	"github.com/tendermint/spn/x/launch/types"
+	"github.com/ignite/network/x/launch/types"
 )
 
 const (

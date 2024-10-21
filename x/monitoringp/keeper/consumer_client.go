@@ -6,18 +6,23 @@ import (
 	sdkerrors "cosmossdk.io/errors"
 	"github.com/cometbft/cometbft/light"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
-	committypes "github.com/cosmos/ibc-go/v7/modules/core/23-commitment/types"
-	ibctmtypes "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
+	clienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
+	committypes "github.com/cosmos/ibc-go/v8/modules/core/23-commitment/types"
+	ibctmtypes "github.com/cosmos/ibc-go/v8/modules/light-clients/07-tendermint"
 
-	"github.com/tendermint/spn/pkg/chainid"
-	"github.com/tendermint/spn/x/monitoringp/types"
+	"github.com/ignite/network/pkg/chainid"
+	"github.com/ignite/network/x/monitoringp/types"
 )
 
 // InitializeConsumerClient initializes the consumer IBC client and set it in the store
 func (k Keeper) InitializeConsumerClient(ctx sdk.Context) (string, error) {
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return "", err
+	}
+
 	// initialize the client state
-	clientState, err := k.initializeClientState(ctx, k.ConsumerChainID(ctx))
+	clientState, err := k.initializeClientState(ctx, params.ConsumerChainId)
 	if err != nil {
 		return "", sdkerrors.Wrap(types.ErrInvalidClientState, err.Error())
 	}
@@ -26,7 +31,7 @@ func (k Keeper) InitializeConsumerClient(ctx sdk.Context) (string, error) {
 	}
 
 	// get consensus state from param
-	tmConsensusState, err := k.ConsumerConsensusState(ctx).ToTendermintConsensusState()
+	tmConsensusState, err := params.ConsumerConsensusState.ToTendermintConsensusState()
 	if err != nil {
 		return "", sdkerrors.Wrap(types.ErrInvalidConsensusState, err.Error())
 	}
@@ -38,22 +43,26 @@ func (k Keeper) InitializeConsumerClient(ctx sdk.Context) (string, error) {
 	}
 
 	// register the IBC client
-	k.SetConsumerClientID(ctx, types.ConsumerClientID{
-		ClientID: clientID,
+	err = k.ConsumerClientID.Set(ctx, types.ConsumerClientID{
+		ClientId: clientID,
 	})
-
-	return clientID, nil
+	return clientID, err
 }
 
 // initializeClientState initializes the client state provided for the IBC client
 func (k Keeper) initializeClientState(ctx sdk.Context, chainID string) (*ibctmtypes.ClientState, error) {
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return nil, err
+	}
+
 	_, revisionNumber, err := chainid.ParseGenesisChainID(chainID)
 	if err != nil {
 		return nil, err
 	}
 
-	unbondingPeriod := k.ConsumerUnbondingPeriod(ctx)
-	revisionHeight := k.ConsumerRevisionHeight(ctx)
+	unbondingPeriod := params.ConsumerUnbondingPeriod
+	revisionHeight := params.ConsumerRevisionHeight
 
 	return ibctmtypes.NewClientState(
 		chainID,

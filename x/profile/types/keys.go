@@ -1,5 +1,7 @@
 package types
 
+import "cosmossdk.io/collections"
+
 const (
 	// ModuleName defines the module name
 	ModuleName = "profile"
@@ -7,46 +9,24 @@ const (
 	// StoreKey defines the primary module store key
 	StoreKey = ModuleName
 
-	// RouterKey is the message route for slashing
-	RouterKey = ModuleName
-
-	// QuerierRoute defines the module's query routing key
-	QuerierRoute = ModuleName
-
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_profile"
-
-	// CoordinatorKey is the prefix to retrieve all Coordinator
-	CoordinatorKey = "Coordinator/value/"
-
-	// CoordinatorCounterKey is the prefix to store coordinator counter
-	CoordinatorCounterKey = "Coordinator/count/"
-
-	// CoordinatorByAddressKeyPrefix is the prefix to retrieve all CoordinatorByAddress
-	CoordinatorByAddressKeyPrefix = "CoordinatorByAddress/value/"
-
-	// ValidatorKeyPrefix is the prefix to retrieve all Validator
-	ValidatorKeyPrefix = "Validator/value/"
-
-	// ValidatorByOperatorAddressKeyPrefix is the prefix to retrieve all ValidatorByOperatorAddress
-	ValidatorByOperatorAddressKeyPrefix = "ValidatorByOperatorAddress/value/"
 )
 
-func KeyPrefix(p string) []byte {
-	return []byte(p)
-}
+var (
+	// ParamsKey is the prefix to retrieve all Params
+	ParamsKey = collections.NewPrefix("p_profile")
 
-// CoordinatorByAddressKey returns the store key to retrieve a CoordinatorByAddress from the index fields
-func CoordinatorByAddressKey(address string) []byte {
-	return []byte(address + "/")
-}
+	// CoordinatorKey is the prefix to retrieve all Coordinator
+	CoordinatorKey = collections.NewPrefix("coordinator/value/")
+	// CoordinatorCountKey is the prefix to retrieve all CoordinatorCount
+	CoordinatorCountKey = collections.NewPrefix("coordinator/count/")
+	// CoordinatorByAddressKey is the prefix to retrieve all CoordinatorByAddress
+	CoordinatorByAddressKey = collections.NewPrefix("coordinatorByAddress/value/")
 
-// ValidatorKey returns the store key to retrieve a Validator from the index fields
-func ValidatorKey(address string) []byte {
-	return []byte(address + "/")
-}
+	// ValidatorKey is the prefix to retrieve all Validator
+	ValidatorKey = collections.NewPrefix("Validator/value/")
 
-// ValidatorByOperatorAddressKey returns the store key to retrieve a ValidatorByOperatorAddress from the index fields
-func ValidatorByOperatorAddressKey(operatorAddress string) []byte {
-	return []byte(operatorAddress + "/")
-}
+	// ValidatorByOperatorAddressKey is the prefix to retrieve all ValidatorByOperatorAddress
+	ValidatorByOperatorAddressKey = collections.NewPrefix("ValidatorByOperatorAddress/value/")
+)

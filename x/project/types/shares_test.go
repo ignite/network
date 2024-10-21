@@ -8,10 +8,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	tc "github.com/tendermint/spn/testutil/constructor"
-	"github.com/tendermint/spn/testutil/sample"
-	project "github.com/tendermint/spn/x/project/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	"github.com/ignite/network/testutil/sample"
+	project "github.com/ignite/network/x/project/types"
 )
 
 var (
@@ -218,24 +218,24 @@ func TestIsEqualShares(t *testing.T) {
 		{
 			name: "should be equal shares",
 			args: args{
-				share1: tc.Shares(t, fmt.Sprintf("%dfoo,101bar", spntypes.TotalShareNumber)),
-				share2: tc.Shares(t, fmt.Sprintf("%dfoo,101bar", spntypes.TotalShareNumber)),
+				share1: tc.Shares(t, fmt.Sprintf("%dfoo,101bar", networktypes.TotalShareNumber)),
+				share2: tc.Shares(t, fmt.Sprintf("%dfoo,101bar", networktypes.TotalShareNumber)),
 			},
 			want: true,
 		},
 		{
 			name: "should be not equal values",
 			args: args{
-				share1: tc.Shares(t, fmt.Sprintf("%dfoo,10bar", spntypes.TotalShareNumber)),
-				share2: tc.Shares(t, fmt.Sprintf("%dfoo,101bar", spntypes.TotalShareNumber)),
+				share1: tc.Shares(t, fmt.Sprintf("%dfoo,10bar", networktypes.TotalShareNumber)),
+				share2: tc.Shares(t, fmt.Sprintf("%dfoo,101bar", networktypes.TotalShareNumber)),
 			},
 			want: false,
 		},
 		{
 			name: "should be false with invalid coin number between sets",
 			args: args{
-				share1: tc.Shares(t, fmt.Sprintf("%dfoo,10bar", spntypes.TotalShareNumber)),
-				share2: tc.Shares(t, fmt.Sprintf("%dfoo", spntypes.TotalShareNumber)),
+				share1: tc.Shares(t, fmt.Sprintf("%dfoo,10bar", networktypes.TotalShareNumber)),
+				share2: tc.Shares(t, fmt.Sprintf("%dfoo", networktypes.TotalShareNumber)),
 			},
 			want: false,
 		},
@@ -498,7 +498,7 @@ func TestShares_CoinsFromTotalSupply(t *testing.T) {
 				require.Error(t, err)
 			} else {
 				require.NoError(t, err)
-				require.True(t, coins.IsEqual(tt.expected),
+				require.True(t, coins.Equal(tt.expected),
 					"%s should be %s",
 					coins.String(),
 					tt.expected.String(),

@@ -3,24 +3,23 @@
 
 # NOTE: Any path below can be absolute (e.g. "/var/myawesomeapp/data") or
 # relative to the home directory (e.g. "data"). The home directory is
-# "$HOME/.tendermint" by default, but could be changed via $TMHOME env variable
+# "$HOME/.cometbft" by default, but could be changed via $CMTHOME env variable
 # or --home cmd flag.
+
+# The version of the CometBFT binary that created or
+# last modified the config file. Do not modify this.
+version = "0.38.12"
 
 #######################################################################
 ###                   Main Base Config Options                      ###
 #######################################################################
 
 # TCP or UNIX socket address of the ABCI application,
-# or the name of an ABCI application compiled in with the Tendermint binary
+# or the name of an ABCI application compiled in with the CometBFT binary
 proxy_app = "tcp://127.0.0.1:26656"
 
 # A custom human readable name for this node
 moniker = "steve"
-
-# If this node is many blocks behind the tip of the chain, FastSync
-# allows them to catchup quickly by downloading blocks in parallel
-# and verifying their commits
-fast_sync = true
 
 # Database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb
 # * goleveldb (github.com/syndtr/goleveldb - most popular implementation)
@@ -63,7 +62,7 @@ priv_validator_key_file = "config/priv_validator_key.json"
 # Path to the JSON file containing the last sign state of a validator
 priv_validator_state_file = "data/priv_validator_state.json"
 
-# TCP or UNIX socket address for Tendermint to listen on for
+# TCP or UNIX socket address for CometBFT to listen on for
 # connections from an external PrivValidator process
 priv_validator_laddr = ""
 
@@ -88,7 +87,7 @@ filter_peers = false
 [rpc]
 
 # TCP or UNIX socket address for the RPC server to listen on
-laddr = ""
+laddr = "tcp://0.0.0.0:26667"
 
 # A list of origins a cross-domain request can be executed from
 # Default value '[]' disables cors support
@@ -136,11 +135,43 @@ max_subscription_clients = 100
 # the estimated # maximum number of broadcast_tx_commit calls per block.
 max_subscriptions_per_client = 5
 
+# Experimental parameter to specify the maximum number of events a node will
+# buffer, per subscription, before returning an error and closing the
+# subscription. Must be set to at least 100, but higher values will accommodate
+# higher event throughput rates (and will use more memory).
+experimental_subscription_buffer_size = 200
+
+# Experimental parameter to specify the maximum number of RPC responses that
+# can be buffered per WebSocket client. If clients cannot read from the
+# WebSocket endpoint fast enough, they will be disconnected, so increasing this
+# parameter may reduce the chances of them being disconnected (but will cause
+# the node to use more memory).
+#
+# Must be at least the same as "experimental_subscription_buffer_size",
+# otherwise connections could be dropped unnecessarily. This value should
+# ideally be somewhat higher than "experimental_subscription_buffer_size" to
+# accommodate non-subscription-related RPC responses.
+experimental_websocket_write_buffer_size = 200
+
+# If a WebSocket client cannot read fast enough, at present we may
+# silently drop events instead of generating an error or disconnecting the
+# client.
+#
+# Enabling this experimental parameter will cause the WebSocket connection to
+# be closed instead if it cannot read fast enough, allowing for greater
+# predictability in subscription behavior.
+experimental_close_on_slow_client = false
+
 # How long to wait for a tx to be committed during /broadcast_tx_commit.
 # WARNING: Using a value larger than 10s will result in increasing the
 # global HTTP write timeout, which applies to all connections and endpoints.
 # See https://github.com/tendermint/tendermint/issues/3435
 timeout_broadcast_tx_commit = "10s"
+
+# Maximum number of requests that can be sent in a batch
+# If the value is set to '0' (zero-value), then no maximum batch size will be
+# enforced for a JSON-RPC batch request.
+max_request_batch_size = 10
 
 # Maximum size of request body, in bytes
 max_body_bytes = 1000000
@@ -149,17 +180,17 @@ max_body_bytes = 1000000
 max_header_bytes = 1048576
 
 # The path to a file containing certificate that is used to create the HTTPS server.
-# Might be either absolute path or path related to Tendermint's config directory.
+# Might be either absolute path or path related to CometBFT's config directory.
 # If the certificate is signed by a certificate authority,
 # the certFile should be the concatenation of the server's certificate, any intermediates,
 # and the CA's certificate.
-# NOTE: both tls_cert_file and tls_key_file must be present for Tendermint to create HTTPS server.
+# NOTE: both tls_cert_file and tls_key_file must be present for CometBFT to create HTTPS server.
 # Otherwise, HTTP server is run.
 tls_cert_file = ""
 
 # The path to a file containing matching private key that is used to create the HTTPS server.
-# Might be either absolute path or path related to Tendermint's config directory.
-# NOTE: both tls-cert-file and tls-key-file must be present for Tendermint to create HTTPS server.
+# Might be either absolute path or path related to CometBFT's config directory.
+# NOTE: both tls-cert-file and tls-key-file must be present for CometBFT to create HTTPS server.
 # Otherwise, HTTP server is run.
 tls_key_file = ""
 
@@ -174,11 +205,9 @@ pprof_laddr = ""
 # Address to listen for incoming connections
 laddr = "tcp://0.0.0.0:26655"
 
-# Address to advertise to peers for them to dial
-# If empty, will use the same port as the laddr,
-# and will introspect on the listener or use UPnP
-# to figure out the address. ip and port are required
-# example: 159.89.10.97:26656
+# Address to advertise to peers for them to dial. If empty, will use the same
+# port as the laddr, and will introspect on the listener to figure out the
+# address. IP and port are required. Example: 159.89.10.97:26656
 external_address = ""
 
 # Comma separated list of seed nodes to connect to
@@ -186,9 +215,6 @@ seeds = ""
 
 # Comma separated list of nodes to keep persistent connections to
 persistent_peers = "2c52641074069b030860e8f21b487779dc10e858@localhost:26656,eb5adfbcebb2de70be353261e23e74c788f08361@localhost:26655,334374377e680538a1714ac65a0de70720c7eba6@localhost:26654"
-
-# UPNP port forwarding
-upnp = false
 
 # Path to address book
 addr_book_file = "config/addrbook.json"
@@ -245,8 +271,45 @@ dial_timeout = "3s"
 #######################################################
 [mempool]
 
+# The type of mempool for this node to use.
+#
+#  Possible types:
+#  - "flood" : concurrent linked list mempool with flooding gossip protocol
+#  (default)
+#  - "nop"   : nop-mempool (short for no operation; the ABCI app is responsible
+#  for storing, disseminating and proposing txs). "create_empty_blocks=false" is
+#  not supported.
+type = "flood"
+
+# Recheck (default: true) defines whether CometBFT should recheck the
+# validity for all remaining transaction in the mempool after a block.
+# Since a block affects the application state, some transactions in the
+# mempool may become invalid. If this does not apply to your application,
+# you can disable rechecking.
 recheck = true
+
+# recheck_timeout is the time the application has during the rechecking process
+# to return CheckTx responses, once all requests have been sent. Responses that
+# arrive after the timeout expires are discarded. It only applies to
+# non-local ABCI clients and when recheck is enabled.
+#
+# The ideal value will strongly depend on the application. It could roughly be estimated as the
+# average size of the mempool multiplied by the average time it takes the application to validate one
+# transaction. We consider that the ABCI application runs in the same location as the CometBFT binary
+# so that the recheck duration is not affected by network delays when making requests and receiving responses.
+recheck_timeout = "1s"
+
+# Broadcast (default: true) defines whether the mempool should relay
+# transactions to other peers. Setting this to false will stop the mempool
+# from relaying transactions to other peers until they are included in a
+# block. In other words, if Broadcast is disabled, only the peer you send
+# the tx to will see it until it is included in a block.
 broadcast = true
+
+# WalPath (default: "") configures the location of the Write Ahead Log
+# (WAL) for the mempool. The WAL is disabled by default. To enable, set
+# WalPath to where you want the WAL to be written (e.g.
+# "data/mempool.wal").
 wal_dir = ""
 
 # Maximum number of transactions in the mempool
@@ -273,6 +336,21 @@ max_tx_bytes = 1048576
 # Including space needed by encoding (one varint per transaction).
 # XXX: Unused due to https://github.com/tendermint/tendermint/issues/5796
 max_batch_bytes = 0
+
+# Experimental parameters to limit gossiping txs to up to the specified number of peers.
+# We use two independent upper values for persistent and non-persistent peers.
+# Unconditional peers are not affected by this feature.
+# If we are connected to more than the specified number of persistent peers, only send txs to
+# ExperimentalMaxGossipConnectionsToPersistentPeers of them. If one of those
+# persistent peers disconnects, activate another persistent peer.
+# Similarly for non-persistent peers, with an upper limit of
+# ExperimentalMaxGossipConnectionsToNonPersistentPeers.
+# If set to 0, the feature is disabled for the corresponding group of peers, that is, the
+# number of active connections to that group of peers is not bounded.
+# For non-persistent peers, if enabled, a value of 10 is recommended based on experimental
+# performance results using the default P2P configuration.
+experimental_max_gossip_connections_to_persistent_peers = 0
+experimental_max_gossip_connections_to_non_persistent_peers = 0
 
 #######################################################
 ###         State Sync Configuration Options        ###
@@ -311,14 +389,16 @@ chunk_request_timeout = "10s"
 chunk_fetchers = "4"
 
 #######################################################
-###       Fast Sync Configuration Connections       ###
+###       Block Sync Configuration Options          ###
 #######################################################
-[fastsync]
+[blocksync]
 
-# Fast Sync version to use:
-#   1) "v0" (default) - the legacy fast sync implementation
-#   2) "v1" - refactor of v0 version for better testability
-#   2) "v2" - complete redesign of v0, optimized for testability & readability
+# Block Sync version to use:
+#
+# In v0.37, v1 and v2 of the block sync protocols were deprecated.
+# Please use v0 instead.
+#
+#   1) "v0" - the default block sync implementation
 version = "v0"
 
 #######################################################
@@ -363,6 +443,17 @@ peer_gossip_sleep_duration = "100ms"
 peer_query_maj23_sleep_duration = "2s"
 
 #######################################################
+###         Storage Configuration Options           ###
+#######################################################
+[storage]
+
+# Set to true to discard ABCI responses from the state store, which can save a
+# considerable amount of disk space. Set to false to ensure ABCI responses are
+# persisted. ABCI responses are required for /block_results RPC queries, and to
+# reindex events in the command-line tool.
+discard_abci_responses = false
+
+#######################################################
 ###   Transaction Indexer Configuration Options     ###
 #######################################################
 [tx_index]
@@ -376,7 +467,13 @@ peer_query_maj23_sleep_duration = "2s"
 #   1) "null"
 #   2) "kv" (default) - the simplest possible indexer, backed by key-value storage (defaults to levelDB; see DBBackend).
 # 		- When "kv" is chosen "tx.height" and "tx.hash" will always be indexed.
+#   3) "psql" - the indexer services backed by PostgreSQL.
+# When "kv" or "psql" is chosen "tx.height" and "tx.hash" will always be indexed.
 indexer = "kv"
+
+# The PostgreSQL connection configuration, the connection format:
+#   postgresql://<user>:<password>@<host>:<port>/<db>?<opts>
+psql-conn = ""
 
 #######################################################
 ###       Instrumentation Configuration Options     ###
@@ -398,4 +495,4 @@ prometheus_listen_addr = ":26660"
 max_open_connections = 3
 
 # Instrumentation namespace
-namespace = "tendermint"
+namespace = "cometbft"

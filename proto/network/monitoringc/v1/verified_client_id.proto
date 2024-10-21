@@ -1,0 +1,9 @@
+syntax = "proto3";
+package network.monitoringc.v1;
+
+option go_package = "github.com/ignite/network/x/monitoringc/types";
+
+message VerifiedClientID {
+  uint64 launch_id = 1;
+  repeated string client_id_list = 2;
+}

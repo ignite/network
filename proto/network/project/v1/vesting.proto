@@ -1,0 +1,40 @@
+syntax = "proto3";
+package network.project.v1;
+
+import "cosmos/base/v1beta1/coin.proto";
+import "gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+import "amino/amino.proto";
+import "cosmos_proto/cosmos.proto";
+
+option go_package = "github.com/ignite/network/x/project/types";
+
+message ShareVestingOptions {
+  oneof options {
+    ShareDelayedVesting delayed_vesting = 1;
+  }
+}
+
+// ShareDelayedVesting represents options for share delayed vesting
+// Delayed vesting is the type of vesting where all vesting coins are vested
+// once end time is reached
+message ShareDelayedVesting {
+  repeated cosmos.base.v1beta1.Coin total_shares = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "Shares"
+  ];
+  repeated cosmos.base.v1beta1.Coin vesting = 2 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "Shares"
+  ];
+  google.protobuf.Timestamp end_time = 3 [
+    (gogoproto.nullable) = false,
+    (gogoproto.stdtime) = true
+  ];
+}

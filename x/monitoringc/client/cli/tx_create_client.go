@@ -7,8 +7,8 @@ import (
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/x/monitoringc/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	"github.com/ignite/network/x/monitoringc/types"
 )
 
 const (
@@ -37,12 +37,12 @@ func CmdCreateClient() *cobra.Command {
 				return err
 			}
 
-			cs, err := spntypes.ParseConsensusStateFromFile(args[1])
+			cs, err := networktypes.ParseConsensusStateFromFile(args[1])
 			if err != nil {
 				return err
 			}
 
-			vs, err := spntypes.ParseValidatorSetFromFile(args[2])
+			vs, err := networktypes.ParseValidatorSetFromFile(args[2])
 			if err != nil {
 				return err
 			}
@@ -62,8 +62,8 @@ func CmdCreateClient() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().Int64(flagUnbondingPeriod, spntypes.DefaultUnbondingPeriod, "Custom unbonding period of the provider chain")
-	cmd.Flags().Uint64(flagRevisionHeight, spntypes.DefaultRevisionHeight, "Custom revision height for the IBC client of the provider chain")
+	cmd.Flags().Int64(flagUnbondingPeriod, networktypes.DefaultUnbondingPeriod, "Custom unbonding period of the provider chain")
+	cmd.Flags().Uint64(flagRevisionHeight, networktypes.DefaultRevisionHeight, "Custom revision height for the IBC client of the provider chain")
 	flags.AddTxFlagsToCmd(cmd)
 
 	return cmd

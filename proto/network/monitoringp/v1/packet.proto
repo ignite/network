@@ -1,0 +1,12 @@
+syntax = "proto3";
+package network.monitoringp.v1;
+
+option go_package = "github.com/ignite/network/x/monitoringp/types";
+
+message MonitoringpPacketData {
+  oneof packet {
+    NoData noData = 1;
+  }
+}
+
+message NoData {}

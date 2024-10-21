@@ -1,4 +1,4 @@
-// Package types defines types to handle IBC handshakes in SPN modules
+// Package types defines types to handle IBC handshakes in Network modules
 package types
 
 import (
@@ -7,12 +7,11 @@ import (
 	"os"
 	"strconv"
 
-	"gopkg.in/yaml.v2"
-
 	"github.com/cometbft/cometbft/crypto/ed25519"
 	tmtypes "github.com/cometbft/cometbft/types"
-	ibctmtypes "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
+	ibctmtypes "github.com/cosmos/ibc-go/v8/modules/light-clients/07-tendermint"
 	"github.com/pkg/errors"
+	"gopkg.in/yaml.v2"
 )
 
 const TypeEd25519 = "tendermint/PubKeyEd25519"
@@ -24,8 +23,8 @@ type validatorSetFile struct {
 		ProposerPriority string `yaml:"proposer_priority"`
 		VotingPower      string `yaml:"voting_power"`
 		PubKey           struct {
-			Type  string `yaml:"type"`
-			Value string `yaml:"value"`
+			Type string `yaml:"@type"`
+			Key  string `yaml:"key"`
 		} `yaml:"pub_key"`
 	} `yaml:"validators"`
 }
@@ -54,7 +53,7 @@ func ParseValidatorSetFromFile(filePath string) (vs ValidatorSet, err error) {
 		if err != nil {
 			return vs, errors.Wrapf(err, "invalid validator %d voting power", i)
 		}
-		vs.Validators = append(vs.Validators, NewValidator(v.PubKey.Value, proposerPriority, votingPower))
+		vs.Validators = append(vs.Validators, NewValidator(v.PubKey.Key, proposerPriority, votingPower))
 	}
 
 	return

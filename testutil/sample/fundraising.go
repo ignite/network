@@ -4,10 +4,10 @@ import (
 	"math/rand"
 	"time"
 
+	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-
-	fundraisingtypes "github.com/tendermint/fundraising/x/fundraising/types"
+	fundraisingtypes "github.com/ignite/modules/x/fundraising/types"
 )
 
 // MsgCreateFixedAuction create a sample MsgCreateFixedAuction message
@@ -22,7 +22,7 @@ func MsgCreateFixedAuction(
 
 	return &fundraisingtypes.MsgCreateFixedPriceAuction{
 		Auctioneer:       auctioneer,
-		StartPrice:       sdk.NewDec(sellingPrice),
+		StartPrice:       sdkmath.LegacyNewDec(sellingPrice),
 		SellingCoin:      sellingCoin,
 		PayingCoinDenom:  stakingtypes.DefaultParams().BondDenom,
 		VestingSchedules: []fundraisingtypes.VestingSchedule{},

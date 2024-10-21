@@ -9,9 +9,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	tc "github.com/tendermint/spn/testutil/constructor"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/launch/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/launch/types"
 )
 
 func TestRequestContent_Validate(t *testing.T) {
@@ -116,9 +116,9 @@ func TestNewGenesisAccount(t *testing.T) {
 
 		genesisAccount := requestContent.GetGenesisAccount()
 		require.NotNil(t, genesisAccount)
-		require.EqualValues(t, launchID, genesisAccount.LaunchID)
+		require.EqualValues(t, launchID, genesisAccount.LaunchId)
 		require.EqualValues(t, address, genesisAccount.Address)
-		require.True(t, coins.IsEqual(genesisAccount.Coins))
+		require.True(t, coins.Equal(genesisAccount.Coins))
 
 		require.Nil(t, requestContent.GetVestingAccount())
 		require.Nil(t, requestContent.GetValidatorRemoval())
@@ -137,7 +137,7 @@ func TestNewVestingAccount(t *testing.T) {
 
 		vestingAccount := requestContent.GetVestingAccount()
 		require.NotNil(t, vestingAccount)
-		require.EqualValues(t, launchID, vestingAccount.LaunchID)
+		require.EqualValues(t, launchID, vestingAccount.LaunchId)
 		require.EqualValues(t, address, vestingAccount.Address)
 		require.Equal(t, vestingOptions, vestingAccount.VestingOptions)
 
@@ -168,11 +168,11 @@ func TestNewGenesisValidator(t *testing.T) {
 
 		genesisValidator := requestContent.GetGenesisValidator()
 		require.NotNil(t, genesisValidator)
-		require.EqualValues(t, launchID, genesisValidator.LaunchID)
+		require.EqualValues(t, launchID, genesisValidator.LaunchId)
 		require.EqualValues(t, address, genesisValidator.Address)
 		require.EqualValues(t, gentTx, genesisValidator.GenTx)
 		require.EqualValues(t, consPubKey, genesisValidator.ConsPubKey)
-		require.True(t, selfDelegation.IsEqual(genesisValidator.SelfDelegation))
+		require.True(t, selfDelegation.Equal(genesisValidator.SelfDelegation))
 		require.EqualValues(t, peer, genesisValidator.Peer)
 
 		require.Nil(t, requestContent.GetGenesisAccount())
@@ -221,13 +221,6 @@ func TestAccountRemoval_Validate(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "should prevent validate account removal with invalid address",
-			content: types.AccountRemoval{
-				Address: "invalid_address",
-			},
-			wantErr: true,
-		},
-		{
 			name: "should validate valid account removal",
 			content: types.AccountRemoval{
 				Address: sample.Address(r),
@@ -258,20 +251,10 @@ func TestGenesisAccount_Validate(t *testing.T) {
 		wantErr  bool
 	}{
 		{
-			name: "should prevent validate genesis account with invalid address",
-			content: types.GenesisAccount{
-				Address:  "invalid_address",
-				LaunchID: launchID,
-				Coins:    sample.Coins(r),
-			},
-			launchID: launchID,
-			wantErr:  true,
-		},
-		{
 			name: "should prevent validate genesis account without coins",
 			content: types.GenesisAccount{
 				Address:  addr,
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Coins:    sdk.NewCoins(),
 			},
 			launchID: launchID,
@@ -281,7 +264,7 @@ func TestGenesisAccount_Validate(t *testing.T) {
 			name: "should prevent validate genesis account with invalid coins",
 			content: types.GenesisAccount{
 				Address:  addr,
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Coins:    sdk.Coins{sdk.Coin{Denom: "", Amount: sdkmath.NewInt(10)}},
 			},
 			launchID: launchID,
@@ -291,7 +274,7 @@ func TestGenesisAccount_Validate(t *testing.T) {
 			name: "should prevent validate genesis account with invalid launch ID",
 			content: types.GenesisAccount{
 				Address:  sample.Address(r),
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Coins:    sample.Coins(r),
 			},
 			launchID: launchID + 1,
@@ -301,7 +284,7 @@ func TestGenesisAccount_Validate(t *testing.T) {
 			name: "should validate valid genesis account",
 			content: types.GenesisAccount{
 				Address:  sample.Address(r),
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Coins:    sample.Coins(r),
 			},
 			launchID: launchID,
@@ -333,7 +316,7 @@ func TestGenesisValidator_Validate(t *testing.T) {
 		{
 			name: "should validate valid genesis validator",
 			content: types.GenesisValidator{
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				Address:        addr,
 				GenTx:          sample.Bytes(r, 500),
 				ConsPubKey:     sample.Bytes(r, 30),
@@ -345,7 +328,7 @@ func TestGenesisValidator_Validate(t *testing.T) {
 		{
 			name: "should prevent validate genesis validator with invalid launch ID",
 			content: types.GenesisValidator{
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				Address:        addr,
 				GenTx:          sample.Bytes(r, 500),
 				ConsPubKey:     sample.Bytes(r, 30),
@@ -356,22 +339,9 @@ func TestGenesisValidator_Validate(t *testing.T) {
 			wantErr:  true,
 		},
 		{
-			name: "should prevent validate genesis validator with invalid address",
-			content: types.GenesisValidator{
-				LaunchID:       launchID,
-				Address:        "invalid_address",
-				GenTx:          sample.Bytes(r, 500),
-				ConsPubKey:     sample.Bytes(r, 30),
-				SelfDelegation: sample.Coin(r),
-				Peer:           sample.GenesisValidatorPeer(r),
-			},
-			launchID: launchID,
-			wantErr:  true,
-		},
-		{
 			name: "should prevent validate genesis validator with empty consensus public key",
 			content: types.GenesisValidator{
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				Address:        addr,
 				GenTx:          sample.Bytes(r, 500),
 				ConsPubKey:     nil,
@@ -384,7 +354,7 @@ func TestGenesisValidator_Validate(t *testing.T) {
 		{
 			name: "should prevent validate genesis validator with empty gentx",
 			content: types.GenesisValidator{
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				Address:        addr,
 				GenTx:          nil,
 				ConsPubKey:     sample.Bytes(r, 30),
@@ -397,7 +367,7 @@ func TestGenesisValidator_Validate(t *testing.T) {
 		{
 			name: "should prevent validate genesis validator with empty peer",
 			content: types.GenesisValidator{
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				Address:        addr,
 				GenTx:          sample.Bytes(r, 500),
 				ConsPubKey:     sample.Bytes(r, 30),
@@ -410,7 +380,7 @@ func TestGenesisValidator_Validate(t *testing.T) {
 		{
 			name: "should prevent validate genesis validator with invalid self delegation",
 			content: types.GenesisValidator{
-				LaunchID:   launchID,
+				LaunchId:   launchID,
 				Address:    addr,
 				GenTx:      sample.Bytes(r, 500),
 				ConsPubKey: sample.Bytes(r, 30),
@@ -426,7 +396,7 @@ func TestGenesisValidator_Validate(t *testing.T) {
 		{
 			name: "should prevent validate genesis validator with zero self delegation",
 			content: types.GenesisValidator{
-				LaunchID:   launchID,
+				LaunchId:   launchID,
 				Address:    addr,
 				GenTx:      sample.Bytes(r, 500),
 				ConsPubKey: sample.Bytes(r, 30),
@@ -458,13 +428,6 @@ func TestValidatorRemoval_Validate(t *testing.T) {
 		content types.ValidatorRemoval
 		wantErr bool
 	}{
-		{
-			name: "should prevent validate validator removal with invalid validator address",
-			content: types.ValidatorRemoval{
-				ValAddress: "invalid_address",
-			},
-			wantErr: true,
-		},
 		{
 			name: "should validate valid validator removal",
 			content: types.ValidatorRemoval{
@@ -500,20 +463,10 @@ func TestVestingAccount_Validate(t *testing.T) {
 		wantErr  bool
 	}{
 		{
-			name: "should prevent validate vesting account with invalid address",
-			content: types.VestingAccount{
-				LaunchID:       launchID,
-				Address:        "invalid_address",
-				VestingOptions: option,
-			},
-			launchID: launchID,
-			wantErr:  true,
-		},
-		{
 			name: "should prevent validate vesting account with invalid vesting option",
 			content: types.VestingAccount{
 				Address:  sample.Address(r),
-				LaunchID: launchID,
+				LaunchId: launchID,
 				VestingOptions: *types.NewDelayedVesting(
 					sample.Coins(r),
 					sample.Coins(r),
@@ -527,7 +480,7 @@ func TestVestingAccount_Validate(t *testing.T) {
 			name: "should prevent validate genesis validator with invalid launch ID",
 			content: types.VestingAccount{
 				Address:        sample.Address(r),
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				VestingOptions: option,
 			},
 			launchID: launchID + 1,
@@ -537,7 +490,7 @@ func TestVestingAccount_Validate(t *testing.T) {
 			name: "should validate valid vesting account",
 			content: types.VestingAccount{
 				Address:        sample.Address(r),
-				LaunchID:       launchID,
+				LaunchId:       launchID,
 				VestingOptions: option,
 			},
 			launchID: launchID,
@@ -567,7 +520,7 @@ func TestParamChange_Validate(t *testing.T) {
 		{
 			name: "should prevent validate change param with empty module string",
 			content: types.ParamChange{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Module:   "",
 				Param:    sample.AlphaString(r, 10),
 				Value:    sample.Bytes(r, 10),
@@ -578,7 +531,7 @@ func TestParamChange_Validate(t *testing.T) {
 		{
 			name: "should prevent validate change param with empty param string",
 			content: types.ParamChange{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Module:   sample.AlphaString(r, 10),
 				Param:    "",
 				Value:    sample.Bytes(r, 10),
@@ -589,7 +542,7 @@ func TestParamChange_Validate(t *testing.T) {
 		{
 			name: "should prevent validate change param with non alpha module string",
 			content: types.ParamChange{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Module:   sample.NonAlphaString(r, 10),
 				Param:    sample.AlphaString(r, 10),
 				Value:    sample.Bytes(r, 10),
@@ -600,7 +553,7 @@ func TestParamChange_Validate(t *testing.T) {
 		{
 			name: "should prevent validate change param with non alpha param string",
 			content: types.ParamChange{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Module:   sample.AlphaString(r, 10),
 				Param:    sample.NonAlphaString(r, 10),
 				Value:    sample.Bytes(r, 10),
@@ -611,7 +564,7 @@ func TestParamChange_Validate(t *testing.T) {
 		{
 			name: "should prevent validate change param with invalid launchID",
 			content: types.ParamChange{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Module:   sample.AlphaString(r, 10),
 				Param:    sample.AlphaString(r, 10),
 				Value:    sample.Bytes(r, 10),
@@ -622,7 +575,7 @@ func TestParamChange_Validate(t *testing.T) {
 		{
 			name: "should validate valid change param",
 			content: types.ParamChange{
-				LaunchID: launchID,
+				LaunchId: launchID,
 				Module:   sample.AlphaString(r, 10),
 				Param:    sample.AlphaString(r, 10),
 				Value:    sample.Bytes(r, 10),

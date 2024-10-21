@@ -6,27 +6,27 @@
   <a href="https://github.com/cosmos/cosmos-sdk/blob/main/LICENSE">
     <img alt="License: Apache-2.0" src="https://img.shields.io/github/license/cosmos/cosmos-sdk.svg" />
   </a>
-  <a href="https://pkg.go.dev/github.com/tendermint/spn?tab=doc">
-    <img alt="GoDoc" src="https://pkg.go.dev/badge/github.com/tendermint/spn.svg" />
+  <a href="https://pkg.go.dev/github.com/ignite/network?tab=doc">
+    <img alt="GoDoc" src="https://pkg.go.dev/badge/github.com/ignite/network.svg" />
   </a>
-  <a href="https://goreportcard.com/report/github.com/tendermint/spn">
-    <img alt="Go report card" src="https://goreportcard.com/badge/github.com/tendermint/spn" />
+  <a href="https://goreportcard.com/report/github.com/ignite/network">
+    <img alt="Go report card" src="https://goreportcard.com/badge/github.com/ignite/network" />
   </a>
 <!--
-  <a href="https://codecov.io/gh/tendermint/spn">
-    <img alt="Code Coverage" src="https://codecov.io/gh/tendermint/spn/branch/develop/graph/badge.svg" />
+  <a href="https://codecov.io/gh/ignite/network">
+    <img alt="Code Coverage" src="https://codecov.io/gh/ignite/network/branch/develop/graph/badge.svg" />
   </a>
 -->
 </div>
 <div align="center">
-  <a href="https://github.com/tendermint/spn">
-    <img alt="Lines Of Code" src="https://tokei.rs/b1/github/tendermint/spn" />
+  <a href="https://github.com/ignite/network">
+    <img alt="Lines Of Code" src="https://tokei.rs/b1/github/ignite/network" />
   </a>
-    <img alt="Test Status" src="https://github.com/tendermint/spn/workflows/Test/badge.svg" />
-    <img alt="Lint Status" src="https://github.com/tendermint/spn/workflows/Lint/badge.svg" />
+    <img alt="Test Status" src="https://github.com/ignite/network/workflows/Test/badge.svg" />
+    <img alt="Lint Status" src="https://github.com/ignite/network/workflows/Lint/badge.svg" />
 </div>
 
-**spn** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite](https://github.com/ignite/cli).
+**network** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite](https://github.com/ignite/cli).
 
 ## Get started
 
@@ -36,7 +36,7 @@ ignite chain serve
 
 ## Launching chains with Ignite CLI
 
-Please read our [guides](https://docs.ignite.com/network/introduction) for using `spn` with Ignite CLI.
+Please read our [guides](https://docs.ignite.com/network/introduction) for using `network` with Ignite CLI.
 
 ## Learn more
 

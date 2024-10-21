@@ -10,8 +10,9 @@ if len(sys.argv) != 4:
 confFile = open('./conf.yml')
 conf = yaml.safe_load(confFile)
 
+
 def delegate_cmd(valNumber, amount):
-    cmd = ["spnd", "tx", "staking", "delegate"]
+    cmd = ["networkd", "tx", "staking", "delegate"]
     cmd.append(conf['validator_addresses'][valNumber])
 
     stake = amount + conf['staking_denom']
@@ -23,9 +24,13 @@ def delegate_cmd(valNumber, amount):
     cmd.append('--chain-id')
     cmd.append(conf['chain_id'])
 
+    cmd.append('--keyring-backend')
+    cmd.append('test')
+
     cmd.append('-y')
 
     return cmd
+
 
 def delegate(amounts):
     for s in amounts:
@@ -42,12 +47,13 @@ def delegate(amounts):
             subprocess.run(cmd, check=True)
         i += 1
 
+
 if __name__ == "__main__":
     delegate(sys.argv[1:])
 
     print()
     print('delegation performed, to show validator set:')
-    print('spnd q tendermint-validator-set')
+    print('networkd q tendermint-validator-set')
     print()
     print('to show consensus state')
-    print('spnd q ibc client self-consensus-state')
+    print('networkd q ibc client self-consensus-state')

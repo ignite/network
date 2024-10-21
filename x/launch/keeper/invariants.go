@@ -3,19 +3,21 @@ package keeper
 import (
 	"fmt"
 
+	"cosmossdk.io/collections"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/tendermint/spn/x/launch/types"
+	"github.com/ignite/network/x/launch/types"
 )
 
 const (
 	invalidChainRoute       = "invalid-chain"
 	duplicatedAccountRoute  = "duplicated-account"
 	unknownRequestTypeRoute = "unknown-request-type"
+	invalidBech32           = "invalid-bech32"
 )
 
 // RegisterInvariants registers all module invariants
-func RegisterInvariants(ir sdk.InvariantRegistry, k Keeper) {
+func RegisterInvariants(ir sdk.InvariantRegistry, k *Keeper) {
 	ir.RegisterRoute(types.ModuleName, invalidChainRoute,
 		InvalidChainInvariant(k))
 	ir.RegisterRoute(types.ModuleName, duplicatedAccountRoute,
@@ -25,7 +27,7 @@ func RegisterInvariants(ir sdk.InvariantRegistry, k Keeper) {
 }
 
 // AllInvariants runs all invariants of the module.
-func AllInvariants(k Keeper) sdk.Invariant {
+func AllInvariants(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
 		res, stop := DuplicatedAccountInvariant(k)(ctx)
 		if stop {
@@ -40,26 +42,30 @@ func AllInvariants(k Keeper) sdk.Invariant {
 }
 
 // InvalidChainInvariant invariant that checks all chain in the store are valid
-func InvalidChainInvariant(k Keeper) sdk.Invariant {
+func InvalidChainInvariant(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
-		chains := k.GetAllChain(ctx)
+		chains, err := k.Chains(ctx)
+		if err != nil {
+			return "", false
+		}
 		for _, chain := range chains {
 			err := chain.Validate()
 			if err != nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, invalidChainRoute,
-					fmt.Sprintf("chain %d is invalid: %s", chain.LaunchID, err.Error()),
+					fmt.Sprintf("chain %d is invalid: %s", chain.LaunchId, err.Error()),
 				), true
 			}
 			// if chain as an associated project, check that it exists
 			if chain.HasProject {
-				_, found := k.projectKeeper.GetProject(ctx, chain.ProjectID)
-				if !found {
+				_, err := k.projectKeeper.GetProject(ctx, chain.ProjectId)
+				if err != nil {
 					return sdk.FormatInvariant(
 						types.ModuleName, invalidChainRoute,
-						fmt.Sprintf("chain %d has an invalid associated project %d",
-							chain.LaunchID,
-							chain.ProjectID,
+						fmt.Sprintf("chain %d has an invalid associated project %d: %s",
+							chain.LaunchId,
+							chain.ProjectId,
+							err.Error(),
 						),
 					), true
 				}
@@ -71,18 +77,25 @@ func InvalidChainInvariant(k Keeper) sdk.Invariant {
 
 // DuplicatedAccountInvariant invariant that checks if the `GenesisAccount`
 // exists into the `VestingAccount` store
-func DuplicatedAccountInvariant(k Keeper) sdk.Invariant {
+func DuplicatedAccountInvariant(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
-		all := k.GetAllGenesisAccount(ctx)
+		all, err := k.AllGenesisAccount(ctx)
+		if err != nil {
+			return "", false
+		}
 		for _, account := range all {
-			_, found := k.GetVestingAccount(ctx, account.LaunchID, account.Address)
-			if found {
+			address, err := k.addressCodec.StringToBytes(account.Address)
+			if err != nil {
+				return sdk.FormatInvariant(types.ModuleName, invalidBech32, err.Error()), true
+			}
+			_, err = k.VestingAccount.Get(ctx, collections.Join(account.LaunchId, sdk.AccAddress(address)))
+			if err == nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, duplicatedAccountRoute,
 					fmt.Sprintf(
 						"account %s for chain %d found in vesting and genesis accounts",
 						account.Address,
-						account.LaunchID,
+						account.LaunchId,
 					),
 				), true
 			}
@@ -93,9 +106,12 @@ func DuplicatedAccountInvariant(k Keeper) sdk.Invariant {
 
 // UnknownRequestTypeInvariant invariant that checks if the Request
 // type is valid
-func UnknownRequestTypeInvariant(k Keeper) sdk.Invariant {
+func UnknownRequestTypeInvariant(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
-		all := k.GetAllRequest(ctx)
+		all, err := k.Requests(ctx)
+		if err != nil {
+			return "", false
+		}
 		for _, request := range all {
 			switch request.Content.Content.(type) {
 			case *types.RequestContent_GenesisAccount,
@@ -110,7 +126,7 @@ func UnknownRequestTypeInvariant(k Keeper) sdk.Invariant {
 					"unknown request content type",
 				), true
 			}
-			if err := request.Content.Validate(request.LaunchID); err != nil {
+			if err := request.Content.Validate(request.LaunchId); err != nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, unknownRequestTypeRoute,
 					"invalid request",

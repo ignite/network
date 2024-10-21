@@ -3,7 +3,7 @@ package sample
 import (
 	"math/rand"
 
-	profile "github.com/tendermint/spn/x/profile/types"
+	profile "github.com/ignite/network/x/profile/types"
 )
 
 // MsgCreateCoordinator returns a sample MsgCreateCoordinator
@@ -69,62 +69,62 @@ func ProfileGenesisState(r *rand.Rand, addresses ...string) profile.GenesisState
 	}
 	operatorAddresses := []string{OperatorAddress(r), OperatorAddress(r)}
 	return profile.GenesisState{
-		Coordinators: []profile.Coordinator{
+		CoordinatorList: []profile.Coordinator{
 			{
-				CoordinatorID: 0,
+				CoordinatorId: 0,
 				Address:       addresses[0],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 			{
-				CoordinatorID: 1,
+				CoordinatorId: 1,
 				Address:       addresses[1],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 			{
-				CoordinatorID: 2,
+				CoordinatorId: 2,
 				Address:       addresses[2],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 			{
-				CoordinatorID: 3,
+				CoordinatorId: 3,
 				Address:       addresses[3],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 			{
-				CoordinatorID: 4,
+				CoordinatorId: 4,
 				Address:       addresses[4],
 				Description:   CoordinatorDescription(r),
 				Active:        true,
 			},
 		},
-		CoordinatorsByAddress: []profile.CoordinatorByAddress{
+		CoordinatorByAddress: []profile.CoordinatorByAddress{
 			{
 				Address:       addresses[0],
-				CoordinatorID: 0,
+				CoordinatorId: 0,
 			},
 			{
 				Address:       addresses[1],
-				CoordinatorID: 1,
+				CoordinatorId: 1,
 			},
 			{
 				Address:       addresses[2],
-				CoordinatorID: 2,
+				CoordinatorId: 2,
 			},
 			{
 				Address:       addresses[3],
-				CoordinatorID: 3,
+				CoordinatorId: 3,
 			},
 			{
 				Address:       addresses[4],
-				CoordinatorID: 4,
+				CoordinatorId: 4,
 			},
 		},
-		CoordinatorCounter: 5,
-		Validators: []profile.Validator{
+		CoordinatorCount: 5,
+		ValidatorList: []profile.Validator{
 			{
 				Address:           addresses[5],
 				Description:       ValidatorDescription(String(r, 10)),

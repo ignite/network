@@ -7,7 +7,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/testutil/sample"
+	"github.com/ignite/network/testutil/sample"
 )
 
 // CreateFixedPriceAuction makes the provided address create a fixed price auction with the specified selling coin and

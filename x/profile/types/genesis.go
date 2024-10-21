@@ -1,39 +1,42 @@
 package types
 
 import (
-	"github.com/pkg/errors"
-	// this line is used by starport scaffolding # genesis/types/import
+	"errors"
 )
 
-// DefaultGenesis returns the default Capability genesis state
+// DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		// this line is used by starport scaffolding # genesis/types/default
-		Validators:                  []Validator{},
+		Params:                      DefaultParams(),
+		ValidatorList:               []Validator{},
 		ValidatorsByOperatorAddress: []ValidatorByOperatorAddress{},
-		Coordinators:                []Coordinator{},
-		CoordinatorCounter:          1,
-		CoordinatorsByAddress:       []CoordinatorByAddress{},
+		CoordinatorList:             []Coordinator{},
+		CoordinatorByAddress:        []CoordinatorByAddress{},
+		// this line is used by starport scaffolding # genesis/types/default
 	}
 }
 
 // Validate performs basic genesis state validation returning an error upon any
 // failure.
 func (gs GenesisState) Validate() error {
-	// this line is used by starport scaffolding # genesis/types/validate
-
 	if err := gs.ValidateValidators(); err != nil {
 		return err
 	}
 
-	return gs.ValidateCoordinators()
+	if err := gs.ValidateCoordinators(); err != nil {
+		return err
+	}
+
+	// this line is used by starport scaffolding # genesis/types/validate
+
+	return gs.Params.Validate()
 }
 
 func (gs GenesisState) ValidateValidators() error {
 	// Check for duplicated index in validator
 	validatorIndexMap := make(map[string]Validator)
-	for _, elem := range gs.Validators {
-		valIndex := string(ValidatorKey(elem.Address))
+	for _, elem := range gs.ValidatorList {
+		valIndex := elem.Address
 		if _, ok := validatorIndexMap[valIndex]; ok {
 			return errors.New("duplicated index for validator")
 		}
@@ -43,12 +46,12 @@ func (gs GenesisState) ValidateValidators() error {
 	// Check for duplicated index in validatorByOperatorAddress
 	validatorByOperatorAddressIndexMap := make(map[string]struct{})
 	for _, elem := range gs.ValidatorsByOperatorAddress {
-		index := string(CoordinatorByAddressKey(elem.OperatorAddress))
+		index := elem.OperatorAddress
 		if _, ok := validatorByOperatorAddressIndexMap[index]; ok {
 			return errors.New("duplicated index for validatorByOperatorAddress")
 		}
-		valIndex := ValidatorKey(elem.ValidatorAddress)
-		validator, ok := validatorIndexMap[string(valIndex)]
+		valIndex := elem.ValidatorAddress
+		validator, ok := validatorIndexMap[valIndex]
 		if !ok {
 			return errors.New("validator operator address not found for Validator")
 		}
@@ -64,25 +67,25 @@ func (gs GenesisState) ValidateValidators() error {
 func (gs GenesisState) ValidateCoordinators() error {
 	// Check for duplicated index in coordinatorByAddress
 	coordinatorByAddressIndexMap := make(map[string]uint64)
-	for _, elem := range gs.CoordinatorsByAddress {
-		index := string(CoordinatorByAddressKey(elem.Address))
+	for _, elem := range gs.CoordinatorByAddress {
+		index := elem.Address
 		if _, ok := coordinatorByAddressIndexMap[index]; ok {
 			return errors.New("duplicated index for coordinatorByAddress")
 		}
-		coordinatorByAddressIndexMap[index] = elem.CoordinatorID
+		coordinatorByAddressIndexMap[index] = elem.CoordinatorId
 	}
 
 	// Check for duplicated ID in coordinator or if coordinator is inactive
 	coordinatorIDMap := make(map[uint64]bool)
-	counter := gs.GetCoordinatorCounter()
-	for _, elem := range gs.Coordinators {
-		if _, ok := coordinatorIDMap[elem.CoordinatorID]; ok {
+	counter := gs.CoordinatorCount
+	for _, elem := range gs.CoordinatorList {
+		if _, ok := coordinatorIDMap[elem.CoordinatorId]; ok {
 			return errors.New("duplicated id for coordinator")
 		}
-		if elem.CoordinatorID >= counter {
+		if elem.CoordinatorId >= counter {
 			return errors.New("coordinator id should be lower or equal than the last id")
 		}
-		index := string(CoordinatorByAddressKey(elem.Address))
+		index := elem.Address
 		_, found := coordinatorByAddressIndexMap[index]
 
 		switch {
@@ -92,7 +95,7 @@ func (gs GenesisState) ValidateCoordinators() error {
 			return errors.New("coordinator found by CoordinatorByAddress should not be inactive")
 		}
 
-		coordinatorIDMap[elem.CoordinatorID] = true
+		coordinatorIDMap[elem.CoordinatorId] = true
 
 		// Remove to check if all coordinator by address exist
 		delete(coordinatorByAddressIndexMap, index)

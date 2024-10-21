@@ -3,7 +3,7 @@ package sample
 import (
 	"math/rand"
 
-	reward "github.com/tendermint/spn/x/reward/types"
+	reward "github.com/ignite/network/x/reward/types"
 )
 
 // RewardPool returns a sample RewardPool
@@ -19,7 +19,7 @@ func RewardPool(r *rand.Rand, launchID uint64) reward.RewardPool {
 	)
 
 	return reward.RewardPool{
-		LaunchID:            launchID,
+		LaunchId:            launchID,
 		Provider:            Address(r),
 		InitialCoins:        initialCoins,
 		RemainingCoins:      remainingCoins,
@@ -41,7 +41,7 @@ func RewardPoolWithCoinsRangeAmount(r *rand.Rand, launchID uint64, denom1, denom
 		max,
 	)
 	return reward.RewardPool{
-		LaunchID:            launchID,
+		LaunchId:            launchID,
 		Provider:            Address(r),
 		InitialCoins:        initialCoins,
 		RemainingCoins:      remainingCoins,

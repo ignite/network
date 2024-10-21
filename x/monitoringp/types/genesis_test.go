@@ -3,12 +3,12 @@ package types_test
 import (
 	"testing"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkmath "cosmossdk.io/math"
 	"github.com/stretchr/testify/require"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/monitoringp/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/monitoringp/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
@@ -26,12 +26,12 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "should allow valid genesis state",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				ConsumerClientID: &types.ConsumerClientID{
-					ClientID: "29",
+				ConsumerClientId: &types.ConsumerClientID{
+					ClientId: "29",
 				},
 				Params: types.DefaultParams(),
-				ConnectionChannelID: &types.ConnectionChannelID{
-					ChannelID: "67",
+				ConnectionChannelId: &types.ConnectionChannelID{
+					ChannelId: "67",
 				},
 				MonitoringInfo: &types.MonitoringInfo{},
 				// this line is used by starport scaffolding # types/genesis/validField
@@ -42,14 +42,14 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "should prevent invalid params",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				ConsumerClientID: &types.ConsumerClientID{
-					ClientID: "29",
+				ConsumerClientId: &types.ConsumerClientID{
+					ClientId: "29",
 				},
 				Params: types.NewParams(
 					1000,
 					"foo", // chain id should be <chain-name>-<revision-number>
 					sample.ConsensusState(0),
-					spntypes.DefaultUnbondingPeriod,
+					networktypes.DefaultUnbondingPeriod,
 					1,
 				),
 				// this line is used by starport scaffolding # types/genesis/validField
@@ -60,21 +60,21 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "should prevent invalid monitoring info",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				ConsumerClientID: &types.ConsumerClientID{
-					ClientID: "29",
+				ConsumerClientId: &types.ConsumerClientID{
+					ClientId: "29",
 				},
 				Params: types.DefaultParams(),
-				ConnectionChannelID: &types.ConnectionChannelID{
-					ChannelID: "67",
+				ConnectionChannelId: &types.ConnectionChannelID{
+					ChannelId: "67",
 				},
 				// Block count is lower than sum of relative signatures
 				MonitoringInfo: &types.MonitoringInfo{
-					SignatureCounts: spntypes.SignatureCounts{
+					SignatureCounts: networktypes.SignatureCounts{
 						BlockCount: 1,
-						Counts: []spntypes.SignatureCount{
+						Counts: []networktypes.SignatureCount{
 							{
 								OpAddress:          sample.Address(r),
-								RelativeSignatures: sdk.NewDec(10),
+								RelativeSignatures: sdkmath.LegacyNewDec(10),
 							},
 						},
 					},
