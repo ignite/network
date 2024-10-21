@@ -41,6 +41,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 		if err != nil {
 			return err
 		}
+
 		if err := k.CoordinatorByAddress.Set(ctx, address, elem); err != nil {
 			return err
 		}

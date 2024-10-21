@@ -33,17 +33,6 @@ func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState)
 		}
 	}
 
-	// Set all the genesisValidator
-	for _, elem := range genState.GenesisValidatorList {
-		address, err := k.AddressCodec().StringToBytes(elem.Address)
-		if err != nil {
-			return err
-		}
-		if err := k.GenesisValidator.Set(ctx, collections.Join(elem.LaunchId, sdk.AccAddress(address)), elem); err != nil {
-			return err
-		}
-	}
-
 	// Set all the vestingAccount
 	for _, elem := range genState.VestingAccountList {
 		address, err := k.AddressCodec().StringToBytes(elem.Address)
@@ -55,14 +44,13 @@ func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState)
 		}
 	}
 
-	// Set all the request
-	for _, elem := range genState.RequestList {
-		if err := k.Request.Set(ctx, collections.Join(elem.LaunchId, elem.RequestId), elem); err != nil {
+	// Set all the genesisValidator
+	for _, elem := range genState.GenesisValidatorList {
+		address, err := k.AddressCodec().StringToBytes(elem.Address)
+		if err != nil {
 			return err
 		}
-	}
-	for _, elem := range genState.RequestCounters {
-		if err := k.RequestSeq.Set(ctx, elem.LaunchId, elem.Counter); err != nil {
+		if err := k.GenesisValidator.Set(ctx, collections.Join(elem.LaunchId, sdk.AccAddress(address)), elem); err != nil {
 			return err
 		}
 	}
@@ -73,6 +61,21 @@ func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState)
 			return err
 		}
 	}
+
+	// Set all the request
+	for _, elem := range genState.RequestList {
+		if err := k.Request.Set(ctx, collections.Join(elem.LaunchId, elem.RequestId), elem); err != nil {
+			return err
+		}
+	}
+
+	// Set all request counter
+	for _, elem := range genState.RequestCounters {
+		if err := k.RequestSeq.Set(ctx, elem.LaunchId, elem.Counter); err != nil {
+			return err
+		}
+	}
+
 	// this line is used by starport scaffolding # genesis/module/init
 
 	return k.Params.Set(ctx, genState.Params)
@@ -107,14 +110,23 @@ func ExportGenesis(ctx sdk.Context, k *keeper.Keeper) (*types.GenesisState, erro
 	}); err != nil {
 		return nil, err
 	}
+
+	if err := k.VestingAccount.Walk(ctx, nil, func(_ collections.Pair[uint64, sdk.AccAddress], val types.VestingAccount) (stop bool, err error) {
+		genesis.VestingAccountList = append(genesis.VestingAccountList, val)
+		return false, nil
+	}); err != nil {
+		return nil, err
+	}
+
 	if err := k.GenesisValidator.Walk(ctx, nil, func(_ collections.Pair[uint64, sdk.AccAddress], val types.GenesisValidator) (stop bool, err error) {
 		genesis.GenesisValidatorList = append(genesis.GenesisValidatorList, val)
 		return false, nil
 	}); err != nil {
 		return nil, err
 	}
-	if err := k.VestingAccount.Walk(ctx, nil, func(_ collections.Pair[uint64, sdk.AccAddress], val types.VestingAccount) (stop bool, err error) {
-		genesis.VestingAccountList = append(genesis.VestingAccountList, val)
+
+	if err := k.ParamChange.Walk(ctx, nil, func(_ collections.Pair[uint64, string], val types.ParamChange) (stop bool, err error) {
+		genesis.ParamChangeList = append(genesis.ParamChangeList, val)
 		return false, nil
 	}); err != nil {
 		return nil, err
@@ -128,7 +140,7 @@ func ExportGenesis(ctx sdk.Context, k *keeper.Keeper) (*types.GenesisState, erro
 	}
 
 	// Get request counts
-	for _, elem := range genesis.RequestList {
+	for _, elem := range genesis.ChainList {
 		// Get request count
 		counter, err := k.GetRequestCounter(ctx, elem.LaunchId)
 		if err != nil {
@@ -138,13 +150,6 @@ func ExportGenesis(ctx sdk.Context, k *keeper.Keeper) (*types.GenesisState, erro
 			LaunchId: elem.LaunchId,
 			Counter:  counter,
 		})
-	}
-
-	if err := k.ParamChange.Walk(ctx, nil, func(_ collections.Pair[uint64, string], val types.ParamChange) (stop bool, err error) {
-		genesis.ParamChangeList = append(genesis.ParamChangeList, val)
-		return false, nil
-	}); err != nil {
-		return nil, err
 	}
 
 	// this line is used by starport scaffolding # genesis/module/export
