@@ -146,7 +146,7 @@ type App struct {
 	ParticipationKeeper participationmodulekeeper.Keeper
 	LaunchKeeper        *launchmodulekeeper.Keeper
 	MonitoringcKeeper   *monitoringcmodulekeeper.Keeper
-	MonitoringpKeeper   monitoringpmodulekeeper.Keeper
+	MonitoringpKeeper   *monitoringpmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager

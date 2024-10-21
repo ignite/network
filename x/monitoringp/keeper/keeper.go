@@ -62,14 +62,14 @@ func NewKeeper(
 	ibcKeeperFn func() *ibckeeper.Keeper,
 	capabilityScopedFn func(string) capabilitykeeper.ScopedKeeper,
 	stakingKeeper types.StakingKeeper,
-) Keeper {
+) *Keeper {
 	if _, err := addressCodec.StringToBytes(authority); err != nil {
 		panic(fmt.Sprintf("invalid authority address %s: %s", authority, err))
 	}
 
 	sb := collections.NewSchemaBuilder(storeService)
 
-	k := Keeper{
+	k := &Keeper{
 		cdc:                 cdc,
 		addressCodec:        addressCodec,
 		storeService:        storeService,

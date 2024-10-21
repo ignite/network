@@ -27,7 +27,7 @@ import (
 	"github.com/ignite/network/x/monitoringp/types"
 )
 
-func MonitoringpKeeper(t testing.TB) (keeper.Keeper, sdk.Context, address.Codec) {
+func MonitoringpKeeper(t testing.TB) (*keeper.Keeper, sdk.Context, address.Codec) {
 	storeKey := storetypes.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 

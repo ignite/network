@@ -63,7 +63,7 @@ type TestKeepers struct {
 	ProfileKeeper            profilekeeper.Keeper
 	RewardKeeper             rewardkeeper.Keeper
 	MonitoringConsumerKeeper *monitoringckeeper.Keeper
-	MonitoringProviderKeeper monitoringpkeeper.Keeper
+	MonitoringProviderKeeper *monitoringpkeeper.Keeper
 	AccountKeeper            authkeeper.AccountKeeper
 	BankKeeper               bankkeeper.Keeper
 	DistrKeeper              distrkeeper.Keeper
