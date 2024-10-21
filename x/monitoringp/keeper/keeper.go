@@ -18,6 +18,7 @@ import (
 	host "github.com/cosmos/ibc-go/v8/modules/core/24-host"
 	"github.com/cosmos/ibc-go/v8/modules/core/exported"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
+	"github.com/pkg/errors"
 
 	"github.com/ignite/network/x/monitoringp/types"
 )
@@ -113,31 +114,53 @@ func (k Keeper) AddressCodec() address.Codec {
 // ----------------------------------------------------------------------------
 
 // SetIBCKeeper sets the IBC Keeper
-func (k *Keeper) SetIBCKeeper(ibcKeeper *ibckeeper.Keeper) {
-	k.SetClientKeeper(ibcKeeper.ClientKeeper)
-	k.SetPortKeeper(ibcKeeper.PortKeeper)
-	k.SetConnectionKeeper(ibcKeeper.ConnectionKeeper)
-	k.SetChannelKeeper(ibcKeeper.ChannelKeeper)
+func (k *Keeper) SetIBCKeeper(ibcKeeper *ibckeeper.Keeper) error {
+	if err := k.SetClientKeeper(ibcKeeper.ClientKeeper); err != nil {
+		return err
+	}
+	if err := k.SetPortKeeper(ibcKeeper.PortKeeper); err != nil {
+		return err
+	}
+	if err := k.SetConnectionKeeper(ibcKeeper.ConnectionKeeper); err != nil {
+		return err
+	}
+	return k.SetChannelKeeper(ibcKeeper.ChannelKeeper)
 }
 
 // SetClientKeeper sets IBC client keeper
-func (k *Keeper) SetClientKeeper(clientKeeper types.ClientKeeper) {
+func (k *Keeper) SetClientKeeper(clientKeeper types.ClientKeeper) error {
+	if k.clientKeeper != nil {
+		return errors.New("client keeper already set for monitoring consumer module")
+	}
 	k.clientKeeper = clientKeeper
+	return nil
 }
 
 // SetPortKeeper sets IBC port keeper
-func (k *Keeper) SetPortKeeper(portKeeper types.PortKeeper) {
+func (k *Keeper) SetPortKeeper(portKeeper types.PortKeeper) error {
+	if k.portKeeper != nil {
+		return errors.New("port keeper already set for monitoring consumer module")
+	}
 	k.portKeeper = portKeeper
+	return nil
 }
 
 // SetConnectionKeeper sets IBC connection keeper
-func (k *Keeper) SetConnectionKeeper(connectionKeeper types.ConnectionKeeper) {
+func (k *Keeper) SetConnectionKeeper(connectionKeeper types.ConnectionKeeper) error {
+	if k.connectionKeeper != nil {
+		return errors.New("connection keeper already set for monitoring consumer module")
+	}
 	k.connectionKeeper = connectionKeeper
+	return nil
 }
 
 // SetChannelKeeper sets IBC channel keeper
-func (k *Keeper) SetChannelKeeper(channelKeeper types.ChannelKeeper) {
+func (k *Keeper) SetChannelKeeper(channelKeeper types.ChannelKeeper) error {
+	if k.channelKeeper != nil {
+		return errors.New("channel keeper already set for monitoring consumer module")
+	}
 	k.channelKeeper = channelKeeper
+	return nil
 }
 
 // ChanCloseInit defines a wrapper function for the channel Keeper's function.

@@ -284,6 +284,9 @@ func New(
 	if err := app.MonitoringcKeeper.SetIBCKeeper(app.IBCKeeper); err != nil {
 		return nil, err
 	}
+	if err := app.MonitoringpKeeper.SetIBCKeeper(app.IBCKeeper); err != nil {
+		return nil, err
+	}
 
 	// register streaming services
 	if err := app.RegisterStreamingServices(appOpts, app.kvStoreKeys()); err != nil {

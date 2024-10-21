@@ -49,7 +49,7 @@ func NewTestSetupWithIBCMocksMonitoringp(
 	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
 	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, scopedKeeper, upgradeKeeper)
 	portKeeper := portkeeper.NewKeeper(scopedKeeper)
-	monitoringProviderKeeper := initializer.Monitoringp(
+	monitoringProviderKeeper, err := initializer.Monitoringp(
 		stakingKeeper,
 		ibcKeeper,
 		*capabilityKeeper,
@@ -57,13 +57,14 @@ func NewTestSetupWithIBCMocksMonitoringp(
 		connectionMock,
 		channelMock,
 	)
+	require.NoError(t, err)
 	fundraisingKeeper := initializer.Fundraising(authKeeper, bankKeeper, distrKeeper)
 	profileKeeper := initializer.Profile()
 	launchKeeper := initializer.Launch(profileKeeper, distrKeeper)
 	rewardKeeper := initializer.Reward(authKeeper, bankKeeper, profileKeeper, launchKeeper)
 	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper)
 	participationKeeper := initializer.Participation(fundraisingKeeper, stakingKeeper)
-	err := launchKeeper.SetProjectKeeper(projectKeeper)
+	err = launchKeeper.SetProjectKeeper(projectKeeper)
 	require.NoError(t, err)
 
 	require.NoError(t, initializer.StateStore.LoadLatestVersion())

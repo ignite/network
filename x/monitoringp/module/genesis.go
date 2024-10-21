@@ -10,6 +10,10 @@ import (
 
 // InitGenesis initializes the module's state from a provided genesis state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) error {
+	if err := k.Params.Set(ctx, genState.Params); err != nil {
+		return err
+	}
+
 	// Set if defined
 	if genState.ConsumerClientId != nil {
 		if err := k.ConsumerClientID.Set(ctx, *genState.ConsumerClientId); err != nil {
@@ -49,7 +53,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 		}
 	}
 
-	return k.Params.Set(ctx, genState.Params)
+	return nil
 }
 
 // ExportGenesis returns the module's exported genesis.

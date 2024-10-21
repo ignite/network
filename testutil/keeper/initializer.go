@@ -381,13 +381,13 @@ func (i initializer) Monitoringc(
 		rewardKeeper,
 	)
 	if err := k.SetClientKeeper(ibcKeeper.ClientKeeper); err != nil {
-		return nil, err
+		return k, err
 	}
 	if err := k.SetPortKeeper(ibcKeeper.PortKeeper); err != nil {
-		return nil, err
+		return k, err
 	}
 	if err := k.SetConnectionKeeper(connKeeper); err != nil {
-		return nil, err
+		return k, err
 	}
 	return k, k.SetChannelKeeper(channelKeeper)
 }
@@ -399,7 +399,7 @@ func (i initializer) Monitoringp(
 	portKeeper portkeeper.Keeper,
 	connectionMock []Connection,
 	channelMock []Channel,
-) monitoringpkeeper.Keeper {
+) (monitoringpkeeper.Keeper, error) {
 	storeKey := storetypes.NewKVStoreKey(monitoringptypes.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(monitoringptypes.MemStoreKey)
 
@@ -436,10 +436,16 @@ func (i initializer) Monitoringp(
 		},
 		stakingKeeper,
 	)
-	k.SetIBCKeeper(ibcKeeper)
-	k.SetConnectionKeeper(connKeeper)
-	k.SetChannelKeeper(channelKeeper)
-	return k
+	if err := k.SetClientKeeper(ibcKeeper.ClientKeeper); err != nil {
+		return k, err
+	}
+	if err := k.SetPortKeeper(ibcKeeper.PortKeeper); err != nil {
+		return k, err
+	}
+	if err := k.SetConnectionKeeper(connKeeper); err != nil {
+		return k, err
+	}
+	return k, k.SetChannelKeeper(channelKeeper)
 }
 
 func (i initializer) Fundraising(

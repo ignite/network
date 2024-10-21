@@ -10,6 +10,10 @@ import (
 
 // InitGenesis initializes the module's state from a provided genesis state.
 func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState) error {
+	if err := k.Params.Set(ctx, genState.Params); err != nil {
+		return err
+	}
+
 	// Set all the verifiedClientID
 	for _, elem := range genState.VerifiedClientIdList {
 		if err := k.VerifiedClientID.Set(ctx, elem.LaunchId, elem); err != nil {
@@ -59,7 +63,7 @@ func InitGenesis(ctx sdk.Context, k *keeper.Keeper, genState types.GenesisState)
 		}
 	}
 
-	return k.Params.Set(ctx, genState.Params)
+	return nil
 }
 
 // ExportGenesis returns the module's exported genesis.
