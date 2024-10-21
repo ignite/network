@@ -96,8 +96,8 @@ if __name__ == "__main__":
 
     # Create verified IBC client on SPN
     print('create verified client')
-    cmd('networkd q tendermint-validator-set 2 --node "tcp://localhost:26659" > vs.yaml')
-    cmd('networkd q ibc client self-consensus-state --height 2 --node "tcp://localhost:26659" > cs.yaml')
+    cmd('networkd q tendermint-validator-set 2 --node "tcp://localhost:26657" > vs.yaml')
+    cmd('networkd q ibc client self-consensus-state --height 2 --node "tcp://localhost:26657" > cs.yaml')
     cmd('networkd tx monitoringc create-client 1 cs.yaml vs.yaml --unbonding-period {} --revision-height 2 --from alice --chain-id spn-1 --keyring-backend test -y'.format(
         unbondingTime))
 
