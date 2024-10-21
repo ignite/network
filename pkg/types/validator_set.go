@@ -23,8 +23,8 @@ type validatorSetFile struct {
 		ProposerPriority string `yaml:"proposer_priority"`
 		VotingPower      string `yaml:"voting_power"`
 		PubKey           struct {
-			Type  string `yaml:"type"`
-			Value string `yaml:"value"`
+			Type string `yaml:"@type"`
+			Key  string `yaml:"key"`
 		} `yaml:"pub_key"`
 	} `yaml:"validators"`
 }
@@ -53,7 +53,7 @@ func ParseValidatorSetFromFile(filePath string) (vs ValidatorSet, err error) {
 		if err != nil {
 			return vs, errors.Wrapf(err, "invalid validator %d voting power", i)
 		}
-		vs.Validators = append(vs.Validators, NewValidator(v.PubKey.Value, proposerPriority, votingPower))
+		vs.Validators = append(vs.Validators, NewValidator(v.PubKey.Key, proposerPriority, votingPower))
 	}
 
 	return
