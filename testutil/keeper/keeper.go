@@ -127,9 +127,10 @@ func NewTestSetup(t testing.TB, options ...SetupOption) (sdk.Context, TestKeeper
 	rewardKeeper := initializer.Reward(authKeeper, bankKeeper, profileKeeper, launchKeeper)
 	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper)
 	participationKeeper := initializer.Participation(fundraisingKeeper, stakingKeeper)
-	launchKeeper.SetProjectKeeper(projectKeeper)
+	err := launchKeeper.SetProjectKeeper(projectKeeper)
+	require.NoError(t, err)
 	portKeeper := portkeeper.NewKeeper(scopedKeeper)
-	monitoringConsumerKeeper := initializer.Monitoringc(
+	monitoringConsumerKeeper, err := initializer.Monitoringc(
 		ibcKeeper,
 		*capabilityKeeper,
 		portKeeper,
@@ -138,7 +139,9 @@ func NewTestSetup(t testing.TB, options ...SetupOption) (sdk.Context, TestKeeper
 		[]Connection{},
 		[]Channel{},
 	)
-	launchKeeper.SetMonitoringcKeeper(monitoringConsumerKeeper)
+	require.NoError(t, err)
+	err = launchKeeper.SetMonitoringcKeeper(monitoringConsumerKeeper)
+	require.NoError(t, err)
 	claimKeeper := initializer.Claim(authKeeper, distrKeeper, bankKeeper)
 	require.NoError(t, initializer.StateStore.LoadLatestVersion())
 
@@ -238,9 +241,10 @@ func NewTestSetupWithIBCMocks(
 	rewardKeeper := initializer.Reward(authKeeper, bankKeeper, profileKeeper, launchKeeper)
 	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper)
 	participationKeeper := initializer.Participation(fundraisingKeeper, stakingKeeper)
-	launchKeeper.SetProjectKeeper(projectKeeper)
+	err := launchKeeper.SetProjectKeeper(projectKeeper)
+	require.NoError(t, err)
 	portKeeper := portkeeper.NewKeeper(scopedKeeper)
-	monitoringConsumerKeeper := initializer.Monitoringc(
+	monitoringConsumerKeeper, err := initializer.Monitoringc(
 		ibcKeeper,
 		*capabilityKeeper,
 		portKeeper,
@@ -249,7 +253,9 @@ func NewTestSetupWithIBCMocks(
 		connectionMock,
 		channelMock,
 	)
-	launchKeeper.SetMonitoringcKeeper(monitoringConsumerKeeper)
+	require.NoError(t, err)
+	err = launchKeeper.SetMonitoringcKeeper(monitoringConsumerKeeper)
+	require.NoError(t, err)
 	claimKeeper := initializer.Claim(authKeeper, distrKeeper, bankKeeper)
 	require.NoError(t, initializer.StateStore.LoadLatestVersion())
 

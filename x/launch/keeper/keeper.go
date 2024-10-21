@@ -106,11 +106,12 @@ func (k Keeper) AddressCodec() address.Codec {
 }
 
 // SetProjectKeeper sets the project keeper interface of the module
-func (k *Keeper) SetProjectKeeper(projectKeeper types.ProjectKeeper) {
+func (k *Keeper) SetProjectKeeper(projectKeeper types.ProjectKeeper) error {
 	if k.projectKeeper != nil {
-		panic("project keeper already set for launch module")
+		return errors.New("project keeper already set for launch module")
 	}
 	k.projectKeeper = projectKeeper
+	return nil
 }
 
 // GetProjectKeeper gets the project keeper interface of the module
@@ -119,11 +120,12 @@ func (k *Keeper) GetProjectKeeper() types.ProjectKeeper {
 }
 
 // SetMonitoringcKeeper sets the monitoring consumer keeper interface of the module
-func (k *Keeper) SetMonitoringcKeeper(monitoringcKeeper types.MonitoringConsumerKeeper) {
+func (k *Keeper) SetMonitoringcKeeper(monitoringcKeeper types.MonitoringConsumerKeeper) error {
 	if k.monitoringcKeeper != nil {
-		panic("monitoring consumer keeper already set for launch module")
+		return errors.New("monitoring consumer keeper already set for launch module")
 	}
 	k.monitoringcKeeper = monitoringcKeeper
+	return nil
 }
 
 // GetMonitoringcKeeper gets the monitoring consumer keeper interface of the module

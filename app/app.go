@@ -259,7 +259,7 @@ func New(
 		&app.MonitoringcKeeper,
 		&app.MonitoringpKeeper,
 	); err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	// add to default baseapp options
@@ -275,9 +275,15 @@ func New(
 	}
 
 	// register redundancy modules
-	app.LaunchKeeper.SetProjectKeeper(app.ProjectKeeper)
-	app.LaunchKeeper.SetMonitoringcKeeper(app.MonitoringcKeeper)
-	app.MonitoringcKeeper.SetIBCKeeper(app.IBCKeeper)
+	if err := app.LaunchKeeper.SetProjectKeeper(app.ProjectKeeper); err != nil {
+		return nil, err
+	}
+	if err := app.LaunchKeeper.SetMonitoringcKeeper(app.MonitoringcKeeper); err != nil {
+		return nil, err
+	}
+	if err := app.MonitoringcKeeper.SetIBCKeeper(app.IBCKeeper); err != nil {
+		return nil, err
+	}
 
 	// register streaming services
 	if err := app.RegisterStreamingServices(appOpts, app.kvStoreKeys()); err != nil {

@@ -342,7 +342,7 @@ func (i initializer) Monitoringc(
 	rewardKeeper rewardkeeper.Keeper,
 	connectionMock []Connection,
 	channelMock []Channel,
-) *monitoringckeeper.Keeper {
+) (*monitoringckeeper.Keeper, error) {
 	storeKey := storetypes.NewKVStoreKey(monitoringctypes.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(monitoringctypes.MemStoreKey)
 
@@ -380,10 +380,13 @@ func (i initializer) Monitoringc(
 		launchKeeper,
 		rewardKeeper,
 	)
-	k.SetIBCKeeper(ibcKeeper)
-	k.SetConnectionKeeper(connKeeper)
-	k.SetChannelKeeper(channelKeeper)
-	return k
+	if err := k.SetIBCKeeper(ibcKeeper); err != nil {
+		return nil, err
+	}
+	if err := k.SetConnectionKeeper(connKeeper); err != nil {
+		return nil, err
+	}
+	return k, k.SetChannelKeeper(channelKeeper)
 }
 
 func (i initializer) Monitoringp(

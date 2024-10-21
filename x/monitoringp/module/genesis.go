@@ -45,7 +45,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	if genState.Params.ConsumerConsensusState.Timestamp != "" {
 		_, err := k.InitializeConsumerClient(ctx)
 		if err != nil {
-			panic("couldn't initialize the consumer client ID" + err.Error())
+			return errors.Wrap(err, "couldn't initialize the consumer client ID")
 		}
 	}
 

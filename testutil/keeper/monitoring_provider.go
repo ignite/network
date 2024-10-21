@@ -63,7 +63,8 @@ func NewTestSetupWithIBCMocksMonitoringp(
 	rewardKeeper := initializer.Reward(authKeeper, bankKeeper, profileKeeper, launchKeeper)
 	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper)
 	participationKeeper := initializer.Participation(fundraisingKeeper, stakingKeeper)
-	launchKeeper.SetProjectKeeper(projectKeeper)
+	err := launchKeeper.SetProjectKeeper(projectKeeper)
+	require.NoError(t, err)
 
 	require.NoError(t, initializer.StateStore.LoadLatestVersion())
 
