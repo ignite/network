@@ -18,6 +18,16 @@ enabled = true
 clear_interval = 100
 clear_on_start = true
 tx_confirmation = true
+auto_register_counterparty_payee = false
+clear_limit = 50
+
+[mode.packets.ics20_max_memo_size]
+enabled = true
+size = 32768
+
+[mode.packets.ics20_max_receiver_size]
+enabled = true
+size = 2048
 
 [rest]
 enabled = false
@@ -31,42 +41,54 @@ port = 3001
 
 [[chains]]
 id = 'spn-1'
+type = 'CosmosSdk'
+ccv_consumer_chain = false
 rpc_addr = 'http://0.0.0.0:26657'
 grpc_addr = 'http://0.0.0.0:9090'
-websocket_addr = 'ws://0.0.0.0:26657/websocket'
+event_source = { batch_delay = '500ms', mode = 'push', url = 'ws://localhost:26657/websocket' }
 rpc_timeout = '10s'
+trusted_node = false
 account_prefix = 'spn'
 key_name = 'steve'
+address_type = { derivation = 'cosmos' }
+key_store_type = 'Test'
 store_prefix = 'ibc'
 default_gas = 100000
 max_gas = 400000
-gas_price = { price = 0.025, denom = 'uspn' }
-gas_adjustment = 0.1
+gas_price = { denom = 'uspn', price = 0.025 }
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 2097152
 clock_drift = '5s'
-max_block_time = '10s'
+max_block_time = '30s'
 trusting_period = '14days'
-trust_threshold = { numerator = '1', denominator = '3' }
-address_type = { derivation = 'cosmos' }
+trust_threshold = { denominator = '3', numerator = '1' }
+memo_prefix = ''
+sequential_batch_tx = false
 
 [[chains]]
 id = 'orbit-1'
+type = 'CosmosSdk'
+ccv_consumer_chain = false
 rpc_addr = 'http://localhost:26659'
 grpc_addr = 'http://localhost:9092'
-websocket_addr = 'ws://localhost:26659/websocket'
+event_source = { batch_delay = '500ms', mode = 'push', url = 'ws://localhost:26659/websocket' }
 rpc_timeout = '10s'
+trusted_node = false
 account_prefix = 'spn'
 key_name = 'joe'
+address_type = { derivation = 'cosmos' }
+key_store_type = 'Test'
 store_prefix = 'ibc'
 default_gas = 100000
 max_gas = 400000
 gas_price = { price = 0.025, denom = 'uspn' }
-gas_adjustment = 0.1
+gas_multiplier = 1.1
 max_msg_num = 30
 max_tx_size = 2097152
 clock_drift = '5s'
 max_block_time = '10s'
 trusting_period = '14days'
-trust_threshold = { numerator = '1', denominator = '3' }
-address_type = { derivation = 'cosmos' }
+trust_threshold = { denominator = '3', numerator = '1' }
+memo_prefix = ''
+sequential_batch_tx = false

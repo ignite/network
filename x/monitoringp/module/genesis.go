@@ -11,8 +11,8 @@ import (
 // InitGenesis initializes the module's state from a provided genesis state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) error {
 	// Set if defined
-	if genState.MonitoringInfo != nil {
-		if err := k.MonitoringInfo.Set(ctx, *genState.MonitoringInfo); err != nil {
+	if genState.ConsumerClientId != nil {
+		if err := k.ConsumerClientID.Set(ctx, *genState.ConsumerClientId); err != nil {
 			return err
 		}
 	}
@@ -23,8 +23,8 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 		}
 	}
 	// Set if defined
-	if genState.ConsumerClientId != nil {
-		if err := k.ConsumerClientID.Set(ctx, *genState.ConsumerClientId); err != nil {
+	if genState.MonitoringInfo != nil {
+		if err := k.MonitoringInfo.Set(ctx, *genState.MonitoringInfo); err != nil {
 			return err
 		}
 	}
@@ -38,6 +38,14 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 		err := k.BindPort(ctx, genState.PortId)
 		if err != nil {
 			return errors.Wrap(err, "could not claim port capability")
+		}
+	}
+
+	// initialize and setup the consumer IBC client
+	if genState.Params.ConsumerConsensusState.Timestamp != "" {
+		_, err := k.InitializeConsumerClient(ctx)
+		if err != nil {
+			panic("couldn't initialize the consumer client ID" + err.Error())
 		}
 	}
 
@@ -55,20 +63,20 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) (*types.GenesisState, error
 	}
 
 	genesis.PortId = k.GetPort(ctx)
-	// Get all monitoringInfo
-	monitoringInfo, err := k.MonitoringInfo.Get(ctx)
+	// Get all consumerClientID
+	consumerClientID, err := k.ConsumerClientID.Get(ctx)
 	if err == nil {
-		genesis.MonitoringInfo = &monitoringInfo
+		genesis.ConsumerClientId = &consumerClientID
 	}
 	// Get all connectionChannelID
 	connectionChannelID, err := k.ConnectionChannelID.Get(ctx)
 	if err == nil {
 		genesis.ConnectionChannelId = &connectionChannelID
 	}
-	// Get all consumerClientID
-	consumerClientID, err := k.ConsumerClientID.Get(ctx)
+	// Get all monitoringInfo
+	monitoringInfo, err := k.MonitoringInfo.Get(ctx)
 	if err == nil {
-		genesis.ConsumerClientId = &consumerClientID
+		genesis.MonitoringInfo = &monitoringInfo
 	}
 	// this line is used by starport scaffolding # genesis/module/export
 
