@@ -380,7 +380,10 @@ func (i initializer) Monitoringc(
 		launchKeeper,
 		rewardKeeper,
 	)
-	if err := k.SetIBCKeeper(ibcKeeper); err != nil {
+	if err := k.SetClientKeeper(ibcKeeper.ClientKeeper); err != nil {
+		return nil, err
+	}
+	if err := k.SetPortKeeper(ibcKeeper.PortKeeper); err != nil {
 		return nil, err
 	}
 	if err := k.SetConnectionKeeper(connKeeper); err != nil {
