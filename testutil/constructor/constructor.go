@@ -4,6 +4,7 @@ package constructor
 import (
 	"testing"
 
+	"cosmossdk.io/core/comet"
 	sdkmath "cosmossdk.io/math"
 	abci "github.com/cometbft/cometbft/abci/types"
 	prototypes "github.com/cometbft/cometbft/proto/tendermint/types"
@@ -22,12 +23,12 @@ type Vote struct {
 }
 
 // LastCommitInfo creates a ABCI LastCommitInfo object for test purpose from a list of vote
-func LastCommitInfo(votes ...Vote) abci.CommitInfo {
-	var lci abci.CommitInfo
+func LastCommitInfo(votes ...Vote) comet.CommitInfo {
+	var lci CommitInfo
 
 	// add votes
 	for _, vote := range votes {
-		lci.Votes = append(lci.Votes, abci.VoteInfo{
+		lci.CommitInfo.Votes = append(lci.CommitInfo.Votes, abci.VoteInfo{
 			Validator: abci.Validator{
 				Address: vote.Address,
 			},

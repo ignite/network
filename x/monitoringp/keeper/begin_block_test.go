@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"testing"
 
-	abci "github.com/cometbft/cometbft/abci/types"
+	"cosmossdk.io/core/comet"
 	cmtproto "github.com/cometbft/cometbft/proto/tendermint/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
@@ -78,7 +78,7 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 		monitoringInfoExist         bool
 		inputMonitoringInfo         types.MonitoringInfo
 		lastBlockHeight             int64
-		lastCommitInfo              abci.CommitInfo
+		lastCommitInfo              comet.CommitInfo
 		currentBlockHeight          int64
 		expectedMonitoringInfoFound bool
 		expectedMonitoringInfo      types.MonitoringInfo

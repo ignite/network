@@ -1,12 +1,12 @@
 package keeper
 
 import (
+	"context"
 	"fmt"
 	"time"
 
 	"cosmossdk.io/collections"
-	abci "github.com/cometbft/cometbft/abci/types"
-	cmtproto "github.com/cometbft/cometbft/proto/tendermint/types"
+	"cosmossdk.io/core/comet"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	clienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
 	"github.com/pkg/errors"
@@ -23,7 +23,7 @@ const (
 )
 
 // ReportBlockSignatures gets signatures from blocks and update monitoring info
-func (k Keeper) ReportBlockSignatures(ctx sdk.Context, lastCommit abci.CommitInfo, blockHeight int64) error {
+func (k Keeper) ReportBlockSignatures(ctx context.Context, lastCommit comet.CommitInfo, blockHeight int64) error {
 	// skip first block because it is not signed
 	if blockHeight == 1 {
 		return nil
@@ -50,16 +50,17 @@ func (k Keeper) ReportBlockSignatures(ctx sdk.Context, lastCommit abci.CommitInf
 	}
 
 	// update signatures with voters that signed blocks
-	valSetSize := int64(len(lastCommit.Votes))
-	for _, vote := range lastCommit.Votes {
-		if vote.BlockIdFlag != cmtproto.BlockIDFlagAbsent {
+	valSetSize := lastCommit.Votes().Len()
+	for i := 0; i < valSetSize; i++ {
+		vote := lastCommit.Votes().Get(i)
+		if vote.GetBlockIDFlag() != comet.BlockIDFlagAbsent {
 			// get the operator address from the consensus address
-			val, err := k.stakingKeeper.GetValidatorByConsAddr(ctx, vote.Validator.Address)
+			val, err := k.stakingKeeper.GetValidatorByConsAddr(ctx, vote.Validator().Address())
 			if err != nil {
-				return fmt.Errorf("validator from consensus address %s not found", vote.Validator.Address)
+				return fmt.Errorf("validator from consensus address %s not found", vote.Validator().Address())
 			}
 
-			monitoringInfo.SignatureCounts.AddSignature(val.OperatorAddress, valSetSize)
+			monitoringInfo.SignatureCounts.AddSignature(val.OperatorAddress, int64(valSetSize))
 		}
 	}
 
@@ -70,7 +71,9 @@ func (k Keeper) ReportBlockSignatures(ctx sdk.Context, lastCommit abci.CommitInf
 
 // TransmitSignatures transmits over IBC the signatures to consumer if height is reached
 // and signatures are not yet transmitted
-func (k Keeper) TransmitSignatures(ctx sdk.Context, blockHeight int64) (sequence uint64, err error) {
+func (k Keeper) TransmitSignatures(ctx context.Context, blockHeight int64) (sequence uint64, err error) {
+	sdkCtx := sdk.UnwrapSDKContext(ctx)
+
 	// check condition to transmit packet
 	// IBC connection to consumer must be established
 	// last block height must be reached
@@ -94,7 +97,7 @@ func (k Keeper) TransmitSignatures(ctx sdk.Context, blockHeight int64) (sequence
 
 	// transmit signature packet
 	sequence, err = k.TransmitMonitoringPacket(
-		ctx,
+		sdkCtx,
 		networktypes.MonitoringPacket{
 			BlockHeight:     blockHeight,
 			SignatureCounts: mi.SignatureCounts,
@@ -102,7 +105,7 @@ func (k Keeper) TransmitSignatures(ctx sdk.Context, blockHeight int64) (sequence
 		types.PortID,
 		cid.ChannelId,
 		clienttypes.ZeroHeight(),
-		uint64(ctx.BlockTime().Add(MonitoringPacketTimeoutDelay).UnixNano()),
+		uint64(sdkCtx.BlockTime().Add(MonitoringPacketTimeoutDelay).UnixNano()),
 	)
 	if err != nil {
 		if err := k.ConsumerClientID.Set(ctx, types.ConsumerClientID{

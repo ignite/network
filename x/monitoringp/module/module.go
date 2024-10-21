@@ -9,6 +9,7 @@ import (
 	"cosmossdk.io/core/appmodule"
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/depinject"
+	"cosmossdk.io/errors"
 	"cosmossdk.io/log"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -154,7 +155,23 @@ func (AppModule) ConsensusVersion() uint64 { return 1 }
 
 // BeginBlock contains the logic that is automatically triggered at the beginning of each block.
 // The begin block implementation is optional.
-func (am AppModule) BeginBlock(_ context.Context) error {
+func (am AppModule) BeginBlock(ctx context.Context) error {
+	var (
+		sdkCtx         = sdk.UnwrapSDKContext(ctx)
+		lastCommitInfo = sdkCtx.CometInfo().GetLastCommit()
+		height         = sdkCtx.BlockHeight()
+	)
+	// reports signatures for the block
+	err := am.keeper.ReportBlockSignatures(ctx, lastCommitInfo, height)
+	if err != nil {
+		return errors.Wrap(err, "error reporting block signatures")
+	}
+
+	// check and transmit signatures
+	_, err = am.keeper.TransmitSignatures(ctx, height)
+	if err != nil {
+		return errors.Wrap(err, "error transmitting the validator signatures")
+	}
 	return nil
 }
 
