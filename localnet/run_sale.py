@@ -47,11 +47,11 @@ if __name__ == "__main__":
     time.sleep(15)
 
     # Place bid
-    cmd('networkd tx fundraising bid 0 fixed-price 100.0 10000v/0/orbit --from bob --chain-id spn-1 --keyring-backend test -y')
+    cmd('networkd tx fundraising bid 0 fixed-price 100 10000v/0/orbit --from bob --chain-id spn-1 --keyring-backend test -y')
     time.sleep(2)
-    cmd('networkd tx fundraising bid 0 fixed-price 100.0 20000v/0/orbit --from carol --chain-id spn-1 --keyring-backend test -y')
+    cmd('networkd tx fundraising bid 0 fixed-price 100 20000v/0/orbit --from carol --chain-id spn-1 --keyring-backend test -y')
     time.sleep(2)
-    cmd('networkd tx fundraising bid 0 fixed-price 100.0 20000v/0/orbit --from dave --chain-id spn-1 --keyring-backend test -y')
+    cmd('networkd tx fundraising bid 0 fixed-price 100 20000v/0/orbit --from dave --chain-id spn-1 --keyring-backend test -y')
 
     # Wait withdrawal delay
     print("waiting for withdrawal delay...")

@@ -31,7 +31,8 @@ if __name__ == "__main__":
     end = date_now + datetime.timedelta(seconds=40)
 
     # Fundraising
-    set_auction_json('v/1/orbit', '50000', 'uspn', '100', '50', date_f(start), date_f(end))
+    set_auction_json('v/0/orbit', '50000', 'uspn', '100', '50', date_f(start), date_f(end))
+    time.sleep(2)
     cmd('networkd tx fundraising create-batch-auction {} --from alice --chain-id spn-1 --keyring-backend test -y'.format(
         auction_file))
     time.sleep(2)
@@ -47,15 +48,15 @@ if __name__ == "__main__":
     time.sleep(15)
 
     # Place bid
-    cmd('networkd tx fundraising place-bid 0 batch-many 120 10000v/1/orbit --from bob --chain-id spn-1 --keyring-backend test -y')
+    cmd('networkd tx fundraising bid 0 batch-many 120 10000v/0/orbit --from bob --chain-id spn-1 --keyring-backend test -y')
     time.sleep(2)
-    cmd('networkd tx fundraising place-bid 0 batch-many 80 20000v/1/orbit --from carol --chain-id spn-1 --keyring-backend test -y')
+    cmd('networkd tx fundraising bid 0 batch-many 80 20000v/0/orbit --from carol --chain-id spn-1 --keyring-backend test -y')
     time.sleep(2)
-    cmd('networkd tx fundraising place-bid 0 batch-many 140 20000v/1/orbit --from dave --chain-id spn-1 --keyring-backend test -y')
+    cmd('networkd tx fundraising bid 0 batch-many 140 20000v/0/orbit --from dave --chain-id spn-1 --keyring-backend test -y')
 
     # Wait withdrawal delay
     print("waiting for withdrawal delay...")
-    time.sleep(5)
+    time.sleep(15)
 
     cmd('networkd tx participation withdraw-allocations 0 --from bob --chain-id spn-1 --keyring-backend test -y')
     time.sleep(2)
