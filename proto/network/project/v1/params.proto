@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package network.project.v1;
+
+import "amino/amino.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/ignite/network/x/project/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "network/x/project/Params";
+  option (gogoproto.equal) = true;
+
+  TotalSupplyRange total_supply_range = 1 [(gogoproto.nullable) = false];
+
+  repeated cosmos.base.v1beta1.Coin project_creation_fee = 2 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+
+  uint64 max_metadata_length = 3;
+}
+
+// TotalSupplyRange defines the range of allowed values for total supply
+message TotalSupplyRange {
+  string min_total_supply = 1 [
+    (gogoproto.nullable) = false,
+    (gogoproto.customtype) = "cosmossdk.io/math.Int",
+    (cosmos_proto.scalar) = "cosmos.Int"
+  ];
+
+  string max_total_supply = 2 [
+    (gogoproto.nullable) = false,
+    (gogoproto.customtype) = "cosmossdk.io/math.Int",
+    (cosmos_proto.scalar) = "cosmos.Int"
+  ];
+}

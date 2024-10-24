@@ -44,7 +44,7 @@ parser.add_argument('--self_delegation_3',
                     help='Self delegation for validator 3',
                     )
 parser.add_argument('--unbonding_time',
-                    default=1814400, # 21 days = 1814400 seconds
+                    default=1814400,  # 21 days = 1814400 seconds
                     type=int,
                     help='Staking unbonding time (unbonding period)',
                     )
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     )
     print('rewards initialized')
 
-    cmd('spnd q ibc client self-consensus-state --height {} > spncs.yaml'.format(revisionHeight))
+    cmd('networkd q ibc client self-consensus-state --height {} > spncs.yaml'.format(revisionHeight))
 
     # Start the testnet
     print('start network')
@@ -96,12 +96,15 @@ if __name__ == "__main__":
 
     # Create verified IBC client on SPN
     print('create verified client')
-    cmd('spnd q tendermint-validator-set 2 --node "tcp://localhost:26659" > vs.yaml')
-    cmd('spnd q ibc client self-consensus-state --height 2 --node "tcp://localhost:26659" > cs.yaml')
-    cmd('spnd tx monitoring-consumer create-client 1 cs.yaml vs.yaml --unbonding-period {} --revision-height 2 --from alice -y'.format(unbondingTime))
+    cmd('networkd q tendermint-validator-set 2 --node "tcp://localhost:26659" > vs.yaml')
+    cmd('networkd q ibc client self-consensus-state --height 2 --node "tcp://localhost:26659" > cs.yaml')
+    time.sleep(2)
+    cmd('networkd tx monitoringc create-client 0 cs.yaml vs.yaml --unbonding-period {} --revision-height 2 --from alice --chain-id spn-1 --keyring-backend test -y'.format(
+        unbondingTime))
+    time.sleep(2)
 
     # Perform IBC connection
-    cmd('hermes -c ./hermes/config.toml create connection spn-1 --client-a 07-tendermint-0 --client-b 07-tendermint-0')
-    cmd('hermes -c ./hermes/config.toml create channel --port-a monitoringc --port-b monitoringp spn-1 connection-0 -o ordered --channel-version monitoring-1')
+    cmd('hermes --config ./hermes/config.toml create connection --a-chain spn-1 --a-client 07-tendermint-0 --b-client 07-tendermint-0')
+    cmd('hermes --config ./hermes/config.toml create channel --a-port monitoringc --b-port monitoringp --a-chain spn-1 --a-connection connection-0 --order ordered --channel-version monitoring-1')
 
-    # hermes -c ./hermes/config.toml start
+    # hermes --config ./hermes/config.toml start

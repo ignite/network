@@ -8,12 +8,12 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/pkg/types"
+	"github.com/ignite/network/pkg/types"
 )
 
 func TestParseValidatorSetFromFile(t *testing.T) {
 	fileFromContent := func(content string) string {
-		f, err := os.CreateTemp("", "spn_validator_set_test")
+		f, err := os.CreateTemp("", "network_validator_set_test")
 		require.NoError(t, err)
 		t.Cleanup(func() {
 			os.Remove(f.Name())
@@ -27,37 +27,37 @@ func TestParseValidatorSetFromFile(t *testing.T) {
 	validValidatorSet := `validators:
 - proposer_priority: "0"
   pub_key:
-    type: tendermint/PubKeyEd25519
-    value: fYaox+q+N3XkGZdcQ5f3MH4/5J4oh6FRoYdW0vxRdIg=
+    '@type': tendermint/PubKeyEd25519
+    key: fYaox+q+N3XkGZdcQ5f3MH4/5J4oh6FRoYdW0vxRdIg=
   voting_power: "100"
 - proposer_priority: "1"
   pub_key:
-    type: tendermint/PubKeyEd25519
-    value: /hO27XpCRWr6bZKqOxdNyYdLB3sAG2dG9dYXrOfM2II=
+    '@type': tendermint/PubKeyEd25519
+    key: /hO27XpCRWr6bZKqOxdNyYdLB3sAG2dG9dYXrOfM2II=
   voting_power: "50"
 `
 	validatorSetInvalidVotingPower := `validators:
 - proposer_priority: "0"
   pub_key:
-    type: tendermint/PubKeyEd25519
-    value: fYaox+q+N3XkGZdcQ5f3MH4/5J4oh6FRoYdW0vxRdIg=
+    '@type': tendermint/PubKeyEd25519
+    key: fYaox+q+N3XkGZdcQ5f3MH4/5J4oh6FRoYdW0vxRdIg=
   voting_power: "foo""
 - proposer_priority: "1"
   pub_key:
-    type: tendermint/PubKeyEd25519
-    value: /hO27XpCRWr6bZKqOxdNyYdLB3sAG2dG9dYXrOfM2II=
+    '@type': tendermint/PubKeyEd25519
+    key: /hO27XpCRWr6bZKqOxdNyYdLB3sAG2dG9dYXrOfM2II=
   voting_power: "50"
 `
 	validatorSetInvalidProposerPriority := `validators:
 - proposer_priority: "0"
   pub_key:
-    type: tendermint/PubKeyEd25519
-    value: fYaox+q+N3XkGZdcQ5f3MH4/5J4oh6FRoYdW0vxRdIg=
+    '@type': tendermint/PubKeyEd25519
+    key: fYaox+q+N3XkGZdcQ5f3MH4/5J4oh6FRoYdW0vxRdIg=
   voting_power: "100""
 - proposer_priority: "foo"
   pub_key:
-    type: tendermint/PubKeyEd25519
-    value: /hO27XpCRWr6bZKqOxdNyYdLB3sAG2dG9dYXrOfM2II=
+    '@type': tendermint/PubKeyEd25519
+    key: /hO27XpCRWr6bZKqOxdNyYdLB3sAG2dG9dYXrOfM2II=
   voting_power: "50"
 `
 	tests := []struct {

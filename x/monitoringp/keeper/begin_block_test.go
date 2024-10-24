@@ -3,15 +3,15 @@ package keeper_test
 import (
 	"testing"
 
+	"cosmossdk.io/core/comet"
+	cmtproto "github.com/cometbft/cometbft/proto/tendermint/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-
-	abci "github.com/cometbft/cometbft/abci/types"
 	"github.com/stretchr/testify/require"
 
-	tc "github.com/tendermint/spn/testutil/constructor"
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/monitoringp/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/monitoringp/types"
 )
 
 func TestKeeper_ReportBlockSignatures(t *testing.T) {
@@ -49,11 +49,16 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 	consNoValidator := sample.ConsAddress(r)
 
 	// initialize staking validator set
-	tk.StakingKeeper.SetValidator(ctx, valFoo)
-	tk.StakingKeeper.SetValidator(ctx, valBar)
-	tk.StakingKeeper.SetValidator(ctx, valBaz)
-	tk.StakingKeeper.SetValidator(ctx, valFred)
-	tk.StakingKeeper.SetValidator(ctx, valQux)
+	err = tk.StakingKeeper.SetValidator(ctx, valFoo)
+	require.NoError(t, err)
+	err = tk.StakingKeeper.SetValidator(ctx, valBar)
+	require.NoError(t, err)
+	err = tk.StakingKeeper.SetValidator(ctx, valBaz)
+	require.NoError(t, err)
+	err = tk.StakingKeeper.SetValidator(ctx, valFred)
+	require.NoError(t, err)
+	err = tk.StakingKeeper.SetValidator(ctx, valQux)
+	require.NoError(t, err)
 
 	t.Run("should set validators by consensus address", func(t *testing.T) {
 		err = tk.StakingKeeper.SetValidatorByConsAddr(ctx, valFoo)
@@ -73,7 +78,7 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 		monitoringInfoExist         bool
 		inputMonitoringInfo         types.MonitoringInfo
 		lastBlockHeight             int64
-		lastCommitInfo              abci.CommitInfo
+		lastCommitInfo              comet.CommitInfo
 		currentBlockHeight          int64
 		expectedMonitoringInfoFound bool
 		expectedMonitoringInfo      types.MonitoringInfo
@@ -111,7 +116,7 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 			lastCommitInfo: tc.LastCommitInfo(
 				tc.Vote{
 					Address: consFoo,
-					Signed:  true,
+					BlockID: cmtproto.BlockIDFlagCommit,
 				},
 			),
 			currentBlockHeight:          11,
@@ -135,7 +140,7 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 			lastCommitInfo: tc.LastCommitInfo(
 				tc.Vote{
 					Address: consFoo,
-					Signed:  true,
+					BlockID: cmtproto.BlockIDFlagCommit,
 				},
 			),
 			currentBlockHeight:          2,
@@ -168,23 +173,23 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 			lastCommitInfo: tc.LastCommitInfo(
 				tc.Vote{
 					Address: consFoo,
-					Signed:  true,
+					BlockID: cmtproto.BlockIDFlagCommit,
 				},
 				tc.Vote{
 					Address: consBar,
-					Signed:  false,
+					BlockID: cmtproto.BlockIDFlagAbsent,
 				},
 				tc.Vote{
 					Address: consBaz,
-					Signed:  true,
+					BlockID: cmtproto.BlockIDFlagCommit,
 				},
 				tc.Vote{
 					Address: consQux,
-					Signed:  false,
+					BlockID: cmtproto.BlockIDFlagAbsent,
 				},
 				tc.Vote{
 					Address: consFred,
-					Signed:  true,
+					BlockID: cmtproto.BlockIDFlagCommit,
 				},
 			),
 			currentBlockHeight:          2,
@@ -221,7 +226,7 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 			lastCommitInfo: tc.LastCommitInfo(
 				tc.Vote{
 					Address: consNoValidator,
-					Signed:  true,
+					BlockID: cmtproto.BlockIDFlagCommit,
 				},
 			),
 			currentBlockHeight: 2,
@@ -231,17 +236,21 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// set keeper values
-			params := tk.MonitoringProviderKeeper.GetParams(ctx)
+			params, err := tk.MonitoringProviderKeeper.Params.Get(ctx)
+			require.NoError(t, err)
 			params.LastBlockHeight = tt.lastBlockHeight
-			tk.MonitoringProviderKeeper.SetParams(ctx, params)
+			err = tk.MonitoringProviderKeeper.Params.Set(ctx, params)
+			require.NoError(t, err)
 			if tt.monitoringInfoExist {
-				tk.MonitoringProviderKeeper.SetMonitoringInfo(ctx, tt.inputMonitoringInfo)
+				err = tk.MonitoringProviderKeeper.MonitoringInfo.Set(ctx, tt.inputMonitoringInfo)
+				require.NoError(t, err)
 			} else {
-				tk.MonitoringProviderKeeper.RemoveMonitoringInfo(ctx)
+				err = tk.MonitoringProviderKeeper.MonitoringInfo.Remove(ctx)
+				require.NoError(t, err)
 			}
 
 			// report
-			err := tk.MonitoringProviderKeeper.ReportBlockSignatures(ctx, tt.lastCommitInfo, tt.currentBlockHeight)
+			err = tk.MonitoringProviderKeeper.ReportBlockSignatures(ctx, tt.lastCommitInfo, tt.currentBlockHeight)
 			if tt.wantErr {
 				require.Error(t, err)
 				return
@@ -249,8 +258,8 @@ func TestKeeper_ReportBlockSignatures(t *testing.T) {
 			require.NoError(t, err)
 
 			// check saved values
-			monitoringInfo, found := tk.MonitoringProviderKeeper.GetMonitoringInfo(ctx)
-			require.EqualValues(t, tt.expectedMonitoringInfoFound, found)
+			monitoringInfo, err := tk.MonitoringProviderKeeper.MonitoringInfo.Get(ctx)
+			require.EqualValues(t, tt.expectedMonitoringInfoFound, err == nil)
 			require.EqualValues(t, tt.expectedMonitoringInfo, monitoringInfo)
 		})
 	}
@@ -265,11 +274,16 @@ func TestKeeper_TransmitSignatures(t *testing.T) {
 		sample.Validator(t, r)
 
 	// initialize staking validator set
-	tk.StakingKeeper.SetValidator(ctx, valFoo)
-	tk.StakingKeeper.SetValidator(ctx, valBar)
-	tk.StakingKeeper.SetValidator(ctx, valBaz)
-	tk.StakingKeeper.SetValidator(ctx, valFred)
-	tk.StakingKeeper.SetValidator(ctx, valQux)
+	err := tk.StakingKeeper.SetValidator(ctx, valFoo)
+	require.NoError(t, err)
+	err = tk.StakingKeeper.SetValidator(ctx, valBar)
+	require.NoError(t, err)
+	err = tk.StakingKeeper.SetValidator(ctx, valBaz)
+	require.NoError(t, err)
+	err = tk.StakingKeeper.SetValidator(ctx, valFred)
+	require.NoError(t, err)
+	err = tk.StakingKeeper.SetValidator(ctx, valQux)
+	require.NoError(t, err)
 
 	t.Run("should set validators by consensus address", func(t *testing.T) {
 		err := tk.StakingKeeper.SetValidatorByConsAddr(ctx, valFoo)
@@ -306,7 +320,7 @@ func TestKeeper_TransmitSignatures(t *testing.T) {
 			lastBlockHeight:    10,
 			currentBlockHeight: 11,
 			channelIDExist:     true,
-			channelID:          types.ConnectionChannelID{ChannelID: "channelID"},
+			channelID:          types.ConnectionChannelID{ChannelId: "channel_id"},
 			wantErr:            true,
 		},
 		{
@@ -331,29 +345,34 @@ func TestKeeper_TransmitSignatures(t *testing.T) {
 			lastBlockHeight:             10,
 			currentBlockHeight:          11,
 			channelIDExist:              true,
-			channelID:                   types.ConnectionChannelID{ChannelID: "channelID"},
+			channelID:                   types.ConnectionChannelID{ChannelId: "channel_id"},
 			expectedMonitoringInfoFound: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// set keeper values
-			params := tk.MonitoringProviderKeeper.GetParams(ctx)
+			params, err := tk.MonitoringProviderKeeper.Params.Get(ctx)
+			require.NoError(t, err)
 			params.LastBlockHeight = tt.lastBlockHeight
-			tk.MonitoringProviderKeeper.SetParams(ctx, params)
+			err = tk.MonitoringProviderKeeper.Params.Set(ctx, params)
+			require.NoError(t, err)
 			if tt.monitoringInfoExist {
-				tk.MonitoringProviderKeeper.SetMonitoringInfo(ctx, tt.inputMonitoringInfo)
+				err = tk.MonitoringProviderKeeper.MonitoringInfo.Set(ctx, tt.inputMonitoringInfo)
+				require.NoError(t, err)
 			} else {
-				tk.MonitoringProviderKeeper.RemoveMonitoringInfo(ctx)
+				err = tk.MonitoringProviderKeeper.MonitoringInfo.Remove(ctx)
+				require.NoError(t, err)
 			}
 
 			if tt.channelIDExist {
-				tk.MonitoringProviderKeeper.SetConnectionChannelID(ctx, tt.channelID)
+				err = tk.MonitoringProviderKeeper.ConnectionChannelID.Set(ctx, tt.channelID)
+				require.NoError(t, err)
 			}
 
 			// report
 			// TODO check sequence in test
-			_, err := tk.MonitoringProviderKeeper.TransmitSignatures(ctx, tt.currentBlockHeight)
+			_, err = tk.MonitoringProviderKeeper.TransmitSignatures(ctx, tt.currentBlockHeight)
 			if tt.wantErr {
 				require.Error(t, err)
 				return
@@ -361,8 +380,8 @@ func TestKeeper_TransmitSignatures(t *testing.T) {
 			require.NoError(t, err)
 
 			// check saved values
-			monitoringInfo, found := tk.MonitoringProviderKeeper.GetMonitoringInfo(ctx)
-			require.EqualValues(t, tt.expectedMonitoringInfoFound, found)
+			monitoringInfo, err := tk.MonitoringProviderKeeper.MonitoringInfo.Get(ctx)
+			require.EqualValues(t, tt.expectedMonitoringInfoFound, err == nil)
 			require.EqualValues(t, tt.expectedMonitoringInfo, monitoringInfo)
 		})
 	}

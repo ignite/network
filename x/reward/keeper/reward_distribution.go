@@ -1,16 +1,18 @@
 package keeper
 
 import (
+	"context"
+	"errors"
 	"fmt"
 
 	sdkerrors "cosmossdk.io/errors"
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	ignterrors "github.com/ignite/modules/pkg/errors"
-
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/x/reward/types"
+	ignterrors "github.com/ignite/network/pkg/errors"
+	networktypes "github.com/ignite/network/pkg/types"
+	profiletypes "github.com/ignite/network/x/profile/types"
+	"github.com/ignite/network/x/reward/types"
 )
 
 // DistributeRewards distributes rewards based on the monitoring packet
@@ -25,15 +27,15 @@ import (
 // so the reward pool is not closed as long as `lastBlockHeight` does not
 // reach `rewardPool.LastRewardHeight`
 func (k Keeper) DistributeRewards(
-	ctx sdk.Context,
+	ctx context.Context,
 	launchID uint64,
-	signatureCounts spntypes.SignatureCounts,
+	signatureCounts networktypes.SignatureCounts,
 	lastBlockHeight int64,
 	closeRewardPool bool,
 ) error {
 	// get the reward pool related to the chain
-	rewardPool, found := k.GetRewardPool(ctx, launchID)
-	if !found {
+	rewardPool, err := k.RewardPool.Get(ctx, launchID)
+	if err != nil {
 		return sdkerrors.Wrapf(types.ErrRewardPoolNotFound, "%d", launchID)
 	}
 
@@ -41,7 +43,7 @@ func (k Keeper) DistributeRewards(
 		return sdkerrors.Wrapf(types.ErrRewardPoolClosed, "%d", launchID)
 	}
 
-	provider, err := sdk.AccAddressFromBech32(rewardPool.Provider)
+	provider, err := k.addressCodec.StringToBytes(rewardPool.Provider)
 	if err != nil {
 		return ignterrors.Criticalf("can't parse the provider address %s", err.Error())
 	}
@@ -57,22 +59,21 @@ func (k Keeper) DistributeRewards(
 	}
 
 	// only the monitored blocks relative to last reward height are rewarded
-	blockRatioNumerator := sdk.NewDec(lastBlockHeight).Sub(sdk.NewDec(rewardPool.CurrentRewardHeight))
-	blockRatioDenominator := sdk.NewDec(rewardPool.LastRewardHeight).Sub(sdk.NewDec(rewardPool.CurrentRewardHeight))
+	blockRatioNumerator := sdkmath.LegacyNewDec(lastBlockHeight).Sub(sdkmath.LegacyNewDec(rewardPool.CurrentRewardHeight))
+	blockRatioDenominator := sdkmath.LegacyNewDec(rewardPool.LastRewardHeight).Sub(sdkmath.LegacyNewDec(rewardPool.CurrentRewardHeight))
 	blockRatio := blockRatioNumerator.Quo(blockRatioDenominator)
-	if blockRatio.GT(sdk.OneDec()) {
-		blockRatio = sdk.OneDec()
+	if blockRatio.GT(sdkmath.LegacyOneDec()) {
+		blockRatio = sdkmath.LegacyOneDec()
 	}
 
 	// store the total relative signature distributed to calculate the refund for the round
-	totalRelativeSignaturesDistributed := sdk.ZeroDec()
+	totalRelativeSignaturesDistributed := sdkmath.LegacyZeroDec()
 
 	// store rewards to distributes per address
 	rewardsToDistribute := make(map[string]sdk.Coins)
 
 	// calculate the total reward for all validators
 	for _, signatureCount := range signatureCounts.Counts {
-
 		// get the operator address of the signature counts with the chain prefix
 		config := sdk.GetConfig()
 		if config == nil {
@@ -86,9 +87,11 @@ func (k Keeper) DistributeRewards(
 		// if the operator address is associated with a validator profile, this address is used to receive rewwards
 		// otherwise rewards are distributed to the operator address account
 		valAddr := opAddr
-		validatorByOpAddr, found := k.profileKeeper.GetValidatorByOperatorAddress(ctx, opAddr)
-		if found {
+		validatorByOpAddr, err := k.profileKeeper.GetValidatorByOperatorAddress(ctx, opAddr)
+		if err == nil {
 			valAddr = validatorByOpAddr.ValidatorAddress
+		} else if !errors.Is(err, profiletypes.ErrValidatorByOperatorAddressNotFound) {
+			return ignterrors.Criticalf("can't get validator by operator address: %s", err.Error())
 		}
 
 		// calculate the total relative signature distributed to calculate the refund for the round
@@ -97,7 +100,7 @@ func (k Keeper) DistributeRewards(
 		// compute reward relative to the signature and block count
 		// and update reward pool
 		signatureRatio := signatureCount.RelativeSignatures.Quo(
-			sdk.NewDecFromInt(sdkmath.NewIntFromUint64(signatureCounts.BlockCount)),
+			sdkmath.LegacyNewDecFromInt(sdkmath.NewIntFromUint64(signatureCounts.BlockCount)),
 		)
 		rewards, err := CalculateRewards(blockRatio, signatureRatio, rewardPool.RemainingCoins)
 		if err != nil {
@@ -116,15 +119,15 @@ func (k Keeper) DistributeRewards(
 		rewardPool.RemainingCoins = coins
 
 		// send rewards to the address
-		account, err := sdk.AccAddressFromBech32(address)
+		account, err := k.addressCodec.StringToBytes(address)
 		if err != nil {
 			return ignterrors.Criticalf("can't parse address %s", err.Error())
 		}
 		if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, account, rewards); err != nil {
 			return ignterrors.Criticalf("send rewards error: %s", err.Error())
 		}
-		if err := ctx.EventManager().EmitTypedEvent(&types.EventRewardsDistributed{
-			LaunchID: launchID,
+		if err := sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(&types.EventRewardsDistributed{
+			LaunchId: launchID,
 			Receiver: address,
 			Rewards:  rewards,
 		}); err != nil {
@@ -139,22 +142,21 @@ func (k Keeper) DistributeRewards(
 			ctx,
 			types.ModuleName,
 			provider,
-			rewardPool.RemainingCoins); err != nil {
+			rewardPool.RemainingCoins,
+		); err != nil {
 			return ignterrors.Criticalf("send rewards error: %s", err.Error())
 		}
 
 		// close the pool
 		rewardPool.Closed = true
 		rewardPool.RemainingCoins = rewardPool.RemainingCoins.Sub(rewardPool.RemainingCoins...) // sub coins transferred
-		k.SetRewardPool(ctx, rewardPool)
-
-		return nil
+		return k.RewardPool.Set(ctx, rewardPool.LaunchId, rewardPool)
 	}
 
 	// Otherwise, the refund is relative to the block ratio and the reward pool is updated
 	// refundRatio is blockCount.
 	// This is sum of signaturesRelative values from validator to compute refund
-	blockCount := sdk.NewDecFromInt(sdkmath.NewIntFromUint64(signatureCounts.BlockCount))
+	blockCount := sdkmath.LegacyNewDecFromInt(sdkmath.NewIntFromUint64(signatureCounts.BlockCount))
 	refundRatioNumerator := blockCount.Sub(totalRelativeSignaturesDistributed)
 	refundRatio := refundRatioNumerator.Quo(blockCount)
 	refund, err := CalculateRewards(blockRatio, refundRatio, rewardPool.RemainingCoins)
@@ -175,24 +177,24 @@ func (k Keeper) DistributeRewards(
 			ctx,
 			types.ModuleName,
 			provider,
-			rewardPool.RemainingCoins); err != nil {
+			rewardPool.RemainingCoins,
+		); err != nil {
 			return ignterrors.Criticalf("send rewards error: %s", err.Error())
 		}
 	}
 
 	// update the current reward height for next reward
 	rewardPool.CurrentRewardHeight = lastBlockHeight
-	k.SetRewardPool(ctx, rewardPool)
-	return nil
+	return k.RewardPool.Set(ctx, rewardPool.LaunchId, rewardPool)
 }
 
 // CalculateRewards calculates the reward relative to the signature and block ratio
-func CalculateRewards(blockRatio, signatureRatio sdk.Dec, coins sdk.Coins) (sdk.Coins, error) {
+func CalculateRewards(blockRatio, signatureRatio sdkmath.LegacyDec, coins sdk.Coins) (sdk.Coins, error) {
 	// ratio can't be greater than one
-	if blockRatio.GT(sdk.OneDec()) {
+	if blockRatio.GT(sdkmath.LegacyOneDec()) {
 		return nil, fmt.Errorf("block ratio is greater than 1 %s", blockRatio.String())
 	}
-	if signatureRatio.GT(sdk.OneDec()) {
+	if signatureRatio.GT(sdkmath.LegacyOneDec()) {
 		return nil, fmt.Errorf("signature ratio is greater than 1 %s", signatureRatio.String())
 	}
 
@@ -204,7 +206,7 @@ func CalculateRewards(blockRatio, signatureRatio sdk.Dec, coins sdk.Coins) (sdk.
 	// calculate rewards
 	rewards := sdk.NewCoins()
 	for _, coin := range coins {
-		amount := blockRatio.Mul(signatureRatio).Mul(sdk.NewDecFromInt(coin.Amount))
+		amount := blockRatio.Mul(signatureRatio).Mul(sdkmath.LegacyNewDecFromInt(coin.Amount))
 		coin.Amount = amount.TruncateInt()
 		rewards = rewards.Add(coin)
 	}

@@ -3,12 +3,12 @@ package types
 import (
 	"errors"
 
-	"github.com/tendermint/spn/pkg/chainid"
+	"github.com/ignite/network/pkg/chainid"
 )
 
 // Validate checks the chain has valid data
 func (m Chain) Validate() error {
-	if _, _, err := chainid.ParseGenesisChainID(m.GenesisChainID); err != nil {
+	if _, _, err := chainid.ParseGenesisChainID(m.GenesisChainId); err != nil {
 		return err
 	}
 

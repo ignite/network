@@ -1,48 +1,36 @@
 package keeper
 
 import (
-	"github.com/cosmos/cosmos-sdk/store/prefix"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"context"
 
-	"github.com/tendermint/spn/x/profile/types"
+	"cosmossdk.io/collections"
+	"github.com/pkg/errors"
+
+	"github.com/ignite/network/x/profile/types"
 )
 
-// SetValidator set a specific validator in the store from its index
-func (k Keeper) SetValidator(ctx sdk.Context, validator types.Validator) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ValidatorKeyPrefix))
-	b := k.cdc.MustMarshal(&validator)
-	store.Set(types.ValidatorKey(
-		validator.Address,
-	), b)
+func (k Keeper) GetValidatorByOperatorAddress(ctx context.Context, operatorAddress string) (types.ValidatorByOperatorAddress, error) {
+	val, err := k.ValidatorByOperatorAddress.Get(ctx, operatorAddress)
+	if errors.Is(err, collections.ErrNotFound) {
+		return types.ValidatorByOperatorAddress{}, types.ErrValidatorByOperatorAddressNotFound
+	}
+	return val, err
 }
 
-// GetValidator returns a validator from its index
-func (k Keeper) GetValidator(ctx sdk.Context, address string) (val types.Validator, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ValidatorKeyPrefix))
-
-	b := store.Get(types.ValidatorKey(
-		address,
-	))
-	if b == nil {
-		return val, false
+func (k Keeper) GetValidator(ctx context.Context, address string) (types.Validator, error) {
+	acc, err := k.Validator.Get(ctx, address)
+	if errors.Is(err, collections.ErrNotFound) {
+		return types.Validator{}, types.ErrValidatorNotFound
 	}
-
-	k.cdc.MustUnmarshal(b, &val)
-	return val, true
+	return acc, err
 }
 
-// GetAllValidator returns all validator
-func (k Keeper) GetAllValidator(ctx sdk.Context) (list []types.Validator) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ValidatorKeyPrefix))
-	iterator := sdk.KVStorePrefixIterator(store, []byte{})
-
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var val types.Validator
-		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		list = append(list, val)
-	}
-
-	return
+// ListValidator returns all Validator.
+func (k Keeper) ListValidator(ctx context.Context) ([]types.Validator, error) {
+	validators := make([]types.Validator, 0)
+	err := k.Validator.Walk(ctx, nil, func(_ string, validator types.Validator) (bool, error) {
+		validators = append(validators, validator)
+		return false, nil
+	})
+	return validators, err
 }

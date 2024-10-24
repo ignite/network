@@ -3,14 +3,12 @@ package types
 import (
 	"errors"
 	"fmt"
-
-	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // NewRewardPool returns a new RewardPool object
 func NewRewardPool(launchID uint64, currentRewardHeight int64) RewardPool {
 	return RewardPool{
-		LaunchID:            launchID,
+		LaunchId:            launchID,
 		CurrentRewardHeight: currentRewardHeight,
 		Closed:              false,
 	}
@@ -52,10 +50,6 @@ func (m RewardPool) Validate() error {
 			m.CurrentRewardHeight,
 			m.LastRewardHeight,
 		)
-	}
-
-	if _, err := sdk.AccAddressFromBech32(m.Provider); err != nil {
-		return fmt.Errorf("invalid provider address: %s", err)
 	}
 
 	return nil

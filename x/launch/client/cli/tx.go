@@ -6,7 +6,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/spf13/cobra"
 
-	"github.com/tendermint/spn/x/launch/types"
+	"github.com/ignite/network/x/launch/types"
 )
 
 // GetTxCmd returns the transaction commands for this module
@@ -21,7 +21,6 @@ func GetTxCmd() *cobra.Command {
 
 	cmd.AddCommand(
 		CmdCreateChain(),
-		CmdEditChain(),
 		CmdUpdateLaunchInformation(),
 		CmdRequestAddAccount(),
 		CmdRequestAddVestingAccount(),
@@ -29,11 +28,7 @@ func GetTxCmd() *cobra.Command {
 		CmdRequestAddValidator(),
 		CmdRequestRemoveValidator(),
 		CmdRequestParamChange(),
-		CmdSettleRequest(),
-		CmdTriggerLaunch(),
-		CmdRevertLaunch(),
 	)
-	// this line is used by starport scaffolding # 1
 
 	return cmd
 }

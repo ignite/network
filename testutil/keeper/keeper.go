@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cometbft/cometbft/libs/log"
+	"cosmossdk.io/log"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
@@ -14,31 +14,32 @@ import (
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	ibcclienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
-	ibcconnectiontypes "github.com/cosmos/ibc-go/v7/modules/core/03-connection/types"
-	ibckeeper "github.com/cosmos/ibc-go/v7/modules/core/keeper"
-	"github.com/stretchr/testify/require"
-	fundraisingkeeper "github.com/tendermint/fundraising/x/fundraising/keeper"
-	fundraisingtypes "github.com/tendermint/fundraising/x/fundraising/types"
-
+	ibcclienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
+	ibcconnectiontypes "github.com/cosmos/ibc-go/v8/modules/core/03-connection/types"
+	portkeeper "github.com/cosmos/ibc-go/v8/modules/core/05-port/keeper"
+	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
+	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 	claimkeeper "github.com/ignite/modules/x/claim/keeper"
 	claimtypes "github.com/ignite/modules/x/claim/types"
+	fundraisingkeeper "github.com/ignite/modules/x/fundraising/keeper"
+	fundraisingtypes "github.com/ignite/modules/x/fundraising/types"
+	"github.com/stretchr/testify/require"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/testutil/keeper/mocks"
-	launchkeeper "github.com/tendermint/spn/x/launch/keeper"
-	launchtypes "github.com/tendermint/spn/x/launch/types"
-	monitoringckeeper "github.com/tendermint/spn/x/monitoringc/keeper"
-	monitoringctypes "github.com/tendermint/spn/x/monitoringc/types"
-	monitoringpkeeper "github.com/tendermint/spn/x/monitoringp/keeper"
-	participationkeeper "github.com/tendermint/spn/x/participation/keeper"
-	participationtypes "github.com/tendermint/spn/x/participation/types"
-	profilekeeper "github.com/tendermint/spn/x/profile/keeper"
-	profiletypes "github.com/tendermint/spn/x/profile/types"
-	projectkeeper "github.com/tendermint/spn/x/project/keeper"
-	projecttypes "github.com/tendermint/spn/x/project/types"
-	rewardkeeper "github.com/tendermint/spn/x/reward/keeper"
-	rewardtypes "github.com/tendermint/spn/x/reward/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	"github.com/ignite/network/testutil/keeper/mocks"
+	launchkeeper "github.com/ignite/network/x/launch/keeper"
+	launchtypes "github.com/ignite/network/x/launch/types"
+	monitoringckeeper "github.com/ignite/network/x/monitoringc/keeper"
+	monitoringctypes "github.com/ignite/network/x/monitoringc/types"
+	monitoringpkeeper "github.com/ignite/network/x/monitoringp/keeper"
+	participationkeeper "github.com/ignite/network/x/participation/keeper"
+	participationtypes "github.com/ignite/network/x/participation/types"
+	profilekeeper "github.com/ignite/network/x/profile/keeper"
+	profiletypes "github.com/ignite/network/x/profile/types"
+	projectkeeper "github.com/ignite/network/x/project/keeper"
+	projecttypes "github.com/ignite/network/x/project/types"
+	rewardkeeper "github.com/ignite/network/x/reward/keeper"
+	rewardtypes "github.com/ignite/network/x/reward/types"
 )
 
 var (
@@ -50,17 +51,17 @@ var (
 )
 
 // HookMocks holds mocks for the module hooks
-type HooksMocks struct {
+type HookMocks struct {
 	LaunchHooksMock *mocks.LaunchHooks
 }
 
 // TestKeepers holds all keepers used during keeper tests for all modules
 type TestKeepers struct {
 	T                        testing.TB
-	ProjectKeeper            *projectkeeper.Keeper
+	ProjectKeeper            projectkeeper.Keeper
 	LaunchKeeper             *launchkeeper.Keeper
-	ProfileKeeper            *profilekeeper.Keeper
-	RewardKeeper             *rewardkeeper.Keeper
+	ProfileKeeper            profilekeeper.Keeper
+	RewardKeeper             rewardkeeper.Keeper
 	MonitoringConsumerKeeper *monitoringckeeper.Keeper
 	MonitoringProviderKeeper *monitoringpkeeper.Keeper
 	AccountKeeper            authkeeper.AccountKeeper
@@ -69,9 +70,9 @@ type TestKeepers struct {
 	IBCKeeper                *ibckeeper.Keeper
 	StakingKeeper            *stakingkeeper.Keeper
 	FundraisingKeeper        fundraisingkeeper.Keeper
-	ParticipationKeeper      *participationkeeper.Keeper
-	ClaimKeeper              *claimkeeper.Keeper
-	HooksMocks               HooksMocks
+	ParticipationKeeper      participationkeeper.Keeper
+	ClaimKeeper              claimkeeper.Keeper
+	HooksMocks               HookMocks
 }
 
 // TestMsgServers holds all message servers used during keeper tests for all modules
@@ -94,7 +95,7 @@ type setupOptions struct {
 	LaunchHooksMock bool
 }
 
-// WithHooksMock sets a mock for the hooks in testing launch keeper
+// WithLaunchHooksMock sets a mock for the hooks in testing launch keeper
 func WithLaunchHooksMock() func(*setupOptions) {
 	return func(o *setupOptions) {
 		o.LaunchHooksMock = true
@@ -118,25 +119,30 @@ func NewTestSetup(t testing.TB, options ...SetupOption) (sdk.Context, TestKeeper
 	stakingKeeper := initializer.Staking(authKeeper, bankKeeper, paramKeeper)
 	distrKeeper := initializer.Distribution(authKeeper, bankKeeper, stakingKeeper)
 	upgradeKeeper := initializer.Upgrade()
-	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, *capabilityKeeper, upgradeKeeper)
-	fundraisingKeeper := initializer.Fundraising(paramKeeper, authKeeper, bankKeeper, distrKeeper)
+	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
+	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, scopedKeeper, upgradeKeeper)
+	fundraisingKeeper := initializer.Fundraising(authKeeper, bankKeeper, distrKeeper)
 	profileKeeper := initializer.Profile()
-	launchKeeper := initializer.Launch(profileKeeper, distrKeeper, paramKeeper)
-	rewardKeeper := initializer.Reward(authKeeper, bankKeeper, profileKeeper, launchKeeper, paramKeeper)
-	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper, paramKeeper)
-	participationKeeper := initializer.Participation(paramKeeper, fundraisingKeeper, stakingKeeper)
-	launchKeeper.SetProjectKeeper(projectKeeper)
-	monitoringConsumerKeeper := initializer.Monitoringc(
-		*ibcKeeper,
+	launchKeeper := initializer.Launch(profileKeeper, distrKeeper)
+	rewardKeeper := initializer.Reward(authKeeper, bankKeeper, profileKeeper, launchKeeper)
+	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper)
+	participationKeeper := initializer.Participation(fundraisingKeeper, stakingKeeper)
+	err := launchKeeper.SetProjectKeeper(projectKeeper)
+	require.NoError(t, err)
+	portKeeper := portkeeper.NewKeeper(scopedKeeper)
+	monitoringConsumerKeeper, err := initializer.Monitoringc(
+		ibcKeeper,
 		*capabilityKeeper,
+		portKeeper,
 		launchKeeper,
 		rewardKeeper,
-		paramKeeper,
 		[]Connection{},
 		[]Channel{},
 	)
-	launchKeeper.SetMonitoringcKeeper(monitoringConsumerKeeper)
-	claimKeeper := initializer.Claim(paramKeeper, authKeeper, distrKeeper, bankKeeper)
+	require.NoError(t, err)
+	err = launchKeeper.SetMonitoringcKeeper(monitoringConsumerKeeper)
+	require.NoError(t, err)
+	claimKeeper := initializer.Claim(authKeeper, distrKeeper, bankKeeper)
 	require.NoError(t, initializer.StateStore.LoadLatestVersion())
 
 	// Create a context using a custom timestamp
@@ -146,40 +152,43 @@ func NewTestSetup(t testing.TB, options ...SetupOption) (sdk.Context, TestKeeper
 	}, false, log.NewNopLogger())
 
 	// Initialize community pool
-	distrKeeper.SetFeePool(ctx, distrtypes.InitialFeePool())
+
+	require.NoError(t, distrKeeper.FeePool.Set(ctx, distrtypes.InitialFeePool()))
 
 	// Initialize params
-	distrKeeper.SetParams(ctx, distrtypes.DefaultParams())
-	stakingKeeper.SetParams(ctx, stakingtypes.DefaultParams())
-	launchKeeper.SetParams(ctx, launchtypes.DefaultParams())
-	rewardKeeper.SetParams(ctx, rewardtypes.DefaultParams())
-	projectKeeper.SetParams(ctx, projecttypes.DefaultParams())
+	require.NoError(t, distrKeeper.Params.Set(ctx, distrtypes.DefaultParams()))
+	require.NoError(t, stakingKeeper.SetParams(ctx, stakingtypes.DefaultParams()))
+	require.NoError(t, launchKeeper.Params.Set(ctx, launchtypes.DefaultParams()))
+	require.NoError(t, rewardKeeper.Params.Set(ctx, rewardtypes.DefaultParams()))
+	require.NoError(t, projectKeeper.Params.Set(ctx, projecttypes.DefaultParams()))
 	fundraisingParams := fundraisingtypes.DefaultParams()
 	fundraisingParams.AuctionCreationFee = sdk.NewCoins()
-	fundraisingKeeper.SetParams(ctx, fundraisingParams)
-	participationKeeper.SetParams(ctx, participationtypes.DefaultParams())
-	monitoringConsumerKeeper.SetParams(ctx, monitoringctypes.DefaultParams())
-	claimKeeper.SetParams(ctx, claimtypes.DefaultParams())
+	require.NoError(t, fundraisingKeeper.Params.Set(ctx, fundraisingParams))
+	require.NoError(t, participationKeeper.Params.Set(ctx, participationtypes.DefaultParams()))
+	require.NoError(t, monitoringConsumerKeeper.Params.Set(ctx, monitoringctypes.DefaultParams()))
+	require.NoError(t, claimKeeper.Params.Set(ctx, claimtypes.DefaultParams()))
 	setIBCDefaultParams(ctx, ibcKeeper)
 
 	// Set hooks
-	var hooksMocks HooksMocks
+	var hooksMocks HookMocks
 	if so.LaunchHooksMock {
+		var err error
 		launchHooksMock := mocks.NewLaunchHooks(t)
-		launchKeeper = launchKeeper.SetHooks(launchHooksMock)
+		err = launchKeeper.SetHooks(launchHooksMock)
+		require.NoError(t, err)
 		hooksMocks.LaunchHooksMock = launchHooksMock
 	}
 
-	profileSrv := profilekeeper.NewMsgServerImpl(*profileKeeper)
-	launchSrv := launchkeeper.NewMsgServerImpl(*launchKeeper)
-	projectSrv := projectkeeper.NewMsgServerImpl(*projectKeeper)
-	rewardSrv := rewardkeeper.NewMsgServerImpl(*rewardKeeper)
-	monitoringcSrv := monitoringckeeper.NewMsgServerImpl(*monitoringConsumerKeeper)
-	participationSrv := participationkeeper.NewMsgServerImpl(*participationKeeper)
-	claimSrv := claimkeeper.NewMsgServerImpl(*claimKeeper)
+	profileSrv := profilekeeper.NewMsgServerImpl(profileKeeper)
+	launchSrv := launchkeeper.NewMsgServerImpl(launchKeeper)
+	projectSrv := projectkeeper.NewMsgServerImpl(projectKeeper)
+	rewardSrv := rewardkeeper.NewMsgServerImpl(rewardKeeper)
+	monitoringcSrv := monitoringckeeper.NewMsgServerImpl(monitoringConsumerKeeper)
+	participationSrv := participationkeeper.NewMsgServerImpl(participationKeeper)
+	claimSrv := claimkeeper.NewMsgServerImpl(claimKeeper)
 
 	// set max shares - only set during app InitGenesis
-	projectKeeper.SetTotalShares(ctx, spntypes.TotalShareNumber)
+	require.NoError(t, projectKeeper.TotalShares.Set(ctx, networktypes.TotalShareNumber))
 
 	return ctx, TestKeepers{
 			T:                        t,
@@ -224,25 +233,30 @@ func NewTestSetupWithIBCMocks(
 	stakingKeeper := initializer.Staking(authKeeper, bankKeeper, paramKeeper)
 	distrKeeper := initializer.Distribution(authKeeper, bankKeeper, stakingKeeper)
 	upgradeKeeper := initializer.Upgrade()
-	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, *capabilityKeeper, upgradeKeeper)
-	fundraisingKeeper := initializer.Fundraising(paramKeeper, authKeeper, bankKeeper, distrKeeper)
+	scopedKeeper := capabilityKeeper.ScopeToModule(ibcexported.ModuleName)
+	ibcKeeper := initializer.IBC(paramKeeper, stakingKeeper, scopedKeeper, upgradeKeeper)
+	fundraisingKeeper := initializer.Fundraising(authKeeper, bankKeeper, distrKeeper)
 	profileKeeper := initializer.Profile()
-	launchKeeper := initializer.Launch(profileKeeper, distrKeeper, paramKeeper)
-	rewardKeeper := initializer.Reward(authKeeper, bankKeeper, profileKeeper, launchKeeper, paramKeeper)
-	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper, paramKeeper)
-	participationKeeper := initializer.Participation(paramKeeper, fundraisingKeeper, stakingKeeper)
-	launchKeeper.SetProjectKeeper(projectKeeper)
-	monitoringConsumerKeeper := initializer.Monitoringc(
-		*ibcKeeper,
+	launchKeeper := initializer.Launch(profileKeeper, distrKeeper)
+	rewardKeeper := initializer.Reward(authKeeper, bankKeeper, profileKeeper, launchKeeper)
+	projectKeeper := initializer.Project(launchKeeper, profileKeeper, bankKeeper, distrKeeper)
+	participationKeeper := initializer.Participation(fundraisingKeeper, stakingKeeper)
+	err := launchKeeper.SetProjectKeeper(projectKeeper)
+	require.NoError(t, err)
+	portKeeper := portkeeper.NewKeeper(scopedKeeper)
+	monitoringConsumerKeeper, err := initializer.Monitoringc(
+		ibcKeeper,
 		*capabilityKeeper,
+		portKeeper,
 		launchKeeper,
 		rewardKeeper,
-		paramKeeper,
 		connectionMock,
 		channelMock,
 	)
-	launchKeeper.SetMonitoringcKeeper(monitoringConsumerKeeper)
-	claimKeeper := initializer.Claim(paramKeeper, authKeeper, distrKeeper, bankKeeper)
+	require.NoError(t, err)
+	err = launchKeeper.SetMonitoringcKeeper(monitoringConsumerKeeper)
+	require.NoError(t, err)
+	claimKeeper := initializer.Claim(authKeeper, distrKeeper, bankKeeper)
 	require.NoError(t, initializer.StateStore.LoadLatestVersion())
 
 	// Create a context using a custom timestamp
@@ -252,29 +266,29 @@ func NewTestSetupWithIBCMocks(
 	}, false, log.NewNopLogger())
 
 	// Initialize community pool
-	distrKeeper.SetFeePool(ctx, distrtypes.InitialFeePool())
+	require.NoError(t, distrKeeper.FeePool.Set(ctx, distrtypes.InitialFeePool()))
 
 	// Initialize params
-	distrKeeper.SetParams(ctx, distrtypes.DefaultParams())
-	stakingKeeper.SetParams(ctx, stakingtypes.DefaultParams())
-	launchKeeper.SetParams(ctx, launchtypes.DefaultParams())
-	rewardKeeper.SetParams(ctx, rewardtypes.DefaultParams())
-	projectKeeper.SetParams(ctx, projecttypes.DefaultParams())
-	fundraisingKeeper.SetParams(ctx, fundraisingtypes.DefaultParams())
-	participationKeeper.SetParams(ctx, participationtypes.DefaultParams())
-	monitoringConsumerKeeper.SetParams(ctx, monitoringctypes.DefaultParams())
-	claimKeeper.SetParams(ctx, claimtypes.DefaultParams())
+	require.NoError(t, distrKeeper.Params.Set(ctx, distrtypes.DefaultParams()))
+	require.NoError(t, stakingKeeper.SetParams(ctx, stakingtypes.DefaultParams()))
+	require.NoError(t, launchKeeper.Params.Set(ctx, launchtypes.DefaultParams()))
+	require.NoError(t, rewardKeeper.Params.Set(ctx, rewardtypes.DefaultParams()))
+	require.NoError(t, projectKeeper.Params.Set(ctx, projecttypes.DefaultParams()))
+	require.NoError(t, fundraisingKeeper.Params.Set(ctx, fundraisingtypes.DefaultParams()))
+	require.NoError(t, participationKeeper.Params.Set(ctx, participationtypes.DefaultParams()))
+	require.NoError(t, monitoringConsumerKeeper.Params.Set(ctx, monitoringctypes.DefaultParams()))
+	require.NoError(t, claimKeeper.Params.Set(ctx, claimtypes.DefaultParams()))
 	setIBCDefaultParams(ctx, ibcKeeper)
 
-	profileSrv := profilekeeper.NewMsgServerImpl(*profileKeeper)
-	launchSrv := launchkeeper.NewMsgServerImpl(*launchKeeper)
-	projectSrv := projectkeeper.NewMsgServerImpl(*projectKeeper)
-	rewardSrv := rewardkeeper.NewMsgServerImpl(*rewardKeeper)
-	monitoringcSrv := monitoringckeeper.NewMsgServerImpl(*monitoringConsumerKeeper)
-	participationSrv := participationkeeper.NewMsgServerImpl(*participationKeeper)
+	profileSrv := profilekeeper.NewMsgServerImpl(profileKeeper)
+	launchSrv := launchkeeper.NewMsgServerImpl(launchKeeper)
+	projectSrv := projectkeeper.NewMsgServerImpl(projectKeeper)
+	rewardSrv := rewardkeeper.NewMsgServerImpl(rewardKeeper)
+	monitoringcSrv := monitoringckeeper.NewMsgServerImpl(monitoringConsumerKeeper)
+	participationSrv := participationkeeper.NewMsgServerImpl(participationKeeper)
 
 	// set max shares - only set during app InitGenesis
-	projectKeeper.SetTotalShares(ctx, spntypes.TotalShareNumber)
+	require.NoError(t, projectKeeper.TotalShares.Set(ctx, networktypes.TotalShareNumber))
 
 	return ctx, TestKeepers{
 			T:                        t,

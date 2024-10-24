@@ -1,43 +1,43 @@
 package keeper
 
 import (
-	"errors"
-	"fmt"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
+	channeltypes "github.com/cosmos/ibc-go/v8/modules/core/04-channel/types"
+	"github.com/pkg/errors"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/x/monitoringc/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	"github.com/ignite/network/x/monitoringc/types"
 )
 
 // OnRecvMonitoringPacket processes packet reception
 func (k Keeper) OnRecvMonitoringPacket(
 	ctx sdk.Context,
 	packet channeltypes.Packet,
-	data spntypes.MonitoringPacket,
-) (packetAck spntypes.MonitoringPacketAck, err error) {
+	data networktypes.MonitoringPacket,
+) (packetAck networktypes.MonitoringPacketAck, err error) {
 	// validate packet data upon receiving
 	if err := data.ValidateBasic(); err != nil {
 		return packetAck, err
 	}
 
 	// retrieve launch ID for channel ID
-	lidFromCid, found := k.GetLaunchIDFromChannelID(ctx, packet.DestinationChannel)
-	if !found {
-		return packetAck, fmt.Errorf("no launch ID associated to channel ID %s", packet.DestinationChannel)
+	lidFromCid, err := k.LaunchIDFromChannelID.Get(ctx, packet.DestinationChannel)
+	if err != nil {
+		return packetAck, errors.Wrapf(err, "no launch ID associated to channel ID %s", packet.DestinationChannel)
 	}
 
 	// save the latest received monitoring packet for documentation purpose
-	k.SetMonitoringHistory(ctx, types.MonitoringHistory{
-		LaunchID:               lidFromCid.LaunchID,
+	err = k.MonitoringHistory.Set(ctx, lidFromCid.LaunchId, types.MonitoringHistory{
+		LaunchId:               lidFromCid.LaunchId,
 		LatestMonitoringPacket: data,
 	})
+	if err != nil {
+	}
 
 	// distribute reward from the signature count
 	err = k.rewardKeeper.DistributeRewards(
 		ctx,
-		lidFromCid.LaunchID,
+		lidFromCid.LaunchId,
 		data.SignatureCounts,
 		data.BlockHeight,
 		true,
@@ -51,7 +51,7 @@ func (k Keeper) OnRecvMonitoringPacket(
 func (k Keeper) OnAcknowledgementMonitoringPacket(
 	_ sdk.Context,
 	_ channeltypes.Packet,
-	_ spntypes.MonitoringPacket,
+	_ networktypes.MonitoringPacket,
 	_ channeltypes.Acknowledgement,
 ) error {
 	return errors.New("not implemented")
@@ -61,7 +61,7 @@ func (k Keeper) OnAcknowledgementMonitoringPacket(
 func (k Keeper) OnTimeoutMonitoringPacket(
 	_ sdk.Context,
 	_ channeltypes.Packet,
-	_ spntypes.MonitoringPacket,
+	_ networktypes.MonitoringPacket,
 ) error {
 	return errors.New("not implemented")
 }

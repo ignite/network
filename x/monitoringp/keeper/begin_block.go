@@ -1,15 +1,18 @@
 package keeper
 
 import (
+	"context"
 	"fmt"
 	"time"
 
-	abci "github.com/cometbft/cometbft/abci/types"
+	"cosmossdk.io/collections"
+	"cosmossdk.io/core/comet"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	clienttypes "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
+	clienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
+	"github.com/pkg/errors"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	"github.com/tendermint/spn/x/monitoringp/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	"github.com/ignite/network/x/monitoringp/types"
 )
 
 const (
@@ -20,88 +23,100 @@ const (
 )
 
 // ReportBlockSignatures gets signatures from blocks and update monitoring info
-func (k Keeper) ReportBlockSignatures(ctx sdk.Context, lastCommit abci.CommitInfo, blockHeight int64) error {
+func (k Keeper) ReportBlockSignatures(ctx context.Context, lastCommit comet.CommitInfo, blockHeight int64) error {
 	// skip first block because it is not signed
 	if blockHeight == 1 {
 		return nil
 	}
 
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return err
+	}
+
 	// no report if last height is reached
-	lastBlockHeight := k.LastBlockHeight(ctx)
-	if blockHeight > lastBlockHeight {
+	if blockHeight > params.LastBlockHeight {
 		return nil
 	}
 
 	// get monitoring info
-	monitoringInfo, found := k.GetMonitoringInfo(ctx)
-	if !found {
+	monitoringInfo, err := k.MonitoringInfo.Get(ctx)
+	if errors.Is(err, collections.ErrNotFound) {
 		monitoringInfo = types.MonitoringInfo{
-			SignatureCounts: spntypes.NewSignatureCounts(),
+			SignatureCounts: networktypes.NewSignatureCounts(),
 		}
+	} else if err != nil {
+		return err
 	}
 
 	// update signatures with voters that signed blocks
-	valSetSize := int64(len(lastCommit.Votes))
-	for _, vote := range lastCommit.Votes {
-		if vote.SignedLastBlock {
+	valSetSize := lastCommit.Votes().Len()
+	for i := 0; i < valSetSize; i++ {
+		vote := lastCommit.Votes().Get(i)
+		if vote.GetBlockIDFlag() != comet.BlockIDFlagAbsent {
 			// get the operator address from the consensus address
-			val, found := k.stakingKeeper.GetValidatorByConsAddr(ctx, vote.Validator.Address)
-			if !found {
-				return fmt.Errorf("validator from consensus address %s not found", vote.Validator.Address)
+			val, err := k.stakingKeeper.GetValidatorByConsAddr(ctx, vote.Validator().Address())
+			if err != nil {
+				return fmt.Errorf("validator from consensus address %s not found", vote.Validator().Address())
 			}
 
-			monitoringInfo.SignatureCounts.AddSignature(val.OperatorAddress, valSetSize)
+			monitoringInfo.SignatureCounts.AddSignature(val.OperatorAddress, int64(valSetSize))
 		}
 	}
 
 	// increment block count and save the monitoring info
 	monitoringInfo.SignatureCounts.BlockCount++
-	k.SetMonitoringInfo(ctx, monitoringInfo)
-
-	return nil
+	return k.MonitoringInfo.Set(ctx, monitoringInfo)
 }
 
 // TransmitSignatures transmits over IBC the signatures to consumer if height is reached
 // and signatures are not yet transmitted
-func (k Keeper) TransmitSignatures(ctx sdk.Context, blockHeight int64) (sequence uint64, err error) {
+func (k Keeper) TransmitSignatures(ctx context.Context, blockHeight int64) (sequence uint64, err error) {
+	sdkCtx := sdk.UnwrapSDKContext(ctx)
+
 	// check condition to transmit packet
 	// IBC connection to consumer must be established
 	// last block height must be reached
 	// monitoring info must exist
 	// signatures must not yet be transmitted
-	if blockHeight < k.LastBlockHeight(ctx) {
+	params, err := k.Params.Get(ctx)
+	if err != nil {
+		return 0, err
+	}
+	if blockHeight < params.LastBlockHeight {
 		return 0, nil
 	}
-	cid, cidFound := k.GetConnectionChannelID(ctx)
-	if !cidFound {
+	cid, err := k.ConnectionChannelID.Get(ctx)
+	if err != nil {
 		return 0, nil
 	}
-	mi, miFound := k.GetMonitoringInfo(ctx)
-	if !miFound || mi.Transmitted {
+	mi, err := k.MonitoringInfo.Get(ctx)
+	if err != nil || mi.Transmitted {
 		return 0, nil
 	}
 
 	// transmit signature packet
 	sequence, err = k.TransmitMonitoringPacket(
-		ctx,
-		spntypes.MonitoringPacket{
+		sdkCtx,
+		networktypes.MonitoringPacket{
 			BlockHeight:     blockHeight,
 			SignatureCounts: mi.SignatureCounts,
 		},
 		types.PortID,
-		cid.ChannelID,
+		cid.ChannelId,
 		clienttypes.ZeroHeight(),
-		uint64(ctx.BlockTime().Add(MonitoringPacketTimeoutDelay).UnixNano()),
+		uint64(sdkCtx.BlockTime().Add(MonitoringPacketTimeoutDelay).UnixNano()),
 	)
 	if err != nil {
-		k.SetConsumerClientID(ctx, types.ConsumerClientID{
-			ClientID: err.Error(),
-		})
+		if err := k.ConsumerClientID.Set(ctx, types.ConsumerClientID{
+			ClientId: err.Error(),
+		}); err != nil {
+			return 0, err
+		}
 		return 0, err
 	}
 
 	// signatures have been transmitted
 	mi.Transmitted = true
-	k.SetMonitoringInfo(ctx, mi)
-	return sequence, nil
+	return sequence, k.MonitoringInfo.Set(ctx, mi)
 }

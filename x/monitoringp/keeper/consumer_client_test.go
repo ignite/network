@@ -4,13 +4,13 @@ import (
 	"testing"
 	"time"
 
-	ibctmtypes "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
+	ibctmtypes "github.com/cosmos/ibc-go/v8/modules/light-clients/07-tendermint"
 	"github.com/stretchr/testify/require"
 
-	spntypes "github.com/tendermint/spn/pkg/types"
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/monitoringp/types"
+	networktypes "github.com/ignite/network/pkg/types"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/monitoringp/types"
 )
 
 func TestKeeper_InitializeConsumerClient(t *testing.T) {
@@ -18,20 +18,21 @@ func TestKeeper_InitializeConsumerClient(t *testing.T) {
 		ctx, tk, _ := testkeeper.NewTestSetupWithMonitoringp(t)
 
 		// set params with valid values
-		tk.MonitoringProviderKeeper.SetParams(ctx, types.NewParams(
+		err := tk.MonitoringProviderKeeper.Params.Set(ctx, types.NewParams(
 			1000,
 			types.DefaultConsumerChainID,
 			sample.ConsensusState(0),
-			spntypes.DefaultUnbondingPeriod,
-			spntypes.DefaultRevisionHeight,
+			networktypes.DefaultUnbondingPeriod,
+			networktypes.DefaultRevisionHeight,
 		))
+		require.NoError(t, err)
 		clientID, err := tk.MonitoringProviderKeeper.InitializeConsumerClient(ctx)
 		require.NoError(t, err)
 		require.NotEmpty(t, clientID)
 
-		consumerClientID, found := tk.MonitoringProviderKeeper.GetConsumerClientID(ctx)
-		require.True(t, found, "consumer client ID should be registered in the store")
-		require.EqualValues(t, clientID, consumerClientID.ClientID)
+		consumerClientID, err := tk.MonitoringProviderKeeper.ConsumerClientID.Get(ctx)
+		require.NoError(t, err, "consumer client ID should be registered in the store")
+		require.EqualValues(t, clientID, consumerClientID.ClientId)
 
 		// IBC client should be created
 		clientState, found := tk.IBCKeeper.ClientKeeper.GetClientState(ctx, clientID)
@@ -39,8 +40,11 @@ func TestKeeper_InitializeConsumerClient(t *testing.T) {
 
 		cs, ok := clientState.(*ibctmtypes.ClientState)
 		require.True(t, ok)
-		require.EqualValues(t, tk.MonitoringProviderKeeper.ConsumerRevisionHeight(ctx), cs.LatestHeight.RevisionHeight)
-		require.EqualValues(t, time.Second*time.Duration(tk.MonitoringProviderKeeper.ConsumerUnbondingPeriod(ctx)), cs.UnbondingPeriod)
+
+		params, err := tk.MonitoringProviderKeeper.Params.Get(ctx)
+		require.NoError(t, err)
+		require.EqualValues(t, params.ConsumerRevisionHeight, cs.LatestHeight.RevisionHeight)
+		require.EqualValues(t, time.Second*time.Duration(params.ConsumerUnbondingPeriod), cs.UnbondingPeriod)
 	})
 
 	t.Run("invalid consumer consensus state", func(t *testing.T) {

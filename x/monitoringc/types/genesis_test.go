@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tendermint/spn/x/monitoringc/types"
+	"github.com/ignite/network/x/monitoringc/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
@@ -23,28 +23,28 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should allow valid genesis state",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				VerifiedClientIDs: []types.VerifiedClientID{
-					{LaunchID: 0, ClientIDs: []string{"0"}},
-					{LaunchID: 1, ClientIDs: []string{"1", "2"}},
+				VerifiedClientIdList: []types.VerifiedClientID{
+					{LaunchId: 0, ClientIdList: []string{"0"}},
+					{LaunchId: 1, ClientIdList: []string{"1", "2"}},
 				},
-				ProviderClientIDs: []types.ProviderClientID{
-					{LaunchID: 0, ClientID: "0"},
-					{LaunchID: 1, ClientID: "2"},
+				ProviderClientIdList: []types.ProviderClientID{
+					{LaunchId: 0, ClientId: "0"},
+					{LaunchId: 1, ClientId: "2"},
 				},
-				LaunchIDsFromVerifiedClientID: []types.LaunchIDFromVerifiedClientID{
-					{LaunchID: 0, ClientID: "0"},
-					{LaunchID: 1, ClientID: "1"},
+				LaunchIdFromVerifiedClientIdList: []types.LaunchIDFromVerifiedClientID{
+					{LaunchId: 0, ClientId: "0"},
+					{LaunchId: 1, ClientId: "1"},
 				},
-				LaunchIDsFromChannelID: []types.LaunchIDFromChannelID{
-					{LaunchID: 0, ChannelID: "0"},
-					{LaunchID: 1, ChannelID: "1"},
+				LaunchIdFromChannelIdList: []types.LaunchIDFromChannelID{
+					{LaunchId: 0, ChannelId: "0"},
+					{LaunchId: 1, ChannelId: "1"},
 				},
-				MonitoringHistories: []types.MonitoringHistory{
+				MonitoringHistoryList: []types.MonitoringHistory{
 					{
-						LaunchID: 0,
+						LaunchId: 0,
 					},
 					{
-						LaunchID: 1,
+						LaunchId: 1,
 					},
 				},
 				// this line is used by starport scaffolding # types/genesis/validField
@@ -62,14 +62,14 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should prevent duplicated verifiedClientID",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				VerifiedClientIDs: []types.VerifiedClientID{
+				VerifiedClientIdList: []types.VerifiedClientID{
 					{
-						LaunchID:  0,
-						ClientIDs: []string{"0"},
+						LaunchId:     0,
+						ClientIdList: []string{"0"},
 					},
 					{
-						LaunchID:  0,
-						ClientIDs: []string{"1", "2"},
+						LaunchId:     0,
+						ClientIdList: []string{"1", "2"},
 					},
 				},
 			},
@@ -79,10 +79,10 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should prevent duplicated clientID",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				VerifiedClientIDs: []types.VerifiedClientID{
+				VerifiedClientIdList: []types.VerifiedClientID{
 					{
-						LaunchID:  0,
-						ClientIDs: []string{"0", "0"},
+						LaunchId:     0,
+						ClientIdList: []string{"0", "0"},
 					},
 				},
 			},
@@ -92,20 +92,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should prevent duplicated providerClientID",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				VerifiedClientIDs: []types.VerifiedClientID{
+				VerifiedClientIdList: []types.VerifiedClientID{
 					{
-						LaunchID:  0,
-						ClientIDs: []string{"0"},
+						LaunchId:     0,
+						ClientIdList: []string{"0"},
 					},
 				},
-				ProviderClientIDs: []types.ProviderClientID{
+				ProviderClientIdList: []types.ProviderClientID{
 					{
-						LaunchID: 0,
-						ClientID: "0",
+						LaunchId: 0,
+						ClientId: "0",
 					},
 					{
-						LaunchID: 0,
-						ClientID: "0",
+						LaunchId: 0,
+						ClientId: "0",
 					},
 				},
 			},
@@ -115,20 +115,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should prevent duplicated launchIDFromVerifiedClientID",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				VerifiedClientIDs: []types.VerifiedClientID{
+				VerifiedClientIdList: []types.VerifiedClientID{
 					{
-						LaunchID:  0,
-						ClientIDs: []string{"0"},
+						LaunchId:     0,
+						ClientIdList: []string{"0"},
 					},
 				},
-				LaunchIDsFromVerifiedClientID: []types.LaunchIDFromVerifiedClientID{
+				LaunchIdFromVerifiedClientIdList: []types.LaunchIDFromVerifiedClientID{
 					{
-						ClientID: "0",
-						LaunchID: 0,
+						ClientId: "0",
+						LaunchId: 0,
 					},
 					{
-						ClientID: "0",
-						LaunchID: 0,
+						ClientId: "0",
+						LaunchId: 0,
 					},
 				},
 			},
@@ -138,17 +138,17 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should prevent provider client id without valid client id",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				VerifiedClientIDs: []types.VerifiedClientID{
-					{LaunchID: 0, ClientIDs: []string{"0"}},
-					{LaunchID: 1, ClientIDs: []string{"1", "2"}},
+				VerifiedClientIdList: []types.VerifiedClientID{
+					{LaunchId: 0, ClientIdList: []string{"0"}},
+					{LaunchId: 1, ClientIdList: []string{"1", "2"}},
 				},
-				ProviderClientIDs: []types.ProviderClientID{
-					{LaunchID: 0, ClientID: "0"},
-					{LaunchID: 1, ClientID: "3"},
+				ProviderClientIdList: []types.ProviderClientID{
+					{LaunchId: 0, ClientId: "0"},
+					{LaunchId: 1, ClientId: "3"},
 				},
-				LaunchIDsFromVerifiedClientID: []types.LaunchIDFromVerifiedClientID{
-					{LaunchID: 0, ClientID: "0"},
-					{LaunchID: 1, ClientID: "2"},
+				LaunchIdFromVerifiedClientIdList: []types.LaunchIDFromVerifiedClientID{
+					{LaunchId: 0, ClientId: "0"},
+					{LaunchId: 1, ClientId: "2"},
 				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
@@ -158,17 +158,17 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should prevent launch id from verified client id without valid client id",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				VerifiedClientIDs: []types.VerifiedClientID{
-					{LaunchID: 0, ClientIDs: []string{"0"}},
-					{LaunchID: 1, ClientIDs: []string{"1", "2"}},
+				VerifiedClientIdList: []types.VerifiedClientID{
+					{LaunchId: 0, ClientIdList: []string{"0"}},
+					{LaunchId: 1, ClientIdList: []string{"1", "2"}},
 				},
-				ProviderClientIDs: []types.ProviderClientID{
-					{LaunchID: 0, ClientID: "0"},
-					{LaunchID: 1, ClientID: "2"},
+				ProviderClientIdList: []types.ProviderClientID{
+					{LaunchId: 0, ClientId: "0"},
+					{LaunchId: 1, ClientId: "2"},
 				},
-				LaunchIDsFromVerifiedClientID: []types.LaunchIDFromVerifiedClientID{
-					{LaunchID: 0, ClientID: "1"},
-					{LaunchID: 1, ClientID: "1"},
+				LaunchIdFromVerifiedClientIdList: []types.LaunchIDFromVerifiedClientID{
+					{LaunchId: 0, ClientId: "1"},
+					{LaunchId: 1, ClientId: "1"},
 				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
@@ -178,12 +178,12 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should prevent duplicated launchIDFromChannelID",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				LaunchIDsFromChannelID: []types.LaunchIDFromChannelID{
+				LaunchIdFromChannelIdList: []types.LaunchIDFromChannelID{
 					{
-						ChannelID: "0",
+						ChannelId: "0",
 					},
 					{
-						ChannelID: "0",
+						ChannelId: "0",
 					},
 				},
 			},
@@ -193,12 +193,12 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "should prevent duplicated monitoringHistory",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
-				MonitoringHistories: []types.MonitoringHistory{
+				MonitoringHistoryList: []types.MonitoringHistory{
 					{
-						LaunchID: 0,
+						LaunchId: 0,
 					},
 					{
-						LaunchID: 0,
+						LaunchId: 0,
 					},
 				},
 			},

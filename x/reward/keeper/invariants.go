@@ -3,7 +3,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/tendermint/spn/x/reward/types"
+	"github.com/ignite/network/x/reward/types"
 )
 
 const (
@@ -27,13 +27,16 @@ func AllInvariants(k Keeper) sdk.Invariant {
 // `remainingCoins` for all reward pools
 func InsufficientRewardsBalanceInvariant(k Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
-		all := k.GetAllRewardPool(ctx)
+		all, err := k.ListRewardPool(ctx)
+		if err != nil {
+			return "", false
+		}
 		totalRewards := sdk.NewCoins()
 		for _, rewardPool := range all {
 			// we don't need to check if reward pool is `closed` since properly closed pools should have no remaining coins
 			totalRewards = totalRewards.Add(rewardPool.RemainingCoins...)
 		}
-		moduleAddr := k.authKeeper.GetModuleAddress(types.ModuleName)
+		moduleAddr := k.accountKeeper.GetModuleAddress(types.ModuleName)
 		balance := k.bankKeeper.SpendableCoins(ctx, moduleAddr)
 		if !balance.IsAllGTE(totalRewards) {
 			return sdk.FormatInvariant(

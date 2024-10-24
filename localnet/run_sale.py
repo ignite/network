@@ -2,10 +2,11 @@ import json
 import os
 import datetime
 import time
-from utils import cmd_devnull, cmd, initialize_project, date_f
+from utils import cmd, initialize_project, date_f
 
 sale_template_file = './auctions/sale_template.json'
 sale_file = './auctions/sale.json'
+
 
 def set_sale_json(selling_denom, selling_amount, paying_denom, price, start_time, end_time):
     f = open(sale_template_file)
@@ -19,35 +20,45 @@ def set_sale_json(selling_denom, selling_amount, paying_denom, price, start_time
     with open(sale_file, 'w', encoding='utf-8') as newF:
         json.dump(jf, newF, ensure_ascii=False, indent=4)
 
+
 if __name__ == "__main__":
     initialize_project()
 
     # Define auction start and end from current time
     date_now = datetime.datetime.utcnow()
     start = date_now + datetime.timedelta(seconds=15)
-    end = date_now + datetime.timedelta(seconds=40)
+    end = date_now + datetime.timedelta(seconds=55)
 
     # Fundraising
-    set_sale_json('v/1/orbit', '50000', 'uspn', '100', date_f(start), date_f(end))
-    cmd_devnull('spnd tx fundraising create-fixed-price-auction {} --from alice -y'.format(sale_file))
+    set_sale_json('v/0/orbit', '50000', 'uspn', '100', date_f(start), date_f(end))
+    time.sleep(2)
+    cmd('networkd tx fundraising create-fixed-price-auction {} --from alice --chain-id spn-1 --keyring-backend test -y'.format(
+        sale_file))
     os.remove(sale_file)
-    cmd_devnull('spnd tx participation participate 1 4 --from bob -y')
-    cmd_devnull('spnd tx participation participate 1 4 --from carol -y')
-    cmd_devnull('spnd tx participation participate 1 4 --from dave -y')
+    time.sleep(2)
+    cmd('networkd tx participation participate 0 4 --from bob --chain-id spn-1 --keyring-backend test -y')
+    time.sleep(2)
+    cmd('networkd tx participation participate 0 4 --from carol --chain-id spn-1 --keyring-backend test -y')
+    time.sleep(2)
+    cmd('networkd tx participation participate 0 4 --from dave --chain-id spn-1 --keyring-backend test -y')
 
     # Wait auction start
     print("waiting for auction start...")
     time.sleep(15)
 
     # Place bid
-    cmd('spnd tx fundraising bid 1 fixed-price 100 10000v/1/orbit --from bob -y')
-    cmd('spnd tx fundraising bid 1 fixed-price 100 20000v/1/orbit --from carol -y')
-    cmd('spnd tx fundraising bid 1 fixed-price 100 20000v/1/orbit --from dave -y')
+    cmd('networkd tx fundraising bid 0 fixed-price 100 10000v/0/orbit --from bob --chain-id spn-1 --keyring-backend test -y')
+    time.sleep(2)
+    cmd('networkd tx fundraising bid 0 fixed-price 100 20000v/0/orbit --from carol --chain-id spn-1 --keyring-backend test -y')
+    time.sleep(2)
+    cmd('networkd tx fundraising bid 0 fixed-price 100 20000v/0/orbit --from dave --chain-id spn-1 --keyring-backend test -y')
 
     # Wait withdrawal delay
     print("waiting for withdrawal delay...")
-    time.sleep(5)
+    time.sleep(15)
 
-    cmd_devnull('spnd tx participation withdraw-allocations 1 --from bob -y')
-    cmd_devnull('spnd tx participation withdraw-allocations 1 --from carol -y')
-    cmd_devnull('spnd tx participation withdraw-allocations 1 --from dave -y')
+    cmd('networkd tx participation withdraw-allocations 0 --from bob --chain-id spn-1 --keyring-backend test -y')
+    time.sleep(2)
+    cmd('networkd tx participation withdraw-allocations 0 --from carol --chain-id spn-1 --keyring-backend test -y')
+    time.sleep(2)
+    cmd('networkd tx participation withdraw-allocations 0 --from dave --chain-id spn-1 --keyring-backend test -y')

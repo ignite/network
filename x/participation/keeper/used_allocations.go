@@ -1,45 +1,35 @@
 package keeper
 
 import (
-	"github.com/cosmos/cosmos-sdk/store/prefix"
+	"context"
+
+	"cosmossdk.io/collections"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/tendermint/spn/x/participation/types"
+	"github.com/ignite/network/x/participation/types"
 )
 
-// SetUsedAllocations set a specific usedAllocations in the store from its index
-func (k Keeper) SetUsedAllocations(ctx sdk.Context, usedAllocations types.UsedAllocations) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.UsedAllocationsKeyPrefix))
-	b := k.cdc.MustMarshal(&usedAllocations)
-	store.Set(types.UsedAllocationsKey(usedAllocations.Address), b)
+// AllUsedAllocations returns all UsedAllocations.
+func (k Keeper) AllUsedAllocations(ctx context.Context) ([]types.UsedAllocations, error) {
+	usedAllocations := make([]types.UsedAllocations, 0)
+	err := k.UsedAllocations.Walk(ctx, nil, func(_ string, value types.UsedAllocations) (bool, error) {
+		usedAllocations = append(usedAllocations, value)
+		return false, nil
+	})
+	return usedAllocations, err
 }
 
-// GetUsedAllocations returns a usedAllocations from its index
-func (k Keeper) GetUsedAllocations(ctx sdk.Context, address string) (val types.UsedAllocations, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.UsedAllocationsKeyPrefix))
-
-	b := store.Get(types.UsedAllocationsKey(address))
-	if b == nil {
-		return val, false
+// AllAuctionUsedAllocations returns all AuctionUsedAllocations.
+func (k Keeper) AllAuctionUsedAllocations(ctx context.Context, address string) ([]types.AuctionUsedAllocations, error) {
+	accAddress, err := k.addressCodec.StringToBytes(address)
+	if err != nil {
+		return nil, err
 	}
-
-	k.cdc.MustUnmarshal(b, &val)
-
-	return val, true
-}
-
-// GetAllUsedAllocations returns all usedAllocations
-func (k Keeper) GetAllUsedAllocations(ctx sdk.Context) (list []types.UsedAllocations) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.UsedAllocationsKeyPrefix))
-	iterator := sdk.KVStorePrefixIterator(store, []byte{})
-
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var val types.UsedAllocations
-		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		list = append(list, val)
-	}
-
-	return
+	auctionUsedAllocations := make([]types.AuctionUsedAllocations, 0)
+	rng := collections.NewPrefixedPairRange[sdk.AccAddress, uint64](accAddress)
+	err = k.AuctionUsedAllocations.Walk(ctx, rng, func(_ collections.Pair[sdk.AccAddress, uint64], value types.AuctionUsedAllocations) (bool, error) {
+		auctionUsedAllocations = append(auctionUsedAllocations, value)
+		return false, nil
+	})
+	return auctionUsedAllocations, err
 }

@@ -1,61 +1,40 @@
 package keeper
 
 import (
-	"github.com/cosmos/cosmos-sdk/store/prefix"
+	"context"
+	"encoding/base64"
+
+	"cosmossdk.io/collections"
+	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/tendermint/spn/x/launch/types"
+	"github.com/ignite/network/x/launch/types"
 )
 
-// SetGenesisAccount set a specific genesisAccount in the store from its index
-func (k Keeper) SetGenesisAccount(ctx sdk.Context, genesisAccount types.GenesisAccount) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.GenesisAccountKeyPrefix))
-	b := k.cdc.MustMarshal(&genesisAccount)
-	store.Set(types.AccountKeyPath(
-		genesisAccount.LaunchID,
-		genesisAccount.Address,
-	), b)
-}
-
-// GetGenesisAccount returns a genesisAccount from its index
-func (k Keeper) GetGenesisAccount(
-	ctx sdk.Context,
+// GetValidatorsAndTotalDelegation returns the genesisValidator map by
+// consensus address and total of self delegation
+func (k Keeper) GetValidatorsAndTotalDelegation(
+	ctx context.Context,
 	launchID uint64,
-	address string,
-) (val types.GenesisAccount, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.GenesisAccountKeyPrefix))
-
-	b := store.Get(types.AccountKeyPath(launchID, address))
-	if b == nil {
-		return val, false
-	}
-
-	k.cdc.MustUnmarshal(b, &val)
-	return val, true
+) (map[string]types.GenesisValidator, sdkmath.LegacyDec, error) {
+	validators := make(map[string]types.GenesisValidator)
+	totalDelegation := sdkmath.LegacyZeroDec()
+	rng := collections.NewPrefixedPairRange[uint64, sdk.AccAddress](launchID)
+	err := k.GenesisValidator.Walk(ctx, rng, func(key collections.Pair[uint64, sdk.AccAddress], val types.GenesisValidator) (bool, error) {
+		consPubKey := base64.StdEncoding.EncodeToString(val.ConsPubKey)
+		validators[consPubKey] = val
+		totalDelegation = totalDelegation.Add(sdkmath.LegacyNewDecFromInt(val.SelfDelegation.Amount))
+		return false, nil
+	})
+	return validators, totalDelegation, err
 }
 
-// RemoveGenesisAccount removes a genesisAccount from the store
-func (k Keeper) RemoveGenesisAccount(
-	ctx sdk.Context,
-	launchID uint64,
-	address string,
-) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.GenesisAccountKeyPrefix))
-	store.Delete(types.AccountKeyPath(launchID, address))
-}
-
-// GetAllGenesisAccount returns all genesisAccount
-func (k Keeper) GetAllGenesisAccount(ctx sdk.Context) (list []types.GenesisAccount) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.GenesisAccountKeyPrefix))
-	iterator := sdk.KVStorePrefixIterator(store, []byte{})
-
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var val types.GenesisAccount
-		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		list = append(list, val)
-	}
-
-	return
+// AllGenesisAccount returns all GenesisAccount.
+func (k Keeper) AllGenesisAccount(ctx context.Context) ([]types.GenesisAccount, error) {
+	genesisAccounts := make([]types.GenesisAccount, 0)
+	err := k.GenesisAccount.Walk(ctx, nil, func(_ collections.Pair[uint64, sdk.AccAddress], value types.GenesisAccount) (bool, error) {
+		genesisAccounts = append(genesisAccounts, value)
+		return false, nil
+	})
+	return genesisAccounts, err
 }

@@ -4,7 +4,6 @@ import (
 	"math/rand"
 
 	sdkmath "cosmossdk.io/math"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	claim "github.com/ignite/modules/x/claim/types"
 )
@@ -19,11 +18,11 @@ func ClaimRecord(r *rand.Rand) claim.ClaimRecord {
 
 func Mission(r *rand.Rand) claim.Mission {
 	const max = 1_000_000
-	maxInt := sdk.NewDec(max)
-	weight := sdk.NewDec(r.Int63n(max)).Quo(maxInt)
+	maxInt := sdkmath.LegacyNewDec(max)
+	weight := sdkmath.LegacyNewDec(r.Int63n(max)).Quo(maxInt)
 
 	return claim.Mission{
-		MissionID:   Uint64(r),
+		MissionId:   Uint64(r),
 		Description: String(r, 20),
 		Weight:      weight,
 	}

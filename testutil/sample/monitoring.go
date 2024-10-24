@@ -3,9 +3,9 @@ package sample
 import (
 	"math/rand"
 
-	"github.com/tendermint/spn/pkg/types"
-	monitoringc "github.com/tendermint/spn/x/monitoringc/types"
-	monitoringp "github.com/tendermint/spn/x/monitoringp/types"
+	"github.com/ignite/network/pkg/types"
+	monitoringc "github.com/ignite/network/x/monitoringc/types"
+	monitoringp "github.com/ignite/network/x/monitoringp/types"
 )
 
 const ConsensusStateNb = 2

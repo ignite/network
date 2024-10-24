@@ -10,14 +10,13 @@ import (
 	neturl "net/url"
 	"os"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/spf13/cobra"
 
-	"github.com/tendermint/spn/x/launch/types"
+	"github.com/ignite/network/x/launch/types"
 )
 
 const (
@@ -26,6 +25,7 @@ const (
 	flagGenesisConfigFile = "genesis-config"
 	flagProjectID         = "project-id"
 	flagAccountBalance    = "account-balance"
+	flagMetadata          = "metadata"
 )
 
 func CmdCreateChain() *cobra.Command {

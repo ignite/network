@@ -1,13 +1,11 @@
 package types
 
-import (
-	"fmt"
-)
+import "fmt"
 
-// DefaultGenesis returns the default Capability genesis state
+// DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		RewardPools: []RewardPool{},
+		RewardPoolList: []RewardPool{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -17,18 +15,17 @@ func DefaultGenesis() *GenesisState {
 // failure.
 func (gs GenesisState) Validate() error {
 	// Check for duplicated index in rewardPool
-	rewardPoolIndexMap := make(map[string]struct{})
-
-	for _, elem := range gs.RewardPools {
+	rewardPoolIndexMap := make(map[uint64]struct{})
+	for _, elem := range gs.RewardPoolList {
 		if err := elem.Validate(); err != nil {
 			return err
 		}
-		index := string(RewardPoolKey(elem.LaunchID))
-		if _, ok := rewardPoolIndexMap[index]; ok {
+		if _, ok := rewardPoolIndexMap[elem.LaunchId]; ok {
 			return fmt.Errorf("duplicated index for rewardPool")
 		}
-		rewardPoolIndexMap[index] = struct{}{}
+		rewardPoolIndexMap[elem.LaunchId] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
+
 	return gs.Params.Validate()
 }

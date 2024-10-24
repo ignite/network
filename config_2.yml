@@ -3,24 +3,21 @@ build:
   binary: spn2d
   proto:
     path: proto
-    third_party_paths:
-    - third_party/proto
-    - proto_vendor
 accounts:
-- name: alice
-  coins:
-  - 200000000uspn
-  mnemonic: slide moment original seven milk crawl help text kick fluid boring awkward
-    doll wonder sure fragile plate grid hard next casual expire okay body
-- name: bob
-  coins:
-  - 200000000uspn
-  mnemonic: trap possible liquid elite embody host segment fantasy swim cable digital
-    eager tiny broom burden diary earn hen grow engine pigeon fringe claim program
+  - name: alice
+    coins:
+      - 200000000uspn
+    mnemonic: slide moment original seven milk crawl help text kick fluid boring awkward
+      doll wonder sure fragile plate grid hard next casual expire okay body
+  - name: bob
+    coins:
+      - 200000000uspn
+    mnemonic: trap possible liquid elite embody host segment fantasy swim cable digital
+      eager tiny broom burden diary earn hen grow engine pigeon fringe claim program
 faucet:
   name: bob
   coins:
-  - 100000uspn
+    - 100000uspn
   host: 0.0.0.0:4500
   port: 4502
 genesis:
@@ -31,39 +28,40 @@ genesis:
     gov:
       deposit_params:
         min_deposit:
-        - amount: "1"
-          denom: uspn
+          - amount: "1"
+            denom: uspn
     launch:
       params:
-        launchTimeRange:
-          minLaunchTime: 5s
-        revertDelay: 5s
+        launch_time_range:
+          min_launch_time: 5s
+        revert_delay: 5s
     mint:
       params:
         mint_denom: uspn
     monitoringp:
       params:
-        consumerChainID: orbit-1
-        consumerRevisionHeight: "1"
-        consumerUnbondingPeriod: "2"
-        lastBlockHeight: "1"
+        consumer_chain_id: orbit-1
+        consumer_revision_height: "1"
+        consumer_unbonding_period: "2"
+        last_block_height: "1"
     staking:
       params:
         bond_denom: uspn
   chain_id: spn-1
 validators:
-- name: alice
-  bonded: 100000000uspn
-  app:
-    api:
-      address: :1319
-    grpc:
-      address: :9094
-    grpc-web:
-      address: :9095
-  config:
-    p2p:
-      laddr: :26660
-    rpc:
-      laddr: :26661
-      pprof_laddr: :6062
+  - name: alice
+    home: "$HOME/.spn"
+    bonded: 100000000uspn
+    app:
+      api:
+        address: :1319
+      grpc:
+        address: :9094
+      grpc-web:
+        address: :9095
+    config:
+      p2p:
+        laddr: :26660
+      rpc:
+        laddr: :26661
+        pprof_laddr: :6062

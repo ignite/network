@@ -1,27 +1,31 @@
 package keeper
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/cosmos/cosmos-sdk/store/prefix"
+	"cosmossdk.io/collections"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/pkg/errors"
 
-	"github.com/tendermint/spn/x/project/types"
+	"github.com/ignite/network/x/project/types"
 )
 
-// AddChainToProject adds a new chain into an existing project
-func (k Keeper) AddChainToProject(ctx sdk.Context, projectID, launchID uint64) error {
+// AddChainToProject adds a new chain into an existing project.
+func (k Keeper) AddChainToProject(ctx context.Context, projectID, launchID uint64) error {
 	// Check project exist
-	if _, found := k.GetProject(ctx, projectID); !found {
+	if _, err := k.GetProject(ctx, projectID); err != nil {
 		return fmt.Errorf("project %d not found", projectID)
 	}
 
-	projectChains, found := k.GetProjectChains(ctx, projectID)
-	if !found {
+	projectChains, err := k.GetProjectChains(ctx, projectID)
+	if errors.Is(err, types.ErrProjectChainsNotFound) {
 		projectChains = types.ProjectChains{
-			ProjectID: projectID,
+			ProjectId: projectID,
 			Chains:    []uint64{launchID},
 		}
+	} else if err != nil {
+		return err
 	} else {
 		// Ensure no duplicated chain ID
 		for _, existingChainID := range projectChains.Chains {
@@ -31,49 +35,19 @@ func (k Keeper) AddChainToProject(ctx sdk.Context, projectID, launchID uint64) e
 		}
 		projectChains.Chains = append(projectChains.Chains, launchID)
 	}
-	k.SetProjectChains(ctx, projectChains)
-	return ctx.EventManager().EmitTypedEvent(&types.EventProjectChainAdded{
-		ProjectID: projectID,
-		LaunchID:  launchID,
+	if err := k.ProjectChains.Set(ctx, projectChains.ProjectId, projectChains); err != nil {
+		return err
+	}
+	return sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(&types.EventProjectChainAdded{
+		ProjectId: projectID,
+		LaunchId:  launchID,
 	})
 }
 
-// SetProjectChains set a specific projectChains in the store from its index
-func (k Keeper) SetProjectChains(ctx sdk.Context, projectChains types.ProjectChains) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ProjectChainsKeyPrefix))
-	b := k.cdc.MustMarshal(&projectChains)
-	store.Set(types.ProjectChainsKey(
-		projectChains.ProjectID,
-	), b)
-}
-
-// GetProjectChains returns a projectChains from its index
-func (k Keeper) GetProjectChains(ctx sdk.Context, projectID uint64) (val types.ProjectChains, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ProjectChainsKeyPrefix))
-
-	b := store.Get(types.ProjectChainsKey(
-		projectID,
-	))
-	if b == nil {
-		return val, false
+func (k Keeper) GetProjectChains(ctx context.Context, projectID uint64) (types.ProjectChains, error) {
+	projectChains, err := k.ProjectChains.Get(ctx, projectID)
+	if errors.Is(err, collections.ErrNotFound) {
+		return types.ProjectChains{}, types.ErrProjectChainsNotFound
 	}
-
-	k.cdc.MustUnmarshal(b, &val)
-	return val, true
-}
-
-// GetAllProjectChains returns all projectChains
-func (k Keeper) GetAllProjectChains(ctx sdk.Context) (list []types.ProjectChains) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ProjectChainsKeyPrefix))
-	iterator := sdk.KVStorePrefixIterator(store, []byte{})
-
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var val types.ProjectChains
-		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		list = append(list, val)
-	}
-
-	return
+	return projectChains, err
 }

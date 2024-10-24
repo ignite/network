@@ -7,8 +7,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	tc "github.com/tendermint/spn/testutil/constructor"
-	project "github.com/tendermint/spn/x/project/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	project "github.com/ignite/network/x/project/types"
 )
 
 func TestUpdateTotalSupply(t *testing.T) {
@@ -52,7 +52,7 @@ func TestUpdateTotalSupply(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			newCoins := project.UpdateTotalSupply(tt.previousCoins, tt.updatedCoins)
-			require.True(t, newCoins.IsEqual(tt.wantedCoins))
+			require.True(t, newCoins.Equal(tt.wantedCoins))
 		})
 	}
 }

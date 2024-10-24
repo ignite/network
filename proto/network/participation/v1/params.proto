@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package network.participation.v1;
+
+import "amino/amino.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "google/protobuf/duration.proto";
+
+option go_package = "github.com/ignite/network/x/participation/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "network/x/participation/Params";
+  option (gogoproto.equal) = true;
+
+  AllocationPrice allocation_price = 1 [(gogoproto.nullable) = false];
+  repeated Tier participation_tier_list = 2 [(gogoproto.nullable) = false];
+  // Time frame before auction starts where MsgParticipate can be called
+  google.protobuf.Duration registration_period = 3 [
+    (gogoproto.nullable) = false,
+    (gogoproto.stdduration) = true
+  ];
+  // Delay after auction starts when allocations can be withdrawn
+  google.protobuf.Duration withdrawal_delay = 4 [
+    (gogoproto.nullable) = false,
+    (gogoproto.stdduration) = true
+  ];
+}
+
+message AllocationPrice {
+  // number of bonded tokens necessary to get one allocation
+  string bonded = 1 [
+    (gogoproto.nullable) = false,
+    (gogoproto.customtype) = "cosmossdk.io/math.Int",
+    (cosmos_proto.scalar) = "cosmos.Int"
+  ];
+}
+
+// Matches a number of required allocations with benefits
+message Tier {
+  uint64 tier_id = 1;
+  string required_allocations = 2 [
+    (gogoproto.nullable) = false,
+    (gogoproto.customtype) = "cosmossdk.io/math.Int",
+    (cosmos_proto.scalar) = "cosmos.Int"
+  ];
+  TierBenefits benefits = 3 [(gogoproto.nullable) = false];
+}
+
+message TierBenefits {
+  // max_bid_amount maximum amount an auction participant can bid
+  string max_bid_amount = 1 [
+    (gogoproto.nullable) = false,
+    (gogoproto.customtype) = "cosmossdk.io/math.Int",
+    (cosmos_proto.scalar) = "cosmos.Int"
+  ];
+}

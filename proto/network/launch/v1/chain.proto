@@ -1,0 +1,72 @@
+syntax = "proto3";
+package network.launch.v1;
+
+import "amino/amino.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/ignite/network/x/launch/types";
+
+message Chain {
+  uint64 launch_id = 1;
+  uint64 coordinator_id = 2;
+  string genesis_chain_id = 3;
+  int64 created_at = 4;
+
+  string source_url = 5;
+  string source_hash = 6;
+
+  InitialGenesis initial_genesis = 7 [(gogoproto.nullable) = false];
+
+  bool has_project = 8;
+  uint64 project_id = 9;
+  bool is_mainnet = 10;
+
+  bool launch_triggered = 11;
+  google.protobuf.Timestamp launch_time = 12 [
+    (gogoproto.nullable) = false,
+    (gogoproto.stdtime) = true
+  ];
+
+  int64 consumer_revision_height = 13;
+
+  bool monitoring_connected = 14;
+
+  // account_balance is the balance given to approved accounts
+  // for this chain.  If not set, the balances used will be those
+  // contained in the requests
+  repeated cosmos.base.v1beta1.Coin account_balance = 15 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+
+  bytes metadata = 16;
+}
+
+message InitialGenesis {
+  oneof source {
+    DefaultInitialGenesis default_initial_genesis = 1;
+    GenesisURL genesis_url = 2;
+    GenesisConfig genesis_config = 3;
+  }
+}
+
+// DefaultInitialGenesis specifies using the default CLI-generated genesis as an
+// initial genesis
+message DefaultInitialGenesis {}
+
+// GenesisURL specifies using a custom genesis from a URL as the initial genesis
+message GenesisURL {
+  string url = 1;
+  string hash = 2;
+}
+
+// GenesisConfig specifies using a custom genesis from a Ignite CLI config file
+// the file is located in the root specified by source_url
+message GenesisConfig {
+  string file = 1;
+}

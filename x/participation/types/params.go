@@ -6,45 +6,36 @@ import (
 	"time"
 
 	sdkmath "cosmossdk.io/math"
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	"gopkg.in/yaml.v2"
 )
 
-var _ paramtypes.ParamSet = (*Params)(nil)
-
 var (
-	KeyAllocationPrice       = []byte("AllocationPrice")
-	KeyParticipationTierList = []byte("ParticipationTierList")
-	KeyRegistrationPeriod    = []byte("RegistrationPeriod")
-	KeyWithdrawalDelay       = []byte("WithdrawalDelay")
-
 	DefaultAllocationPrice = AllocationPrice{
 		Bonded: sdkmath.NewInt(1000),
 	}
 	DefaultParticipationTierList = []Tier{
 		{
-			TierID:              1,
+			TierId:              1,
 			RequiredAllocations: sdkmath.OneInt(),
 			Benefits: TierBenefits{
 				MaxBidAmount: sdkmath.NewInt(1000),
 			},
 		},
 		{
-			TierID:              2,
+			TierId:              2,
 			RequiredAllocations: sdkmath.NewInt(2),
 			Benefits: TierBenefits{
 				MaxBidAmount: sdkmath.NewInt(2000),
 			},
 		},
 		{
-			TierID:              3,
+			TierId:              3,
 			RequiredAllocations: sdkmath.NewInt(5),
 			Benefits: TierBenefits{
 				MaxBidAmount: sdkmath.NewInt(10000),
 			},
 		},
 		{
-			TierID:              4,
+			TierId:              4,
 			RequiredAllocations: sdkmath.NewInt(10),
 			Benefits: TierBenefits{
 				MaxBidAmount: sdkmath.NewInt(30000),
@@ -58,11 +49,6 @@ var (
 	// DefaultRegistrationPeriod they sum up to the total default UnbondingTime
 	DefaultWithdrawalDelay = time.Hour * 24 * 14 // Two weeks
 )
-
-// ParamKeyTable the param key table for launch module
-func ParamKeyTable() paramtypes.KeyTable {
-	return paramtypes.NewKeyTable().RegisterParamSet(&Params{})
-}
 
 // NewParams creates a new Params instance
 func NewParams(
@@ -79,7 +65,7 @@ func NewParams(
 	}
 }
 
-// DefaultParams returns a default set of parameters
+// DefaultParams returns a default set of parameters.
 func DefaultParams() Params {
 	return NewParams(
 		DefaultAllocationPrice,
@@ -87,16 +73,6 @@ func DefaultParams() Params {
 		DefaultRegistrationPeriod,
 		DefaultWithdrawalDelay,
 	)
-}
-
-// ParamSetPairs get the params.ParamSet
-func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
-	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(KeyAllocationPrice, &p.AllocationPrice, validateAllocationPrice),
-		paramtypes.NewParamSetPair(KeyParticipationTierList, &p.ParticipationTierList, validateParticipationTierList),
-		paramtypes.NewParamSetPair(KeyRegistrationPeriod, &p.RegistrationPeriod, validateTimeDuration),
-		paramtypes.NewParamSetPair(KeyWithdrawalDelay, &p.WithdrawalDelay, validateTimeDuration),
-	}
 }
 
 // Validate validates the set of params
@@ -116,19 +92,8 @@ func (p Params) Validate() error {
 	return validateTimeDuration(p.WithdrawalDelay)
 }
 
-// String implements the Stringer interface.
-func (p Params) String() string {
-	out, _ := yaml.Marshal(p)
-	return string(out)
-}
-
 // validateAllocationPrice validates the AllocationPrice param
-func validateAllocationPrice(v interface{}) error {
-	allocationPrice, ok := v.(AllocationPrice)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", v)
-	}
-
+func validateAllocationPrice(allocationPrice AllocationPrice) error {
 	if allocationPrice.Bonded.IsNil() {
 		return errors.New("value for 'bonded' should be set")
 	}
@@ -141,19 +106,14 @@ func validateAllocationPrice(v interface{}) error {
 }
 
 // validateParticipationTierList validates the ParticipationTierList param
-func validateParticipationTierList(v interface{}) error {
-	participationTierList, ok := v.([]Tier)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", v)
-	}
-
+func validateParticipationTierList(participationTierList []Tier) error {
 	tiersIndexMap := make(map[uint64]struct{})
 	for _, tier := range participationTierList {
 		// check IDs are unique
-		if _, ok = tiersIndexMap[tier.TierID]; ok {
-			return fmt.Errorf("duplicated tier ID: %v", tier.TierID)
+		if _, ok := tiersIndexMap[tier.TierId]; ok {
+			return fmt.Errorf("duplicated tier ID: %v", tier.TierId)
 		}
-		tiersIndexMap[tier.TierID] = struct{}{}
+		tiersIndexMap[tier.TierId] = struct{}{}
 
 		if tier.RequiredAllocations.LTE(sdkmath.ZeroInt()) {
 			return errors.New("required allocations must be greater than zero")
@@ -180,15 +140,30 @@ func validateTierBenefits(b TierBenefits) error {
 }
 
 // validateTimeDuration validates a time.Duration parameter
-func validateTimeDuration(i interface{}) error {
-	v, ok := i.(time.Duration)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateTimeDuration(v time.Duration) error {
 	if v <= 0 {
 		return fmt.Errorf("time frame must be positive")
 	}
 
 	return nil
+}
+
+func (a *AllocationPrice) Equal(cmp *AllocationPrice) bool {
+	return a.Bonded.Equal(cmp.Bonded)
+}
+
+func (t *Tier) Equal(cmp *Tier) bool {
+	switch {
+	case t.TierId != cmp.TierId:
+		return false
+	case !t.RequiredAllocations.Equal(cmp.RequiredAllocations):
+		return false
+	case !t.Benefits.Equal(&cmp.Benefits):
+		return false
+	}
+	return true
+}
+
+func (t *TierBenefits) Equal(cmp *TierBenefits) bool {
+	return t.MaxBidAmount.Equal(cmp.MaxBidAmount)
 }

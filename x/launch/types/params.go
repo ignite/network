@@ -2,13 +2,9 @@ package types
 
 import (
 	"errors"
-	"fmt"
 	"time"
 
-	"gopkg.in/yaml.v2"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )
 
 var (
@@ -30,20 +26,7 @@ var (
 	MaxParametrableRevertDelay = time.Hour * 24
 
 	DefaultMaxMetadataLength uint64 = 2000
-
-	KeyLaunchTimeRange   = []byte("LaunchTimeRange")
-	KeyRevertDelay       = []byte("RevertDelay")
-	KeyChainCreationFee  = []byte("ChainCreationFee")
-	KeyRequestFee        = []byte("RequestFee")
-	KeyMaxMetadataLength = []byte("MaxMetadataLength")
 )
-
-var _ paramtypes.ParamSet = (*Params)(nil)
-
-// ParamKeyTable the param key table for launch module
-func ParamKeyTable() paramtypes.KeyTable {
-	return paramtypes.NewKeyTable().RegisterParamSet(&Params{})
-}
 
 // NewLaunchTimeRange creates a new LaunchTimeRange instance
 func NewLaunchTimeRange(minLaunchTime, maxLaunchTime time.Duration) LaunchTimeRange {
@@ -83,26 +66,12 @@ func DefaultParams() Params {
 	)
 }
 
-// ParamSetPairs get the params.ParamSet
-func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
-	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(KeyLaunchTimeRange, &p.LaunchTimeRange, validateLaunchTimeRange),
-		paramtypes.NewParamSetPair(KeyRevertDelay, &p.RevertDelay, validateRevertDelay),
-		paramtypes.NewParamSetPair(KeyChainCreationFee, &p.ChainCreationFee, validateFee),
-		paramtypes.NewParamSetPair(KeyRequestFee, &p.RequestFee, validateFee),
-		paramtypes.NewParamSetPair(KeyMaxMetadataLength, &p.MaxMetadataLength, validateMaxMetadataLength),
-	}
-}
-
-// Validate validates the set of params
+// Validate validates the set of params.
 func (p Params) Validate() error {
 	if err := validateLaunchTimeRange(p.LaunchTimeRange); err != nil {
 		return err
 	}
 	if err := validateRevertDelay(p.RevertDelay); err != nil {
-		return err
-	}
-	if err := validateMaxMetadataLength(p.MaxMetadataLength); err != nil {
 		return err
 	}
 	if err := p.ChainCreationFee.Validate(); err != nil {
@@ -111,18 +80,7 @@ func (p Params) Validate() error {
 	return p.RequestFee.Validate()
 }
 
-// String implements the Stringer interface.
-func (p Params) String() string {
-	out, _ := yaml.Marshal(p)
-	return string(out)
-}
-
-func validateLaunchTimeRange(i interface{}) error {
-	v, ok := i.(LaunchTimeRange)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateLaunchTimeRange(v LaunchTimeRange) error {
 	// it is enough to check that minLaunchTime is positive since it must be that minLaunchTime < maxLaunchTime
 	if v.MinLaunchTime < 0 {
 		return errors.New("MinLaunchTime can't be negative")
@@ -139,12 +97,7 @@ func validateLaunchTimeRange(i interface{}) error {
 	return nil
 }
 
-func validateRevertDelay(i interface{}) error {
-	v, ok := i.(time.Duration)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-
+func validateRevertDelay(v time.Duration) error {
 	if v > MaxParametrableRevertDelay {
 		return errors.New("max parametrable revert delay reached")
 	}
@@ -156,17 +109,12 @@ func validateRevertDelay(i interface{}) error {
 	return nil
 }
 
-func validateFee(i interface{}) error {
-	v, ok := i.(sdk.Coins)
-	if !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
+func (l *LaunchTimeRange) Equal(cmp *LaunchTimeRange) bool {
+	switch {
+	case l.GetMinLaunchTime().Nanoseconds() != cmp.GetMinLaunchTime().Nanoseconds():
+		return false
+	case l.GetMaxLaunchTime().Nanoseconds() != cmp.GetMaxLaunchTime().Nanoseconds():
+		return false
 	}
-	return v.Validate()
-}
-
-func validateMaxMetadataLength(i interface{}) error {
-	if _, ok := i.(uint64); !ok {
-		return fmt.Errorf("invalid parameter type: %T", i)
-	}
-	return nil
+	return true
 }

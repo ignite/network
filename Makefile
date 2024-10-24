@@ -53,8 +53,8 @@ build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
 
 # process linker flags
 
-ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=spnd \
-		  -X github.com/cosmos/cosmos-sdk/version.AppName=spnd \
+ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=networkd \
+		  -X github.com/cosmos/cosmos-sdk/version.AppName=networkd \
 		  -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
 		  -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
 		  -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)" \
@@ -84,7 +84,7 @@ govulncheck:
 	@echo Running govulncheck...
 	@go run golang.org/x/vuln/cmd/govulncheck ./...
 
-FIND_ARGS := -name '*.go' -type f -not -name '*.pb.go' -not -name '*.pb.gw.go'
+FIND_ARGS := -name '*.go' -type f -not -name '*.pb.go' -not -name '*.pb.gw.go' -not -path './api/*'
 
 ## format: Run gofumpt and goimports.
 format:
@@ -92,7 +92,7 @@ format:
 	@go install mvdan.cc/gofumpt
 	@go install golang.org/x/tools/cmd/goimports
 	@find . $(FIND_ARGS) | xargs gofumpt -w .
-	@find . $(FIND_ARGS) | xargs goimports -w -local github.com/ignite/modules
+	@find . $(FIND_ARGS) | xargs goimports -w -local github.com/ignite/network
 
 ## lint: Run Golang CI Lint.
 lint:
@@ -115,22 +115,22 @@ help: Makefile
 
 build: go.sum
 ifeq ($(OS),Windows_NT)
-	go build $(BUILD_FLAGS) -o build/spnd.exe ./cmd/spnd
+	go build $(BUILD_FLAGS) -o build/networkd.exe ./cmd/networkd
 else
-	go build $(BUILD_FLAGS) -o build/spnd ./cmd/spnd
+	go build $(BUILD_FLAGS) -o build/networkd ./cmd/networkd
 endif
 
 build-linux: go.sum
 	LEDGER_ENABLED=false GOOS=linux GOARCH=amd64 $(MAKE) build
 
 install: go.sum
-	go install $(BUILD_FLAGS) ./cmd/spnd
+	go install $(BUILD_FLAGS) ./cmd/networkd
 
 build-reproducible: go.sum
 	$(DOCKER) rm latest-build || true
 	$(DOCKER) run --volume=$(CURDIR):/sources:ro \
         --env TARGET_PLATFORMS='linux/amd64 darwin/amd64 linux/arm64' \
-        --env APP=spnd \
+        --env APP=networkd \
         --env VERSION=$(VERSION) \
         --env COMMIT=$(COMMIT) \
         --name latest-build cosmossdk/rbuilder:latest
@@ -181,7 +181,7 @@ bench:
 	@VERSION=$(VERSION) go test -mod=readonly -v -timeout 30m -bench=. $(PACKAGES)
 
 ## test: Run unit and integration tests.
-test: govet test-unit
+test: govet govulncheck test-unit
 
 .PHONY: test test-unit test-race test-cover bench
 
@@ -194,7 +194,7 @@ proto-all: proto-format proto-lint proto-gen-gogo
 proto-gen-gogo:
 	@echo "Generating Protobuf Files"
 	@buf generate --template $(CURDIR)/proto/buf.gen.gogo.yaml --output $(CURDIR)/gen/go
-	@cp -r gen/go/github.com/ignite/modules/x ./
+	@cp -r gen/go/github.com/ignite/network/x ./
 	@rm -R gen/go
 
 proto-gen-swagger:

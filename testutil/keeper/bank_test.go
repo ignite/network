@@ -7,14 +7,13 @@ import (
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/stretchr/testify/require"
 
-	testkeeper "github.com/tendermint/spn/testutil/keeper"
-	"github.com/tendermint/spn/testutil/sample"
+	testkeeper "github.com/ignite/network/testutil/keeper"
+	"github.com/ignite/network/testutil/sample"
 )
 
 func TestTestKeepers_Mint(t *testing.T) {
-	sdkCtx, tk, _ := testkeeper.NewTestSetup(t)
+	ctx, tk, _ := testkeeper.NewTestSetup(t)
 	r := sample.Rand()
-	ctx := sdk.WrapSDKContext(sdkCtx)
 	address := sample.Address(r)
 	coins, otherCoins := sample.Coins(r), sample.Coins(r)
 
@@ -28,11 +27,11 @@ func TestTestKeepers_Mint(t *testing.T) {
 	}
 
 	// should create the account
-	tk.Mint(sdkCtx, address, coins)
-	require.True(t, getBalances(address).IsEqual(coins))
+	tk.Mint(ctx, address, coins)
+	require.True(t, getBalances(address).Equal(coins))
 
 	// should add the minted coins in the balance
 	previousBalance := getBalances(address)
-	tk.Mint(sdkCtx, address, otherCoins)
-	require.True(t, getBalances(address).IsEqual(previousBalance.Add(otherCoins...)))
+	tk.Mint(ctx, address, otherCoins)
+	require.True(t, getBalances(address).Equal(previousBalance.Add(otherCoins...)))
 }

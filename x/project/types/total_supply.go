@@ -74,3 +74,13 @@ func (sr TotalSupplyRange) ValidateBasic() error {
 
 	return nil
 }
+
+func (sr *TotalSupplyRange) Equal(cmp *TotalSupplyRange) bool {
+	switch {
+	case !sr.MinTotalSupply.Equal(cmp.MinTotalSupply):
+		return false
+	case !sr.MaxTotalSupply.Equal(cmp.MaxTotalSupply):
+		return false
+	}
+	return true
+}

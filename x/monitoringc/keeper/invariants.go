@@ -4,7 +4,8 @@ import (
 	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/tendermint/spn/x/monitoringc/types"
+
+	"github.com/ignite/network/x/monitoringc/types"
 )
 
 const (
@@ -12,13 +13,13 @@ const (
 )
 
 // RegisterInvariants registers all module invariants
-func RegisterInvariants(ir sdk.InvariantRegistry, k Keeper) {
+func RegisterInvariants(ir sdk.InvariantRegistry, k *Keeper) {
 	ir.RegisterRoute(types.ModuleName, missingVerifiedClientIDRoute,
 		MissingVerifiedClientIDInvariant(k))
 }
 
 // AllInvariants runs all invariants of the module.
-func AllInvariants(k Keeper) sdk.Invariant {
+func AllInvariants(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
 		return MissingVerifiedClientIDInvariant(k)(ctx)
 	}
@@ -26,17 +27,23 @@ func AllInvariants(k Keeper) sdk.Invariant {
 
 // MissingVerifiedClientIDInvariant checks if any of the clientIDs in `VerifiedClientID` does not have a corresponding
 // entry in `LaunchIDFromVerifiedClientID`
-func MissingVerifiedClientIDInvariant(k Keeper) sdk.Invariant {
+func MissingVerifiedClientIDInvariant(k *Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
-		allVerifiedClientID := k.GetAllVerifiedClientID(ctx)
-		allLaunchIDFromVerifiedClientlID := k.GetAllLaunchIDFromVerifiedClientID(ctx)
+		allVerifiedClientID, err := k.AllVerifiedClientID(ctx)
+		if err != nil {
+			return "", false
+		}
+		allLaunchIDFromVerifiedClientID, err := k.AllLaunchIDFromVerifiedClientID(ctx)
+		if err != nil {
+			return "", false
+		}
 		clientIDMap := make(map[string]struct{})
-		for _, launchIDFromVerifiedClientID := range allLaunchIDFromVerifiedClientlID {
-			clientIDMap[clientIDKey(launchIDFromVerifiedClientID.LaunchID, launchIDFromVerifiedClientID.ClientID)] = struct{}{}
+		for _, launchIDFromVerifiedClientID := range allLaunchIDFromVerifiedClientID {
+			clientIDMap[clientIDKey(launchIDFromVerifiedClientID.LaunchId, launchIDFromVerifiedClientID.ClientId)] = struct{}{}
 		}
 		for _, verifiedClientID := range allVerifiedClientID {
-			for _, clientID := range verifiedClientID.ClientIDs {
-				if _, ok := clientIDMap[clientIDKey(verifiedClientID.LaunchID, clientID)]; !ok {
+			for _, clientID := range verifiedClientID.ClientIdList {
+				if _, ok := clientIDMap[clientIDKey(verifiedClientID.LaunchId, clientID)]; !ok {
 					return sdk.FormatInvariant(
 						types.ModuleName, missingVerifiedClientIDRoute,
 						"client id from verifiedClient list not found in launchIDFromVerifiedClientID list",

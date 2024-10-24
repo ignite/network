@@ -1,0 +1,12 @@
+syntax = "proto3";
+package network.monitoringp.v1;
+
+import "gogoproto/gogo.proto";
+import "network/types/monitoring.proto";
+
+option go_package = "github.com/ignite/network/x/monitoringp/types";
+
+message MonitoringInfo {
+  bool transmitted = 1;
+  network.types.SignatureCounts signature_counts = 2 [(gogoproto.nullable) = false];
+}

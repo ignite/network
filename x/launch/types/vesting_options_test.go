@@ -8,9 +8,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	tc "github.com/tendermint/spn/testutil/constructor"
-	"github.com/tendermint/spn/testutil/sample"
-	"github.com/tendermint/spn/x/launch/types"
+	tc "github.com/ignite/network/testutil/constructor"
+	"github.com/ignite/network/testutil/sample"
+	"github.com/ignite/network/x/launch/types"
 )
 
 func TestNewDelayedVesting(t *testing.T) {
@@ -23,8 +23,8 @@ func TestNewDelayedVesting(t *testing.T) {
 
 		delayedVesting := vestingOptions.GetDelayedVesting()
 		require.NotNil(t, delayedVesting)
-		require.True(t, vesting.IsEqual(delayedVesting.Vesting))
-		require.True(t, totalBalance.IsEqual(delayedVesting.TotalBalance))
+		require.True(t, vesting.Equal(delayedVesting.Vesting))
+		require.True(t, totalBalance.Equal(delayedVesting.TotalBalance))
 		require.EqualValues(t, endTime, delayedVesting.EndTime)
 	})
 }

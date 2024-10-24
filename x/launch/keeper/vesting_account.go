@@ -1,61 +1,20 @@
 package keeper
 
 import (
-	"github.com/cosmos/cosmos-sdk/store/prefix"
+	"context"
+
+	"cosmossdk.io/collections"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/tendermint/spn/x/launch/types"
+	"github.com/ignite/network/x/launch/types"
 )
 
-// SetVestingAccount set a specific vestingAccount in the store from its index
-func (k Keeper) SetVestingAccount(ctx sdk.Context, vestingAccount types.VestingAccount) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.VestingAccountKeyPrefix))
-	b := k.cdc.MustMarshal(&vestingAccount)
-	store.Set(types.AccountKeyPath(
-		vestingAccount.LaunchID,
-		vestingAccount.Address,
-	), b)
-}
-
-// GetVestingAccount returns a vestingAccount from its index
-func (k Keeper) GetVestingAccount(
-	ctx sdk.Context,
-	launchID uint64,
-	address string,
-) (val types.VestingAccount, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.VestingAccountKeyPrefix))
-
-	b := store.Get(types.AccountKeyPath(launchID, address))
-	if b == nil {
-		return val, false
-	}
-
-	k.cdc.MustUnmarshal(b, &val)
-	return val, true
-}
-
-// RemoveVestingAccount removes a vestingAccount from the store
-func (k Keeper) RemoveVestingAccount(
-	ctx sdk.Context,
-	launchID uint64,
-	address string,
-) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.VestingAccountKeyPrefix))
-	store.Delete(types.AccountKeyPath(launchID, address))
-}
-
-// GetAllVestingAccount returns all vestingAccount
-func (k Keeper) GetAllVestingAccount(ctx sdk.Context) (list []types.VestingAccount) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.VestingAccountKeyPrefix))
-	iterator := sdk.KVStorePrefixIterator(store, []byte{})
-
-	defer iterator.Close()
-
-	for ; iterator.Valid(); iterator.Next() {
-		var val types.VestingAccount
-		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		list = append(list, val)
-	}
-
-	return
+// AllVestingAccount returns all VestingAccount.
+func (k Keeper) AllVestingAccount(ctx context.Context) ([]types.VestingAccount, error) {
+	vestingAccount := make([]types.VestingAccount, 0)
+	err := k.VestingAccount.Walk(ctx, nil, func(_ collections.Pair[uint64, sdk.AccAddress], value types.VestingAccount) (bool, error) {
+		vestingAccount = append(vestingAccount, value)
+		return false, nil
+	})
+	return vestingAccount, err
 }

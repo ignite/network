@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+package network.project.v1;
+
+import "amino/amino.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "cosmos_proto/cosmos.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "network/project/v1/mainnet_account.proto";
+import "network/project/v1/params.proto";
+import "network/project/v1/project.proto";
+import "network/project/v1/project_chains.proto";
+
+option go_package = "github.com/ignite/network/x/project/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/ignite/network/project/v1/params";
+  }
+
+  // Queries a list of MainnetAccount items.
+  rpc GetMainnetAccount(QueryGetMainnetAccountRequest) returns (QueryGetMainnetAccountResponse) {
+    option (google.api.http).get = "/ignite/network/project/mainnet_account/{project_id}/{address}";
+  }
+  rpc ListMainnetAccount(QueryAllMainnetAccountRequest) returns (QueryAllMainnetAccountResponse) {
+    option (google.api.http).get = "/ignite/network/project/mainnet_account/{project_id}";
+  }
+
+  // Queries a list of Project items.
+  rpc GetProject(QueryGetProjectRequest) returns (QueryGetProjectResponse) {
+    option (google.api.http).get = "/ignite/network/project/project/{project_id}";
+  }
+  rpc ListProject(QueryAllProjectRequest) returns (QueryAllProjectResponse) {
+    option (google.api.http).get = "/ignite/network/project/project";
+  }
+
+  // Queries a list of ProjectChains items.
+  rpc GetProjectChains(QueryGetProjectChainsRequest) returns (QueryGetProjectChainsResponse) {
+    option (google.api.http).get = "/ignite/network/project/project_chains/{project_id}";
+  }
+
+  // Queries a list of SpecialAllocationsBalance items.
+  rpc SpecialAllocationsBalance(QuerySpecialAllocationsBalanceRequest) returns (QuerySpecialAllocationsBalanceResponse) {
+    option (google.api.http).get = "/ignite/network/project/special_allocations_balance/{project_id}";
+  }
+
+  // Queries a list of MainnetAccountBalance items.
+  rpc MainnetAccountBalance(QueryMainnetAccountBalanceRequest) returns (QueryMainnetAccountBalanceResponse) {
+    option (google.api.http).get = "/ignite/network/project/mainnet_account_balance/{project_id}/{address}";
+  }
+
+  // Queries a list of ListMainnetAccountBalance items.
+  rpc ListMainnetAccountBalance(QueryListMainnetAccountBalanceRequest) returns (QueryListMainnetAccountBalanceResponse) {
+    option (google.api.http).get = "/ignite/network/project/list_mainnet_account_balance/{project_id}";
+  }
+
+  // Queries a list of TotalShares items.
+  rpc TotalShares(QueryTotalSharesRequest) returns (QueryTotalSharesResponse) {
+    option (google.api.http).get = "/ignite/network/project/total_shares";
+  }
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
+
+message QueryGetMainnetAccountRequest {
+  uint64 project_id = 1;
+  string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}
+
+message QueryGetMainnetAccountResponse {
+  MainnetAccount mainnet_account = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMainnetAccountRequest {
+  uint64 project_id = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryAllMainnetAccountResponse {
+  repeated MainnetAccount mainnet_account = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetProjectRequest {
+  uint64 project_id = 1;
+}
+
+message QueryGetProjectResponse {
+  Project project = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllProjectRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllProjectResponse {
+  repeated Project project = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetProjectChainsRequest {
+  uint64 project_id = 1;
+}
+
+message QueryGetProjectChainsResponse {
+  ProjectChains project_chains = 1 [(gogoproto.nullable) = false];
+}
+
+message QuerySpecialAllocationsBalanceRequest {
+  uint64 project_id = 1;
+}
+
+message QuerySpecialAllocationsBalanceResponse {
+  repeated cosmos.base.v1beta1.Coin genesis_distribution = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+  repeated cosmos.base.v1beta1.Coin claimable_airdrop = 2 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (amino.encoding) = "legacy_coins",
+    (gogoproto.casttype) = "github.com/cosmos/cosmos-sdk/types.Coin",
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+}
+
+message QueryMainnetAccountBalanceRequest {
+  uint64 project_id = 1;
+  string address = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+}
+
+message QueryMainnetAccountBalanceResponse {
+  MainnetAccountBalance mainnet_account_balance = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryListMainnetAccountBalanceRequest {
+  uint64 project_id = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryListMainnetAccountBalanceResponse {
+  repeated MainnetAccountBalance mainnet_account_balance = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryTotalSharesRequest {}
+
+message QueryTotalSharesResponse {
+  uint64 total_shares = 1;
+}

@@ -1,6 +1,6 @@
 package types
 
-import spntypes "github.com/tendermint/spn/pkg/types"
+import "cosmossdk.io/collections"
 
 const (
 	// ModuleName defines the module name
@@ -12,12 +12,6 @@ const (
 	// StoreKey defines the primary module store key
 	StoreKey = ModuleName
 
-	// RouterKey is the message route for slashing
-	RouterKey = ModuleName
-
-	// QuerierRoute defines the module's query routing key
-	QuerierRoute = ModuleName
-
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_monitoringc"
 
@@ -26,51 +20,26 @@ const (
 
 	// PortID is the default port id that module binds to
 	PortID = "monitoringc"
-
-	// VerifiedClientIDKeyPrefix is the prefix to retrieve all VerifiedClientID
-	VerifiedClientIDKeyPrefix = "VerifiedClientID/value/"
-
-	// ProviderClientIDKeyPrefix is the prefix to retrieve all ProviderClientID
-	ProviderClientIDKeyPrefix = "ProviderClientID/value/"
-
-	// LaunchIDFromVerifiedClientIDKeyPrefix is the prefix to retrieve all LaunchIDFromVerifiedClientID
-	LaunchIDFromVerifiedClientIDKeyPrefix = "LaunchIDFromVerifiedClientID/value/"
-
-	// LaunchIDFromChannelIDKeyPrefix is the prefix to retrieve all LaunchIDFromChannelID
-	LaunchIDFromChannelIDKeyPrefix = "LaunchIDFromChannelID/value/"
-
-	// MonitoringHistoryKeyPrefix is the prefix to retrieve all MonitoringHistory
-	MonitoringHistoryKeyPrefix = "MonitoringHistory/value/"
 )
 
-// PortKey defines the key to store the port ID in store
-var PortKey = KeyPrefix("monitoringc-port-")
+var (
+	ParamsKey = collections.NewPrefix("p_monitoringc")
 
-func KeyPrefix(p string) []byte {
-	return []byte(p)
-}
+	// PortKey defines the key to store the port ID in store
+	PortKey = collections.NewPrefix("monitoringc-port-")
 
-// VerifiedClientIDKey returns the store key to retrieve a VerifiedClientID from the index fields
-func VerifiedClientIDKey(launchID uint64) []byte {
-	return append(spntypes.UintBytes(launchID), byte('/'))
-}
+	// LaunchIDFromChannelIDKey is the prefix to retrieve all LaunchIDFromChannelID
+	LaunchIDFromChannelIDKey = collections.NewPrefix("LaunchIDFromChannelID/value/")
 
-// ProviderClientIDKey returns the store key to retrieve a ProviderClientID from the index fields
-func ProviderClientIDKey(launchID uint64) []byte {
-	return append(spntypes.UintBytes(launchID), byte('/'))
-}
+	// LaunchIDFromVerifiedClientIDKey is the prefix to retrieve all LaunchIDFromVerifiedClientID
+	LaunchIDFromVerifiedClientIDKey = collections.NewPrefix("LaunchIDFromVerifiedClientID/value/")
 
-// LaunchIDFromVerifiedClientIDKey returns the store key to retrieve a LaunchIDFromVerifiedClientID from the index fields
-func LaunchIDFromVerifiedClientIDKey(clientID string) []byte {
-	return []byte(clientID + "/")
-}
+	// MonitoringHistoryKey is the prefix to retrieve all MonitoringHistory
+	MonitoringHistoryKey = collections.NewPrefix("MonitoringHistory/value/")
 
-// LaunchIDFromChannelIDKey returns the store key to retrieve a LaunchIDFromChannelID from the index fields
-func LaunchIDFromChannelIDKey(channelID string) []byte {
-	return []byte(channelID + "/")
-}
+	// VerifiedClientIDKey is the prefix to retrieve all VerifiedClientID
+	VerifiedClientIDKey = collections.NewPrefix("VerifiedClientID/value/")
 
-// MonitoringHistoryKey returns the store key to retrieve a MonitoringHistory from the index fields
-func MonitoringHistoryKey(launchID uint64) []byte {
-	return append(spntypes.UintBytes(launchID), byte('/'))
-}
+	// ProviderClientIDKey is the prefix to retrieve all ProviderClientID
+	ProviderClientIDKey = collections.NewPrefix("ProviderClientID/value/")
+)

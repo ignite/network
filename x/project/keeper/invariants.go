@@ -5,7 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/tendermint/spn/x/project/types"
+	"github.com/ignite/network/x/project/types"
 )
 
 const (
@@ -36,12 +36,15 @@ func AllInvariants(k Keeper) sdk.Invariant {
 // the `MainnetAccount` project exist.
 func AccountWithoutProjectInvariant(k Keeper) sdk.Invariant {
 	return func(ctx sdk.Context) (string, bool) {
-		all := k.GetAllMainnetAccount(ctx)
+		all, err := k.GetAllMainnetAccount(ctx)
+		if err != nil {
+			return "", false
+		}
 		for _, acc := range all {
-			if _, found := k.GetProject(ctx, acc.ProjectID); !found {
+			if _, err := k.GetProject(ctx, acc.ProjectId); err != nil {
 				return sdk.FormatInvariant(
 					types.ModuleName, accountWithoutProjectRoute,
-					fmt.Sprintf("%s: %d", types.ErrProjectNotFound, acc.ProjectID),
+					fmt.Sprintf("%s: %d", err, acc.ProjectId),
 				), true
 			}
 		}
@@ -58,19 +61,26 @@ func ProjectSharesInvariant(k Keeper) sdk.Invariant {
 		accountSharesByProject := make(map[uint64]types.Shares)
 
 		// get all mainnet account shares
-		accounts := k.GetAllMainnetAccount(ctx)
+		accounts, err := k.GetAllMainnetAccount(ctx)
+		if err != nil {
+			return "", false
+		}
 		for _, acc := range accounts {
-			if _, ok := accountSharesByProject[acc.ProjectID]; !ok {
-				accountSharesByProject[acc.ProjectID] = types.EmptyShares()
+			if _, ok := accountSharesByProject[acc.ProjectId]; !ok {
+				accountSharesByProject[acc.ProjectId] = types.EmptyShares()
 			}
-			accountSharesByProject[acc.ProjectID] = types.IncreaseShares(
-				accountSharesByProject[acc.ProjectID],
+			accountSharesByProject[acc.ProjectId] = types.IncreaseShares(
+				accountSharesByProject[acc.ProjectId],
 				acc.Shares,
 			)
 		}
 
-		for _, project := range k.GetAllProject(ctx) {
-			projectID := project.ProjectID
+		projects, err := k.Projects(ctx)
+		if err != nil {
+			return "", false
+		}
+		for _, project := range projects {
+			projectID := project.ProjectId
 			expectedAllocatedSharesShares := accountSharesByProject[projectID]
 
 			// read existing denoms from allocated shares of the project to check possible minted vouchers
