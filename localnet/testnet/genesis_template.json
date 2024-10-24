@@ -441,7 +441,7 @@
           }
         ],
         "registration_period": "604800s",
-        "withdrawal_delay": "1209600s"
+        "withdrawal_delay": "25s"
       },
       "used_allocations_list": []
     },

@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
     # Wait withdrawal delay
     print("waiting for withdrawal delay...")
-    time.sleep(5)
+    time.sleep(15)
 
     cmd('networkd tx participation withdraw-allocations 0 --from bob --chain-id spn-1 --keyring-backend test -y')
     time.sleep(2)
