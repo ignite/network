@@ -6,39 +6,31 @@ accounts:
   - name: alice
     coins:
       - 200000000uspn
-    mnemonic: slide moment original seven milk crawl help text kick fluid boring awkward
-      doll wonder sure fragile plate grid hard next casual expire okay body
+    mnemonic: slide moment original seven milk crawl help text kick fluid boring awkward doll wonder sure fragile plate grid hard next casual expire okay body
   - name: bob
     coins:
       - 200000000uspn
-    mnemonic: trap possible liquid elite embody host segment fantasy swim cable digital
-      eager tiny broom burden diary earn hen grow engine pigeon fringe claim program
+    mnemonic: trap possible liquid elite embody host segment fantasy swim cable digital eager tiny broom burden diary earn hen grow engine pigeon fringe claim program
   - name: carol
     coins:
       - 200000000uspn
-    mnemonic: great immense still pill defense fetch pencil slow purchase symptom speed
-      arm shoot fence have divorce cigar rapid hen vehicle pear evolve correct nerve
+    mnemonic: great immense still pill defense fetch pencil slow purchase symptom speed arm shoot fence have divorce cigar rapid hen vehicle pear evolve correct nerve
   - name: dave
     coins:
       - 200000000uspn
-    mnemonic: resist portion leisure lawn shell lunch inhale start pupil add fault segment
-      hour dwarf toddler insect frame math remove twist easy paddle nice rhythm
+    mnemonic: resist portion leisure lawn shell lunch inhale start pupil add fault segment hour dwarf toddler insect frame math remove twist easy paddle nice rhythm
   - name: joe
     coins:
       - 200000000uspn
-    mnemonic: diary behind allow lawn loop assault armor survey media toe rural mass
-      skull way crater tobacco pair glare window soon lift pistol fitness annual
+    mnemonic: diary behind allow lawn loop assault armor survey media toe rural mass skull way crater tobacco pair glare window soon lift pistol fitness annual
   - name: steve
     coins:
       - 200000000uspn
-    mnemonic: initial aisle blush gift shuffle hat solar dove dwarf soup credit acid
-      update seed mercy thumb swear main verb image dove rose chat inmate
+    mnemonic: initial aisle blush gift shuffle hat solar dove dwarf soup credit acid update seed mercy thumb swear main verb image dove rose chat inmate
   - name: olivia
     coins:
       - 200000000uspn
-    mnemonic: dinosaur submit around jacket movie garden crash weather matter option
-      time cabbage butter mind skin nature ride mosquito seat lock elephant merit empower
-      come
+    mnemonic: dinosaur submit around jacket movie garden crash weather matter option time cabbage butter mind skin nature ride mosquito seat lock elephant merit empower come
 faucet:
   name: bob
   coins:
