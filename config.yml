@@ -52,9 +52,9 @@ genesis:
               exponent: "3"
             - denom: spn
               exponent: "6"
-          description: The native staking token of Starport Network
+          description: The native staking token of Ignite Network
           display: spn
-          name: Starport Network
+          name: Ignite Network
           symbol: SPN
     claim:
       airdrop_supply:

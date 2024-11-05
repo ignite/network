@@ -1,6 +1,6 @@
 ## Localnet
 
-Localnet is a simple local testnet for Starport Network that includes 3 validators.
+Localnet is a simple local testnet for Ignite Network that includes 3 validators.
 
 Running localnet requires Python 3.
 

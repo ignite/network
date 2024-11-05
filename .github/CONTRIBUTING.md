@@ -1,6 +1,6 @@
 # Contributing guidelines
 
-If you're willing to create a new PR on Starport Network, make sure that you read and comply with this document.
+If you're willing to create a new PR on Ignite Network, make sure that you read and comply with this document.
 
 Start a new [Discussion](https://github.com/ignite/network/discussions/new) if you want to propose changes to this document.
 
