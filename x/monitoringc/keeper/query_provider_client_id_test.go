@@ -50,7 +50,7 @@ func TestProviderClientIDQuerySingle(t *testing.T) {
 			response: &types.QueryGetProviderClientIDResponse{ProviderClientId: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetProviderClientIDRequest{
 				LaunchId: 100000,
 			},

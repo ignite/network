@@ -51,7 +51,7 @@ func TestVerifiedClientIDQuerySingle(t *testing.T) {
 			response: &types.QueryGetVerifiedClientIDResponse{VerifiedClientId: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetVerifiedClientIDRequest{
 				LaunchId: 100000,
 			},

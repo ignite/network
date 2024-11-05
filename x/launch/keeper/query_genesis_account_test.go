@@ -57,7 +57,7 @@ func TestGenesisAccountQuerySingle(t *testing.T) {
 			response: &types.QueryGetGenesisAccountResponse{GenesisAccount: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetGenesisAccountRequest{
 				Address:  sample.Address(r),
 				LaunchId: 100000,

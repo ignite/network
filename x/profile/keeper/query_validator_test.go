@@ -67,7 +67,7 @@ func TestValidatorQuerySingle(t *testing.T) {
 			response: &types.QueryGetValidatorResponse{Validator: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetValidatorRequest{
 				Address: strconv.Itoa(100000),
 			},

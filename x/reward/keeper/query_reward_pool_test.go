@@ -50,7 +50,7 @@ func TestRewardPoolQuerySingle(t *testing.T) {
 			response: &types.QueryGetRewardPoolResponse{RewardPool: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetRewardPoolRequest{
 				LaunchId: 100000,
 			},

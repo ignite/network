@@ -53,7 +53,7 @@ func TestUsedAllocationsQuerySingle(t *testing.T) {
 			response: &types.QueryGetUsedAllocationsResponse{UsedAllocations: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetUsedAllocationsRequest{
 				Address: strconv.Itoa(100000),
 			},

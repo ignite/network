@@ -72,7 +72,7 @@ func TestAuctionUsedAllocationsQuerySingle(t *testing.T) {
 			response: &types.QueryGetAuctionUsedAllocationsResponse{AuctionUsedAllocations: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetAuctionUsedAllocationsRequest{
 				AuctionId: 100,
 				Address:   sample.Address(r),

@@ -51,9 +51,9 @@ func TestRequestQuerySingle(t *testing.T) {
 			response: &types.QueryGetRequestResponse{Request: msgs[1]},
 		},
 		{
-			desc:    "KeyNotFound",
+			desc:    "NotFound",
 			request: &types.QueryGetRequestRequest{LaunchId: uint64(len(msgs)), RequestId: uint64(len(msgs))},
-			err:     sdkerrors.ErrKeyNotFound,
+			err:     sdkerrors.ErrNotFound,
 		},
 		{
 			desc: "InvalidRequest",

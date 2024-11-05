@@ -49,7 +49,7 @@ func TestProjectChainsQuerySingle(t *testing.T) {
 			response: &types.QueryGetProjectChainsResponse{ProjectChains: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetProjectChainsRequest{
 				ProjectId: 100000,
 			},

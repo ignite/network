@@ -56,7 +56,7 @@ func TestMainnetAccountQuerySingle(t *testing.T) {
 			response: &types.QueryGetMainnetAccountResponse{MainnetAccount: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetMainnetAccountRequest{
 				Address:   sample.Address(r),
 				ProjectId: 100000,
