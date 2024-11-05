@@ -57,7 +57,7 @@ func TestVestingAccountQuerySingle(t *testing.T) {
 			response: &types.QueryGetVestingAccountResponse{VestingAccount: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetVestingAccountRequest{
 				Address:  sample.Address(r),
 				LaunchId: 100000,

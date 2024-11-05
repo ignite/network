@@ -51,7 +51,7 @@ func TestLaunchIDFromChannelIDQuerySingle(t *testing.T) {
 			response: &types.QueryGetLaunchIDFromChannelIDResponse{LaunchIdFromChannelId: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetLaunchIDFromChannelIDRequest{
 				ChannelId: strconv.Itoa(100000),
 			},

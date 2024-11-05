@@ -49,7 +49,7 @@ func TestMonitoringHistoryQuerySingle(t *testing.T) {
 			response: &types.QueryGetMonitoringHistoryResponse{MonitoringHistory: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetMonitoringHistoryRequest{
 				LaunchId: 100000,
 			},

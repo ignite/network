@@ -48,9 +48,9 @@ func TestChainQuerySingle(t *testing.T) {
 			response: &types.QueryGetChainResponse{Chain: msgs[1]},
 		},
 		{
-			desc:    "KeyNotFound",
+			desc:    "NotFound",
 			request: &types.QueryGetChainRequest{LaunchId: uint64(len(msgs))},
-			err:     sdkerrors.ErrKeyNotFound,
+			err:     sdkerrors.ErrNotFound,
 		},
 		{
 			desc: "InvalidRequest",

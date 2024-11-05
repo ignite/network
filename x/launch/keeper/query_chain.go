@@ -41,7 +41,7 @@ func (q queryServer) GetChain(ctx context.Context, req *types.QueryGetChainReque
 	chain, err := q.k.Chain.Get(ctx, req.LaunchId)
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
-			return nil, sdkerrors.ErrKeyNotFound
+			return nil, sdkerrors.ErrNotFound
 		}
 
 		return nil, status.Error(codes.Internal, "internal error")

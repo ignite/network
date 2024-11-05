@@ -57,7 +57,7 @@ func TestGenesisValidatorQuerySingle(t *testing.T) {
 			response: &types.QueryGetGenesisValidatorResponse{GenesisValidator: msgs[1]},
 		},
 		{
-			desc: "KeyNotFound",
+			desc: "NotFound",
 			request: &types.QueryGetGenesisValidatorRequest{
 				Address:  sample.Address(r),
 				LaunchId: 100000,

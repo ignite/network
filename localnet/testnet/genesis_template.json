@@ -7,13 +7,6 @@
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "0",
-          "address": "spn15rz2rwnlgr7nf6eauz52usezffwrxc0m7fezqe",
-          "pub_key": null,
-          "sequence": "0"
-        },
-        {
-          "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "account_number": "0",
           "address": "spn1aqn8ynvr3jmq67879qulzrwhchq5dtrvtx0nhe",
           "pub_key": null,
           "sequence": "0"
@@ -50,6 +43,13 @@
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "0",
           "address": "spn1twckcceyw43da9j247pfs3yhqsv25j38grh68q",
+          "pub_key": null,
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "0",
+          "address": "spn15rz2rwnlgr7nf6eauz52usezffwrxc0m7fezqe",
           "pub_key": null,
           "sequence": "0"
         }
@@ -131,7 +131,35 @@
           ]
         }
       ],
-      "denom_metadata": [],
+      "denom_metadata": [
+        {
+          "base": "uspn",
+          "denom_units": [
+            {
+              "aliases": [
+                "microspn"
+              ],
+              "denom": "uspn",
+              "exponent": "0"
+            },
+            {
+              "aliases": [
+                "millispn"
+              ],
+              "denom": "mspn",
+              "exponent": "3"
+            },
+            {
+              "denom": "spn",
+              "exponent": "6"
+            }
+          ],
+          "description": "The native staking token of Starport Network",
+          "display": "spn",
+          "name": "Starport Network",
+          "symbol": "SPN"
+        }
+      ],
       "params": {
         "default_send_enabled": true,
         "send_enabled": []
@@ -150,12 +178,51 @@
     "claim": {
       "airdrop_supply": {
         "supply": {
-          "amount": "0",
-          "denom": "uspn"
+          "amount": "1000",
+          "denom": "drop"
         }
       },
-      "claim_record_list": [],
-      "mission_list": [],
+      "claim_record_list": [
+        {
+          "address": "spn1aqn8ynvr3jmq67879qulzrwhchq5dtrvtx0nhe",
+          "claimable": "500"
+        },
+        {
+          "address": "spn1ezptsm3npn54qx9vvpah4nymre59ykr9exx2ul",
+          "claimable": "400"
+        },
+        {
+          "address": "spn1pkdk6m2nh77nlaep84cylmkhjder3arey7rll5",
+          "claimable": "100"
+        }
+      ],
+      "initial_claim": {
+        "enabled": true,
+        "mission_id": "0"
+      },
+      "mission_count": "4",
+      "mission_list": [
+        {
+          "description": "initial claim",
+          "mission_id": "0",
+          "weight": "0.25"
+        },
+        {
+          "description": "sending request",
+          "mission_id": "3",
+          "weight": "0.25"
+        },
+        {
+          "description": "staking",
+          "mission_id": "1",
+          "weight": "0.25"
+        },
+        {
+          "description": "voting",
+          "mission_id": "2",
+          "weight": "0.25"
+        }
+      ],
       "params": {}
     },
     "crisis": {
@@ -364,7 +431,20 @@
           "funded_addresses": "0.400000000000000000",
           "staking": "0.500000000000000000"
         },
-        "funded_addresses": [],
+        "funded_addresses": [
+          {
+            "address": "spn1ezptsm3npn54qx9vvpah4nymre59ykr9exx2ul",
+            "weight": "0.400000000000000000"
+          },
+          {
+            "address": "spn1aqn8ynvr3jmq67879qulzrwhchq5dtrvtx0nhe",
+            "weight": "0.300000000000000000"
+          },
+          {
+            "address": "spn1pkdk6m2nh77nlaep84cylmkhjder3arey7rll5",
+            "weight": "0.300000000000000000"
+          }
+        ],
         "goal_bonded": "0.670000000000000000",
         "inflation_max": "0.200000000000000000",
         "inflation_min": "0.070000000000000000",

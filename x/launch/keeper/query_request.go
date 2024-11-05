@@ -44,7 +44,7 @@ func (q queryServer) GetRequest(ctx context.Context, req *types.QueryGetRequestR
 	request, err := q.k.Request.Get(ctx, collections.Join(req.LaunchId, req.RequestId))
 	if err != nil {
 		if errors.Is(err, collections.ErrNotFound) {
-			return nil, sdkerrors.ErrKeyNotFound
+			return nil, sdkerrors.ErrNotFound
 		}
 
 		return nil, status.Error(codes.Internal, "internal error")

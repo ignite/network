@@ -49,9 +49,9 @@ func TestCoordinatorQuerySingle(t *testing.T) {
 			response: &types.QueryGetCoordinatorResponse{Coordinator: msgs[1]},
 		},
 		{
-			desc:    "KeyNotFound",
+			desc:    "NotFound",
 			request: &types.QueryGetCoordinatorRequest{CoordinatorId: uint64(len(msgs))},
-			err:     sdkerrors.ErrKeyNotFound,
+			err:     sdkerrors.ErrNotFound,
 		},
 		{
 			desc: "InvalidRequest",
@@ -172,7 +172,7 @@ func TestCoordinatorByAddressQuerySingle(t *testing.T) {
 		{
 			desc:    "should prevent querying non existing coordinator by address",
 			request: &types.QueryGetCoordinatorByAddressRequest{Address: sample.Address(r)},
-			err:     sdkerrors.ErrKeyNotFound,
+			err:     sdkerrors.ErrNotFound,
 		},
 		{
 			desc:    "should prevent querying invalid coordinator by address",
