@@ -70,6 +70,8 @@ import (
 	ibcfeekeeper "github.com/cosmos/ibc-go/v8/modules/apps/29-fee/keeper"
 	ibctransferkeeper "github.com/cosmos/ibc-go/v8/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
+	claimkeeper "github.com/ignite/modules/x/claim/keeper"
+	_ "github.com/ignite/modules/x/claim/module" // import for side-effects
 	fundraisingmodulekeeper "github.com/ignite/modules/x/fundraising/keeper"
 	_ "github.com/ignite/modules/x/fundraising/module" // import for side-effects
 	mintkeeper "github.com/ignite/modules/x/mint/keeper"
@@ -112,7 +114,6 @@ type App struct {
 	ConsensusParamsKeeper consensuskeeper.Keeper
 
 	SlashingKeeper       slashingkeeper.Keeper
-	MintKeeper           mintkeeper.Keeper
 	GovKeeper            *govkeeper.Keeper
 	CrisisKeeper         *crisiskeeper.Keeper
 	UpgradeKeeper        *upgradekeeper.Keeper
@@ -139,7 +140,10 @@ type App struct {
 	ScopedICAHostKeeper       capabilitykeeper.ScopedKeeper
 	ScopedKeepers             map[string]capabilitykeeper.ScopedKeeper
 
-	FundraisingKeeper   fundraisingmodulekeeper.Keeper
+	MintKeeper        mintkeeper.Keeper
+	ClaimKeeper       claimkeeper.Keeper
+	FundraisingKeeper fundraisingmodulekeeper.Keeper
+
 	ProfileKeeper       profilemodulekeeper.Keeper
 	ProjectKeeper       projectmodulekeeper.Keeper
 	RewardKeeper        rewardmodulekeeper.Keeper
@@ -250,6 +254,7 @@ func New(
 		&app.NFTKeeper,
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
+		&app.ClaimKeeper,
 		&app.FundraisingKeeper,
 		&app.ProfileKeeper,
 		&app.LaunchKeeper,

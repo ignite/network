@@ -49,10 +49,14 @@ import (
 	ibcfeetypes "github.com/cosmos/ibc-go/v8/modules/apps/29-fee/types"
 	ibctransfertypes "github.com/cosmos/ibc-go/v8/modules/apps/transfer/types"
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
+	claimmodulev1 "github.com/ignite/modules/api/modules/claim/module/v1"
 	fundraisingmodulev1 "github.com/ignite/modules/api/modules/fundraising/module/v1"
 	mintmodulev1 "github.com/ignite/modules/api/modules/mint/module/v1"
+	_ "github.com/ignite/modules/x/claim/module"
 	claimtypes "github.com/ignite/modules/x/claim/types"
-	fundraisingmoduletypes "github.com/ignite/modules/x/fundraising/types"
+	_ "github.com/ignite/modules/x/fundraising/module"
+	fundraisingtypes "github.com/ignite/modules/x/fundraising/types"
+	_ "github.com/ignite/modules/x/mint/module"
 	minttypes "github.com/ignite/modules/x/mint/types"
 	"google.golang.org/protobuf/types/known/durationpb"
 
@@ -114,7 +118,8 @@ var (
 		consensustypes.ModuleName,
 		circuittypes.ModuleName,
 		// chain modules
-		fundraisingmoduletypes.ModuleName,
+		claimtypes.ModuleName,
+		fundraisingtypes.ModuleName,
 		profilemoduletypes.ModuleName,
 		launchmoduletypes.ModuleName,
 		rewardmoduletypes.ModuleName,
@@ -146,7 +151,8 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
-		fundraisingmoduletypes.ModuleName,
+		claimtypes.ModuleName,
+		fundraisingtypes.ModuleName,
 		profilemoduletypes.ModuleName,
 		launchmoduletypes.ModuleName,
 		rewardmoduletypes.ModuleName,
@@ -173,7 +179,8 @@ var (
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		// chain modules
-		fundraisingmoduletypes.ModuleName,
+		claimtypes.ModuleName,
+		fundraisingtypes.ModuleName,
 		profilemoduletypes.ModuleName,
 		launchmoduletypes.ModuleName,
 		rewardmoduletypes.ModuleName,
@@ -203,7 +210,7 @@ var (
 		{Account: icatypes.ModuleName},
 		{Account: projectmoduletypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		{Account: rewardmoduletypes.ModuleName},
-		{Account: fundraisingmoduletypes.ModuleName},
+		{Account: fundraisingtypes.ModuleName},
 		{Account: monitoringcmoduletypes.ModuleName},
 		{Account: monitoringpmoduletypes.ModuleName},
 		{Account: claimtypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
@@ -343,7 +350,11 @@ var (
 				Config: appconfig.WrapAny(&circuitmodulev1.Module{}),
 			},
 			{
-				Name:   fundraisingmoduletypes.ModuleName,
+				Name:   claimtypes.ModuleName,
+				Config: appconfig.WrapAny(&claimmodulev1.Module{}),
+			},
+			{
+				Name:   fundraisingtypes.ModuleName,
 				Config: appconfig.WrapAny(&fundraisingmodulev1.Module{}),
 			},
 			{
