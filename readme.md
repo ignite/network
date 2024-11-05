@@ -1,5 +1,5 @@
 <div align="center">
-  <h1> Starport Network </h1>
+  <h1> Ignite Network </h1>
 </div>
 
 <div align="center">
@@ -40,7 +40,7 @@ Please read our [guides](https://docs.ignite.com/network/introduction) for using
 
 ## Learn more
 
-Starport Network (SPN) is a free and open source product maintained by [Ignite](https://ignite.com). Here's where you can find us. Stay in touch.
+Ignite Network (SPN) is a free and open source product maintained by [Ignite](https://ignite.com). Here's where you can find us. Stay in touch.
 
 - [Ignite docs](https://docs.ignite.com/)
 - [@IgniteDev on Twitter](https://twitter.com/ignite_dev)
