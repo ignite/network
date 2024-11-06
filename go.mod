@@ -43,7 +43,7 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.20.0
-	github.com/ignite/modules v0.0.3-0.20241105050027-482388061bf0
+	github.com/ignite/modules v0.0.3-0.20241106034624-8a3f18117729
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cast v1.6.0
 	github.com/spf13/cobra v1.8.1
