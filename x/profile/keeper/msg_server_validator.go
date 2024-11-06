@@ -8,7 +8,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/ignite/network/pkg/errors"
 	"github.com/ignite/network/x/profile/types"
 )
 
@@ -23,7 +22,7 @@ func (k msgServer) UpdateValidatorDescription(ctx context.Context, msg *types.Ms
 
 	// Check if the validator address is already in the store
 	validator, err := k.Validator.Get(ctx, msg.Address)
-	if errors.IsOf(err, collections.ErrNotFound) {
+	if errorsmod.IsOf(err, collections.ErrNotFound) {
 		validator = types.Validator{
 			Address:     msg.Address,
 			Description: types.ValidatorDescription{},
@@ -48,7 +47,7 @@ func (k msgServer) UpdateValidatorDescription(ctx context.Context, msg *types.Ms
 		validator.Description.SecurityContact = msg.SecurityContact
 	}
 
-	if errors.IsOf(err, collections.ErrNotFound) {
+	if errorsmod.IsOf(err, collections.ErrNotFound) {
 		err = sdk.UnwrapSDKContext(ctx).EventManager().EmitTypedEvent(
 			&types.EventValidatorCreated{
 				Address:           validator.Address,
@@ -83,7 +82,7 @@ func (k msgServer) AddValidatorOperatorAddress(ctx context.Context, msg *types.M
 
 	// get the current validator to eventually overwrite description and add opAddr
 	validatorStore, err := k.Validator.Get(ctx, valAddr)
-	if !errors.IsOf(err, collections.ErrNotFound) {
+	if !errorsmod.IsOf(err, collections.ErrNotFound) {
 		validator.Description = validatorStore.Description
 		validator = validatorStore.AddValidatorOperatorAddress(opAddr)
 	}
@@ -100,7 +99,7 @@ func (k msgServer) AddValidatorOperatorAddress(ctx context.Context, msg *types.M
 	}
 
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
-	if !errors.IsOf(err, collections.ErrNotFound) {
+	if !errorsmod.IsOf(err, collections.ErrNotFound) {
 		err = sdkCtx.EventManager().EmitTypedEvent(
 			&types.EventValidatorOperatorAddressesUpdated{
 				Address:           validator.Address,
